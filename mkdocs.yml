@@ -3,6 +3,13 @@ theme:
   name: material
   palette:
     primary: indigo
+  font:
+    text: Roboto
+  icon:
+    repo: fontawesome/brands/github
+
+repo_url: https://github.com/victorleaoo/SUSHI_Information_Retrieval_Archives
+repo_name: victorleaoo/SUSHI_Research
 
 markdown_extensions:
   - attr_list
@@ -24,3 +31,8 @@ markdown_extensions:
       alternate_style: true
   - admonition
   - pymdownx.details
+  - pymdownx.critic
+  - pymdownx.caret
+  - pymdownx.keys
+  - pymdownx.mark
+  - pymdownx.tilde

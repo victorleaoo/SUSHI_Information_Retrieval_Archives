@@ -1,6 +1,6 @@
 # Welcome to MkDocs
 
-For full documentation visit [mkdocs.org](https://www.mkdocs.org).
+[MkDocs Documentation](https://squidfunk.github.io/mkdocs-material/reference/).
 
 ## Commands
 
@@ -20,6 +20,14 @@ For full documentation visit [mkdocs.org](https://www.mkdocs.org).
 
 ```py title="example.py" linenums="1"
 print('Example')
+```
+
+``` py hl_lines="2 3"
+def bubble_sort(items):
+    for i in range(len(items)):
+        for j in range(len(items) - 1 - i):
+            if items[j] > items[j + 1]:
+                items[j], items[j + 1] = items[j + 1], items[j]
 ```
 
 ## Example of an admonition/callout with a title:
@@ -65,3 +73,16 @@ sequenceDiagram
   Terminal->>Database: Request customer data
   Database-->>Terminal: Customer data
 ```
+
+# Example Text
+
+- ==This was marked (highlight)==
+- ^^This was inserted (underline)^^
+- ~~This was deleted (strikethrough)~~
+
+# Images
+
+<figure markdown="span">
+  ![Image title](https://dummyimage.com/600x400/){ width="300" }
+  <figcaption>Image caption</figcaption>
+</figure>
