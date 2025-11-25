@@ -1,4 +1,5 @@
 site_name: SUSHI Research Documentation
+site_url: https://victorleaoo.github.io/SUSHI_Information_Retrieval_Archives
 theme:
   name: material
   palette:
@@ -7,6 +8,28 @@ theme:
     text: Roboto
   icon:
     repo: fontawesome/brands/github
+
+nav:
+  - Mkdocs Help: mkdocs_help.md
+  - Home: index.md
+  - IR Solutions:
+    - Overview: 0_ir_solutions/1_index.md
+  - SUSHI Problem and Solution: 
+    - The problem: 1_sushi_problem/1_index.md
+    - The solution: 1_sushi_problem/2_solution.md
+    - First Solutions: 1_sushi_problem/3_first_solutions.md
+  - SUSHI Design:
+    - Design principles: 2_sushi_design/1_index.md
+    - Data collections: 2_sushi_design/2_data.md
+    - Evaluation: 2_sushi_design/3_evaluation.md
+    - Run Submissions: 2_sushi_design/4_runs.md
+  - SUSHI Guidelines:
+    - Guidelines overview: 3_sushi_solutions/1_index.md
+  - Explainable IR:
+    - Explainable IR overview: 4_ir_explain/1_index.md
+    - ExIR Models: 4_ir_explain/2_models.md
+  - Proposed Work:
+    - Proposed Work overview: 5_proposed_work/1_index.md
 
 repo_url: https://github.com/victorleaoo/SUSHI_Information_Retrieval_Archives
 repo_name: victorleaoo/SUSHI_Research
@@ -22,6 +45,8 @@ markdown_extensions:
       pygments_lang_class: true
   - pymdownx.inlinehilite
   - pymdownx.snippets
+  - md_in_html
+  - pymdownx.blocks.caption
   - pymdownx.superfences:
       custom_fences:
         - name: mermaid
