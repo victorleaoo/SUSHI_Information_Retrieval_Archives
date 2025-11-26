@@ -51,7 +51,7 @@ Below there are few models I choose to help perform the explainability for the S
 
 ## [Listwise Explanations for Ranking Models Using Multiple Explainers](https://research.tudelft.nl/files/150434358/978_3_031_28244_7_41.pdf)
 
-=> Estudar mais para explicar aqui
+=> Need more understanding
 
 ## [A Counterfactual Explanation Framework for Retrieval Models](https://arxiv.org/abs/2409.00860)
 
