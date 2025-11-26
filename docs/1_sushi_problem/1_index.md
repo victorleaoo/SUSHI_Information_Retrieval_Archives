@@ -17,13 +17,15 @@ The problem SUSHI tries to address is the **Information Retrieval in Archives** 
             - Topic (agriculture, education, economy...)
 
 Some data that shows how real the problem of digitizing individual documents in Archives is:
+
 - **U.K. National Archives has 14 billion printed pages**, which if put in a single stack would stretch halfway around the world [1].
 - **26k archives in the US**, with low level of funding [1].
 - **97.6%** of US National Archives materials is not digitized [1].
 - In the first five months of 2023, the National Archives and Records Administration (NARA) digitized **13 million pages from their holdings of 11.7 billion pages**, 121,000 pages per day, it would take **375 years to digitize the paper holdings of that one repository**.
 
 The problem is also real in Brazil:
--  Despite a high rate of adhesion by institutions, where **77% engage in digitization, only 43% make even a part of their collections available to the public online**. The primary causes for this gap include :
+
+-  Despite a high rate of adhesion by institutions, where **77% engage in digitization, only 43% make even a part of their collections available to the public online**. The primary causes for this gap include:
     * Lack of funding;
     * Shortage of qualified personnel for digital dissemination;
     * Persistent issues with cataloging and digital storage.

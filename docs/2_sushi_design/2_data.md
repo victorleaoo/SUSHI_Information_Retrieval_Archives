@@ -3,20 +3,22 @@
 The data created and given by SUSHI is peculiar.
 
 The selection of the sparsity can be:
-    - **Even:** same number of documents per box.
-        * This helps achieve **better control** over experimental conditions.
-    - **Uneven:** different number of documents per box.
-        * This emulates **real archives problems better** and help **characterize the additional challenges** of the problem.
+
+- **Even:** same number of documents per box.
+    * This helps achieve **better control** over experimental conditions.
+- **Uneven:** different number of documents per box.
+    * This emulates **real archives problems better** and help **characterize the additional challenges** of the problem.
 
 ## Full collection
 
 All of the documents in the collection were created by the **State Department or the United States of America during the 1960’s and 1970’s**. The documents were selected for, and digitized by, the Brown University Libraries for use by scholars of **twentieth-century Brazilian history**. Some documents have metadata from both sources. The folder structure and the folder labels reflect the f**iling system used by the State Department when these were active records** [2].
 
 The full collection is [1]:
-    - **31,682 U.S. State Department documents** PDF files with unique identifier from;   
-        * OCR and metadata (title, date, original folder label)
-    - **1,337 folders** with unique identifier in;
-    - **124 boxes** with unique identifier.
+
+- **31,682 U.S. State Department documents** PDF files with unique identifier from;   
+    * OCR and metadata (title, date, original folder label)
+- **1,337 folders** with unique identifier in;
+- **124 boxes** with unique identifier.
 
 What makes the collection **easily judged** is that it is **fully digitized**, and that we have **topical metadata for every document** [1].
 
@@ -27,6 +29,7 @@ About **one-third of the documents were downloaded from NARA**, alone with NARA�
 In general, the **NARA metadata format** is somewhat **more consistent**, but somewhat **less expressive**, than that of the Brown metadata [2].
 
 Since there documents with metadata from NARA and others only from Brown, it was created identifiers for the SUSHI task (Sushi Box, Sushi Folder and Sushi File). The Boxes from SUSHI ids are in a order of XNNNN, in which X is the collection and NNNN the sequential number. Folder and File are only unique ids, there's no order assigned [2].
+
 - If starts with **N is from NARA only**;
 - If starts with **M is from Brown only**.
 
@@ -55,8 +58,9 @@ For the Dry Run, the sparse digitized sample is **even, including five documents
 ### Topics creation and Relevance Judgments
 
 **Randomly selection a document** that systems did not see at training time and using the **title** for the document as the query [1].
-    - Treat any document with the **same title metadata as being relevant** [1].
-    - Systems can't see those titles, since no training document (those with document-level metadata) is relevant [1].
+
+- Treat any document with the **same title metadata as being relevant** [1].
+- Systems can't see those titles, since no training document (those with document-level metadata) is relevant [1].
 
 Exact matching on document titles is useful for initial system development, but is a wak proxy for true human relevance judgements [1].
 

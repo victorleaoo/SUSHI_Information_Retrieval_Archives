@@ -5,6 +5,7 @@ This section is about the metrics to evaluate a system's performance.
 ## NDCG@5
 
 The **principal evaluation measure** if a system construct the ranking of folders related to a search is Normalized Discounted Cumulative Gain at or above the 5th rank position (NDCG@5). The choice behind the number 5[1]:
+
 - A cutoff at 5 corresponds to about a **half hour’s work by someone** who is actually looking at physical documents in an archive[1];
 - We estimate this from the fact that a folder contains an average of **31682/1337 ≈ 24 documents**, together with out expectation that a skilled searcher could recognize a relevant document in **15 seconds**[1];
 - Obtaining the **boxes** that contain those folders might take **another hour or two**[1].
@@ -21,6 +22,7 @@ Success at 1 (S@1) assumes that the searcher will examine only the top-ranked fo
 ## Relevance Judgement File Format
 
 Relevance judgment (QRels) files for the dry run topics and the official run topics will be distributed in the TSV format.
+
 - **TopicID**: A topic identifier;
 - **ZeroColumn**: The value for this field is always zero;
 - **SushiFolder**: The Sushi Folder identifier for which a relevance judgment was made;

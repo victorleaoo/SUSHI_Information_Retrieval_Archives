@@ -3,6 +3,7 @@
 ## Data that can be used
 
 The [data](./2_data.md) that can be used is:
+
 - Systems may train using both the **digitized content** from the specified sample and any of the provided **item-level** metadata from that specified sample;
 - Systems may also train using other **metadata (e.g., folder labels)** for the entire test collection;
 - However, systems may **NOT train machine learning systems** on any of the digitized content or item-level metadata from **items outside the specified training sample** in any way. Folder-level can be used.
@@ -18,6 +19,7 @@ All runs must use the T field in their queries.
 The simulation of limited digitization in SUSHI Subtask A requires that the allowable training data be specified for each topic.
 
 Experiment Control Files contain three components:
+
 - **Experiment Name:** A unique human-readable identifier for the experiment control file;
 - **Training Set:** A list of full file paths in the test collection, one for each allowable training document in this experiment;
 - **Topics:** Specifications of what the system is asked to find (relevant folders with relevant documents). Each topic includes at least a query field containing a query string that is representative of what a searcher might type (TDN).
@@ -62,6 +64,7 @@ Experiment Control Files contain three components:
 ## Run Submission Format
 
 Each run is to be submitted as one Tab-Separated Values (TSV) file with one line for each folder retrieved by the system.
+
 - **TopicID**: A topic identifier;
 - **SushiFolder**: The Sushi Folder identifier;
 - **Rank**: The rank for the folder. Ranks are integers between 1 and 1,000, with Rank 1 indicating the most highly ranked folder;

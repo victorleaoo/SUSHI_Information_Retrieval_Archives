@@ -36,6 +36,7 @@ POL 6 BRAZ 01/01/1967
 ### Experiments
 
 When finding undigitized content is the goal, **all that a user of NARA’s archive would have is folder labels**. They would need to request every box containing any folder labeled with with a subject-numeric code and date related to their search goal.
+
 - **Solution**: recommend to a user of the archive what box they should look.
     * **OCR from few documents** of each box to **create an index** to be used to search.
     * Query is some document titles (not used in the index creation).
@@ -62,6 +63,7 @@ Also, extend to **uneven sampling**.
 ### Data
 
 It creates two collections:
+
 1. **Even sampling**: 5 documents per box;
 2. **Uneven sampling**: vary the number of documents per box.
 

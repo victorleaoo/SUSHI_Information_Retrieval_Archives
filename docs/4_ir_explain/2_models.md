@@ -1,4 +1,4 @@
-# Models that can be used for ExIR
+# Methods that can be used for ExIR
 
 Below there are few models I choose to help perform the explainability for the SUSHI models.
 

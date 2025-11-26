@@ -19,7 +19,7 @@ nav:
     - The solution: 1_sushi_problem/2_solution.md
     - First Solutions: 1_sushi_problem/3_first_solutions.md
   - SUSHI Design:
-    - Design principles: 2_sushi_design/1_index.md
+    #- Design principles: 2_sushi_design/1_index.md
     - Data collections: 2_sushi_design/2_data.md
     - Evaluation: 2_sushi_design/3_evaluation.md
     - Run Submissions: 2_sushi_design/4_runs.md
@@ -27,7 +27,7 @@ nav:
     - Guidelines overview: 3_sushi_solutions/1_index.md
   - Explainable IR:
     - Explainable IR overview: 4_ir_explain/1_index.md
-    - ExIR Models: 4_ir_explain/2_models.md
+    - ExIR Methods: 4_ir_explain/2_models.md
   - Proposed Work:
     - Proposed Work overview: 5_proposed_work/1_index.md
 

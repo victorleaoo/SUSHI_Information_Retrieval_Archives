@@ -99,6 +99,7 @@ Using the best system (UMCP-T-TOFS-L2-CF), The system will then recommend a few 
 ### Hard Topics problem
 
 Looking at all results, there are topics that are easier than others. Every topic has at least one (Highly) Relevant folder to be found.
+
 - For 21 of the 45 topics, most systems were able to place some relevant folder in the top five ranks;
 - For another 13, at least one system managed to et at least relevant folder somewhere top 5;
 - **No system found any relevant folder for any of the remaining 11 topics.**
@@ -111,4 +112,5 @@ Looking at all results, there are topics that are easier than others. Every topi
 </figure>
 
 With this hard topics problem in mind, it is suggested to work on understading the key differences between the easy topics and the hard ones and, also, understand why all the systems underperformed in some topics. For instance, look for test collection deficiencies or understand if the "judging impact" is also of value. Since it was humans who made it, were the right things judged? and were the judgments for the same things consistent?
+
 - **Explain why things were retrieved**.
