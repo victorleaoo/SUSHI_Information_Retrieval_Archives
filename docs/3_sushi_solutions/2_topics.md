@@ -1,5 +1,12 @@
 # Topics
 
+<style>
+pre code {
+  white-space: pre-wrap !important;
+  word-break: break-word;
+}
+</style>
+
 The topics used in the submissions are shown below. They are categorized as Easy (14), Medium (18) and Hard (13), divided by topic mean nDCG@5 value.
 
 <figure markdown="span">
