@@ -10,7 +10,7 @@ pre code {
 The topics used in the submissions are shown below. They are categorized as Easy (14), Medium (18) and Hard (13), divided by topic mean nDCG@5 value.
 
 <figure markdown="span">
-  ![Kasys](../assets/topics_difficulty.png){ width="300" }
+  ![Topics](../assets/topics_difficulty.png){ width="900" }
   <figcaption>Topics Difficulty</figcaption>
 </figure>
 
