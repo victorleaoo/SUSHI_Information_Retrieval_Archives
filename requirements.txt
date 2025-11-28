@@ -1,0 +1,5 @@
+streamlit==1.51.0
+numpy==1.26.4
+python-terrier==1.0
+pytrec_eval-terrier==0.5.10
+openpyxl==3.1.5
