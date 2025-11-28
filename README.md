@@ -18,9 +18,12 @@ For the topics matter, there is a quick visualization for the topics and what ar
 
 - Add the MULTIPLEX explanation (ir_explain and proposed work)
 
-- Run formal-run with the same model from dry run (for each topic, save a file with the ranking + metrics per topic)
-- see if there's a way to see index and bm25 choices
-- add to webservice run topic and box checking and viz => with trainingdata
+- documentar a estrutura de pastas do repositorio pra saber o que baixar e como colocar a fim de replicar tudo que está aqui
+- calculo de resultado do topico (pode ser simples, so se encontrou ou nao documentos relevantes)
+    - colocar isto direto na run para ficar mais facil de ver
+    - adicionar isto no webservice "topic score"
+- see if there's a way to see and explain index and bm25 choices
 
-- Run quick exir model for results
-- Document 
+
+- Run quick exir model for results (lib: ir_explain -> lirme)
+- Document

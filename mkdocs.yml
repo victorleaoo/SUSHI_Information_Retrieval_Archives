@@ -26,6 +26,7 @@ nav:
   - SUSHI Solutions:
     - SUSHI Submissions: 3_sushi_solutions/1_index.md
     - SUSHI Topics: 3_sushi_solutions/2_topics.md
+    - SUSHI Baseline Runs: 3_sushi_solutions/3_baseline_runs.md
   - Explainable IR:
     - Explainable IR overview: 4_ir_explain/1_index.md
     - ExIR Methods: 4_ir_explain/2_models.md

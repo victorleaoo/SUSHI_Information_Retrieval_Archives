@@ -14,7 +14,7 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from SNCLabelTranslate import translate_snc_label
 from SubtaskAEvaluation import writeSearchResults, evaluateSearchResults
 
-CONTROL_FILE_PREFIX = os.path.join(base_dir, 'ecf', 'dry_run', 'Ntcir18SushiDryRunExperimentControlFileV1.1.json')
+CONTROL_FILE_PREFIX = os.path.join(base_dir, 'ecf', 'formal_run', 'Ntcir18SushiOfficialExperimentControlFileV1.1.json')
 
 def readExperimentControlFile(fileName):
     with open(fileName) as ecfFile:
@@ -70,7 +70,9 @@ def trainTerrierModel(trainingDocs, searchFields):
         
         ocr = items[file]["ocr"][0]
 
-        trainingSet.append({'docno': file, 'folder': folder, 'box': box, 'title': title, 'ocr': ocr, 'folderlabel': label})
+        summary = items[file]["summary"]
+
+        trainingSet.append({'docno': file, 'folder': folder, 'box': box, 'title': title, 'ocr': ocr, 'folderlabel': label, 'summary': summary})
 
     # Create the Terrier index for this training set and then return a Terrier retriever for that index
     seq += 1 # We create one Terrier index per training set
@@ -83,7 +85,7 @@ def trainTerrierModel(trainingDocs, searchFields):
         pt.java.init()
 
     indexer = pt.IterDictIndexer(indexDir, 
-                                meta={'docno': 20, 'folder':20, 'box': 20, 'title':16384, 'ocr':16384, 'folderlabel': 1024}, meta_reverse=['docno', 'folder', 'box'],
+                                meta={'docno': 20, 'folder':20, 'box': 20, 'title':16384, 'ocr':16384, 'folderlabel': 1024, 'summary': 16384}, meta_reverse=['docno', 'folder', 'box'],
                                 overwrite=True,
                                 text_attrs=searchFields
                                 )
@@ -142,22 +144,22 @@ if __name__ == '__main__':
     os.environ["JAVA_HOME"] = "/usr/lib/jvm/java-17-openjdk-amd64"
     unix = True
     seq = 0
-    prefix = '/home/victorleao/mestrado/sushi_docs/SUSHI_Information_Retrieval_Archives/src/dry_run/'
+    prefix = '/home/victorleao/mestrado/sushi_docs/SUSHI_Information_Retrieval_Archives/src/formal_run/'
 
     # Run experiment
-    searchFields = ['title', 'ocr', 'folderlabel']
+    searchFields = ['title', 'ocr', 'folderlabel', 'summary']
     ecf = readExperimentControlFile(CONTROL_FILE_PREFIX)
     results = generateSearchResults(ecf, 
                                     searchFields)
     
-    writeSearchResults('./results/topics/DryRunTopicsResults.tsv', 
+    writeSearchResults('./results/topics/FormalRunTopicsResults.tsv', 
                        results, 
-                       'Baseline-0')
+                       'Baseline-TOFS')
     
-    evaluateSearchResults('./results/topics/DryRunTopicsResults.tsv', 
+    evaluateSearchResults('./results/topics/FormalRunTopicsResults.tsv', 
                           os.path.join(base_dir, 
-                                       'qrels', 'dry-run-qrels', 'Ntcir18SushiDryRunFolderQrelsV1.1.tsv'), # folder qrels
+                                       'qrels', 'formal-run-qrels', 'formal-folder-qrel.txt'), # folder qrels
                           os.path.join(base_dir, 
-                                       'qrels', 'dry-run-qrels', 'Ntcir18SushiDryRunBoxQrelsV1.1.tsv'), # box qrels
-                          './results/metrics/DryRunTopicsResultsEvaluation.txt'
+                                       'qrels', 'formal-run-qrels', 'formal-box-qrel.txt'), # box qrels
+                          './results/metrics/FormalRunTopicsResultsEvaluation.txt'
                          )
