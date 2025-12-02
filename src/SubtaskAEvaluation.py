@@ -79,6 +79,9 @@ def evaluateSearchResults(runFileName, folderQrelsFileName, boxQrelsFileName, ou
         folderEvaluator = pytrec_eval.RelevanceEvaluator(folderQrels, measures)
         folderTopicResults = folderEvaluator.evaluate(folderRun)  # replace run with folderQrels to see perfect evaluation measures
 
+        with open('results/topics/TopicsFolderMetrics.json', 'w') as f:
+            json.dump(folderTopicResults, f, indent=4)
+
         boxQrels = {}
         for line in boxQrelsFile:
             topicId, unused, folderId, relevanceLevel = line.split('\t')
@@ -90,6 +93,9 @@ def evaluateSearchResults(runFileName, folderQrelsFileName, boxQrelsFileName, ou
                 boxQrels[topicId][folderId] = int(relevanceLevel.strip())
         boxEvaluator = pytrec_eval.RelevanceEvaluator(boxQrels, measures)
         boxTopicResults = boxEvaluator.evaluate(boxRun) # replace run with qrels to see perfect evaluation measures
+        
+        with open('results/topics/TopicsBoxMetrics.json', 'w') as f:
+            json.dump(boxTopicResults, f, indent=4)
 
         pm='\u00B1'
         lines = []

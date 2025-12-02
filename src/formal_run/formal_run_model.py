@@ -85,7 +85,8 @@ def trainTerrierModel(trainingDocs, searchFields):
         pt.java.init()
 
     indexer = pt.IterDictIndexer(indexDir, 
-                                meta={'docno': 20, 'folder':20, 'box': 20, 'title':16384, 'ocr':16384, 'folderlabel': 1024, 'summary': 16384}, meta_reverse=['docno', 'folder', 'box'],
+                                meta={'docno': 20, 'folder':20, 'box': 20, 'title':16384, 'ocr':16384, 'folderlabel': 1024, 'summary': 16384}, 
+                                meta_reverse=['docno', 'folder', 'box'],
                                 overwrite=True,
                                 text_attrs=searchFields
                                 )
@@ -94,7 +95,7 @@ def trainTerrierModel(trainingDocs, searchFields):
 
     BM25 = pt.terrier.Retriever(index, 
                                 wmodel="BM25",
-                                metadata=['docno', 'folder', 'box'], 
+                                metadata=['docno', 'folder', 'box', 'title', 'ocr', 'folderlabel', 'summary'],
                                 num_results=1000
                                )
     return BM25
@@ -104,12 +105,46 @@ def trainModel(trainingDocuments, searchFields):
     print(f'Training Called, preparing index for experiment set {seq+1}')
     return trainTerrierModel(trainingDocuments, searchFields)
 
-def terrierSearch(query, engine):
+import json
+import re
+import pyterrier as pt
+import os
+
+# 1. Recebe o dicionário 'output_data' como argumento
+def saveSearchText(query, result, topicId, output_data):
+    # Removemos o 'global', agora usamos o argumento passado
+    
+    # Concatena os campos de texto
+    result['search_text'] = (
+        result['title'].fillna('') + " " + 
+        result['ocr'].fillna('') + " " + 
+        result['folderlabel'].fillna('') + " " + 
+        result['summary'].fillna('')
+    ).str.strip()
+
+    ranked_df = result[['folder', 'score', 'search_text']].copy()
+    # Mantém o documento com maior score da pasta para representar o texto
+    ranked_df.drop_duplicates(subset='folder', keep='first', inplace=True)
+    
+    # Pega top 10 e converte para dicionário
+    top_10 = ranked_df.head(10).to_dict(orient='records')
+
+    # Salva no dicionário que veio lá da função principal
+    output_data[topicId] = {
+        "query": query,
+        "top_10_results": top_10
+    }
+
+# 2. Recebe 'set_output_data' e repassa para saveSearchText
+def terrierSearch(query, engine, topicId, set_output_data):
     if not pt.java.started(): 
         pt.java.init()
 
-    query = re.sub(r'[^a-zA-Z0-9\s]', '', query) # Terries fails if punctuation is found in a query
+    query = re.sub(r'[^a-zA-Z0-9\s]', '', query) 
     result = engine.search(query)
+
+    # Passamos o dicionário adiante para ser preenchido
+    saveSearchText(query, result, topicId, set_output_data)
 
     rankedList = result['folder']
     rankedList.drop_duplicates(inplace=True)
@@ -119,17 +154,38 @@ def terrierSearch(query, engine):
 def generateSearchResults(ecf, searchFields):
     results = []
     i = 0
-    # Experiment Set => Training Data Set + Topics to Search
-    for experimentSet in ecf['ExperimentSets']:
+    
+    # Garante que o diretório de saída existe
+    if not os.path.exists("./results/exir/"):
+        os.makedirs("./results/exir/")
+
+    # Usamos enumerate para saber qual é o número do Experiment Set atual (0, 1, 2...)
+    for set_idx, experimentSet in enumerate(ecf['ExperimentSets']):
+        
+        # Cria o dicionário novo para ESTE set específico
+        set_output_data = {}
+        
         index = trainModel(experimentSet['TrainingDocuments'], searchFields)
         topics = list(experimentSet['Topics'].keys())
+        
         for j in range(len(topics)):
             results.append({})
             results[i]['Id'] = topics[j]
+            
             query = experimentSet['Topics'][topics[j]]['TITLE']
-            rankedFolderList = terrierSearch(query, index)
+            
+            # Passamos set_output_data como argumento aqui
+            rankedFolderList = terrierSearch(query, index, topics[j], set_output_data)
+            
             results[i]['RankedList'] = rankedFolderList
-            i+=1
+            i += 1
+        
+        # Salvamos usando set_idx + 1 para ficar "set_1", "set_2" corretamente
+        filepath = f"./results/exir/experiment_set_{set_idx + 1}_explainable.json"
+        
+        with open(filepath, 'w', encoding='utf-8') as f:
+            json.dump(set_output_data, f, indent=4, ensure_ascii=False)
+
     return results
 
 def writeSearchResults(fileName, results, runName):
