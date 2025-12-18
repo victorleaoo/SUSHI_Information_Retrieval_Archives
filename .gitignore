@@ -9,3 +9,7 @@ qrels/
 terrierindex/
 
 venv/
+
+docs/
+
+mkdocs*
