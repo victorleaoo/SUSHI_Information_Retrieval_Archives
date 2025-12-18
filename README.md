@@ -1,24 +1,11 @@
-# [SUSHI](https://sites.google.com/view/ntcir-sushi-task/) Research
+# SUSHI (Searching Unseen Sources for Historical Information) Experiment Runner and Visualizer
 
-[Documentation](https://victorleaoo.github.io/SUSHI_Information_Retrieval_Archives/)
+## Repository Setup
 
-## Web Service SUSHI Data and Topic Visualizer
-
-It was created a streamlit application that shows easier the metadata from folders and items. It also allows the visualization of the PDFs files.
-
-For the topics matter, there is a quick visualization for the topics and what are the highly relevant and relevant boxes, folders and documents for them, making it simple to understand what are the expectations for a topic.
-
-**How to use**:
-
-1. Install the requirements: ```pip install requirements.txt```
-2. Run the app: ```streamlit run app.py```
-3. Open in the browser: ```http://localhost:8501```
-
-## Project Structure & Required Files
-
-To run the application correctly, you must reproduce the data structure locally, as large or sensitive files are not versioned in this repository (they are git-ignored).
+To run the applications correctly, it is necessary to reproduce the data structure locally, as large or sensitive files are not versioned in this repository (they are git-ignored).
 
 ```
+├── all_runs/ # It contains runs that were already made from models  
 ├── data/                           # ⚠️ Create folder and add files manually
 │   ├── folders_metadata/
 │   │   └── FoldersV1.2.json        # ⚠️ Download Folder metadata
@@ -53,6 +40,84 @@ All files can be found at the [SUSHI Test Collection](https://sites.google.com/v
 - [Ntcir18SushiDryRunFolderQrelsV1.1.tsv](https://drive.google.com/file/d/1Q6553xByDHcxhqMgrsNDT5O_a9f3VB9x/view?usp=sharing)
 - [formal-box-qrel.txt + formal-document-qrel.txt + formal-folder-qrel.txt](https://drive.google.com/file/d/16vfBPyykpRHPbEfwGIVry5CAK7j-VzqR/view?usp=share_link)
 
-## What is next?
+## SUSHI Experiment Runner
 
-- Test the [ir_explain](https://github.com/souravsaha/ir_explain) library for pointwise solutions (LIRME and EXS) for initial works.
+In order to help developers to run a set of different random generated Experiment Control Files, it was created a code that allows the follow workflow:
+
+1. Load the documents and folders metadata;
+2. Select the topic/query fields, search fields and if it is going to use the expansion technique or not (this last part being specific for the current model);
+3. From a list of random seeds:
+    - Generate a random Experiment Control File, with random selection of 5 documents from each box and a random selection of the topics for each data set.
+    - Run the model for the ECF and generate the search results for the defined params;
+    - Evaluate and save the models results.
+
+The same workflow can be changed to run not for random seeds, but for AllTrainingDocuments.
+
+The implemented model for the current workflow is the BM25F + Expansion technique developed in [Biting into SUSHI: The University of Maryland at NTCIR-18](https://research.nii.ac.jp/ntcir/workshop/OnlineProceedings18/pdf/ntcir/03-NTCIR18-SUSHI-OardD.pdf).
+
+### How to Run
+
+In order to run the SUSHI Experiment Runner, the follow steps must be followed:
+
+1. **Install Python**:
+2. **Install Python libraries**:
+3. **Install Java**:
+
+## SUSHI Visualizer
+
+The SUSHI Visualizer is a web application developed using Streamlit (Python library). It serves as an interactive dashboard for researchers participating in the SUSHI task, allowing them to benchmark their models, analyze performance stability, and explore the underlying dataset.
+
+The tool is designed to bridge the gap between raw metric files and actionable insights, offering features like confidence interval visualization, topic-by-topic breakdowns, and dynamic filtering.
+
+The SUSHI visualizer has two main screens:
+
+- **Experiment Analyzer**: performance benchmarking;
+- **Topics and Data Visualizer**: dataset exploration.
+
+### Experiment Analyzer
+
+The Experiment Analyzer is the core benchmarking dashboard. It aggregates results from multiple randomized runs to provide a statistically robust view of model performance. As shown in the interface, this screen is divided into four key areas:
+
+1. **Settings Menu:** filters and sorts.
+2. **Overall Model Metrics:** high-level summary of the model's global performance across all topics (mean nDCG@5 with Confidence Intervals).
+3. **Topic Results Chart:** interval plot that show the results (mean nDCG@5 with Confidence Intervals) of the filtered models for all topics.
+    - **Points**: Represent the mean score for a specific run model;
+    - **Error Bars**: Horizontal lines indicating the confidence interval for that specific topic;
+    - **Baselines**: Includes comparison points for "All Training Documents" (Green) and official "SUSHISubmissions" (Red) to benchmark against known standards.
+4. **Runs Results Table:** lists the raw metric values for every run and topic, allowing for granular inspection of the data used to generate the charts.
+
+For the Experiment Analyzer to function, the experiment results must be stored in the all_runs directory following this strict naming convention \<SEARCHFIELDS>_\<TECHNIQUE>\<TOPICFIELDS>, in which:
+
+- **SEARCHFIELDS:** these are the search fields used in the model. *T*itle, *F*older Label, *S*ummary and *O*CR.
+- **TECHNIQUE:** these are different techniques that can be approached for the model. *EX*pansion, *N*ot *EX*pansion and *EMB*eddings.
+- **TOPICFIELDS:** these are the topic fields used for the query. *T*itle, *D*escription and *N*arrative.
+
+Inside each folder, it's important to have a few different set of folders in order for the visualizer to show the all results in the sections:
+
+- **\<RUNNAME>_TopicsFolderMetrics.json**: these are the topics results for different runs of the same model in different generated Experiment Control File.
+- **AllTrainingDocuments_TopicsFolderMetrics.json**: these are the topics results for the model run in a Experiment Control File that have all documents at the Training Documents set.
+- **model_overall_stats.json**: different runs model global mean results across all topics.
+- **all_training_model_overall_stats.json**: all training documents model global mean results across all topics.
+- **topics_mean_margin.json**: different runs model mean results for each topic.
+
+Therefore, with all the information in the files present, the Experiment Analyzer can show all the data and charts necessary for the user to study the results of their models.
+
+### Topics and Data Visualizer
+
+The other screen is focused in showing the topics and the documents/folders that compose the task. This screen has a filter for topics and, after a topic is selected, there are three different tabs:
+
+- **Documents:** it shows all the documents that have a value different than 0 in the qrels. With a document selected, it is possible to see all of its metadata, in addition to the PDF file.
+- **Folders:** it shows all folders that have a value different than 0 in the qrels. With a folder selected, it is possible to see all of its metadata.
+- **Boxes:** it shows all boxes that have a value different than 0 in the qrels. The boxes doesn't have any metadata related to them.
+
+The Topics and Data Visualizer allows the user to understand about the data that they're working on with the topics for search.
+
+### How to Run
+
+In order to run the SUSHI Experiment Runner, the follow steps must be followed:
+
+1. **Install Python**: [https://www.python.org](https://www.python.org).
+2. **Install Python libraries**: run the command ```pip install -r requirements.txt```. It is recommended to use a [virtualenv](https://virtualenv.pypa.io/en/latest/user_guide.html) or a [conda](https://www.anaconda.com/docs/getting-started/miniconda/install) env.
+3. **Download all necessary files**: make sure to follow all the steps in the **Repository Setup** section of this README file.
+4. **Run Experiments in the necessary format**: for experiments to appear, it's necessary to have the ```all_runs``` folder with the runs folders inside it in the ```\<SEARCHFIELDS>_\<TECHNIQUE>\<TOPICFIELDS>``` format.
+5. **Run the Streamlit application**: now run the application and access it in the browser: ```streamlit run web_app/app_sushi.py```.

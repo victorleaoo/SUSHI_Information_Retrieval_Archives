@@ -1,0 +1,410 @@
+{
+    "T18Eval-00001": {
+        "ndcg_cut_5": 0.26,
+        "count_relevant_folders_training": 4,
+        "count_relevant_folders_total": 7,
+        "count_highly_relevant_folders_training": 2,
+        "count_highly_relevant_folders_total": 6,
+        "count_relevant_in_top5_model": 1,
+        "count_highly_relevant_in_top5_model": 1
+    },
+    "T18Eval-00002": {
+        "ndcg_cut_5": 0.47,
+        "count_relevant_folders_training": 5,
+        "count_relevant_folders_total": 5,
+        "count_highly_relevant_folders_training": 5,
+        "count_highly_relevant_folders_total": 5,
+        "count_relevant_in_top5_model": 1,
+        "count_highly_relevant_in_top5_model": 2
+    },
+    "T18Eval-00003": {
+        "ndcg_cut_5": 0.0,
+        "count_relevant_folders_training": 0,
+        "count_relevant_folders_total": 0,
+        "count_highly_relevant_folders_training": 2,
+        "count_highly_relevant_folders_total": 3,
+        "count_relevant_in_top5_model": 0,
+        "count_highly_relevant_in_top5_model": 0
+    },
+    "T18Eval-00004": {
+        "ndcg_cut_5": 0.09,
+        "count_relevant_folders_training": 1,
+        "count_relevant_folders_total": 3,
+        "count_highly_relevant_folders_training": 4,
+        "count_highly_relevant_folders_total": 7,
+        "count_relevant_in_top5_model": 1,
+        "count_highly_relevant_in_top5_model": 0
+    },
+    "T18Eval-00005": {
+        "ndcg_cut_5": 0.34,
+        "count_relevant_folders_training": 6,
+        "count_relevant_folders_total": 11,
+        "count_highly_relevant_folders_training": 8,
+        "count_highly_relevant_folders_total": 15,
+        "count_relevant_in_top5_model": 0,
+        "count_highly_relevant_in_top5_model": 2
+    },
+    "T18Eval-00006": {
+        "ndcg_cut_5": 0.0,
+        "count_relevant_folders_training": 6,
+        "count_relevant_folders_total": 8,
+        "count_highly_relevant_folders_training": 0,
+        "count_highly_relevant_folders_total": 3,
+        "count_relevant_in_top5_model": 0,
+        "count_highly_relevant_in_top5_model": 0
+    },
+    "T18Eval-00007": {
+        "ndcg_cut_5": 0.13,
+        "count_relevant_folders_training": 3,
+        "count_relevant_folders_total": 4,
+        "count_highly_relevant_folders_training": 0,
+        "count_highly_relevant_folders_total": 1,
+        "count_relevant_in_top5_model": 1,
+        "count_highly_relevant_in_top5_model": 0
+    },
+    "T18Eval-00008": {
+        "ndcg_cut_5": 0.0,
+        "count_relevant_folders_training": 0,
+        "count_relevant_folders_total": 2,
+        "count_highly_relevant_folders_training": 0,
+        "count_highly_relevant_folders_total": 1,
+        "count_relevant_in_top5_model": 0,
+        "count_highly_relevant_in_top5_model": 0
+    },
+    "T18Eval-00009": {
+        "ndcg_cut_5": 0.01,
+        "count_relevant_folders_training": 2,
+        "count_relevant_folders_total": 6,
+        "count_highly_relevant_folders_training": 1,
+        "count_highly_relevant_folders_total": 2,
+        "count_relevant_in_top5_model": 0,
+        "count_highly_relevant_in_top5_model": 0
+    },
+    "T18Eval-00010": {
+        "ndcg_cut_5": 0.0,
+        "count_relevant_folders_training": 1,
+        "count_relevant_folders_total": 1,
+        "count_highly_relevant_folders_training": 2,
+        "count_highly_relevant_folders_total": 2,
+        "count_relevant_in_top5_model": 0,
+        "count_highly_relevant_in_top5_model": 0
+    },
+    "T18Eval-00011": {
+        "ndcg_cut_5": 0.26,
+        "count_relevant_folders_training": 0,
+        "count_relevant_folders_total": 0,
+        "count_highly_relevant_folders_training": 9,
+        "count_highly_relevant_folders_total": 10,
+        "count_relevant_in_top5_model": 0,
+        "count_highly_relevant_in_top5_model": 2
+    },
+    "T18Eval-00012": {
+        "ndcg_cut_5": 0.01,
+        "count_relevant_folders_training": 0,
+        "count_relevant_folders_total": 1,
+        "count_highly_relevant_folders_training": 0,
+        "count_highly_relevant_folders_total": 2,
+        "count_relevant_in_top5_model": 0,
+        "count_highly_relevant_in_top5_model": 0
+    },
+    "T18Eval-00013": {
+        "ndcg_cut_5": 0.0,
+        "count_relevant_folders_training": 5,
+        "count_relevant_folders_total": 10,
+        "count_highly_relevant_folders_training": 3,
+        "count_highly_relevant_folders_total": 13,
+        "count_relevant_in_top5_model": 0,
+        "count_highly_relevant_in_top5_model": 0
+    },
+    "T18Eval-00014": {
+        "ndcg_cut_5": 0.0,
+        "count_relevant_folders_training": 1,
+        "count_relevant_folders_total": 1,
+        "count_highly_relevant_folders_training": 1,
+        "count_highly_relevant_folders_total": 1,
+        "count_relevant_in_top5_model": 0,
+        "count_highly_relevant_in_top5_model": 0
+    },
+    "T18Eval-00015": {
+        "ndcg_cut_5": 0.37,
+        "count_relevant_folders_training": 2,
+        "count_relevant_folders_total": 3,
+        "count_highly_relevant_folders_training": 3,
+        "count_highly_relevant_folders_total": 4,
+        "count_relevant_in_top5_model": 0,
+        "count_highly_relevant_in_top5_model": 2
+    },
+    "T18Eval-00016": {
+        "ndcg_cut_5": 0.88,
+        "count_relevant_folders_training": 0,
+        "count_relevant_folders_total": 0,
+        "count_highly_relevant_folders_training": 1,
+        "count_highly_relevant_folders_total": 1,
+        "count_relevant_in_top5_model": 0,
+        "count_highly_relevant_in_top5_model": 1
+    },
+    "T18Eval-00017": {
+        "ndcg_cut_5": 0.0,
+        "count_relevant_folders_training": 1,
+        "count_relevant_folders_total": 1,
+        "count_highly_relevant_folders_training": 0,
+        "count_highly_relevant_folders_total": 2,
+        "count_relevant_in_top5_model": 0,
+        "count_highly_relevant_in_top5_model": 0
+    },
+    "T18Eval-00018": {
+        "ndcg_cut_5": 0.15,
+        "count_relevant_folders_training": 1,
+        "count_relevant_folders_total": 2,
+        "count_highly_relevant_folders_training": 1,
+        "count_highly_relevant_folders_total": 3,
+        "count_relevant_in_top5_model": 0,
+        "count_highly_relevant_in_top5_model": 1
+    },
+    "T18Eval-00019": {
+        "ndcg_cut_5": 0.42,
+        "count_relevant_folders_training": 7,
+        "count_relevant_folders_total": 9,
+        "count_highly_relevant_folders_training": 3,
+        "count_highly_relevant_folders_total": 6,
+        "count_relevant_in_top5_model": 0,
+        "count_highly_relevant_in_top5_model": 2
+    },
+    "T18Eval-00020": {
+        "ndcg_cut_5": 0.32,
+        "count_relevant_folders_training": 2,
+        "count_relevant_folders_total": 3,
+        "count_highly_relevant_folders_training": 3,
+        "count_highly_relevant_folders_total": 7,
+        "count_relevant_in_top5_model": 0,
+        "count_highly_relevant_in_top5_model": 2
+    },
+    "T18Eval-00021": {
+        "ndcg_cut_5": 0.13,
+        "count_relevant_folders_training": 1,
+        "count_relevant_folders_total": 2,
+        "count_highly_relevant_folders_training": 0,
+        "count_highly_relevant_folders_total": 1,
+        "count_relevant_in_top5_model": 1,
+        "count_highly_relevant_in_top5_model": 0
+    },
+    "T18Eval-00022": {
+        "ndcg_cut_5": 0.15,
+        "success_1": 0.0,
+        "success_5": 1.0,
+        "success_10": 1.0,
+        "count_relevant_folders_training": 2,
+        "count_relevant_folders_total": 5,
+        "count_highly_relevant_folders_training": 0,
+        "count_highly_relevant_folders_total": 1,
+        "count_relevant_in_top5_model": 1,
+        "count_highly_relevant_in_top5_model": 0
+    },
+    "T18Eval-00023": {
+        "ndcg_cut_5": 0.4,
+        "count_relevant_folders_training": 0,
+        "count_relevant_folders_total": 1,
+        "count_highly_relevant_folders_training": 5,
+        "count_highly_relevant_folders_total": 6,
+        "count_relevant_in_top5_model": 0,
+        "count_highly_relevant_in_top5_model": 2
+    },
+    "T18Eval-00024": {
+        "ndcg_cut_5": 0.09,
+        "count_relevant_folders_training": 2,
+        "count_relevant_folders_total": 3,
+        "count_highly_relevant_folders_training": 2,
+        "count_highly_relevant_folders_total": 2,
+        "count_relevant_in_top5_model": 0,
+        "count_highly_relevant_in_top5_model": 0
+    },
+    "T18Eval-00025": {
+        "ndcg_cut_5": 0.0,
+        "count_relevant_folders_training": 1,
+        "count_relevant_folders_total": 1,
+        "count_highly_relevant_folders_training": 0,
+        "count_highly_relevant_folders_total": 1,
+        "count_relevant_in_top5_model": 0,
+        "count_highly_relevant_in_top5_model": 0
+    },
+    "T18Eval-00026": {
+        "ndcg_cut_5": 0.0,
+        "count_relevant_folders_training": 0,
+        "count_relevant_folders_total": 0,
+        "count_highly_relevant_folders_training": 0,
+        "count_highly_relevant_folders_total": 1,
+        "count_relevant_in_top5_model": 0,
+        "count_highly_relevant_in_top5_model": 0
+    },
+    "T18Eval-00027": {
+        "ndcg_cut_5": 0.05,
+        "count_relevant_folders_training": 2,
+        "count_relevant_folders_total": 5,
+        "count_highly_relevant_folders_training": 2,
+        "count_highly_relevant_folders_total": 4,
+        "count_relevant_in_top5_model": 1,
+        "count_highly_relevant_in_top5_model": 0
+    },
+    "T18Eval-00028": {
+        "ndcg_cut_5": 0.84,
+        "count_relevant_folders_training": 0,
+        "count_relevant_folders_total": 0,
+        "count_highly_relevant_folders_training": 1,
+        "count_highly_relevant_folders_total": 1,
+        "count_relevant_in_top5_model": 0,
+        "count_highly_relevant_in_top5_model": 1
+    },
+    "T18Eval-00029": {
+        "ndcg_cut_5": 0.03,
+        "count_relevant_folders_training": 3,
+        "count_relevant_folders_total": 4,
+        "count_highly_relevant_folders_training": 3,
+        "count_highly_relevant_folders_total": 8,
+        "count_relevant_in_top5_model": 0,
+        "count_highly_relevant_in_top5_model": 0
+    },
+    "T18Eval-00030": {
+        "ndcg_cut_5": 0.0,
+        "count_relevant_folders_training": 7,
+        "count_relevant_folders_total": 8,
+        "count_highly_relevant_folders_training": 1,
+        "count_highly_relevant_folders_total": 1,
+        "count_relevant_in_top5_model": 0,
+        "count_highly_relevant_in_top5_model": 0
+    },
+    "T18Eval-00031": {
+        "ndcg_cut_5": 0.0,
+        "count_relevant_folders_training": 3,
+        "count_relevant_folders_total": 6,
+        "count_highly_relevant_folders_training": 1,
+        "count_highly_relevant_folders_total": 3,
+        "count_relevant_in_top5_model": 0,
+        "count_highly_relevant_in_top5_model": 0
+    },
+    "T18Eval-00032": {
+        "ndcg_cut_5": 0.08,
+        "count_relevant_folders_training": 4,
+        "count_relevant_folders_total": 4,
+        "count_highly_relevant_folders_training": 0,
+        "count_highly_relevant_folders_total": 2,
+        "count_relevant_in_top5_model": 1,
+        "count_highly_relevant_in_top5_model": 0
+    },
+    "T18Eval-00033": {
+        "ndcg_cut_5": 0.06,
+        "count_relevant_folders_training": 0,
+        "count_relevant_folders_total": 0,
+        "count_highly_relevant_folders_training": 0,
+        "count_highly_relevant_folders_total": 3,
+        "count_relevant_in_top5_model": 0,
+        "count_highly_relevant_in_top5_model": 0
+    },
+    "T18Eval-00034": {
+        "ndcg_cut_5": 0.02,
+        "count_relevant_folders_training": 3,
+        "count_relevant_folders_total": 6,
+        "count_highly_relevant_folders_training": 1,
+        "count_highly_relevant_folders_total": 3,
+        "count_relevant_in_top5_model": 0,
+        "count_highly_relevant_in_top5_model": 0
+    },
+    "T18Eval-00035": {
+        "ndcg_cut_5": 0.31,
+        "count_relevant_folders_training": 4,
+        "count_relevant_folders_total": 4,
+        "count_highly_relevant_folders_training": 2,
+        "count_highly_relevant_folders_total": 3,
+        "count_relevant_in_top5_model": 0,
+        "count_highly_relevant_in_top5_model": 1
+    },
+    "T18Eval-00036": {
+        "ndcg_cut_5": 0.52,
+        "count_relevant_folders_training": 2,
+        "count_relevant_folders_total": 5,
+        "count_highly_relevant_folders_training": 4,
+        "count_highly_relevant_folders_total": 4,
+        "count_relevant_in_top5_model": 0,
+        "count_highly_relevant_in_top5_model": 4
+    },
+    "T18Eval-00037": {
+        "ndcg_cut_5": 0.29,
+        "count_relevant_folders_training": 4,
+        "count_relevant_folders_total": 5,
+        "count_highly_relevant_folders_training": 5,
+        "count_highly_relevant_folders_total": 9,
+        "count_relevant_in_top5_model": 0,
+        "count_highly_relevant_in_top5_model": 2
+    },
+    "T18Eval-00038": {
+        "ndcg_cut_5": 0.05,
+        "count_relevant_folders_training": 4,
+        "count_relevant_folders_total": 7,
+        "count_highly_relevant_folders_training": 0,
+        "count_highly_relevant_folders_total": 0,
+        "count_relevant_in_top5_model": 0,
+        "count_highly_relevant_in_top5_model": 0
+    },
+    "T18Eval-00039": {
+        "ndcg_cut_5": 0.07,
+        "count_relevant_folders_training": 1,
+        "count_relevant_folders_total": 1,
+        "count_highly_relevant_folders_training": 0,
+        "count_highly_relevant_folders_total": 1,
+        "count_relevant_in_top5_model": 0,
+        "count_highly_relevant_in_top5_model": 0
+    },
+    "T18Eval-00040": {
+        "ndcg_cut_5": 0.02,
+        "count_relevant_folders_training": 0,
+        "count_relevant_folders_total": 1,
+        "count_highly_relevant_folders_training": 0,
+        "count_highly_relevant_folders_total": 2,
+        "count_relevant_in_top5_model": 0,
+        "count_highly_relevant_in_top5_model": 0
+    },
+    "T18Eval-00041": {
+        "ndcg_cut_5": 0.03,
+        "count_relevant_folders_training": 0,
+        "count_relevant_folders_total": 0,
+        "count_highly_relevant_folders_training": 3,
+        "count_highly_relevant_folders_total": 3,
+        "count_relevant_in_top5_model": 0,
+        "count_highly_relevant_in_top5_model": 0
+    },
+    "T18Eval-00042": {
+        "ndcg_cut_5": 0.04,
+        "count_relevant_folders_training": 0,
+        "count_relevant_folders_total": 0,
+        "count_highly_relevant_folders_training": 2,
+        "count_highly_relevant_folders_total": 3,
+        "count_relevant_in_top5_model": 0,
+        "count_highly_relevant_in_top5_model": 0
+    },
+    "T18Eval-00043": {
+        "ndcg_cut_5": 0.0,
+        "count_relevant_folders_training": 0,
+        "count_relevant_folders_total": 1,
+        "count_highly_relevant_folders_training": 0,
+        "count_highly_relevant_folders_total": 0,
+        "count_relevant_in_top5_model": 0,
+        "count_highly_relevant_in_top5_model": 0
+    },
+    "T18Eval-00044": {
+        "ndcg_cut_5": 0.41,
+        "count_relevant_folders_training": 6,
+        "count_relevant_folders_total": 16,
+        "count_highly_relevant_folders_training": 1,
+        "count_highly_relevant_folders_total": 2,
+        "count_relevant_in_top5_model": 1,
+        "count_highly_relevant_in_top5_model": 1
+    },
+    "T18Eval-00045": {
+        "ndcg_cut_5": 0.04,
+        "count_relevant_folders_training": 0,
+        "count_relevant_folders_total": 2,
+        "count_highly_relevant_folders_training": 2,
+        "count_highly_relevant_folders_total": 5,
+        "count_relevant_in_top5_model": 0,
+        "count_highly_relevant_in_top5_model": 0
+    }
+}

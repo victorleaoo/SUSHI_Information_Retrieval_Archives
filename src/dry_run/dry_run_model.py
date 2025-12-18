@@ -142,7 +142,7 @@ if __name__ == '__main__':
     os.environ["JAVA_HOME"] = "/usr/lib/jvm/java-17-openjdk-amd64"
     unix = True
     seq = 0
-    prefix = '/home/victorleao/mestrado/sushi_docs/SUSHI_Information_Retrieval_Archives/src/dry_run/'
+    prefix = '/Users/victorleao/mestrado/sushi_docs/SUSHI_Information_Retrieval_Archives/src/dry_run/'
 
     # Run experiment
     searchFields = ['title', 'ocr', 'folderlabel']

@@ -10,24 +10,17 @@ def extract_topics(input_file, output_file):
         return
 
     with open(output_file, 'w') as out:
-        # Inject CSS to force line wrapping in code blocks for MkDocs
-        out.write("<style> pre code { white-space: pre-wrap !important; word-break: break-word; } </style>\n\n")
-
         if "ExperimentSets" in data:
             for experiment_set in data["ExperimentSets"]:
                 if "Topics" in experiment_set:
                     topics = experiment_set["Topics"]
-                    for topic_id, topic_data in topics.items():
-                        out.write(f"# {topic_id}\n\n")
-                        out.write("```json\n")
-                        out.write(json.dumps(topic_data, indent=4, ensure_ascii=False))
-                        out.write("\n```\n\n")
+                    out.write(json.dumps(topics, indent=4, ensure_ascii=False))
         else:
             print("Key 'ExperimentSets' not found in JSON.")
 
 if __name__ == "__main__":
     # Adjust the filename if your input file has a different name or extension
-    input_json = "Ntcir18SushiOfficialExperimentControlFileV1.1.json" 
+    input_json = "formal_run/Ntcir18SushiOfficialExperimentControlFileV1.1.json" 
     output_txt = "topics_output.txt"
     
     extract_topics(input_json, output_txt)

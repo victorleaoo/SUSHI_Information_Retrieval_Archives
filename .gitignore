@@ -12,4 +12,10 @@ venv/
 
 docs/
 
-mkdocs*
+mkdocs.yml
+
+analysis_from_runs.md
+
+asistposter.py
+
+.DS_Store

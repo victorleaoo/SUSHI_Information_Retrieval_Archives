@@ -105,11 +105,6 @@ def trainModel(trainingDocuments, searchFields):
     print(f'Training Called, preparing index for experiment set {seq+1}')
     return trainTerrierModel(trainingDocuments, searchFields)
 
-import json
-import re
-import pyterrier as pt
-import os
-
 # 1. Recebe o dicionário 'output_data' como argumento
 def saveSearchText(query, result, topicId, output_data):
     # Removemos o 'global', agora usamos o argumento passado
@@ -197,10 +192,9 @@ def writeSearchResults(fileName, results, runName):
 
 if __name__ == '__main__':
     # Params
-    os.environ["JAVA_HOME"] = "/usr/lib/jvm/java-17-openjdk-amd64"
     unix = True
     seq = 0
-    prefix = '/home/victorleao/mestrado/sushi_docs/SUSHI_Information_Retrieval_Archives/src/formal_run/'
+    prefix = '/Users/victorleao/mestrado/sushi_docs/SUSHI_Information_Retrieval_Archives/src/formal_run/'
 
     # Run experiment
     searchFields = ['title', 'ocr', 'folderlabel', 'summary']
