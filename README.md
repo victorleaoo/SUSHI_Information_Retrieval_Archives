@@ -74,6 +74,8 @@ The SUSHI visualizer has two main screens:
 
 ### Experiment Analyzer
 
+![Experiment Analyzer](./img/experiment.png)
+
 The Experiment Analyzer is the core benchmarking dashboard. It aggregates results from multiple randomized runs to provide a statistically robust view of model performance. As shown in the interface, this screen is divided into four key areas:
 
 1. **Settings Menu:** filters and sorts.
@@ -101,6 +103,8 @@ Inside each folder, it's important to have a few different set of folders in ord
 Therefore, with all the information in the files present, the Experiment Analyzer can show all the data and charts necessary for the user to study the results of their models.
 
 ### Topics and Data Visualizer
+
+![Topic and Data](./img/topicdata.png)
 
 The other screen is focused in showing the topics and the documents/folders that compose the task. This screen has a filter for topics and, after a topic is selected, there are three different tabs:
 
