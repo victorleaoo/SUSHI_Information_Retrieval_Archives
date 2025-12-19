@@ -20,7 +20,7 @@ COLOR_MAP = {
     'Avg No Expansion': '#ff7f0e',
     'AllTrainingDocs': '#2ca02c',
     'SUSHISubmissions': '#d62728',
-    'Embeddings FolderLabel': '#9467bd'
+    'Embeddings (F_EMB_T)': '#9467bd'
 }
 
 def natural_keys(text: str) -> List[Any]:

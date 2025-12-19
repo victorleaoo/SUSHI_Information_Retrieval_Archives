@@ -4,8 +4,6 @@ __pycache__/
 
 data/
 
-qrels/
-
 terrierindex/
 
 venv/

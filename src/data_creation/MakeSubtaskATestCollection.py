@@ -149,16 +149,16 @@ def writeEcf(fileName, experimentName, trainingSets, topicSets, topicPrefix, fir
 
 if __name__ == '__main__':
     fullCreation = False
-    fullCollection = getSushiFiles('/Users/victorleao/mestrado/SUSHI_Information_Retrieval_Archives/data/raw/')
+    fullCollection = getSushiFiles('../data/raw/')
     
     with open("./topics_output.txt", 'r', encoding='utf-8') as file:
         queries = list(json.load(file).values())
 
     if fullCreation:
         topicSets, trainingSets = full_trainingset_topicset(queries, fullCollection)
-        ecf_path = f'/Users/victorleao/mestrado/SUSHI_Information_Retrieval_Archives/ecf/random_generated/ECF_ALL_TRAINING_SET.json'
+        ecf_path = f'../ecf/random_generated/ECF_ALL_TRAINING_SET.json'
         topicSets = writeEcf(ecf_path, 'All Docs in TrainingSet', trainingSets, topicSets, 'FULL_TOPICS', 1)
     else:
         topicSets, trainingSets = setupEcf(queries, fullCollection) #seting dryrun to true uses manually selected queries
-        ecf_path = f'/Users/victorleao/mestrado/SUSHI_Information_Retrieval_Archives/ecf/random_generated/ECF_RANDOM_{RANDOM_SEED}.json'
+        ecf_path = f'../ecf/random_generated/ECF_RANDOM_{RANDOM_SEED}.json'
         topicSets = writeEcf(ecf_path, f'ECF w/ Random Seed {RANDOM_SEED}', trainingSets, topicSets, 'TEST', 1)

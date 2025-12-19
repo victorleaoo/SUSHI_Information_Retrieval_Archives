@@ -1,11 +1,15 @@
 import json
 import sys
+import os
 
 from metric_generator import metric_generator
 
 from lastest_runs.run_refactor import load_snc_expansions, load_folder_items_metadata, readExperimentControlFile, generateSearchResults, writeSearchResults, evaluateSearchResults
 
 from data_creation.MakeSubtaskATestCollection import getSushiFiles, setupEcf, writeEcf
+
+# Set project root
+PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 
 def saving_folder_name(queryFields, searchFields, expansion):
     field_map = {
@@ -28,15 +32,15 @@ def saving_folder_name(queryFields, searchFields, expansion):
 
 if __name__ == '__main__':
     print("== Loading the Folder and Items Metadata...")
-    folder_metadata_path = '/Users/victorleao/mestrado/SUSHI_Information_Retrieval_Archives/data/folders_metadata/FoldersV1.2.json'
-    items_metadata_path = '/Users/victorleao/mestrado/SUSHI_Information_Retrieval_Archives/data/items_metadata/itemsV1.2.json'
+    folder_metadata_path = os.path.join(PROJECT_ROOT, 'data', 'folders_metadata', 'FoldersV1.2.json')
+    items_metadata_path = os.path.join(PROJECT_ROOT, 'data', 'items_metadata', 'itemsV1.2.json')
     folderMetadata, items = load_folder_items_metadata(folder_metadata_path, items_metadata_path)
     print("== Loaded the Folder and Items Metadata\n")
 
     queryFields = ["T"] # ["T", "TD", "TDN"]
     searchFields = [['title']] # [['title'], ['ocr'], ['folderlabel'], ['summary'], ['title', 'ocr', 'folderlabel', 'summary']]
     expansion = True
-    random = False
+    random = True
 
     allDocs = True
 
@@ -52,12 +56,12 @@ if __name__ == '__main__':
 
                     print("== Loading Experiment Control File...")
 
-                    fullCollection = getSushiFiles('/Users/victorleao/mestrado/SUSHI_Information_Retrieval_Archives/data/raw/')
-                    with open("./data_creation/topics_output.txt", 'r', encoding='utf-8') as file:
+                    fullCollection = getSushiFiles(os.path.join(PROJECT_ROOT, 'data', 'raw'))
+                    with open(os.path.join(PROJECT_ROOT, "src", "data_creation", "topics_output.txt"), 'r', encoding='utf-8') as file:
                         queries = list(json.load(file).values())
 
                     topicSets, trainingSets = setupEcf(queries, fullCollection, random_seed)
-                    ecf_path = f'/Users/victorleao/mestrado/SUSHI_Information_Retrieval_Archives/ecf/random_generated/ECF_RANDOM_{random_seed}.json'
+                    ecf_path = os.path.join(PROJECT_ROOT, 'ecf', 'random_generated', f'ECF_RANDOM_{random_seed}.json')
                     topicSets = writeEcf(ecf_path, f'ECF w/ Random Seed {random_seed}', trainingSets, topicSets, 'TEST', 1)
 
                     ecf = readExperimentControlFile(ecf_path)
@@ -69,24 +73,31 @@ if __name__ == '__main__':
                     print(f"== Generated results for all Experiment Sets.")
                     
                     print(f"== Writing Search Results...")
-                    writeSearchResults('./results/Ntcir18SushiOfficialResultsV1.1.tsv', results, '4-topic-test')
+                    writeSearchResults(os.path.join(PROJECT_ROOT, 'results', 'Ntcir18SushiOfficialResultsV1.1.tsv'), results, '4-topic-test')
                     print(f"== Search Results written.")
 
                     print("== Evaluating Search Results...")
-                    qrels_folder = '/Users/victorleao/mestrado/SUSHI_Information_Retrieval_Archives/qrels/formal-run-qrels/formal-folder-qrel.txt'
-                    qrels_box = '/Users/victorleao/mestrado/SUSHI_Information_Retrieval_Archives/qrels/formal-run-qrels/formal-box-qrel.txt'
-                    evaluateSearchResults('./results/Ntcir18SushiOfficialResultsV1.1.tsv', qrels_folder, qrels_box, './results/metrics/OfficialResultsTopicsResultsEvaluation.txt', ecf, f"{saving_folder_name(queryField, searchField, expansion)}/Random{random_seed}")
+                    qrels_folder = os.path.join(PROJECT_ROOT, 'qrels', 'formal-run-qrels', 'formal-folder-qrel.txt')
+                    qrels_box = os.path.join(PROJECT_ROOT, 'qrels', 'formal-run-qrels', 'formal-box-qrel.txt')
+                    evaluateSearchResults(
+                        os.path.join(PROJECT_ROOT, 'results', 'Ntcir18SushiOfficialResultsV1.1.tsv'),
+                        qrels_folder,
+                        qrels_box,
+                        os.path.join(PROJECT_ROOT, 'results', 'metrics', 'OfficialResultsTopicsResultsEvaluation.txt'),
+                        ecf,
+                        f"{saving_folder_name(queryField, searchField, expansion)}/Random{random_seed}"
+                    )
                     print(f'======= Saved Random{random_seed} -> {saving_folder_name(queryField, searchField, expansion)} =======')
                     print("== Search results evaluated.")
             else:
                 if allDocs:
                     name_run = f"AllTrainingDocuments{queryField}"
-                    ecf = readExperimentControlFile(f'/Users/victorleao/mestrado/SUSHI_Information_Retrieval_Archives/ecf/random_generated/ECF_ALL_TRAINING_SET.json')
+                    ecf = readExperimentControlFile(os.path.join(PROJECT_ROOT, 'ecf', 'random_generated', 'ECF_ALL_TRAINING_SET.json'))
                     print(f"{len(ecf['ExperimentSets'])} Experiment Sets")
                     print("== Loaded the Folder and Items Metadata\n")
                 else:
                     name_run = f"FormalRun{queryField}"
-                    ecf = readExperimentControlFile(f'/Users/victorleao/mestrado/SUSHI_Information_Retrieval_Archives/ecf/formal_run/Ntcir18SushiOfficialExperimentControlFileV1.1.json')
+                    ecf = readExperimentControlFile(os.path.join(PROJECT_ROOT, 'ecf', 'formal_run', 'Ntcir18SushiOfficialExperimentControlFileV1.1.json'))
                     print(f"{len(ecf['ExperimentSets'])} Experiment Sets")
                     print("== Loaded the Folder and Items Metadata\n")
                     
@@ -99,9 +110,16 @@ if __name__ == '__main__':
                 print(f"== Search Results written.")
 
                 print("== Evaluating Search Results...")
-                qrels_folder = '/Users/victorleao/mestrado/SUSHI_Information_Retrieval_Archives/qrels/formal-run-qrels/formal-folder-qrel.txt'
-                qrels_box = '/Users/victorleao/mestrado/SUSHI_Information_Retrieval_Archives/qrels/formal-run-qrels/formal-box-qrel.txt'
-                evaluateSearchResults('./results/Ntcir18SushiOfficialResultsV1.1.tsv', qrels_folder, qrels_box, './results/metrics/OfficialResultsTopicsResultsEvaluation.txt', ecf, f"{saving_folder_name(queryField, searchField, expansion)}/AllTrainingDocuments")
+                qrels_folder = os.path.join(PROJECT_ROOT, 'qrels', 'formal-run-qrels', 'formal-folder-qrel.txt')
+                qrels_box = os.path.join(PROJECT_ROOT, 'qrels', 'formal-run-qrels', 'formal-box-qrel.txt')
+                evaluateSearchResults(
+                    './results/Ntcir18SushiOfficialResultsV1.1.tsv',
+                    qrels_folder,
+                    qrels_box,
+                    './results/metrics/OfficialResultsTopicsResultsEvaluation.txt',
+                    ecf,
+                    f"{saving_folder_name(queryField, searchField, expansion)}/AllTrainingDocuments"
+                )
                 print(f"======== {saving_folder_name(queryField, searchField, expansion)}/AllTrainingDocuments ========")
                 print("== Search results evaluated.")
 

@@ -14,18 +14,17 @@ To run the applications correctly, it is necessary to reproduce the data structu
 │   └── raw/                        # ⚠️ Download and Place the raw Box/Folder structure with PDFs here
 ├── docs/
 ├── ecf/                            
-├── qrels/                          # ⚠️ Add relevance judgment files here
-│   ├── dry-run-qrels/              # ⚠️ Create folder and add files manually
-│   │   ├── Ntcir18SushiDryRunBoxQrelsV1.1.tsv # ⚠️ Download
-│   │   └── Ntcir18SushiDryRunFolderQrelsV1.1.tsv # ⚠️ Download
-│   └── formal-run-qrels/           # ⚠️ Create folder and add files manually
-│       ├── formal-box-qrel.txt # ⚠️ Download
-│       ├── formal-document-qrel.txt # ⚠️ Download
-│       └── formal-folder-qrel.txt # ⚠️ Download
-├── src/
-├── venv/                           # Virtual Environment (Create locally)
+├── qrels/                          
+│   ├── dry-run-qrels/              
+│   │   ├── Ntcir18SushiDryRunBoxQrelsV1.1.tsv
+│   │   └── Ntcir18SushiDryRunFolderQrelsV1.1.tsv 
+│   └── formal-run-qrels/          
+│       ├── formal-box-qrel.txt
+│       ├── formal-document-qrel.txt
+│       └── formal-folder-qrel.txt
+├── src/ # Experiment Run Generator
+├── web_app/ # SUSHI visualizer
 ├── .gitignore
-├── app.py                          # Main Streamlit application
 ├── mkdocs.yml
 ├── README.md
 └── requirements.txt                # Python dependencies
@@ -33,12 +32,9 @@ To run the applications correctly, it is necessary to reproduce the data structu
 
 All files can be found at the [SUSHI Test Collection](https://sites.google.com/view/ntcir-sushi-task/test-collection):
 
-- [FoldersV1.2.json](https://drive.google.com/file/d/1U6BCx1_MWsymny_hOhurlfUapFa8HsTC/view?usp=sharing)
+- [FoldersV1.2.json](https://github.com/victorleaoo/SUSHI_Information_Retrieval_Archives/blob/main/FoldersV1.2.json)
 - [itemsV1.2.json](https://drive.google.com/file/d/1c_hpR_lgdGeskXaNQTdCS7nO9s1R2NOb/view?usp=share_link)
 - [raw](https://drive.google.com/file/d/1hA5FW0cNloi20coLlGvnv5wMap8ZN8YL/view?usp=sharing)
-- [Ntcir18SushiDryRunBoxQrelsV1.1.tsv](https://drive.google.com/file/d/1rVwHYOtY-PpG-RUo44H7lY9PmHNwbuL0/view?usp=sharing)
-- [Ntcir18SushiDryRunFolderQrelsV1.1.tsv](https://drive.google.com/file/d/1Q6553xByDHcxhqMgrsNDT5O_a9f3VB9x/view?usp=sharing)
-- [formal-box-qrel.txt + formal-document-qrel.txt + formal-folder-qrel.txt](https://drive.google.com/file/d/16vfBPyykpRHPbEfwGIVry5CAK7j-VzqR/view?usp=share_link)
 
 ## SUSHI Experiment Runner
 
@@ -59,9 +55,11 @@ The implemented model for the current workflow is the BM25F + Expansion techniqu
 
 In order to run the SUSHI Experiment Runner, the follow steps must be followed:
 
-1. **Install Python**:
-2. **Install Python libraries**:
-3. **Install Java**:
+1. **Install Python**: [https://www.python.org](https://www.python.org).
+2. **Install Python libraries**: run the command ```pip install -r requirements.txt```. It is recommended to use a [virtualenv](https://virtualenv.pypa.io/en/latest/user_guide.html) or a [conda](https://www.anaconda.com/docs/getting-started/miniconda/install) env.
+3. **Install Java for Pyterrier**: [https://pyterrier.readthedocs.io/en/latest/troubleshooting/java.html](https://pyterrier.readthedocs.io/en/latest/troubleshooting/java.html)
+4. **Setup the run parameters**: in the ```src/random_run_generator.py```, set the **queryFields**, **searchFields**, **expansion** and **random** params to run the model desired.
+5. **Run the run generator**: execute the code with ```python src/random_run_generator.py```.
 
 ## SUSHI Visualizer
 

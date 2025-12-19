@@ -1,14 +1,3 @@
-# gptexperiments.py Version 1.2 as of January 22, 2025
-# Douglas W. Oard, oard@umd.edu
-
-# Forked from version 1.2 of SubtaskAEvaluation.py
-# This is a snapshot of code that is presently under development
-    # The name is an anacronism from when I first added Tokinori's GPT summaries
-    # Main added capabilities are improved handling of item and folder metadata
-        # That change was dictated by a desire to clean up handling of dates from different training sets, some of which have errors.
-        # That change will ultimately result in better factored code, but at present both the old and new code is present (for regression testing).
-    # Lots of other changes to support current experiments (e.g., addition of GPT summaries, item-based expansion, ...)
-
 import os
 import sys
 import json
@@ -23,6 +12,8 @@ import statistics
 
 import pyterrier as pt
 import pytrec_eval
+
+PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))
 
 # Setting base path
 script_dir = os.path.dirname(os.path.abspath(__file__))
@@ -54,7 +45,7 @@ def load_folder_items_metadata(folder_metadata_path, items_metadata_path):
     #     naraLabel = str(df_items.loc[df_items['Sushi Folder'] == folder, 'NARA Folder Name'].iloc[0])
     #     brownLabel = str(df_items.loc[df_items['Sushi Folder'] == folder, 'Brown Folder Name'].iloc[0])
 
-    #     sncTranslation = load_snc_expansions('/Users/victorleao/mestrado/SUSHI_Information_Retrieval_Archives/src/SncTranslationV1.3.xlsx')
+    #     sncTranslation = load_snc_expansions('../src/SncTranslationV1.3.xlsx')
 
     #     if snc in sncTranslation:
     #         label = sncTranslation[snc]['expanded'] + ' ' + sncTranslation[snc]['scope']
@@ -73,7 +64,7 @@ def load_folder_items_metadata(folder_metadata_path, items_metadata_path):
     #     print(f'{count}/{count_total}')
     #     count += 1
     
-    # with open('/Users/victorleao/mestrado/SUSHI_Information_Retrieval_Archives/data/folders_metadata/FoldersV1.2.json', 'w', encoding='utf-8') as f:
+    # with open('../data/folders_metadata/FoldersV1.2.json', 'w', encoding='utf-8') as f:
     #     json.dump(folderMetadata, f, indent=4)
 
     print(f"-> {len(folderMetadata)} folders")
@@ -379,6 +370,7 @@ def generateSearchResults(ecf, searchFields, items, folderMetadata, queryFields=
     return results
 
 def writeSearchResults(fileName, results, runName):
+    os.makedirs(os.path.dirname(fileName), exist_ok=True)  # Ensure output directory exists
     with open(fileName, 'w') as f:
         for topic in results:
             for i in range(len(topic['RankedList'])):
@@ -387,7 +379,7 @@ def writeSearchResults(fileName, results, runName):
 
 def createFolderToBoxMap():
     boxMap = {}
-    with open(os.path.join(base_dir, 'data', 'folders_metadata', 'FoldersV1.2.json')) as foldersFile:
+    with open(os.path.join(PROJECT_ROOT, 'data', 'folders_metadata', 'FoldersV1.2.json')) as foldersFile:
         folders = json.load(foldersFile)
 
     for folder in folders.items():
@@ -532,7 +524,7 @@ def evaluateSearchResults(runFileName, folderQrelsFileName, boxQrelsFileName, ou
         if not emb:
             process_topics_enrichment_strict(folderTopicResults, ecf, folderQrelsFileName, folderRun)
 
-        file_path = f'/Users/victorleao/mestrado/SUSHI_Information_Retrieval_Archives/all_runs/{experiment_name}_TopicsFolderMetrics.json'
+        file_path = f'../all_runs/{experiment_name}_TopicsFolderMetrics.json'
         os.makedirs(os.path.dirname(file_path), exist_ok=True)
 
         with open(file_path, 'w') as f:
@@ -574,18 +566,18 @@ if __name__ == '__main__':
     # os.environ["JAVA_HOME"] = "C:/Program Files/Java/jdk-22/"
 
     # Set global variables
-    prefix = '/Users/victorleao/mestrado/SUSHI_Information_Retrieval_Archives/data/raw'
+    prefix = os.path.join(PROJECT_ROOT, 'data', 'raw')
     seq=0 # Controls index segments
     unix = True # Set to false for Windows, true for Unix.  This adapts the code to the locations where Terrier writes its index.
     model = 'terrier'
 
     #print("\n== Starting the SNC Translation...")
-    #sncTranslation = load_snc_expansions('/Users/victorleao/mestrado/SUSHI_Information_Retrieval_Archives/src/SncTranslationV1.3.xlsx')
+    #sncTranslation = load_snc_expansions('../src/SncTranslationV1.3.xlsx')
     #print("== Finished the SNC Translation\n")
     
     print("== Loading the Folder and Items Metadata...")
-    folder_metadata_path = '/Users/victorleao/mestrado/SUSHI_Information_Retrieval_Archives/data/folders_metadata/FoldersV1.2.json'
-    items_metadata_path = '/Users/victorleao/mestrado/SUSHI_Information_Retrieval_Archives/data/items_metadata/itemsV1.2.json'
+    folder_metadata_path = os.path.join(PROJECT_ROOT, 'data', 'folders_metadata', 'FoldersV1.2.json')
+    items_metadata_path = os.path.join(PROJECT_ROOT, 'data', 'items_metadata', 'itemsV1.2.json')
     
     folderMetadata, items = load_folder_items_metadata(folder_metadata_path, items_metadata_path)
     # Print the Count of each SNC element in the FoldersMetadata:
@@ -606,7 +598,7 @@ if __name__ == '__main__':
         searchFields = ['title']
         expansion = True
         print("== Loading Experiment Control File...")
-        ecf = readExperimentControlFile('/Users/victorleao/mestrado/SUSHI_Information_Retrieval_Archives/ecf/formal_run/Ntcir18SushiOfficialExperimentControlFileV1.1.json')
+        ecf = readExperimentControlFile('../ecf/formal_run/Ntcir18SushiOfficialExperimentControlFileV1.1.json')
         print(f"{len(ecf['ExperimentSets'])} Experiment Sets")
         print("== Loaded the Folder and Items Metadata\n")
 
@@ -619,7 +611,7 @@ if __name__ == '__main__':
         print(f"== Search Results written.")
 
         print("== Evaluating Search Results...")
-        qrels_folder = '/Users/victorleao/mestrado/SUSHI_Information_Retrieval_Archives/qrels/formal-run-qrels/formal-folder-qrel.txt'
-        qrels_box = '/Users/victorleao/mestrado/SUSHI_Information_Retrieval_Archives/qrels/formal-run-qrels/formal-box-qrel.txt'
+        qrels_folder = '../qrels/formal-run-qrels/formal-folder-qrel.txt'
+        qrels_box = '../qrels/formal-run-qrels/formal-box-qrel.txt'
         evaluateSearchResults('./results/Ntcir18SushiOfficialResultsV1.1.tsv', qrels_folder, qrels_box, './results/metrics/OfficialResultsTopicsResultsEvaluation.txt', ecf, "FormalRun")
         print("== Search results evaluated.")
