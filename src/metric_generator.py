@@ -61,9 +61,9 @@ def metric_generator(random_generation = True):
     paths = []
     file_values_path = 'topics_values.json' # GENERATED FROM acc -> calculate_folder_average
     if random_generation:
-        for item in os.listdir('../all_runs/'):
+        for item in os.listdir('./all_runs/'):
             # Construct the full path
-            full_path = os.path.join('../all_runs/', item)
+            full_path = os.path.join('./all_runs/', item)
             
             # Check if the item is a directory
             if os.path.isdir(full_path):
@@ -123,7 +123,7 @@ def metric_generator(random_generation = True):
             with open(output_model_path, 'w') as f:
                 json.dump(model_stats, f, indent=4)
     else:
-        for item in os.listdir('../all_runs/'):
+        for item in os.listdir('./all_runs/'):
             # Construct the full path
             full_path = os.path.join('../all_runs/', item)
             

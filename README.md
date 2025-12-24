@@ -6,9 +6,9 @@ To run the applications correctly, it is necessary to reproduce the data structu
 
 ```
 ├── all_runs/ # It contains runs that were already made from models  
-├── data/                           # ⚠️ Create folder and add files manually
+├── data/                           
 │   ├── folders_metadata/
-│   │   └── FoldersV1.2.json        # ⚠️ Download Folder metadata
+│   │   └── FoldersV1.2.json
 │   ├── items_metadata/
 │   │   └── itemsV1.2.json          # ⚠️ Download Document metadata
 │   └── raw/                        # ⚠️ Download and Place the raw Box/Folder structure with PDFs here
@@ -36,6 +36,12 @@ All files can be found at the [SUSHI Test Collection](https://sites.google.com/v
 - [itemsV1.2.json](https://drive.google.com/file/d/1c_hpR_lgdGeskXaNQTdCS7nO9s1R2NOb/view?usp=share_link)
 - [raw](https://drive.google.com/file/d/1hA5FW0cNloi20coLlGvnv5wMap8ZN8YL/view?usp=sharing)
 
+After downloading, reproduce the following steps:
+
+1. Create a dir called ```data```;
+2. Inside the dir ```data/items_metadata```, place the ```itemsV1.2.json``` file;
+3. Inside the dir ```data/raw```, place the ```sushi-files.zip``` inside it and unzip it. After unziping, bring all folders out to the ```raw``` dir and delete the ```sushi-files``` folder and the ```sushi-files.zip``` file.
+
 ## SUSHI Experiment Runner
 
 In order to help developers to run a set of different random generated Experiment Control Files, it was created a code that allows the follow workflow:
@@ -59,7 +65,9 @@ In order to run the SUSHI Experiment Runner, the follow steps must be followed:
 2. **Install Python libraries**: run the command ```pip install -r requirements.txt```. It is recommended to use a [virtualenv](https://virtualenv.pypa.io/en/latest/user_guide.html) or a [conda](https://www.anaconda.com/docs/getting-started/miniconda/install) env.
 3. **Install Java for Pyterrier**: [https://pyterrier.readthedocs.io/en/latest/troubleshooting/java.html](https://pyterrier.readthedocs.io/en/latest/troubleshooting/java.html)
 4. **Setup the run parameters**: in the ```src/random_run_generator.py```, set the **queryFields**, **searchFields**, **expansion** and **random** params to run the model desired.
-5. **Run the run generator**: execute the code with ```python src/random_run_generator.py```.
+5. **Run the run generator**: execute the code with ```python src/random_run_generator.py```. **It is important to run outside the src folder, in order for the paths creation to work**.
+
+**IMPORTANT NOTE**: the code doesn't automatically delete the terrierindex folder that is created for each run, therefore, it is necessary to **manually delete it after the run generator stops** running.
 
 ## SUSHI Visualizer
 

@@ -8,8 +8,8 @@ from typing import List, Dict, Tuple, Any, Optional
 # ==========================================
 # CONSTANTES
 # ==========================================
-EXPERIMENTS_ROOT_DIR = "../all_runs"
-SUSHI_ROOT_DIR = "../all_runs/"
+EXPERIMENTS_ROOT_DIR = "./all_runs"
+SUSHI_ROOT_DIR = "./all_runs/"
 
 DIFFICULT_TOPICS = {24, 32, 39, 33, 27, 38, 42, 45, 41, 29, 40, 34, 9, 12, 6}
 IMPOSSIBLE_TOPICS = {3, 8, 10, 13, 14, 17, 25, 26, 30, 31, 43}

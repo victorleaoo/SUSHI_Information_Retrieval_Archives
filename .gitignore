@@ -2,7 +2,9 @@ __pycache__/
 
 .ipynb_checkpoints
 
-data/
+data/items_metadata/itemsV1.2.json
+
+data/raw
 
 terrierindex/
 

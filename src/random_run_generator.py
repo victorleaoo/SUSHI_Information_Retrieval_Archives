@@ -1,5 +1,5 @@
 import json
-import sys
+import shutil
 import os
 
 from metric_generator import metric_generator
@@ -38,9 +38,9 @@ if __name__ == '__main__':
     print("== Loaded the Folder and Items Metadata\n")
 
     queryFields = ["T"] # ["T", "TD", "TDN"]
-    searchFields = [['title']] # [['title'], ['ocr'], ['folderlabel'], ['summary'], ['title', 'ocr', 'folderlabel', 'summary']]
+    searchFields = [['title'], ['ocr']] # [['title'], ['ocr'], ['folderlabel'], ['summary'], ['title', 'ocr', 'folderlabel', 'summary']]
     expansion = True
-    random = True
+    random = False
 
     allDocs = True
 

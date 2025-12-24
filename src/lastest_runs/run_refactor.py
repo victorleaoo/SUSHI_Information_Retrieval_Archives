@@ -22,8 +22,6 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 from SNCLabelTranslate import load_snc_expansions
 
-os.environ["_JAVA_OPTIONS"] = "--enable-native-access=ALL-UNNAMED" # supress java warning
-
 def load_folder_items_metadata(folder_metadata_path, items_metadata_path):
     # items metadata
     with open(items_metadata_path) as itemsMetadataFile:
@@ -78,7 +76,13 @@ def readExperimentControlFile(fileName):
 
 def NEWtrainTerrierModel(trainingDocs, searchFields, items, folderMetadata):
     global seq  # Used to control creation of a separate index for each training set
-    global unix  # Used to accommodate Terrier's use of var for indexes with Unix
+
+    if os.name == 'nt': # Windows
+        unix_check = True
+        java_home = r'C:\Program Files\Java\jdk-11'
+        os.environ["JAVA_HOME"] = java_home
+    else:
+        unix_check = False
 
     noShortOcr = False # Set to true if you want to replace OCR text that is nearly empty with the document title
     expanding = False  # Set to True if you want to index more than the full collection and not just the folders in the original training set
@@ -126,12 +130,12 @@ def NEWtrainTerrierModel(trainingDocs, searchFields, items, folderMetadata):
     print(f"\t\t{len(relations)} folders with relations created")
     print("\t**Relations for folders built.\n")
 
+    import time
     # Create the Terrier index for this training set and then return a Terrier retriever for that index
     seq += 1 # We create one Terrier index per training set
-    indexDir = './terrierindex/'+str(seq) # Be careful here -- this directory and all its contents will be deleted!
-    if 'index' in indexDir and os.path.isdir(indexDir):
-        print(f'\t\tDeleting prior index {indexDir}')
-        shutil.rmtree(indexDir) # This is required because Terrier fails to close its index on completion
+    unique_id = str(int(time.time()))
+    base_index_folder = os.path.abspath("terrierindex")
+    indexDir = os.path.join(base_index_folder, unique_id)
     #if not pt.java.started(): pt.init()
 
     print("\t**Setting Up BM25F model...")
@@ -164,6 +168,11 @@ def NEWtrainTerrierModel(trainingDocs, searchFields, items, folderMetadata):
         else:
             print(f"{field} not available")
             sys.exit()
+
+    if not pt.started():
+        pt.java.init()
+
+    pt.ApplicationSetup.setProperty("terrier.use.memory.mapping", "false")
 
     indexer = pt.IterDictIndexer(indexDir, 
                                  meta={'docno': 20, 'folder': 20, 'box': 20, 'date': 10}, 
@@ -524,7 +533,7 @@ def evaluateSearchResults(runFileName, folderQrelsFileName, boxQrelsFileName, ou
         if not emb:
             process_topics_enrichment_strict(folderTopicResults, ecf, folderQrelsFileName, folderRun)
 
-        file_path = f'../all_runs/{experiment_name}_TopicsFolderMetrics.json'
+        file_path = f'./all_runs/{experiment_name}_TopicsFolderMetrics.json'
         os.makedirs(os.path.dirname(file_path), exist_ok=True)
 
         with open(file_path, 'w') as f:
