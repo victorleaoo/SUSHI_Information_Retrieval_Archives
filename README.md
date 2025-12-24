@@ -65,7 +65,8 @@ In order to run the SUSHI Experiment Runner, the follow steps must be followed:
 2. **Install Python libraries**: run the command ```pip install -r requirements.txt```. It is recommended to use a [virtualenv](https://virtualenv.pypa.io/en/latest/user_guide.html) or a [conda](https://www.anaconda.com/docs/getting-started/miniconda/install) env.
 3. **Install Java for Pyterrier**: [https://pyterrier.readthedocs.io/en/latest/troubleshooting/java.html](https://pyterrier.readthedocs.io/en/latest/troubleshooting/java.html)
 4. **Setup the run parameters**: in the ```src/random_run_generator.py```, set the **queryFields**, **searchFields**, **expansion** and **random** params to run the model desired.
-5. **Run the run generator**: execute the code with ```python src/random_run_generator.py```. **It is important to run outside the src folder, in order for the paths creation to work**.
+5. If you're running on Windows, change the ```java_home```, in the ```src/lastest_runs/run_refactor.py``` file (line 82);
+6. **Run the run generator**: execute the code with ```python src/random_run_generator.py```. **It is important to run outside the src folder, in order for the paths creation to work**.
 
 **IMPORTANT NOTE**: the code doesn't automatically delete the terrierindex folder that is created for each run, therefore, it is necessary to **manually delete it after the run generator stops** running.
 
