@@ -84,6 +84,8 @@ def NEWtrainTerrierModel(trainingDocs, searchFields, items, folderMetadata):
     else:
         unix_check = False
 
+    unix = unix_check
+
     noShortOcr = False # Set to true if you want to replace OCR text that is nearly empty with the document title
     expanding = False  # Set to True if you want to index more than the full collection and not just the folders in the original training set
 
