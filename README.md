@@ -11,7 +11,11 @@ To run the applications correctly, it is necessary to reproduce the data structu
 │   │   └── FoldersV1.2.json
 │   ├── items_metadata/
 │   │   └── itemsV1.2.json          # ⚠️ Download Document metadata
-│   └── raw/                        # ⚠️ Download and Place the raw Box/Folder structure with PDFs here
+│   ├── raw/                        # ⚠️ Download and Place the raw Box/Folder structure with PDFs here
+│   │   └── A0001
+│   │   └── A0002
+│   │   └── A0003
+│   │   └── ...
 ├── docs/
 ├── ecf/                            
 ├── qrels/                          

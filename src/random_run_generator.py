@@ -40,7 +40,7 @@ if __name__ == '__main__':
     queryFields = ["T"] # ["T", "TD", "TDN"]
     searchFields = [['title'], ['ocr']] # [['title'], ['ocr'], ['folderlabel'], ['summary'], ['title', 'ocr', 'folderlabel', 'summary']]
     expansion = True
-    random = False
+    random = True
 
     allDocs = True
 

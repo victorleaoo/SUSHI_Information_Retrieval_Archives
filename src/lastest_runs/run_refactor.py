@@ -7,7 +7,6 @@ import re
 import math
 import pandas as pd
 
-from matplotlib.backends.backend_pdf import PdfPages
 import statistics
 
 import pyterrier as pt
@@ -265,7 +264,7 @@ def trainModel(trainingDocuments, searchFields, items, folderMetadata):
     print(f'\n=> Training Called, preparing index for experiment set {seq+1}')
     return NEWtrainTerrierModel(trainingDocuments, searchFields, items, folderMetadata)
 
-def terrierSearch(query, engine, pdf, relations, expansion=True):
+def terrierSearch(query, engine, relations, expansion=True):
     query = re.sub(r'[^a-zA-Z0-9\s]', '', query) # Terrier fails if punctuation is found in a query
     result = engine.search(query)
     #    qid  docid   docno     folder    box        date           rank      score        query
@@ -351,7 +350,7 @@ def generateSearchResults(ecf, searchFields, items, folderMetadata, queryFields=
     for experimentSet in ecf['ExperimentSets']:
         index, relations = trainModel(experimentSet['TrainingDocuments'], searchFields, items, folderMetadata)
 
-        pdf = PdfPages('./dates/plots'+str(i+1)+'.pdf')
+        #pdf = PdfPages('./dates/plots'+str(i+1)+'.pdf')
 
         topics = list(experimentSet['Topics'].keys())
         print("\t**Performing topics ranking with terrierSearch BM25F...")
@@ -373,11 +372,11 @@ def generateSearchResults(ecf, searchFields, items, folderMetadata, queryFields=
             
             query = query.strip()
 
-            rankedFolderList = terrierSearch(query, index, pdf, relations, expansion)
+            rankedFolderList = terrierSearch(query, index, relations, expansion)
             results[i]['RankedList'] = rankedFolderList
             i+=1
         print("\t**Topics Ranking ended.")
-        pdf.close()
+        #pdf.close()
     return results
 
 def writeSearchResults(fileName, results, runName):

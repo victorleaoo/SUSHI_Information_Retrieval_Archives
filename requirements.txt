@@ -1,9 +1,7 @@
-streamlit==1.51.0
-numpy==1.26.4
-python-terrier==1.0
+streamlit
+numpy
+python-terrier
 pytrec_eval-terrier==0.5.10
-openpyxl==3.1.5
-altair==5.5.0
-pandas==2.3.3
-scipy==1.14.0
-matplotlib==3.10.7
+altair
+pandas
+scipy
