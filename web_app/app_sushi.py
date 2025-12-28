@@ -227,6 +227,12 @@ def run_sushi_visualization_ui():
                             if "ocr" in meta and meta["ocr"]:
                                 with st.expander("Show OCR Text"): st.text(meta["ocr"][0])
 
+                            sushi_folder_id = meta.get("Sushi Folder")
+                            if sushi_folder_id:
+                                specific_folder_meta = folders_meta.get(sushi_folder_id, {})
+                                folder_label = specific_folder_meta.get("folder_label", "N/A")
+                                st.markdown(f"**Sushi Folder Label:** {folder_label}")
+
         with tab_folders:
             if not rf: st.write("No relevant folders found.")
             else:
