@@ -5,3 +5,5 @@ pytrec_eval-terrier==0.5.10
 altair
 pandas
 scipy
+tqdm
+sentence_transformers
