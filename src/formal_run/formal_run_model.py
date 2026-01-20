@@ -12,7 +12,7 @@ base_dir = os.path.abspath(os.path.join(script_dir, '..', '..'))
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from SNCLabelTranslate import translate_snc_label
-from SubtaskAEvaluation import writeSearchResults, evaluateSearchResults
+from SUSHI_Information_Retrieval_Archives.src.lastest_runs.SubtaskAEvaluation import writeSearchResults, evaluateSearchResults
 
 CONTROL_FILE_PREFIX = os.path.join(base_dir, 'ecf', 'formal_run', 'Ntcir18SushiOfficialExperimentControlFileV1.1.json')
 

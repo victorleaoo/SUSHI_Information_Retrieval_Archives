@@ -13,12 +13,12 @@ os.environ["TOKENIZERS_PARALLELISM"] = "false"
 
 import pandas as pd
 import pyterrier as pt
-import pytrec_eval
-import numpy as np
-import scipy.stats as st
 from tqdm import tqdm
-from sentence_transformers import SentenceTransformer, util
 from pylate import indexes, models, retrieve
+
+# Models Class
+from models import BM25Model, EmbeddingsModel, ColBERTModel, BM_25_FIELD_WEIGHTS
+from evaluator import Evaluator
 
 class Style:
     HEADER = '\033[95m'
@@ -46,13 +46,6 @@ RANDOM_SEED_LIST = [1, 42, 100, 300, 333, 777, 999, 2025, 6159, 12345, 19865, 53
                     56782, 62537, 72738, 75259, 81236, 91823, 98665, 98765, 99009, 999777333,
                     120302, 123865, 170302, 180803, 5122025, 12052024, 12052025, 99000011]
 
-BM_25_FIELD_WEIGHTS = {
-    'title':       {'index_col': 'title',       'w': 2.3,  'c': 0.65},
-    'ocr':         {'index_col': 'ocr',         'w': 0.1,  'c': 0.4},
-    'folderlabel': {'index_col': 'folderlabel', 'w': 0.2,  'c': 0.6},
-    'summary':     {'index_col': 'summary',     'w': 0.08, 'c': 2.0}
-}
-
 SEARCHING_FIELD_MAP = {
     'folderlabel': 'F', 
     'ocr': 'O', 
@@ -77,11 +70,12 @@ RRF_R_PARAMETER = 0  # "we set r = 0"
 class RunGenerator:
     def __init__(self, 
                  searching_fields=[['folderlabel']],#, [['title', 'ocr']], [['title', 'summary']], [['ocr', 'summary']], [['title', 'ocr', 'summary']]], # [['title', 'ocr', 'folderlabel', 'summary']]
-                 query_fields=['T', 'TD', 'TDN'], # ["T", "TD", "TDN"]
+                 query_fields=['TD'], # ["T", "TD", "TDN"]
                  run_type='random', # 'random', 'all_documents'
-                 models=['bm25'], # list: 'bm25', 'embeddings', 'colbert'
+                 models=['embeddings'], # list: 'bm25', 'embeddings', 'colbert'
                  sampling='uniform', # 'uniform', 'uneven' (only works for run_type == 'random')
-                 expansion=[] # ['same_box', 'same_snc', 'similar_snc', 'close_date']
+                 expansion=[], # ['same_box', 'same_snc', 'similar_snc', 'close_date']
+                 all_folders_folder_label=True
                  ):
         # Initialize params
         self.searching_fields = searching_fields
@@ -90,14 +84,7 @@ class RunGenerator:
         self.models = models
         self.sampling = sampling
         self.expansion = expansion
-
-        # Initial configs if system is Windows
-        if os.name == 'nt': # Windows
-            self.unix_check = True
-            java_home = r'C:\Program Files\Java\jdk-11'
-            os.environ["JAVA_HOME"] = java_home
-        else:
-            self.unix_check = False
+        self.all_folders_folder_label = all_folders_folder_label
 
         # Load items and folderMetadata
         #print('> Loading Items and folderMetadata... <')
@@ -106,6 +93,8 @@ class RunGenerator:
         with open(FOLDER_METADATA_PATH) as folderMetadataFile:
             self.folderMetadata = json.load(folderMetadataFile)
         #print('!> Loaded Items and folderMetadata <!')
+
+        self.evaluator = Evaluator(FOLDER_QRELS_PATH, BOX_QRELS_PATH)
         
         # Load full collection of data
         def sortLongest(my_dict):
@@ -115,7 +104,6 @@ class RunGenerator:
             return sorted_dict
         
         # Load full test collection (necessary to generate ecf)
-        #print('> Loading full collection... <')
         self.fullCollection = {}
         for box in os.listdir(SUSHI_FILES_PATH):
             self.fullCollection[box] = {}
@@ -125,13 +113,6 @@ class RunGenerator:
                     self.fullCollection[box][folder].append(file)
         for box in self.fullCollection:
             self.fullCollection[box] = sortLongest(self.fullCollection[box])
-        #print('!> Loaded full collection <!')
-
-        self.MODELS_METHODS = {
-            'bm25': (self.train_bm25, self.search_bm25),
-            'embeddings': (self.setup_embeddings, self.search_embeddings),
-            'colbert': (self.setup_colbert, self.search_colbert)
-        }
         
     ##### MAIN WORKFLOW #####
     def run_experiments(self):
@@ -145,6 +126,8 @@ class RunGenerator:
                 print(f"\t- {Style.BOLD}Run type:{Style.RESET}          {Style.CYAN}{self.run_type}{Style.RESET}")
                 print(f"\t- {Style.BOLD}Model:{Style.RESET}             {Style.CYAN}{', '.join([model for model in self.models])}{Style.RESET}")
                 print(f"\t- {Style.BOLD}Expansion Methods:{Style.RESET} {Style.CYAN}{', '.join([exp for exp in self.expansion])}{Style.RESET}")
+                run_folder_name = self.saving_folder_name()
+                metrics_output_folder = os.path.abspath(f'../all_runs/{run_folder_name}')
                 if self.run_type == 'random':
                     #print('>> Running Random Experiment <<')
                     for random_seed in tqdm(RANDOM_SEED_LIST, desc="Generating Results of Random Runs"):
@@ -152,35 +135,64 @@ class RunGenerator:
                         self.random_seed = random_seed
                         # 1. Create the random ECF
                         self.ecf = self.create_random_ecf()
-                        #print(f"!>>> ECF created for seed {random_seed} <<<!")
 
-                        # 2. Train model
-                        for model in self.models:
-                            self.MODELS_METHODS[model][0]()
+                        # 2. Get data dict
+                        clean_data = self.prepare_training_data()
+
+                        if self.run_type != "all_documents" and self.all_folders_folder_label == False:
+                            self.relations = self.create_folder_relations_for_expansion(clean_data)
+
+                        # 3. Train model
+                        self.active_models = {}
+                        for model_name in self.models:
+                            if model_name == 'bm25':
+                                model = BM25Model(self.current_searching_field)
+                            elif model_name == 'embeddings':
+                                model = EmbeddingsModel()
+                            elif model_name == 'colbert':
+                                model = ColBERTModel()
+
+                            model.train(clean_data)
+                            self.active_models[model_name] = model
                         
-                        # 3. Generate Search Results for Topics
+                        # 4. Generate Search Results for Topics
                         results = self.produce_topics_results()
 
-                        # 4. Save and Evaluate Results
-                        self.write_results(results)
-                        self.evaluate_results()
-                    self.metric_file_generator()
+                        # 5. Save and Evaluate Results
+                        run_name=f'45-Topics-Random-{random_seed}'
+                        self.evaluator.save_run_file(results, RESULTS_PATH, run_name)
+                        json_path = os.path.join(metrics_output_folder, f'Random{self.random_seed}_TopicsFolderMetrics.json')
+                        self.evaluator.evaluate(RESULTS_PATH, json_path)
+                    self.evaluator.generate_aggregated_metrics(metrics_output_folder, 'random')
                 elif self.run_type == 'all_documents':
                     # 1. Read ECF
                     with open(ALL_DOCUMENTS_ECF_PATH) as ecfFile:
                         self.ecf = json.load(ecfFile)
 
-                    # 2. Train model
-                    for model in self.models:
-                        self.MODELS_METHODS[model][0]()
+                    # 2. Get data dict
+                    clean_data = self.prepare_training_data()
 
-                    # 3. Generate Search Results for Topics
+                    # 3. Train model
+                    self.active_models = {}
+                    for model_name in self.models:
+                        if model_name == 'bm25':
+                            model = BM25Model(self.current_searching_field)
+                        elif model_name == 'embeddings':
+                            model = EmbeddingsModel()
+                        elif model_name == 'colbert':
+                            model = ColBERTModel()
+
+                        model.train(clean_data)
+                        self.active_models[model_name] = model
+
+                    # 4. Generate Search Results for Topics
                     results = self.produce_topics_results()
 
-                    # 4. Save and Evaluate Results
-                    self.write_results(results)
-                    self.evaluate_results()
-                    self.metric_file_generator()
+                    # 5. Save and Evaluate Results
+                    self.evaluator.save_run_file(results, RESULTS_PATH, run_name)
+                    json_path = os.path.join(metrics_output_folder, 'AllDocuments_TopicsFolderMetrics.json')
+                    self.evaluator.evaluate(RESULTS_PATH, json_path)
+                    self.evaluator.generate_aggregated_metrics(metrics_output_folder, 'all_documents')
 
     def create_random_ecf(self):
         # Load all topics
@@ -235,6 +247,69 @@ class RunGenerator:
             json.dump(ecf, json_file, indent=4)
 
         return ecf
+
+    def prepare_training_data(self):
+        trainingSet = []
+        # Determine the fields for text_blob generation
+        # Logic adapted from your original setup_embeddings
+        current_fields = self.current_searching_field[0] if isinstance(self.current_searching_field[0], list) else [self.current_searching_field[0]]
+
+        if not self.all_folders_folder_label:
+            for trainingDoc in self.ecf["ExperimentSets"][0]["TrainingDocuments"]:
+                file = trainingDoc[-10:-4] 
+                folder = self.items[file]['Sushi Folder']
+                box = self.items[file]['Sushi Box']
+                docDate = self.items[file]['date']
+                
+                # 1. Base Metadata
+                doc_entry = {
+                    'docno': file,
+                    'folder': folder,
+                    'box': box,
+                    'date': docDate,
+                    'title': self.items[file]['title'],
+                    'ocr': self.items[file]['ocr'][0],
+                    'summary': self.items[file]['summary'],
+                }
+
+                # 2. Handle Folder Label
+                try:
+                    label = self.folderMetadata[folder]['label_parent_expanded'] + ". " + self.folderMetadata[folder]['scope_stoppers']
+                except:
+                    label = self.folderMetadata[folder]['label']
+                doc_entry['folderlabel'] = label
+
+                # 3. Generate 'text_blob' for Dense Retrievers (Concat logic)
+                text_blob = ""
+                for field in current_fields:
+                    if field == 'folderlabel':
+                        text_blob += label + ". "
+                    else:
+                        val = self.items[file][field]
+                        if field == 'ocr': 
+                            val = val[0] # Handle OCR list
+                        text_blob += str(val) + ". "
+                doc_entry['text_blob'] = text_blob.strip()
+
+                trainingSet.append(doc_entry)
+        else:
+            for folder in self.folderMetadata:
+                folder_entry = {
+                    'docno': folder,
+                    'folder': folder,
+                    'date': self.folderMetadata[folder]['date'],
+                    'box': self.folderMetadata[folder]['box']
+                }
+                try:
+                    label = self.folderMetadata[folder]['label_parent_expanded'] + ". " + self.folderMetadata[folder]['scope_stoppers']
+                except:
+                    label = self.folderMetadata[folder]['label']
+                folder_entry['folderlabel'] = label
+                folder_entry['text_blob'] = label
+                
+                trainingSet.append(folder_entry)
+
+        return trainingSet
     
     def produce_topics_results(self):
         #print(">>> Generating Results... <<<")
@@ -252,26 +327,34 @@ class RunGenerator:
             if self.current_query_field == "TDN":
                 query = f"{title} {description} {narrative}".strip()
             elif self.current_query_field == "TD":
-                query = f"{title} {description}".strip()
+                query = f"{title}. {description}".strip()
             else:
                 query = title.strip()
 
-            if len(self.models) == 1:
-                if self.models[0] == 'embeddings':
-                    rankedFolderList = self.search_embeddings(query)
-                elif self.models[0] == "bm25":
-                    rankedFolderList = self.search_bm25(query)
-                elif self.models[0] == "colbert":
-                    rankedFolderList = self.search_colbert(query)
+            dfs_to_combine = {}
 
-                results[i]['RankedList'] = rankedFolderList['folder'].drop_duplicates().tolist()
-            else: # rrf = True -> the result is going to be a combination of results
-                dfs_to_combine = {}
-                for model in self.models:
-                    dfs_to_combine[model] = self.MODELS_METHODS[model][1](query)
-                    
-                rankedFolderList = self.apply_weighted_rrf(dfs_to_combine)
-                results[i]['RankedList'] = rankedFolderList['folder'].drop_duplicates().tolist()
+            for model_name, model_instance in self.active_models.items():
+                # 1. Get raw search results (DataFrame)
+                raw_df = model_instance.search(query)
+                
+                # 2. Apply Expansion
+                if len(self.expansion) == 0 or self.run_type == 'all_documents':
+                    final_df = raw_df[['folder', 'score']]
+                else:
+                    final_df = self.produce_expansion_results(raw_df)
+                
+                dfs_to_combine[model_name] = final_df
+            
+            if len(self.models) == 1:
+                # Get the only dataframe
+                single_model = self.models[0]
+                ranked_list = dfs_to_combine[single_model]['folder'].drop_duplicates().tolist()
+            else:
+                ranked_df = self.apply_weighted_rrf(dfs_to_combine)
+                ranked_list = ranked_df['folder'].drop_duplicates().tolist()
+
+            results[i]['RankedList'] = ranked_list
+
             i += 1
         return results
     
@@ -420,262 +503,6 @@ class RunGenerator:
         df = pd.DataFrame(list(folder_score.items()), columns=['folder', 'score'])
 
         return df
-    
-    def train_bm25(self):
-        unix = self.unix_check
-
-        trainingSet=[]
-
-        # Creating trainingSet list with documents metadata
-        for trainingDoc in self.ecf["ExperimentSets"][0]["TrainingDocuments"]:
-            file = trainingDoc[-10:-4] # This extracts the file name and ignores the box and folder labels, which we will get from the metadata
-            folder = self.items[file]['Sushi Folder']
-            box = self.items[file]['Sushi Box']
-            try:
-                label = self.folderMetadata[folder]['label_parent_expanded'] + self.folderMetadata[folder]['scope_stoppers']
-            except:
-                label = self.folderMetadata[folder]['label']
-            docDate = self.items[file]['date']
-            title = self.items[file]['title']
-            ocr = self.items[file]['ocr'][0] # This indexes only the first page of the OCR
-            summary = self.items[file]['summary'] # This comes from gpt4o-mini
-            trainingSet.append({'docno': file, 
-                                'folder': folder, 
-                                'box': box,
-                                'title': title, 
-                                'ocr': ocr, 
-                                'folderlabel': label, 
-                                'summary': summary, 
-                                'date': docDate})
-        
-        if self.run_type != "all_documents":
-            self.relations = self.create_folder_relations_for_expansion(trainingSet)
-
-        if not pt.java.started():
-            pt.java.init()
-        pt.ApplicationSetup.setProperty("terrier.use.memory.mapping", "false")
-        pt.java.set_log_level('ERROR')
-
-        # Setting BM25F weights
-        if isinstance(self.current_searching_field[0], list):
-            active_text_attrs = []
-            bm25f_controls = {}
-
-            field_idx = 0
-            for field in self.current_searching_field[0]:
-                if field in BM_25_FIELD_WEIGHTS:
-                    col_name = BM_25_FIELD_WEIGHTS[field]['index_col']
-                    active_text_attrs.append(col_name)
-                    
-                    weight = BM_25_FIELD_WEIGHTS[field]['w']
-                    c_val = BM_25_FIELD_WEIGHTS[field]['c']
-                    
-                    bm25f_controls[f'w.{field_idx}'] = weight
-                    bm25f_controls[f'c.{field_idx}'] = c_val
-                    
-                    field_idx += 1
-                else:
-                    print(f"{field} not available")
-                    sys.exit()
-            final_wmodel = "BM25F"
-            final_controls = bm25f_controls 
-        else:
-            final_wmodel = "BM25"
-            final_controls = {}
-            active_text_attrs = [field for field in self.current_searching_field if field in BM_25_FIELD_WEIGHTS]
-
-        #print(final_wmodel, final_controls, active_text_attrs)
-
-        # Creating TerrierIndex with Unique ID as directory (need to work on Windows)
-        indexDir = os.path.join(os.path.abspath("terrierindex"), str(int(time.time())))
-        indexer = pt.IterDictIndexer(indexDir, 
-                                    meta={'docno': 20, 'folder': 20, 'box': 20, 'date': 10}, 
-                                    text_attrs=active_text_attrs,
-                                    meta_reverse=['docno'], overwrite=True, fields=True
-                                    )
-        indexref = indexer.index(trainingSet)
-        index = pt.IndexFactory.of(indexref)
-
-        # Setting up model (BM25 or BM25F, depending on the config)
-        self.BM25 = pt.terrier.Retriever(index, 
-                                         wmodel=final_wmodel,
-                                         controls=final_controls, 
-                                         metadata=['docno', 'folder', 'box', 'date'], 
-                                         num_results=1000
-                                         )
-
-        return
-    
-    def search_bm25(self, query):
-        query = re.sub(r'[^a-zA-Z0-9\s]', '', query) # Terrier fails if punctuation is found in a query
-        result = self.BM25.search(query)
-        #    qid  docid   docno     folder    box        date           rank      score        query
-        #    1     47     S25507    B99990565 B0003      1966-04-27     0         8.366143     Future space missions
-        #    1    138     S24275    E99990997 E0026      1969-05-01     1         8.183247     Future space missions
-        rankedList = result[['folder', 'score']]
-
-        if len(self.expansion) == 0 or self.run_type == 'all_documents':
-            return rankedList
-        
-        return self.produce_expansion_results(result)
-    
-    def setup_embeddings(self):
-        # 'all-MiniLM-L6-v2' is fast and effective. Use 'all-mpnet-base-v2' for higher accuracy (slower)
-        self.embedding_model = SentenceTransformer('all-mpnet-base-v2')
-        # Creating ids and text embeddings
-        self.documents_ids = [doc[16:-4] for doc in self.ecf['ExperimentSets'][0]['TrainingDocuments']]
-
-        self.documents_texts = []
-        for doc in self.documents_ids:
-            current_text = ""
-            if isinstance(self.current_searching_field[0], str):
-                if self.current_searching_field[0] == 'folderlabel':
-                    try:
-                        current_text = self.folderMetadata[folder]['label_parent_expanded'] + self.folderMetadata[folder]['scope_stoppers']
-                    except:
-                        current_text = self.folderMetadata[folder]['label']
-                else:
-                    current_text = self.items[doc][self.current_searching_field[0]] if self.current_searching_field[0] != 'ocr' else self.items[doc][self.current_searching_field[0]][0]
-            else:
-                for field in self.current_searching_field[0]:
-                    if field == 'folderlabel':
-                        current_text += self.folderMetadata[self.items[doc]['Sushi Folder']]['label_parent_expanded'] + self.folderMetadata[self.items[doc]['Sushi Folder']]['scope_stoppers'] + ". "
-                    else:
-                        text_to_add = self.items[doc][field]+". " if field != 'ocr' else self.items[doc][field][0]+". "
-                        current_text += text_to_add
-            self.documents_texts.append(current_text)
-
-        trainingSet = []
-
-        for trainingDoc in self.ecf["ExperimentSets"][0]["TrainingDocuments"]:
-            file = trainingDoc[-10:-4] # This extracts the file name and ignores the box and folder labels, which we will get from the metadata
-            folder = self.items[file]['Sushi Folder']
-            box = self.items[file]['Sushi Box']
-            trainingSet.append({'docno': file, 
-                                'folder': folder, 
-                                'box': box,
-                                })
-
-        if self.run_type != "all_documents":
-            self.relations = self.create_folder_relations_for_expansion(trainingSet)
-
-        self.documents_texts_embeddings = self.embedding_model.encode(self.documents_texts, convert_to_tensor=True)
-        return
-    
-    def search_embeddings(self, query):
-        query_embedding = self.embedding_model.encode(query, convert_to_tensor=True)
-
-        cosine_scores = util.cos_sim(query_embedding, self.documents_texts_embeddings)[0]
-        scores_and_ids = zip(cosine_scores.tolist(), self.documents_ids)
-
-        ranked_ids = sorted(scores_and_ids, key=lambda x: x[0], reverse=True)
-
-        rankedFolders = []
-        results_data = []
-        for score, id in ranked_ids:
-            rankedFolders.append(self.items[id]['Sushi Folder'])
-
-            results_data.append({
-                'docno': id,
-                'folder': self.items[id]['Sushi Folder'],
-                'score': score
-            })
-
-        df = pd.DataFrame(results_data)
-
-        if len(self.expansion) == 0 or self.run_type == 'all_documents':
-            return df
-
-        return self.produce_expansion_results(df)
-    
-    def setup_colbert(self):
-        self.colbert_model = models.ColBERT(model_name_or_path="colbert-ir/colbertv2.0")
-        self.colbert_index = indexes.PLAID(
-            index_folder="pylate-index",
-            index_name="index",
-            override=True,
-        )
-        self.colbert_retriever = retrieve.ColBERT(index=self.colbert_index)
-
-        self.documents_ids = [doc[16:-4] for doc in self.ecf['ExperimentSets'][0]['TrainingDocuments']]
-        for doc in self.documents_ids:
-            current_text = ""
-            if isinstance(self.current_searching_field[0], str):
-                if self.current_searching_field[0] == 'folderlabel':
-                    try:
-                        current_text = self.folderMetadata[folder]['label_parent_expanded'] + self.folderMetadata[folder]['scope_stoppers']
-                    except:
-                        current_text = self.folderMetadata[folder]['label']
-                else:
-                    current_text = self.items[doc][self.current_searching_field[0]] if self.current_searching_field[0] != 'ocr' else self.items[doc][self.current_searching_field[0]][0]
-            else:
-                for field in self.current_searching_field[0]:
-                    if field == 'folderlabel':
-                        current_text += self.folderMetadata[self.items[doc]['Sushi Folder']]['label_parent_expanded'] + self.folderMetadata[self.items[doc]['Sushi Folder']]['scope_stoppers'] + ". "
-                    else:
-                        text_to_add = self.items[doc][field]+". " if field != 'ocr' else self.items[doc][field][0]+". "
-                        current_text += text_to_add
-            self.documents_texts.append(current_text)
-
-        documents_embeddings = self.colbert_model.encode(
-            self.documents_texts,
-            batch_size=128,
-            is_query=False, # Encoding documents
-            show_progress_bar=False,
-        )
-
-        self.colbert_index.add_documents(
-            documents_ids=self.documents_ids,
-            documents_embeddings=documents_embeddings,
-        )
-
-        trainingSet = []
-
-        for trainingDoc in self.ecf["ExperimentSets"][0]["TrainingDocuments"]:
-            file = trainingDoc[-10:-4] # This extracts the file name and ignores the box and folder labels, which we will get from the metadata
-            folder = self.items[file]['Sushi Folder']
-            box = self.items[file]['Sushi Box']
-            trainingSet.append({'docno': file,
-                                'folder': folder, 
-                                'box': box,
-                                })
-
-        if self.run_type != "all_documents":
-            self.relations = self.create_folder_relations_for_expansion(trainingSet)
-        
-        return
-    
-    def search_colbert(self, query):
-        query_embeddings = self.colbert_model.encode(
-            [query],
-            batch_size=128,
-            is_query=True, # Encoding queries
-            show_progress_bar=False,
-        )
-
-        results = self.colbert_retriever.retrieve(
-            queries_embeddings=query_embeddings,
-            k=100,
-        )
-
-        df = pd.DataFrame(results[0])
-
-        df['folder'] = df['id'].apply(lambda x: self.items[x]['Sushi Folder'])
-        df['docno'] = df['id']
-
-        if len(self.expansion) == 0 or self.run_type == 'all_documents':
-            return df
-
-        return self.produce_expansion_results(df)
-    
-    def write_results(self, results):
-        os.makedirs(os.path.dirname(RESULTS_PATH), exist_ok=True)  # Ensure output directory exists
-        name_run = f'45-Topics-Random-{self.random_seed}' if self.run_type == 'random' else '45-Topics-AllDocuments'
-        with open(RESULTS_PATH, 'w') as f:
-            for topic in results:
-                for i in range(len(topic['RankedList'])):
-                    print(f'{topic["Id"]}\t{topic["RankedList"][i]}\t{i+1}\t{1/(i+1):.4f}\t{name_run}', file=f)
-        f.close()
 
     def saving_folder_name(self):
         search_field_name = ""
@@ -684,6 +511,9 @@ class RunGenerator:
                 search_field_name += SEARCHING_FIELD_MAP[field]
         else:
             search_field_name = SEARCHING_FIELD_MAP[self.current_searching_field[0]]
+
+        if self.all_folders_folder_label == True:
+            search_field_name = "ALLFL"
         
         expansion_name = ""
         if len(self.expansion) > 0:
@@ -695,135 +525,6 @@ class RunGenerator:
         model_name        = "-".join(self.models).upper()
 
         return f"{search_field_name}_{expansion_name[:-1]}_{query_fields_name}_{model_name}"
-
-    def evaluate_results(self):
-        measures = {'ndcg_cut', 'map', 'recip_rank', 'success'} # Generic measures for configuring a pytrec_eval evaluator
-        
-        with open(RESULTS_PATH) as runFile, open(FOLDER_QRELS_PATH) as folderQrelsFile, open(BOX_QRELS_PATH) as boxQrelsFile:
-            folderRun = {}
-
-            for line in runFile:
-                topicId, folderId, _, score, _ = line.split('\t')
-                if topicId not in folderRun:
-                    folderRun[topicId] = {}
-                folderRun[topicId][folderId] = float(score)
-
-            folderQrels = {}
-            for line in folderQrelsFile:
-                topicId, _, folderId, relevanceLevel = line.split('\t')
-                if topicId not in folderQrels:
-                    folderQrels[topicId] = {}
-                folderQrels[topicId][folderId] = int(relevanceLevel.strip())  # this deletes the \n at end of line
-            folderEvaluator = pytrec_eval.RelevanceEvaluator(folderQrels, measures)
-            folderTopicResults = folderEvaluator.evaluate(folderRun)  # replace run with folderQrels to see perfect evaluation measures
-
-            file_path = f'../all_runs/{self.saving_folder_name()}/Random{self.random_seed}_TopicsFolderMetrics.json' if self.run_type == 'random' else f'../all_runs/{self.saving_folder_name()}/AllDocuments_TopicsFolderMetrics.json'
-            os.makedirs(os.path.dirname(file_path), exist_ok=True)
-            with open(file_path, 'w') as f:
-                json.dump(folderTopicResults, f, indent=4)
-        
-        return 
-
-    def calculate_mean_margin(self, values):
-        n = len(values)
-
-        mean = np.mean(values)
-
-        if mean == 0.0:
-            return 0.0, 0.0
-
-        # (Standard Error of Mean - SEM)
-        # s / sqrt(n)
-        sem = st.sem(values) 
-        
-        # T-Student
-        interval = st.t.interval(0.95, df=n-1, loc=mean, scale=sem)
-        
-        margin_of_error = interval[1] - mean
-        
-        return mean, margin_of_error
-
-    def metric_file_generator(self):
-        run_results_path = f"../all_runs/{self.saving_folder_name()}"
-        if self.run_type == 'random':
-            valid_files = [f for f in os.listdir(run_results_path) if f.startswith("Random") and f.endswith(".json")]
-            topic_accumulator = {topic: [] for topic in {f"T{i}" for i in range(1, 46)}}
-
-            for filename in valid_files:
-                with open(os.path.join(run_results_path, filename), 'r', encoding='utf-8') as f:
-                    data = json.load(f)
-
-                run_values = {}
-                for raw_key, metrics in data.items():
-                    norm_key = int(re.search(r'\d+$', raw_key).group())
-                    val = metrics.get('ndcg_cut_5', 0.0)
-                    run_values[norm_key] = val
-                
-                # Add to accumulator (fill missing topics with 0.0 for this run)
-                for topic in {f"T{i}" for i in range(1, 46)}:
-                    topic_accumulator[topic].append(run_values.get(int(topic[1:]), 0.0))
-
-            with open(os.path.join(os.path.join(run_results_path, "topics_values.json")), 'w') as f:
-                json.dump(topic_accumulator, f, indent=4)
-
-            topics_intervals = {}
-            for topic, values in topic_accumulator.items():
-                mean, margin = self.calculate_mean_margin(values)
-                lower = max(0.0, mean - margin)
-                topics_intervals[topic] = (lower, mean, mean + margin)
-            
-            with open(os.path.join(run_results_path, "topics_mean_margin.json"), 'w') as f:
-                json.dump(topics_intervals, f, indent=4)
-
-            all_topics_means = [val[1] for val in topics_intervals.values()]
-            global_mean, global_margin = self.calculate_mean_margin(all_topics_means)
-            
-            model_stats = {
-                "model_global_ndcg": {
-                    "mean": global_mean,
-                    "margin": global_margin,
-                    "interval": [(max(0.0, (global_mean - global_margin))), global_mean, (min(1.0, (global_mean + global_margin)))]
-                }
-            }
-
-            print(model_stats)
-
-            with open(os.path.join(run_results_path, "model_overall_stats.json"), 'w') as f:
-                json.dump(model_stats, f, indent=4)
-            
-        elif self.run_type == 'all_documents':
-            expected_topics = {f"T{i}" for i in range(1, 46)}
-            with open(os.path.join(run_results_path, "AllDocuments_TopicsFolderMetrics.json"), 'r', encoding='utf-8') as f:
-                raw_data = json.load(f)
-                
-                data = {}
-                for k, v in raw_data.items():
-                    data[int(re.search(r'\d+$', k).group())] = v
-
-            topics_intervals = {}
-
-            for topic in expected_topics:
-                if int(topic[1:]) in data:
-                    val = data[int(topic[1:])]['ndcg_cut_5']
-                    topics_intervals[topic] = (val, val, val)
-                else:
-                    topics_intervals[topic] = (0.0, 0.0, 0.0)
-            
-            all_topics_means = [val[1] for val in topics_intervals.values()]
-            global_mean, global_margin = self.calculate_mean_margin(all_topics_means)
-            
-            model_stats = {
-                "model_global_ndcg": {
-                    "mean": global_mean,
-                    "margin": global_margin,
-                    "interval": [(max(0.0, (global_mean - global_margin))), global_mean, (min(1.0, (global_mean + global_margin)))]
-                }
-            }
-
-            print(model_stats)
-
-            with open(os.path.join(run_results_path, "all_documents_model_overall_stats.json"), 'w') as f:
-                json.dump(model_stats, f, indent=4)
     
 if __name__ == "__main__":
     run_experiments = RunGenerator()
