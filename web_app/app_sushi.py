@@ -45,27 +45,76 @@ def render_charts(df_chart: pd.DataFrame, topics_to_display: list):
 def render_table(df_table: pd.DataFrame, topics_to_display: list):
     if df_table.empty: return
     
+    # 1. Filter Columns
     cols_to_keep = ["Experiment"] + topics_to_display
     cols_to_keep = [c for c in cols_to_keep if c in df_table.columns]
     df_filtered = df_table[cols_to_keep]
     
+    # 2. Get CSS (Now returns empty string from Utils)
     css = u1.generate_column_css(df_filtered)
     
+    # 3. Define Clean Styles (Removed Green Header)
+    # Added simple borders and alternating rows for readability without strong colors
     st.markdown(f"""
     <style>
         {css} 
-        .dataframe th {{background-color: #4CAF50; color: white;}} 
-        tr:contains('>>') {{background-color: #f0f8ff !important; font-weight: bold; border-top: 2px solid #ccc;}}
+        .dataframe {{
+            width: 100%;
+            border-collapse: collapse;
+        }}
+        .dataframe th {{
+            background-color: #f0f2f6; /* Neutral Streamlit Gray */
+            color: black;
+            font-weight: bold;
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }} 
+        .dataframe td {{
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }}
+        /* Highlight the 'Avg' rows slightly for differentiation */
+        tr:contains('>>') {{
+            background-color: #f9f9f9 !important; 
+            font-weight: bold; 
+            border-top: 2px solid #ccc;
+        }}
     </style>""", unsafe_allow_html=True)
     
-    st.write(df_filtered.to_html(escape=False, index=False, classes="dataframe"), unsafe_allow_html=True)
+    # 4. Wrap in Expander
+    # expanded=False makes it collapsed by default (saving screen space)
+    with st.expander("📝 Detailed Results Table", expanded=False):
+        st.write(df_filtered.to_html(escape=False, index=False, classes="dataframe"), unsafe_allow_html=True)
 
 def run_experiment_analyzer_ui():
     st.sidebar.header("Experiment Filters")
-    sel_search = st.sidebar.selectbox("Searching Field", ["T", "O", "F", "S", "TOFS"])
-    sel_query = st.sidebar.selectbox("Query Field", ["T", "TD", "TDN"])
+    # 1. SCAN FOLDERS
+    options, _ = u1.scan_available_runs()
+    
+    if not options["search"] or not options["model"]:
+        st.error("No valid run folders found in ../all_runs/. Check naming convention: <Search>_<Exp>_<Query>_<Model>")
+        return
 
-    df_chart, df_table, all_topics, stats_ex, stats_nex, stats_oracle, stats_emb = u1.process_experiment_data(sel_search, sel_query)
+    # 2. DYNAMIC FILTERS
+    # Use index=0 safely if list not empty
+    sel_search = st.sidebar.selectbox("Searching Field", options["search"], index=0)
+    sel_query = st.sidebar.selectbox("Query Field", options["query"], index=0)
+    sel_model = st.sidebar.selectbox("Model", options["model"], index=0)
+    
+    # Expansion Strategy (The 'Blue' line)
+    # We default to the first available expansion strategy found
+    if not options["expansion"]:
+        st.sidebar.warning("No Expansion (EX) runs found. Comparisons may be empty.")
+        sel_expansion = "None"
+    else:
+        sel_expansion = st.sidebar.selectbox("Expansion Strategy", options["expansion"], index=0)
+
+    # 3. PROCESS DATA (Pass all 4 parameters)
+    df_chart, df_table, all_topics, stats_ex, stats_nex, stats_oracle, stats_emb = u1.process_experiment_data(
+        sel_search, sel_query, sel_model, sel_expansion
+    )
 
     sel_topic_filter = st.sidebar.radio("Filter Topics:", ["All Topics", "Difficult Topics Only", "Impossible Topics Only"])
 
@@ -84,7 +133,7 @@ def run_experiment_analyzer_ui():
     sort_opt = st.sidebar.radio("Sort Topics By (Desc nDCG):", ["Default (Topic ID)", "Sort by TrainingDocuments", "Sort by SUSHISubmissions", "Sort by Mean With Exp"])
 
     st.title("🔬 Analysis of Experiments")
-    st.caption(f"Aggregating runs from: `{sel_search}_EX_{sel_query}` vs `{sel_search}_NEX_{sel_query}`")
+    st.caption(f"Comparing: `{sel_search}_{sel_expansion}_{sel_query}_{sel_model}` (Blue) vs `{sel_search}_NEX_{sel_query}_{sel_model}` (Orange)")
 
     # --- Score Cards ---
     if stats_emb: c1, c2, c3, c4 = st.columns([1,1,1,1])
@@ -152,6 +201,57 @@ def run_experiment_analyzer_ui():
         render_table(df_table, topics_to_display)
     else:
         st.info(f"No topics found for the selected filter: {sel_topic_filter}")
+
+    st.markdown("---")
+    st.header("📊 Runs Comparisons")
+    
+    df_runs = u1.get_all_runs_statistics()
+    
+    if not df_runs.empty:
+        all_run_names = df_runs['Run Name'].tolist()
+        
+        # Smart Filter: Default to showing runs that match current selection (EX and NEX)
+        current_context_runs = [
+            f"{sel_search}_{sel_expansion}_{sel_query}_{sel_model}",
+            f"{sel_search}_NEX_{sel_query}_{sel_model}"
+        ]
+        # Filter to only existing ones
+        default_selection = [r for r in current_context_runs if r in all_run_names]
+        # If none match, show top 5
+        if not default_selection:
+            default_selection = all_run_names[:5]
+
+        sel_runs_compare = st.multiselect(
+            "Select Runs to Compare:", 
+            options=all_run_names, 
+            default=default_selection
+        )
+        
+        # 3. Filter DataFrame based on selection
+        df_runs_filtered = df_runs[df_runs['Run Name'].isin(sel_runs_compare)]
+        
+        # 4. Format the Metrics Column (Mean ± Margin)
+        # We create a new column for display purposes
+        df_runs_filtered['nDCG@5 (Mean ± Margin)'] = df_runs_filtered.apply(
+            lambda x: f"{x['Mean']:.4f} ± {x['Margin']:.4f}", axis=1
+        )
+        
+        # 5. Display
+        # Reorder columns for cleaner view
+        display_cols = ['Run Name', 'nDCG@5 (Mean ± Margin)', 'Random Runs Count']
+        
+        st.dataframe(
+            df_runs_filtered[display_cols], 
+            use_container_width=True,
+            hide_index=True,
+            column_config={
+                "Run Name": st.column_config.TextColumn("Experiment Folder", width="medium"),
+                "nDCG@5 (Mean ± Margin)": st.column_config.TextColumn("Global Performance", width="small"),
+                "Random Runs Count": st.column_config.NumberColumn("# Random ECFs", help="Number of random runs found in folder")
+            }
+        )
+    else:
+        st.warning("No run statistics found in ../all_runs/")
 
 # ==========================================
 # UI COMPONENTS - APP 2 (SUSHI Visualization)

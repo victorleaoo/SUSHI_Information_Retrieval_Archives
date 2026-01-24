@@ -8,8 +8,8 @@ from typing import List, Dict, Tuple, Any, Optional
 # ==========================================
 # CONSTANTES
 # ==========================================
-EXPERIMENTS_ROOT_DIR = "./all_runs"
-SUSHI_ROOT_DIR = "./all_runs/"
+EXPERIMENTS_ROOT_DIR = "../all_runs"
+SUSHI_ROOT_DIR = "../all_runs/"
 
 DIFFICULT_TOPICS = {24, 32, 39, 33, 27, 38, 42, 45, 41, 29, 40, 34, 9, 12, 6}
 IMPOSSIBLE_TOPICS = {3, 8, 10, 13, 14, 17, 25, 26, 30, 31, 43}
@@ -22,6 +22,54 @@ COLOR_MAP = {
     'SUSHISubmissions': '#d62728',
     'Embeddings (F_EMB_T)': '#9467bd'
 }
+def parse_run_folder(folder_name: str) -> Optional[Dict[str, str]]:
+    """
+    Parses folder name assuming format: <search>_<expansion>_<query>_<model>
+    Example: F_SB-SS_T_BM25-COLBERT
+    """
+    parts = folder_name.split('_')
+    if len(parts) != 4:
+        return None
+    
+    return {
+        "search": parts[0],
+        "expansion": parts[1],
+        "query": parts[2],
+        "model": parts[3],
+        "full_name": folder_name
+    }
+
+def scan_available_runs() -> Tuple[Dict[str, List[str]], List[Dict]]:
+    """
+    Scans the run directory and returns unique options for filters.
+    """
+    if not os.path.exists(EXPERIMENTS_ROOT_DIR):
+        return {}, []
+
+    options = {
+        "search": set(),
+        "query": set(),
+        "model": set(),
+        "expansion": set()
+    }
+    parsed_runs = []
+
+    for f in os.listdir(EXPERIMENTS_ROOT_DIR):
+        if not os.path.isdir(os.path.join(EXPERIMENTS_ROOT_DIR, f)):
+            continue
+            
+        meta = parse_run_folder(f)
+        if meta:
+            options["search"].add(meta["search"])
+            options["query"].add(meta["query"])
+            options["model"].add(meta["model"])
+            if meta["expansion"] != "NEX":
+                options["expansion"].add(meta["expansion"])
+            parsed_runs.append(meta)
+
+    # Convert sets to sorted lists
+    final_options = {k: sorted(list(v)) for k, v in options.items()}
+    return final_options, parsed_runs
 
 def natural_keys(text: str) -> List[Any]:
     return [int(c) if c.isdigit() else c for c in re.split(r'(\d+)', text)]
@@ -41,9 +89,9 @@ def normalize_topic_key(key: str) -> str:
     except (AttributeError, ValueError):
         return key
 
-def get_smart_folder_name(search_field: str, expansion: bool, query_field: str) -> str:
-    exp_str = "EX" if expansion else "NEX"
-    return f"{search_field}_{exp_str}_{query_field}"
+def get_smart_folder_name(search: str, expansion: str, query: str, model: str) -> str:
+    """Reconstructs folder name based on strict 4-part convention."""
+    return f"{search}_{expansion}_{query}_{model}"
 
 def format_cell_content(metrics: Any) -> str:
     if isinstance(metrics, (float, int)):
@@ -67,22 +115,12 @@ def format_cell_content(metrics: Any) -> str:
     return str(metrics)
 
 def generate_column_css(df: pd.DataFrame) -> str:
-    css_rules = []
-    for idx, col_name in enumerate(df.columns):
-        css_index = idx + 1
-        topic_num = get_topic_number(col_name)
-        if topic_num != -1:
-            if topic_num in DIFFICULT_TOPICS:
-                rule = (f".dataframe td:nth-child({css_index}), "
-                        f".dataframe th:nth-child({css_index}) "
-                        f"{{ background-color: #e3bf88 !important; }}")
-                css_rules.append(rule)
-            elif topic_num in IMPOSSIBLE_TOPICS:
-                rule = (f".dataframe td:nth-child({css_index}), "
-                        f".dataframe th:nth-child({css_index}) "
-                        f"{{ background-color: #ab5050 !important; }}")
-                css_rules.append(rule)
-    return "\n".join(css_rules)
+    """
+    Returns empty CSS. 
+    Previous logic for coloring Difficult/Impossible topics has been removed 
+    to keep the table uniform.
+    """
+    return ""
 
 # ==========================================
 # DATA LOADING
@@ -211,19 +249,29 @@ def build_table_dataset(sorted_topics: List[str], avg_ex: Dict, avg_nex: Dict, o
         df_table = df_table.reindex(columns=cols)
     return df_table
 
-def process_experiment_data(search_field: str, query_field: str):
-    name_ex = get_smart_folder_name(search_field, True, query_field)
-    name_nex = get_smart_folder_name(search_field, False, query_field)
+def process_experiment_data(search_field: str, query_field: str, model: str, expansion_strat: str):
+    """
+    Now accepts model and specific expansion strategy to find the exact pair of folders.
+    """
+    # 1. Construct Target Folder Names
+    name_ex = get_smart_folder_name(search_field, expansion_strat, query_field, model)
+    name_nex = get_smart_folder_name(search_field, "NEX", query_field, model)
+    
     path_ex = os.path.join(EXPERIMENTS_ROOT_DIR, name_ex)
     path_nex = os.path.join(EXPERIMENTS_ROOT_DIR, name_nex)
     
+    # 2. Load Data (Logic remains similar, just different paths)
     avg_ex, files_ex = calculate_folder_average(path_ex)
     avg_nex, files_nex = calculate_folder_average(path_nex)
+    
     margins_ex = load_margin_data(path_ex)
     margins_nex = load_margin_data(path_nex)
+    
     stats_ex = load_overall_stats(path_ex, "model_overall_stats.json")
     stats_nex = load_overall_stats(path_nex, "model_overall_stats.json")
     
+    # 3. Load Oracle/Baseline (Try to find in NEX folder, fallback to root or known path)
+    # The 'AllTraining' run is usually stored inside the run folder, or we can look in path_nex
     stats_oracle = load_overall_stats(path_nex, "all_training_model_overall_stats.json")
     oracle_data = load_oracle_data(path_nex)
     sushi_data = load_sushi_submissions(SUSHI_ROOT_DIR)
@@ -232,23 +280,75 @@ def process_experiment_data(search_field: str, query_field: str):
     final_stats_nex = get_model_metric_summary(stats_nex, avg_nex)
     final_stats_oracle = get_model_metric_summary(stats_oracle, oracle_data)
 
+    # 4. Aggregate Topics
     all_topics = set()
     if avg_ex: all_topics.update(avg_ex.keys())
     if avg_nex: all_topics.update(avg_nex.keys())
     if oracle_data: all_topics.update(oracle_data.keys())
     sorted_topics = sorted(list(all_topics), key=natural_keys)
 
-    is_embedding_scenario = (search_field == 'F' and query_field == 'T')
-    path_emb = os.path.join(EXPERIMENTS_ROOT_DIR, "F_EMB_T")
+    # 5. Embeddings (Optional check - assumes specific folder structure still exists or ignore)
+    # If embedding is a separate 'model', it will be handled by the main selection. 
+    # If it's a separate folder 'F_EMB_T', we handle it if specific conditions meet, 
+    # OR we can just return empty for simplicity in this strict structure.
     avg_emb, margins_emb, stats_emb = {}, {}, {}
-    
-    if is_embedding_scenario:
-        avg_emb, _ = calculate_folder_average(path_emb)
-        margins_emb = load_margin_data(path_emb)
-        raw_stats = load_overall_stats(path_emb, "model_overall_stats.json")
-        stats_emb = get_model_metric_summary(raw_stats, avg_emb)
+    # (Skipping embedding specific logic for generic structure unless F_EMB_T follows the new pattern)
 
+    # 6. Build DataFrames
     df_chart = build_chart_dataset(sorted_topics, avg_ex, margins_ex, avg_nex, margins_nex, oracle_data, sushi_data, avg_emb, margins_emb)
     df_table = build_table_dataset(sorted_topics, avg_ex, avg_nex, oracle_data, sushi_data, path_ex, files_ex, path_nex, files_nex)
 
     return df_chart, df_table, sorted_topics, final_stats_ex, final_stats_nex, final_stats_oracle, stats_emb
+
+def get_all_runs_statistics() -> pd.DataFrame:
+    """
+    Scans the EXPERIMENTS_ROOT_DIR for all subfolders, looks for 
+    model_overall_stats.json, and counts Random_ files.
+    """
+    rows = []
+    
+    if not os.path.exists(EXPERIMENTS_ROOT_DIR):
+        return pd.DataFrame()
+
+    # Iterate over all items in the root directory
+    for folder_name in os.listdir(EXPERIMENTS_ROOT_DIR):
+        folder_path = os.path.join(EXPERIMENTS_ROOT_DIR, folder_name)
+        
+        # Skip if it's not a directory
+        if not os.path.isdir(folder_path):
+            continue
+
+        # Check for model_overall_stats.json
+        stats_file_path = os.path.join(folder_path, "model_overall_stats.json")
+        
+        if os.path.exists(stats_file_path):
+            stats_data = load_json_safely(stats_file_path)
+            # Access the nested structure: "model_global_ndcg" -> "mean" / "margin"
+            global_metrics = stats_data.get("model_global_ndcg", {})
+            
+            mean_val = global_metrics.get("mean", 0.0)
+            margin_val = global_metrics.get("margin", 0.0)
+            
+            # Count files starting with "Random" (matches Random_ or Random1 etc)
+            # Using startsWith("Random") based on your previous logic, 
+            # but specific to prompt "Random_" can be adjusted if files are named strictly "Random_"
+            random_count = len([
+                f for f in os.listdir(folder_path) 
+                if f.startswith("Random") and f.endswith(".json") and "TopicsFolderMetrics" in f
+            ])
+            
+            rows.append({
+                "Run Name": folder_name,
+                "Mean": mean_val,
+                "Margin": margin_val,
+                "Random Runs Count": random_count
+            })
+
+    # Create DataFrame
+    df = pd.DataFrame(rows)
+    
+    if not df.empty:
+        # Sort by Mean descending by default
+        df = df.sort_values(by="Run Name", ascending=False)
+        
+    return df
