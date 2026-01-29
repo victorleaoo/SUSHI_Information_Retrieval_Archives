@@ -19,7 +19,7 @@ script_dir = os.path.dirname(os.path.abspath(__file__))
 base_dir = os.path.abspath(os.path.join(script_dir, '..', '..'))
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
-from SNCLabelTranslate import load_snc_expansions
+from data_creation.SNCLabelTranslate import load_snc_expansions
 
 def load_folder_items_metadata(folder_metadata_path, items_metadata_path):
     # items metadata

@@ -16,12 +16,17 @@ IMPOSSIBLE_TOPICS = {3, 8, 10, 13, 14, 17, 25, 26, 30, 31, 43}
 ALL_KNOWN_TOPICS = {f"T{i}" for i in range(1, 46)}
 
 COLOR_MAP = {
-    'Avg With Expansion': '#1f77b4',
-    'Avg No Expansion': '#ff7f0e',
-    'AllTrainingDocs': '#2ca02c',
-    'SUSHISubmissions': '#d62728',
-    'Embeddings (F_EMB_T)': '#9467bd'
+    'BM25': '#1f77b4',                       # Blue
+    'COLBERT': '#ff7f0e',                    # Orange
+    'EMBEDDINGS': '#2ca02c',                 # Green
+    'BM25-COLBERT': '#d62728',               # Red
+    'BM25-EMBEDDINGS': '#9467bd',            # Purple
+    'BM25-EMBEDDINGS-COLBERT': '#8c564b',    # Brown
+    'BM25-COLBERT-TUNED': '#e377c2',         # Pink
+    'BM25-EMBEDDINGS-COLBERT-TUNED': '#17becf', # Cyan/Teal
+    'BM25-EMBEDDINGS-COLBERT-TUNED-WRRF': '#bcbd22' # Olive/Yellow-Green
 }
+
 def parse_run_folder(folder_name: str) -> Optional[Dict[str, str]]:
     """
     Parses folder name assuming format: <search>_<expansion>_<query>_<model>
@@ -122,6 +127,37 @@ def generate_column_css(df: pd.DataFrame) -> str:
     """
     return ""
 
+def build_multi_model_chart_dataset(topics: List[str], model_data: Dict[str, Dict]) -> pd.DataFrame:
+    """
+    Constructs the dataset for the Altair Chart.
+    model_data structure: {'ModelName': {'avg': {...}, 'margins': {...}}}
+    """
+    chart_rows = []
+    
+    for t in topics:
+        for model_name, data in model_data.items():
+            avg_dict = data.get('avg', {})
+            margin_dict = data.get('margins', {})
+            
+            # If value is missing (NaN), we might want to skip or handle gracefully
+            # Your requirement: "repeat mean value if NaN". 
+            # Note: avg_dict usually only contains valid keys.
+            
+            if t in avg_dict:
+                val = avg_dict[t]
+                # Default margin tuple is (val, val, val) -> no error bar
+                m_min, _, m_max = margin_dict.get(t, [val, val, val])
+                
+                chart_rows.append({
+                    "Topic": t, 
+                    "Type": model_name, 
+                    "nDCG": val, 
+                    "min_ci": m_min, 
+                    "max_ci": m_max
+                })
+                
+    return pd.DataFrame(chart_rows)
+
 # ==========================================
 # DATA LOADING
 # ==========================================
@@ -154,19 +190,6 @@ def calculate_folder_average(folder_path: str) -> Tuple[Optional[Dict[str, float
             
     averages = {k: np.mean(v) for k, v in topic_accumulator.items() if v}
     return averages, valid_files
-
-def load_oracle_data(folder_path: str) -> Dict[str, Dict]:
-    if not os.path.exists(folder_path): return {}
-    clean_data = {f"T{i}": {'ndcg_cut_5': 0.0} for i in range(1, 46)}
-    for filename in os.listdir(folder_path):
-        if filename.startswith("AllTrainingDocuments"):
-            data = load_json_safely(os.path.join(folder_path, filename))
-            if not data: continue
-            for key, val in data.items():
-                norm_key = normalize_topic_key(key)
-                clean_data[norm_key] = val
-            return clean_data
-    return clean_data
 
 def load_margin_data(folder_path: str) -> Dict:
     return load_json_safely(os.path.join(folder_path, "topics_mean_margin.json"))
@@ -205,12 +228,6 @@ def build_chart_dataset(topics: List[str], avg_ex: Dict, margins_ex: Dict, avg_n
             val = avg_nex[t]
             m_min, _, m_max = margins_nex.get(t, [val, val, val])
             chart_rows.append({"Topic": t, "Type": "Avg No Expansion", "nDCG": val, "min_ci": m_min, "max_ci": m_max})
-        if oracle_data and t in oracle_data:
-            val = oracle_data[t].get('ndcg_cut_5', 0)
-            chart_rows.append({"Topic": t, "Type": "AllTrainingDocs", "nDCG": val, "min_ci": val, "max_ci": val})
-        if sushi_data and t in sushi_data:
-            val = sushi_data[t].get('ndcg_cut_5', 0)
-            chart_rows.append({"Topic": t, "Type": "SUSHISubmissions", "nDCG": val, "min_ci": val, "max_ci": val})
         if avg_emb and t in avg_emb:
             val = avg_emb[t]
             m_min, _, m_max = margins_emb.get(t, [val, val, val])
@@ -249,56 +266,97 @@ def build_table_dataset(sorted_topics: List[str], avg_ex: Dict, avg_nex: Dict, o
         df_table = df_table.reindex(columns=cols)
     return df_table
 
-def process_experiment_data(search_field: str, query_field: str, model: str, expansion_strat: str):
+def get_grouped_run_configurations() -> Dict[str, List[str]]:
     """
-    Now accepts model and specific expansion strategy to find the exact pair of folders.
+    Scans the run directory and groups folders by their configuration prefix.
+    Returns: { 'F_SB_TD': ['F_SB_TD_BM25', 'F_SB_TD_COLBERT'], ... }
     """
-    # 1. Construct Target Folder Names
-    name_ex = get_smart_folder_name(search_field, expansion_strat, query_field, model)
-    name_nex = get_smart_folder_name(search_field, "NEX", query_field, model)
-    
-    path_ex = os.path.join(EXPERIMENTS_ROOT_DIR, name_ex)
-    path_nex = os.path.join(EXPERIMENTS_ROOT_DIR, name_nex)
-    
-    # 2. Load Data (Logic remains similar, just different paths)
-    avg_ex, files_ex = calculate_folder_average(path_ex)
-    avg_nex, files_nex = calculate_folder_average(path_nex)
-    
-    margins_ex = load_margin_data(path_ex)
-    margins_nex = load_margin_data(path_nex)
-    
-    stats_ex = load_overall_stats(path_ex, "model_overall_stats.json")
-    stats_nex = load_overall_stats(path_nex, "model_overall_stats.json")
-    
-    # 3. Load Oracle/Baseline (Try to find in NEX folder, fallback to root or known path)
-    # The 'AllTraining' run is usually stored inside the run folder, or we can look in path_nex
-    stats_oracle = load_overall_stats(path_nex, "all_training_model_overall_stats.json")
-    oracle_data = load_oracle_data(path_nex)
-    sushi_data = load_sushi_submissions(SUSHI_ROOT_DIR)
+    if not os.path.exists(EXPERIMENTS_ROOT_DIR):
+        return {}
 
-    final_stats_ex = get_model_metric_summary(stats_ex, avg_ex)
-    final_stats_nex = get_model_metric_summary(stats_nex, avg_nex)
-    final_stats_oracle = get_model_metric_summary(stats_oracle, oracle_data)
+    grouped_runs = {}
 
-    # 4. Aggregate Topics
+    for folder_name in os.listdir(EXPERIMENTS_ROOT_DIR):
+        if not os.path.isdir(os.path.join(EXPERIMENTS_ROOT_DIR, folder_name)):
+            continue
+            
+        # Naming Convention: Search_Expansion_Query_Model
+        parts = folder_name.split('_')
+        
+        # We assume the LAST part is the Model, and the rest is Configuration
+        if len(parts) >= 2:
+            config_key = "_".join(parts[:-1]) # Everything before the last underscore
+            
+            if config_key not in grouped_runs:
+                grouped_runs[config_key] = []
+            
+            grouped_runs[config_key].append(folder_name)
+
+    return grouped_runs
+
+def process_experiment_data(selected_configs: List[str], run_map: Dict[str, List[str]]):
+    """
+    Loads data for all models belonging to the selected configurations.
+    """
+    available_runs = []
+    
+    # 1. Gather all relevant folders
+    for config in selected_configs:
+        folders = run_map.get(config, [])
+        for f in folders:
+            meta = parse_run_folder(f)
+            if meta:
+                # We save the model name specifically for the legend
+                meta['display_model'] = meta['model'] 
+                available_runs.append(meta)
+
+    # 2. Load Data
+    model_results = {} 
     all_topics = set()
-    if avg_ex: all_topics.update(avg_ex.keys())
-    if avg_nex: all_topics.update(avg_nex.keys())
-    if oracle_data: all_topics.update(oracle_data.keys())
+    
+    for run in available_runs:
+        path = os.path.join(EXPERIMENTS_ROOT_DIR, run['full_name'])
+        
+        # KEY CHANGE: The display key is just the Model Name (e.g. "BM25")
+        display_name = run['display_model']
+        
+        avg_data, _ = calculate_folder_average(path)
+        margin_data = load_margin_data(path)
+        global_stats = load_overall_stats(path, "model_overall_stats.json")
+        summary_stats = get_model_metric_summary(global_stats, avg_data)
+        
+        random_count = len([f for f in os.listdir(path) if f.startswith("Random") and f.endswith(".json") and "TopicsFolderMetrics" in f])
+
+        model_results[display_name] = {
+            'avg': avg_data,
+            'margins': margin_data,
+            'stats': summary_stats,
+            'count': random_count,
+            'folder_name': run['full_name']
+        }
+        
+        if avg_data:
+            all_topics.update(avg_data.keys())
+
     sorted_topics = sorted(list(all_topics), key=natural_keys)
 
-    # 5. Embeddings (Optional check - assumes specific folder structure still exists or ignore)
-    # If embedding is a separate 'model', it will be handled by the main selection. 
-    # If it's a separate folder 'F_EMB_T', we handle it if specific conditions meet, 
-    # OR we can just return empty for simplicity in this strict structure.
-    avg_emb, margins_emb, stats_emb = {}, {}, {}
-    # (Skipping embedding specific logic for generic structure unless F_EMB_T follows the new pattern)
+    # 3. Build Output Objects
+    df_chart = build_multi_model_chart_dataset(sorted_topics, model_results)
+    
+    # Simple table logic (unused in main view but good for internal consistency)
+    table_rows = []
+    for name, data in model_results.items():
+        row = {'Experiment': name}
+        avgs = data.get('avg', {})
+        for t in sorted_topics:
+            row[t] = format_cell_content(avgs.get(t, 0.0))
+        table_rows.append(row)
+        
+    df_table = pd.DataFrame(table_rows)
+    if not df_table.empty:
+        df_table = df_table.reindex(columns=['Experiment'] + sorted_topics)
 
-    # 6. Build DataFrames
-    df_chart = build_chart_dataset(sorted_topics, avg_ex, margins_ex, avg_nex, margins_nex, oracle_data, sushi_data, avg_emb, margins_emb)
-    df_table = build_table_dataset(sorted_topics, avg_ex, avg_nex, oracle_data, sushi_data, path_ex, files_ex, path_nex, files_nex)
-
-    return df_chart, df_table, sorted_topics, final_stats_ex, final_stats_nex, final_stats_oracle, stats_emb
+    return df_chart, df_table, sorted_topics, model_results
 
 def get_all_runs_statistics() -> pd.DataFrame:
     """
@@ -350,5 +408,93 @@ def get_all_runs_statistics() -> pd.DataFrame:
     if not df.empty:
         # Sort by Mean descending by default
         df = df.sort_values(by="Run Name", ascending=False)
+        
+    return df
+
+def load_relevance_stats(folder_path: str) -> Dict:
+    """Loads the relevant count stats json."""
+    return load_json_safely(os.path.join(folder_path, "topics_relevant_count_stats.json"))
+
+def calculate_global_relevance_mean(topic_data: Dict[str, Dict]) -> float:
+    """
+    Calculates simple Global Mean from per-topic dictionaries.
+    No margin needed for this counter metric.
+    """
+    if not topic_data:
+        return 0.0
+    
+    means = [v.get('mean', 0.0) for v in topic_data.values()]
+    if not means: return 0.0
+    
+    return float(np.mean(means))
+
+def get_unified_comparison_dataframe(selected_run_names: List[str]) -> pd.DataFrame:
+    """
+    Builds the Master Table combining nDCG (with margin) and Relevance Counts (mean only).
+    """
+    rows = []
+    
+    # Pre-calculate sorted topic list to ensure column order
+    all_topics = sorted(list(ALL_KNOWN_TOPICS), key=natural_keys)
+
+    for run_name in selected_run_names:
+        folder_path = os.path.join(EXPERIMENTS_ROOT_DIR, run_name)
+        if not os.path.exists(folder_path): continue
+
+        # 1. Load Data Sources
+        # Global nDCG (Contains mean AND margin)
+        overall_stats = load_overall_stats(folder_path, "model_overall_stats.json")
+        
+        # Per-Topic nDCG (Format: 'T1': [min, mean, max])
+        topic_ndcg = load_margin_data(folder_path) 
+        
+        # Per-Topic Relevance (Format: 'T1': {'mean': X, ...})
+        topic_rel = load_relevance_stats(folder_path)
+
+        # 2. Process Global Stats
+        # nDCG: We use the statistical mean and margin provided by the evaluator
+        g_ndcg_mean = overall_stats.get('mean', 0.0)
+        g_ndcg_margin = overall_stats.get('margin', 0.0)
+        
+        # Relevance: We calculate the simple average of the counts
+        g_rel_mean = calculate_global_relevance_mean(topic_rel)
+
+        # 3. Build Row
+        row = {
+            "Experiment Folder": run_name,
+            "Global nDCG@5": f"{g_ndcg_mean:.4f} ± {g_ndcg_margin:.4f}",
+            "Global Relevance": f"{g_rel_mean:.2f}" # No margin, just the number
+        }
+
+        # 4. Fill Topic Columns
+        for t in all_topics:
+            # Get nDCG Mean (Index 1 in the [min, mean, max] list)
+            # We handle cases where data might be missing for a specific topic
+            if topic_ndcg and t in topic_ndcg:
+                ndcg_val = topic_ndcg[t][1]
+                ndcg_margin = topic_ndcg[t][2] - topic_ndcg[t][1]
+            else:
+                ndcg_val = 0.0
+                ndcg_margin = 0
+            
+            # Get Relevance Mean
+            if topic_rel and t in topic_rel:
+                rel_val = topic_rel[t].get('mean', 0.0)
+            else:
+                rel_val = 0.0
+            
+            # Format: "0.450 | 1.5"
+            row[t] = f"{ndcg_val:.3f} ± {ndcg_margin:.3f} | {rel_val:.1f}"
+
+        rows.append(row)
+
+    # Create DF and sort
+    df = pd.DataFrame(rows)
+    if not df.empty:
+        # Reorder columns: Fixed Info -> Metrics -> Topics
+        cols = ["Experiment Folder", "Global nDCG@5", "Global Relevance"] + all_topics
+        # Only keep columns that actually exist (in case no topics found)
+        cols = [c for c in cols if c in df.columns]
+        df = df[cols]
         
     return df

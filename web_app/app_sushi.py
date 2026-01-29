@@ -89,169 +89,125 @@ def render_table(df_table: pd.DataFrame, topics_to_display: list):
         st.write(df_filtered.to_html(escape=False, index=False, classes="dataframe"), unsafe_allow_html=True)
 
 def run_experiment_analyzer_ui():
-    st.sidebar.header("Experiment Filters")
-    # 1. SCAN FOLDERS
-    options, _ = u1.scan_available_runs()
+    # ==========================================
+    # PART 1: VISUAL ANALYSIS (Model Comparison)
+    # ==========================================
+    st.title("🔬 Experiment Analysis: Model Comparison")
     
-    if not options["search"] or not options["model"]:
-        st.error("No valid run folders found in ../all_runs/. Check naming convention: <Search>_<Exp>_<Query>_<Model>")
+    # 1. Scan and Group Runs for the Dropdown
+    grouped_runs = u1.get_grouped_run_configurations()
+    
+    if not grouped_runs:
+        st.error("No valid run folders found in ../all_runs/.")
         return
 
-    # 2. DYNAMIC FILTERS
-    # Use index=0 safely if list not empty
-    sel_search = st.sidebar.selectbox("Searching Field", options["search"], index=0)
-    sel_query = st.sidebar.selectbox("Query Field", options["query"], index=0)
-    sel_model = st.sidebar.selectbox("Model", options["model"], index=0)
+    config_options = sorted(list(grouped_runs.keys()))
     
-    # Expansion Strategy (The 'Blue' line)
-    # We default to the first available expansion strategy found
-    if not options["expansion"]:
-        st.sidebar.warning("No Expansion (EX) runs found. Comparisons may be empty.")
-        sel_expansion = "None"
-    else:
-        sel_expansion = st.sidebar.selectbox("Expansion Strategy", options["expansion"], index=0)
-
-    # 3. PROCESS DATA (Pass all 4 parameters)
-    df_chart, df_table, all_topics, stats_ex, stats_nex, stats_oracle, stats_emb = u1.process_experiment_data(
-        sel_search, sel_query, sel_model, sel_expansion
+    st.caption("Select a configuration to compare how different models performed under that specific setting.")
+    
+    # SINGLE SELECTION for the Chart
+    selected_config = st.selectbox(
+        "Select Configuration for Visualization:",
+        options=config_options,
+        index=0 if config_options else None,
+        help="Loads the Dumbbell Chart and Stats for all models within this specific configuration."
     )
 
-    sel_topic_filter = st.sidebar.radio("Filter Topics:", ["All Topics", "Difficult Topics Only", "Impossible Topics Only"])
+    if selected_config:
+        # Process data ONLY for this config for the visualizations
+        df_chart, df_table_dummy, all_topics, model_results = u1.process_experiment_data([selected_config], grouped_runs)
 
-    run_type_options = {
-        "With Expansion": "Avg With Expansion",
-        "No Expansion": "Avg No Expansion",
-        "All Training Docs": "AllTrainingDocs",
-        "SUSHISubmissions": "SUSHISubmissions"
-    }
-    if stats_emb:
-        run_type_options["Embeddings"] = "Embeddings (F_EMB_T)"
+        # --- DYNAMIC SCORE CARDS ---
+        st.subheader("Global Performance (Mean nDCG@5)")
+        sorted_models = sorted(model_results.keys(), key=lambda x: model_results[x]['stats']['val'], reverse=True)
+    
+        cols = st.columns(min(len(sorted_models), 4))
+        for i, model_key in enumerate(sorted_models):
+            stats = model_results[model_key]['stats']
+            count = model_results[model_key]['count']
+            
+            with cols[i % 4]:
+                st.metric(
+                    # UPDATE: Added (N={count}) to the label for visibility
+                    label=f"{model_key} (N={count})", 
+                    value=f"{stats['val']:.4f}",
+                    delta=f"± {stats['margin']:.4f}",
+                    delta_color="off",
+                    help=f"Mean nDCG@5 aggregated from {count} random seed executions."
+                )
 
-    sel_run_types = st.sidebar.pills("Show Runs:", options=list(run_type_options.keys()), default=list(run_type_options.keys()), selection_mode="multi")
-    selected_internal_types = [run_type_options[k] for k in sel_run_types]
+        # --- DUMBELL CHART ---
+        if all_topics:
+            with st.expander("📈 Model Comparison Chart (nDCG@5)", expanded=True):
+                render_charts(df_chart, all_topics)
+        else:
+            st.warning("No topic data found for this configuration.")
 
-    sort_opt = st.sidebar.radio("Sort Topics By (Desc nDCG):", ["Default (Topic ID)", "Sort by TrainingDocuments", "Sort by SUSHISubmissions", "Sort by Mean With Exp"])
+    # ==========================================
+    # PART 2: DETAILED COMPARISON TABLE (Global)
+    # Focus: Compare ANY run against ANY run
+    # ==========================================
+    st.markdown("---")
+    st.header("📑 Detailed Comparison Table (Cross-Experiment)")
+    st.caption("Select specific run folders to compare their detailed metrics side-by-side.")
 
-    st.title("🔬 Analysis of Experiments")
-    st.caption(f"Comparing: `{sel_search}_{sel_expansion}_{sel_query}_{sel_model}` (Blue) vs `{sel_search}_NEX_{sel_query}_{sel_model}` (Orange)")
-
-    # --- Score Cards ---
-    if stats_emb: c1, c2, c3, c4 = st.columns([1,1,1,1])
-    else: 
-        c1, c2, c3 = st.columns([1,1,1])
-        c4 = None
-
-    with c1:
-        st.markdown("**Mean nDCG@5 (With Exp):**")
-        st.info(f"{stats_ex['val']:.4f} ± {stats_ex['margin']:.4f}", icon="🔵")
-    with c2:
-        st.markdown("**Mean nDCG@5 (No Exp):**")
-        st.warning(f"{stats_nex['val']:.4f} ± {stats_nex['margin']:.4f}", icon="🟠")
-    with c3:
-        st.markdown("**Mean nDCG@5 (All Training):**")
-        st.success(f"{stats_oracle['val']:.4f} ± {stats_oracle['margin']:.4f}", icon="🟢")
-    if c4 and stats_emb:
-        with c4:
-            st.markdown("**Mean nDCG@5 (Embeddings):**")
-            st.error(f"{stats_emb['val']:.4f} ± {stats_emb['margin']:.4f}", icon="🟣")
-
-    if df_chart.empty:
-        st.error("No data found for this configuration.")
+    # 1. Get ALL Run Folders (Flat List)
+    all_runs_df = u1.get_all_runs_statistics() 
+    if all_runs_df.empty:
+        st.warning("No runs found.")
         return
 
-    # --- Filter ---
-    filtered_topics = []
-    if sel_topic_filter == "All Topics":
-        filtered_topics = all_topics
-    elif sel_topic_filter == "Difficult Topics Only":
-        filtered_topics = [t for t in all_topics if u1.get_topic_number(t) in u1.DIFFICULT_TOPICS]
-    elif sel_topic_filter == "Impossible Topics Only":
-        filtered_topics = [t for t in all_topics if u1.get_topic_number(t) in u1.IMPOSSIBLE_TOPICS]
+    all_run_names = all_runs_df['Run Name'].tolist()
 
-    df_chart = df_chart[df_chart['Type'].isin(selected_internal_types)]
-
-    def should_keep_table_row(row_name: str) -> bool:
-        if "With Exp" in row_name or "(EX)" in row_name: return "With Expansion" in sel_run_types
-        if "Without Exp" in row_name or "(NEX)" in row_name or "No Exp" in row_name: return "No Expansion" in sel_run_types
-        if "All Training" in row_name: return "All Training Docs" in sel_run_types
-        if "SUSHISubmissions" in row_name: return "SUSHISubmissions" in sel_run_types
-        return True 
-    df_table = df_table[df_table['Experiment'].apply(should_keep_table_row)]
-
-    # Sorting
-    def get_sort_value(topic: str, run_type: str) -> float:
-        row = df_chart[(df_chart['Topic'] == topic) & (df_chart['Type'] == run_type)]
-        if not row.empty: return row.iloc[0]['nDCG']
-        return -1.0
-
-    topics_to_display = filtered_topics
-    if sort_opt == "Default (Topic ID)":
-        topics_to_display = sorted(filtered_topics, key=u1.natural_keys)
-    elif sort_opt == "Sort by TrainingDocuments":
-        topics_to_display = sorted(filtered_topics, key=lambda t: get_sort_value(t, "AllTrainingDocs"), reverse=True)
-    elif sort_opt == "Sort by SUSHISubmissions":
-        topics_to_display = sorted(filtered_topics, key=lambda t: get_sort_value(t, "SUSHISubmissions"), reverse=True)
-    elif sort_opt == "Sort by Mean With Exp":
-        topics_to_display = sorted(filtered_topics, key=lambda t: get_sort_value(t, "Avg With Expansion"), reverse=True)
-
-    if topics_to_display:
-        with st.expander("📈 Expansion Impact Analysis", expanded=True):
-            render_charts(df_chart, topics_to_display)
-        st.divider()
-        render_table(df_table, topics_to_display)
-    else:
-        st.info(f"No topics found for the selected filter: {sel_topic_filter}")
-
-    st.markdown("---")
-    st.header("📊 Runs Comparisons")
+    # 2. Smart Defaults: Pre-select runs from the config chosen above (if any)
+    # This connects the two parts nicely without restricting the user.
+    default_selection = []
+    if selected_config and selected_config in grouped_runs:
+        default_selection = grouped_runs[selected_config]
     
-    df_runs = u1.get_all_runs_statistics()
-    
-    if not df_runs.empty:
-        all_run_names = df_runs['Run Name'].tolist()
-        
-        # Smart Filter: Default to showing runs that match current selection (EX and NEX)
-        current_context_runs = [
-            f"{sel_search}_{sel_expansion}_{sel_query}_{sel_model}",
-            f"{sel_search}_NEX_{sel_query}_{sel_model}"
-        ]
-        # Filter to only existing ones
-        default_selection = [r for r in current_context_runs if r in all_run_names]
-        # If none match, show top 5
-        if not default_selection:
-            default_selection = all_run_names[:5]
+    # Fallback if list is empty or too long
+    if not default_selection: 
+        default_selection = all_run_names[:3]
 
-        sel_runs_compare = st.multiselect(
-            "Select Runs to Compare:", 
-            options=all_run_names, 
-            default=default_selection
-        )
+    # 3. GLOBAL MULTI-SELECT
+    sel_runs_table = st.multiselect(
+        "Select Runs to Compare:",
+        options=all_run_names,
+        default=default_selection,
+        help="You can add runs from different configurations here to compare them."
+    )
+
+    if sel_runs_table:
+        # 4. Generate the Unified Dataframe for specific folders
+        df_unified = u1.get_unified_comparison_dataframe(sel_runs_table)
         
-        # 3. Filter DataFrame based on selection
-        df_runs_filtered = df_runs[df_runs['Run Name'].isin(sel_runs_compare)]
+        # 5. Filter Topics Columns (Reuse the topics found in the chart logic if available)
+        # Or just show all columns available in the dataframe
+        fixed_cols = ["Experiment Folder", "Global nDCG@5", "Global Relevance"]
         
-        # 4. Format the Metrics Column (Mean ± Margin)
-        # We create a new column for display purposes
-        df_runs_filtered['nDCG@5 (Mean ± Margin)'] = df_runs_filtered.apply(
-            lambda x: f"{x['Mean']:.4f} ± {x['Margin']:.4f}", axis=1
-        )
+        # Get topic columns that exist in the dataframe
+        # We sort them naturally (T1, T2, T10...)
+        available_cols = [c for c in df_unified.columns if c not in fixed_cols]
+        # Sort using the natural keys helper from u1
+        available_cols.sort(key=u1.natural_keys)
         
-        # 5. Display
-        # Reorder columns for cleaner view
-        display_cols = ['Run Name', 'nDCG@5 (Mean ± Margin)', 'Random Runs Count']
+        final_cols = fixed_cols + available_cols
         
+        df_display = df_unified[final_cols]
+
+        # 6. Render
         st.dataframe(
-            df_runs_filtered[display_cols], 
+            df_display,
             use_container_width=True,
             hide_index=True,
             column_config={
-                "Run Name": st.column_config.TextColumn("Experiment Folder", width="medium"),
-                "nDCG@5 (Mean ± Margin)": st.column_config.TextColumn("Global Performance", width="small"),
-                "Random Runs Count": st.column_config.NumberColumn("# Random ECFs", help="Number of random runs found in folder")
+                "Experiment Folder": st.column_config.TextColumn("Experiment Folder", width="medium"),
+                "Global nDCG@5": st.column_config.TextColumn("Global nDCG", width="small"),
+                "Global Relevance": st.column_config.TextColumn("Global Rel.", width="small")
             }
         )
     else:
-        st.warning("No run statistics found in ../all_runs/")
+        st.info("Select experiments to view the comparison table.")
 
 # ==========================================
 # UI COMPONENTS - APP 2 (SUSHI Visualization)
@@ -329,9 +285,11 @@ def run_sushi_visualization_ui():
 
                             sushi_folder_id = meta.get("Sushi Folder")
                             if sushi_folder_id:
-                                specific_folder_meta = folders_meta.get(sushi_folder_id, {})
-                                folder_label = specific_folder_meta.get("folder_label", "N/A")
-                                st.markdown(f"**Sushi Folder Label:** {folder_label}")
+                                st.markdown(f"**Document Sushi Folder Metadata:**")
+                                f_meta = folders_meta.get(sushi_folder_id, {})
+                                if f_meta:
+                                    st.json(f_meta)
+                                else: st.warning("No metadata found.")
 
         with tab_folders:
             if not rf: st.write("No relevant folders found.")
@@ -347,8 +305,6 @@ def run_sushi_visualization_ui():
                     if selected_folder_id:
                         f_meta = folders_meta.get(selected_folder_id, {})
                         if f_meta:
-                            if 'label' in f_meta: st.markdown(f"**Label:** {f_meta['label']}")
-                            if 'Box' in f_meta: st.markdown(f"**Box:** {f_meta['Box']}")
                             st.json(f_meta)
                         else: st.warning("No metadata found.")
 

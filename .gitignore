@@ -8,6 +8,13 @@ data/raw
 
 terrierindex/
 
+tuning_index/
+
+tuning_index_global/
+
+src/pylate-index/
+pylate-index/index/
+
 venv/
 
 docs/
@@ -19,3 +26,7 @@ analysis_from_runs.md
 asistposter.py
 
 .DS_Store
+
+UNUSED*
+
+lastest_runs/

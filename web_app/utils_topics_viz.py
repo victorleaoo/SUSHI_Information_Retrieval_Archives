@@ -3,13 +3,17 @@ import json
 import base64
 import streamlit as st
 
-BASE_DIR_FILES = os.path.join(".", "data", "raw")
-PATH_FOLDERS_JSON = './data/folders_metadata/FoldersV1.2.json'
-PATH_ITEMS_JSON = './data/items_metadata/itemsV1.2.json'
-PATH_TOPICS_JSON = './web_app/Ntcir18SushiOfficialExperimentControlFileV1.1.json'
-PATH_QRELS_DOCS = './qrels/formal-run-qrels/formal-document-qrel.txt'
-PATH_QRELS_FOLDERS = './qrels/formal-run-qrels/formal-folder-qrel.txt'
-PATH_QRELS_BOXES = './qrels/formal-run-qrels/formal-box-qrel.txt'
+current_dir = os.path.dirname(__file__)
+
+PROJECT_ROOT = os.path.abspath(os.path.join(current_dir, '..'))
+PATH_ECF = os.path.join(PROJECT_ROOT, 'ecf', 'random_generated', 'ECF_ALL_TRAINING_SET.json')
+BASE_DIR_FILES = os.path.join(PROJECT_ROOT, 'data', 'raw')
+PATH_FOLDERS_JSON = os.path.join(PROJECT_ROOT, 'data', 'folders_metadata', 'FoldersV1.3.json')
+PATH_ITEMS_JSON = os.path.join(PROJECT_ROOT, 'data', 'items_metadata', 'itemsV1.2.json')
+PATH_TOPICS_JSON = os.path.join(PROJECT_ROOT, 'ecf', 'random_generated', 'ECF_ALL_TRAINING_SET.json')
+PATH_QRELS_DOCS = os.path.join(PROJECT_ROOT, 'qrels', 'formal-run-qrels', 'formal-document-qrel.txt')
+PATH_QRELS_FOLDERS = os.path.join(PROJECT_ROOT, 'qrels', 'formal-run-qrels', 'formal-folder-qrel.txt')
+PATH_QRELS_BOXES = os.path.join(PROJECT_ROOT, 'qrels', 'formal-run-qrels', 'formal-box-qrel.txt')
 
 @st.cache_data
 def load_metadata():
@@ -31,7 +35,7 @@ def load_metadata():
 @st.cache_data
 def load_ecf_data():
     try:
-        with open(PATH_TOPICS_JSON, 'r', encoding='utf-8') as f:
+        with open(PATH_ECF, 'r', encoding='utf-8') as f:
             return json.load(f)
     except FileNotFoundError:
         print('ecf file not found')
