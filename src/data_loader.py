@@ -2,6 +2,8 @@ import os
 import json
 import random
 
+import pandas as pd
+
 class DataLoader:
     """
     Central data management utility for the experiment pipeline.
@@ -23,6 +25,8 @@ class DataLoader:
         self.items = self._load_json(self.items_metadata_path)
         self.folder_metadata = self._load_json(self.folder_metadata_path)
         self.full_collection = self._build_full_collection()
+
+        self.df_uneven_distribution = pd.read_excel("RGdistribution.xlsx")
 
     def _load_json(self, path):
         """
@@ -86,11 +90,11 @@ class DataLoader:
         """
         random.seed(seed)
         topics = self.get_topics()
+
+        training_set = []
+        training_files = []
         
         if sampling == 'uniform':
-            training_set = []
-            training_files = []
-            
             for box, folders in self.full_collection.items():
                 folder_docs_limit = [0] * max_docs
                 total_selected = 0
@@ -117,18 +121,28 @@ class DataLoader:
                         for doc in selected:
                             training_files.append(doc)
                             training_set.append(f"{box}/{folder}/{doc}")
+
+        elif sampling == "uneven":
+            # 1. Load distribution targets
+            target_counts = self.df_uneven_distribution["Samples/Box"].dropna().astype(int).tolist()
+
+            # 2. Randomly order boxes
+            available_boxes = list(self.full_collection.keys())
+            random.shuffle(available_boxes)
+
+            for i in (range(min(len(target_counts), len(available_boxes)))):
+                pass
             
-            training_set.sort()
-            
-            ecf = {
-                'ExperimentName': f'ECF w/ Random Seed {seed}',
-                'ExperimentSets': [{'TrainingDocuments': training_set, 'Topics': {}}]
-            }
-            for topic in topics:
-                ecf['ExperimentSets'][0]['Topics'][topic['ID']] = topic
-            
-            return ecf
-        return None
+        training_set.sort()
+        
+        ecf = {
+            'ExperimentName': f'ECF w/ Random Seed {seed}',
+            'ExperimentSets': [{'TrainingDocuments': training_set, 'Topics': {}}]
+        }
+        for topic in topics:
+            ecf['ExperimentSets'][0]['Topics'][topic['ID']] = topic
+        
+        return ecf
 
     def load_all_docs_ecf(self):
         """
