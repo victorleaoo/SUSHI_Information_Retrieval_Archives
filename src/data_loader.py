@@ -131,7 +131,59 @@ class DataLoader:
             random.shuffle(available_boxes)
 
             for i in (range(min(len(target_counts), len(available_boxes)))):
-                pass
+                target = target_counts[i]
+                current_box_id = available_boxes[i]
+
+                total_docs_in_current = sum(len(files) for files in self.full_collection[current_box_id].values())
+
+                # 3. Swap Logic: If current box doesn't have enough docs, find one that does
+                if total_docs_in_current < target:
+                    swap_index = -1
+                    # Look ahead in the list for a suitable candidate
+                    for j in range(i + 1, len(available_boxes)):
+                        candidate_box_id = available_boxes[j]
+                        total_docs_candidate = sum(len(files) for files in self.full_collection[candidate_box_id].values())
+                        
+                        if total_docs_candidate >= target:
+                            swap_index = j
+                            break
+                    
+                    if swap_index != -1:
+                        # Perform the swap
+                        available_boxes[i], available_boxes[swap_index] = available_boxes[swap_index], available_boxes[i]
+                        current_box_id = available_boxes[i]
+                    else:
+                        # Edge case: No box remaining has enough documents. 
+                        # We effectively cap the target at what's available in the current box.
+                        target = total_docs_in_current
+
+                # 4. Sampling Logic (Specific to this box and target)
+                folders = self.full_collection[current_box_id]
+                folder_docs_limit = [0] * max_docs
+                total_selected = 0
+                num_folders = len(folders)
+
+                # Distribute the specific 'target' count across folders
+                if num_folders > 0:
+                    for _ in range(target):
+                        for f_idx in range(min(num_folders, target, max_docs)):
+                            if total_selected < target:
+                                folder_docs_limit[f_idx] += 1
+                                total_selected += 1
+
+                folder_names = list(folders.keys())
+                random.shuffle(folder_names)
+
+                for f_idx, folder in enumerate(folder_names):
+                    candidates = [doc for doc in folders[folder] if doc not in training_files]
+                    limit = folder_docs_limit[f_idx] if f_idx < len(folder_docs_limit) else 0
+                    num_to_pick = min(limit, len(candidates))
+
+                    if num_to_pick > 0:
+                        selected = random.sample(candidates, num_to_pick)
+                        for doc in selected:
+                            training_files.append(doc)
+                            training_set.append(f"{current_box_id}/{folder}/{doc}")
             
         training_set.sort()
         
@@ -141,6 +193,18 @@ class DataLoader:
         }
         for topic in topics:
             ecf['ExperimentSets'][0]['Topics'][topic['ID']] = topic
+
+        saveJson = True
+
+        if saveJson:
+            output_dir = os.path.join(self.project_root, 'ecf', 'random_generated')
+            os.makedirs(output_dir, exist_ok=True)
+            
+            filename = f"ECF_UNEVEN_Random_Seed_{seed}.json"
+            output_path = os.path.join(output_dir, filename)
+
+            with open(output_path, 'w', encoding='utf-8') as f:
+                json.dump(ecf, f, indent=4, ensure_ascii=False)
         
         return ecf
 
