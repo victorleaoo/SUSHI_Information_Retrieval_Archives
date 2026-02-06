@@ -128,11 +128,9 @@ def run_experiment_analyzer_ui():
             
             with cols[i % 4]:
                 st.metric(
-                    # UPDATE: Added (N={count}) to the label for visibility
                     label=f"{model_key} (N={count})", 
-                    value=f"{stats['val']:.4f}",
-                    delta=f"± {stats['margin']:.4f}",
-                    delta_color="off",
+                    # Combine the value and the margin into one string
+                    value=f"{stats['val']:.4f} ± {stats['margin']:.4f}",
                     help=f"Mean nDCG@5 aggregated from {count} random seed executions."
                 )
 
