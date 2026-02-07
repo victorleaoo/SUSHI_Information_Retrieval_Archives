@@ -5,7 +5,7 @@ import pandas as pd
 
 PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 FOLDER_METADATA_PATH = os.path.join(PROJECT_ROOT, 'data', 'folders_metadata', 'old_FoldersV1.2.json')
-SNC_TRANSLATION_PATH = './SncTranslationV1.3.xlsx'
+SNC_TRANSLATION_PATH = os.path.join(PROJECT_ROOT, 'data', 'folders_metadata', 'SncTranslationV1.3.xlsx')
 
 class FolderLabelConstructor:
     def __init__(self):

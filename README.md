@@ -1,4 +1,130 @@
-# SUSHI (Searching Unseen Sources for Historical Information) Experiment Runner and Visualizer
+# SUSHI (Searching Unseen Sources for Historical Information) Test Collection and Experiments
+
+This repository presents the SUSHI Test Collection and provides a walk-through on how to access and use it. 
+
+It also houses the code required to reproduce initial experiments, as well as a Python Streamlit web application for data and experiment visualization.
+
+## About the Collection
+
+The SUSHI Collection seeks to facilitate the development of archival Information Retrieval (IR). In many archival contexts, describing every individual document with metadata is impractical; often, the finest-grained descriptions available are for sets of boxes, which may contain sparsely digitized documents. 
+
+Consequently, the most common search task in an archive is not to find specific documents directly, but to identify *where* in the repository to look for them. Searchers typically identify promising boxes or folders, request them, and then physically or digitally browse the contents to find relevant information.
+
+The first version of the NTCIR-18 SUSHI Collection is available at:  
+[https://sites.google.com/view/ntcir-sushi-task/test-collection](https://sites.google.com/view/ntcir-sushi-task/test-collection)
+
+### Data Hierarchy: Boxes, Folders, and Documents
+
+The raw data structure follows a strict hierarchy representing the physical archival organization. The dataset contains **31,684 digitized documents**.
+
+* **Download:** The raw box/folder/document structure is available [here](https://drive.google.com/file/d/1hA5FW0cNloi20coLlGvnv5wMap8ZN8YL/view?usp=sharing).
+* **Format:** All documents are provided as PDF files.
+
+**The Hierarchy:**
+1.  **Box:** Identified by a unique identifier (e.g., `N1234`).
+2.  **Folder:** Stored within a box, identified by a unique folder identifier (e.g., `N12345678`).
+3.  **Document:** Stored within a folder, identified by a unique SUSHI document identifier (e.g., `S12345.pdf`).
+
+**Directory Structure:**
+The test collection file system mirrors this hierarchy: one directory for each Box $\rightarrow$ one subdirectory for each Folder $\rightarrow$ one PDF file for each digitized Document. 
+
+> **Note:** The PDF files contain embedded (uncorrected) OCR text, allowing participating teams to utilize raw text features in their experiments.
+
+### Folder Metadata
+
+The **Folder Label Metadata** is critical for retrieval. Raw archival folder titles are often opaque codes (e.g., `POL 15-1`). To make these searchable, we enrich them using the **Subject-Numeric Code (SNC)** systems from [1963](https://www.archives.gov/files/research/foreign-policy/state-dept/finding-aids/records-classification-handbook-1963.pdf) and [1965](https://www.archives.gov/files/research/foreign-policy/state-dept/finding-aids/dos-records-classification-handbook-1965-1973.pdf).
+
+This enrichment is handled by the `FolderLabelConstructor` class ([src/data_creation/SNCLabelTranslate.py](https://github.com/victorleaoo/SUSHI_Information_Retrieval_Archives/blob/main/src/data_creation/SNCLabelTranslate.py)), merging raw folder data with the SNC Translation Table (`SncTranslationV1.3.xlsx`).
+
+* **Input Source:** `SncTranslationV1.3.xlsx`
+    * `SNC`: The code (e.g., `POL 1`).
+    * `1965`: Label from the 1965 classification (Preferred).
+    * `1963`: Label from the 1963 classification (Fallback).
+    * `Scope Note`: Description of the category's inclusion/exclusion criteria.
+
+**Output Fields (JSON):**
+
+| Field | Description | Purpose |
+| :--- | :--- | :--- |
+| `label1965` | Literal text from 1965 column. | Preferred term source. |
+| `label1963` | Literal text from 1963 column. | Fallback source. |
+| `main_title` | Resolved primary label (1965 or 1963). | Core display name for the folder. |
+| `raw_scope` | Full scope note text. | Provides maximum context. |
+| `scope_truncated` | Cleaned scope note. "Stopper Keywords" (e.g., `SEE`, `Exclude`) are used to cut off negative definitions. | High-precision context; removes confusing negative keywords. |
+| `parent` | SNC code of the immediate parent. | hierarchy traversal. |
+| `label_parent_expanded` | Full semantic path string. | e.g., Resolves `POL 15-1` to "POLITICAL -> GENERAL" rather than just "General". |
+
+### Documents Metadata
+
+The **Document Metadata** file aggregates information available for each document, sourcing data from NARA and Brown University records.
+
+* **Input Source:** `SubtaskACollectionMetadataV1.1.xlsx` (available in `data/items_metadata/`)
+    * Contains SUSHI unique identifiers.
+    * Merges available NARA and Brown metadata.
+
+**Output Fields (JSON):**
+
+| Field | Description |
+| :--- | :--- |
+| `Sushi Box` | The SUSHI unique ID for the box. |
+| `Sushi Folder` | The SUSHI unique ID for the folder. |
+| `Sushi File` | The SUSHI unique ID for the document (including `.pdf` extension). |
+| `NARA <metadata>` | The set of raw fields provided by NARA. |
+| `Brown <metadata>` | The set of raw fields provided by Brown. |
+| `date` | The resolved date of the file (prioritizes Brown metadata if available, falls back to NARA). |
+| `title` | The resolved title of the file (prioritizes Brown metadata if available, falls back to NARA). |
+| `ocr` | A list containing the OCR text for each page. Generated primarily using ABBYY FineReader. |
+| `summary` | A generated summary of the document content produced by GPT4o. |
+
+### Topics
+
+The [Topics File](src/data_creation/topics_output.txt) contains 45 information needs. Each topic includes:
+
+* **ID:** Unique identifier.
+* **Title:** A short, web-search-style query.
+* **Description:** A single sentence succinctly expressing the information need.
+* **Narrative:** A paragraph providing detailed criteria for relevance assessment.
+
+### Relevance judgment (QRels)
+
+Relevance assessments are provided at three granularity levels in the `qrels/formal-run-qrels/` directory:
+
+- [Box Qrels](https://github.com/victorleaoo/SUSHI_Information_Retrieval_Archives/blob/main/qrels/formal-run-qrels/formal-box-qrel.txt);
+- [Folder Qrels](https://github.com/victorleaoo/SUSHI_Information_Retrieval_Archives/blob/main/qrels/formal-run-qrels/formal-folder-qrel.txt);
+- [Document Qrels](https://github.com/victorleaoo/SUSHI_Information_Retrieval_Archives/blob/main/qrels/formal-run-qrels/formal-document-qrel.txt).
+
+**Format:**
+Each line maps a topic to a Box/Folder/Document ID with a relevance score:
+
+* **3:** Highly Relevant
+* **1:** Somewhat Relevant
+* **0:** Not Relevant
+
+*(Unjudged items are omitted from the files).*
+
+### Experiment Control Files (ECFs)
+
+The **Experiment Control File (ECF)** serves the role of a standard "Topics" file in TREC evaluations but is adapted for the SUSHI task. Real-world archives have limited digitization. SUSHI simulates this by explicitly defining which documents are "visible" (digitized/training data) to the system for a given topic.
+
+**Structure:**
+
+Each ECF defines specific **Experiment Sets**. An experiment set maps a list of **Topics** to a specific list of **TrainingDocuments**.
+
+* **TrainingDocuments:** A slash-delimited path (`SushiBox/SushiFolder/SushiFile`, e.g., `N1234/N12345678/S12345.pdf`). These are the only documents the system is allowed to "read" to learn the relevance features for the associated topics.
+* **Topics:** The queries for which the system must find *other* relevant folders (containing documents *not* in the training set).
+
+**ECF Conditions:**
+
+We provide ECFs covering three different experimental conditions:
+
+1.  **All Training Documents (No Mask):** * ECF containing all available training documents for all topics.
+2.  **Random (Uniform):** * ECF simulating a uniform digitization strategy (e.g., 5 documents per box), selected via different random seeds.
+3.  **Uneven (Skewed):** * ECF simulating a skewed distribution of digitized documents per box.
+    * The distribution logic is detailed in `src/RGdistribution.xlsx`.
+
+*The ECF creation logic is located at [create_random_ecf](https://github.com/victorleaoo/SUSHI_Information_Retrieval_Archives/blob/main/src/data_loader.py#L77).*
+
+---
 
 ## Repository Setup
 
@@ -8,10 +134,10 @@ To run the applications correctly, it is necessary to reproduce the data structu
 ├── all_runs/ # It contains runs that were already made from models  
 ├── data/                           
 │   ├── folders_metadata/
-│   │   └── FoldersV1.2.json
+│   │   └── FoldersV1.3.json
 │   ├── items_metadata/
-│   │   └── itemsV1.2.json          # ⚠️ Download Document metadata
-│   ├── raw/                        # ⚠️ Download and Place the raw Box/Folder structure with PDFs here
+│   │   └── itemsV1.2.json  # ⚠️ Download Document metadata
+│   ├── raw/                # ⚠️ Download and Place the raw Box/Folder structure with PDFs here
 │   │   └── A0001
 │   │   └── A0002
 │   │   └── A0003
@@ -25,11 +151,11 @@ To run the applications correctly, it is necessary to reproduce the data structu
 │       ├── formal-box-qrel.txt
 │       ├── formal-document-qrel.txt
 │       └── formal-folder-qrel.txt
-├── src/ # Experiment Run Generator
+├── src/     # Experiment Run Generator
 ├── web_app/ # SUSHI visualizer
 ├── .gitignore
 ├── README.md
-└── requirements.txt                # Python dependencies
+└── requirements.txt
 ```
 
 ### Adding missing files
@@ -45,33 +171,7 @@ After downloading, reproduce the following steps:
 2. Inside the dir ```data/items_metadata```, place the ```itemsV1.2.json``` file;
 3. Inside the dir ```data/raw```, place the ```sushi-files.zip``` inside it and unzip it. After unziping, bring all folders out to the ```raw``` dir and delete the ```sushi-files``` folder and the ```sushi-files.zip``` file.
 
-### About Folders Metadata File
-
-The **Folder Label Metadata** is a critical component of the retrieval pipeline. Since the raw folder names in archival collections are often opaque codes (e.g., `POL 15-1`), we must enrich them with semantic meaning derived from the **SNC** system used in [1963](https://www.archives.gov/files/research/foreign-policy/state-dept/finding-aids/records-classification-handbook-1963.pdf) and [1965](https://www.archives.gov/files/research/foreign-policy/state-dept/finding-aids/dos-records-classification-handbook-1965-1973.pdf).
-
-This process is handled by the `FolderLabelConstructor` class (*src/data_creation/SNCLabelTranslate.py* file), which merges the raw folder metadata with an SNC Translation Table (`SncTranslationV1.3.xlsx`) to create a rich, searchable textual representation for every folder.
-
-**1. Input Data Sources**
-
-- **`SncTranslationV1.3.xlsx`**: A reference table containing the definitions for every SNC code. It has four key columns:
-    * `SNC`: The code itself (e.g., `POL 1`).
-    * `1965`: The label used in the 1965 classification (Preferred).
-    * `1963`: The label used in the 1963 classification (Fallback).
-    * `Scope Note`: A descriptive paragraph explaining what is included or excluded in this category.
-
-**2. The Output Fields**
-
-The final JSON output for each folder contains a set of enriched fields. Here is why each one exists:
-
-| Field | Description | Why it exists? |
-| :--- | :--- | :--- |
-| `label1965` | The literal text from the 1965 column. | Preferred term source. |
-| `label1963` | The literal text from the 1963 column. | Fallback source if 1965 is missing. |
-| `main_title` | The resolved primary label (1965 or 1963). | Used as the core display name for the folder. |
-| `raw_scope` | The full scope note. | Maximum context. |
-| `scope_truncated` | A cleaned version. The code scans for "Stopper Keywords" (like `SEE`, `Exclude`, `Except`) and cuts off the text immediately before them. This leaves only the positive definition of the category. | High-precision context. Removes negative keywords that might confuse models. |
-| `parent` | The SNC code of the immediate parent. | Used for field below. |
-| `label_parent_expanded` | SNC codes are hierarchical. `POL 15-1` is a child of `POL 15`, which might be a child of `POL`. To understand `POL 15-1`, you need the context of its parents. | It provides the full semantic path, ensuring a folder like "General" is understood as "POLITICAL -> GENERAL". |
+---
 
 ## SUSHI Experiment Running
 
@@ -260,6 +360,8 @@ python src/rrf_best_models.py
 
 The results will be saved and evaluated automatically, ready for inspection in the Visualizer.
 
+---
+
 ## SUSHI Visualizer Web Application
 
 The **Visualizer** is the primary interface for analyzing experiment results and exploring the dataset. It is divided into two distinct applications, accessible via the sidebar navigation. It is a web application developed using Streamlit (Python library)
@@ -394,7 +496,7 @@ In order to run the SUSHI Experiment Runner, the follow steps must be followed:
 2. **Install Python libraries**: run the command ```pip install -r requirements.txt```. It is recommended to use a [virtualenv](https://virtualenv.pypa.io/en/latest/user_guide.html) or a [conda](https://www.anaconda.com/docs/getting-started/miniconda/install) env.
 3. **Download all necessary files**: make sure to follow all the steps in the **Repository Setup** section of this README file.
 4. **Setup experiments**: make sure the experiments are in the expected way.
-4. **Run the Streamlit application**: now run the application and access it in the browser: ```streamlit run web_app/app_sushi.py```.
+5. **Run the Streamlit application**: now run the application inside the *web_app* folder and access it in the browser: ```streamlit run app_sushi.py```.
 
 ## Acknowledgements
 This project was supported by the **[Fundação de Apoio à Pesquisa do DF](https://www.fap.df.gov.br/)**. We are grateful for their support.
