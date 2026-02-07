@@ -498,5 +498,10 @@ In order to run the SUSHI Experiment Runner, the follow steps must be followed:
 4. **Setup experiments**: make sure the experiments are in the expected way.
 5. **Run the Streamlit application**: now run the application inside the *web_app* folder and access it in the browser: ```streamlit run app_sushi.py```.
 
+---
+
 ## Acknowledgements
-This project was supported by the **[Fundação de Apoio à Pesquisa do DF](https://www.fap.df.gov.br/)**. We are grateful for their support.
+
+Development of the SUSHI test collection was supported in part by Japan Society for the Promotion of Science KAKENHI Grant 23KK0005 and National Institute of Informatics Open Collaborative Research 2024 (24S0505).
+
+In addition, part of the work was also supported by Fundação de Apoio e Pesquisa do Distrito Federal (FAPDF).
