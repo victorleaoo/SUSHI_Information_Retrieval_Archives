@@ -61,6 +61,11 @@ class DataLoader:
         for box in collection:
             sorted_folders = sorted(collection[box], key=lambda k: len(collection[box][k]), reverse=True)
             collection[box] = {k: collection[box][k] for k in sorted_folders}
+
+        printSort = False
+        if printSort:
+            for box, values in collection.items():
+                print(f"{box}: {sum(len(files) for files in collection[box].values())}")
             
         return collection
 
@@ -93,7 +98,54 @@ class DataLoader:
 
         training_set = []
         training_files = []
-        
+
+        def _sample_round_robin(box_id, target_count):
+            """
+            Selects 'target_count' documents from 'box_id' using round-robin
+            across folders to handle uneven folder sizes correctly.
+            """
+            folders = self.full_collection[box_id]
+            
+            # 1. Map valid candidates per folder
+            valid_folders_map = {}
+            for f_name, f_docs in folders.items():
+                # Only consider docs that haven't been used yet
+                cands = [doc for doc in f_docs if doc not in training_files]
+                if cands:
+                    valid_folders_map[f_name] = cands
+            
+            # 2. Prepare rotation list
+            active_folders = list(valid_folders_map.keys())
+            random.shuffle(active_folders)
+
+            docs_selected_count = 0
+            folder_idx = 0
+
+            # 3. Round-Robin Loop
+            while docs_selected_count < target_count and active_folders:
+                # Get current folder from rotation
+                current_f_name = active_folders[folder_idx % len(active_folders)]
+                
+                # Pick a document
+                if valid_folders_map[current_f_name]:
+                    rand_idx = random.randrange(len(valid_folders_map[current_f_name]))
+                    selected_doc = valid_folders_map[current_f_name].pop(rand_idx)
+                    
+                    # Add to global lists
+                    training_files.append(selected_doc)
+                    training_set.append(f"{box_id}/{current_f_name}/{selected_doc}")
+                    docs_selected_count += 1
+                
+                # Cleanup: If folder is now empty, remove from rotation
+                if not valid_folders_map[current_f_name]:
+                    active_folders.remove(current_f_name)
+                    # Adjust index to avoid skipping the next folder since list shrank
+                    if len(active_folders) > 0:
+                        folder_idx = folder_idx % len(active_folders)
+                else:
+                    # Move to next folder
+                    folder_idx += 1
+
         if sampling == 'uniform':
             for box, folders in self.full_collection.items():
                 folder_docs_limit = [0] * max_docs
@@ -124,13 +176,13 @@ class DataLoader:
 
         elif sampling == "uneven":
             # 1. Load distribution targets
-            target_counts = self.df_uneven_distribution["Samples/Box"].dropna().astype(int).tolist()
+            target_counts = self.df_uneven_distribution["Samples/Box"].dropna().astype(int).tolist()[:-1]
 
             # 2. Randomly order boxes
             available_boxes = list(self.full_collection.keys())
             random.shuffle(available_boxes)
 
-            for i in (range(min(len(target_counts), len(available_boxes)))):
+            for i in range(min(len(target_counts), len(available_boxes))):
                 target = target_counts[i]
                 current_box_id = available_boxes[i]
 
@@ -154,53 +206,26 @@ class DataLoader:
                         current_box_id = available_boxes[i]
                     else:
                         # Edge case: No box remaining has enough documents. 
-                        # We effectively cap the target at what's available in the current box.
+                        # We effectively cap the target at what's available.
                         target = total_docs_in_current
 
-                # 4. Sampling Logic (Specific to this box and target)
-                folders = self.full_collection[current_box_id]
-                folder_docs_limit = [0] * max_docs
-                total_selected = 0
-                num_folders = len(folders)
+                # 4. Sampling Logic: Use the unified helper
+                _sample_round_robin(current_box_id, target)
 
-                # Distribute the specific 'target' count across folders
-                if num_folders > 0:
-                    for _ in range(target):
-                        for f_idx in range(min(num_folders, target, max_docs)):
-                            if total_selected < target:
-                                folder_docs_limit[f_idx] += 1
-                                total_selected += 1
-
-                folder_names = list(folders.keys())
-                random.shuffle(folder_names)
-
-                for f_idx, folder in enumerate(folder_names):
-                    candidates = [doc for doc in folders[folder] if doc not in training_files]
-                    limit = folder_docs_limit[f_idx] if f_idx < len(folder_docs_limit) else 0
-                    num_to_pick = min(limit, len(candidates))
-
-                    if num_to_pick > 0:
-                        selected = random.sample(candidates, num_to_pick)
-                        for doc in selected:
-                            training_files.append(doc)
-                            training_set.append(f"{current_box_id}/{folder}/{doc}")
-            
-        training_set.sort()
-        
         ecf = {
-            'ExperimentName': f'ECF w/ Random Seed {seed}',
+            'ExperimentName': f'ECF {sampling} w/ Random Seed {seed}',
             'ExperimentSets': [{'TrainingDocuments': training_set, 'Topics': {}}]
         }
         for topic in topics:
             ecf['ExperimentSets'][0]['Topics'][topic['ID']] = topic
 
-        saveJson = True
+        saveJson = False
 
         if saveJson:
             output_dir = os.path.join(self.project_root, 'ecf', 'random_generated')
             os.makedirs(output_dir, exist_ok=True)
             
-            filename = f"ECF_UNEVEN_Random_Seed_{seed}.json"
+            filename = f"ECF_Random_Seed_{seed}.json"
             output_path = os.path.join(output_dir, filename)
 
             with open(output_path, 'w', encoding='utf-8') as f:

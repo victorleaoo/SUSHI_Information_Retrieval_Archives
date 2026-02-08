@@ -17,7 +17,7 @@ pt.java.set_log_level('ERROR')
 PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '../..'))
 ITEMS_METADATA_PATH = os.path.join(PROJECT_ROOT, 'data', 'items_metadata', 'itemsV1.2.json')
 FOLDER_METADATA_PATH = os.path.join(PROJECT_ROOT, 'data', 'folders_metadata', 'FoldersV1.3.json')
-FOLDER_QRELS_PATH = os.path.join(PROJECT_ROOT, 'qrels', 'formal-run-qrels', 'formal-folder-qrel.txt')
+FOLDER_QRELS_PATH = os.path.join(PROJECT_ROOT, 'qrels', 'formal-folder-qrel.txt')
 TOPICS_PATH = os.path.join(PROJECT_ROOT, "src", "data_creation", "topics_output.txt")
 ECF_PATH = os.path.join(PROJECT_ROOT, 'ecf', 'random_generated', 'ECF_ALL_TRAINING_SET.json')
 

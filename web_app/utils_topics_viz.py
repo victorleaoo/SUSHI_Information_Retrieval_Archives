@@ -11,9 +11,9 @@ BASE_DIR_FILES = os.path.join(PROJECT_ROOT, 'data', 'raw')
 PATH_FOLDERS_JSON = os.path.join(PROJECT_ROOT, 'data', 'folders_metadata', 'FoldersV1.3.json')
 PATH_ITEMS_JSON = os.path.join(PROJECT_ROOT, 'data', 'items_metadata', 'itemsV1.2.json')
 PATH_TOPICS_JSON = os.path.join(PROJECT_ROOT, 'ecf', 'random_generated', 'ECF_ALL_TRAINING_SET.json')
-PATH_QRELS_DOCS = os.path.join(PROJECT_ROOT, 'qrels', 'formal-run-qrels', 'formal-document-qrel.txt')
-PATH_QRELS_FOLDERS = os.path.join(PROJECT_ROOT, 'qrels', 'formal-run-qrels', 'formal-folder-qrel.txt')
-PATH_QRELS_BOXES = os.path.join(PROJECT_ROOT, 'qrels', 'formal-run-qrels', 'formal-box-qrel.txt')
+PATH_QRELS_DOCS = os.path.join(PROJECT_ROOT, 'qrels', 'formal-document-qrel.txt')
+PATH_QRELS_FOLDERS = os.path.join(PROJECT_ROOT, 'qrels', 'formal-folder-qrel.txt')
+PATH_QRELS_BOXES = os.path.join(PROJECT_ROOT, 'qrels', 'formal-box-qrel.txt')
 
 @st.cache_data
 def load_metadata():

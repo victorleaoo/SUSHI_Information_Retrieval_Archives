@@ -25,8 +25,8 @@ class Style:
 # CONSTANTS
 PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 RESULTS_PATH = os.path.join(PROJECT_ROOT, 'results', 'RunResults.tsv')
-FOLDER_QRELS_PATH = os.path.join(PROJECT_ROOT, 'qrels', 'formal-run-qrels', 'formal-folder-qrel.txt')
-BOX_QRELS_PATH = os.path.join(PROJECT_ROOT, 'qrels', 'formal-run-qrels', 'formal-box-qrel.txt')
+FOLDER_QRELS_PATH = os.path.join(PROJECT_ROOT, 'qrels', 'formal-folder-qrel.txt')
+BOX_QRELS_PATH = os.path.join(PROJECT_ROOT, 'qrels', 'formal-box-qrel.txt')
 
 RANDOM_SEED_LIST = [1, 42, 100, 300, 333, 777, 999, 2025, 6159, 12345, 19865, 53819,
                     56782, 62537, 72738, 75259, 81236, 91823, 98665, 98765, 99009, 999777333,
@@ -58,12 +58,12 @@ class RunGenerator:
         expansion_ceiling_k (int): Rank threshold that expanded results cannot surpass.
     """
     def __init__(self, 
-                 searching_fields=[['title', 'summary', 'folderlabel']],
+                 searching_fields=[['title']],
                  query_fields=['TD'],
                  run_type='random',
-                 models=['bm25', 'embeddings', 'colbert'],
+                 models=['bm25'],
                  sampling='uniform',
-                 expansion=['similar_snc'],
+                 expansion=[],
                  all_folders_folder_label=False,
                  rrf_input='docs',
                  expansion_ceiling_k=2
@@ -527,7 +527,9 @@ class RunGenerator:
         query_fields_name = self.current_query_field
         model_name        = "-".join(self.models).upper()
 
-        return f"{search_field_name}_{expansion_name[:-1]}_{query_fields_name}_{model_name}"
+        uneven = "-UNEVEN" if self.sampling == "uneven" else ""
+
+        return f"{search_field_name}{uneven}_{expansion_name[:-1]}_{query_fields_name}_{model_name}"
 
 if __name__ == "__main__":
    gen = RunGenerator()
