@@ -2,7 +2,7 @@ import json
 from collections import Counter
 
 # Load the JSON data
-with open('random_generated/ECF_UNEVEN_Random_Seed_100.json', 'r') as f:
+with open('random_generated/ECF_3perbox_Random_Seed_42.json', 'r') as f:
     data = json.load(f)
 
 # Initialize a counter

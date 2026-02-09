@@ -58,10 +58,10 @@ class RunGenerator:
         expansion_ceiling_k (int): Rank threshold that expanded results cannot surpass.
     """
     def __init__(self, 
-                 searching_fields=[['title']],
+                 searching_fields=[['title', 'ocr', 'folderlabel', 'summary']],
                  query_fields=['TD'],
                  run_type='random',
-                 models=['bm25'],
+                 models=['bm25', 'embeddings', 'colbert'],
                  sampling='uniform',
                  expansion=[],
                  all_folders_folder_label=False,
@@ -529,7 +529,7 @@ class RunGenerator:
 
         uneven = "-UNEVEN" if self.sampling == "uneven" else ""
 
-        return f"{search_field_name}{uneven}_{expansion_name[:-1]}_{query_fields_name}_{model_name}"
+        return f"4perBox-{search_field_name}{uneven}_{expansion_name[:-1]}_{query_fields_name}_{model_name}"
 
 if __name__ == "__main__":
    gen = RunGenerator()
