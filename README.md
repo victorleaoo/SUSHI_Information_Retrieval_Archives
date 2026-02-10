@@ -132,6 +132,17 @@ Each line maps a topic to a Box/Folder/Document ID with a relevance score:
 
 *(Unjudged items are omitted from the files).*
 
+**Note on Documents Qrels Score Normalization:**
+
+The [raw judgments for documents](./qrels/OLD-formal-document-qrel.txt) contained a wider range of labels. These were normalized to the standard TREC-style 3-point scale as follows:
+
+| Original Assessor Label | Final Qrels Score | Meaning |
+| :--- | :--- | :--- |
+| **4** | **3** | Highly Relevant |
+| **3** | **1** | Relevant |
+| **1, 2** | **0** | Not Relevant |
+| **-1** | *(Removed)* | Not judgeable |
+
 ### Experiment Control Files (ECFs)
 
 The **Experiment Control File (ECF)** serves the role of a standard "Topics" file in TREC evaluations but is adapted for the SUSHI task. Real-world archives have limited digitization. SUSHI simulates this by explicitly defining which documents are "visible" (digitized/training data) to the system for a given topic.
