@@ -1,12 +1,37 @@
 # SUSHI (Searching Unseen Sources for Historical Information) Test Collection and Experiments
 
+## Index
+- [About the Collection](#about-the-collection)
+    - [Data Hierarchy: Boxes, Folders, and Documents](#data-hierarchy-boxes-folders-and-documents)
+    - [Folder Metadata](#folder-metadata)
+    - [Documents Metadata](#documents-metadata)
+    - [Topics](#topics)
+    - [Relevance judgment (QRels)](#relevance-judgment-qrels)
+    - [Experiment Control Files (ECFs)](#experiment-control-files-ecfs)
+- [Repository Setup](#repository-setup)
+    - [Adding missing files](#adding-missing-files)
+- [SUSHI Experiment Running](#sushi-experiment-running)
+    - [1. System/File Architecture](#1-systemfile-architecture)
+    - [2. The Experiment Workflow (Step-by-Step)](#2-the-experiment-workflow-step-by-step)
+    - [3. Output Structure](#3-output-structure)
+    - [4. Usage Example](#4-usage-example)
+    - [5. Hybrid Models (Combining two different techniques with RRF) - `rrf_best_models.py`](#5-hybrid-models-combining-two-different-techniques-with-rrf---rrf_best_modelspy)
+- [SUSHI Visualizer Web Application](#sushi-visualizer-web-application)
+    - [Experiment Analyzer](#experiment-analyzer)
+    - [Topics and Data Visualizer](#topics-and-data-visualizer)
+    - [Setup Experiments for the Visualizer](#setup-experiments-for-the-visualizer)
+    - [How to Run](#how-to-run)
+- [Acknowledgements](#acknowledgements)
+
+---
+
 This repository presents the SUSHI Test Collection and provides a walk-through on how to access and use it. 
 
 It also houses the code required to reproduce initial experiments, as well as a Python Streamlit web application for data and experiment visualization.
 
 ## About the Collection
 
-The SUSHI Collection seeks to facilitate the development of archival Information Retrieval (IR). In many archival contexts, describing every individual document with metadata is impractical; often, the finest-grained descriptions available are for sets of boxes, which may contain sparsely digitized documents. 
+The SUSHI Collection seeks to facilitate the development of archival Information Retrieval (IR). In many archival contexts, describing every individual document with metadata is impractical; often, the finest-grained descriptions available are for sets of boxes and folders, which may contain sparsely digitized documents. 
 
 Consequently, the most common search task in an archive is not to find specific documents directly, but to identify *where* in the repository to look for them. Searchers typically identify promising boxes or folders, request them, and then physically or digitally browse the contents to find relevant information.
 
@@ -15,28 +40,32 @@ The first version of the NTCIR-18 SUSHI Collection is available at:
 
 ### Data Hierarchy: Boxes, Folders, and Documents
 
-The raw data structure follows a strict hierarchy representing the physical archival organization. The dataset contains **31,684 digitized documents**.
+The raw data structure follows a strict hierarchy representing the physical archival organization. The dataset contains **31,684 digitized documents**, stored in **1,336 folders** and **126 boxes**.
 
 * **Download:** The raw box/folder/document structure is available [here](https://drive.google.com/file/d/1hA5FW0cNloi20coLlGvnv5wMap8ZN8YL/view?usp=sharing).
 * **Format:** All documents are provided as PDF files.
 
 **The Hierarchy:**
-1.  **Box:** Identified by a unique identifier (e.g., `N1234`).
-2.  **Folder:** Stored within a box, identified by a unique folder identifier (e.g., `N12345678`).
-3.  **Document:** Stored within a folder, identified by a unique SUSHI document identifier (e.g., `S12345.pdf`).
+
+1. **Box:** Identified by a unique identifier (e.g., `N1234`).
+2. **Folder:** Stored within a box, identified by a unique folder identifier (e.g., `N12345678`).
+3. **Document:** Stored within a folder, identified by a unique SUSHI document identifier (e.g., `S12345.pdf`).
 
 **Directory Structure:**
+
 The test collection file system mirrors this hierarchy: one directory for each Box $\rightarrow$ one subdirectory for each Folder $\rightarrow$ one PDF file for each digitized Document. 
 
 > **Note:** The PDF files contain embedded (uncorrected) OCR text, allowing participating teams to utilize raw text features in their experiments.
 
 ### Folder Metadata
 
-The **Folder Label Metadata** is critical for retrieval. Raw archival folder titles are often opaque codes (e.g., `POL 15-1`). To make these searchable, we enrich them using the **Subject-Numeric Code (SNC)** systems from [1963](https://www.archives.gov/files/research/foreign-policy/state-dept/finding-aids/records-classification-handbook-1963.pdf) and [1965](https://www.archives.gov/files/research/foreign-policy/state-dept/finding-aids/dos-records-classification-handbook-1965-1973.pdf).
+The **Folder Label Metadata** is critical for retrieval. Raw archival folder titles are often codes (e.g., `POL 15-1`). To make these searchable, we enrich them using the **Subject-Numeric Code (SNC)** systems from [1963](https://www.archives.gov/files/research/foreign-policy/state-dept/finding-aids/records-classification-handbook-1963.pdf) and [1965](https://www.archives.gov/files/research/foreign-policy/state-dept/finding-aids/dos-records-classification-handbook-1965-1973.pdf).
 
-This enrichment is handled by the `FolderLabelConstructor` class ([src/data_creation/SNCLabelTranslate.py](https://github.com/victorleaoo/SUSHI_Information_Retrieval_Archives/blob/main/src/data_creation/SNCLabelTranslate.py)), merging raw folder data with the SNC Translation Table (`SncTranslationV1.3.xlsx`).
+This enrichment is handled by the `FolderLabelConstructor` class ([src/data_creation/SNCLabelTranslate.py](https://github.com/victorleaoo/SUSHI_Information_Retrieval_Archives/blob/main/src/data_creation/SNCLabelTranslate.py)), merging raw folder data with the SNC Translation Table.
 
-* **Input Source:** `SncTranslationV1.3.xlsx`
+The file can be found at [FoldersV1.3.json](https://github.com/victorleaoo/SUSHI_Information_Retrieval_Archives/blob/main/data/folders_metadata/FoldersV1.3.json).
+
+* **Input Source:** [SncTranslationV1.3.xlsx](https://github.com/victorleaoo/SUSHI_Information_Retrieval_Archives/blob/main/data/folders_metadata/SncTranslationV1.3.xlsx)
     * `SNC`: The code (e.g., `POL 1`).
     * `1965`: Label from the 1965 classification (Preferred).
     * `1963`: Label from the 1963 classification (Fallback).
@@ -56,11 +85,11 @@ This enrichment is handled by the `FolderLabelConstructor` class ([src/data_crea
 
 ### Documents Metadata
 
-The **Document Metadata** file aggregates information available for each document, sourcing data from NARA and Brown University records.
+The **Document Metadata** file aggregates information available for each document, sourcing data from NARA and Brown University records. It can be loaded at [itemsV1.2.json](https://drive.google.com/file/d/1c_hpR_lgdGeskXaNQTdCS7nO9s1R2NOb/view?usp=share_link).
 
-* **Input Source:** `SubtaskACollectionMetadataV1.1.xlsx` (available in `data/items_metadata/`)
+* **Input Source:** [SubtaskACollectionMetadataV1.1.xlsx](https://github.com/victorleaoo/SUSHI_Information_Retrieval_Archives/blob/main/data/items_metadata/SubtaskACollectionMetadataV1.1.xlsx)
     * Contains SUSHI unique identifiers.
-    * Merges available NARA and Brown metadata.
+    * Merges available original NARA and Brown metadata.
 
 **Output Fields (JSON):**
 
@@ -94,6 +123,7 @@ Relevance assessments are provided at three granularity levels in the `qrels/for
 - [Document Qrels](https://github.com/victorleaoo/SUSHI_Information_Retrieval_Archives/blob/main/qrels/formal-run-qrels/formal-document-qrel.txt).
 
 **Format:**
+
 Each line maps a topic to a Box/Folder/Document ID with a relevance score:
 
 * **3:** Highly Relevant
@@ -115,12 +145,12 @@ Each ECF defines specific **Experiment Sets**. An experiment set maps a list of 
 
 **ECF Conditions:**
 
-We provide ECFs covering three different experimental conditions:
+We provide [ECFs](https://github.com/victorleaoo/SUSHI_Information_Retrieval_Archives/tree/main/ecf/random_generated) covering three different experimental conditions:
 
-1.  **All Training Documents (No Mask):** * ECF containing all available training documents for all topics.
-2.  **Random (Uniform):** * ECF simulating a uniform digitization strategy (e.g., 5 documents per box), selected via different random seeds.
-3.  **Uneven (Skewed):** * ECF simulating a skewed distribution of digitized documents per box.
-    * The distribution logic is detailed in `src/RGdistribution.xlsx`.
+1.  **[All Training Documents (No Mask)](https://github.com/victorleaoo/SUSHI_Information_Retrieval_Archives/blob/main/ecf/random_generated/ECF_ALL_TRAINING_SET.json):** * ECF containing all available training documents for all topics.
+2.  **Random (Uniform):** * ECF simulating a uniform digitization strategy (e.g., 5 documents per box), selected via different random seeds. These are the ECFs that have the name such as *ECF_RANDOM_seed.json*.
+3.  **Uneven (Skewed):** * ECF simulating a skewed distribution of digitized documents per box. These are the ECFs that have the name such as *ECF_UNEVEN_Random_Seed_seed.json*.
+    * The distribution logic is detailed in [src/RGdistribution.xlsx](https://github.com/victorleaoo/SUSHI_Information_Retrieval_Archives/blob/main/src/RGdistribution.xlsx).
 
 *The ECF creation logic is located at [create_random_ecf](https://github.com/victorleaoo/SUSHI_Information_Retrieval_Archives/blob/main/src/data_loader.py#L77).*
 
@@ -144,13 +174,9 @@ To run the applications correctly, it is necessary to reproduce the data structu
 │   │   └── ...
 ├── ecf/                            
 ├── qrels/                          
-│   ├── dry-run-qrels/              
-│   │   ├── Ntcir18SushiDryRunBoxQrelsV1.1.tsv
-│   │   └── Ntcir18SushiDryRunFolderQrelsV1.1.tsv 
-│   └── formal-run-qrels/          
-│       ├── formal-box-qrel.txt
-│       ├── formal-document-qrel.txt
-│       └── formal-folder-qrel.txt
+│   ├── formal-box-qrel.txt
+│   ├── formal-document-qrel.txt
+│   └── formal-folder-qrel.txt
 ├── src/     # Experiment Run Generator
 ├── web_app/ # SUSHI visualizer
 ├── .gitignore
@@ -302,7 +328,7 @@ gen.run_experiments()
 
 This script is an advanced tool designed to **fuse distinct retrieval strategies** into a single, optimized ranking. While the standard `RunGenerator` ensembles models that share the same configuration (e.g., BM25 + ColBERT both using the same document text), this script allows you to combine fundamentally different approaches.
 
-**Key Use Case:** Combining high-precision **Document Retrieval** (using OCR content) with high-recall **Folder Retrieval** (using only folder metadata).
+**Key Use Case:** Combining **Document Retrieval** (using OCR content) with **Folder Retrieval** (using only folder metadata).
 
 **1. How It Works**
 
@@ -362,9 +388,9 @@ The results will be saved and evaluated automatically, ready for inspection in t
 
 ---
 
-## SUSHI Visualizer Web Application
+## [SUSHI Visualizer Web Application](https://tinyurl.com/sushisigir)
 
-The **Visualizer** is the primary interface for analyzing experiment results and exploring the dataset. It is divided into two distinct applications, accessible via the sidebar navigation. It is a web application developed using Streamlit (Python library)
+The **Visualizer** is the primary interface for analyzing experiment results and exploring the dataset. It is divided into two distinct applications, accessible via the sidebar navigation. It is a web application developed using Streamlit (Python library). It can be accessed at [https://tinyurl.com/sushisigir](https://tinyurl.com/sushisigir).
 
 The tool is designed to bridge the gap between raw metric files and actionable insights, offering features like confidence interval visualization, topic-by-topic breakdowns, and dynamic filtering.
 
@@ -382,7 +408,7 @@ This dashboard is a "Command Center" for evaluating models performances. It allo
 At the top of the page, it's possible to see score cards for each model in the selected configuration (e.g., BM25 vs. ColBERT).
 
 * **Mean nDCG@5:** The large number represents the average retrieval quality across all 45 topics. Higher is better (0.0 to 1.0).
-* **Margin of Error (±):** The smaller number below shows the 95% Confidence Interval. If the intervals of two models overlap significantly, their performance difference might not be statistically significant.
+* **Margin of Error (±):** The number aside shows the 95% Confidence Interval. If the intervals of two models overlap significantly, their performance difference might not be statistically significant.
 * **N=30:** Indicates that the score is robust, calculated from 30 separate random trials (simulating different digitization scenarios).
 
 **B. Topic Performance (The Dumbbell Chart)**
