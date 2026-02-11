@@ -397,6 +397,28 @@ python src/rrf_best_models.py
 
 The results will be saved and evaluated automatically, ready for inspection in the Visualizer.
 
+### 6. Wilcoxon Test Analysis Notebook
+
+The [wilcoxon_test.ipynb](https://github.com/victorleaoo/SUSHI_Information_Retrieval_Archives/blob/main/src/stats_test/wilcoxon_test.ipynb) performs statistical significance testing to compare the performance of two models. Specifically, it uses the **Wilcoxon Signed-Rank Test** to evaluate whether the difference in performance metrics between two models is statistically significant across multiple random seed trials. 
+
+It has 2 main type of analysis:
+
+**1. Global Performance Comparison**
+
+Computes the aggregate performance difference across all topics.
+
+* **Outputs:**
+    * **P-value:** Determines significance ($p < 0.05$).
+    * **Win/Loss Count:** Shows how many seeds favored each model.
+    * **Rank Breakdown:** A DataFrame detailing the score difference for each seed.
+
+**2. Single Topic Deep Dive**
+
+Provides a detailed analysis for a specific topic ID (e.g., `T18Eval-00001`).
+
+* **Visualization:** Plots the score distribution across the 30 seeds for that specific query.
+* **Robustness Check:** Verifies if the improvement on a specific topic is consistent or an outlier.
+
 ---
 
 ## [SUSHI Visualizer Web Application](https://tinyurl.com/sushisigir)
