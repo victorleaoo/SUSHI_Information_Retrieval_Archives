@@ -55,11 +55,13 @@ The raw data structure follows a strict hierarchy representing the physical arch
 
 The test collection file system mirrors this hierarchy: one directory for each Box $\rightarrow$ one subdirectory for each Folder $\rightarrow$ one PDF file for each digitized Document. 
 
-> **Note:** The PDF files contain embedded (uncorrected) OCR text, allowing participating teams to utilize raw text features in their experiments.
+> **Note:** The PDF files contain embedded (uncorrected) OCR text, allowing users of the collection to utilize raw text features in their experiments.
 
 ### Folder Metadata
 
-The **Folder Label Metadata** is critical for retrieval. Raw archival folder titles are often codes (e.g., `POL 15-1`). To make these searchable, we enrich them using the **Subject-Numeric Code (SNC)** systems from [1963](https://www.archives.gov/files/research/foreign-policy/state-dept/finding-aids/records-classification-handbook-1963.pdf) and [1965](https://www.archives.gov/files/research/foreign-policy/state-dept/finding-aids/dos-records-classification-handbook-1965-1973.pdf).
+Raw archival folder titles are often codes (e.g., `POL 15-1`). To make these searchable, we enrich them using the **Subject-Numeric Code (SNC)** systems from [1963](https://www.archives.gov/files/research/foreign-policy/state-dept/finding-aids/records-classification-handbook-1963.pdf) and [1965](https://www.archives.gov/files/research/foreign-policy/state-dept/finding-aids/dos-records-classification-handbook-1965-1973.pdf).
+
+For NTCIR, it was provided the FoldersV1.2.json file, however additions were provided in order to have more fields (version FoldersV1.3.json): the labels from 1965 and 1963 (not only the newest one available); the raw version of scope note; the truncated version of scope note; the parent snc (if possible) and its recursive expansion.
 
 This enrichment is handled by the `FolderLabelConstructor` class ([src/data_creation/SNCLabelTranslate.py](https://github.com/victorleaoo/SUSHI_Information_Retrieval_Archives/blob/main/src/data_creation/SNCLabelTranslate.py)), merging raw folder data with the SNC Translation Table.
 
@@ -118,9 +120,9 @@ The [Topics File](src/data_creation/topics_output.txt) contains 45 information n
 
 Relevance assessments are provided at three granularity levels in the `qrels/formal-run-qrels/` directory:
 
-- [Box Qrels](https://github.com/victorleaoo/SUSHI_Information_Retrieval_Archives/blob/main/qrels/formal-run-qrels/formal-box-qrel.txt);
-- [Folder Qrels](https://github.com/victorleaoo/SUSHI_Information_Retrieval_Archives/blob/main/qrels/formal-run-qrels/formal-folder-qrel.txt);
-- [Document Qrels](https://github.com/victorleaoo/SUSHI_Information_Retrieval_Archives/blob/main/qrels/formal-run-qrels/formal-document-qrel.txt).
+- [Box Qrels](https://github.com/victorleaoo/SUSHI_Information_Retrieval_Archives/blob/main/qrels/formal-box-qrel.txt);
+- [Folder Qrels](https://github.com/victorleaoo/SUSHI_Information_Retrieval_Archives/blob/main/qrels/formal-folder-qrel.txt);
+- [Document Qrels](https://github.com/victorleaoo/SUSHI_Information_Retrieval_Archives/blob/main/qrels/formal-document-qrel.txt).
 
 **Format:**
 
@@ -249,7 +251,7 @@ For `run_type='random'`, the system iterates through 30 fixed random seeds. For 
 
 1.  **Sampling (ECF Creation):**
     * The `DataLoader` selects 5 random documents from every box in the collection.
-    * These documents become the "Training Set." All other documents are considered "undigitized" and invisible to the model training.
+    * These documents become the "Training Set." All other documents are considered "undigitized" and not described by document-level metadata, and invisible to the model training.
 2.  **Model Training:**
     * The active models (`BM25`, `ColBERT`, etc.) build their indexes **only** using the sampled Training Set.
 3.  **Retrieval:**
@@ -259,11 +261,11 @@ For `run_type='random'`, the system iterates through 30 fixed random seeds. For 
 4.  **Fusion & Expansion (The Complex Part):**
     * **RRF:** Results from multiple models (e.g., BM25 + ColBERT) are merged using Reciprocal Rank Fusion (RRF) at the *document* or *folder* level first.
     * **Expansion:** The system looks for "Ghost Folders" (folders not retrieved by the model). It checks the retrieved documents for relationships (Same Box, Same Classification Code). If enough evidence exists, the empty folder is assigned an inferred score.
-    * **Safety Ceiling:** Rhe score of inferred folders is mathematically capped so they cannot rank higher than the Top-K original results (controlled by `expansion_ceiling_k`).
+    * **Safety Ceiling:** The score of inferred folders is mathematically capped so they cannot rank higher than the Top-K original results (controlled by `expansion_ceiling_k`).
 5.  **Evaluation:**
     * The final ranked list of folders is saved.
     * Metrics (nDCG@5, Precision) are calculated for this specific seed.
-    * For each topic, it saves how many relevant folders (qrels_value > 0) are on the top 5.
+    * For each topic, it saves how many relevant folders (qrels_value > 0) are in the top 5.
 
 **Configuration Arguments**
 
@@ -273,11 +275,11 @@ The `RunGenerator` is highly configurable. Here is what each argument controls:
 | :--- | :--- | :--- |
 | `searching_fields` | `List[List[str]]` | Which metadata fields to index. <br>Ex: `[['title', 'ocr']]`. If multiple fields are provided, BM25 upgrades to BM25F automatically. |
 | `query_fields` | `List[str]` | Which parts of the Topic to use as the query.<br>`'T'`: Title only.<br>`'TD'`: Title + Description.<br>`'TDN'`: Title + Desc + Narrative. |
-| `run_type` | `str` | `'random'`: Runs the loop over 30 seeds (simulating sparsity).<br>`'all_documents'`: Runs once using the entire collection (Oracle mode). |
+| `run_type` | `str` | `'random'`: Runs the loop over 30 seeds with uniform 5 docs/box (simulating sparsity).<br>`'uneven'`: Runs the loop over 30 seeds with skewed distribution.<br>`'all_documents'`: Runs once using the entire collection (Oracle mode). |
 | `models` | `List[str]` | The models to ensemble. Options: `'bm25'`, `'embeddings'`, `'colbert'`. If more than one is given, it is performed RRF between the different models results. |
 | `expansion` | `List[str]` | Strategies to infer missing folders scores.<br>`'same_box'`: Neighbor is in the same box.<br>`'same_snc'`: Neighbor has same Classification Code.<br>`'close_date'`: Neighbor has same SNC and is temporally close.<br>`[]`: No expansion. |
 | `rrf_input` | `str` | **`'docs'`**: Fuses model results at document level.<br>**`'folders'`**: Expands each model independently, then fuses final folders. |
-| `expansion_ceiling_k` | `int` | **Trust Threshold**. Determines the rank `k` that expanded results cannot beat.<br>`1`: Expansion can take Rank #2 but not #1.<br>`3`: Expansion can take Rank #4, but Top 3 are preserved. |
+| `expansion_ceiling_k` | `int` | **Trust Threshold**. Determines the rank `k` that expanded results cannot beat.<br>`1`: Expansion can take Rank #2 but not #1.<br>`2`: Expansion can take Rank #3 but not #2.<br>`3`: Expansion can take Rank #4, but Top 3 are preserved.<br>... |
 | `all_folders_folder_label` | `bool` | If `True`, ignores document contents and retrieves based ONLY on folder metadata labels. The `searching_fields` must be only ['folderlabel'] |
 
 ### 3. Output Structure
@@ -337,10 +339,8 @@ The script defines two separate `RunGenerator` instances (`gen_A` and `gen_B`) a
 1.  **Run Config A (Content-Based):**
     * Typically uses rich document fields (`Title`, `OCR`, `Summary`).
     * Applies expansion techniques (e.g., `Same Box`) to infer folder relevance from document hits.
-    * *Strengths:* Finds specific information buried deep in files.
 2.  **Run Config B (Metadata-Based):**
-    * Uses **`all_folders_folder_label=True`**. This ignores file content and retrieves based purely on the folder's semantic label (e.g., "Cuban Missile Crisis").
-    * *Strengths:* Very high precision for broad topics; acts as a "sanity check" or baseline.
+    * Uses **`all_folders_folder_label=True`**. This ignores file content and retrieves based purely on the folder's label.
 3.  **Fusion (RRF):**
     * The results from A and B are merged.
     * You can assign weights (e.g., `1.0` for Content, `0.65` for Metadata) to prioritize one strategy over the other.
@@ -403,13 +403,20 @@ The SUSHI visualizer has two main screens:
 
 This dashboard is a "Command Center" for evaluating models performances. It allows to answer two key questions: *"Which model is better?"* and *"Why is it better?"*.
 
+The models that are shown for selection and comparing are the ones present at the **all_runs** folder. They are presented for the application with the following name structure: STRATEGY-SEARCHINGFIELDS_EXPANSIONMETHOD_TD_RETRIEVALMODELS. They can be interpreted in the following way:
+
+| Strategy | Searching Fields | Expansion Method | Query Fields | Retrieval Models |
+| :- | :- | :- | :- | :- |
+| If **HYBRID**: it combines with the AllF strategy<br/>If **XperBox**, it means that different ECFs for uniform sampling was used.<br/>If **UNEVEN**, it used Uneven sampling for the ECFs. | Searching fields (T,O,F,S) and their combination used for indexing.<br/>ALLFL means the usage of AllF strategy. | **SB:** Same Box<br/>**SS:** Same SNC<br/>**SMS:** Similar SNC<br/>**CD:** Close date<br/>**NEX:** No Expansion<br/>The number beside it is the n-th top rank that infered folders can't pass. | TD for Title and Description as Query Fields | When more than one model is present, it was performed RRF in the results.<br/>When **TUNED**, it used Tuned BM25F params. |
+
+
 **A. Model Global Performance (The Score Cards)**
 
 At the top of the page, it's possible to see score cards for each model in the selected configuration (e.g., BM25 vs. ColBERT).
 
 * **Mean nDCG@5:** The large number represents the average retrieval quality across all 45 topics. Higher is better (0.0 to 1.0).
 * **Margin of Error (±):** The number aside shows the 95% Confidence Interval. If the intervals of two models overlap significantly, their performance difference might not be statistically significant.
-* **N=30:** Indicates that the score is robust, calculated from 30 separate random trials (simulating different digitization scenarios).
+* **N=30:** Indicates that the score is calculated from 30 separate random trials (simulating different digitization scenarios).
 
 **B. Topic Performance (The Dumbbell Chart)**
 
@@ -428,7 +435,7 @@ Located at the bottom, this table allows you to compare **different configuratio
 
 * **Global nDCG:** The overall effectiveness of the run.
 * **Global Rel:** The average number of relevant folders found in the top 5 results.
-* **Per-Topic Columns:** Shows the detailed score for every single topic. Useful for spotting regressions (e.g., *"Did adding expansion hurt Topic 12?"*).
+* **Per-Topic Columns:** Shows the detailed score for every single topic. Useful for spotting changes (e.g., *"Did adding expansion hurt Topic 12?"*).
 
 ![Models](https://raw.githubusercontent.com/victorleaoo/SUSHI_Information_Retrieval_Archives/refs/heads/main/img/models.png)
 
@@ -440,9 +447,9 @@ This section is an explorer for the dataset itself (The "Ground Truth"). It help
 
 Select a Topic ID (e.g., `T1`) from the sidebar. You will see:
 
-* **Title:** The short query (e.g., "Cuban Missile Crisis").
+* **Title:** The short query.
 * **Description:** A sentence explaining the user's intent.
-* **Narrative:** A detailed paragraph defining strictly what counts as relevant or irrelevant.
+* **Narrative:** A paragraph helping to define for assessors what counts as relevant or irrelevant.
 
 **B. Document View**
 
@@ -450,15 +457,16 @@ This tab shows all documents marked as relevant for the selected topic.
 
 * **PDF Preview:** On the left, you can read the actual scanned document content.
 * **Metadata Inspector:** On the right, you can see the file's indexed metadata (OCR text, Date, Box ID).
-* **Sushi Folder Metadata:** Crucially, it shows the metadata of the *folder* this document belongs to, helping you understand the context of the match.
+* **Sushi Folder Metadata:** Crucially, it shows the metadata of the *folder* and *box* this document belongs to, helping you understand the context of the match.
 
 ![Topics and Docs](https://raw.githubusercontent.com/victorleaoo/SUSHI_Information_Retrieval_Archives/refs/heads/main/img/topic-doc.png)
 
 **C. Folder View**
 
 This tab lists the "Gold Standard" folders — the physical folders that the user *should* have found.
-* **Star Rating (⭐⭐):** Indicates the relevance level (High vs. Normal).
-* **Enriched Labels:** You can see the full semantic label (e.g., `POLITICAL -> GENERAL -> ELECTIONS`) generated by the metadata enrichment process, which explains *why* this folder is relevant to the topic.
+
+* **Star Rating (⭐):** Indicates the relevance level: 1 as relevant; 3 as highly relevant.
+* **Folder metadata:** The folder metadata for the selected folder.
 
 ![Folder Metadata](https://raw.githubusercontent.com/victorleaoo/SUSHI_Information_Retrieval_Archives/refs/heads/main/img/folder.png)
 
