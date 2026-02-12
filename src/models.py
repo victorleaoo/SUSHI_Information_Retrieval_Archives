@@ -264,7 +264,6 @@ class ColBERTModel(RetrievalModel):
         2. Encodes document `text_blob`s using ColBERT.
         3. Adds document embeddings to the index.
         """
-        # Clean previous index to prevent corruption on re-runs
         if os.path.exists(self.index_path):
             shutil.rmtree(self.index_path)
 

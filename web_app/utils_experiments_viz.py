@@ -35,7 +35,6 @@ def parse_run_folder(folder_name: str) -> Optional[Dict[str, str]]:
     parts = folder_name.split('_')
     if len(parts) != 4:
         return None
-    
     return {
         "search": parts[0],
         "expansion": parts[1],
@@ -44,61 +43,20 @@ def parse_run_folder(folder_name: str) -> Optional[Dict[str, str]]:
         "full_name": folder_name
     }
 
-def scan_available_runs() -> Tuple[Dict[str, List[str]], List[Dict]]:
-    """
-    Scans the run directory and returns unique options for filters.
-    """
-    if not os.path.exists(EXPERIMENTS_ROOT_DIR):
-        return {}, []
-
-    options = {
-        "search": set(),
-        "query": set(),
-        "model": set(),
-        "expansion": set()
-    }
-    parsed_runs = []
-
-    for f in os.listdir(EXPERIMENTS_ROOT_DIR):
-        if not os.path.isdir(os.path.join(EXPERIMENTS_ROOT_DIR, f)):
-            continue
-            
-        meta = parse_run_folder(f)
-        if meta:
-            options["search"].add(meta["search"])
-            options["query"].add(meta["query"])
-            options["model"].add(meta["model"])
-            if meta["expansion"] != "NEX":
-                options["expansion"].add(meta["expansion"])
-            parsed_runs.append(meta)
-
-    # Convert sets to sorted lists
-    final_options = {k: sorted(list(v)) for k, v in options.items()}
-    return final_options, parsed_runs
-
 def natural_keys(text: str) -> List[Any]:
+    """Split text into numeric and non-numeric parts for natural sorting."""
     return [int(c) if c.isdigit() else c for c in re.split(r'(\d+)', text)]
 
-def get_topic_number(col_name: str) -> int:
-    try:
-        if col_name.startswith("T"):
-            return int(col_name[1:])
-    except (ValueError, IndexError):
-        pass
-    return -1
-
 def normalize_topic_key(key: str) -> str:
+    """Normalize topic keys to the 'T{n}' format when possible."""
     try:
         topic_num = int(re.search(r'\d+$', key).group())
         return f"T{topic_num}"
     except (AttributeError, ValueError):
         return key
 
-def get_smart_folder_name(search: str, expansion: str, query: str, model: str) -> str:
-    """Reconstructs folder name based on strict 4-part convention."""
-    return f"{search}_{expansion}_{query}_{model}"
-
 def format_cell_content(metrics: Any) -> str:
+    """Format metrics for HTML display in table cells."""
     if isinstance(metrics, (float, int)):
         return f"<b>{metrics:.3f}</b>"
     if isinstance(metrics, dict) and metrics.get('is_summary', False):
@@ -118,14 +76,6 @@ def format_cell_content(metrics: Any) -> str:
             f"<span style='font-size: 0.85em;'>H: {h_top5}/{h_train}/{h_total}</span>"
         )
     return str(metrics)
-
-def generate_column_css(df: pd.DataFrame) -> str:
-    """
-    Returns empty CSS. 
-    Previous logic for coloring Difficult/Impossible topics has been removed 
-    to keep the table uniform.
-    """
-    return ""
 
 def build_multi_model_chart_dataset(topics: List[str], model_data: Dict[str, Dict]) -> pd.DataFrame:
     """
@@ -163,6 +113,7 @@ def build_multi_model_chart_dataset(topics: List[str], model_data: Dict[str, Dic
 # ==========================================
 
 def load_json_safely(filepath: str) -> Dict:
+    """Load JSON from filepath; return empty dict on error."""
     try:
         with open(filepath, 'r', encoding='utf-8') as f:
             return json.load(f)
@@ -170,6 +121,7 @@ def load_json_safely(filepath: str) -> Dict:
         return {}
 
 def calculate_folder_average(folder_path: str) -> Tuple[Optional[Dict[str, float]], List[str]]:
+    """Compute per-topic mean nDCG from all Random*.json files in a folder."""
     if not os.path.exists(folder_path): return None, []
     valid_files = [f for f in os.listdir(folder_path) if f.startswith("Random") and f.endswith(".json")]
     if not valid_files: return None, []
@@ -192,24 +144,16 @@ def calculate_folder_average(folder_path: str) -> Tuple[Optional[Dict[str, float
     return averages, valid_files
 
 def load_margin_data(folder_path: str) -> Dict:
+    """Load per-topic mean/margin data from topics_mean_margin.json."""
     return load_json_safely(os.path.join(folder_path, "topics_mean_margin.json"))
 
 def load_overall_stats(folder_path: str, filename: str) -> Dict:
+    """Load overall model stats JSON and return the model_global_ndcg section."""
     data = load_json_safely(os.path.join(folder_path, filename))
     return data.get('model_global_ndcg', {})
 
-def load_sushi_submissions(folder_path: str) -> Dict[str, Any]:
-    if not os.path.exists(folder_path): return {}
-    for filename in os.listdir(folder_path):
-        if filename.startswith("SUSHISubmissions") and filename.endswith(".json"):
-            data = load_json_safely(os.path.join(folder_path, filename))
-            normalized_data = {}
-            for key, val in data.items():
-                normalized_data[normalize_topic_key(key)] = val
-            return normalized_data
-    return {}
-
 def get_model_metric_summary(stats_dict: Dict, topic_avgs_dict: Dict) -> Dict[str, float]:
+    """Summarize model metrics using provided stats or topic averages."""
     if stats_dict and 'mean' in stats_dict:
         return {'val': stats_dict['mean'], 'margin': stats_dict.get('margin', 0.0)}
     elif topic_avgs_dict:
@@ -218,6 +162,7 @@ def get_model_metric_summary(stats_dict: Dict, topic_avgs_dict: Dict) -> Dict[st
         return {'val': 0.0, 'margin': 0.0}
 
 def build_chart_dataset(topics: List[str], avg_ex: Dict, margins_ex: Dict, avg_nex: Dict, margins_nex: Dict, oracle_data: Dict, sushi_data: Dict, avg_emb: Dict = {}, margins_emb: Dict = {}) -> pd.DataFrame:
+    """Build per-topic chart rows across experiment variants."""
     chart_rows = []
     for t in topics:
         if avg_ex and t in avg_ex:
@@ -233,130 +178,6 @@ def build_chart_dataset(topics: List[str], avg_ex: Dict, margins_ex: Dict, avg_n
             m_min, _, m_max = margins_emb.get(t, [val, val, val])
             chart_rows.append({"Topic": t, "Type": "Embeddings (F_EMB_T)", "nDCG": val, "min_ci": m_min, "max_ci": m_max})
     return pd.DataFrame(chart_rows)
-
-def build_table_dataset(sorted_topics: List[str], avg_ex: Dict, avg_nex: Dict, oracle_data: Dict, sushi_data: Dict, path_ex: str, files_ex: List[str], path_nex: str, files_nex: List[str]) -> pd.DataFrame:
-    table_rows = []
-    def add_row(name: str, source_data: Dict, is_raw: bool = False):
-        row_data = {"Experiment": name}
-        for t in sorted_topics:
-            val = source_data.get(t, {}) if is_raw else source_data.get(t, 0.0)
-            row_data[t] = format_cell_content(val)
-        table_rows.append(row_data)
-        
-    def add_individual_files(folder_path: str, file_list: List[str], suffix_label: str):
-        if not os.path.exists(folder_path): return
-        for f in file_list:
-            data = load_json_safely(os.path.join(folder_path, f))
-            if data:
-                clean = {normalize_topic_key(k): v for k, v in data.items()}
-                simple_name = f.split('_')[0]
-                add_row(f"{simple_name} - {suffix_label}", clean, is_raw=True)
-                
-    if avg_ex: add_row("Mean With Exp", avg_ex)
-    if avg_nex: add_row("Mean No Exp", avg_nex)
-    if oracle_data: add_row("All Training Docs", oracle_data, is_raw=True)
-    if sushi_data: add_row("SUSHISubmissions", sushi_data, is_raw=True)
-    
-    add_individual_files(path_ex, files_ex, "With Expansion")
-    add_individual_files(path_nex, files_nex, "Without Expansion")
-    
-    df_table = pd.DataFrame(table_rows)
-    if not df_table.empty:
-        cols = ["Experiment"] + sorted_topics
-        df_table = df_table.reindex(columns=cols)
-    return df_table
-
-def get_grouped_run_configurations() -> Dict[str, List[str]]:
-    """
-    Scans the run directory and groups folders by their configuration prefix.
-    Returns: { 'F_SB_TD': ['F_SB_TD_BM25', 'F_SB_TD_COLBERT'], ... }
-    """
-    if not os.path.exists(EXPERIMENTS_ROOT_DIR):
-        return {}
-
-    grouped_runs = {}
-
-    for folder_name in os.listdir(EXPERIMENTS_ROOT_DIR):
-        if not os.path.isdir(os.path.join(EXPERIMENTS_ROOT_DIR, folder_name)):
-            continue
-            
-        # Naming Convention: Search_Expansion_Query_Model
-        parts = folder_name.split('_')
-        
-        # We assume the LAST part is the Model, and the rest is Configuration
-        if len(parts) >= 2:
-            config_key = "_".join(parts[:-1]) # Everything before the last underscore
-            
-            if config_key not in grouped_runs:
-                grouped_runs[config_key] = []
-            
-            grouped_runs[config_key].append(folder_name)
-
-    return grouped_runs
-
-def process_experiment_data(selected_configs: List[str], run_map: Dict[str, List[str]]):
-    """
-    Loads data for all models belonging to the selected configurations.
-    """
-    available_runs = []
-    
-    # 1. Gather all relevant folders
-    for config in selected_configs:
-        folders = run_map.get(config, [])
-        for f in folders:
-            meta = parse_run_folder(f)
-            if meta:
-                # We save the model name specifically for the legend
-                meta['display_model'] = meta['model'] 
-                available_runs.append(meta)
-
-    # 2. Load Data
-    model_results = {} 
-    all_topics = set()
-    
-    for run in available_runs:
-        path = os.path.join(EXPERIMENTS_ROOT_DIR, run['full_name'])
-        
-        # KEY CHANGE: The display key is just the Model Name (e.g. "BM25")
-        display_name = run['display_model']
-        
-        avg_data, _ = calculate_folder_average(path)
-        margin_data = load_margin_data(path)
-        global_stats = load_overall_stats(path, "model_overall_stats.json")
-        summary_stats = get_model_metric_summary(global_stats, avg_data)
-        
-        random_count = len([f for f in os.listdir(path) if f.startswith("Random") and f.endswith(".json") and "TopicsFolderMetrics" in f])
-
-        model_results[display_name] = {
-            'avg': avg_data,
-            'margins': margin_data,
-            'stats': summary_stats,
-            'count': random_count,
-            'folder_name': run['full_name']
-        }
-        
-        if avg_data:
-            all_topics.update(avg_data.keys())
-
-    sorted_topics = sorted(list(all_topics), key=natural_keys)
-
-    # 3. Build Output Objects
-    df_chart = build_multi_model_chart_dataset(sorted_topics, model_results)
-    
-    # Simple table logic (unused in main view but good for internal consistency)
-    table_rows = []
-    for name, data in model_results.items():
-        row = {'Experiment': name}
-        avgs = data.get('avg', {})
-        for t in sorted_topics:
-            row[t] = format_cell_content(avgs.get(t, 0.0))
-        table_rows.append(row)
-        
-    df_table = pd.DataFrame(table_rows)
-    if not df_table.empty:
-        df_table = df_table.reindex(columns=['Experiment'] + sorted_topics)
-
-    return df_chart, df_table, sorted_topics, model_results
 
 def get_all_runs_statistics() -> pd.DataFrame:
     """

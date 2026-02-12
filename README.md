@@ -15,7 +15,7 @@
     - [2. The Experiment Workflow (Step-by-Step)](#2-the-experiment-workflow-step-by-step)
     - [3. Output Structure](#3-output-structure)
     - [4. Usage Example](#4-usage-example)
-    - [5. Hybrid Models (Combining two different techniques with RRF) - `rrf_best_models.py`](#5-hybrid-models-combining-two-different-techniques-with-rrf---rrf_best_modelspy)
+    - [5. Hybrid Models (Combining two different techniques with RRF) - `hybrid_models.py`](#5-hybrid-models-combining-two-different-techniques-with-rrf---hybrid_modelspy)
 - [SUSHI Visualizer Web Application](#sushi-visualizer-web-application)
     - [Experiment Analyzer](#experiment-analyzer)
     - [Topics and Data Visualizer](#topics-and-data-visualizer)
@@ -55,7 +55,7 @@ The raw data structure follows a strict hierarchy representing the physical arch
 
 The test collection file system mirrors this hierarchy: one directory for each Box $\rightarrow$ one subdirectory for each Folder $\rightarrow$ one PDF file for each digitized Document. 
 
-> **Note:** The PDF files contain embedded (uncorrected) OCR text, allowing users of the collection to utilize raw text features in their experiments.
+> **Note:** The PDF files contain embedded (uncorrected) OCR text, allowing the users of the collection to utilize raw text features in their experiments.
 
 ### Folder Metadata
 
@@ -136,7 +136,7 @@ Each line maps a topic to a Box/Folder/Document ID with a relevance score:
 
 **Note on Documents Qrels Score Normalization:**
 
-The [raw judgments for documents](./qrels/OLD-formal-document-qrel.txt) contained a wider range of labels. These were normalized to the standard TREC-style 3-point scale as follows:
+The [raw judgments for documents](./qrels/OLD-formal-document-qrel.txt) contained a wider range of labels. These were normalized to the standard 3-point scale as follows:
 
 | Original Assessor Label | Final Qrels Score | Meaning |
 | :--- | :--- | :--- |
@@ -337,7 +337,7 @@ gen.run_experiments()
 
 **IMPORTANT NOTE**: the code doesn't automatically delete the terrierindex folder that is created for each run, therefore, it is necessary to **manually delete it after the run generator stops** running.
 
-### 5. Hybrid Models (Combining two different techniques with RRF) - `rrf_best_models.py`
+### 5. Hybrid Models (Combining two different techniques with RRF) - `hybrid_models.py`
 
 This script is an advanced tool designed to **fuse distinct retrieval strategies** into a single, optimized ranking. While the standard `RunGenerator` ensembles models that share the same configuration (e.g., BM25 + ColBERT both using the same document text), this script allows you to combine fundamentally different approaches.
 
@@ -358,7 +358,7 @@ The script defines two separate `RunGenerator` instances (`gen_A` and `gen_B`) a
 
 **2. Usage Guide**
 
-To create your own hybrid experiment, open `src/rrf_best_models.py` and modify the `run_hybrid_experiment` function.
+To create your own hybrid experiment, open `src/hybrid_models.py` and modify the `run_hybrid_experiment` function.
 
 Set up the two generators. Note how `gen_B` is set to `all_folders_folder_label=True`, making it a pure metadata run.
 
@@ -392,7 +392,7 @@ run_folder_name = "HYBRID-TOFS-SMS-1-ALLFL-COLBERT_NE_TD_BM25-EMBEDDINGS-COLBERT
 **4. Run the script directly from your terminal:**
 
 ```Bash
-python src/rrf_best_models.py
+python src/hybrid_models.py
 ```
 
 The results will be saved and evaluated automatically, ready for inspection in the Visualizer.

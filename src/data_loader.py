@@ -152,7 +152,6 @@ class DataLoader:
                 total_selected = 0
                 
                 # Determine how many docs per folder to pick
-                # Logic mirrors original: distribute 5 docs across available folders
                 num_folders = len(folders)
                 for _ in range(docs_per_box):
                     for i in range(min(num_folders, docs_per_box, max_docs)):
@@ -206,7 +205,6 @@ class DataLoader:
                         current_box_id = available_boxes[i]
                     else:
                         # Edge case: No box remaining has enough documents. 
-                        # We effectively cap the target at what's available.
                         target = total_docs_in_current
 
                 # 4. Sampling Logic: Use the unified helper

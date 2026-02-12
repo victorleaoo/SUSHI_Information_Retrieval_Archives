@@ -17,6 +17,7 @@ PATH_QRELS_BOXES = os.path.join(PROJECT_ROOT, 'qrels', 'formal-box-qrel.txt')
 
 @st.cache_data
 def load_metadata():
+    """Load folders and items metadata JSON files."""
     folders_data, items_data = {}, {}
     try:
         with open(PATH_FOLDERS_JSON, 'r', encoding='utf-8') as f:
@@ -34,6 +35,7 @@ def load_metadata():
 
 @st.cache_data
 def load_ecf_data():
+    """Load ECF training set JSON data."""
     try:
         with open(PATH_ECF, 'r', encoding='utf-8') as f:
             return json.load(f)
@@ -43,6 +45,7 @@ def load_ecf_data():
 
 @st.cache_data
 def load_qrels_data(filepath):
+    """Load qrels data from a file path into a topic->[(id, relevance)] map."""
     qrels = {}
     try:
         with open(filepath, 'r', encoding='utf-8') as f:
@@ -62,6 +65,7 @@ def load_qrels_data(filepath):
     return qrels
 
 def get_smart_title(item_data, item_id):
+    """Derive a readable title from metadata, falling back to the item id."""
     if not item_data: return item_id
     brown_title = item_data.get("Brown Title")
     nara_title = item_data.get("NARA Title")
@@ -77,6 +81,7 @@ def get_smart_title(item_data, item_id):
     return item_id
 
 def get_file_path_from_metadata(doc_id, items_meta, folders_meta):
+    """Build the PDF file path from item and folder metadata."""
     item_data = items_meta.get(doc_id)
     if not item_data: return None
     folder_name = item_data.get('Sushi Folder')
@@ -87,6 +92,7 @@ def get_file_path_from_metadata(doc_id, items_meta, folders_meta):
     return None
 
 def get_pdf_base64(file_path):
+    """Return base64-encoded PDF content for a file path, or None on failure."""
     if os.path.exists(file_path):
         try:
             with open(file_path, "rb") as f:

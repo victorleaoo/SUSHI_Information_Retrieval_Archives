@@ -5,7 +5,6 @@ from collections import Counter
 with open('random_generated/ECF_3perbox_Random_Seed_42.json', 'r') as f:
     data = json.load(f)
 
-# Initialize a counter
 box_counts = Counter()
 
 # Iterate through the ExperimentSets

@@ -24,7 +24,7 @@ class FolderLabelConstructor:
             label1965 = str(self.sncExpansion.loc[self.sncExpansion['SNC'] == snc, 1965].iloc[0])
             label1963 = str(self.sncExpansion.loc[self.sncExpansion['SNC'] == snc, 1963].iloc[0])
 
-            # uses 1965 as main
+            # Uses 1965 as main label
             if label1965 != 'nan':
                 label = label1965
             elif label1963 != 'nan':
@@ -38,6 +38,7 @@ class FolderLabelConstructor:
             if raw_scope == 'nan':
                 raw_scope = ''
                 scope_truncated = ''
+            # Creates truncated version of scope note
             if len(raw_scope)>0:
                 stoppers = ['SEE', 'for which ', 'Exclude ', 'exclude ', 'Subdivide ', 'subdivide ', 'Other than ', 'other than ', 'For ', 'Except ', 'except ']
                 cut = len(raw_scope)
