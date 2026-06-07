@@ -3,9 +3,6 @@ from tqdm import tqdm
 
 from run_generator import RunGenerator, Style, RANDOM_SEED_LIST, RESULTS_PATH
 
-# ==========================================
-# HYBRID RRF LOGIC
-# ==========================================
 def perform_hybrid_fusion(results_a, results_b, k=0, weight_a=1.0, weight_b=0.65):
     """
     Combines two lists of results using Weighted Reciprocal Rank Fusion.
@@ -22,7 +19,6 @@ def perform_hybrid_fusion(results_a, results_b, k=0, weight_a=1.0, weight_b=0.65
     """
     merged_results = []
     
-    # Create lookup for Set B
     dict_b = {item['Id']: item['RankedList'] for item in results_b}
 
     for item_a in results_a:
@@ -36,13 +32,12 @@ def perform_hybrid_fusion(results_a, results_b, k=0, weight_a=1.0, weight_b=0.65
         def add_scores(doc_list, weight):
             for rank, doc in enumerate(doc_list):
                 # RRF Formula: weight * (1 / (k + rank))
-                # rank is 0-indexed, so we use rank + 1
                 score = weight * (1 / (k + (rank + 1)))
                 scores[doc] = scores.get(doc, 0.0) + score
 
-        # Apply weighting here
-        add_scores(list_a, weight_a) # Weight 1.0
-        add_scores(list_b, weight_b) # Weight 0.65
+        # Apply weighting
+        add_scores(list_a, weight_a)
+        add_scores(list_b, weight_b)
 
         # Sort by accumulated score
         sorted_docs = sorted(scores.items(), key=lambda x: x[1], reverse=True)
@@ -64,9 +59,8 @@ def run_hybrid_experiment():
         searching_fields=[search_field_A],
         query_fields=['TD'],
         models=['bm25', 'embeddings', 'colbert'],
-        # Expansion Config for Doc Model
         expansion=['similar_snc'], 
-        rrf_input='docs', # Early fusion usually better for expansion
+        rrf_input='docs',
         expansion_ceiling_k=1,
         all_folders_folder_label=False
     )

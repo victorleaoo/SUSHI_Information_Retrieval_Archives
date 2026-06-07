@@ -49,11 +49,12 @@ class RunGenerator:
     5.  **Evaluation**: Triggering the evaluation of results against QRELs.
 
     Attributes:
-        searching_fields (list): List of field combinations to search (e.g., [['title'], ['ocr']]).
+        searching_fields (list): List of field combinations to search (e.g., [['title'], ['ocr'], ['title', 'ocr']]).
         query_fields (list): List of query modes to use (e.g., ['T', 'TD']).
         run_type (str): 'random' (for sparse sampling) or 'all_documents' (oracle).
         models (list): List of model names to ensemble (e.g., ['bm25', 'colbert']).
-        expansion (list): List of expansion techniques to apply (e.g., ['same_box']).
+        sampling (str): 'uniform' for uniform sampling or 'uneven' for skewed sampling.
+        expansion (list): List of expansion techniques to apply (e.g., ['same_box', 'similar_snc']).
         rrf_input (str): Strategy for fusion ('docs' = Early Fusion, 'folders' = Late Fusion).
         expansion_ceiling_k (int): Rank threshold that expanded results cannot surpass.
     """
@@ -78,12 +79,10 @@ class RunGenerator:
         self.rrf_input = rrf_input
         self.expansion_ceiling_k = expansion_ceiling_k
 
-        # Initialize Data Loader
         self.loader = DataLoader(PROJECT_ROOT)
         self.items = self.loader.items
         self.folderMetadata = self.loader.folder_metadata
         
-        # Initialize Evaluator
         self.evaluator = Evaluator(FOLDER_QRELS_PATH, BOX_QRELS_PATH)
     
     def run_experiments(self):
@@ -100,7 +99,6 @@ class RunGenerator:
                 self.current_searching_field = searching_field
                 self.current_query_field = query_field
                 
-                # Console Feedback
                 print(f"{Style.BOLD}{Style.GREEN}> Running Experiments for:{Style.RESET}")
                 s_fields_str = ', '.join([f for f in searching_field]) if isinstance(searching_field[0], str) else str(searching_field)
                 print(f"\t- {Style.BOLD}Searching fields:{Style.RESET}  {Style.CYAN}{s_fields_str}{Style.RESET}")
@@ -113,14 +111,14 @@ class RunGenerator:
                 # Setup Output Directory
                 run_folder_name = self.saving_folder_name()
                 metrics_output_folder = os.path.abspath(f'../all_runs/{run_folder_name}')
-                os.makedirs(metrics_output_folder, exist_ok=True) # Ensure dir exists
+                os.makedirs(metrics_output_folder, exist_ok=True)
 
                 if self.run_type == 'random':
                     for random_seed in tqdm(RANDOM_SEED_LIST, desc=f"Runs ({run_folder_name})"):
                         # 1. Execute Run (Delegated to run_single_seed)
                         results = self.run_single_seed(random_seed, searching_field, query_field)
 
-                        # 2. Save TREC Run File
+                        # 2. Save Run File
                         run_name = f'45-Topics-Random-{random_seed}'
                         self.evaluator.save_run_file(results, RESULTS_PATH, run_name)
 
@@ -170,7 +168,7 @@ class RunGenerator:
         # 2. Prepare Data
         clean_data = self.prepare_training_data()
 
-        # Create relations (only if needed)
+        # Create relations for expansion
         if self.run_type != "all_documents" and self.all_folders_folder_label == False:
             self.relations = self.create_folder_relations_for_expansion(clean_data)
 
@@ -203,7 +201,7 @@ class RunGenerator:
         trainingSet = []
         current_fields = self.current_searching_field
 
-        # If ALLFL is True, it uses a generic label approach
+        # If ALLFL is True, it uses a folder metadata label approach only
         if self.all_folders_folder_label:
              for folder in self.folderMetadata:
                 try:
@@ -291,7 +289,6 @@ class RunGenerator:
 
             # 2. Pipeline Logic Branching
             if self.rrf_input == 'folders':
-                # Late Fusion: Results -> Folder RRF
                 expanded_map = {}
                 for model_name, raw_df in raw_results_map.items():
                     # Check if it should expand or just take raw scores
@@ -306,7 +303,6 @@ class RunGenerator:
                     final_ranked_df = expanded_map[self.models[0]]
             
             elif self.rrf_input == 'docs':
-                # Early Fusion: Docs RRF -> Results
                 if len(self.models) > 1:
                     fused_docs_df = self.apply_document_level_rrf(raw_results_map)
                 else:

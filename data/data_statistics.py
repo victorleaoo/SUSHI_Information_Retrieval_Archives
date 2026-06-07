@@ -1,8 +1,5 @@
 import os
 import statistics
-import csv
-
-# --- Existing Collection Functions ---
 
 def sortLongest(my_dict):
     dict_lengths = {key: len(value) for key, value in my_dict.items()}
@@ -39,6 +36,7 @@ def getSushiFiles(dir):
 def print_detailed_stats(label, data_tuples):
     """
     Calculates stats (Min, Max, Mean, Median, StdDev) and prints specific examples.
+
     data_tuples: List of (Name, Count) -> [('Box1', 10), ('Box2', 5), ...]
     """
     if not data_tuples:
@@ -81,7 +79,6 @@ def analyze_collection_detailed(fullCollection):
         print("Collection is empty.")
         return
 
-    # Data structures to hold (Name, Count) tuples
     folders_per_box_data = []
     docs_per_box_data = []
     docs_per_folder_data = []
@@ -99,7 +96,7 @@ def analyze_collection_detailed(fullCollection):
         for folder, docs in folders.items():
             # 2. Documents per Folder
             doc_count = len(docs)
-            # Use "Box/Folder" as name to be unique
+
             docs_per_folder_data.append((f"{box}/{folder}", doc_count))
             box_doc_total += doc_count
             total_docs += doc_count
@@ -133,14 +130,12 @@ def analyze_qrels(qrel_paths):
             print(f"File not found: {path}")
             continue
             
-        # Storage for counts per topic
         # Structure: {'TopicID': count}
         total_relevant = {} # 1 or 3
         relevant_1 = {}     # 1 only
         relevant_3 = {}     # 3 only
         
-        # Set of all topics seen (to handle 0 counts correctly if needed, 
-        # though standard practice usually analyzes distribution of positive hits)
+        # Set of all topics seen
         topics_seen = set()
 
         with open(path, 'r', encoding='utf-8') as f:
@@ -152,7 +147,7 @@ def analyze_qrels(qrel_paths):
                 try:
                     label = int(parts[3])
                 except ValueError:
-                    continue # Skip header or malformed lines
+                    continue
 
                 topics_seen.add(topic)
                 
@@ -166,9 +161,6 @@ def analyze_qrels(qrel_paths):
                         relevant_3[topic] = relevant_3.get(topic, 0) + 1
 
         # Convert to list of tuples for the stats function: [(Topic, Count), ...]
-        # We perform a check: if a topic was seen in the file but has no relevant items,
-        # it won't be in the dictionaries. We explicitly set those to 0 to represent "0 relevant items found".
-        
         def prepare_data(count_dict, all_topics):
             data = []
             for t in all_topics:
@@ -179,26 +171,22 @@ def analyze_qrels(qrel_paths):
         data_1 = prepare_data(relevant_1, topics_seen)
         data_3 = prepare_data(relevant_3, topics_seen)
 
-        # 1. General View (1 + 3)
         print(">>> GENERAL VIEW (Labels 1 & 3)")
         print_detailed_stats(f"Relevant {q_type}s per Topic", data_total)
         
-        # 2. Specific View (1 vs 3)
         print(">>> SPECIFIC VIEW")
         print_detailed_stats(f"Label 1 (Relevant) {q_type}s per Topic", data_1)
         print_detailed_stats(f"Label 3 (Highly Relevant) {q_type}s per Topic", data_3)
 
+if __name__ == "__main__":
+    # 1. Run Collection Analysis
+    fullCollection = getSushiFiles('./raw/')
+    analyze_collection_detailed(fullCollection)
 
-# --- Execution Example ---
-
-# 1. Run Collection Analysis
-# fullCollection = getSushiFiles('./raw/')
-# analyze_collection_detailed(fullCollection)
-
-# 2. Run QREL Analysis
-qrel_files = {
-    'Box': '../qrels/formal-box-qrel.txt',
-    'Folder': '../qrels/formal-folder-qrel.txt',
-    'Document': '../qrels/formal-document-qrel.txt'
-}
-analyze_qrels(qrel_files)
+    # 2. Run QREL Analysis
+    qrel_files = {
+        'Box': '../qrels/formal-box-qrel.txt',
+        'Folder': '../qrels/formal-folder-qrel.txt',
+        'Document': '../qrels/formal-document-qrel.txt'
+    }
+    analyze_qrels(qrel_files)

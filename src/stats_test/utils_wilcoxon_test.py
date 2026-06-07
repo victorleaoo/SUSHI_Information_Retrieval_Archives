@@ -112,7 +112,7 @@ class ExperimentAnalyzer:
 
         # Styling
         def highlight(val):
-            # Colors: Greenish for positive, Reddish for negative
+            # Colors: Green for positive, Red for negative
             color = '#d4edda' if val > 0 else '#f8d7da' if val < 0 else 'white'
             return f'background-color: {color}'
 

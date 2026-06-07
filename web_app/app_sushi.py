@@ -13,6 +13,7 @@ st.set_page_config(layout="wide", page_title="SUSHI Research Platform")
 # ==========================================
 
 def render_charts(df_chart: pd.DataFrame, topics_to_display: list):
+    """Render the Dumbbell chart for selected topics."""
     if df_chart.empty or not topics_to_display: return
     
     chart_data = df_chart[df_chart['Topic'].isin(topics_to_display)]
@@ -42,53 +43,8 @@ def render_charts(df_chart: pd.DataFrame, topics_to_display: list):
     final_chart = (rule_bg + ci_rule + tick_min + tick_max + points).properties(height=len(topics_to_display) * 65)
     st.altair_chart(final_chart)
 
-def render_table(df_table: pd.DataFrame, topics_to_display: list):
-    if df_table.empty: return
-    
-    # 1. Filter Columns
-    cols_to_keep = ["Experiment"] + topics_to_display
-    cols_to_keep = [c for c in cols_to_keep if c in df_table.columns]
-    df_filtered = df_table[cols_to_keep]
-    
-    # 2. Get CSS (Now returns empty string from Utils)
-    css = u1.generate_column_css(df_filtered)
-    
-    # 3. Define Clean Styles (Removed Green Header)
-    # Added simple borders and alternating rows for readability without strong colors
-    st.markdown(f"""
-    <style>
-        {css} 
-        .dataframe {{
-            width: 100%;
-            border-collapse: collapse;
-        }}
-        .dataframe th {{
-            background-color: #f0f2f6; /* Neutral Streamlit Gray */
-            color: black;
-            font-weight: bold;
-            border: 1px solid #ddd;
-            padding: 8px;
-            text-align: center;
-        }} 
-        .dataframe td {{
-            border: 1px solid #ddd;
-            padding: 8px;
-            text-align: center;
-        }}
-        /* Highlight the 'Avg' rows slightly for differentiation */
-        tr:contains('>>') {{
-            background-color: #f9f9f9 !important; 
-            font-weight: bold; 
-            border-top: 2px solid #ccc;
-        }}
-    </style>""", unsafe_allow_html=True)
-    
-    # 4. Wrap in Expander
-    # expanded=False makes it collapsed by default (saving screen space)
-    with st.expander("📝 Detailed Results Table", expanded=False):
-        st.write(df_filtered.to_html(escape=False, index=False, classes="dataframe"), unsafe_allow_html=True)
-
 def run_experiment_analyzer_ui():
+    """Render the Experiment Analyzer UI."""
     # ==========================================
     # PART 1: VISUAL ANALYSIS (Model Comparison)
     # ==========================================
@@ -212,6 +168,7 @@ def run_experiment_analyzer_ui():
 # ==========================================
 
 def run_sushi_visualization_ui():
+    """Render the Topics and Data Visualization UI."""
     st.sidebar.title("SUSHI Visual Controls")
     
     folders_meta, items_meta = u2.load_metadata()
@@ -310,11 +267,8 @@ def run_sushi_visualization_ui():
             for bid, sc in rb:
                 st.markdown(f"- **{bid}** ({'⭐'*sc})")
 
-# ==========================================
-# MAIN NAVIGATION
-# ==========================================
-
 def main():
+    """Application entry point and navigation router."""
     st.sidebar.title("📱 App Navigation")
     app_mode = st.sidebar.radio(
         "Choose Application:",
