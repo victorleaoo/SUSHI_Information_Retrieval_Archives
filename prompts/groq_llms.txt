@@ -1,0 +1,17 @@
+llama-3.1-8b-instant 
+    - request/min: 30
+    - request/day: 14,4k
+    - token/min: 6k
+    - token/day: 500k
+
+llama-3.3-70b-versatile
+    - request/min: 30
+    - request/day: 1k
+    - token/min: 12k
+    - token/day: 100k
+
+qwen/qwen3-32b
+    - request/min: 60
+    - request/day: 1k
+    - token/min: 6k
+    - token/day: 500k

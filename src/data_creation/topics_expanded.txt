@@ -1,0 +1,1645 @@
+{
+  "T18Eval-00001": {
+    "TITLE": "Future space missions",
+    "DESCRIPTION": "Find documents that describe plans for one or more specific future space missions by any nation, organization, or individual.",
+    "NARRATIVE": "Space missions are defined as objects of any kind that are launched from the Earth with the intent to exceed the Karman line at 100 km above the Earth's surface.  Space missions could be suborbital or orbital, or they could go beyond Earth orbit.  Missions that were ongoing or completed at the time the document was written are not of interest.  Documents related to planning for future space missions generally, without identifying specific missions, are also not of interest.  Only information about specific planned future space missions that have not yet been launched would be relevant to this request.",
+    "ID": "T18Eval-00001",
+    "bm25_expansion": {
+      "historical_entities": [
+        "NASA",
+        "INPE",
+        "Brazilian Ministry of Aeronautics",
+        "CNAE",
+        "FAB"
+      ],
+      "key_figures": [
+        "James E. Webb",
+        "Thomas Paine",
+        "Aldo Maciel",
+        "Fernando de Mendonca"
+      ],
+      "bureaucratic_jargon": [
+        "orbital payload",
+        "telemetry tracking",
+        "sounding rockets",
+        "space bilateral cooperation",
+        "suborbital launch vehicle"
+      ],
+      "locations": [
+        "Alcantara Launch Center",
+        "Barreira do Inferno",
+        "Cape Canaveral",
+        "Natal",
+        "Washington D.C."
+      ],
+      "combined_keyword_string": "Future space missions NASA INPE orbital payload telemetry tracking sounding rockets Barreira do Inferno suborbital launch vehicle CNAE James E. Webb"
+    },
+    "dense_hyde_summary": "This folder contains declassified diplomatic cables, memorandums of conversation, and intelligence reports regarding planned future space missions by international state actors, with a particular focus on the Cold War aerospace relationship between the U.S. and Brazil. The documents detail proposed orbital and suborbital launches, telemetry tracking station agreements, and negotiations surrounding technology transfers for spaceframes yet to be launched.\n\nFurthermore, the archival materials highlight the logistical and bureaucratic hurdles of scheduling future satellite deployments, including joint sounding rocket experiments. Correspondences between NASA officials and Brazilian Ministry of Aeronautics representatives illustrate the strategic importance of tracking future space missions within the context of scientific diplomacy and hemispheric defense."
+  },
+  "T18Eval-00002": {
+    "TITLE": "Brazilian submarines",
+    "DESCRIPTION": "Find documents that mention the operation of submarines by the Brazilian Navy.",
+    "NARRATIVE": "Submarines are any watercraft that can operate fully submerged and that can move under their own power.  So, for example, a diving bell is not a submarine.  A submarine may be of any size, and used for any purpose, but to be of interest the submarine must be operated by the Brazilian Navy at some point in time.  Information about any past, present, or future Brazilian Navy submarines would be of interest, regardless of whether a specific submarine is mentioned.",
+    "ID": "T18Eval-00002",
+    "bm25_expansion": {
+      "historical_entities": [
+        "Brazilian Navy",
+        "Marinha do Brasil",
+        "Submarine Force Command",
+        "Forca de Submarinos",
+        "US Navy"
+      ],
+      "key_figures": [
+        "Maximiano da Fonseca",
+        "Adalberto de Barros Nunes",
+        "Henrique Saboia"
+      ],
+      "bureaucratic_jargon": [
+        "diesel-electric",
+        "naval procurement",
+        "antisubmarine warfare",
+        "fleet modernization",
+        "submersible vessel"
+      ],
+      "locations": [
+        "Rio de Janeiro",
+        "Guanabara Bay",
+        "Santos",
+        "Mocangue Island"
+      ],
+      "combined_keyword_string": "Brazilian submarines Marinha do Brasil Submarine Force Command diesel-electric antisubmarine warfare naval procurement Guanabara Bay fleet modernization Maximiano da Fonseca submersible vessel"
+    },
+    "dense_hyde_summary": "This folder contains military attache reports, diplomatic dispatches, and naval intelligence summaries concerning the operation, procurement, and tactical deployment of submarines by the Brazilian Navy. The records document Brazil's efforts to modernize its undersea fleet through the acquisition of diesel-electric vessels, participation in joint hemispheric defense exercises, and internal naval strategy memos from the Ministry of the Navy.\n\nAdditional files within this collection outline bilateral military assistance programs, maintenance schedules at naval shipyards in Rio de Janeiro, and U.S. assessments of Brazilian antisubmarine warfare capabilities. These documents provide critical insight into South American maritime defense postures and Cold War naval operations in the South Atlantic."
+  },
+  "T18Eval-00003": {
+    "TITLE": "Alagoas flood",
+    "DESCRIPTION": "I'm interested in learning about damage from flooding in Alagoas in 1969 and in American help with the recovery effort.",
+    "NARRATIVE": "I'm looking for documents about flood damage in Alagoas, a state in northeast Brazil, that happened in in March,1969, and in which several hundred people were killed.  In addition to documents about the damage from the flood itself, I am also interested in any information about help with the recovery effort by the United States government or by individuals or nongovernmental organizations based in the United States.",
+    "ID": "T18Eval-00003",
+    "bm25_expansion": {
+      "historical_entities": [
+        "USAID",
+        "SUDENE",
+        "American Red Cross",
+        "Brazilian Civil Defense",
+        "US Air Force"
+      ],
+      "key_figures": [
+        "John Tuthill",
+        "William Rountree",
+        "Arthur da Costa e Silva"
+      ],
+      "bureaucratic_jargon": [
+        "disaster relief",
+        "humanitarian assistance",
+        "PL-480",
+        "emergency airlift",
+        "casualty estimates"
+      ],
+      "locations": [
+        "Alagoas",
+        "Maceio",
+        "Northeast Brazil",
+        "Pernambuco",
+        "Mundau River"
+      ],
+      "combined_keyword_string": "Alagoas flood USAID SUDENE disaster relief humanitarian assistance emergency airlift American Red Cross Maceio PL-480 casualty estimates"
+    },
+    "dense_hyde_summary": "This folder consists of U.S. embassy cables, USAID situation reports, and casualty assessments detailing the catastrophic March 1969 flooding in the Brazilian state of Alagoas. The documents provide extensive documentation of the infrastructural damage, the rising death toll, and the immediate humanitarian crisis faced by local municipalities following the overflow of regional river systems.\n\nCrucially, the archives chronicle the mobilization of U.S. disaster relief efforts, including emergency airlifts of food and medical supplies coordinated by the U.S. military and the American Red Cross. Memorandums highlight the diplomatic coordination between Washington, the U.S. Embassy in Brazil, and Brazilian authorities like SUDENE to execute recovery operations and disburse aid to affected populations."
+  },
+  "T18Eval-00004": {
+    "TITLE": "Grain sorghum",
+    "DESCRIPTION": "Tell me about grain sorghum operations in Northeast Brazil.",
+    "NARRATIVE": "Sorghum is a drought-tolerant species of grass cultivated for its grain. Sorghum operations in Northeast Brazil primarily focused on supplying the growing demand for the animal feed industry. Documents related to sorghum operations in this region, including operational plans and site visits, would be of particular interest.",
+    "ID": "T18Eval-00004",
+    "bm25_expansion": {
+      "historical_entities": [
+        "USAID",
+        "EMBRAPA",
+        "Ministry of Agriculture",
+        "SUDENE",
+        "DNOCS"
+      ],
+      "key_figures": [
+        "Alysson Paulinelli",
+        "Norman Borlaug",
+        "Cirne Lima"
+      ],
+      "bureaucratic_jargon": [
+        "agricultural development",
+        "drought resistance",
+        "crop yield",
+        "livestock feed",
+        "agronomic assistance"
+      ],
+      "locations": [
+        "Northeast Brazil",
+        "Pernambuco",
+        "Ceara",
+        "Bahia",
+        "Sertao"
+      ],
+      "combined_keyword_string": "Grain sorghum operations Northeast Brazil USAID EMBRAPA agricultural development drought resistance livestock feed SUDENE agronomic assistance crop yield"
+    },
+    "dense_hyde_summary": "This folder houses agricultural attache reports, USAID development plans, and joint U.S.-Brazilian agronomic studies concerning the cultivation and expansion of grain sorghum operations in Northeast Brazil. The documents explicitly cover site visits to experimental farms, analyses of sorghum's drought-resistant properties in the semi-arid Sertao, and strategic initiatives to boost crop yields to support the region's burgeoning animal feed industry.\n\nThe files also include technical correspondence regarding seed imports, fertilizer applications, and funding provided through bilateral agricultural assistance programs. Memorandums from the Ministry of Agriculture and SUDENE outline the socio-economic impact of transitioning from traditional crops to sorghum to stabilize livestock production during recurring periods of drought."
+  },
+  "T18Eval-00005": {
+    "TITLE": "Beef cattle industry",
+    "DESCRIPTION": "Locate documents containing information on Brazil's beef cattle industry and the distribution of its products.",
+    "NARRATIVE": "The beef cattle industry is a sector of agriculture dedicated to the breeding, raising, and production of cattle for meat. It includes cattle breeding, their care and nutrition, and the processing of beef for consumer distribution. Documents that reference aspects of the industry in Brazil, such as production, costs, pricing, supply chain dynamics, and shipping would be relevant.",
+    "ID": "T18Eval-00005",
+    "bm25_expansion": {
+      "historical_entities": [
+        "Ministry of Agriculture",
+        "USAID",
+        "Inter-American Development Bank",
+        "Brazilian Rural Society",
+        "CACEX"
+      ],
+      "key_figures": [
+        "Alysson Paulinelli",
+        "Ernesto Geisel",
+        "Delfim Netto"
+      ],
+      "bureaucratic_jargon": [
+        "livestock production",
+        "slaughterhouse operations",
+        "beef export quotas",
+        "foot-and-mouth disease",
+        "pasture management"
+      ],
+      "locations": [
+        "Mato Grosso",
+        "Sao Paulo",
+        "Rio Grande do Sul",
+        "Goias",
+        "Minas Gerais"
+      ],
+      "combined_keyword_string": "Beef cattle industry Brazil livestock production slaughterhouse operations beef export quotas Ministry of Agriculture pasture management Mato Grosso Rio Grande do Sul CACEX"
+    },
+    "dense_hyde_summary": "This folder contains comprehensive reports from U.S. agricultural attaches, economic forecasting memos, and trade policy cables detailing the modernization and expansion of Brazil's beef cattle industry. The records analyze livestock production metrics, pasture management techniques, and the economic challenges of disease control, specifically focusing on vaccination campaigns against foot-and-mouth disease to meet international meat export standards.\n\nAdditionally, the documents explore supply chain dynamics, including the operational capacities of domestic slaughterhouses, domestic meat pricing structures under military regime price controls, and international shipping logistics. Correspondence between the U.S. Embassy and Brazilian trade authorities (CACEX) provides insight into beef export quotas and the broader impact of cattle ranching on the Brazilian agricultural economy."
+  },
+  "T18Eval-00006": {
+    "TITLE": "Cocoa exports",
+    "DESCRIPTION": "I want to see documents about the exportation of cocoa out of Brazil.",
+    "NARRATIVE": "Exports refer to the goods and services that a country or business sells and trades to other countries or entities. Cocoa would be considered a good. Documents related to the exportation of cocoa from Brazil to other countries and the standard in which the export is graded would be relevant.",
+    "ID": "T18Eval-00006",
+    "bm25_expansion": {
+      "historical_entities": [
+        "CEPLAC",
+        "International Cocoa Organization",
+        "Ministry of Finance",
+        "CACEX",
+        "ICCO"
+      ],
+      "key_figures": [
+        "Delfim Netto",
+        "Antonio Delfim Netto",
+        "Ernesto Geisel"
+      ],
+      "bureaucratic_jargon": [
+        "export quotas",
+        "agricultural commodities",
+        "commodity pricing",
+        "trade tariffs",
+        "export grading"
+      ],
+      "locations": [
+        "Bahia",
+        "Ilheus",
+        "Itabuna",
+        "Salvador",
+        "Port of Salvador"
+      ],
+      "combined_keyword_string": "Cocoa exports Brazil CEPLAC export quotas agricultural commodities commodity pricing CACEX export grading Bahia Ilheus International Cocoa Organization"
+    },
+    "dense_hyde_summary": "This folder compiles economic reports, trade negotiation cables, and agricultural assessments focused on the exportation of cocoa out of Brazil. The declassified materials document the regulatory mechanisms enforced by Brazilian agencies like CEPLAC and CACEX, detailing annual export volumes, international commodity pricing trends, and the stringent grading standards required for international trade.\n\nThe files further capture bilateral and multilateral trade discussions concerning export tariffs, buffer stocks, and market access for Brazilian cocoa in the United States and Europe. Memorandums highlight the macroeconomic significance of cocoa revenues to the Brazilian balance of payments and the logistical operations centered around the major export hubs in the state of Bahia."
+  },
+  "T18Eval-00007": {
+    "TITLE": "Manioc cultivation",
+    "DESCRIPTION": "Tell me about manioc cultivation in Brazil.",
+    "NARRATIVE": "Manioc is woody shrub of the spurge family, native to South America and from Brazil, Paraguay and parts of the Andes. It is harvested for its edible starchy tuberous root. Brazilians utilize this plant as an alternative to potatoes. Documents regarding their cultivation, including crop development and research about local growing conditions for manioc would be of interest.",
+    "ID": "T18Eval-00007",
+    "bm25_expansion": {
+      "historical_entities": [
+        "EMBRAPA",
+        "Ministry of Agriculture",
+        "USAID agricultural mission",
+        "SUDENE",
+        "FAO"
+      ],
+      "key_figures": [
+        "Alysson Paulinelli",
+        "Jose Irineu Cabral"
+      ],
+      "bureaucratic_jargon": [
+        "tuberous root yield",
+        "staple crop cultivation",
+        "agricultural modernization",
+        "subsistence farming",
+        "cassava flour processing"
+      ],
+      "locations": [
+        "Northeast Brazil",
+        "Amazonas",
+        "Mato Grosso",
+        "Sertao",
+        "Para"
+      ],
+      "combined_keyword_string": "Manioc cultivation Brazil cassava tuberous root yield EMBRAPA staple crop cultivation subsistence farming agricultural modernization Northeast Brazil SUDENE"
+    },
+    "dense_hyde_summary": "This folder contains technical agricultural reports, USAID field assessments, and agronomic research papers detailing the practices and economic importance of manioc (cassava) cultivation in Brazil. The documents emphasize the role of manioc as a critical staple crop for subsistence farming, particularly in the Northeast and Amazon regions, and provide data on local growing conditions, soil adaptability, and crop development techniques.\n\nIncluded in the archives are evaluations by entities such as EMBRAPA on improving tuberous root yields and the industrial processing of manioc into flour. Memorandums discuss agricultural extension programs designed to educate rural farmers on modern cultivation practices to ensure food security and improve the livelihoods of impoverished agrarian communities."
+  },
+  "T18Eval-00008": {
+    "TITLE": "Peace Corps birth control ",
+    "DESCRIPTION": "Find documents that mention the Peace Corps distributing birth control to women in Brazil.",
+    "NARRATIVE": "The Peace Corps is a US government agency that trains and sends volunteers to developing countries to help with international development. The Peace Corps were known in Brazil for engaging in public health initiatives. Birth control, also known as contraception, is any method used to prevent pregnancy. Documents that mention the Peace Corps distributing - or claiming to not distribute - types of birth control such as female sterilization, birth control pills, and IUDs would be relevant. Documents that mention individual Peace Corps volunteers who distributed birth control to women would also be relevant.",
+    "ID": "T18Eval-00008",
+    "bm25_expansion": {
+      "historical_entities": [
+        "Peace Corps",
+        "USAID",
+        "BEMFAM",
+        "Ministry of Health",
+        "US State Department"
+      ],
+      "key_figures": [
+        "Jack Vaughn",
+        "Sargent Shriver",
+        "Joseph Blatchford",
+        "Lincoln Gordon"
+      ],
+      "bureaucratic_jargon": [
+        "family planning",
+        "demographic control",
+        "contraceptive distribution",
+        "public health initiative",
+        "IUD insertion"
+      ],
+      "locations": [
+        "Northeast Brazil",
+        "Rio de Janeiro",
+        "Brasilia",
+        "Mato Grosso",
+        "Pernambuco"
+      ],
+      "combined_keyword_string": "Peace Corps birth control Brazil family planning contraceptive distribution IUD BEMFAM public health initiative demographic control female sterilization USAID"
+    },
+    "dense_hyde_summary": "This folder is composed of internal Peace Corps memorandums, U.S. State Department cables, and public health initiative reports addressing controversies and policies surrounding the distribution of birth control by volunteers in Brazil. The documents explicitly detail specific instances of volunteers providing, or allegedly providing, oral contraceptives, IUDs, and family planning counseling to local women, alongside official denials or policy clarifications issued by the agency's directors.\n\nThe files contextualize these activities within the broader, highly sensitive debate over demographic control and Catholic opposition in Brazil. Correspondences between the U.S. Embassy and Brazilian health officials highlight the political fallout, press scrutiny, and subsequent directives aimed at regulating the scope of Peace Corps medical interventions and their collaboration with local family planning organizations like BEMFAM."
+  },
+  "T18Eval-00009": {
+    "TITLE": "Marijuana consumption",
+    "DESCRIPTION": "I want to find documents about marijuana consumption in Brazil.",
+    "NARRATIVE": "Marijuana, known also as "cannabis,
+    " "pot,
+    " and "weed,
+    " is a psychoactive drug made from the cannabis plant that is used for medical and recreational purposes. Any relevant documents would describe the creation, distribution, and consumption of marijuana in Brazil, social attitudes regarding its use, and legal restriction and/or prohibition of its trade and consumption.",
+    "ID": "T18Eval-00009",
+    "bm25_expansion": {
+      "historical_entities": [
+        "Federal Police",
+        "DEA",
+        "BNDD",
+        "DOPS",
+        "Ministry of Justice"
+      ],
+      "key_figures": [
+        "Armando Falcao",
+        "John Ingersoll"
+      ],
+      "bureaucratic_jargon": [
+        "narcotics control",
+        "illicit trafficking",
+        "drug prohibition",
+        "substance abuse eradication",
+        "cannabis cultivation"
+      ],
+      "locations": [
+        "Rio de Janeiro",
+        "Sao Paulo",
+        "Bahia",
+        "Pernambuco",
+        "Maconha triangle"
+      ],
+      "combined_keyword_string": "Marijuana consumption Brazil cannabis maconha narcotics control illicit trafficking DEA Federal Police substance abuse prohibition DOPS"
+    },
+    "dense_hyde_summary": "This folder contains intelligence reports from the Bureau of Narcotics and Dangerous Drugs (BNDD) and later the DEA, alongside U.S. Embassy cables assessing the scale of marijuana consumption and cultivation in Brazil. The records document the domestic distribution networks, changing societal attitudes among Brazilian youth, and the legal frameworks implemented by the military government to strictly prohibit the trade and use of the drug locally known as 'maconha'.\n\nAdditionally, the archives feature collaborative enforcement strategies between U.S. anti-narcotics agents and the Brazilian Federal Police. Memorandums outline eradication efforts targeting cannabis plantations in the Northeast and the socio-political rhetoric linking marijuana consumption to subversion and moral decay during the height of the military regime's internal security crackdowns."
+  },
+  "T18Eval-00010": {
+    "TITLE": "Wine industry",
+    "DESCRIPTION": "I want to find documents on Brazil's wine industry.",
+    "NARRATIVE": "The Brazilian wine industry specializes in wine-related commerce through the bottling and selling of wines for public consumption. Relevant documents would include descriptions of the wine industry's development, prominence, and economic status. They would also discuss the creation and selling of wines themselves (grape cultivation, pressing, bottling, distribution) as well as efforts to promote Brazilian wine and its consumption. Mention of foreign wines and wine industries would be excluded here.",
+    "ID": "T18Eval-00010",
+    "bm25_expansion": {
+      "historical_entities": [
+        "Ministry of Agriculture",
+        "Brazilian Wine Institute",
+        "UVIBRA",
+        "EMBRAPA Uva e Vinho",
+        "Cooperativa Vinicola Aurora"
+      ],
+      "key_figures": [
+        "Alysson Paulinelli"
+      ],
+      "bureaucratic_jargon": [
+        "viticulture",
+        "domestic wine consumption",
+        "grape cultivation",
+        "bottling operations",
+        "agricultural commerce"
+      ],
+      "locations": [
+        "Rio Grande do Sul",
+        "Bento Goncalves",
+        "Serra Gaucha",
+        "Caxias do Sul",
+        "Garibaldi"
+      ],
+      "combined_keyword_string": "Wine industry Brazil viticulture domestic wine consumption grape cultivation bottling operations Rio Grande do Sul Bento Goncalves Serra Gaucha UVIBRA"
+    },
+    "dense_hyde_summary": "This folder holds agricultural surveys, economic analyses, and commercial reports detailing the growth, modernization, and economic prominence of the domestic Brazilian wine industry. The documents provide extensive information on viticulture practices, primarily centered in the Serra Gaucha region of Rio Grande do Sul, covering the entire supply chain from grape cultivation and pressing to commercial bottling operations.\n\nFurthermore, the files outline government and cooperative initiatives designed to promote domestic wine consumption and standardize production quality. The archival records offer a comprehensive overview of the agricultural commerce surrounding local vineyards, explicitly excluding foreign imports, to assess the self-sufficiency and profitability of Brazil's indigenous wine sector."
+  },
+  "T18Eval-00011": {
+    "TITLE": "International reactions to coup",
+    "DESCRIPTION": "I need information on international reactions to the 1964 Brazilian coup d'etat.",
+    "NARRATIVE": "The 1964 Brazilian coup d'etat was an event in which the Brazilian military deposed then-President Joao Goulart and marked the beginning of the decades-long Brazilian dictatorship. Documents relevant to this issue would describe international reactions to the upheaval, including those of non-Latin American countries such as the United States and the Soviet Union. Domestic disputes, reactions, approval, and condemnation would not fall under this umbrella.",
+    "ID": "T18Eval-00011",
+    "bm25_expansion": {
+      "historical_entities": [
+        "US State Department",
+        "CIA",
+        "United Nations",
+        "Soviet Foreign Ministry",
+        "OAS"
+      ],
+      "key_figures": [
+        "Joao Goulart",
+        "Lincoln Gordon",
+        "Thomas Mann",
+        "Dean Rusk",
+        "Lyndon B. Johnson"
+      ],
+      "bureaucratic_jargon": [
+        "diplomatic recognition",
+        "regime change",
+        "communist subversion",
+        "international condemnation",
+        "foreign policy stance"
+      ],
+      "locations": [
+        "Washington D.C.",
+        "Moscow",
+        "London",
+        "Paris",
+        "Havana"
+      ],
+      "combined_keyword_string": "International reactions to 1964 Brazilian coup d'etat diplomatic recognition regime change Lincoln Gordon US State Department Soviet foreign policy stance international condemnation Washington D.C."
+    },
+    "dense_hyde_summary": "This folder consists of high-level diplomatic cables, intelligence estimates, and State Department memorandums documenting the immediate global response to the 1964 Brazilian coup d'etat that ousted President Joao Goulart. The records focus heavily on the rapid diplomatic recognition extended by the United States, as well as the contrasting reactions, statements of condemnation, or policy shifts from other non-Latin American powers, including the Soviet Union, European allies, and international organizations.\n\nThe archives analyze global press coverage, official foreign ministry communiques, and intelligence reports tracking the geopolitical fallout of the regime change. These documents strictly capture the international sentiment and strategic recalibrations triggered by the coup, providing a comprehensive view of how foreign nations interpreted the sudden shift toward military rule in South America's largest nation."
+  },
+  "T18Eval-00012": {
+    "TITLE": "Japanese fishing boat seizure",
+    "DESCRIPTION": "I'm looking for information on the seizure of Japanese fishing boats in Brazilian waters.",
+    "NARRATIVE": "Japanese fishing boats would include those of any type, assuming they are fishing in Brazilian waters and flying the flag of the East Asian country of Japan. Relevant documents would describe the seizure of these boats, the justification for doing so, and reactions to these seizures.",
+    "ID": "T18Eval-00012",
+    "bm25_expansion": {
+      "historical_entities": [
+        "Brazilian Navy",
+        "Japanese Embassy",
+        "Ministry of External Relations",
+        "SUDEPE",
+        "Itamaraty"
+      ],
+      "key_figures": [
+        "Mario Gibson Barboza",
+        "Ramiro Saraiva Guerreiro"
+      ],
+      "bureaucratic_jargon": [
+        "territorial waters",
+        "200-mile limit",
+        "vessel seizure",
+        "maritime sovereignty",
+        "illegal fishing enforcement"
+      ],
+      "locations": [
+        "Belem",
+        "Brazilian coast",
+        "Tokyo",
+        "Atlantic Ocean",
+        "Brasilia"
+      ],
+      "combined_keyword_string": "Japanese fishing boat seizure Brazilian waters 200-mile limit vessel seizure maritime sovereignty Brazilian Navy Itamaraty illegal fishing enforcement Tokyo"
+    },
+    "dense_hyde_summary": "This folder contains diplomatic dispatches, naval incident reports, and international maritime legal analyses detailing the seizure of Japanese-flagged fishing vessels operating within Brazil's claimed territorial waters. The documents closely follow the enforcement of Brazil's controversial 200-nautical-mile maritime sovereignty limit, providing official justifications from the Ministry of External Relations for the apprehension and impounding of the foreign trawlers.\n\nThe files also capture the subsequent diplomatic fallout, featuring correspondences between the Japanese Embassy in Brasilia and Brazilian authorities regarding the release of the crews and vessels. U.S. Embassy memos observing these incidents highlight the broader international tensions over fishing rights, maritime law, and economic resource protection during the era."
+  },
+  "T18Eval-00013": {
+    "TITLE": "Brazilian immigration to America",
+    "DESCRIPTION": "I need to find documents that describe immigration process of Brazilian citizens to America.",
+    "NARRATIVE": "Immigration is the legal process by which a foreign national becomes a resident of a nation. Relevant documentation would include descriptions of Brazilian immigration to America/United States/U.S. and details of immigration policy. Non-permanent immigration records, such as temporary work visas, are also welcome. Travel for business or pleasure into America, despite involvement of American immigration agencies, would not count as immigration and would not be included.",
+    "ID": "T18Eval-00013",
+    "bm25_expansion": {
+      "historical_entities": [
+        "INS",
+        "US Embassy Consular Section",
+        "State Department Bureau of Consular Affairs",
+        "Department of Justice"
+      ],
+      "key_figures": [
+        "William Macomber",
+        "Diego Asencio"
+      ],
+      "bureaucratic_jargon": [
+        "permanent residency",
+        "visa issuance",
+        "quota system",
+        "brain drain",
+        "alien registration",
+        "expatriation"
+      ],
+      "locations": [
+        "Rio de Janeiro",
+        "Sao Paulo",
+        "New York",
+        "Miami",
+        "Washington D.C."
+      ],
+      "combined_keyword_string": "Brazilian immigration to America permanent residency visa issuance quota system INS alien registration US Embassy Consular Section brain drain"
+    },
+    "dense_hyde_summary": "This folder is comprised of consular operation reports, immigration statistics, and policy directives from the U.S. Immigration and Naturalization Service (INS) and the State Department regarding the processing of Brazilian citizens seeking to immigrate to the United States. The records detail the bureaucratic procedures for obtaining permanent residency, the application of visa quota systems, and the issuance of temporary work visas, explicitly differentiating these from tourist or business travel.\n\nAdditionally, the documents analyze demographic trends, including the phenomenon of "braindrain" as skilled Brazilian professionals sought legal expatriation during periods of domestic economic instability or political repression. Memorandums from the consular sections in Rio de Janeiro and Sao Paulo provide a granular view of the administrative challenges and policy implementations governing bilateral migration."
+  },
+  "T18Eval-00014": {
+    "TITLE": "El Chocon Dam",
+    "DESCRIPTION": "I'm looking for documents mentioning the El Chocon Dam.",
+    "NARRATIVE": "The El Chocon Dam is a man-made hydroelectric dam built on the Limay river in Argentine Patagonia. Relevant documentation would include details on its development, construction, and impact on the economy and water systems, alongside any discussion of the dam itself, more broadly speaking.",
+    "ID": "T18Eval-00014",
+    "bm25_expansion": {
+      "historical_entities": [
+        "World Bank",
+        "Argentine Government",
+        "Hidronor",
+        "Inter-American Development Bank",
+        "SEGBA"
+      ],
+      "key_figures": [
+        "Juan Carlos Ongania",
+        "Alejandro Lanusse",
+        "Robert McNamara"
+      ],
+      "bureaucratic_jargon": [
+        "hydroelectric infrastructure",
+        "river basin management",
+        "megaproject financing",
+        "power generation capacity",
+        "civil engineering"
+      ],
+      "locations": [
+        "Patagonia",
+        "Limay River",
+        "Neuquen",
+        "Buenos Aires",
+        "Comahue region"
+      ],
+      "combined_keyword_string": "El Chocon Dam Argentina hydroelectric infrastructure Limay River Neuquen World Bank megaproject financing Hidronor river basin management Patagonia"
+    },
+    "dense_hyde_summary": "This folder contains economic intelligence reports, World Bank project appraisals, and U.S. embassy cables monitoring the development and construction of the El Chocon Dam in Argentine Patagonia. Although tangentially related to U.S.-Brazil relations via regional infrastructure competition, the documents focus extensively on the financing, civil engineering challenges, and projected power generation capacities of the hydroelectric megaproject built on the Limay River.\n\nThe files analyze the dam's profound impact on Argentina's national grid, its role in stimulating the economy of the Comahue region, and the management of regional water systems. Memorandums discuss the political capitalization of the project by the Argentine military government and its broader implications for South American energy independence and modernization."
+  },
+  "T18Eval-00015": {
+    "TITLE": "Coffee policies",
+    "DESCRIPTION": "Find documents that mention Brazilian policies on the production or distribution of coffee.",
+    "NARRATIVE": "Documents that include any substantive mention of Brazilian policies related to the cultivation or distribution of coffee at any level of administrative unit such as national, state or city would be relevant. Reports including only agricultural statistics, such as coffee crop production, with no mention of policies, would not be of interest.",
+    "ID": "T18Eval-00015",
+    "bm25_expansion": {
+      "historical_entities": [
+        "IBC (Brazilian Coffee Institute)",
+        "International Coffee Organization",
+        "Ministry of Industry and Commerce",
+        "CACEX",
+        "CMN (National Monetary Council)"
+      ],
+      "key_figures": [
+        "Camilo Penna",
+        "Delfim Netto",
+        "Leonidas Boriello"
+      ],
+      "bureaucratic_jargon": [
+        "export quotas",
+        "frost damage mitigation",
+        "price stabilization",
+        "stockpile regulation",
+        "agricultural subsidies"
+      ],
+      "locations": [
+        "Parana",
+        "Sao Paulo",
+        "Minas Gerais",
+        "Santos",
+        "London"
+      ],
+      "combined_keyword_string": "Brazilian Coffee policies IBC export quotas price stabilization International Coffee Organization stockpile regulation agricultural subsidies Parana Sao Paulo"
+    },
+    "dense_hyde_summary": "This folder holds trade negotiation records, U.S. agricultural attache cables, and economic policy analyses focused strictly on the regulatory frameworks and policy decisions governing Brazil's coffee sector. The documents detail the interventions of the Brazilian Coffee Institute (IBC) in setting minimum export prices, managing vast national stockpiles, and enforcing cultivation regulations to stabilize the volatile international commodities market.\n\nThe files feature extensive commentary on the geopolitical implications of these policies, particularly concerning Brazil's negotiating posture within the International Coffee Organization (ICO). Memos outline state and national responses to catastrophic weather events, detailing the specific subsidies and eradication policies implemented to protect the long-term viability of the nation's most crucial agricultural export."
+  },
+  "T18Eval-00016": {
+    "TITLE": "Amateur radio",
+    "DESCRIPTION": "I am looking for information about amateur radio operations in Brazil.",
+    "NARRATIVE": "Amateur radio, also called "ham" radio, is a hobby engaged in by operators that are licensed by some country to use certain radio frequencies for recreational purposes or some types of public services activities such as emergency communications.  Documents that describe the practice or regulation of amateur radio operations in Brazil would be relevant, regardless of which nation issued the amateur radio license to the operators involved.  However, amateur radio operations conducted by Brazilian amateur radio operators outside of the territory of Brazil would not be relevant.",
+    "ID": "T18Eval-00016",
+    "bm25_expansion": {
+      "historical_entities": [
+        "DENTEL",
+        "LABRE",
+        "FCC",
+        "Ministry of Communications",
+        "ITU"
+      ],
+      "key_figures": [
+        "Euclides Quandt de Oliveira",
+        "Hygino Corsetti"
+      ],
+      "bureaucratic_jargon": [
+        "shortwave broadcasting",
+        "telecommunications regulation",
+        "frequency allocation",
+        "ham radio licensing",
+        "emergency communications network"
+      ],
+      "locations": [
+        "Rio de Janeiro",
+        "Brasilia",
+        "Sao Paulo",
+        "Amazon region"
+      ],
+      "combined_keyword_string": "Amateur radio operations Brazil ham radio DENTEL LABRE frequency allocation shortwave broadcasting telecommunications regulation emergency communications network"
+    },
+    "dense_hyde_summary": "This folder contains telecommunications regulatory reviews, U.S. Information Agency (USIA) reports, and embassy correspondence regarding the oversight and practice of amateur (ham) radio operations within Brazil. The documents detail the licensing procedures, frequency allocations, and strict regulations enforced by the Brazilian Ministry of Communications and DENTEL, reflecting the military government's acute interest in controlling domestic broadcasts and communications networks.\n\nAdditionally, the archives capture instances where amateur radio operators mobilized for emergency communications during natural disasters or served as crucial links in remote areas like the Amazon. Memorandums discuss bilateral agreements recognizing foreign licenses and the role of local ham radio clubs (such as LABRE) in both recreational broadcasting and civil defense."
+  },
+  "T18Eval-00017": {
+    "TITLE": "German war criminals",
+    "DESCRIPTION": "Find documents that mention people who were, or are suspected of having been, involved with war crimes or other serious offense where the Nazi party was in power.",
+    "NARRATIVE": "Serious offenses include any offenses for which extradition might reasonably be sought by any nation.  Examples of serious offenses include war crimes or felonies.  Investigations based on membership in the Nazi party or German state security services from the Nazi era in would be relevant, but service in the German Armed Forces, without reason to expect that serious offenses had been committed, would not be.",
+    "ID": "T18Eval-00017",
+    "bm25_expansion": {
+      "historical_entities": [
+        "DOPS",
+        "Mossad",
+        "CIA",
+        "Federal Police",
+        "West German Embassy"
+      ],
+      "key_figures": [
+        "Josef Mengele",
+        "Franz Stangl",
+        "Gustav Wagner",
+        "Simon Wiesenthal",
+        "Albert Speer"
+      ],
+      "bureaucratic_jargon": [
+        "extradition requests",
+        "war crimes investigation",
+        "fugitive apprehension",
+        "clandestine ratlines",
+        "Interpol notice"
+      ],
+      "locations": [
+        "Sao Paulo",
+        "Rio de Janeiro",
+        "Buenos Aires",
+        "Bavaria",
+        "Bertioga"
+      ],
+      "combined_keyword_string": "German war criminals Brazil Nazi extradition requests Josef Mengele Franz Stangl fugitive apprehension DOPS ratlines war crimes investigation Mossad"
+    },
+    "dense_hyde_summary": "This folder compiles classified CIA intelligence reports, State Department legal cables, and Interpol communications regarding the tracking, investigation, and apprehension of suspected German war criminals residing in Brazil. The documents focus on individuals wanted for severe atrocities committed under the Nazi regime, detailing the clandestine networks ('ratlines') they utilized to secure false identities and safe harbor in South America.\n\nThe files highlight the complex extradition battles and diplomatic pressures involving the West German government, Israeli intelligence (Mossad), and Brazilian authorities like DOPS. Memos describe surveillance operations, forensic identification efforts, and the political sensitivities of harboring high-profile fugitives such as Franz Stangl and Gustav Wagner within Brazilian territory."
+  },
+  "T18Eval-00018": {
+    "TITLE": "Lumber industry ",
+    "DESCRIPTION": "Find documents that provide information on the lumber industry in Brazil.",
+    "NARRATIVE": "The lumber industry refers to the sector of the economy engaged in the production, processing, and distribution of wood products. Brazil is one of the largest exporters of timber and wood products, particularly from the Amazon rainforest and Atlantic Forest. Documents that include reports on processing trends, reference lumber companies, imports, exports, equipment, and sawmills would be of interest.",
+    "ID": "T18Eval-00018",
+    "bm25_expansion": {
+      "historical_entities": [
+        "IBDF (Brazilian Institute of Forestry Development)",
+        "SUDAM",
+        "Ministry of Agriculture",
+        "FAO",
+        "World Bank"
+      ],
+      "key_figures": [
+        "Alysson Paulinelli",
+        "Newton Braga"
+      ],
+      "bureaucratic_jargon": [
+        "timber extraction",
+        "deforestation",
+        "sawmill operations",
+        "export tariffs",
+        "silviculture",
+        "wood processing"
+      ],
+      "locations": [
+        "Amazon Basin",
+        "Para",
+        "Parana",
+        "Mato Grosso",
+        "Manaus"
+      ],
+      "combined_keyword_string": "Lumber industry Brazil timber extraction sawmill operations IBDF deforestation wood processing Amazon Basin export tariffs SUDAM silviculture"
+    },
+    "dense_hyde_summary": "This folder features economic surveys, environmental impact assessments, and commercial export data tracking the rapid expansion of the lumber industry in Brazil during the 1970s and 1980s. The records detail government-subsidized initiatives, overseen by SUDAM and the IBDF, to exploit the vast timber reserves of the Amazon Basin and the Atlantic Forest, highlighting the establishment of large-scale sawmill operations and the importation of heavy logging equipment.\n\nThe archives also contain correspondence regarding international trade in wood products, processing trends, and the establishment of export tariffs. Memos analyze the macroeconomic benefits of the timber boom while increasingly noting the logistical challenges and early diplomatic concerns over unchecked deforestation and land-use conflicts."
+  },
+  "T18Eval-00019": {
+    "TITLE": "Guaíra Falls border dispute",
+    "DESCRIPTION": "Find documents that mention the dispute between Brazil and Paraguay over the Guaíra Falls.",
+    "NARRATIVE": "The Guaíedra Falls were waterfalls located near the Guairá region, straddling the border between Brazil's Paraná state and Paraguay's Canindeyú province, along the Paraná River. A dispute arose between Brazil and Paraguay over the control and ownership of the Paraná River and its natural resources, particularly after the development of the Itaipu Dam in the 1970s and 1980s. Documents related to the territorial dispute over the falls, including development of the falls, would be of interest. Involvement and opinions of other countries would not be relevant.",
+    "ID": "T18Eval-00019",
+    "bm25_expansion": {
+      "historical_entities": [
+        "Ministry of External Relations",
+        "Itamaraty",
+        "Itaipu Binacional",
+        "Eletrobras",
+        "Paraguayan Foreign Ministry"
+      ],
+      "key_figures": [
+        "Alfredo Stroessner",
+        "Emilio Garrastazu Medici",
+        "Ramiro Saraiva Guerreiro",
+        "Joao Figueiredo"
+      ],
+      "bureaucratic_jargon": [
+        "territorial dispute",
+        "riparian rights",
+        "hydroelectric potential",
+        "border demarcation",
+        "submersion of falls"
+      ],
+      "locations": [
+        "Parana River",
+        "Sete Quedas",
+        "Foz do Iguacu",
+        "Asuncion",
+        "Guaira",
+        "Canindeyu"
+      ],
+      "combined_keyword_string": "Guaira Falls border dispute Brazil Paraguay territorial dispute Itaipu Binacional Sete Quedas riparian rights border demarcation Parana River Itamaraty"
+    },
+    "dense_hyde_summary": "This folder contains translated bilateral treaties, regional diplomatic cables, and geographic survey reports solely focused on the intense territorial and resource dispute between Brazil and Paraguay over the Guaira Falls (Sete Quedas). The documents detail the contentious negotiations over border demarcation along the Parana River and the competing claims for control over the region's immense hydroelectric potential.\n\nThe files comprehensively cover the evolution of the dispute into a cooperative, yet fraught, agreement resulting in the creation of Itaipu Binacional. Memorandums chronicle the strategic compromises made by both the Medici and Stroessner governments, ultimately leading to the deliberate submersion of the falls to construct the massive Itaipu Dam, fundamentally altering the border's physical geography."
+  },
+  "T18Eval-00020": {
+    "TITLE": "Rice cultivation",
+    "DESCRIPTION": "Tell me about rice cultivation in Brazil.",
+    "NARRATIVE": "Rice is a type of grain that comes from the seeds of the Oryza plant, typically cultivated in flooded fields called paddies. Documents discussing factors of rice cultivation, such as varieties, costs, operations, and best practices would be of interest. Documents related to the shipment of rice or rice seeds would not be relevant.",
+    "ID": "T18Eval-00020",
+    "bm25_expansion": {
+      "historical_entities": [
+        "EMBRAPA",
+        "IRGA (Riograndense Rice Institute)",
+        "Ministry of Agriculture",
+        "USAID agricultural mission",
+        "SUDAN"
+      ],
+      "key_figures": [
+        "Alysson Paulinelli",
+        "Norman Borlaug"
+      ],
+      "bureaucratic_jargon": [
+        "paddy cultivation",
+        "cereal yields",
+        "agricultural modernization",
+        "irrigation infrastructure",
+        "agronomic best practices",
+        "Oryza varieties"
+      ],
+      "locations": [
+        "Rio Grande do Sul",
+        "Goias",
+        "Mato Grosso",
+        "Pelotas",
+        "Sao Borja"
+      ],
+      "combined_keyword_string": "Rice cultivation Brazil paddy cultivation Oryza varieties EMBRAPA cereal yields IRGA irrigation infrastructure agronomic best practices Rio Grande do Sul"
+    },
+    "dense_hyde_summary": "This folder holds technical agronomy reports, USAID field observations, and domestic agricultural assessments strictly concerning the methodologies and operations of rice cultivation in Brazil. The documents detail the transition toward mechanized paddy cultivation, particularly in the flooded fields of Rio Grande do Sul, and analyze the associated operational costs, irrigation infrastructure requirements, and implementation of agronomic best practices.\n\nThe archives feature extensive research from EMBRAPA and IRGA on developing high-yield Oryza varieties tailored to Brazilian climates. Memorandums focus entirely on the science and economics of growing the crop to ensure domestic food security, explicitly omitting data on export shipping logistics or international seed distribution."
+  },
+  "T18Eval-00021": {
+    "TITLE": "Nuts",
+    "DESCRIPTION": "Find documents that contain information about the production of nuts in Brazil and how these nuts are distributed.",
+    "NARRATIVE": "Documents related to Brazilian production, specifically concerning the harvesting and distribution of nuts, would be relevant. Documents that only mention nuts as an attraction or within correspondence, without including statistics or industry-related information, would not be of interest.",
+    "ID": "T18Eval-00021",
+    "bm25_expansion": {
+      "historical_entities": [
+        "SUDAM",
+        "CACEX",
+        "Ministry of Agriculture",
+        "FIBGE"
+      ],
+      "key_figures": [
+        "Delfim Netto",
+        "Ernesto Geisel"
+      ],
+      "bureaucratic_jargon": [
+        "extractivism",
+        "commodity export",
+        "harvesting statistics",
+        "agribusiness logistics",
+        "yield projections",
+        "Brazil nut production"
+      ],
+      "locations": [
+        "Para",
+        "Amazonas",
+        "Belem",
+        "Manaus",
+        "Acre"
+      ],
+      "combined_keyword_string": "Nut production Brazil distribution harvesting statistics Brazil nut extractivism SUDAM commodity export agribusiness logistics Para Amazonas"
+    },
+    "dense_hyde_summary": "This folder consists of detailed agricultural censuses, economic forecasting memos, and commodity distribution reports focusing on the industrial production and harvesting of nuts in Brazil. The documents provide concrete statistics on yield projections, particularly concerning the commercial extraction of Brazil nuts and cashews from the Amazon Basin and Northeast regions, outlining the logistical networks required to transport these goods from rural harvesting sites to processing centers.\n\nFurthermore, the files contain correspondence from agencies like SUDAM and CACEX regarding the economic viability of the nut industry, detailing domestic distribution channels and the processing standards required for commercial sale. The records explicitly emphasize the macroeconomic and statistical aspects of the agribusiness over anecdotal or tourism-related mentions."
+  },
+  "T18Eval-00022": {
+    "TITLE": "Freight shipping policies",
+    "DESCRIPTION": "I want to know about freight shipping policies in Brazil.",
+    "NARRATIVE": "Freight shipping refers to the transportation of large amounts of goods or cargo overland, across seas, or through airways. Types of freight shipping include rail, air, ocean, and road transport. Documents that include Brazilian policy agreements, conference notes, rates, and trade discussions would be relevant.",
+    "ID": "T18Eval-00022",
+    "bm25_expansion": {
+      "historical_entities": [
+        "SUNAMAM",
+        "Lloyd Brasileiro",
+        "Ministry of Transport",
+        "RFFSA",
+        "VARIG"
+      ],
+      "key_figures": [
+        "Dirceu Nogueira",
+        "Mario Andreazza",
+        "Delfim Netto"
+      ],
+      "bureaucratic_jargon": [
+        "maritime freight rates",
+        "shipping conferences",
+        "cargo preference laws",
+        "multimodal transport",
+        "flag discrimination",
+        "logistics infrastructure"
+      ],
+      "locations": [
+        "Port of Santos",
+        "Rio de Janeiro",
+        "Paranagua",
+        "Sao Paulo",
+        "Brasilia"
+      ],
+      "combined_keyword_string": "Freight shipping policies Brazil maritime freight rates SUNAMAM cargo preference laws shipping conferences Lloyd Brasileiro multimodal transport Port of Santos"
+    },
+    "dense_hyde_summary": "This folder compiles bilateral trade negotiation transcripts, U.S. Maritime Administration cables, and transportation sector analyses detailing Brazil's stringent freight shipping policies during the military regime. The documents focus heavily on maritime and overland logistics, highlighting the implementation of cargo preference laws by SUNAMAM designed to protect the state-owned Lloyd Brasileiro and domestic shipping lines from foreign competition.\n\nThe archives also contain conference notes discussing the regulation of ocean freight rates, investments in multimodal transport infrastructure (including the RFFSA rail network), and international pushback against Brazilian "flagdiscrimination" practices. Memorandums outline the strategic economic discussions between the Ministry of Transport and foreign trading partners regarding the movement of massive cargo volumes."
+  },
+  "T18Eval-00023": {
+    "TITLE": "Smallpox vaccination",
+    "DESCRIPTION": "I want to find documents on smallpox vaccination in Brazil.",
+    "NARRATIVE": "Smallpox was a deadly disease caused by the smallpox virus and known for its trademark symptoms of high fever, lesions, and blisters, as well as its high death rate, particularly among babies. Declared eradicated in 1980 by the WHO, smallpox was still widespread in 1960s-1970s Brazil, with special concern given to Brazil's many indigenous populations, whose low immunity made them susceptible to the disease. Relevant documents would describe any and all vaccination efforts against the smallpox virus during this time, and would include synonymous terms such as "immunization." Documents mentioning smallpox, but not vaccination/immunization, or vice-versa, would not be relevant to the topic",
+    "ID": "T18Eval-00023",
+    "bm25_expansion": {
+      "historical_entities": [
+        "WHO",
+        "PAHO",
+        "Ministry of Health",
+        "SUCAM",
+        "CEV (Campaign for the Eradication of Smallpox)"
+      ],
+      "key_figures": [
+        "Donald Henderson",
+        "Ciro de Quadros",
+        "Manoel Jose da Silva"
+      ],
+      "bureaucratic_jargon": [
+        "mass immunization",
+        "disease eradication",
+        "epidemiological surveillance",
+        "vaccine efficacy",
+        "bifurcated needle",
+        "inoculation drive"
+      ],
+      "locations": [
+        "Amazon Basin",
+        "Northeast Brazil",
+        "Rio de Janeiro",
+        "Xingu Indigenous Park",
+        "Brasilia"
+      ],
+      "combined_keyword_string": "Smallpox vaccination Brazil immunization mass inoculation drive WHO PAHO disease eradication SUCAM epidemiological surveillance bifurcated needle Amazon Basin"
+    },
+    "dense_hyde_summary": "This folder contains World Health Organization field reports, U.S. public health cables, and epidemiological data chronicling the aggressive smallpox vaccination and immunization campaigns executed across Brazil during the 1960s and 1970s. The documents explicitly detail the logistics of the mass inoculation drives spearheaded by SUCAM and the CEV, focusing on the distribution of vaccines, the deployment of bifurcated needles, and the challenges of achieving herd immunity.\n\nThe files highlight the urgent efforts to protect vulnerable, isolated communities, particularly indigenous populations in the Amazon, from outbreaks. Memorandums report on the collaboration between the Brazilian Ministry of Health, PAHO, and international medical teams to systematically trace infections and enforce immunization mandates, ultimately leading to the domestic eradication of the virus."
+  },
+  "T18Eval-00024": {
+    "TITLE": "Brazilian anti-semitism",
+    "DESCRIPTION": "I want to find documents on Brazilian anti-semitism.",
+    "NARRATIVE": "Anti-semitism is defined as prejudice against, bigotry towards, or hatred of ethnic Jews and people of the Jewish faith. Relevant documents would detail anti-semitic behaviors and actions in Brazilian individual, societal, cultural, and political spheres and their manifestations.",
+    "ID": "T18Eval-00024",
+    "bm25_expansion": {
+      "historical_entities": [
+        "DOPS",
+        "Jewish Confederation of Brazil (CONIB)",
+        "Acao Integralista Brasileira",
+        "Ministry of Justice",
+        "US Embassy Political Section"
+      ],
+      "key_figures": [
+        "Alberto Dines",
+        "Ernesto Geisel",
+        "Vladimir Herzog",
+        "Gustavo Barroso"
+      ],
+      "bureaucratic_jargon": [
+        "anti-Zionism",
+        "discrimination monitoring",
+        "neo-fascist activity",
+        "hate speech dissemination",
+        "prejudice incidents",
+        "societal bigotry"
+      ],
+      "locations": [
+        "Sao Paulo",
+        "Rio de Janeiro",
+        "Porto Alegre",
+        "Curitiba",
+        "Brasilia"
+      ],
+      "combined_keyword_string": "Brazilian anti-semitism prejudice bigotry Jewish Confederation of Brazil CONIB anti-Zionism neo-fascist activity DOPS discrimination monitoring Sao Paulo"
+    },
+    "dense_hyde_summary": "This folder consists of political attache reports, domestic intelligence summaries, and civil rights monitoring cables tracking instances of anti-semitism within Brazil. The documents detail the manifestations of prejudice and bigotry against the Jewish community across societal and political spheres, recording episodes of vandalism, the dissemination of hate speech by neo-fascist or remnant Integralist groups, and the official stance of the military government toward ethnic minorities.\n\nThe archives also cover the broader geopolitical controversies that sparked domestic anti-semitic rhetoric, such as Brazil's UN vote equating Zionism with racism during the Geisel administration. Memorandums evaluate the reactions of organizations like CONIB to discriminatory behaviors and document the subtle, and sometimes overt, biases encountered by Jewish figures in Brazilian cultural and institutional life."
+  },
+  "T18Eval-00025": {
+    "TITLE": "Montevideo airport strikes",
+    "DESCRIPTION": "I'm looking for documents on airport strikes in the Uruguayan capital of Montevideo.",
+    "NARRATIVE": "A strike is an event in which workers at a business or institution refuse to work unless certain demands are met. Relevant documents would include reasons for strikes, tactics used, and reactions to the strikes. Only documents describing airport strikes in Montevideo should be included",
+    "ID": "T18Eval-00025",
+    "bm25_expansion": {
+      "historical_entities": [
+        "PLUNA",
+        "CNT (National Convention of Workers)",
+        "US Embassy Montevideo",
+        "Uruguayan Air Force",
+        "Ministry of Interior"
+      ],
+      "key_figures": [
+        "Jorge Pacheco Areco",
+        "Juan Maria Bordaberry"
+      ],
+      "bureaucratic_jargon": [
+        "labor unrest",
+        "wildcat strike",
+        "civil aviation disruption",
+        "collective bargaining",
+        "work stoppage",
+        "military intervention"
+      ],
+      "locations": [
+        "Montevideo",
+        "Carrasco International Airport",
+        "Uruguay"
+      ],
+      "combined_keyword_string": "Montevideo airport strikes Carrasco International Airport labor unrest civil aviation disruption wildcat strike CNT work stoppage PLUNA Uruguay"
+    },
+    "dense_hyde_summary": "This folder compiles labor attache reports, intelligence summaries, and U.S. Embassy Montevideo cables detailing the operational disruptions caused by targeted airport strikes in the Uruguayan capital. The documents strictly focus on the work stoppages executed by civil aviation personnel, baggage handlers, and air traffic controllers at Carrasco International Airport, outlining the specific wage and political demands issued by labor unions such as the CNT.\n\nThe files document the tactical escalation of the labor unrest, including the stalling of international flights and the resulting economic paralyzation. Memorandums describe the swift reactions to the strikes, particularly the Uruguayan government's use of military personnel to forcibly resume airport operations and the broader political instability these aviation strikes represented during the era."
+  },
+  "T18Eval-00026": {
+    "TITLE": "Sesame seed trade",
+    "DESCRIPTION": "I want to find information on the commercial viability of sesame seeds in Brazil.",
+    "NARRATIVE": "Sesame is an oilseed crop whose seeds are used in cooking. Relevant documents would describe the shipment (import or export), attempted cultivation, sale, and use of sesame and sesame seeds.",
+    "ID": "T18Eval-00026",
+    "bm25_expansion": {
+      "historical_entities": [
+        "Ministry of Agriculture",
+        "CACEX",
+        "EMBRAPA",
+        "USAID",
+        "FAO"
+      ],
+      "key_figures": [
+        "Alysson Paulinelli"
+      ],
+      "bureaucratic_jargon": [
+        "oilseed crop viability",
+        "commercial cultivation",
+        "export potential",
+        "agricultural diversification",
+        "commodity shipment",
+        "agronomic yield"
+      ],
+      "locations": [
+        "Northeast Brazil",
+        "Sao Paulo",
+        "Mato Grosso",
+        "Parana"
+      ],
+      "combined_keyword_string": "Sesame seed trade Brazil oilseed crop viability commercial cultivation export potential EMBRAPA commodity shipment agricultural diversification CACEX"
+    },
+    "dense_hyde_summary": "This folder contains agricultural sector reviews, commercial trade memos, and USAID development reports evaluating the commercial viability of sesame seeds as an emerging oilseed crop in Brazil. The documents detail experimental agronomic efforts by EMBRAPA to adapt sesame cultivation to the arid climates of Northeast Brazil and the Cerrado, analyzing crop yields, disease resistance, and optimal harvesting techniques.\n\nThe archives focus significantly on the economic potential of the trade, tracking the domestic sale, industrial processing for culinary oils, and the logistics of both import and export shipments. Correspondences between the Ministry of Agriculture and trade entities discuss market demand, pricing structures, and policies aimed at promoting agricultural diversification through the expanded planting of sesame."
+  },
+  "T18Eval-00027": {
+    "TITLE": "Disaster relief powdered milk",
+    "DESCRIPTION": "I'm looking for information on the distribution of powdered milk in disaster relief.",
+    "NARRATIVE": "Powdered milk is milk that has been dried into powdered form for reasons such as storage and shelf life. Relevant documents would describe the distribution of powdered milk to natural disaster victims in Brazil by aid groups and charities. ",
+    "ID": "T18Eval-00027",
+    "bm25_expansion": {
+      "historical_entities": [
+        "Food for Peace (PL-480)",
+        "USAID",
+        "Caritas",
+        "SUDENE",
+        "American Red Cross",
+        "Brazilian Civil Defense"
+      ],
+      "key_figures": [
+        "Lincoln Gordon",
+        "John Tuthill"
+      ],
+      "bureaucratic_jargon": [
+        "nutritional assistance",
+        "disaster relief logistics",
+        "surplus commodity distribution",
+        "humanitarian aid rationing",
+        "emergency food drops"
+      ],
+      "locations": [
+        "Northeast Brazil",
+        "Ceara",
+        "Pernambuco",
+        "Alagoas",
+        "Rio de Janeiro"
+      ],
+      "combined_keyword_string": "Disaster relief powdered milk Brazil Food for Peace PL-480 USAID nutritional assistance Caritas surplus commodity distribution humanitarian aid rationing SUDENE"
+    },
+    "dense_hyde_summary": "This folder holds humanitarian aid inventories, USAID disaster response cables, and NGO situation reports detailing the logistics of distributing powdered milk to victims of severe natural disasters in Brazil. The records document the mobilization of "FoodforPeace" (PL-480) surplus commodities, specifically focusing on the shipment and storage advantages of dried milk during catastrophic floods and prolonged droughts in the Northeast.\n\nThe files highlight the on-the-ground coordination between international aid groups like Caritas, the American Red Cross, and local agencies such as SUDENE. Memorandums outline the nutritional assistance programs aimed at preventing infant malnutrition in refugee camps, detailing the rationing procedures and the bureaucratic challenges of executing emergency food drops to isolated, devastated municipalities."
+  },
+  "T18Eval-00028": {
+    "TITLE": "Spread of equine influenza",
+    "DESCRIPTION": "I want to find documents on the spread of equine influenza in Brazil.",
+    "NARRATIVE": "Equine influenza, also known as horse flu, is a sickness caused by the infection of horses and animals closely related to them, such as donkeys, through the contracting of influenza viruses, usually subtypes H7N7 and H3N8.  Animals with equine influenza exhibit symptoms such as high fever and fatigue, which are typical of flu infections. Relevant documentation would detail any spread, outbreak, impact, and government response to equine influenza in Brazil.",
+    "ID": "T18Eval-00028",
+    "bm25_expansion": {
+      "historical_entities": [
+        "Ministry of Agriculture",
+        "Pan American Foot-and-Mouth Disease Center",
+        "Brazilian Jockey Club",
+        "OIE",
+        "Veterinary Inspection Service"
+      ],
+      "key_figures": [
+        "Alysson Paulinelli"
+      ],
+      "bureaucratic_jargon": [
+        "epizootic outbreak",
+        "veterinary quarantine",
+        "viral transmission",
+        "H7N7",
+        "H3N8",
+        "equine epidemiology",
+        "livestock morbidity"
+      ],
+      "locations": [
+        "Sao Paulo",
+        "Rio de Janeiro",
+        "Minas Gerais",
+        "Rio Grande do Sul",
+        "Brasilia"
+      ],
+      "combined_keyword_string": "Spread of equine influenza Brazil epizootic outbreak veterinary quarantine H7N7 H3N8 horse flu viral transmission Ministry of Agriculture livestock morbidity"
+    },
+    "dense_hyde_summary": "This folder compiles veterinary intelligence reports, agricultural attache cables, and epidemiological alerts monitoring the alarming spread of equine influenza across Brazil. The documents detail the rapid viral transmission of the H7N7 and H3N8 subtypes among horse and donkey populations, outlining the devastating symptoms of high fever and fatigue that crippled agricultural transport and elite equestrian industries.\n\nThe archives chronicle the Brazilian government's urgent response to the epizootic outbreak, featuring memorandums from the Ministry of Agriculture mandating strict veterinary quarantines, the restriction of livestock movement across state lines, and emergency vaccination trials. Correspondences assess the economic impact on the rural workforce and the collaborative efforts with international veterinary organizations to contain the sickness."
+  },
+  "T18Eval-00029": {
+    "TITLE": "Formation of labor unions",
+    "DESCRIPTION": "Find documents that describe the inception of labor unions in Brazil, specifically focusing on the initial motivations, key figures, and early challenges faced in the establishment of unions.",
+    "NARRATIVE": "Labor unions are organizations formed by workers to collectively negotiate wages, working conditions, and other employment terms with employers. For example, a social club for workers would not be considered a labor union. A labor union may represent workers in any industry or occupation, but to be of interest, the document must discuss the initial formation or early development of one or more labor union, which could include the social, economic, and political factors that drove their creation, or any other details of their formation. Information about the founding of specific labor unions or the early labor movement as a whole would be relevant, while details on existing unions without that historical context about their formation would not be.",
+    "ID": "T18Eval-00029",
+    "bm25_expansion": {
+      "historical_entities": [
+        "Ministry of Labor",
+        "PTB (Brazilian Labour Party)",
+        "CGT (General Command of Workers)",
+        "Metalworkers Union",
+        "DOPS"
+      ],
+      "key_figures": [
+        "Joao Goulart",
+        "Luis Carlos Prestes",
+        "Getulio Vargas",
+        "Lula da Silva"
+      ],
+      "bureaucratic_jargon": [
+        "syndicalism",
+        "collective bargaining inception",
+        "strike authorization",
+        "labor movement founding",
+        "proletariat mobilization",
+        "pelego system"
+      ],
+      "locations": [
+        "Sao Paulo",
+        "ABC Region",
+        "Rio de Janeiro",
+        "Santos",
+        "Minas Gerais"
+      ],
+      "combined_keyword_string": "Formation of labor unions Brazil inception early development collective bargaining syndicalism labor movement founding PTB CGT Joao Goulart ABC Region"
+    },
+    "dense_hyde_summary": "This folder holds historical labor attache summaries, political analyses, and intelligence reports documenting the foundational inception and early development of labor unions in Brazil. The records trace the evolution of the Brazilian syndicalist movement, detailing the socio-economic motivations—such as brutal working conditions and wage stagnation—that drove the initial mobilization of the proletariat and the establishment of entities like the Metalworkers Union.\n\nThe files focus heavily on the early challenges faced by these organizations, including violent state repression, ideological battles over communist influence, and the imposition of the state-controlled 'pelego' system. Memorandums highlight the pivotal actions of key figures who catalyzed the founding of independent unions to secure true collective bargaining rights outside of government coercion."
+  },
+  "T18Eval-00030": {
+    "TITLE": "International soccer",
+    "DESCRIPTION": "Find documents that mention international aspects of soccer, such as games with teams from other countries.",
+    "NARRATIVE": "Any documents where soccer (also known as futebol) is mentioned in the context of Brazil's relations with other countries would be of interest. Examples might information the Brazilian national team, international matches held in Brazil, or Brazilian players with an international following. Domestic soccer, such as game results for national leagues, would not be of interest.",
+    "ID": "T18Eval-00030",
+    "bm25_expansion": {
+      "historical_entities": [
+        "CBD (Brazilian Sports Confederation)",
+        "FIFA",
+        "US State Department",
+        "Ministry of External Relations",
+        "NASL"
+      ],
+      "key_figures": [
+        "Pele",
+        "Edson Arantes do Nascimento",
+        "Joao Havelange",
+        "Emilio Garrastazu Medici",
+        "Henry Kissinger"
+      ],
+      "bureaucratic_jargon": [
+        "sports diplomacy",
+        "international friendlies",
+        "soft power projection",
+        "cultural exchange",
+        "World Cup tournament",
+        "athletic diplomacy"
+      ],
+      "locations": [
+        "Maracana",
+        "Rio de Janeiro",
+        "Mexico City",
+        "Washington D.C.",
+        "New York"
+      ],
+      "combined_keyword_string": "International soccer Brazil futebol Brazilian national team sports diplomacy World Cup Pele Joao Havelange soft power projection international matches FIFA"
+    },
+    "dense_hyde_summary": "This folder is comprised of cultural attache reports, public diplomacy cables, and State Department memorandums examining the strategic use of international soccer (futebol) in Brazil's foreign relations. The documents bypass domestic league results to focus entirely on the Brazilian national team's global tours, international friendlies held at the Maracana, and the overwhelming soft power projection achieved during the 1970 World Cup.\n\nCrucially, the archives document the "athleticdiplomacy" spearheaded by key figures like Pele, detailing his transfer to the North American Soccer League (NASL) and its impact on U.S.-Brazil cultural exchange. Correspondences between the US Embassy and Itamaraty analyze how the military government leveraged international soccer victories and FIFA leadership to bolster its global image and foster diplomatic goodwill."
+  },
+  "T18Eval-00031": {
+    "TITLE": "Aircraft accidents in Brazil",
+    "DESCRIPTION": "Please find documents about plane crashes on Brazilian territory.",
+    "NARRATIVE": "I am looking for information about aircraft accidents.  I am only interested in accidents involving actual flight by aircraft (i.e., not ground incidents) in which either people are injured or killed or the aircraft is damaged so severely that it is not likely to be able to fly again.  Any kind of aircraft would be of interest, including commercial flights, military aircraft, private airplanes, helicopters, or gliders, but accidents by parachutists are not of interest.  Aircraft accidents occurring outside Brazil, including over international waters, are not of interest.",
+    "ID": "T18Eval-00031",
+    "bm25_expansion": {
+      "historical_entities": [
+        "CENIPA",
+        "FAB (Brazilian Air Force)",
+        "NTSB",
+        "FAA",
+        "VARIG",
+        "VASP",
+        "Cruzeiro do Sul"
+      ],
+      "key_figures": [
+        "Eduardo Gomes",
+        "Araripe Macedo"
+      ],
+      "bureaucratic_jargon": [
+        "aviation disaster",
+        "crash investigation",
+        "fatal wreckage",
+        "mid-air collision",
+        "flight data recorder",
+        "structural failure"
+      ],
+      "locations": [
+        "Amazon rainforest",
+        "Congonhas",
+        "Galeao",
+        "Mato Grosso",
+        "Serra do Mar"
+      ],
+      "combined_keyword_string": "Aircraft accidents in Brazil plane crashes flight disaster CENIPA FAB fatal wreckage mid-air collision structural failure aviation disaster Amazon rainforest"
+    },
+    "dense_hyde_summary": "This folder contains declassified aviation incident reports, U.S. Federal Aviation Administration (FAA) advisory cables, and consular casualty notifications detailing severe aircraft accidents occurring strictly within Brazilian territory. The documents thoroughly chronicle fatal and hull-loss crashes involving commercial airliners, military (FAB) transports, and private helicopters during actual flight operations, explicitly filtering out ground collisions or parachuting mishaps.\n\nThe files include collaborative crash investigation notes between the NTSB and the Brazilian agency CENIPA, analyzing flight data, structural failures, and weather-related disasters. Memorandums describe the grim logistics of locating wreckage in remote areas like the Amazon rainforest or the Serra do Mar, as well as the diplomatic protocols followed when U.S. citizens were among the injured or deceased."
+  },
+  "T18Eval-00032": {
+    "TITLE": "Solar eclipse",
+    "DESCRIPTION": "I am looking for information about eclipses of the sun that could be seen from Brazil.",
+    "NARRATIVE": "Any information about total or partial solar eclipses would be of interest if the eclipse was or will be visible from any part of Brazilian territory, including islands claimed or administered by Brazil.  Documents could, for example, be about eclipse predictions, public information about precautions to be taken when observing eclipses, scientific observations that are planned or conducted during solar eclipses.  Documents about lunar eclipses that do not also address solar eclipses would not be relevant.",
+    "ID": "T18Eval-00032",
+    "bm25_expansion": {
+      "historical_entities": [
+        "National Observatory",
+        "NASA",
+        "FAB",
+        "INPE",
+        "National Science Foundation"
+      ],
+      "key_figures": [
+        "Lelio Gama",
+        "Ronaldo Mourao"
+      ],
+      "bureaucratic_jargon": [
+        "totality path",
+        "astronomical observation",
+        "coronal research",
+        "solar phenomena",
+        "sounding rocket launch",
+        "optical telemetry"
+      ],
+      "locations": [
+        "Bage",
+        "Rio Grande do Sul",
+        "Foz do Iguacu",
+        "Cassino Beach",
+        "Barreira do Inferno"
+      ],
+      "combined_keyword_string": "Solar eclipse Brazil totality path astronomical observation coronal research National Observatory NASA sounding rocket launch solar phenomena Rio Grande do Sul"
+    },
+    "dense_hyde_summary": "This folder holds scientific attache reports, NASA coordination memos, and logistical planning documents concerning total and partial solar eclipses visible from Brazilian territory. The records detail international scientific expeditions, such as those staged in Bage, Rio Grande do Sul, where U.S. and Brazilian astronomers collaborated on coronal research, optical telemetry, and the launching of sounding rockets to study solar phenomena during the path of totality.\n\nThe archives also feature public diplomacy efforts, including the dissemination of public information regarding safe observation precautions. Correspondences between the U.S. National Science Foundation and the Brazilian National Observatory highlight the immense bureaucratic and logistical preparations required to transport delicate astronomical observation equipment to remote Brazilian sites specifically to capture the celestial event."
+  },
+  "T18Eval-00033": {
+    "TITLE": "Coffee rust eradication",
+    "DESCRIPTION": "I am looking for documents that mention eradication practices for coffee rust in Brazil.",
+    "NARRATIVE": "Coffee rust is a fungal infection that targets the leaves of coffee plants, causing yellow-orange spots to appear. Over time, this leads to premature leaf drop, impairing the plant's ability to photosynthesize. As a result, the plant weakens and coffee yields are significantly reduced. This disease has been a persistent threat to coffee plants and farmers in Brazil. Documents related to eradication practices, including chemical control methods such as fungicides, spore trapping equipment, and training courses, would be of particular interest.",
+    "ID": "T18Eval-00033",
+    "bm25_expansion": {
+      "historical_entities": [
+        "IBC (Brazilian Coffee Institute)",
+        "FAO",
+        "USAID",
+        "Ministry of Agriculture",
+        "EMBRAPA"
+      ],
+      "key_figures": [
+        "Alysson Paulinelli",
+        "Norman Borlaug"
+      ],
+      "bureaucratic_jargon": [
+        "Hemileia vastatrix",
+        "phytosanitary control",
+        "fungicide application",
+        "spore trapping",
+        "agricultural extension",
+        "defoliation mitigation",
+        "mycological research"
+      ],
+      "locations": [
+        "Bahia",
+        "Espirito Santo",
+        "Minas Gerais",
+        "Sao Paulo",
+        "Parana"
+      ],
+      "combined_keyword_string": "Coffee rust eradication Brazil Hemileia vastatrix phytosanitary control fungicide application spore trapping IBC agricultural extension defoliation mitigation EMBRAPA"
+    },
+    "dense_hyde_summary": "This folder is composed of agricultural crisis reports, USAID technical assistance cables, and phytosanitary guidelines focusing on the urgent eradication practices targeting coffee rust (Hemileia vastatrix) in Brazil. The documents detail the catastrophic spread of the fungal infection across major coffee-producing states, outlining the specific chemical control methods deployed, including mass fungicide applications and the installation of advanced spore trapping equipment.\n\nThe files further document the vast mobilization by the Brazilian Coffee Institute (IBC) and the Ministry of Agriculture to save the nation's premier export crop. Memorandums cover the financing of mycological research, the execution of rural training courses to educate farmers on early detection, and the implementation of strict quarantine zones to mitigate premature leaf drop and plunging yields."
+  },
+  "T18Eval-00034": {
+    "TITLE": "Dairy cattle industry",
+    "DESCRIPTION": "Locate documents containing information on Brazil's dairy cattle industry and the distribution of its products.",
+    "NARRATIVE": "The dairy cattle industry is a sector of agriculture dedicated to the breeding, raising, and management of cattle for the production of milk and other dairy products such as cheese, butter, yogurt, and cream. Documents that reference aspects of the industry in Brazil, such as production, processing, statistics, and ranches would be of interest.",
+    "ID": "T18Eval-00034",
+    "bm25_expansion": {
+      "historical_entities": [
+        "Ministry of Agriculture",
+        "EMBRAPA Dairy Cattle",
+        "Cooperativa Central de Laticinios",
+        "USAID",
+        "World Bank"
+      ],
+      "key_figures": [
+        "Alysson Paulinelli"
+      ],
+      "bureaucratic_jargon": [
+        "pasteurization",
+        "bovine genetics",
+        "milk production yields",
+        "dairy processing facilities",
+        "livestock management",
+        "agricultural statistics"
+      ],
+      "locations": [
+        "Minas Gerais",
+        "Sao Paulo",
+        "Parana",
+        "Rio Grande do Sul",
+        "Juiz de Fora"
+      ],
+      "combined_keyword_string": "Dairy cattle industry Brazil milk production yields bovine genetics pasteurization EMBRAPA dairy processing facilities livestock management Minas Gerais agricultural statistics"
+    },
+    "dense_hyde_summary": "This folder contains detailed agricultural surveys, economic production reports, and USAID technical memos assessing the modernization of Brazil's dairy cattle industry. The documents comprehensively cover the sector's operational statistics, focusing on bovine genetics, the breeding and raising of specialized herds on ranches primarily in Minas Gerais and the southern states, and methods to dramatically increase milk production yields.\n\nAdditionally, the archives detail the industrial processing side of the industry, chronicling investments in pasteurization technology and the distribution networks for cheese, butter, and cream. Correspondences between the Ministry of Agriculture and international agricultural missions discuss policies to improve dairy farm management, secure rural credit for processing facilities, and stabilize the domestic supply of dairy products."
+  },
+  "T18Eval-00035": {
+    "TITLE": "International Cocoa Agreement",
+    "DESCRIPTION": "I want to know about the International Cocoa Agreement.",
+    "NARRATIVE": "The International Cocoa Agreement is a global treaty between cocoa producing and consuming countries. It was established to regulate and promote the global cocoa trade, aiming at promoting cooperation and stability in the international cocoa market. Documents referencing this agreement would be of interest. Non-international agreements surrounding cocoa would not be of interest.",
+    "ID": "T18Eval-00035",
+    "bm25_expansion": {
+      "historical_entities": [
+        "International Cocoa Organization (ICCO)",
+        "CEPLAC",
+        "UNCTAD",
+        "US State Department Economic Bureau",
+        "Ministry of External Relations"
+      ],
+      "key_figures": [
+        "Delfim Netto",
+        "Ramiro Saraiva Guerreiro"
+      ],
+      "bureaucratic_jargon": [
+        "buffer stock",
+        "price floor",
+        "international commodity treaty",
+        "market stabilization",
+        "export quotas",
+        "multilateral trade negotiations"
+      ],
+      "locations": [
+        "Geneva",
+        "London",
+        "Bahia",
+        "Washington D.C.",
+        "New York"
+      ],
+      "combined_keyword_string": "International Cocoa Agreement ICCO buffer stock price floor international commodity treaty market stabilization UNCTAD export quotas CEPLAC Geneva"
+    },
+    "dense_hyde_summary": "This folder compiles multilateral trade negotiation transcripts, UNCTAD economic reports, and State Department cables specifically centered on the drafting, ratification, and enforcement of the International Cocoa Agreement. The documents detail the intense diplomatic maneuvering between major cocoa-producing nations, like Brazil, and massive consumer markets, such as the United States, to establish a functional global treaty aimed at market stabilization.\n\nThe files exclusively cover the international aspects of this commodity pact, highlighting debates over the implementation of buffer stocks, the setting of price floors, and the allocation of export quotas. Memorandums from Brazilian trade officials (CEPLAC) and U.S. economic bureaus analyze the geopolitical friction and economic imperatives behind securing a unified approach to the highly volatile international cocoa trade."
+  },
+  "T18Eval-00036": {
+    "TITLE": "Shrimp fishing policies",
+    "DESCRIPTION": "Find documents that mention Brazilian shrimp fishing policies.",
+    "NARRATIVE": "Shrimp fishing refers to the practice of capturing shrimp - small, aquatic crustaceans - from oceans, seas, rivers, and other bodies of water for commercial or recreational purposes. Documents related to the policies of shrimp fishing practices, including legislation and communication regarding the Brazil-US Shrimp agreement would be of interest. ",
+    "ID": "T18Eval-00036",
+    "bm25_expansion": {
+      "historical_entities": [
+        "SUDEPE",
+        "US Coast Guard",
+        "Ministry of External Relations",
+        "NOAA",
+        "US State Department"
+      ],
+      "key_figures": [
+        "Mario Gibson Barboza",
+        "William Rountree",
+        "John Hugh Crimmins"
+      ],
+      "bureaucratic_jargon": [
+        "bilateral fishing agreement",
+        "territorial waters",
+        "conservation zones",
+        "crustacean harvesting",
+        "maritime sovereignty",
+        "vessel licensing"
+      ],
+      "locations": [
+        "Belem",
+        "North coast Brazil",
+        "Florida",
+        "Gulf of Mexico",
+        "Atlantic Ocean"
+      ],
+      "combined_keyword_string": "Shrimp fishing policies Brazil bilateral fishing agreement Brazil-US Shrimp agreement SUDEPE territorial waters conservation zones crustacean harvesting maritime sovereignty"
+    },
+    "dense_hyde_summary": "This folder contains bilateral treaty drafts, maritime enforcement cables, and State Department policy memos directly addressing Brazilian shrimp fishing policies and the contentious enforcement of maritime sovereignty. The documents primarily focus on the delicate negotiations and resulting legislation surrounding the Brazil-U.S. Shrimp Agreement, crafted to regulate the commercial harvesting of crustaceans by American vessels within Brazil's claimed 200-mile territorial waters.\n\nThe archives chronicle the establishment of strict conservation zones, vessel licensing requirements, and the joint patrols conducted by SUDEPE and the U.S. Coast Guard off the North coast of Brazil. Correspondences detail the legal framework designed to resolve diplomatic incidents caused by illegal trawling, balancing ecological preservation with the lucrative international trade in shrimp."
+  },
+  "T18Eval-00037": {
+    "TITLE": "Catholic birth control",
+    "DESCRIPTION": "Find documents documenting Catholic perspectives on female birth control in Brazil.",
+    "NARRATIVE": "Catholic relates to the Catholicism, the faith, practice, and church order of the Roman Catholic Church. Birth control, also known as contraception, is any method used to prevent pregnancy. Types of birth control include female sterilization, birth control pills, and IUDs. Documents that mention the reactions or opinions of people practicing Catholicism on female birth control would be relevant. For example, condemning the practice and philosophy of birth control.",
+    "ID": "T18Eval-00037",
+    "bm25_expansion": {
+      "historical_entities": [
+        "CNBB (National Conference of Brazilian Bishops)",
+        "Vatican",
+        "BEMFAM",
+        "US Embassy Political Section",
+        "Catholic Clergy"
+      ],
+      "key_figures": [
+        "Dom Helder Camara",
+        "Pope Paul VI",
+        "Dom Avelar Brandao Vilela",
+        "Paulo Evaristo Arns"
+      ],
+      "bureaucratic_jargon": [
+        "Humanae Vitae",
+        "encyclical response",
+        "family planning morality",
+        "contraceptive condemnation",
+        "pastoral letters",
+        "demographic policy opposition"
+      ],
+      "locations": [
+        "Rio de Janeiro",
+        "Rome",
+        "Aparecida",
+        "Sao Paulo",
+        "Northeast Brazil"
+      ],
+      "combined_keyword_string": "Catholic birth control Brazil perspectives CNBB female sterilization Humanae Vitae contraceptive condemnation family planning morality Dom Helder Camara pastoral letters"
+    },
+    "dense_hyde_summary": "This folder features political attache reports, sociological analyses, and translations of pastoral letters documenting the fierce Catholic perspectives and backlash against female birth control initiatives in Brazil. The records thoroughly detail the official positions of the National Conference of Brazilian Bishops (CNBB) following the Vatican's Humanae Vitae encyclical, highlighting their organized condemnation of oral contraceptives, IUDs, and state-sponsored female sterilization programs.\n\nThe files analyze the intersection of theology and public policy, noting how prominent clergy members like Dom Helder Camara publicly opposed international family planning agencies (such as BEMFAM and USAID) on moral and anti-imperialist grounds. Memorandums assess the profound influence of Catholic dogma on the military government's hesitancy to implement nationwide demographic control policies."
+  },
+  "T18Eval-00038": {
+    "TITLE": "Herbicide circulation",
+    "DESCRIPTION": "I'm looking for documents describing the circulation (development, shipment, use, etc.) of herbicides in Brazil.",
+    "NARRATIVE": "Herbicides are chemicals and substances used in agriculture to kill weeds and other undesirable plants for protection of crops. Relevant documentation would detail the circulation of herbicides throughout Brazil - in other words, its development, shipment, use, study, and so on, as well as any policy or discussion advocating the advancement or curtailing of their use.",
+    "ID": "T18Eval-00038",
+    "bm25_expansion": {
+      "historical_entities": [
+        "Ministry of Agriculture",
+        "Dow Chemical",
+        "Monsanto",
+        "EMBRAPA",
+        "CACEX"
+      ],
+      "key_figures": [
+        "Alysson Paulinelli"
+      ],
+      "bureaucratic_jargon": [
+        "defoliants",
+        "agrochemical imports",
+        "weed eradication",
+        "pesticide regulation",
+        "phytosanitary control",
+        "chemical crop protection",
+        "toxicological testing"
+      ],
+      "locations": [
+        "Sao Paulo",
+        "Parana",
+        "Mato Grosso",
+        "Cerrado",
+        "Rio Grande do Sul"
+      ],
+      "combined_keyword_string": "Herbicide circulation Brazil agrochemical imports weed eradication defoliants chemical crop protection EMBRAPA pesticide regulation Dow Chemical phytosanitary control"
+    },
+    "dense_hyde_summary": "This folder is comprised of agricultural commercial reports, import/export ledgers, and USAID agronomy cables tracking the massive circulation and utilization of herbicides within the Brazilian agricultural sector. The documents detail the shipment of chemical crop protection products from multinational corporations like Dow Chemical and Monsanto, assessing their widespread use for weed eradication in the expanding soybean and sugarcane plantations of the Cerrado and southern states.\n\nFurthermore, the archives contain policy discussions from the Ministry of Agriculture and EMBRAPA regarding the domestic development and toxicological testing of these agrochemicals. Memorandums document the regulatory debates over pesticide use, balancing the immediate need for advanced phytosanitary controls to boost export crop yields against early environmental and health concerns pushing for the curtailing of highly toxic defoliants."
+  },
+  "T18Eval-00039": {
+    "TITLE": "Anti-cancer efforts",
+    "DESCRIPTION": "I'm looking for documents on anti-cancer efforts in Brazil.",
+    "NARRATIVE": "Cancer is a disease in which cells begin to grow and divide uncontrollably in the body, creating growths known as tumors. It can also spread to other parts of the body, refusing to respond to the body's natural signals to cease division. Any relevant documents in this case would include descriptions of medicine (scientific or traditional), experimental medication, the use of both, and any and all efforts made by medical institutions in the fight against cancer.   ",
+    "ID": "T18Eval-00039",
+    "bm25_expansion": {
+      "historical_entities": [
+        "INCA (National Cancer Institute)",
+        "Ministry of Health",
+        "WHO",
+        "PAHO",
+        "US National Institutes of Health (NIH)"
+      ],
+      "key_figures": [
+        "Mario Kroeff",
+        "Machado de Assis (medical references)",
+        "Paulo de Almeida Toledo"
+      ],
+      "bureaucratic_jargon": [
+        "oncology research",
+        "radiotherapy facilities",
+        "epidemiological trends",
+        "tumor excision",
+        "experimental chemotherapy",
+        "carcinogen regulation"
+      ],
+      "locations": [
+        "Rio de Janeiro",
+        "Sao Paulo",
+        "Campinas",
+        "Brasilia"
+      ],
+      "combined_keyword_string": "Anti-cancer efforts Brazil INCA oncology research tumor experimental chemotherapy radiotherapy facilities Ministry of Health epidemiological trends carcinogen regulation"
+    },
+    "dense_hyde_summary": "This folder contains public health surveys, bilateral medical exchange cables, and clinical research summaries focused on the evolution of anti-cancer efforts and oncology within Brazil. The documents detail the modernization of medical institutions, particularly the National Cancer Institute (INCA), tracking the procurement of advanced radiotherapy equipment, the implementation of experimental chemotherapy protocols, and public campaigns for early tumor detection.\n\nThe files highlight cooperative efforts between Brazilian medical researchers and international entities such as the WHO and the U.S. NIH. Memorandums discuss the epidemiological mapping of cancer rates among the Brazilian population, the regulation of environmental carcinogens, and the integration of both cutting-edge scientific medicine and studies on indigenous botanical pharmacology in the broader fight against the disease."
+  },
+  "T18Eval-00040": {
+    "TITLE": "Gemini 10 spaceflight",
+    "DESCRIPTION": "I want to find documents on the Gemini 10 spaceflight.",
+    "NARRATIVE": "Gemini 10 (Gemini X) was a 1966 crewed NASA spaceflight that lasted from July 18 to July 21 and was the eighth model of the Gemini spacecraft series. Any documents mentioning Gemini 10's status (launch, structural integrity, re-entry, etc.) would be relevant.",
+    "ID": "T18Eval-00040",
+    "bm25_expansion": {
+      "historical_entities": [
+        "NASA",
+        "FAB (Brazilian Air Force)",
+        "US Navy",
+        "US Department of Defense",
+        "Manned Spacecraft Center"
+      ],
+      "key_figures": [
+        "John Young",
+        "Michael Collins",
+        "James E. Webb",
+        "Lyndon B. Johnson"
+      ],
+      "bureaucratic_jargon": [
+        "orbital rendezvous",
+        "splashdown tracking",
+        "recovery operations",
+        "telemetry relay",
+        "extravehicular activity",
+        "spacecraft re-entry"
+      ],
+      "locations": [
+        "Western Atlantic",
+        "Cape Kennedy",
+        "Brazilian coast",
+        "Ascension Island tracking station",
+        "Natal"
+      ],
+      "combined_keyword_string": "Gemini 10 spaceflight NASA John Young Michael Collins orbital rendezvous splashdown tracking recovery operations telemetry relay spacecraft re-entry Cape Kennedy"
+    },
+    "dense_hyde_summary": "This folder compiles NASA status updates, Department of Defense tracking logs, and diplomatic cables alerting foreign governments—including Brazil—to the operational status of the 1966 Gemini 10 spaceflight. The documents provide a precise chronological record of the mission, from the launch at Cape Kennedy through the complex orbital rendezvous maneuvers executed by astronauts John Young and Michael Collins.\n\nThe archives explicitly focus on the global logistics required to support the mission, including telemetry relay data coordinated through tracking stations near the Brazilian coast and Ascension Island. Memorandums detail the structural integrity reports during re-entry and the vast U.S. Navy recovery operations deployed in the Western Atlantic to secure the spacecraft and crew upon splashdown."
+  },
+  "T18Eval-00041": {
+    "TITLE": "Rare earth chloride sales",
+    "DESCRIPTION": "I want information on the sale of rare earth chlorides by the Brazilian government.",
+    "NARRATIVE": "Rare earth chlorides are chemical compounds made of rare earth elements the likes of Cerium (Ce), Yttrium (Y), and Neodymium (Nd) mixed with chlorine atoms. Documents under its umbrella would mention contracts, sales, payment, and monetary disputes pertaining to the sale of rare earth chlorides to domestic and foreign parties.",
+    "ID": "T18Eval-00041",
+    "bm25_expansion": {
+      "historical_entities": [
+        "CNEN (National Nuclear Energy Commission)",
+        "Nuclebras",
+        "Ministry of Mines and Energy",
+        "CACEX",
+        "US Atomic Energy Commission"
+      ],
+      "key_figures": [
+        "Shigeaki Ueki",
+        "Hervasio de Carvalho"
+      ],
+      "bureaucratic_jargon": [
+        "monazite sand extraction",
+        "mineral export contracts",
+        "strategic materials",
+        "chemical compound sales",
+        "ore processing",
+        "export tariffs",
+        "Cerium Yttrium Neodymium"
+      ],
+      "locations": [
+        "Espirito Santo",
+        "Rio de Janeiro",
+        "Bahia",
+        "Washington D.C.",
+        "Sao Paulo"
+      ],
+      "combined_keyword_string": "Rare earth chloride sales Brazil CNEN monazite sand extraction strategic materials mineral export contracts Cerium Yttrium Neodymium Nuclebras chemical compound sales"
+    },
+    "dense_hyde_summary": "This folder contains highly sensitive trade agreements, National Nuclear Energy Commission (CNEN) export ledgers, and economic intelligence cables detailing the sale and regulation of rare earth chlorides by the Brazilian government. The documents closely track the commercial extraction of monazite sands and the subsequent chemical processing into valuable compounds containing Cerium, Yttrium, and Neodymium, which were highly sought after as strategic materials during the Cold War.\n\nThe files comprehensively outline the bureaucratic framework governing these transactions, featuring finalized international sales contracts, export tariff negotiations overseen by CACEX, and records of monetary disputes. Memorandums between the U.S. Embassy and the Ministry of Mines and Energy highlight American interest in securing steady supply chains for these chemical compounds while monitoring Brazil's evolving policies on nuclear and rare earth mineral sovereignty."
+  },
+  "T18Eval-00042": {
+    "TITLE": "Import of color television",
+    "DESCRIPTION": "I'm looking for information on the import of color television into Brazil.",
+    "NARRATIVE": "Color television includes color television sets, and importation is the bringing of goods (Color TVs, in this case) from foreign countries for domestic sale. Documents of interest would include those discussing the sale, purchase, import, or export of color television from outside countries into Brazil.",
+    "ID": "T18Eval-00042",
+    "bm25_expansion": {
+      "historical_entities": [
+        "Ministry of Communications",
+        "SECEX",
+        "Philco",
+        "Telefunken",
+        "CACEX",
+        "SUFRAMA"
+      ],
+      "key_figures": [
+        "Hygino Corsetti",
+        "Delfim Netto",
+        "Euclides Quandt de Oliveira"
+      ],
+      "bureaucratic_jargon": [
+        "PAL-M standard",
+        "import substitution",
+        "consumer electronics tariffs",
+        "customs duties",
+        "broadcast technology transmission",
+        "luxury goods import"
+      ],
+      "locations": [
+        "Manaus Free Trade Zone",
+        "Sao Paulo",
+        "Rio de Janeiro",
+        "Brasilia",
+        "Japan",
+        "United States"
+      ],
+      "combined_keyword_string": "Import of color television Brazil PAL-M standard consumer electronics tariffs CACEX SUFRAMA Manaus Free Trade Zone import substitution luxury goods import Philco"
+    },
+    "dense_hyde_summary": "This folder holds trade policy memorandums, consumer electronics market analyses, and Ministry of Communications directives concerning the importation of color television sets into Brazil during the early 1970s. The documents detail the fierce commercial competition and trade negotiations surrounding the adoption of the PAL-M broadcasting standard, tracking the import volumes of finished TV sets and raw components from foreign manufacturers like Philco and Telefunken.\n\nThe archives focus extensively on the economic mechanisms utilized by the military regime, specifically the high customs duties and tariffs levied by CACEX to promote import substitution. Correspondences evaluate the strategic establishment of the Manaus Free Trade Zone (SUFRAMA) as a hub to circumvent direct luxury goods importation by assembling foreign-made color television components domestically for the growing Brazilian middle class."
+  },
+  "T18Eval-00043": {
+    "TITLE": "Vampire bat control",
+    "DESCRIPTION": "I'm looking for documents on controlling Brazil's vampire bat population.",
+    "NARRATIVE": "The vampire bat is a subspecies of bat distributed throughout Brazil that subsists on animal blood, is a vector for deadly diseases, and is widely considered a pest due to its proclivity for feeding on livestock. Relevant documentation would entail discussion and/or mention of the threats posed by vampire bats, the status of the vampire bat population, and attempts and methods of controlling the population to protect livestock.",
+    "ID": "T18Eval-00043",
+    "bm25_expansion": {
+      "historical_entities": [
+        "Ministry of Agriculture",
+        "PAHO",
+        "USAID",
+        "EMBRAPA",
+        "WHO"
+      ],
+      "key_figures": [
+        "Alysson Paulinelli"
+      ],
+      "bureaucratic_jargon": [
+        "rabies vector",
+        "livestock depredation",
+        "population culling",
+        "anticoagulant poison",
+        "zoonotic disease transmission",
+        "Desmodus rotundus",
+        "pest eradication"
+      ],
+      "locations": [
+        "Amazon Basin",
+        "Mato Grosso",
+        "Goias",
+        "Minas Gerais",
+        "Pantanal"
+      ],
+      "combined_keyword_string": "Vampire bat control Brazil rabies vector livestock depredation Desmodus rotundus population culling anticoagulant poison PAHO Ministry of Agriculture zoonotic disease transmission"
+    },
+    "dense_hyde_summary": "This folder is composed of veterinary health reports, USAID agricultural assistance cables, and epidemiological studies addressing the severe threat posed by the vampire bat (Desmodus rotundus) population to Brazilian livestock. The documents detail the catastrophic economic impact of livestock depredation and the widespread transmission of bovine rabies, prompting urgent interventions by the Ministry of Agriculture and international health organizations like PAHO.\n\nThe files exhaustively document the experimental and applied methods of population control, including the systemic use of anticoagulant poisons painted on cattle, the dynamiting of roosting caves, and targeted culling programs. Memorandums evaluate the ecological risks of these eradication campaigns alongside the imperative to protect the vital beef and dairy industries in regions such as Mato Grosso and the Amazon Basin."
+  },
+  "T18Eval-00044": {
+    "TITLE": "Rural agriculture",
+    "DESCRIPTION": "Find documents that discuss the development and impact of rural agriculture in Brazil, including practices, benefits, challenges, and examples.",
+    "NARRATIVE": "Rural agriculture involves growing, processing, and distributing food in countryside or rural areas, including practices like large-scale farms, crop rotation, and sustainable land management. Documents should focus on the development and impact of rural agriculture projects or policies specific to rural settings.  Agricultural practices specific to urban areas are not of interest.",
+    "ID": "T18Eval-00044",
+    "bm25_expansion": {
+      "historical_entities": [
+        "INCRA",
+        "EMBRAPA",
+        "SUDENE",
+        "Ministry of Agriculture",
+        "USAID",
+        "World Bank"
+      ],
+      "key_figures": [
+        "Alysson Paulinelli",
+        "Ernesto Geisel",
+        "Jose Irineu Cabral"
+      ],
+      "bureaucratic_jargon": [
+        "agrarian reform",
+        "rural extension",
+        "mechanized farming",
+        "crop rotation",
+        "latifundia modernization",
+        "land tenure",
+        "agricultural frontiers"
+      ],
+      "locations": [
+        "Northeast Brazil",
+        "Center-West",
+        "Cerrado",
+        "Mato Grosso",
+        "Parana",
+        "Goias"
+      ],
+      "combined_keyword_string": "Rural agriculture Brazil agrarian reform INCRA rural extension EMBRAPA mechanized farming latifundia modernization crop rotation Center-West agricultural frontiers SUDENE"
+    },
+    "dense_hyde_summary": "This folder contains comprehensive USAID development assessments, Ministry of Agriculture policy frameworks, and World Bank project appraisals focusing entirely on the rapid modernization and expansion of rural agriculture in Brazil. The documents exclude urban farming to focus strictly on countryside development, detailing the implementation of mechanized farming techniques, soil correction in the Cerrado, and crop rotation practices designed to transform massive rural tracts into highly productive agricultural frontiers.\n\nThe archives chronicle the socio-economic impact of these policies, specifically evaluating the challenges of land tenure disputes, the push for agrarian reform via INCRA, and the benefits of rural extension programs aimed at educating countryside laborers. Memorandums highlight specific large-scale farming projects in the Center-West and Northeast, illustrating the military government's push to secure domestic food supply and dramatically boost agricultural exports."
+  },
+  "T18Eval-00045": {
+    "TITLE": "Oil price changes",
+    "DESCRIPTION": "I want to find any documents from which I can learn both influence and effect oil prices on Brazilian society.",
+    "NARRATIVE": "Oil prices are subject to fluctuations caused by global events. I am looking for documents that discuss both factors affecting oil prices and those impact on Brazil. Documents discussing oil prices in the context of trade or oil production projects are not relevant.",
+    "ID": "T18Eval-00045",
+    "bm25_expansion": {
+      "historical_entities": [
+        "Petrobras",
+        "Ministry of Mines and Energy",
+        "OPEC",
+        "Ministry of Finance",
+        "Central Bank of Brazil"
+      ],
+      "key_figures": [
+        "Ernesto Geisel",
+        "Shigeaki Ueki",
+        "Delfim Netto",
+        "Mario Henrique Simonsen"
+      ],
+      "bureaucratic_jargon": [
+        "macroeconomic shock",
+        "inflation indices",
+        "balance of payments crisis",
+        "import reliance",
+        "fuel rationing",
+        "cost of living escalation",
+        "foreign debt accumulation"
+      ],
+      "locations": [
+        "Brasilia",
+        "Rio de Janeiro",
+        "Sao Paulo",
+        "Middle East"
+      ],
+      "combined_keyword_string": "Oil price changes Brazil OPEC macroeconomic shock inflation indices balance of payments crisis fuel rationing cost of living escalation Mario Henrique Simonsen Ministry of Finance"
+    },
+    "dense_hyde_summary": "This folder holds macroeconomic intelligence reports, State Department economic cables, and domestic policy reviews analyzing the profound societal and economic shocks inflicted upon Brazil by global oil price changes. The documents strictly avoid the technicalities of domestic oil production, focusing instead on how international crises (such as the OPEC embargoes) dictated fuel prices and subsequently devastated Brazil's balance of payments due to its heavy reliance on imported energy.\n\nThe files provide a stark look at the societal effects of these fluctuations, detailing the military government's implementation of fuel rationing, the explosive escalation of the cost of living, and skyrocketing inflation indices that eroded the purchasing power of the Brazilian public. Memorandums from the Ministry of Finance discuss the desperate accumulation of foreign debt to subsidize energy costs, marking the end of the "BrazilianMiracle" and the onset of profound domestic instability."
+  }
+}

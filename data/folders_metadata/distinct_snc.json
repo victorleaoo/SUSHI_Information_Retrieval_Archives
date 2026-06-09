@@ -1,0 +1,1897 @@
+[
+  {
+    "snc": "LAB 3",
+    "label_parent_extended": "LABOR & MANPOWER: ORGANIZATIONS & CONFERENCES",
+    "raw_scope": ""
+  },
+  {
+    "snc": "POL 18",
+    "label_parent_extended": "POLITICAL AFFAIRS & RELATIONS: PROVINCIAL, MUNICIPAL & STATE GOVERNMENT",
+    "raw_scope": "Use for materials on the political affairs of provinces, municipalities, and other political subdivisions of countries. Includes tribal administration. Subdivide by name of province, city, sheikdom, etc., if volume warrants."
+  },
+  {
+    "snc": "AID",
+    "label_parent_extended": "AID",
+    "raw_scope": ""
+  },
+  {
+    "snc": "DEF",
+    "label_parent_extended": "DEFENSE AFFAIRS",
+    "raw_scope": ""
+  },
+  {
+    "snc": "AV",
+    "label_parent_extended": "AVIATION (CIVIL)",
+    "raw_scope": ""
+  },
+  {
+    "snc": "E 12",
+    "label_parent_extended": "ECONOMIC AFFAIRS (GENERAL): LAND USE. LAND REFORM.",
+    "raw_scope": ""
+  },
+  {
+    "snc": "FN",
+    "label_parent_extended": "FINANCE",
+    "raw_scope": ""
+  },
+  {
+    "snc": "POL 13-2",
+    "label_parent_extended": "POLITICAL AFFAIRS & RELATIONS: NON-PARTY BLOCS: Students. Youth Groups.",
+    "raw_scope": ""
+  },
+  {
+    "snc": "POL 29",
+    "label_parent_extended": "POLITICAL AFFAIRS & RELATIONS: POLITICAL PRISONERS",
+    "raw_scope": "Includes treatment, trials, amnesty, pardons, and executions. Also includes detention of citizens in a country."
+  },
+  {
+    "snc": "POL 14",
+    "label_parent_extended": "POLITICAL AFFAIRS & RELATIONS: ELECTIONS",
+    "raw_scope": "Except for provincial and municipal government office, for which SEE: POL 18-1. Includes materials on specific election, forecasts, voting, election issues, results, procedures , honesty, candidates, electoral laws and decrees, suffrage, and government and foreign interference. Subdivide by specific election if volume warrants."
+  },
+  {
+    "snc": "SP",
+    "label_parent_extended": "SPACE & ASTRONAUTICS",
+    "raw_scope": ""
+  },
+  {
+    "snc": "E 7",
+    "label_parent_extended": "ECONOMIC AFFAIRS (GENERAL): VISITS. MISSIONS.",
+    "raw_scope": ""
+  },
+  {
+    "snc": "CSM 10",
+    "label_parent_extended": "COMMUNISM: COMMUNIST PROPAGANDA",
+    "raw_scope": ""
+  },
+  {
+    "snc": "LAB 2",
+    "label_parent_extended": "LABOR & MANPOWER: GENERAL REPORTS & STATISTICS",
+    "raw_scope": ""
+  },
+  {
+    "snc": "TP",
+    "label_parent_extended": "TRADE PROMOTION & ASSISTANCE",
+    "raw_scope": ""
+  },
+  {
+    "snc": "INCO",
+    "label_parent_extended": "INDUSTRIES & COMMODITIES",
+    "raw_scope": ""
+  },
+  {
+    "snc": "POL 15-1",
+    "label_parent_extended": "POLITICAL AFFAIRS & RELATIONS: GOVERNMENT: Head of State. Executive Branch.",
+    "raw_scope": "Includes family of Head of State. For Presidential missions or visits by Heads of State, SEE: POL 7."
+  },
+  {
+    "snc": "INT",
+    "label_parent_extended": "INTELLIGENCE",
+    "raw_scope": ""
+  },
+  {
+    "snc": "EDU",
+    "label_parent_extended": "EDUCATION",
+    "raw_scope": ""
+  },
+  {
+    "snc": "POL 2",
+    "label_parent_extended": "POLITICAL AFFAIRS & RELATIONS: GENERAL REPORTS & STATISTICS",
+    "raw_scope": "General political analyses, \"picture\" of local situations, such as country situation reports, and similar material which cannot be filed under one of the more specific subjects in this outline. Subdivide by type or title if volume warrants."
+  },
+  {
+    "snc": "PR 5",
+    "label_parent_extended": "PUBLIC RELATIONS: INVITATIONS",
+    "raw_scope": ""
+  },
+  {
+    "snc": "POL 7",
+    "label_parent_extended": "POLITICAL AFFAIRS & RELATIONS: VISITS. MEETINGS.",
+    "raw_scope": "Includes planned, proposed, or actual trips and tours of heads of state and other prominent political personages; special Presidential missions; meetings of groups of key political leaders; and political conferences and meetings other than those of organizations, for which SEE: POL 3. If desired, subdivide by surname, title or rank, and country of individual. Indicate most common identification, such as \"Kennedy-DeGaulle Talks.\" Indicate regularly-held meetings by name (e.g., Foreign Ministers Meetings). Exclude: Military visits and missions, for which SEE: DEF 7; CODELS, for which SEE: LEG 7."
+  },
+  {
+    "snc": "LAB 6",
+    "label_parent_extended": "LABOR & MANPOWER: LABOR-MANAGEMENT RELATIONS",
+    "raw_scope": ""
+  },
+  {
+    "snc": "PPB",
+    "label_parent_extended": "",
+    "raw_scope": ""
+  },
+  {
+    "snc": "POL 23-9",
+    "label_parent_extended": "POLITICAL AFFAIRS & RELATIONS: INTERNAL SECURITY. COUNTER-INSURGENCY.: Rebellion. Coups.",
+    "raw_scope": "Includes any type of planned, attempted or actual revolt and actions to suppress it. However, where the rebellion is not short-lived and involves military operations to any significant extent, use POL 27."
+  },
+  {
+    "snc": "E 2",
+    "label_parent_extended": "ECONOMIC AFFAIRS (GENERAL): GENERAL REPORTS & STATISTICS",
+    "raw_scope": ""
+  },
+  {
+    "snc": "E 5",
+    "label_parent_extended": "ECONOMIC AFFAIRS (GENERAL): ECONOMIC DEVELOPMENT",
+    "raw_scope": ""
+  },
+  {
+    "snc": "EDX",
+    "label_parent_extended": "EDUCATIONAL & CULTURAL EXCHANGE",
+    "raw_scope": ""
+  },
+  {
+    "snc": "VEH",
+    "label_parent_extended": "",
+    "raw_scope": ""
+  },
+  {
+    "snc": "Unknown",
+    "label_parent_extended": "",
+    "raw_scope": ""
+  },
+  {
+    "snc": "POL",
+    "label_parent_extended": "POLITICAL AFFAIRS & RELATIONS",
+    "raw_scope": "Use for papers on the internal(domestic) political situation and developments within a country, its provinces, dependencies, etc., and for papers on the external (foreign) political relations of countries, both bilateral and multilateral. Included are such matters as the formation and structure of government, its stability, attempts to overthrow or secede from the national government, armed conflicts in supporting or putting down rebellion, political organizations, international hostilities, and territorial claims and disputes (air, land and water) SEE: COMMUNISM outline for international Communism. DEFENSE AFFAIRS outline for regional and collective defense pacts, such as NATO, SEATO, Warsaw Pact, etc. PROTECTIVE SERVICES outline for matters relating to the protection of persons and property of abroad. ECONOMIC INTEGRATION outline for economic collaboration and integration on an international regional basis."
+  },
+  {
+    "snc": "AGR",
+    "label_parent_extended": "AGRICULTURE",
+    "raw_scope": ""
+  },
+  {
+    "snc": "POL 13-6",
+    "label_parent_extended": "POLITICAL AFFAIRS & RELATIONS: NON-PARTY BLOCS: Religious Groups",
+    "raw_scope": ""
+  },
+  {
+    "snc": "LEG 7",
+    "label_parent_extended": "LEGISLATIVE & LEGAL AFFAIRS: VISITS",
+    "raw_scope": ""
+  },
+  {
+    "snc": "EDU 9-5",
+    "label_parent_extended": "EDUCATION: EDUCATIONAL SYSTEM. INSTITUTIONS.: U.S.-Sponsored Schools Abroad",
+    "raw_scope": ""
+  },
+  {
+    "snc": "POL 23-7",
+    "label_parent_extended": "POLITICAL AFFAIRS & RELATIONS: INTERNAL SECURITY. COUNTER-INSURGENCY.: Infiltration. Subversion. Sabotage.",
+    "raw_scope": ""
+  },
+  {
+    "snc": "FT",
+    "label_parent_extended": "FOREIGN TRADE",
+    "raw_scope": ""
+  },
+  {
+    "snc": "AID 8-4",
+    "label_parent_extended": "AID: GRANTS. TECHNICAL ASSISTANCE.: Labor",
+    "raw_scope": ""
+  },
+  {
+    "snc": "POL 23",
+    "label_parent_extended": "POLITICAL AFFAIRS & RELATIONS: INTERNAL SECURITY. COUNTER-INSURGENCY.",
+    "raw_scope": "Includes program to strengthen internal defense as means of counteracting potential or actual insurgency."
+  },
+  {
+    "snc": "SOC 10",
+    "label_parent_extended": "SOCIAL CONDITIONS: DISASTERS & DISASTER RELIEF",
+    "raw_scope": ""
+  },
+  {
+    "snc": "LAB",
+    "label_parent_extended": "LABOR & MANPOWER",
+    "raw_scope": ""
+  },
+  {
+    "snc": "POL 18-1",
+    "label_parent_extended": "POLITICAL AFFAIRS & RELATIONS: PROVINCIAL, MUNICIPAL & STATE GOVERNMENT: Elections",
+    "raw_scope": "For election of state and local persons to national office, SEE: POL 14,"
+  },
+  {
+    "snc": "ORG 7",
+    "label_parent_extended": "ORGANIZATION & ADMINISTRATION: VISITS",
+    "raw_scope": ""
+  },
+  {
+    "snc": "ORG 11",
+    "label_parent_extended": "ORGANIZATION & ADMINISTRATION: INSPECTIONS",
+    "raw_scope": ""
+  },
+  {
+    "snc": "CA 18",
+    "label_parent_extended": "",
+    "raw_scope": ""
+  },
+  {
+    "snc": "AID 15",
+    "label_parent_extended": "AID: PL 480. FOOD FOR PEACE PROGRAM",
+    "raw_scope": ""
+  },
+  {
+    "snc": "AE",
+    "label_parent_extended": "ATOMIC ENERGY",
+    "raw_scope": ""
+  },
+  {
+    "snc": "TP 15",
+    "label_parent_extended": "TRADE PROMOTION & ASSISTANCE: TRADE & INVESTMENT OPPORTUNITIES",
+    "raw_scope": ""
+  },
+  {
+    "snc": "TP 10",
+    "label_parent_extended": "TRADE PROMOTION & ASSISTANCE: TRADE COMPLAINTS & DISPUTES",
+    "raw_scope": ""
+  },
+  {
+    "snc": "E",
+    "label_parent_extended": "ECONOMIC AFFAIRS (GENERAL)",
+    "raw_scope": "Use for papers which pertain to economic matters of a general nature which cannot be filed under one of the more specific economic subject outlines. Includes general economic analyses and forecasts, economic growth, and development plans and programs not involving aid. SEE: AID outline for economic aid, technical assistance, loans, grants, etc. ECONOMIC INTEGRATION outline for economic integration and collaboration on an international regional basis."
+  },
+  {
+    "snc": "HLTH",
+    "label_parent_extended": "HEALTH & MEDICAL CARE",
+    "raw_scope": ""
+  },
+  {
+    "snc": "INT 7",
+    "label_parent_extended": "INTELLIGENCE: VISITS. MISSIONS.",
+    "raw_scope": ""
+  },
+  {
+    "snc": "SCI",
+    "label_parent_extended": "SCIENCE & TECHNOLOGY",
+    "raw_scope": "Use for papers which concern exploratory, basic research in the sciences, international cooperation, scientific manpower, technological developments of a general nature, and similar matters. The subject breakdowns (SCI 1 through 14) are for use in filing papers of a general nature. The categories which follow (SCI 20 through 64) are intended for use in arranging papers on particular sciences. SEE: INDUSTRIES & COMMODITIES outline for matters which pertain to applied research and development in the industrial world and for the manufacture of scientific instruments and equipment. AGRICULTURE, FUELS & ENERGY, PETROLEUM and other outlines on certain major industries for research and technology as applied to these industries. ATOMIC ENERGY outline for atomic/nuclear basic research and development. SPACE & ASTRONAUTICS outline for space research, exploration and travel. DEFENSE AFFAIRS outline for military research and development, including armaments."
+  },
+  {
+    "snc": "SOC",
+    "label_parent_extended": "SOCIAL CONDITIONS",
+    "raw_scope": "Use for papers on social conditions, customs and problems, plans for and effects of social development, and social welfare services provided by public and private organizations. This outline covers population statistics and growth problems; human rights, including the status of women and protection of the rights of minority groups; and race relations involving discrimination, persecution, genocide, and other forms of race prejudice. SEE: ECONOMIC AFFAIRS (GEN.) outline for living standards and living conditions, including prices, cost of living, land use and reform, etc. AID outline for technical assistance aspects of community or rural development projects. REFUGEES & MIGRATION outline for refugees, escapees, and displaced persons as a social welfare problem. HEALTH & MEDICAL CARE outline for international health program, public health services provided to improve and protect health of the population, and medical assistance rendered in epidemics. CULTURE outline for a nation's culture, cultural development and conflicts, etc. EDUCATION outline for educational levels, trends, and development. LABOR & MANPOWER outline for matters regarding social security, retirement and pensions."
+  },
+  {
+    "snc": "LAB 11",
+    "label_parent_extended": "LABOR & MANPOWER: WAGES. HOURS. WORKING CONDITIONS.",
+    "raw_scope": ""
+  },
+  {
+    "snc": "POL 15-7",
+    "label_parent_extended": "POLITICAL AFFAIRS & RELATIONS: GOVERNMENT: Church-State Relations",
+    "raw_scope": "General materials only. For political activities and influence of religious groups as non-party blocs, SEE: POL 13-6."
+  },
+  {
+    "snc": "POL 13",
+    "label_parent_extended": "POLITICAL AFFAIRS & RELATIONS: NON-PARTY BLOCS",
+    "raw_scope": "Use for materials on blocs, groups, and organizations which engage to some degree in political activities, have impact on government or on political trends and developments or which otherwise have political significance. Includes pressure groups. Exclude: Activities of political exiles, for which SEE: POL 30-2 and demonstrations, riots, and similar disorders in which such non-party groups are involved, for which SEE: POL 25. Subdivide by type alphabetically and thereunder by name if volume warrants."
+  },
+  {
+    "snc": "POL 23-8",
+    "label_parent_extended": "POLITICAL AFFAIRS & RELATIONS: INTERNAL SECURITY. COUNTER-INSURGENCY.: Demonstrations. Riots. Protests.",
+    "raw_scope": "Other than those involving rebellion, for which SEE: POL 23-9. Includes disorders and violent acts, such as arson, bombings, stonings, shootings, and atrocities, as well as passive opposition and non-violent activities, such as picketing and petitions. Also includes suppression and control."
+  },
+  {
+    "snc": "SP 10",
+    "label_parent_extended": "SPACE & ASTRONAUTICS: SPACE FLIGHT & EXPLORATION",
+    "raw_scope": ""
+  },
+  {
+    "snc": "POL 15-5",
+    "label_parent_extended": "POLITICAL AFFAIRS & RELATIONS: GOVERNMENT: Constitution",
+    "raw_scope": ""
+  },
+  {
+    "snc": "POL 15",
+    "label_parent_extended": "POLITICAL AFFAIRS & RELATIONS: GOVERNMENT",
+    "raw_scope": "Formation, structure, reorganization, operating efficiency, centralism or decentralization, etc., of the central government. If useful, designate by name of head (e.g., DeGaulle Government, MacMillan Government). Subdivide by branches and/ or by specific elements or positions (e.g., President, King, Premier, Ministry of Finance) as appropriate for the particular country involved."
+  },
+  {
+    "snc": "POL 12",
+    "label_parent_extended": "POLITICAL AFFAIRS & RELATIONS: POLITICAL PARTIES",
+    "raw_scope": "Use for materials on membership, strength, leadership, finances, party factions and splits, meetings, and related matters pertaining to political parties as such. Exclude: Materials on elections, for which SEE: POL 14; legislative matters, for which SEE: POL 15 -2; and defectors and expellees, for which SEE: POL 3 G,. Subdivide by name of party."
+  },
+  {
+    "snc": "AID 14",
+    "label_parent_extended": "AID: PEACE CORPS",
+    "raw_scope": ""
+  },
+  {
+    "snc": "POL 1-2",
+    "label_parent_extended": "POLITICAL AFFAIRS & RELATIONS: GENERAL POLICY. BACKGROUND.: Basic Policies. Guidelines. Directives.",
+    "raw_scope": "Use for papers so broad in political nature that they cannot be filed under one of the more specific subjects in this outline. Subdivide, as appropriate, by category, country, area or subject. For basic policies dealing with other than political affairs, use appropriate subject outline."
+  },
+  {
+    "snc": "LAB 6-1",
+    "label_parent_extended": "LABOR & MANPOWER: LABOR-MANAGEMENT RELATIONS: Disputes. Strikes.",
+    "raw_scope": ""
+  },
+  {
+    "snc": "SCI 11",
+    "label_parent_extended": "SCIENCE & TECHNOLOGY: RESEARCH",
+    "raw_scope": ""
+  },
+  {
+    "snc": "POL 1-1",
+    "label_parent_extended": "POLITICAL AFFAIRS & RELATIONS: GENERAL POLICY. BACKGROUND.: Contingency Planning",
+    "raw_scope": "Use for papers dealing with development and coordination of U.S., host country or regional political policies for contingency use. Includes intra- and inter-agency arrangements and responsibilities. For contingency planning pertaining to defense matters, SEE: DEF 1-1; pertaining to access to Berlin, SEE: POL 38."
+  },
+  {
+    "snc": "INT 6",
+    "label_parent_extended": "INTELLIGENCE: COLLECTION OF INTELLIGENCE",
+    "raw_scope": ""
+  },
+  {
+    "snc": "SP 12",
+    "label_parent_extended": "SPACE & ASTRONAUTICS: SATELLITES",
+    "raw_scope": ""
+  },
+  {
+    "snc": "DEF 15",
+    "label_parent_extended": "DEFENSE AFFAIRS: BASES. INSTALLATIONS.",
+    "raw_scope": ""
+  },
+  {
+    "snc": "SOC 12",
+    "label_parent_extended": "SOCIAL CONDITIONS: RELIGION",
+    "raw_scope": ""
+  },
+  {
+    "snc": "POL 17",
+    "label_parent_extended": "POLITICAL AFFAIRS & RELATIONS: DIPLOMATIC & CONSULAR REPRESENTATION",
+    "raw_scope": "Includes establishment, status, termination, persona non grata, and protocol. Appointment of diplomatic representative to an international organization may be shown by treating the organization as a country for filing purposes only. SEE: Administration outlines for administrative matters involving U.S. diplomatic and consular personnel."
+  },
+  {
+    "snc": "PER 9",
+    "label_parent_extended": "PERSONNEL: TRAINING & DEVELOPMENT",
+    "raw_scope": ""
+  },
+  {
+    "snc": "PR",
+    "label_parent_extended": "PUBLIC RELATIONS",
+    "raw_scope": ""
+  },
+  {
+    "snc": "SY",
+    "label_parent_extended": "SECURITY",
+    "raw_scope": ""
+  },
+  {
+    "snc": "PER",
+    "label_parent_extended": "PERSONNEL",
+    "raw_scope": ""
+  },
+  {
+    "snc": "ES",
+    "label_parent_extended": "",
+    "raw_scope": ""
+  },
+  {
+    "snc": "FMGT",
+    "label_parent_extended": "",
+    "raw_scope": ""
+  },
+  {
+    "snc": "FSV",
+    "label_parent_extended": "FACILITATIVE SERVICES",
+    "raw_scope": ""
+  },
+  {
+    "snc": "LEG",
+    "label_parent_extended": "LEGISLATIVE & LEGAL AFFAIRS",
+    "raw_scope": ""
+  },
+  {
+    "snc": "ACC",
+    "label_parent_extended": "ACCOUNTING & DISBURSING",
+    "raw_scope": ""
+  },
+  {
+    "snc": "PER 11",
+    "label_parent_extended": "PERSONNEL: COMPENSATION",
+    "raw_scope": ""
+  },
+  {
+    "snc": "BUD",
+    "label_parent_extended": "",
+    "raw_scope": ""
+  },
+  {
+    "snc": "ORG",
+    "label_parent_extended": "ORGANIZATION & ADMINISTRATION",
+    "raw_scope": ""
+  },
+  {
+    "snc": "PER 4",
+    "label_parent_extended": "PERSONNEL: STAFFING. COMPLEMENT.",
+    "raw_scope": ""
+  },
+  {
+    "snc": "ORG 10",
+    "label_parent_extended": "ORGANIZATION & ADMINISTRATION: MANAGEMENT IMPROVEMENT",
+    "raw_scope": ""
+  },
+  {
+    "snc": "PER 15",
+    "label_parent_extended": "PERSONNEL: EMPLOYEE RELATIONS & SERVICES",
+    "raw_scope": ""
+  },
+  {
+    "snc": "ACC 11",
+    "label_parent_extended": "ACCOUNTING & DISBURSING: ACCOUNTS RECEIVABLE",
+    "raw_scope": ""
+  },
+  {
+    "snc": "PER 13",
+    "label_parent_extended": "PERSONNEL: EMPLOYMENT",
+    "raw_scope": ""
+  },
+  {
+    "snc": "POL 3",
+    "label_parent_extended": "POLITICAL AFFAIRS & RELATIONS: ORGANIZATIONS & ALIGNMENTS",
+    "raw_scope": "Political communities of nations, regional alignments and groupings, such as United Nations, Nordic Council, Organization of American States (OAS), Council of Europe, and such federations and leagues as Arab League, Afro-Asian Peoples Solidarity Organization, etc. Includes conferences of such organizations. Subdivide by name of organization and name, date, and location of conference if volume warrants."
+  },
+  {
+    "snc": "C",
+    "label_parent_extended": "",
+    "raw_scope": ""
+  },
+  {
+    "snc": "CR 3",
+    "label_parent_extended": "COMMUNICATIONS & RECORDS: MAIL FACILITIES & SERVICES",
+    "raw_scope": ""
+  },
+  {
+    "snc": "DEF 19",
+    "label_parent_extended": "DEFENSE AFFAIRS: MILITARY ASSISTANCE",
+    "raw_scope": ""
+  },
+  {
+    "snc": "PO",
+    "label_parent_extended": "",
+    "raw_scope": ""
+  },
+  {
+    "snc": "PET",
+    "label_parent_extended": "",
+    "raw_scope": ""
+  },
+  {
+    "snc": "POL 1",
+    "label_parent_extended": "POLITICAL AFFAIRS & RELATIONS: GENERAL POLICY. BACKGROUND.",
+    "raw_scope": "Includes history and general briefing information, general foreign and national policy trends, bibliography, and similar materials of general political significance."
+  },
+  {
+    "snc": "TEL",
+    "label_parent_extended": "TELECOMMUNICATIONS",
+    "raw_scope": ""
+  },
+  {
+    "snc": "DEF 12",
+    "label_parent_extended": "DEFENSE AFFAIRS: ARMAMENTS",
+    "raw_scope": ""
+  },
+  {
+    "snc": "DEF 7",
+    "label_parent_extended": "DEFENSE AFFAIRS: VISITS. MISSIONS.",
+    "raw_scope": ""
+  },
+  {
+    "snc": "IT",
+    "label_parent_extended": "INLAND TRANSPORT",
+    "raw_scope": ""
+  },
+  {
+    "snc": "DEF 18",
+    "label_parent_extended": "DEFENSE AFFAIRS: ARMS CONTROL & DISARMAMENT",
+    "raw_scope": ""
+  },
+  {
+    "snc": "OS",
+    "label_parent_extended": "",
+    "raw_scope": ""
+  },
+  {
+    "snc": "CSM",
+    "label_parent_extended": "COMMUNISM",
+    "raw_scope": ""
+  },
+  {
+    "snc": "INCO 12",
+    "label_parent_extended": "INDUSTRIES & COMMODITIES: PRODUCTION & CONSUMPTION",
+    "raw_scope": ""
+  },
+  {
+    "snc": "INCO 3",
+    "label_parent_extended": "INDUSTRIES & COMMODITIES: ORGANIZATIONS & CONFERENCES",
+    "raw_scope": ""
+  },
+  {
+    "snc": "STR",
+    "label_parent_extended": "STRATEGIC TRADE CONTROL",
+    "raw_scope": ""
+  },
+  {
+    "snc": "POL 27",
+    "label_parent_extended": "POLITICAL AFFAIRS & RELATIONS: MILITARY OPERATIONS",
+    "raw_scope": "Use for declared or undeclared warfare involving two or more nations, i.e., that in which different nations attack one another, eros s boundaries, etc., and for civil war and other kinds of armed conflict which are limited to within a single country, such as restoration of law and order, and protection of the civil population. Includes use of military forces as a deterrent or to exert political pressure, even though such forces are not engaged in combat."
+  },
+  {
+    "snc": "POL 33-6",
+    "label_parent_extended": "POLITICAL AFFAIRS & RELATIONS: WATERS.  BOUNDARIES.: High Seas",
+    "raw_scope": "Includes freedom of navigation, piracy, right of hot pursuit, exploitation of the seabed, rights to lay cables and pipelines, rights to fish on the high seas, detention of ships; and disputes, violations, incidents, and claims."
+  },
+  {
+    "snc": "POL 30",
+    "label_parent_extended": "POLITICAL AFFAIRS & RELATIONS: DEFECTORS & EXPELLEES",
+    "raw_scope": "Use for materials on defector and expellee matters in general, such as asylum policy, and for materials on individuals in or from host country, usually of importance or prominence in political, professional, or private life, who have been forced to leave or who voluntarily leave their native country because of their political views. Includes departure and arrival, request for and refusal or granting of asylum, and their political activities in behalf of their native country while in exile. Subdivide by name of individual if volume warrants. For refugees as a social problem, SEE: REF outline; for visa matters concerning refugees and escapees, SEE: V outline."
+  },
+  {
+    "snc": "POL 33",
+    "label_parent_extended": "POLITICAL AFFAIRS & RELATIONS: WATERS.  BOUNDARIES.",
+    "raw_scope": "Includes flood prevention on international waters."
+  },
+  {
+    "snc": "POL 6",
+    "label_parent_extended": "POLITICAL AFFAIRS & RELATIONS: PEOPLE. BIOGRAPHIC DATA.",
+    "raw_scope": "Other than military personnel, for which SEE: DEF 6-7; government officials in office, for which SEE: POL 15; and Communists and fellow travelers, for which SEE: CSM 8 (except posts in Communist countries which should use POL 6 or 15)."
+  },
+  {
+    "snc": "REF",
+    "label_parent_extended": "REFUGEES & MIGRATION",
+    "raw_scope": ""
+  },
+  {
+    "snc": "SOC 13",
+    "label_parent_extended": "SOCIAL CONDITIONS: POPULATION",
+    "raw_scope": ""
+  },
+  {
+    "snc": "RG 84",
+    "label_parent_extended": "",
+    "raw_scope": ""
+  },
+  {
+    "snc": "SP 1",
+    "label_parent_extended": "SPACE & ASTRONAUTICS: GENERAL POLICY. PLANS. COORDINATION.",
+    "raw_scope": ""
+  },
+  {
+    "snc": "CR",
+    "label_parent_extended": "COMMUNICATIONS & RECORDS",
+    "raw_scope": ""
+  },
+  {
+    "snc": "FN 13",
+    "label_parent_extended": "FINANCE: CAPITAL MOVEMENTS",
+    "raw_scope": ""
+  },
+  {
+    "snc": "FN 9",
+    "label_parent_extended": "FINANCE: FOREIGN INVESTMENT",
+    "raw_scope": ""
+  },
+  {
+    "snc": "FN 12",
+    "label_parent_extended": "FINANCE: BALANCE OF PAYMENTS",
+    "raw_scope": ""
+  },
+  {
+    "snc": "FN 16",
+    "label_parent_extended": "FINANCE: REVENUE. TAXATION.",
+    "raw_scope": ""
+  },
+  {
+    "snc": "AV 4",
+    "label_parent_extended": "AVIATION (CIVIL): AGREEMENTS",
+    "raw_scope": ""
+  },
+  {
+    "snc": "FN 15",
+    "label_parent_extended": "FINANCE: BUDGET",
+    "raw_scope": ""
+  },
+  {
+    "snc": "FN 6",
+    "label_parent_extended": "FINANCE: BANKS & BANKING",
+    "raw_scope": ""
+  },
+  {
+    "snc": "AID 8",
+    "label_parent_extended": "AID: GRANTS. TECHNICAL ASSISTANCE.",
+    "raw_scope": ""
+  },
+  {
+    "snc": "FN 3",
+    "label_parent_extended": "FINANCE: ORGANIZATIONS & CONFERENCES",
+    "raw_scope": ""
+  },
+  {
+    "snc": "FN 10",
+    "label_parent_extended": "FINANCE: FOREIGN EXCHANGE",
+    "raw_scope": ""
+  },
+  {
+    "snc": "E 3",
+    "label_parent_extended": "ECONOMIC AFFAIRS (GENERAL): ORGANIZATIONS & CONFERENCES",
+    "raw_scope": ""
+  },
+  {
+    "snc": "FSE",
+    "label_parent_extended": "",
+    "raw_scope": ""
+  },
+  {
+    "snc": "E 1",
+    "label_parent_extended": "ECONOMIC AFFAIRS (GENERAL): GENERAL POLICIES, PLANS, PROGRAMS.",
+    "raw_scope": "Use only for material which is so broad in content that it cannot he filed under one of the more specific subjects in this outline. For economic development plans, SEE: E 5."
+  },
+  {
+    "snc": "AID 3",
+    "label_parent_extended": "AID: ORGANIZATIONS & CONFERENCES",
+    "raw_scope": ""
+  },
+  {
+    "snc": "POL 4",
+    "label_parent_extended": "POLITICAL AFFAIRS & RELATIONS: AGREEMENTS. TREATIES.",
+    "raw_scope": "Use only for material which cannot be filed under one of the more specific subjects in this outline. Includes lists of treaties signed during a given period, general treaties, registration and publication of treaties and international agreements, and Circular 175 instructions."
+  },
+  {
+    "snc": "TP 7",
+    "label_parent_extended": "TRADE PROMOTION & ASSISTANCE: VISITS. MISSIONS.",
+    "raw_scope": ""
+  },
+  {
+    "snc": "INF 4",
+    "label_parent_extended": "INFORMATION: EXCHANGE AGREEMENTS",
+    "raw_scope": ""
+  },
+  {
+    "snc": "PRM",
+    "label_parent_extended": "",
+    "raw_scope": ""
+  },
+  {
+    "snc": "PRM 1-2",
+    "label_parent_extended": "",
+    "raw_scope": ""
+  },
+  {
+    "snc": "PRM 1-4",
+    "label_parent_extended": "",
+    "raw_scope": ""
+  },
+  {
+    "snc": "OCM",
+    "label_parent_extended": "",
+    "raw_scope": ""
+  },
+  {
+    "snc": "PRM 1-5",
+    "label_parent_extended": "",
+    "raw_scope": ""
+  },
+  {
+    "snc": "PRM 1-3",
+    "label_parent_extended": "",
+    "raw_scope": ""
+  },
+  {
+    "snc": "PRM 1",
+    "label_parent_extended": "",
+    "raw_scope": ""
+  },
+  {
+    "snc": "PRM 1-1",
+    "label_parent_extended": "",
+    "raw_scope": ""
+  },
+  {
+    "snc": "PRM 7-2",
+    "label_parent_extended": "",
+    "raw_scope": ""
+  },
+  {
+    "snc": "PRM 6",
+    "label_parent_extended": "",
+    "raw_scope": ""
+  },
+  {
+    "snc": "PRM 7-5",
+    "label_parent_extended": "",
+    "raw_scope": ""
+  },
+  {
+    "snc": "PRM 4",
+    "label_parent_extended": "",
+    "raw_scope": ""
+  },
+  {
+    "snc": "SOC 2",
+    "label_parent_extended": "SOCIAL CONDITIONS: GENERAL REPORTS & STATISTICS",
+    "raw_scope": ""
+  },
+  {
+    "snc": "SOC 6",
+    "label_parent_extended": "SOCIAL CONDITIONS: SOCIAL DEVELOPMENT",
+    "raw_scope": ""
+  },
+  {
+    "snc": "EDX 16",
+    "label_parent_extended": "EDUCATIONAL & CULTURAL EXCHANGE: FOREIGN SPECIALIST PROGRAM",
+    "raw_scope": ""
+  },
+  {
+    "snc": "AGR 1",
+    "label_parent_extended": "AGRICULTURE: GENERAL POLICY. PLANS. COORDINATION.",
+    "raw_scope": ""
+  },
+  {
+    "snc": "CUL 16",
+    "label_parent_extended": "CULTURE: CULTURAL PRESENTATIONS",
+    "raw_scope": ""
+  },
+  {
+    "snc": "EDU 9",
+    "label_parent_extended": "EDUCATION: EDUCATIONAL SYSTEM. INSTITUTIONS.",
+    "raw_scope": ""
+  },
+  {
+    "snc": "CU",
+    "label_parent_extended": "",
+    "raw_scope": ""
+  },
+  {
+    "snc": "CUL 9",
+    "label_parent_extended": "CULTURE: MATERIALS PRESENTATION",
+    "raw_scope": ""
+  },
+  {
+    "snc": "EDU 11",
+    "label_parent_extended": "EDUCATION: FOREIGN LANGUAGE STUDY AND TRAINING",
+    "raw_scope": ""
+  },
+  {
+    "snc": "EDX 11",
+    "label_parent_extended": "",
+    "raw_scope": ""
+  },
+  {
+    "snc": "AGR 2",
+    "label_parent_extended": "AGRICULTURE: GENERAL REPORTS & STATISTICS",
+    "raw_scope": ""
+  },
+  {
+    "snc": "CUL 11",
+    "label_parent_extended": "CULTURE: LIBRARIES & CENTERS",
+    "raw_scope": ""
+  },
+  {
+    "snc": "EDU 9-3",
+    "label_parent_extended": "EDUCATION: EDUCATIONAL SYSTEM. INSTITUTIONS.: College & University",
+    "raw_scope": ""
+  },
+  {
+    "snc": "AID 15-4",
+    "label_parent_extended": "AID: PL 480. FOOD FOR PEACE PROGRAM: PL 480 - Agreements",
+    "raw_scope": ""
+  },
+  {
+    "snc": "CUL 8",
+    "label_parent_extended": "CULTURE: FAIRS, EXHIBITS & DISPLAYS",
+    "raw_scope": ""
+  },
+  {
+    "snc": "EDX 19-5",
+    "label_parent_extended": "EDUCATIONAL & CULTURAL EXCHANGE: U.S. PROFESSOR PROGRAM: English Language Teaching Program",
+    "raw_scope": ""
+  },
+  {
+    "snc": "CUL 3",
+    "label_parent_extended": "CULTURE: ORGANIZATIONS & CONFERENCES",
+    "raw_scope": ""
+  },
+  {
+    "snc": "EDX 15",
+    "label_parent_extended": "EDUCATIONAL & CULTURAL EXCHANGE: FOREIGN LEADER PROGRAM",
+    "raw_scope": ""
+  },
+  {
+    "snc": "EDX 33",
+    "label_parent_extended": "EDUCATIONAL & CULTURAL EXCHANGE: EXCHANGE VISITOR PROGRAM",
+    "raw_scope": ""
+  },
+  {
+    "snc": "EDX 28",
+    "label_parent_extended": "EDUCATIONAL & CULTURAL EXCHANGE: PROGRAMMING & FACILITATIVE SERVICES",
+    "raw_scope": ""
+  },
+  {
+    "snc": "AV 13",
+    "label_parent_extended": "AVIATION (CIVIL): NAVIGATION & SAFETY",
+    "raw_scope": ""
+  },
+  {
+    "snc": "CUL 9-8",
+    "label_parent_extended": "CULTURE: MATERIALS PRESENTATION: Other Materials",
+    "raw_scope": ""
+  },
+  {
+    "snc": "EDU 4",
+    "label_parent_extended": "EDUCATION: AGREEMENTS",
+    "raw_scope": ""
+  },
+  {
+    "snc": "EDX 19",
+    "label_parent_extended": "EDUCATIONAL & CULTURAL EXCHANGE: U.S. PROFESSOR PROGRAM",
+    "raw_scope": ""
+  },
+  {
+    "snc": "AID 1",
+    "label_parent_extended": "AID: GENERAL POLICY. PLANS. COORDINATION",
+    "raw_scope": ""
+  },
+  {
+    "snc": "AV 12",
+    "label_parent_extended": "AVIATION (CIVIL): AIRCRAFT & AERONAUTICAL EQUIPMENT",
+    "raw_scope": ""
+  },
+  {
+    "snc": "EDU 2",
+    "label_parent_extended": "EDUCATION: REPORTS & STATISTICS",
+    "raw_scope": ""
+  },
+  {
+    "snc": "AV 5",
+    "label_parent_extended": "AVIATION (CIVIL): LAWS & REGULATIONS",
+    "raw_scope": ""
+  },
+  {
+    "snc": "AID 15-7",
+    "label_parent_extended": "AID: PL 480. FOOD FOR PEACE PROGRAM: PL 480 - Program Transactions",
+    "raw_scope": ""
+  },
+  {
+    "snc": "EDU 10-4",
+    "label_parent_extended": "EDUCATION: ENGLISH LANGUAGE TRAINING: English Teaching by Radio & TV",
+    "raw_scope": ""
+  },
+  {
+    "snc": "AV 15",
+    "label_parent_extended": "AVIATION (CIVIL): NON-SCHEDULED OPERATIONS",
+    "raw_scope": ""
+  },
+  {
+    "snc": "AID 7",
+    "label_parent_extended": "AID: PROGRAM OPERATION. TERMINATION.",
+    "raw_scope": ""
+  },
+  {
+    "snc": "AID 2",
+    "label_parent_extended": "AID: GENERAL REPORTS & STATISTICS",
+    "raw_scope": ""
+  },
+  {
+    "snc": "EDX 14",
+    "label_parent_extended": "EDUCATIONAL & CULTURAL EXCHANGE: TEACHER DEVELOPMENT PROGRAM",
+    "raw_scope": ""
+  },
+  {
+    "snc": "CUL 6",
+    "label_parent_extended": "CULTURE: COMMEMORATIVE CELEBRATIONS. HOLIDAYS.",
+    "raw_scope": ""
+  },
+  {
+    "snc": "EDX 28-2",
+    "label_parent_extended": "EDUCATIONAL & CULTURAL EXCHANGE: PROGRAMMING & FACILITATIVE SERVICES: English Language Training",
+    "raw_scope": ""
+  },
+  {
+    "snc": "EDU 9-4",
+    "label_parent_extended": "EDUCATION: EDUCATIONAL SYSTEM. INSTITUTIONS.: Adult. Vocational.",
+    "raw_scope": ""
+  },
+  {
+    "snc": "EDX 10",
+    "label_parent_extended": "EDUCATIONAL & CULTURAL EXCHANGE: FOREIGN STUDENT PROGRAM",
+    "raw_scope": ""
+  },
+  {
+    "snc": "AGR 3",
+    "label_parent_extended": "AGRICULTURE: ORGANIZATIONS & CONFERENCES",
+    "raw_scope": ""
+  },
+  {
+    "snc": "SCI 25",
+    "label_parent_extended": "SCIENCE & TECHNOLOGY: GEOGRAPHY.CARTOGRAPHY.",
+    "raw_scope": ""
+  },
+  {
+    "snc": "HLTH 8-3",
+    "label_parent_extended": "HEALTH & MEDICAL CARE: DISEASES & CONDITIONS: Epidemics",
+    "raw_scope": ""
+  },
+  {
+    "snc": "SCI 10",
+    "label_parent_extended": "SCIENCE & TECHNOLOGY: SCIENTIFIC INFORMATION",
+    "raw_scope": ""
+  },
+  {
+    "snc": "REF 11-1",
+    "label_parent_extended": "REFUGEES & MIGRATION: REESTABLISHMENT: Movement",
+    "raw_scope": ""
+  },
+  {
+    "snc": "POL 23-11",
+    "label_parent_extended": "POLITICAL AFFAIRS & RELATIONS: INTERNAL SECURITY. COUNTER-INSURGENCY.: Travel Observation",
+    "raw_scope": "Use for reports on movement of people. Includes lists of travelers"
+  },
+  {
+    "snc": "SCI 26",
+    "label_parent_extended": "SCIENCE & TECHNOLOGY: GEOLOGY",
+    "raw_scope": ""
+  },
+  {
+    "snc": "SCI 2",
+    "label_parent_extended": "SCIENCE & TECHNOLOGY: GENERAL REPORTS & STATISTICS",
+    "raw_scope": ""
+  },
+  {
+    "snc": "SCI 31",
+    "label_parent_extended": "SCIENCE & TECHNOLOGY: OCEANOGRAPHY",
+    "raw_scope": ""
+  },
+  {
+    "snc": "SP 13",
+    "label_parent_extended": "",
+    "raw_scope": ""
+  },
+  {
+    "snc": "HLTH 2",
+    "label_parent_extended": "HEALTH & MEDICAL CARE: GENERAL REPORTS & STATISTICS",
+    "raw_scope": ""
+  },
+  {
+    "snc": "POL 17-5",
+    "label_parent_extended": "POLITICAL AFFAIRS & RELATIONS: DIPLOMATIC & CONSULAR REPRESENTATION: Arrival & Departure. Change in Status.",
+    "raw_scope": "Notices sent or received concerning temporary absences, arrivals, departures, changes of rank, etc., of diplomatic and consular personnel."
+  },
+  {
+    "snc": "HLTH 10",
+    "label_parent_extended": "HEALTH & MEDICAL CARE: RADIATION HAZARDS & EFFECTS",
+    "raw_scope": ""
+  },
+  {
+    "snc": "SP 12-3",
+    "label_parent_extended": "SPACE & ASTRONAUTICS: SATELLITES: Weather Satellites",
+    "raw_scope": ""
+  },
+  {
+    "snc": "HLTH 8-2",
+    "label_parent_extended": "HEALTH & MEDICAL CARE: DISEASES & CONDITIONS: Prevention. Control. Eradication.",
+    "raw_scope": ""
+  },
+  {
+    "snc": "POL 6-3",
+    "label_parent_extended": "POLITICAL AFFAIRS & RELATIONS: PEOPLE. BIOGRAPHIC DATA.: Awards & Gifts",
+    "raw_scope": ""
+  },
+  {
+    "snc": "HLTH 14",
+    "label_parent_extended": "HEALTH & MEDICAL CARE: HEALTH & MEDICAL SERVICES",
+    "raw_scope": ""
+  },
+  {
+    "snc": "AE 2",
+    "label_parent_extended": "ATOMIC ENERGY: GENERAL REPORTS & STATISTICS",
+    "raw_scope": ""
+  },
+  {
+    "snc": "SOC 9",
+    "label_parent_extended": "SOCIAL CONDITIONS: SOCIAL WELFARE SERVICES",
+    "raw_scope": ""
+  },
+  {
+    "snc": "POL 17-2",
+    "label_parent_extended": "POLITICAL AFFAIRS & RELATIONS: DIPLOMATIC & CONSULAR REPRESENTATION: Immunities. Privileges.",
+    "raw_scope": "Includes free entry and customs courtesies, and denial, withholding, and restrictions re immunities and privileges."
+  },
+  {
+    "snc": "HLTH 8",
+    "label_parent_extended": "HEALTH & MEDICAL CARE: DISEASES & CONDITIONS",
+    "raw_scope": ""
+  },
+  {
+    "snc": "POL 17-3",
+    "label_parent_extended": "POLITICAL AFFAIRS & RELATIONS: DIPLOMATIC & CONSULAR REPRESENTATION: Diplomatic & Consular Lists",
+    "raw_scope": ""
+  },
+  {
+    "snc": "SOC 14",
+    "label_parent_extended": "SOCIAL CONDITIONS: HUMAN RIGHTS. RACE RELATIONS.",
+    "raw_scope": "Includes prevention of discrimination, apartheid, protection of minorities, segregation, and desegregation. Subdivide by race, group, or type of discrimination (e. g., employment, education, religion, political rights, etc.)."
+  },
+  {
+    "snc": "POL 6-2",
+    "label_parent_extended": "POLITICAL AFFAIRS & RELATIONS: PEOPLE. BIOGRAPHIC DATA.: Congratulations & Condolences",
+    "raw_scope": ""
+  },
+  {
+    "snc": "SCI 7",
+    "label_parent_extended": "SCIENCE & TECHNOLOGY: VISITS. MISSIONS.",
+    "raw_scope": ""
+  },
+  {
+    "snc": "POL 17-4",
+    "label_parent_extended": "POLITICAL AFFAIRS & RELATIONS: DIPLOMATIC & CONSULAR REPRESENTATION: Ceremonial & Social Affairs",
+    "raw_scope": "Except those involving contacts with Communist representatives, for which SEE: POL 17-8, Includes Independence Day anniversary celebrations, Christmas and New Year's greetings between nations, etc. For commemorative celebrations and holidays not involving diplomatic relations, SES: CUL 6"
+  },
+  {
+    "snc": "POL 19",
+    "label_parent_extended": "POLITICAL AFFAIRS & RELATIONS: GOVERNMENT OF DEPENDENCIES",
+    "raw_scope": "Includes administration of dependencies and territories, relationship to mother country and self-determination. Also includes activities of such bodies as Caribbean Organization, South Pacific Commission, and UN Trusteeship Council. Subdivide by name of dependency, organization, etc., if volume warrants."
+  },
+  {
+    "snc": "SOC 13-3",
+    "label_parent_extended": "SOCIAL CONDITIONS: POPULATION: Growth. Decline.",
+    "raw_scope": ""
+  },
+  {
+    "snc": "POL 16",
+    "label_parent_extended": "POLITICAL AFFAIRS & RELATIONS: INDEPENDENCE. RECOGNITION.",
+    "raw_scope": "Whether or not a country is to be recognized as independent, self-governing, and its government politically acceptable, as well as actual recognition. Includes messages of congratulation on independence and recognition of new countries. SEE: POL 17 for diplomatic and consular representation; POL 17-4 for commemorative celebration messages."
+  },
+  {
+    "snc": "HLTH 14-7",
+    "label_parent_extended": "HEALTH & MEDICAL CARE: HEALTH & MEDICAL SERVICES: Health & Medical Plans",
+    "raw_scope": ""
+  },
+  {
+    "snc": "SCI 61",
+    "label_parent_extended": "SCIENCE & TECHNOLOGY: ANTHROPOLOGY",
+    "raw_scope": ""
+  },
+  {
+    "snc": "HLTH 17",
+    "label_parent_extended": "HEALTH & MEDICAL CARE: FOOD & DRUG LAWS & REGULATIONS",
+    "raw_scope": ""
+  },
+  {
+    "snc": "SCI 41-1",
+    "label_parent_extended": "SCIENCE & TECHNOLOGY: BIOLOGY: Biology Research",
+    "raw_scope": ""
+  },
+  {
+    "snc": "SOC 7",
+    "label_parent_extended": "SOCIAL CONDITIONS: VISITS",
+    "raw_scope": ""
+  },
+  {
+    "snc": "POL 17-7",
+    "label_parent_extended": "POLITICAL AFFAIRS & RELATIONS: DIPLOMATIC & CONSULAR REPRESENTATION: Foreign Mission Administration",
+    "raw_scope": "Use for all material relating to administration and operation of foreign missions (e. g., site acquisition for new chancery). For U.S. post administration, SEE: Administration outlines."
+  },
+  {
+    "snc": "POL 23-10",
+    "label_parent_extended": "POLITICAL AFFAIRS & RELATIONS: INTERNAL SECURITY. COUNTER-INSURGENCY.: Travel Control",
+    "raw_scope": "Use for material on travel controls of foreign countries, both internal and external, which are not concerned with alien applicants for U.S. visas, U.S. visa reciprocity, or U.S. travelers. For exit permits and other travel controls on (l) national of a foreign country applying for a U.S. visa, SEE: V-name; (2) U.S. citizen wishing to leave a foreign country, SEE: PS 7-6 or PS-name; (3) alien leaving U.S., SEE: V-name; (4) effect on U.S. visa operations or reciprocity, SEE: V 5; ( 5) effect on U.S. travelers, SEE: PPT 7-1. For travel controls imposed on diplomatic and consular personnel, SEE: POL 17-2."
+  },
+  {
+    "snc": "HLTH 7",
+    "label_parent_extended": "HEALTH & MEDICAL CARE: VISITS",
+    "raw_scope": ""
+  },
+  {
+    "snc": "SP 7",
+    "label_parent_extended": "SPACE & ASTRONAUTICS: VISITS",
+    "raw_scope": ""
+  },
+  {
+    "snc": "INCO 2",
+    "label_parent_extended": "INDUSTRIES & COMMODITIES: GENERAL REPORTS & STATISTICS",
+    "raw_scope": ""
+  },
+  {
+    "snc": "INCO 15",
+    "label_parent_extended": "INDUSTRIES & COMMODITIES: INDUSTRIAL ORGANIZATION & CONTROL",
+    "raw_scope": ""
+  },
+  {
+    "snc": "INCO 6",
+    "label_parent_extended": "INDUSTRIES & COMMODITIES: COMPANIES. COOPERATIVES.",
+    "raw_scope": ""
+  },
+  {
+    "snc": "TP 21",
+    "label_parent_extended": "TRADE PROMOTION & ASSISTANCE: ADVERTISING",
+    "raw_scope": ""
+  },
+  {
+    "snc": "TP 6",
+    "label_parent_extended": "TRADE PROMOTION & ASSISTANCE: COMMERCIAL ORGANIZATIONS",
+    "raw_scope": ""
+  },
+  {
+    "snc": "TP 7-1",
+    "label_parent_extended": "TRADE PROMOTION & ASSISTANCE: VISITS. MISSIONS.: U.S. Citizens",
+    "raw_scope": ""
+  },
+  {
+    "snc": "TP 12",
+    "label_parent_extended": "TRADE PROMOTION & ASSISTANCE: CLAIMS AGAINST HOST GOVERNMENT",
+    "raw_scope": ""
+  },
+  {
+    "snc": "TP 16",
+    "label_parent_extended": "TRADE PROMOTION & ASSISTANCE: TRADE LISTS",
+    "raw_scope": ""
+  },
+  {
+    "snc": "SHW",
+    "label_parent_extended": "",
+    "raw_scope": ""
+  },
+  {
+    "snc": "TP 7-3",
+    "label_parent_extended": "TRADE PROMOTION & ASSISTANCE: VISITS. MISSIONS.: Tourism",
+    "raw_scope": ""
+  },
+  {
+    "snc": "IT 7-10",
+    "label_parent_extended": "INLAND TRANSPORT: HIGHWAY TRANSPORT: Rates & Charges (Hwy)",
+    "raw_scope": ""
+  },
+  {
+    "snc": "TP 8",
+    "label_parent_extended": "TRADE PROMOTION & ASSISTANCE: FAIRS & EXHIBITIONS",
+    "raw_scope": ""
+  },
+  {
+    "snc": "TP 7-2",
+    "label_parent_extended": "TRADE PROMOTION & ASSISTANCE: VISITS. MISSIONS.: Foreign Nationals",
+    "raw_scope": ""
+  },
+  {
+    "snc": "POL 26",
+    "label_parent_extended": "POLITICAL AFFAIRS & RELATIONS: REBELLION.  COUPS. INSURGENCY.",
+    "raw_scope": "Includes any type of planned, attempted, or actual revolt and actions to suppress it."
+  },
+  {
+    "snc": "SCI 6",
+    "label_parent_extended": "SCIENCE & TECHNOLOGY: ASSISTANCE TO SCIENTISTS",
+    "raw_scope": ""
+  },
+  {
+    "snc": "POL 33-4",
+    "label_parent_extended": "POLITICAL AFFAIRS & RELATIONS: WATERS.  BOUNDARIES.: Territorial Waters",
+    "raw_scope": "Includes contiguous zone, subadjacent seabed and subsoil, limits, baselines, right of innocent passage, fishing, and disputes, violations, incidents, and claims, etc."
+  },
+  {
+    "snc": "POL 23-3",
+    "label_parent_extended": "POLITICAL AFFAIRS & RELATIONS: INTERNAL SECURITY. COUNTER-INSURGENCY.: Forces. Organizations.",
+    "raw_scope": "Organization, strength, capabilities, coordination, and political reliability."
+  },
+  {
+    "snc": "POL 32-1",
+    "label_parent_extended": "POLITICAL AFFAIRS & RELATIONS: TERRITORY. BOUNDARIES.: Territory & Boundary Disputes.  Violations.  Incidents",
+    "raw_scope": "Other than those involving air space or water, for which SEE: POL 31-1, 33-4, 33-5, and 33-6. Includes irredentism and territorial claims except island claims, for which SEE: POL 32-6. For disputes which enlarge into extensive military operations, SEE: POL 27."
+  },
+  {
+    "snc": "PER 18",
+    "label_parent_extended": "PERSONNEL: POSITION DESCRIPTIONS. CLASSIFICATION.",
+    "raw_scope": ""
+  },
+  {
+    "snc": "PER 12",
+    "label_parent_extended": "",
+    "raw_scope": ""
+  },
+  {
+    "snc": "PER 8",
+    "label_parent_extended": "PERSONNEL: ATTENDANCE & LEAVE",
+    "raw_scope": ""
+  },
+  {
+    "snc": "PER 11-9",
+    "label_parent_extended": "PERSONNEL: COMPENSATION: Retail Price Schedules",
+    "raw_scope": ""
+  },
+  {
+    "snc": "PER 11-7",
+    "label_parent_extended": "PERSONNEL: COMPENSATION: Post Differential Allowances",
+    "raw_scope": ""
+  },
+  {
+    "snc": "PER 10",
+    "label_parent_extended": "PERSONNEL: PERFORMANCE EVALUATION",
+    "raw_scope": ""
+  },
+  {
+    "snc": "PER 6",
+    "label_parent_extended": "PERSONNEL: AWARDS & COMMENDATIONS",
+    "raw_scope": ""
+  },
+  {
+    "snc": "PER 16",
+    "label_parent_extended": "PERSONNEL: SECURITY",
+    "raw_scope": ""
+  },
+  {
+    "snc": "PER 2",
+    "label_parent_extended": "PERSONNEL: GENERAL REPORTS & STATISTICS",
+    "raw_scope": ""
+  },
+  {
+    "snc": "PER 14",
+    "label_parent_extended": "PERSONNEL: HEALTH & MEDICAL CARE",
+    "raw_scope": ""
+  },
+  {
+    "snc": "PER 2-1",
+    "label_parent_extended": "PERSONNEL: GENERAL REPORTS & STATISTICS: Post Reports",
+    "raw_scope": ""
+  },
+  {
+    "snc": "PER 11-5",
+    "label_parent_extended": "PERSONNEL: COMPENSATION: Local Wage Rates",
+    "raw_scope": ""
+  },
+  {
+    "snc": "AID 6",
+    "label_parent_extended": "AID: COMMUNIST BLOC AID",
+    "raw_scope": ""
+  },
+  {
+    "snc": "AID 14-6",
+    "label_parent_extended": "AID: PEACE CORPS: PC - Volunteers",
+    "raw_scope": ""
+  },
+  {
+    "snc": "SHW 17",
+    "label_parent_extended": "",
+    "raw_scope": ""
+  },
+  {
+    "snc": "FT 1",
+    "label_parent_extended": "FOREIGN TRADE: GENERAL POLICY. PLANS. PRACTICES.",
+    "raw_scope": ""
+  },
+  {
+    "snc": "INCO 14",
+    "label_parent_extended": "INDUSTRIES & COMMODITIES: PRICES",
+    "raw_scope": ""
+  },
+  {
+    "snc": "POL 12-6",
+    "label_parent_extended": "POLITICAL AFFAIRS & RELATIONS: POLITICAL PARTIES: Membership. Leaders.",
+    "raw_scope": "Includes party elections, purges of party, etc. Subdivide by name of leader if volume warrants."
+  },
+  {
+    "snc": "TP 17",
+    "label_parent_extended": "TRADE PROMOTION & ASSISTANCE: WORLD TRADE DIRECTORY REPORTS",
+    "raw_scope": ""
+  },
+  {
+    "snc": "TR",
+    "label_parent_extended": "",
+    "raw_scope": ""
+  },
+  {
+    "snc": "POL 13-1",
+    "label_parent_extended": "POLITICAL AFFAIRS & RELATIONS: NON-PARTY BLOCS: Labor Organizations",
+    "raw_scope": ""
+  },
+  {
+    "snc": "TP 9",
+    "label_parent_extended": "TRADE PROMOTION & ASSISTANCE: PRIVATE INVESTMENT OPPORTUNITIES",
+    "raw_scope": ""
+  },
+  {
+    "snc": "TP 1",
+    "label_parent_extended": "TRADE PROMOTION & ASSISTANCE: GENERAL POLICY. PLANS. COORDINATION",
+    "raw_scope": ""
+  },
+  {
+    "snc": "ORG 2",
+    "label_parent_extended": "ORGANIZATION & ADMINISTRATION: GENERAL REPORTS & STATISTICS",
+    "raw_scope": ""
+  },
+  {
+    "snc": "ORG 6",
+    "label_parent_extended": "ORGANIZATION & ADMINISTRATION: DUTY OFFICERS. ROSTERS.",
+    "raw_scope": ""
+  },
+  {
+    "snc": "ORG 3",
+    "label_parent_extended": "ORGANIZATION & ADMINISTRATION: MEETINGS & CONFERENCES",
+    "raw_scope": ""
+  },
+  {
+    "snc": "ORG 4",
+    "label_parent_extended": "ORGANIZATION & ADMINISTRATION: ADMINISTRATIVE SUPPORT",
+    "raw_scope": ""
+  },
+  {
+    "snc": "ORG 5",
+    "label_parent_extended": "ORGANIZATION & ADMINISTRATION: DELEGATIONS OF AUTHORITY",
+    "raw_scope": ""
+  },
+  {
+    "snc": "AGR 2-1",
+    "label_parent_extended": "",
+    "raw_scope": ""
+  },
+  {
+    "snc": "AGR 2-3",
+    "label_parent_extended": "",
+    "raw_scope": ""
+  },
+  {
+    "snc": "AGR 4-1",
+    "label_parent_extended": "",
+    "raw_scope": ""
+  },
+  {
+    "snc": "AGR 4",
+    "label_parent_extended": "AGRICULTURE: AGREEMENTS",
+    "raw_scope": ""
+  },
+  {
+    "snc": "AGR 4-2",
+    "label_parent_extended": "",
+    "raw_scope": ""
+  },
+  {
+    "snc": "AGR 2-2",
+    "label_parent_extended": "",
+    "raw_scope": ""
+  },
+  {
+    "snc": "AGR 8",
+    "label_parent_extended": "AGRICULTURE: FAIRS",
+    "raw_scope": ""
+  },
+  {
+    "snc": "AGR 9-1",
+    "label_parent_extended": "",
+    "raw_scope": ""
+  },
+  {
+    "snc": "AGR 5",
+    "label_parent_extended": "AGRICULTURE: LAWS & REGULATIONS",
+    "raw_scope": ""
+  },
+  {
+    "snc": "AGR 9-2",
+    "label_parent_extended": "",
+    "raw_scope": ""
+  },
+  {
+    "snc": "AGR 5-3",
+    "label_parent_extended": "",
+    "raw_scope": ""
+  },
+  {
+    "snc": "AGR 6-2",
+    "label_parent_extended": "",
+    "raw_scope": ""
+  },
+  {
+    "snc": "AGR 6",
+    "label_parent_extended": "AGRICULTURE: FARM COOPERATIVES. COLLECTIVES.",
+    "raw_scope": ""
+  },
+  {
+    "snc": "AGR 9",
+    "label_parent_extended": "AGRICULTURE: AGRICULTURAL EDUCATION & TRAINING",
+    "raw_scope": ""
+  },
+  {
+    "snc": "AGR 9-3",
+    "label_parent_extended": "",
+    "raw_scope": ""
+  },
+  {
+    "snc": "AGR 12",
+    "label_parent_extended": "AGRICULTURE: CROP PRODUCTION & CONSUMPTION",
+    "raw_scope": ""
+  },
+  {
+    "snc": "AGR 10-3",
+    "label_parent_extended": "",
+    "raw_scope": ""
+  },
+  {
+    "snc": "AGR 10-2",
+    "label_parent_extended": "",
+    "raw_scope": ""
+  },
+  {
+    "snc": "AGR 9-5",
+    "label_parent_extended": "",
+    "raw_scope": ""
+  },
+  {
+    "snc": "AGR 11",
+    "label_parent_extended": "AGRICULTURE: SOIL",
+    "raw_scope": ""
+  },
+  {
+    "snc": "AGR 9-6",
+    "label_parent_extended": "",
+    "raw_scope": ""
+  },
+  {
+    "snc": "AGR 10",
+    "label_parent_extended": "AGRICULTURE: RESOURCES & DEVELOPMENT",
+    "raw_scope": ""
+  },
+  {
+    "snc": "AGR 10-1",
+    "label_parent_extended": "",
+    "raw_scope": ""
+  },
+  {
+    "snc": "AGR 9-10",
+    "label_parent_extended": "",
+    "raw_scope": ""
+  },
+  {
+    "snc": "THE",
+    "label_parent_extended": "",
+    "raw_scope": ""
+  },
+  {
+    "snc": "FN 9-3",
+    "label_parent_extended": "FINANCE: FOREIGN INVESTMENT: Investment Guaranty",
+    "raw_scope": ""
+  },
+  {
+    "snc": "POL 15-2",
+    "label_parent_extended": "POLITICAL AFFAIRS & RELATIONS: GOVERNMENT: Legislature",
+    "raw_scope": "Includes parliament, diet, etc. For general material on laws promulgated by legislative bodies, SEE: POL 5; for agency relations with Congress, SEE: LEG outline."
+  },
+  {
+    "snc": "POL 5",
+    "label_parent_extended": "POLITICAL AFFAIRS & RELATIONS: LAW",
+    "raw_scope": "Use only for material which cannot be filed under one of the more specific subjects in this or other outlines."
+  },
+  {
+    "snc": "RIO",
+    "label_parent_extended": "",
+    "raw_scope": ""
+  },
+  {
+    "snc": "POL 15-4",
+    "label_parent_extended": "POLITICAL AFFAIRS & RELATIONS: GOVERNMENT: Administration of Government",
+    "raw_scope": "General matters, such as efficiency, relative honesty, corruption, graft, reform, civil service, etc."
+  },
+  {
+    "snc": "POL 15-3",
+    "label_parent_extended": "POLITICAL AFFAIRS & RELATIONS: GOVERNMENT: Judiciary",
+    "raw_scope": ""
+  },
+  {
+    "snc": "POL 2-1",
+    "label_parent_extended": "POLITICAL AFFAIRS & RELATIONS: GENERAL REPORTS & STATISTICS: Joint Weekas",
+    "raw_scope": ""
+  },
+  {
+    "snc": "POL 3-66",
+    "label_parent_extended": "",
+    "raw_scope": ""
+  },
+  {
+    "snc": "SOC 14-1",
+    "label_parent_extended": "SOCIAL CONDITIONS: HUMAN RIGHTS. RACE RELATIONS.: General Policy",
+    "raw_scope": ""
+  },
+  {
+    "snc": "PPT 7",
+    "label_parent_extended": "PASSPORTS & CITIZENSHIP: TRAVEL CONTROL",
+    "raw_scope": ""
+  },
+  {
+    "snc": "STR 7",
+    "label_parent_extended": "STRATEGIC TRADE CONTROL: SHIPMENTS OF U.S. GOODS",
+    "raw_scope": ""
+  },
+  {
+    "snc": "V 17",
+    "label_parent_extended": "VISAS: LOOKOUT",
+    "raw_scope": ""
+  },
+  {
+    "snc": "PS 11",
+    "label_parent_extended": "PROTECTIVE SERVICES: FEDERAL BENEFITS & SERVICES",
+    "raw_scope": ""
+  },
+  {
+    "snc": "V 31",
+    "label_parent_extended": "VISAS: NONIMMIGRANTS",
+    "raw_scope": ""
+  },
+  {
+    "snc": "V 11",
+    "label_parent_extended": "VISAS: ELIGIBILITY. INELIGIBILITY.",
+    "raw_scope": ""
+  },
+  {
+    "snc": "V 10",
+    "label_parent_extended": "VISAS: DOCUMENTATION",
+    "raw_scope": ""
+  },
+  {
+    "snc": "SCI 1",
+    "label_parent_extended": "SCIENCE & TECHNOLOGY: GENERAL POLICY. PROGRAMS.",
+    "raw_scope": ""
+  },
+  {
+    "snc": "V 15",
+    "label_parent_extended": "VISAS: INVESTIGATIONS",
+    "raw_scope": ""
+  },
+  {
+    "snc": "SY 7",
+    "label_parent_extended": "SECURITY: VISITS OF DIGNITARIES",
+    "raw_scope": ""
+  },
+  {
+    "snc": "PPBG",
+    "label_parent_extended": "",
+    "raw_scope": ""
+  },
+  {
+    "snc": "V 5",
+    "label_parent_extended": "VISAS: LAWS & REGULATIONS",
+    "raw_scope": ""
+  },
+  {
+    "snc": "FGMT",
+    "label_parent_extended": "",
+    "raw_scope": ""
+  },
+  {
+    "snc": "FSV 8",
+    "label_parent_extended": "FACILITATIVE SERVICES: PUBLICATIONS PROCUREMENT",
+    "raw_scope": ""
+  },
+  {
+    "snc": "HLTH 14-6",
+    "label_parent_extended": "HEALTH & MEDICAL CARE: HEALTH & MEDICAL SERVICES: Hospitals. Clinics. Laboratories.",
+    "raw_scope": ""
+  },
+  {
+    "snc": "INF",
+    "label_parent_extended": "INFORMATION",
+    "raw_scope": ""
+  },
+  {
+    "snc": "BG",
+    "label_parent_extended": "BUILDINGS & GROUNDS",
+    "raw_scope": ""
+  },
+  {
+    "snc": "CR 7",
+    "label_parent_extended": "COMMUNICATIONS & RECORDS: TELECOMMUNICATIONS SERVICES",
+    "raw_scope": ""
+  },
+  {
+    "snc": "CUL",
+    "label_parent_extended": "CULTURE",
+    "raw_scope": ""
+  },
+  {
+    "snc": "DEF 18-9",
+    "label_parent_extended": "DEFENSE AFFAIRS: ARMS CONTROL & DISARMAMENT: Demilitarized & Nuclear-Free Zones",
+    "raw_scope": ""
+  },
+  {
+    "snc": "E 8",
+    "label_parent_extended": "ECONOMIC AFFAIRS (GENERAL): ECONOMIC CONDITIONS",
+    "raw_scope": ""
+  },
+  {
+    "snc": "FN 7",
+    "label_parent_extended": "FINANCE: VISITS. MISSIONS.",
+    "raw_scope": ""
+  },
+  {
+    "snc": "ECIN",
+    "label_parent_extended": "",
+    "raw_scope": ""
+  },
+  {
+    "snc": "EP",
+    "label_parent_extended": "",
+    "raw_scope": ""
+  },
+  {
+    "snc": "FT 4",
+    "label_parent_extended": "FOREIGN TRADE: TRADE AGREEMENTS",
+    "raw_scope": ""
+  },
+  {
+    "snc": "FN 17",
+    "label_parent_extended": "FINANCE: MONEY.CURRENCY.",
+    "raw_scope": ""
+  },
+  {
+    "snc": "FN 8",
+    "label_parent_extended": "FINANCE: DOMESTIC INVESTMENT",
+    "raw_scope": ""
+  },
+  {
+    "snc": "IC",
+    "label_parent_extended": "",
+    "raw_scope": ""
+  },
+  {
+    "snc": "MEAT",
+    "label_parent_extended": "",
+    "raw_scope": ""
+  },
+  {
+    "snc": "POL 2-3",
+    "label_parent_extended": "POLITICAL AFFAIRS & RELATIONS: GENERAL REPORTS & STATISTICS: Politico-Economic Reports",
+    "raw_scope": ""
+  },
+  {
+    "snc": "POL 1-3",
+    "label_parent_extended": "POLITICAL AFFAIRS & RELATIONS: GENERAL POLICY. BACKGROUND.: Policy Evaluation.",
+    "raw_scope": "Use for papers dealing with review of overall U.S., host country or regional political policies, trends, ideology. Use POL 1-2, or other appropriate subject, when a specific policy, directive or guideline is under review."
+  },
+  {
+    "snc": "FN 0",
+    "label_parent_extended": "",
+    "raw_scope": ""
+  },
+  {
+    "snc": "FN 2",
+    "label_parent_extended": "FINANCE: GENERAL REPORTS & STATISTICS",
+    "raw_scope": ""
+  },
+  {
+    "snc": "FN 14",
+    "label_parent_extended": "FINANCE: PUBLIC DEBT",
+    "raw_scope": ""
+  },
+  {
+    "snc": "FN 6-1",
+    "label_parent_extended": "FINANCE: BANKS & BANKING: Credit. loans.",
+    "raw_scope": ""
+  },
+  {
+    "snc": "FN 11",
+    "label_parent_extended": "FINANCE: INVESTMENT GUARANTY",
+    "raw_scope": ""
+  },
+  {
+    "snc": "FN 10-1",
+    "label_parent_extended": "FINANCE: FOREIGN EXCHANGE: Exchange Rates",
+    "raw_scope": ""
+  },
+  {
+    "snc": "FN 17-1",
+    "label_parent_extended": "FINANCE: MONEY.CURRENCY.: Monetary Policy. Reform.",
+    "raw_scope": ""
+  },
+  {
+    "snc": "INCO 11",
+    "label_parent_extended": "INDUSTRIES & COMMODITIES: INDUSTRIAL PROPERTY",
+    "raw_scope": ""
+  },
+  {
+    "snc": "TP 3",
+    "label_parent_extended": "TRADE PROMOTION & ASSISTANCE: ORGANIZATIONS & CONFERENCES",
+    "raw_scope": ""
+  },
+  {
+    "snc": "TP 2",
+    "label_parent_extended": "TRADE PROMOTION & ASSISTANCE: GENERAL REPORTS & STATISTICS",
+    "raw_scope": ""
+  },
+  {
+    "snc": "DEF 15-5",
+    "label_parent_extended": "DEFENSE AFFAIRS: BASES. INSTALLATIONS.: Facilities & Services",
+    "raw_scope": ""
+  },
+  {
+    "snc": "DEF 13",
+    "label_parent_extended": "DEFENSE AFFAIRS: LOGISTICAL MATTERS",
+    "raw_scope": ""
+  },
+  {
+    "snc": "DEF 21",
+    "label_parent_extended": "DEFENSE AFFAIRS: MILITARY COMMUNICATIONS SYSTEM",
+    "raw_scope": ""
+  },
+  {
+    "snc": "DEF 12-5",
+    "label_parent_extended": "DEFENSE AFFAIRS: ARMAMENTS: Procurement. Sole.",
+    "raw_scope": ""
+  },
+  {
+    "snc": "DEF 19-1",
+    "label_parent_extended": "DEFENSE AFFAIRS: MILITARY ASSISTANCE: Policy. Plans.",
+    "raw_scope": ""
+  },
+  {
+    "snc": "DEF 19-8",
+    "label_parent_extended": "DEFENSE AFFAIRS: MILITARY ASSISTANCE: Equipment & Supplies (Mil. Assistance)",
+    "raw_scope": ""
+  },
+  {
+    "snc": "SOC 12-2",
+    "label_parent_extended": "SOCIAL CONDITIONS: RELIGION: Missionaries",
+    "raw_scope": ""
+  },
+  {
+    "snc": "SOC 12-1",
+    "label_parent_extended": "SOCIAL CONDITIONS: RELIGION: Churches. Sects.",
+    "raw_scope": ""
+  },
+  {
+    "snc": "AE 1",
+    "label_parent_extended": "ATOMIC ENERGY: GENERAL POLICY. PLANS.",
+    "raw_scope": ""
+  },
+  {
+    "snc": "SCI 6-1",
+    "label_parent_extended": "SCIENCE & TECHNOLOGY: ASSISTANCE TO SCIENTISTS: Grants",
+    "raw_scope": ""
+  },
+  {
+    "snc": "SCI 9",
+    "label_parent_extended": "SCIENCE & TECHNOLOGY: SCIENCE EDUCATION & TRAINING",
+    "raw_scope": ""
+  },
+  {
+    "snc": "SCI 20",
+    "label_parent_extended": "SCIENCE & TECHNOLOGY: PHYSICAL SCIENCES",
+    "raw_scope": ""
+  },
+  {
+    "snc": "SCI 3",
+    "label_parent_extended": "SCIENCE & TECHNOLOGY: ORGANIZATIONS & CONFERENCES",
+    "raw_scope": ""
+  },
+  {
+    "snc": "SCI 30",
+    "label_parent_extended": "SCIENCE & TECHNOLOGY: METEOROLOGY",
+    "raw_scope": ""
+  },
+  {
+    "snc": "SCI 34",
+    "label_parent_extended": "SCIENCE & TECHNOLOGY: SEISMOLOGY",
+    "raw_scope": ""
+  },
+  {
+    "snc": "SCI 44",
+    "label_parent_extended": "",
+    "raw_scope": ""
+  },
+  {
+    "snc": "SCI 42",
+    "label_parent_extended": "SCIENCE & TECHNOLOGY: BOTANY",
+    "raw_scope": ""
+  },
+  {
+    "snc": "SCI 41",
+    "label_parent_extended": "SCIENCE & TECHNOLOGY: BIOLOGY",
+    "raw_scope": ""
+  },
+  {
+    "snc": "SCI 21",
+    "label_parent_extended": "SCIENCE & TECHNOLOGY: ASTRONOMY",
+    "raw_scope": ""
+  },
+  {
+    "snc": "SCI 43",
+    "label_parent_extended": "SCIENCE & TECHNOLOGY: ZOOLOGY",
+    "raw_scope": ""
+  },
+  {
+    "snc": "SCI 28",
+    "label_parent_extended": "SCIENCE & TECHNOLOGY: HYDROLOGY",
+    "raw_scope": ""
+  },
+  {
+    "snc": "SCI 13",
+    "label_parent_extended": "SCIENCE & TECHNOLOGY: RESEARCH LABORATORIES & CENTERS",
+    "raw_scope": ""
+  },
+  {
+    "snc": "SOC 11",
+    "label_parent_extended": "SOCIAL CONDITIONS: PUBLIC SAFETY & LAW ENFORCEMENT",
+    "raw_scope": ""
+  },
+  {
+    "snc": "SOC 16",
+    "label_parent_extended": "SOCIAL CONDITIONS: CHILDREN. YOUTH.",
+    "raw_scope": ""
+  },
+  {
+    "snc": "POL 12-1",
+    "label_parent_extended": "POLITICAL AFFAIRS & RELATIONS: POLITICAL PARTIES: Policy. Plans. Ideology.",
+    "raw_scope": ""
+  },
+  {
+    "snc": "POL 23-2",
+    "label_parent_extended": "POLITICAL AFFAIRS & RELATIONS: INTERNAL SECURITY. COUNTER-INSURGENCY.: Reports",
+    "raw_scope": "Organization, strength, capabilities, coordination, and political reliability. For their actual involvement in suppression of a riot, rebellion, coup, etc., SEE: POL 25 and 26, respectively."
+  },
+  {
+    "snc": "POL 17-1",
+    "label_parent_extended": "POLITICAL AFFAIRS & RELATIONS: DIPLOMATIC & CONSULAR REPRESENTATION: Acceptability & Accreditation",
+    "raw_scope": "Includes letters of credence and exequatur."
+  },
+  {
+    "snc": "POL 2-2",
+    "label_parent_extended": "POLITICAL AFFAIRS & RELATIONS: GENERAL REPORTS & STATISTICS: Political Summaries",
+    "raw_scope": ""
+  },
+  {
+    "snc": "POL 12-3",
+    "label_parent_extended": "POLITICAL AFFAIRS & RELATIONS: POLITICAL PARTIES: Meetings and Conferences",
+    "raw_scope": ""
+  },
+  {
+    "snc": "POL 23-6",
+    "label_parent_extended": "POLITICAL AFFAIRS & RELATIONS: INTERNAL SECURITY. COUNTER-INSURGENCY.: Agents",
+    "raw_scope": "Includes registration of foreign agents, bogus agents, and notification by agents representing foreign governments in U.S"
+  },
+  {
+    "snc": "POL 23-5",
+    "label_parent_extended": "POLITICAL AFFAIRS & RELATIONS: INTERNAL SECURITY. COUNTER-INSURGENCY.: Laws & Regulations",
+    "raw_scope": "Includes laws and regulations controlling or banning Communist Party."
+  },
+  {
+    "snc": "POL 32",
+    "label_parent_extended": "POLITICAL AFFAIRS & RELATIONS: TERRITORY. BOUNDARIES.",
+    "raw_scope": "Includes international and national territorial matters."
+  },
+  {
+    "snc": "POL 6-1",
+    "label_parent_extended": "POLITICAL AFFAIRS & RELATIONS: PEOPLE. BIOGRAPHIC DATA.: Biographic Data",
+    "raw_scope": ""
+  },
+  {
+    "snc": "POL 9",
+    "label_parent_extended": "POLITICAL AFFAIRS & RELATIONS: INTERVENTION",
+    "raw_scope": "Includes definitions, treaties and agreements, and international conferences on the subject, as well as materials pertaining to actual or alleged intervention in the internal affairs of a specific country. For armed intervention, SEE: POL 27; for interference in national elections, SEE: POL 14."
+  },
+  {
+    "snc": "POL 25",
+    "label_parent_extended": "POLITICAL AFFAIRS & RELATIONS: DEMONSTRATIONS.  PROTESTS.  RIOTS.",
+    "raw_scope": "Other than those involving rebellion, for which SEE: POL 26; and pro-Communist, for which SEE: CSM 9-1. Includes such disorders and violent acts as arson, bombings, stonings, shootings, and atrocities, as well as passive opposition and nonviolent activities, such as picketing and petitions. Also includes suppression and control."
+  },
+  {
+    "snc": "POL 24",
+    "label_parent_extended": "POLITICAL AFFAIRS & RELATIONS: SANCTIONS",
+    "raw_scope": "Use for policy of applying sanctions as a political consideration by UN, OAS, etc. For specific type of sanction or bilateral action, SEE: FT 11 or POL 27-2."
+  },
+  {
+    "snc": "POL 33-1",
+    "label_parent_extended": "POLITICAL AFFAIRS & RELATIONS: WATERS.  BOUNDARIES.: Boundary & International Rivers & Seaways",
+    "raw_scope": "Use for material on river boundaries and international rivers flowing through or between countries, such as water diversion, water rights, dam construction, bridges, sanitation, etc. Subdivide by name of river or seaway and thereunder by case or project title as volume warrants."
+  }
+]
