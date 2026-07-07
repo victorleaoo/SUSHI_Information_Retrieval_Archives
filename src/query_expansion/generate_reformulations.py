@@ -22,15 +22,15 @@ Rules:
 - Maximize the diversity of vocabulary across the 4 queries.
 - Return ONLY the 4 queries, one per line, without numbering, labels, or explanations."""
 
-def generate_reformulations_queries(topics: list[dict], llm: LLMClient, output_path: str, topics_subset: list = None):
+def generate_reformulations_queries(topics: list, llm: LLMClient, output_path: str,
+                                    topics_subset: list = None, logs_path: str = None) -> dict:
     """Generate Q4 (Reformulations) queries for all 45 topics."""
     results = {}
     if os.path.exists(output_path):
         try:
-            import json as _json_temp
             with open(output_path, 'r', encoding='utf-8') as f:
-                results = _json_temp.load(f)
-        except:
+                results = json.load(f)
+        except Exception:
             pass
 
     filtered_topics = topics
@@ -39,22 +39,37 @@ def generate_reformulations_queries(topics: list[dict], llm: LLMClient, output_p
             filtered_topics = [t for t in topics if int(t['ID'].split('-')[-1]) in topics_subset]
         else:
             filtered_topics = [t for t in topics if t['ID'] in topics_subset]
-    print(f"Generating Reformulations queries (Q4) for {len(filtered_topics)} topics...")
-    for topic in filtered_topics:
+
+    to_generate = [t for t in filtered_topics if t['ID'] not in results]
+    print(f"  [Q4-Reformulations] Generating for {len(to_generate)} topics "
+          f"({len(filtered_topics) - len(to_generate)} already cached)...")
+
+    log_entries = []
+    for topic in to_generate:
         prompt = P1_REF_TEMPLATE.format(
             title=topic['TITLE'],
             description=topic['DESCRIPTION']
         )
-        response = llm.generate(prompt)
-        
-        # Post-processing: Final Q4 string = only the LLM-generated reformulations
-        q4 = ' '.join(response.strip().split('\n'))
+        print(f"    [Q4] → {topic['ID']}: {topic['TITLE'][:60]}")
+        raw = llm.generate(prompt)
+        q4 = ' '.join(raw.strip().split('\n'))
         results[topic['ID']] = q4
-        print(f"Generated Q4 for {topic['ID']}")
-    
-    os.makedirs(os.path.dirname(output_path), exist_ok=True)
+        print(f"    [Q4] ✓ Generated")
+        log_entries.append({'query_type': 'Q4_reformulations', 'topic_id': topic['ID'],
+                            'topic_title': topic['TITLE'], 'prompt': prompt,
+                            'raw_response': raw, 'processed_query': q4})
+
+    os.makedirs(os.path.dirname(os.path.abspath(output_path)), exist_ok=True)
     with open(output_path, 'w', encoding='utf-8') as f:
-        json.dump(results, f, indent=2)
+        json.dump(results, f, indent=2, ensure_ascii=False)
+
+    if logs_path and log_entries:
+        os.makedirs(os.path.dirname(os.path.abspath(logs_path)), exist_ok=True)
+        with open(logs_path, 'a', encoding='utf-8') as f:
+            for entry in log_entries:
+                f.write(json.dumps(entry, ensure_ascii=False) + '\n')
+
+    print(f"  [Q4-Reformulations] Saved to {output_path}")
     return results
 
 if __name__ == "__main__":

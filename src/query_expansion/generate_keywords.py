@@ -21,15 +21,15 @@ Include in your list:
 
 Return ONLY a single comma-separated list. No bullet points, no numbering, no explanations. Maximum 30 terms."""
 
-def generate_keywords_queries(topics: list[dict], llm: LLMClient, output_path: str, topics_subset: list = None):
+def generate_keywords_queries(topics: list, llm: LLMClient, output_path: str,
+                              topics_subset: list = None, logs_path: str = None) -> dict:
     """Generate Q2 (Keywords) queries for all 45 topics."""
     results = {}
     if os.path.exists(output_path):
         try:
-            import json as _json_temp
             with open(output_path, 'r', encoding='utf-8') as f:
-                results = _json_temp.load(f)
-        except:
+                results = json.load(f)
+        except Exception:
             pass
 
     filtered_topics = topics
@@ -38,23 +38,37 @@ def generate_keywords_queries(topics: list[dict], llm: LLMClient, output_path: s
             filtered_topics = [t for t in topics if int(t['ID'].split('-')[-1]) in topics_subset]
         else:
             filtered_topics = [t for t in topics if t['ID'] in topics_subset]
-    print(f"Generating Keywords queries (Q2) for {len(filtered_topics)} topics...")
-    for topic in filtered_topics:
+
+    to_generate = [t for t in filtered_topics if t['ID'] not in results]
+    print(f"  [Q2-Keywords] Generating for {len(to_generate)} topics "
+          f"({len(filtered_topics) - len(to_generate)} already cached)...")
+
+    log_entries = []
+    for topic in to_generate:
         prompt = P1_KW_TEMPLATE.format(
             title=topic['TITLE'],
             description=topic['DESCRIPTION']
         )
-        response = llm.generate(prompt)
-        # Post-processing: Replace commas with spaces
-        q2 = response.replace(',', ' ').replace('\n', ' ')
-        # compact multiple spaces
-        q2 = ' '.join(q2.split())
+        print(f"    [Q2] → {topic['ID']}: {topic['TITLE'][:60]}")
+        raw = llm.generate(prompt)
+        q2 = ' '.join(raw.replace(',', ' ').replace('\n', ' ').split())
         results[topic['ID']] = q2
-        print(f"Generated Q2 for {topic['ID']}")
-    
-    os.makedirs(os.path.dirname(output_path), exist_ok=True)
+        print(f"    [Q2] ✓ Generated ({len(q2.split())} terms)")
+        log_entries.append({'query_type': 'Q2_keywords', 'topic_id': topic['ID'],
+                            'topic_title': topic['TITLE'], 'prompt': prompt,
+                            'raw_response': raw, 'processed_query': q2})
+
+    os.makedirs(os.path.dirname(os.path.abspath(output_path)), exist_ok=True)
     with open(output_path, 'w', encoding='utf-8') as f:
-        json.dump(results, f, indent=2)
+        json.dump(results, f, indent=2, ensure_ascii=False)
+
+    if logs_path and log_entries:
+        os.makedirs(os.path.dirname(os.path.abspath(logs_path)), exist_ok=True)
+        with open(logs_path, 'a', encoding='utf-8') as f:
+            for entry in log_entries:
+                f.write(json.dumps(entry, ensure_ascii=False) + '\n')
+
+    print(f"  [Q2-Keywords] Saved to {output_path}")
     return results
 
 if __name__ == "__main__":

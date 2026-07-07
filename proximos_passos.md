@@ -1,9 +1,9 @@
 - As queries expansion podem citar termos mais genéricos para ajudar na busca, tipo qual o tópico/tema do que está sendo pesquisado (as queries são muito específicas e os folder label genéricos).
   - Alguma query ou outra fala de elementos (eventos) específicos, mas nem sempre
 - Estudar os dados e ver como são os textos de documentos e pastas em relação a queries (ver com QRELS).
-- - A ideia seria entender se tem algum tipo de escrita específica que tem que pedir para reescrever query ou algum jeito específico para escrever os documentos para bater com as queries.
+- A ideia seria entender se tem algum tipo de escrita específica que tem que pedir para reescrever query ou algum jeito específico para escrever os documentos para bater com as queries.
   - Parece que tem muita correlação entre a query e o folder label (alguns são bem fortes) em si, usar os documentos só para encontrar os temas mais específicos memso.
-  - - Alguns POL não são descritivos no folder label, daí precisa dos documentos para dizer de forma mais específica mesmo do que a pasta pode falar acerca. Eles são mais genéricos, como usar ageração para tentar ser descritivo para cada especificidade?
+  - Alguns POL não são descritivos no folder label, daí precisa dos documentos para dizer de forma mais específica mesmo do que a pasta pode falar acerca. Eles são mais genéricos, como usar ageração para tentar ser descritivo para cada especificidade?
 - Acompanhar de perto os textos gerados para queries e para pastas para entender se está legal ou o que precisa mudar para bater melhor as pesquisas.
   - Pedir para gerar uma descrição que não precisa muito correlata com a época apenas, mas mais com temas, conceitos e palavras que podem ser similares. Mas manter as especificidades dos documentos
     - Quando for gerar para uma pasta com os documentos dos outros, usar o contexto dos documentos para tentar extrair eventos e palavras similares.

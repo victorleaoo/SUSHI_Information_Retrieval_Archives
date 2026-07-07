@@ -19,15 +19,15 @@ Write a single paragraph of 150-200 words that:
 
 Write only the paragraph. No title, no header, no preamble."""
 
-def generate_emb_text_queries(topics: list[dict], llm: LLMClient, output_path: str, topics_subset: list = None):
+def generate_emb_text_queries(topics: list, llm: LLMClient, output_path: str,
+                              topics_subset: list = None, logs_path: str = None) -> dict:
     """Generate Q3 (Embedding Text) queries for all 45 topics."""
     results = {}
     if os.path.exists(output_path):
         try:
-            import json as _json_temp
             with open(output_path, 'r', encoding='utf-8') as f:
-                results = _json_temp.load(f)
-        except:
+                results = json.load(f)
+        except Exception:
             pass
 
     filtered_topics = topics
@@ -36,21 +36,37 @@ def generate_emb_text_queries(topics: list[dict], llm: LLMClient, output_path: s
             filtered_topics = [t for t in topics if int(t['ID'].split('-')[-1]) in topics_subset]
         else:
             filtered_topics = [t for t in topics if t['ID'] in topics_subset]
-    print(f"Generating Embedding Text queries (Q3) for {len(filtered_topics)} topics...")
-    for topic in filtered_topics:
+
+    to_generate = [t for t in filtered_topics if t['ID'] not in results]
+    print(f"  [Q3-EmbText] Generating for {len(to_generate)} topics "
+          f"({len(filtered_topics) - len(to_generate)} already cached)...")
+
+    log_entries = []
+    for topic in to_generate:
         prompt = P1_EMB_TEMPLATE.format(
             title=topic['TITLE'],
             description=topic['DESCRIPTION']
         )
-        response = llm.generate(prompt)
-        # Post-processing: Use paragraph directly
-        q3 = response.strip()
+        print(f"    [Q3] → {topic['ID']}: {topic['TITLE'][:60]}")
+        raw = llm.generate(prompt)
+        q3 = ' '.join(raw.strip().split())
         results[topic['ID']] = q3
-        print(f"Generated Q3 for {topic['ID']}")
-    
-    os.makedirs(os.path.dirname(output_path), exist_ok=True)
+        print(f"    [Q3] ✓ Generated ({len(q3.split())} words)")
+        log_entries.append({'query_type': 'Q3_embtext', 'topic_id': topic['ID'],
+                            'topic_title': topic['TITLE'], 'prompt': prompt,
+                            'raw_response': raw, 'processed_query': q3})
+
+    os.makedirs(os.path.dirname(os.path.abspath(output_path)), exist_ok=True)
     with open(output_path, 'w', encoding='utf-8') as f:
-        json.dump(results, f, indent=2)
+        json.dump(results, f, indent=2, ensure_ascii=False)
+
+    if logs_path and log_entries:
+        os.makedirs(os.path.dirname(os.path.abspath(logs_path)), exist_ok=True)
+        with open(logs_path, 'a', encoding='utf-8') as f:
+            for entry in log_entries:
+                f.write(json.dumps(entry, ensure_ascii=False) + '\n')
+
+    print(f"  [Q3-EmbText] Saved to {output_path}")
     return results
 
 if __name__ == "__main__":
