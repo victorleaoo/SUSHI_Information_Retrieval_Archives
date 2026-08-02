@@ -575,26 +575,69 @@ def run_single_experiment_ui():
                 render_charts(df_chart, all_topics, sort_mode=sort_key)
 
             with st.expander("📊 Seed Variance per Topic", expanded=True):
-                first_run_name = grouped_runs[selected_config][0]
-                var_df = u1.compute_seed_variance_df(first_run_name, selected_subfolder)
+                config_runs = grouped_runs[selected_config]
+                run_model_map = {}
+                for r in config_runs:
+                    parsed = u1.parse_run_folder(r)
+                    model_name = parsed["model"] if parsed else r
+                    run_model_map[r] = f"{model_name} ({r})"
+
+                if len(config_runs) == 1:
+                    selected_var_run = config_runs[0]
+                else:
+                    selected_var_run = st.selectbox(
+                        "Select Model for Seed Variance:",
+                        options=config_runs,
+                        format_func=lambda r: run_model_map[r],
+                        key="seed_var_run_select"
+                    )
+
+                var_df = u1.compute_seed_variance_df(selected_var_run, selected_subfolder)
                 if var_df.empty:
-                    st.info("No multi-seed metric data available for this configuration.")
+                    st.info("No multi-seed metric data available for this model run.")
                 elif var_df["N_Seeds"].max() <= 1:
-                    st.caption("Only 1 seed available — no cross-seed variance to display.")
+                    st.caption(f"Only 1 seed available for `{selected_var_run}` — no cross-seed variance to display.")
                 else:
                     n_seeds = int(var_df["N_Seeds"].max())
-                    st.caption(f"Distribution of nDCG@5 across **{n_seeds} seeds** for `{first_run_name}`.")
+                    st.caption(f"Distribution of nDCG@5 across **{n_seeds} seeds** for `{selected_var_run}`.")
                     render_seed_variance_chart(var_df)
         else:
             st.warning("No topic data found for this configuration.")
 
     # ── Retrieval Analysis ──
     if selected_config and selected_config in grouped_runs:
-        first_run_name = grouped_runs[selected_config][0]
-        first_run_dir = u1.resolve_run_folder_path(first_run_name, selected_subfolder) or ""
-        run_txt_path = os.path.join(first_run_dir, "run.txt") if first_run_dir else ""
+        config_runs = grouped_runs[selected_config]
+        valid_runs = []
+        for r in config_runs:
+            r_dir = u1.resolve_run_folder_path(r, selected_subfolder) or ""
+            if r_dir and os.path.isfile(os.path.join(r_dir, "run.txt")):
+                valid_runs.append((r, r_dir))
 
-        if first_run_dir and os.path.isfile(run_txt_path):
+        if valid_runs:
+            st.markdown("---")
+            st.header("🔬 Retrieval Analysis")
+            st.caption("Inspect the retrieved folders per topic alongside qrels grades for the selected run.")
+
+            c_ret_run, c_ret_topn = st.columns([2, 1])
+            with c_ret_run:
+                if len(valid_runs) == 1:
+                    sel_ret_run, sel_ret_dir = valid_runs[0]
+                else:
+                    ret_run_options = [r for r, _ in valid_runs]
+                    ret_run_map = {
+                        r: f"{u1.parse_run_folder(r)['model'] if u1.parse_run_folder(r) else r} ({r})"
+                        for r, _ in valid_runs
+                    }
+                    sel_ret_run = st.selectbox(
+                        "Select Model for Retrieval Analysis:",
+                        options=ret_run_options,
+                        format_func=lambda r: ret_run_map[r],
+                        key="ret_run_select"
+                    )
+                    sel_ret_dir = u1.resolve_run_folder_path(sel_ret_run, selected_subfolder) or ""
+            with c_ret_topn:
+                top_n_sel = st.selectbox("Top-N retrieved folders to show:", [5, 10, 15, 20], index=2, key="ret_top_n")
+
             folders_meta, _ = u2.load_metadata()
             ecf_data = u2.load_ecf_data()
             all_ecf_topics = {}
@@ -603,11 +646,7 @@ def run_single_experiment_ui():
                     if "Topics" in es: all_ecf_topics.update(es["Topics"])
 
             if all_ecf_topics:
-                st.markdown("---")
-                st.header("🔬 Retrieval Analysis")
-                st.caption("Inspect the retrieved folders per topic alongside qrels grades for the selected run.")
-                top_n_sel = st.selectbox("Top-N retrieved folders to show:", [5, 10, 15, 20], index=2, key="ret_top_n")
-                render_retrieval_analysis(first_run_name, first_run_dir, all_ecf_topics, folders_meta, top_n=top_n_sel)
+                render_retrieval_analysis(sel_ret_run, sel_ret_dir, all_ecf_topics, folders_meta, top_n=top_n_sel)
 
 
 def run_two_experiment_ui():
