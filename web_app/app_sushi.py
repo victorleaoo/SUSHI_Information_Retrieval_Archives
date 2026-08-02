@@ -18,52 +18,158 @@ import utils_ecf_inspector as u4
 st.set_page_config(layout="wide", page_title="SUSHI Research Platform")
 
 # ============================================================
-# SHARED CSS
+# DYNAMIC THEME & CSS SYSTEM
+# ============================================================
+
+# ============================================================
+# SHARED CSS (ALWAYS LIGHT MODE)
 # ============================================================
 st.markdown("""
 <style>
-    .stApp { background: linear-gradient(135deg, #0F172A 0%, #1E293B 50%, #0F172A 100%); }
-    div[data-testid="stMetric"] {
-        background: linear-gradient(135deg, #1E293B, #334155);
-        border: 1px solid rgba(99,102,241,0.3);
-        border-radius: 12px; padding: 16px;
-        box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    /* App Shell & Background */
+    html, body, .stApp, [data-testid="stAppViewContainer"], [data-testid="stHeader"] {
+        background-color: #FFFFFF !important;
+        color: #0F172A !important;
     }
-    div[data-testid="stMetric"] label { color: #94A3B8 !important; font-size: 0.85rem !important; }
-    div[data-testid="stMetric"] [data-testid="stMetricValue"] { color: #F1F5F9 !important; font-weight: 700 !important; }
+
+    /* Sidebar */
+    section[data-testid="stSidebar"] {
+        background-color: #F8FAFC !important;
+        border-right: 1px solid #E2E8F0 !important;
+    }
+    section[data-testid="stSidebar"] * {
+        color: #334155 !important;
+    }
+    section[data-testid="stSidebar"] div[data-testid="stRadio"] div[role="radiogroup"] > label:last-child {
+        border-top: 1px solid #E2E8F0 !important;
+        margin-top: 12px;
+        padding-top: 12px;
+    }
+
+    /* Typography */
+    h1, h2, h3, h4, h5, h6,
+    [data-testid="stMarkdownContainer"] h1,
+    [data-testid="stMarkdownContainer"] h2,
+    [data-testid="stMarkdownContainer"] h3 {
+        color: #0F172A !important;
+    }
+    p, span, label, div[data-testid="stMarkdownContainer"] p, .stMarkdown {
+        color: #334155 !important;
+    }
+
+    /* Metric Cards */
+    div[data-testid="stMetric"] {
+        background-color: #F8FAFC !important;
+        border: 1px solid #E2E8F0 !important;
+        border-radius: 12px !important;
+        padding: 14px 16px !important;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.05) !important;
+    }
+    div[data-testid="stMetric"] label {
+        color: #64748B !important;
+        font-size: 0.85rem !important;
+        white-space: normal !important;
+        word-break: break-word !important;
+    }
+    div[data-testid="stMetric"] [data-testid="stMetricValue"] {
+        color: #0F172A !important;
+        font-weight: 700 !important;
+        font-size: 1.35rem !important;
+        word-break: break-word !important;
+    }
+    /* Hide Streamlit metric delta arrows */
+    div[data-testid="stMetricDelta"] svg {
+        display: none !important;
+    }
+
+    /* Tabs */
     .stTabs [data-baseweb="tab-list"] { gap: 8px; }
     .stTabs [data-baseweb="tab"] {
-        background: rgba(30,41,59,0.8); border-radius: 8px;
-        border: 1px solid rgba(99,102,241,0.2); color: #94A3B8; padding: 8px 20px;
+        background-color: #F1F5F9 !important;
+        border-radius: 8px !important;
+        border: 1px solid #E2E8F0 !important;
+        color: #475569 !important;
+        padding: 8px 20px !important;
     }
     .stTabs [aria-selected="true"] {
-        background: linear-gradient(135deg,#6366F1,#8B5CF6) !important;
-        color: white !important; border: none !important;
+        background: linear-gradient(135deg, #1E40AF, #1D4ED8) !important;
+        color: #FFFFFF !important;
+        border: none !important;
     }
-    section[data-testid="stSidebar"] {
-        background: linear-gradient(180deg,#1E293B 0%,#0F172A 100%);
-        border-right: 1px solid rgba(99,102,241,0.2);
+    .stTabs [aria-selected="true"] span, .stTabs [aria-selected="true"] p {
+        color: #FFFFFF !important;
     }
-    h1, h2, h3 { color: #F1F5F9 !important; }
+
+    /* Expanders */
+    div[data-testid="stExpander"] {
+        background-color: #FFFFFF !important;
+        border: 1px solid #E2E8F0 !important;
+        border-radius: 8px !important;
+    }
+
+    /* Custom Boxes & Cards */
     .info-box {
-        background: linear-gradient(135deg,rgba(99,102,241,0.15),rgba(139,92,246,0.1));
-        border: 1px solid rgba(99,102,241,0.3); border-radius: 12px;
-        padding: 16px 20px; margin: 8px 0; color: #CBD5E1;
+        background-color: #EFF6FF !important;
+        border: 1px solid #BFDBFE !important;
+        border-radius: 12px !important;
+        padding: 16px 20px !important;
+        margin: 8px 0 !important;
+        color: #1E40AF !important;
     }
-    .info-box strong { color: #A5B4FC; }
+    .info-box strong { color: #1E3A8A !important; }
+
     .folder-card {
-        background: #161b27; border-radius: 8px; padding: 14px;
-        margin-bottom: 10px; border: 1px solid #2d3250;
+        background-color: #FFFFFF !important;
+        border-radius: 8px !important;
+        padding: 14px !important;
+        margin-bottom: 10px !important;
+        border: 1px solid #E2E8F0 !important;
+        box-shadow: 0 1px 2px rgba(0,0,0,0.04) !important;
     }
-    .folder-card.rel3 { border-left: 4px solid #2ecc71; }
-    .folder-card.rel1 { border-left: 4px solid #f1c40f; }
-    .folder-card.rel0 { border-left: 4px solid #555; }
-    .metric-box { background: #1e2130; border-radius: 8px; padding: 12px; text-align: center; }
-    .tag { display:inline-block; padding:2px 8px; border-radius:12px; font-size:12px; margin:2px; }
-    .tag-top5 { background:#2a4080; color:#8fb4ff; }
-    .tag-top15 { background:#2a2a2a; color:#aaa; }
+    .folder-card.rel3 { border-left: 4px solid #16A34A !important; }
+    .folder-card.rel1 { border-left: 4px solid #D97706 !important; }
+    .folder-card.rel0 { border-left: 4px solid #94A3B8 !important; }
+
+    .metric-box {
+        background-color: #F8FAFC !important;
+        border-radius: 8px !important;
+        padding: 12px !important;
+        text-align: center !important;
+        border: 1px solid #E2E8F0 !important;
+    }
+    .kpi-lg { font-size: 24px; font-weight: bold; }
+    .kpi-md { font-size: 20px; font-weight: bold; }
+    .kpi-sm { font-size: 14px; font-weight: bold; }
+    .kpi-label { color: #64748B !important; font-size: 13px; margin-top: 4px; }
+    .kpi-xs { font-size: 11px; color: #64748B !important; }
+    .kpi-good { color: #16A34A !important; }
+    .kpi-bad { color: #DC2626 !important; }
+    .kpi-mid { color: #D97706 !important; }
+    .kpi-accent { color: #1D4ED8 !important; }
+    .grade-3 { color: #16A34A !important; font-size: 22px; font-weight: bold; }
+    .grade-1 { color: #D97706 !important; font-size: 22px; font-weight: bold; }
+    .grade-0 { color: #94A3B8 !important; font-size: 22px; font-weight: bold; }
+
+    .tag { display: inline-block; padding: 2px 8px; border-radius: 12px; font-size: 12px; margin: 2px; }
+    .tag-top5 { background-color: #DBEAFE !important; color: #1E40AF !important; }
+    .tag-top15 { background-color: #F1F5F9 !important; color: #475569 !important; }
+    .tag-movable { background-color: #DCFCE7 !important; color: #15803D !important; }
 </style>
 """, unsafe_allow_html=True)
+
+
+def _apply_light_theme(fig, height=500):
+    fig.update_layout(
+        template="plotly_white",
+        paper_bgcolor="#FFFFFF",
+        plot_bgcolor="#FFFFFF",
+        font=dict(family="Inter, sans-serif", color="#0F172A"),
+        height=height,
+        margin=dict(l=40, r=40, t=50, b=40),
+    )
+    fig.update_xaxes(gridcolor="#E2E8F0", title_font=dict(color="#0F172A"), tickfont=dict(color="#0F172A"))
+    fig.update_yaxes(gridcolor="#E2E8F0", title_font=dict(color="#0F172A"), tickfont=dict(color="#0F172A"))
+    return fig
 
 
 # ============================================================
@@ -74,9 +180,16 @@ _FOLDERS_PATH_DA = _BASE_DIR_DA / "data" / "folders_metadata" / "FoldersV1.3.jso
 _ITEMS_PATH_DA = _BASE_DIR_DA / "data" / "items_metadata" / "itemsV1.2.json"
 
 _DA_COLORS = {
-    "primary": "#6366F1", "secondary": "#8B5CF6", "accent": "#EC4899",
-    "success": "#10B981", "warning": "#F59E0B", "danger": "#EF4444",
-    "info": "#3B82F6", "rich": "#10B981", "moderate": "#F59E0B", "poor": "#EF4444",
+    "primary": "#1D4ED8",     # Cobalt Blue
+    "secondary": "#EA580C",   # Dark Orange / Rust
+    "accent": "#047857",      # Forest / Emerald Green
+    "success": "#15803D",     # Deep Green
+    "warning": "#D97706",     # Dark Amber
+    "danger": "#DC2626",      # Red
+    "info": "#2563EB",        # Cobalt Blue
+    "rich": "#047857",        # Emerald Green
+    "moderate": "#EA580C",    # Dark Orange
+    "poor": "#DC2626",        # Red
 }
 
 _STOP_WORDS = {
@@ -97,15 +210,17 @@ _STOP_WORDS = {
 }
 
 
-def _apply_dark_theme(fig, height=500):
+def _apply_light_theme(fig, height=500):
     fig.update_layout(
-        template="plotly_dark", paper_bgcolor="rgba(0,0,0,0)",
-        plot_bgcolor="rgba(15,23,42,0.6)",
-        font=dict(family="Inter, sans-serif", color="#CBD5E1"),
-        height=height, margin=dict(l=40, r=40, t=50, b=40),
+        template="plotly_white",
+        paper_bgcolor="#FFFFFF",
+        plot_bgcolor="#FFFFFF",
+        font=dict(family="Inter, sans-serif", color="#0F172A"),
+        height=height,
+        margin=dict(l=40, r=40, t=50, b=40),
     )
-    fig.update_xaxes(gridcolor="rgba(148,163,184,0.1)")
-    fig.update_yaxes(gridcolor="rgba(148,163,184,0.1)")
+    fig.update_xaxes(gridcolor="#E2E8F0", title_font=dict(color="#0F172A"), tickfont=dict(color="#0F172A"))
+    fig.update_yaxes(gridcolor="#E2E8F0", title_font=dict(color="#0F172A"), tickfont=dict(color="#0F172A"))
     return fig
 
 
@@ -202,9 +317,9 @@ def render_charts(df_chart: pd.DataFrame, topics_to_display: list, sort_mode: st
         chart_data['Topic Label'] = chart_data['Topic'].map(lambda x: title_map.get(x, x))
     present_types = list(chart_data['Type'].unique())
     domain = [t for t in present_types if t in u1.COLOR_MAP] + [t for t in present_types if t not in u1.COLOR_MAP]
-    range_colors = [u1.COLOR_MAP.get(t, '#1f77b4') for t in domain]
+    range_colors = [u1.get_model_color(t, i) for i, t in enumerate(domain)]
     color_scale = alt.Color('Type', scale=alt.Scale(domain=domain, range=range_colors),
-                            legend=alt.Legend(title="Model Type", orient="top"))
+                            legend=alt.Legend(title="Model Type", orient="top", columns=3, labelLimit=2000, titleLimit=2000))
     base = alt.Chart(chart_data).encode(
         y=alt.Y('Topic Label:N', title="Topics", sort=topic_labels, axis=alt.Axis(labelLimit=1000))
     )
@@ -243,7 +358,7 @@ def render_two_run_comparison_chart(df_run_a, df_run_b, run_a_name, run_b_name, 
         sorted_labels = [title_map.get(f'T{i}', f'T{i}') for i in range(1, 46)]
 
     color_scale = alt.Color('Run:N',
-        scale=alt.Scale(domain=[label_a, label_b], range=['#1f77b4', '#ff7f0e']),
+        scale=alt.Scale(domain=[label_a, label_b], range=['#1D4ED8', '#EA580C']),
         legend=alt.Legend(title="Experiment Run", orient="top"))
     base = alt.Chart(df_combined).encode(
         y=alt.Y('Topic Label:N', title="Topics & Titles", sort=sorted_labels, axis=alt.Axis(labelLimit=1000))
@@ -285,27 +400,35 @@ def render_seed_variance_chart(var_df: pd.DataFrame):
         x=x_vals,
         y=y_vals,
         orientation="h",
-        marker_color="#6366F1",
+        marker_color="#1D4ED8",
         boxpoints=False,
-        fillcolor="rgba(99, 102, 241, 0.4)",
-        line=dict(color="#818CF8", width=1.5),
-        hoverinfo="x+y",
+        fillcolor="rgba(29, 78, 216, 0.2)",
+        line=dict(color="#1E40AF", width=1.5),
+        hovertemplate=(
+            "<b>%{y}</b><br>"
+            "Median nDCG@5: %{median:.4f}<br>"
+            "Q1: %{q1:.4f} | Q3: %{q3:.4f}<br>"
+            "Min: %{min:.4f} | Max: %{max:.4f}<extra></extra>"
+        ),
     ))
 
+    fig = _apply_light_theme(fig, max(500, len(var_df) * 36))
     fig.update_layout(
         showlegend=False,
         xaxis=dict(title="nDCG@5", range=[-0.02, 1.05]),
         yaxis=dict(title="", automargin=True),
         margin=dict(l=10, r=20, t=10, b=30),
     )
-    fig = _apply_dark_theme(fig, max(500, len(var_df) * 36))
     st.plotly_chart(fig, width="stretch")
 
 
 def render_retrieval_analysis(run_name: str, run_dir: str, all_topics: dict, folders_meta: dict, top_n: int = 15):
     """Render the Retrieval Analysis section: top-N retrieved folders per topic."""
     if not run_dir or not os.path.exists(run_dir):
-        st.warning(f"Run directory not found for `{run_name}`.")
+        return
+
+    run_txt_path = os.path.join(run_dir, "run.txt")
+    if not os.path.isfile(run_txt_path):
         return
 
     folder_qrels = u3.load_folder_qrels()
@@ -349,14 +472,14 @@ def render_retrieval_analysis(run_name: str, run_dir: str, all_topics: dict, fol
         st.markdown(f"**{sel_topic_id}: {topic_data.get('TITLE', '')}**")
         st.caption(topic_data.get('DESCRIPTION', ''))
     with col_t2:
-        ndcg_color = "#2ecc71" if ndcg5 > 0.4 else "#e74c3c" if ndcg5 < 0.2 else "#f1c40f"
-        st.markdown(f'<div class="metric-box"><div style="font-size:24px;font-weight:bold;color:{ndcg_color}">{ndcg5:.4f}</div><div style="color:#aaa">nDCG@5</div></div>', unsafe_allow_html=True)
+        ndcg_cls = "kpi-good" if ndcg5 > 0.4 else "kpi-bad" if ndcg5 < 0.2 else "kpi-mid"
+        st.markdown(f'<div class="metric-box"><div class="kpi-lg {ndcg_cls}">{ndcg5:.4f}</div><div class="kpi-label">nDCG@5</div></div>', unsafe_allow_html=True)
     with col_t3:
-        st.markdown(f'<div class="metric-box"><div style="font-size:20px;font-weight:bold;color:#8fb4ff">{n_rel_top5}/5</div><div style="color:#aaa">Rel in Top-5</div></div>', unsafe_allow_html=True)
+        st.markdown(f'<div class="metric-box"><div class="kpi-md kpi-accent">{n_rel_top5}/5</div><div class="kpi-label">Rel in Top-5</div></div>', unsafe_allow_html=True)
     with col_t4:
-        p_color = "#2ecc71" if has_potential else "#e74c3c"
+        p_cls = "kpi-good" if has_potential else "kpi-bad"
         p_label = "✅ Rerank Potential" if has_potential else "❌ No Potential"
-        st.markdown(f'<div class="metric-box"><div style="font-size:14px;font-weight:bold;color:{p_color}">{p_label}</div><div style="color:#aaa;font-size:11px">{len(outside_top5)} rel at rank 6-{top_n}</div></div>', unsafe_allow_html=True)
+        st.markdown(f'<div class="metric-box"><div class="kpi-sm {p_cls}">{p_label}</div><div class="kpi-xs">{len(outside_top5)} rel at rank 6-{top_n}</div></div>', unsafe_allow_html=True)
 
     if not ranking:
         st.info("No ranking data for this topic in the selected run.")
@@ -374,7 +497,7 @@ def render_retrieval_analysis(run_name: str, run_dir: str, all_topics: dict, fol
         top_tag = '<span class="tag tag-top5">TOP-5</span>' if in_top5 else f'<span class="tag tag-top15">rank 6-{top_n}</span>'
         # Use star-based grade display for consistency with Topic Viewer
         grade_label = u3.grade_stars(grade)
-        movable_tag = '<span class="tag" style="background:#1a4a1a;color:#4dff4d">🎯 MOVABLE</span>' if is_movable else ''
+        movable_tag = '<span class="tag tag-movable">🎯 MOVABLE</span>' if is_movable else ''
 
         label = folder_data.get('label', 'N/A')
         snc = folder_data.get('snc', 'N/A')
@@ -390,9 +513,9 @@ def render_retrieval_analysis(run_name: str, run_dir: str, all_topics: dict, fol
                     st.markdown(f"**Scope Note:** {str(folder_data['raw_scope'])[:300]}…")
                 st.markdown(top_tag + movable_tag, unsafe_allow_html=True)
             with col_f2:
-                grade_color_map = {3: "#2ecc71", 1: "#f1c40f", 0: "#888"}
-                g_color = grade_color_map.get(grade, "#888")
-                st.markdown(f'<div class="metric-box"><div style="font-size:22px;font-weight:bold;color:{g_color}">Grade {grade}</div></div>', unsafe_allow_html=True)
+                grade_cls_map = {3: "grade-3", 1: "grade-1", 0: "grade-0"}
+                g_cls = grade_cls_map.get(grade, "grade-0")
+                st.markdown(f'<div class="metric-box"><div class="{g_cls}">Grade {grade}</div></div>', unsafe_allow_html=True)
             if aug_data:
                 with st.expander("🤖 LLM Augmentation"):
                     if aug_data.get('CORE_THEMES'): st.markdown(f"**CORE_THEMES:** {aug_data['CORE_THEMES']}")
@@ -400,10 +523,10 @@ def render_retrieval_analysis(run_name: str, run_dir: str, all_topics: dict, fol
 
 
 
-def run_experiment_analyzer_ui():
-    # ── PART 1: Single Experiment Analysis ──
-    st.title("🔬 Single Experiment Analysis")
-    st.caption("Select a configuration to see per-model nDCG@5 results. Models (suffix after last `_`) are shown for comparison within a single experiment.")
+def run_single_experiment_ui():
+    """Screen 1: Single Experiment Analysis & Retrieval Analysis"""
+    st.title("🔬 Single Experiment Viewer")
+    st.caption("Select a configuration to see per-model nDCG@5 results, seed variance, and detailed retrieval rankings.")
 
     available_subfolders = ["All Subfolders"] + u1.get_available_subfolders()
 
@@ -433,14 +556,16 @@ def run_experiment_analyzer_ui():
         df_chart, _, all_topics, model_results = u1.process_experiment_data([selected_config], grouped_runs)
         st.subheader("Global Performance (Mean nDCG@5)")
         sorted_models = sorted(model_results.keys(), key=lambda x: model_results[x]['stats']['val'], reverse=True)
-        cols = st.columns(min(len(sorted_models), 4))
-        for i, model_key in enumerate(sorted_models):
-            stats = model_results[model_key]['stats']
-            count = model_results[model_key]['count']
-            with cols[i % 4]:
-                st.metric(label=f"{model_key} (N={count})", value=f"{stats['val']:.4f} ± {stats['margin']:.3f}")
+        chunk_size = 4 if len(sorted_models) <= 4 else 3
+        for row_start in range(0, len(sorted_models), chunk_size):
+            row_models = sorted_models[row_start:row_start + chunk_size]
+            cols = st.columns(len(row_models))
+            for i, model_key in enumerate(row_models):
+                stats = model_results[model_key]['stats']
+                count = model_results[model_key]['count']
+                with cols[i]:
+                    st.metric(label=f"{model_key} (N={count})", value=f"{stats['val']:.4f} ± {stats['margin']:.3f}")
         if all_topics:
-            # Dumbbell sort selector
             sort_mode_single = st.radio(
                 "Sort topics by:", ["Topic Order (T1, T2, …)", "nDCG@5 Mean (Desc)"],
                 horizontal=True, key="sort_single"
@@ -463,38 +588,42 @@ def run_experiment_analyzer_ui():
         else:
             st.warning("No topic data found for this configuration.")
 
-    # ── Retrieval Analysis (right after single experiment) ──
+    # ── Retrieval Analysis ──
     if selected_config and selected_config in grouped_runs:
         first_run_name = grouped_runs[selected_config][0]
         first_run_dir = u1.resolve_run_folder_path(first_run_name, selected_subfolder) or ""
+        run_txt_path = os.path.join(first_run_dir, "run.txt") if first_run_dir else ""
 
-        folders_meta, _ = u2.load_metadata()
-        ecf_data = u2.load_ecf_data()
-        all_ecf_topics = {}
-        if "ExperimentSets" in ecf_data:
-            for es in ecf_data["ExperimentSets"]:
-                if "Topics" in es: all_ecf_topics.update(es["Topics"])
+        if first_run_dir and os.path.isfile(run_txt_path):
+            folders_meta, _ = u2.load_metadata()
+            ecf_data = u2.load_ecf_data()
+            all_ecf_topics = {}
+            if "ExperimentSets" in ecf_data:
+                for es in ecf_data["ExperimentSets"]:
+                    if "Topics" in es: all_ecf_topics.update(es["Topics"])
 
-        if all_ecf_topics and first_run_dir:
-            st.markdown("---")
-            st.header("🔬 Retrieval Analysis")
-            st.caption("Inspect the retrieved folders per topic alongside qrels grades for the selected run.")
-            top_n_sel = st.selectbox("Top-N retrieved folders to show:", [5, 10, 15, 20], index=2, key="ret_top_n")
-            render_retrieval_analysis(first_run_name, first_run_dir, all_ecf_topics, folders_meta, top_n=top_n_sel)
+            if all_ecf_topics:
+                st.markdown("---")
+                st.header("🔬 Retrieval Analysis")
+                st.caption("Inspect the retrieved folders per topic alongside qrels grades for the selected run.")
+                top_n_sel = st.selectbox("Top-N retrieved folders to show:", [5, 10, 15, 20], index=2, key="ret_top_n")
+                render_retrieval_analysis(first_run_name, first_run_dir, all_ecf_topics, folders_meta, top_n=top_n_sel)
 
-    # ── PART 2: Two-Experiment Comparison ──
-    st.markdown("---")
-    st.header("⚔️ Direct Two-Experiment Overlay Comparison")
 
-    all_runs_df = u1.get_all_runs_statistics(selected_subfolder)
+def run_two_experiment_ui():
+    """Screen 2: Direct Two-Experiment Overlay Comparison"""
+    st.title("⚔️ Two-Experiment Viewer")
+    st.caption("Directly compare two experiment runs side-by-side with statistical significance tests and topic separation analysis.")
+
+    available_subfolders = ["All Subfolders"] + u1.get_available_subfolders()
+    all_runs_df = u1.get_all_runs_statistics("All Subfolders")
     if all_runs_df.empty:
-        st.warning("No runs found for comparison in the selected subfolder scope.")
+        st.warning("No runs found for comparison.")
         return
 
     all_run_names = all_runs_df['Run Name'].tolist()
-
-    default_a = grouped_runs[selected_config][0] if selected_config and selected_config in grouped_runs and grouped_runs[selected_config] else all_run_names[0]
-    default_b = grouped_runs[selected_config][1] if selected_config and selected_config in grouped_runs and len(grouped_runs[selected_config]) > 1 else (all_run_names[1] if len(all_run_names) > 1 else all_run_names[0])
+    default_a = all_run_names[0] if all_run_names else ""
+    default_b = all_run_names[1] if len(all_run_names) > 1 else default_a
 
     col_sel_a, col_sel_b = st.columns(2)
     with col_sel_a:
@@ -537,25 +666,47 @@ def run_experiment_analyzer_ui():
         with m_col_b:
             st.metric(label=f"🟧 Run B: {sel_run_b}", value=f"{mean_b:.4f} ± {margin_b:.4f}", help=f"Global Relevance: {rel_b:.2f}")
         with m_col_delta:
-            # No green arrow — just show the numeric value
             st.metric(label="Global Delta (A - B)", value=f"{delta_ndcg:+.4f}")
 
         # Wilcoxon signed-rank test
         wilcoxon_result = u1.run_wilcoxon_test(sel_run_a, sel_run_b, subfolder_a, subfolder_b)
         if "error" not in wilcoxon_result:
+            p_val = wilcoxon_result["p_value"]
+            sig_icon = "✅" if wilcoxon_result["significant"] else "❌"
+            sig_text = "Significant" if wilcoxon_result["significant"] else "Not Significant"
+            raw_winner = wilcoxon_result["winner"]
+            if raw_winner in ("Run A", sel_run_a):
+                winner_disp = "🟦 Run A"
+            elif raw_winner in ("Run B", sel_run_b):
+                winner_disp = "🟧 Run B"
+            else:
+                winner_disp = raw_winner
+
             w_col1, w_col2, w_col3 = st.columns(3)
             with w_col1:
-                p_val = wilcoxon_result["p_value"]
-                sig_icon = "✅" if wilcoxon_result["significant"] else "❌"
-                st.metric("Wilcoxon p-value", f"{p_val:.5f}", help=f"{sig_icon} {'Significant' if wilcoxon_result['significant'] else 'Not significant'} (α=0.05)")
+                st.metric(
+                    label="Wilcoxon p-value",
+                    value=f"{p_val:.5f}",
+                    delta=f"{sig_icon} {sig_text} (α=0.05)",
+                    delta_color="off"
+                )
             with w_col2:
-                st.metric("Winner", wilcoxon_result["winner"])
+                st.metric(
+                    label="Winner",
+                    value=winner_disp,
+                    delta=f"Run A: {wilcoxon_result['wins_a']} wins | Run B: {wilcoxon_result['wins_b']} wins",
+                    delta_color="off"
+                )
             with w_col3:
-                st.metric("Seeds Compared", f"{wilcoxon_result['n_seeds']} (A wins: {wilcoxon_result['wins_a']}, B wins: {wilcoxon_result['wins_b']})")
+                st.metric(
+                    label="Seeds Compared",
+                    value=f"{wilcoxon_result['n_seeds']} seeds",
+                    delta=f"A wins: {wilcoxon_result['wins_a']} | B wins: {wilcoxon_result['wins_b']}",
+                    delta_color="off"
+                )
         elif wilcoxon_result.get("error"):
             st.caption(f"⚠️ Wilcoxon test: {wilcoxon_result['error']}")
 
-        # Dumbbell sort selector for overlay
         sort_mode_overlay = st.radio(
             "Sort topics by:", ["Topic Order (T1, T2, …)", "nDCG@5 Mean (Desc)"],
             horizontal=True, key="sort_overlay"
@@ -576,7 +727,6 @@ def run_experiment_analyzer_ui():
             col_b, col_e, col_w = st.columns(3)
             with col_b:
                 pct_b = (len(df_better) / total_topics * 100) if total_topics else 0.0
-                # No green arrow — show count and percentage directly in value
                 st.metric("🟢 Run A Better than B (≥ +10%)", f"{len(df_better)} topics ({pct_b:.1f}%)")
             with col_e:
                 pct_e = (len(df_equal) / total_topics * 100) if total_topics else 0.0
@@ -616,7 +766,7 @@ def run_experiment_analyzer_ui():
 # ============================================================
 
 def run_data_overview_ui():
-    st.title("📦 Data Overview — SUSHI Collection")
+    st.title("📦 Collection Viewer — SUSHI Collection")
 
     folders_df = _load_folders_df()
     items_df = _load_items_df()
@@ -640,13 +790,13 @@ def run_data_overview_ui():
         st.markdown("### Documents per Folder")
         fig = px.histogram(folders_df, x="doc_count", nbins=50, color_discrete_sequence=[_DA_COLORS["primary"]],
             labels={"doc_count": "Documents", "count": "Folders"})
-        st.plotly_chart(_apply_dark_theme(fig, 350), width="stretch")
+        st.plotly_chart(_apply_light_theme(fig, 350), width="stretch")
     with col_b:
         st.markdown("### Folders per Box")
         fpb = folders_df.groupby("box").size().reset_index(name="folder_count")
-        fig = px.histogram(fpb, x="folder_count", nbins=30, color_discrete_sequence=[_DA_COLORS["secondary"]],
+        fig = px.histogram(fpb, x="folder_count", nbins=30, color_discrete_sequence=[_DA_COLORS["primary"]],
             labels={"folder_count": "Folders", "count": "Boxes"})
-        st.plotly_chart(_apply_dark_theme(fig, 350), width="stretch")
+        st.plotly_chart(_apply_light_theme(fig, 350), width="stretch")
 
     st.markdown("### Primary SNC Code — Folder & Document Counts")
     primary_stats = folders_df.groupby("snc_primary").agg(
@@ -656,8 +806,8 @@ def run_data_overview_ui():
     fig.add_trace(go.Bar(y=primary_stats["snc_primary"], x=primary_stats["folder_count"], orientation="h",
         marker_color=_DA_COLORS["primary"], name="Folders"), row=1, col=1)
     fig.add_trace(go.Bar(y=primary_stats["snc_primary"], x=primary_stats["total_docs"], orientation="h",
-        marker_color=_DA_COLORS["accent"], name="Documents"), row=1, col=2)
-    fig = _apply_dark_theme(fig, max(400, len(primary_stats) * 22))
+        marker_color="#2563EB", name="Documents"), row=1, col=2)
+    fig = _apply_light_theme(fig, max(400, len(primary_stats) * 22))
     fig.update_yaxes(autorange="reversed")
     st.plotly_chart(fig, width="stretch")
 
@@ -694,14 +844,14 @@ def run_data_overview_ui():
                 width="stretch", hide_index=True)
         fig = px.histogram(snc3, x="folder_count", nbins=40, color_discrete_sequence=[_DA_COLORS["primary"]],
             labels={"folder_count":"Folders","count":"SNCs"}, title="Histogram: Folders per SNC (3-Level)")
-        st.plotly_chart(_apply_dark_theme(fig), width="stretch")
+        st.plotly_chart(_apply_light_theme(fig), width="stretch")
         st.markdown("#### Top 40 SNCs (3-Level) by Folder Count")
         fig_top40 = px.bar(snc3.head(40), x="snc_3level", y="folder_count",
             color_discrete_sequence=[_DA_COLORS["primary"]],
             labels={"snc_3level":"SNC (3-Level)","folder_count":"Folders"},
             title="Top 40 SNCs (3-Level)")
         fig_top40.update_xaxes(tickangle=45)
-        st.plotly_chart(_apply_dark_theme(fig_top40, 450), width="stretch")
+        st.plotly_chart(_apply_light_theme(fig_top40, 450), width="stretch")
         with st.expander("All SNCs — Complete Table"):
             st.dataframe(snc3.rename(columns={"snc_3level":"SNC","folder_count":"Folders","total_docs":"Documents","has_scope":"Has Scope"}),
                 width="stretch", hide_index=True, height=400)
@@ -722,13 +872,13 @@ def run_data_overview_ui():
                 width="stretch", hide_index=True)
         fig = px.histogram(snc2, x="folder_count", nbins=30, color_discrete_sequence=[_DA_COLORS["primary"]],
             labels={"folder_count":"Folders","count":"SNCs"}, title="Histogram: Folders per SNC (2-Level)")
-        st.plotly_chart(_apply_dark_theme(fig), width="stretch")
+        st.plotly_chart(_apply_light_theme(fig), width="stretch")
         fig_top40 = px.bar(snc2.head(40), x="snc_2level", y="folder_count",
             color_discrete_sequence=[_DA_COLORS["primary"]],
             labels={"snc_2level":"SNC (2-Level)","folder_count":"Folders"},
             title="Top 40 SNCs (2-Level)")
         fig_top40.update_xaxes(tickangle=45)
-        st.plotly_chart(_apply_dark_theme(fig_top40, 450), width="stretch")
+        st.plotly_chart(_apply_light_theme(fig_top40, 450), width="stretch")
         with st.expander("All SNCs — Complete Table"):
             st.dataframe(snc2.rename(columns={"snc_2level":"SNC","folder_count":"Folders","total_docs":"Documents"}),
                 width="stretch", hide_index=True, height=400)
@@ -749,13 +899,13 @@ def run_data_overview_ui():
                 width="stretch", hide_index=True)
         fig = px.histogram(snc1, x="folder_count", nbins=20, color_discrete_sequence=[_DA_COLORS["primary"]],
             labels={"folder_count":"Folders","count":"SNCs"}, title="Histogram: Folders per Primary SNC")
-        st.plotly_chart(_apply_dark_theme(fig), width="stretch")
+        st.plotly_chart(_apply_light_theme(fig), width="stretch")
         fig_top40 = px.bar(snc1, x="snc_primary", y="folder_count",
             color_discrete_sequence=[_DA_COLORS["primary"]],
             labels={"snc_primary":"Primary SNC","folder_count":"Folders"},
             title="Folders per Primary SNC Code (All)")
         fig_top40.update_xaxes(tickangle=45)
-        st.plotly_chart(_apply_dark_theme(fig_top40, 450), width="stretch")
+        st.plotly_chart(_apply_light_theme(fig_top40, 450), width="stretch")
         with st.expander("All SNCs — Complete Table"):
             st.dataframe(snc1.rename(columns={"snc_primary":"SNC","folder_count":"Folders","total_docs":"Documents"}),
                 width="stretch", hide_index=True, height=400)
@@ -768,7 +918,7 @@ def run_data_overview_ui():
             f"{s} — {snc_labels_map.get(s,'')} — Count of folders: {snc3_count_map.get(s,0)}"
             for s in snc_options
         ]
-        sel_idx = st.selectbox("Select SNC Code", range(len(snc_options)), format_func=lambda i: snc_display[i],
+        sel_idx = st.selectbox("Select SNC Code (SNC - Folder Label - Number of folders with this SNC)", range(len(snc_options)), format_func=lambda i: snc_display[i],
             key="deepdive_snc_select")
         selected_snc = snc_options[sel_idx]
 
@@ -797,7 +947,7 @@ def run_data_overview_ui():
             st.markdown("### Browse Folder Documents")
             folder_ids = snc_folders["folder_id"].tolist()
             folder_labels_map = snc_folders.set_index("folder_id")["label"].to_dict()
-            sel_folder = st.selectbox("Select Folder", folder_ids, format_func=lambda x: f"{x} — {folder_labels_map.get(x,'')}", key="deepdive_folder_select")
+            sel_folder = st.selectbox("Select Folder (Folder ID - SNC - Folder Label)", folder_ids, format_func=lambda x: f"{x} — {folder_labels_map.get(x,'')}", key="deepdive_folder_select")
             if sel_folder:
                 folder_docs_df = snc_docs[snc_docs["folder_id"] == sel_folder]
                 st.markdown(f"**{len(folder_docs_df)} documents in this folder:**")
@@ -813,15 +963,15 @@ def run_data_overview_ui():
                 fig = px.bar(kw_df, x="Count", y="Word", orientation="h",
                     color_discrete_sequence=[_DA_COLORS["primary"]])
                 fig.update_yaxes(autorange="reversed")
-                st.plotly_chart(_apply_dark_theme(fig, 500), width="stretch")
+                st.plotly_chart(_apply_light_theme(fig, 500), width="stretch")
             st.markdown("### Top Keywords from Summaries")
             sum_kw = _extract_keywords(snc_docs["summary"].dropna().tolist(), top_n=25)
             if sum_kw:
                 kw_df2 = pd.DataFrame(sum_kw, columns=["Word","Count"])
                 fig2 = px.bar(kw_df2, x="Count", y="Word", orientation="h",
-                    color_discrete_sequence=[_DA_COLORS["secondary"]])
+                    color_discrete_sequence=[_DA_COLORS["primary"]])
                 fig2.update_yaxes(autorange="reversed")
-                st.plotly_chart(_apply_dark_theme(fig2, 500), width="stretch")
+                st.plotly_chart(_apply_light_theme(fig2, 500), width="stretch")
 
     # ── SECTION 3: Document Analysis ─────────────────────────────────
     st.markdown("---")
@@ -838,12 +988,12 @@ def run_data_overview_ui():
         with ca:
             fig = px.histogram(items_df, x="ocr_pages", nbins=50, color_discrete_sequence=[_DA_COLORS["primary"]],
                 labels={"ocr_pages":"OCR Pages","count":"Documents"}, title="OCR Pages per Document")
-            st.plotly_chart(_apply_dark_theme(fig), width="stretch")
+            st.plotly_chart(_apply_light_theme(fig), width="stretch")
         with cb:
             dpf = items_df.groupby("folder_id").size().reset_index(name="doc_count")
-            fig = px.histogram(dpf, x="doc_count", nbins=50, color_discrete_sequence=[_DA_COLORS["accent"]],
+            fig = px.histogram(dpf, x="doc_count", nbins=50, color_discrete_sequence=[_DA_COLORS["primary"]],
                 labels={"doc_count":"Documents per Folder","count":"Folders"}, title="Documents per Folder")
-            st.plotly_chart(_apply_dark_theme(fig), width="stretch")
+            st.plotly_chart(_apply_light_theme(fig), width="stretch")
         st.markdown("### Most Common Words in Document Titles")
         title_kws = _extract_keywords(items_df["title"].dropna().tolist(), top_n=30)
         if title_kws:
@@ -852,7 +1002,7 @@ def run_data_overview_ui():
                 color_discrete_sequence=[_DA_COLORS["primary"]],
                 title="Top 30 Words in Document Titles")
             fig.update_yaxes(autorange="reversed")
-            st.plotly_chart(_apply_dark_theme(fig, 600), width="stretch")
+            st.plotly_chart(_apply_light_theme(fig, 600), width="stretch")
 
     with doc_tab2:
         # Build dropdown: SNC — Label — Count of folders: N
@@ -862,7 +1012,7 @@ def run_data_overview_ui():
             f"{s} — {snc_labels_map_da.get(s,'')} — Count of folders: {snc3_count_map.get(s,0)}"
             for s in snc_opts
         ]
-        sel_snc_idx = st.selectbox("Select SNC Code", range(len(snc_opts)), format_func=lambda i: snc_display_da[i],
+        sel_snc_idx = st.selectbox("Select SNC Code (SNC - Folder Label - Number of folders with this SNC)", range(len(snc_opts)), format_func=lambda i: snc_display_da[i],
             index=0, key="doc_browse_snc")
         sel_snc = snc_opts[sel_snc_idx]
         snc_flds = folders_df[folders_df["snc_3level"] == sel_snc]
@@ -878,7 +1028,7 @@ def run_data_overview_ui():
             fig = px.bar(kw_df3, x="Count", y="Word", orientation="h",
                 color_discrete_sequence=[_DA_COLORS["secondary"]])
             fig.update_yaxes(autorange="reversed")
-            st.plotly_chart(_apply_dark_theme(fig, 450), width="stretch")
+            st.plotly_chart(_apply_light_theme(fig, 450), width="stretch")
         st.markdown("### Folders")
         for _, folder_row in snc_flds.iterrows():
             fid = folder_row["folder_id"]; n_docs2 = folder_row["doc_count"]
@@ -908,7 +1058,7 @@ def run_data_overview_ui():
             for fid in all_folder_ids
         ]
         sel_folder_idx = st.selectbox(
-            "Select Folder",
+            "Select Folder (Folder ID - SNC - Folder Label)",
             range(len(all_folder_ids)),
             format_func=lambda i: folder_display_labels[i],
             key="da_browse_folder_select"
@@ -956,7 +1106,8 @@ def run_topic_viewer_ui():
     q_folders = u2.load_qrels_data(u2.PATH_QRELS_FOLDERS)
     q_boxes = u2.load_qrels_data(u2.PATH_QRELS_BOXES)
 
-    st.title("🔍 Topic Viewer & Content Explorer")
+    st.title("🔍 Task Viewer & Content Explorer")
+    st.caption("⭐ **Relevance Legend:** ⭐⭐⭐ = Highly Relevant (Grade 3) | ⭐ = Relevant (Grade 1)")
 
     all_topics = {}
     if "ExperimentSets" in ecf_data:
@@ -1153,23 +1304,17 @@ If yes, a re-ranking step could improve nDCG@5 by promoting these folders.
 ## App Pages
 
 
-### 🔬 Experiment Analyzer
-Analyzes experiment results at multiple levels of granularity:
-- **Single Experiment Analysis**: Select a configuration to compare models (e.g., BM25 vs ColBERT) within it. Metrics are shown as KPIs and a dumbbell chart per topic.
-- **Retrieval Analysis**: For a selected run, inspect the Top-N retrieved folders per topic alongside qrels grades. Use the "Top-N" selector (5/15/25/50) to control how many folders to display. All folders are listed collapsed — expand any to see details.
-- **Two-Experiment Comparison**: Pick any two runs from any subfolder and compare them side-by-side with a Wilcoxon signed-rank test, an overlay chart, and a topic separation table (Better / Equal / Worse).
-
-### 📦 Data Overview
+### 📦 Collection Viewer
 Explore the SUSHI collection structure:
 - **SNC Distribution tabs** (3-Level / 2-Level / 1-Level): For each SNC granularity, see the count of distinct codes, top-10 / bottom-10 by folder count, a histogram, a top-40 bar chart, and a complete table.
 - **SNC Deep Dive**: Pick an SNC code from the dropdown (shows `SNC — Label — Count of folders: N`) to explore all its folders, browse documents, and view keyword clouds.
 - **Document Analysis → Browse by SNC**: Filter documents by SNC code to see keyword summaries and folder listings.
 - **Document Analysis → Browse by Folder**: Pick any of the 1,336 folders by `FOLDER_ID — SNC — Label` to see its metadata and all its documents.
 
-### 🔍 Topic Viewer
+### 🔍 Task Viewer
 Browse the 45 evaluation topics (T1–T45). Select a topic to see its description and narrative, then explore the hierarchical tree of relevant **Boxes → Folders → Documents** with star-based relevance grades.
 
-### 🧪 ECF Inspector
+### 🧪 Training Set Viewer
 Analyze what the Experiment Control File (ECF) includes:
 - **Overview**: Histogram of documents per covered folder.
 - **By SNC**: Coverage table by SNC code with KPIs for SNCs with/without docs.
@@ -1177,6 +1322,20 @@ Analyze what the Experiment Control File (ECF) includes:
 - **By Folder**: Browse only the folders covered by this ECF (dropdown: `FOLDER_ID — SNC — Label`).
 - **Relevance Coverage**: Cross-reference ECF coverage with the 45-topic qrels, including % coverage for Grade 3 and Grade 1 relevant folders.
 - **Compare ECFs**: Overlay two ECFs to compare their coverage distributions.
+
+### 🔬 Single Experiment Viewer
+Select an experiment configuration to compare models (e.g., BM25 vs ColBERT) within it:
+- **Global Performance**: KPI metrics showing mean nDCG@5 ± 95% margin per model.
+- **Model Comparison Chart**: Interactive dumbbell chart showing per-topic mean nDCG@5 and confidence intervals.
+- **Seed Variance**: Horizontal box plot displaying nDCG@5 distribution across seeds per topic.
+- **Retrieval Analysis**: Detailed inspection of retrieved folders per topic alongside qrels grades, movable tags, scope notes, and OCR text.
+
+### ⚔️ Two-Experiment Viewer
+Direct side-by-side comparison of any two experiment runs across any subfolders:
+- **Side-by-Side KPIs & Delta**: Global mean nDCG@5 metrics and exact performance delta (A - B).
+- **Wilcoxon Signed-Rank Test**: Statistical significance test results (p-value, winner, win counts).
+- **Overlay Comparison Chart**: Side-by-side topic overlay dumbbell chart comparing Run A (Blue) vs Run B (Orange).
+- **Topic Separation Analysis**: Categorized breakdown of topics into Better (≥ +10%), Equal (within ±10%), and Worse (≤ -10%).
 
 ---
 
@@ -1203,6 +1362,60 @@ Analyze what the Experiment Control File (ECF) includes:
 | `date` | string | Document date |
 | `summary` | string | GPT-4o generated summary |
 | `ocr` | list[string] | OCR text per page |
+
+---
+
+### 🧪 Experiment Naming Conventions & Dictionary Mappings
+
+Run folders in `all_runs/` are named according to encoded short codes representing search field combinations, expansion techniques, and model architectures.
+
+#### Search Field Dictionary (`SEARCH_FIELD_CONFIG`)
+
+| Code | Original Name | Included Fields / Search Mode |
+|:---:|:---:|:---|
+| **1** | `T` | Title only |
+| **2** | `F` | Folder Label only |
+| **3** | `O` | OCR text only |
+| **4** | `S` | GPT-4o Summary only |
+| **5** | `TSF` | Title + Summary + Folder Label |
+| **6** | `TOF` | Title + OCR + Folder Label |
+| **7** | `TOFS` | Title + OCR + Folder Label + Summary (All Document Fields) |
+| **8** | `ALLFL` | All Folders Label mode (Folder-level retrieval) |
+| **9** | `TFS` | Title + Folder Label + Summary |
+
+#### Expansion Strategy Dictionary (`EXPANSION_CONFIG`)
+
+| Code | Original Name | Expansion Technique |
+|:---:|:---:|:---|
+| **A** | `NEX` | No Expansion |
+| **B** | `SMS` | Similar SNC Expansion |
+| **C** | `SB` | Same Box Expansion |
+| **D** | `SS` | Same SNC Expansion |
+| **E** | `CD` | Close Date / Same SNC Close Date Expansion |
+
+#### Model Architecture Dictionary (`MODEL_CONFIG`)
+
+| Code | Original Name | Retrieval / Fusion Model |
+|:---:|:---:|:---|
+| **BM25** | `BM25` | Lexical Okapi BM25 model |
+| **BM25(TUNED)** | `BM25-TUNED` | Hyperparameter-tuned BM25F weights |
+| **EMB** | `EMBEDDINGS` | Dense BGE-m3 Embeddings model |
+| **CBERT** | `COLBERT` | Dense Late-Interaction ColBERT model |
+
+#### 📁 Document Availability & Sampling Scope Dictionary
+
+| Scope / Prefix | Strategy | Description |
+|:---:|:---:|:---|
+| **All Docs (`ALLDOCS`)** | Unconstrained Upper Bound | All 31,681 documents across all folders are fully indexed and available for retrieval. Serves as the empirical performance ceiling. |
+| **Uniform (`UNIFORM`)** | Uniform Random Sampling | Digitization is evenly distributed, randomly sampling ~5 documents per physical box (~630 total digitized documents across the archive). |
+| **Uneven (`UNEVEN`)** | Skewed Box Sampling | Non-uniform document sampling per box, simulating realistic, uneven archival digitization where some boxes are heavily digitized while others remain sparse. |
+
+#### Folder Naming Format Examples
+
+Folder names follow the structured pattern `[CategoryFolder]/[SearchField]_[Expansion]_[Models]`:
+- **`7/7_A_BM25`**: Search Field `TOFS` (7), No Expansion `NEX` (A), Model `BM25`
+- **`2/2_A_BM25-CBERT`**: Search Field `F` (2), No Expansion `NEX` (A), Models `BM25` + `ColBERT` (BM25-CBERT)
+- **`7/7_B-1_BM25(TUNED)-EMB-CBERT`**: Search Field `TOFS` (7), Expansion `SMS` with ceiling k=1 (B-1), Models Ensembled `BM25(TUNED)` + `EMBEDDINGS` + `ColBERT` (BM25(TUNED)-EMB-CBERT)
 """)
 
 
@@ -1211,7 +1424,7 @@ Analyze what the Experiment Control File (ECF) includes:
 # ============================================================
 
 def run_ecf_inspector_ui():
-    st.title("🧪 ECF Inspector")
+    st.title("🧪 Training Set Viewer")
     st.caption("Analyze Experiment Control File coverage: which folders, SNCs, and boxes have digitized documents.")
 
     folders_meta = u4._load_folders_meta()
@@ -1237,38 +1450,56 @@ def run_ecf_inspector_ui():
         ecf_a = filtered_ecfs[sel_ecf_a_idx]
 
     with col_ecf_b:
-        ecf_b_options = ["(None — no comparison)"] + [e["label"] for e in filtered_ecfs]
+        compare_ecfs = [e for e in filtered_ecfs if e["path"] != ecf_a["path"]]
+        ecf_b_options = ["(None — no comparison)"] + [e["label"] for e in compare_ecfs]
         sel_ecf_b_idx = st.selectbox("Compare against:", range(len(ecf_b_options)),
             format_func=lambda i: ecf_b_options[i], key="ecf_b")
-        ecf_b = filtered_ecfs[sel_ecf_b_idx - 1] if sel_ecf_b_idx > 0 else None
+        ecf_b = compare_ecfs[sel_ecf_b_idx - 1] if sel_ecf_b_idx > 0 else None
 
     # Load ECF A
     docs_a = u4.load_ecf_training_docs(ecf_a["path"])
     parsed_a = u4.parse_ecf_docs(docs_a)
     metrics_a = u4.compute_headline_metrics(parsed_a, folders_meta)
 
-    # Headline metrics — use value + delta to avoid truncation
+    # Headline metrics — clean non-truncating format with percentage text right below count (no ? tooltips)
     st.markdown("---")
     mc1, mc2, mc3, mc4 = st.columns(4)
-    mc1.metric(
-        "📄 Documents Included",
-        f"{metrics_a['docs_included']:,} / {metrics_a['docs_total']:,}",
-        delta=f"{metrics_a['docs_pct']}% of total",
-        delta_color="off"
-    )
-    mc2.metric(
-        "📂 Folders with ≥1 Doc",
-        f"{metrics_a['folders_covered']:,} / {metrics_a['folders_total']:,}",
-        delta=f"{metrics_a['folders_pct']}% covered",
-        delta_color="off"
-    )
-    mc3.metric(
-        "📦 Boxes Represented",
-        f"{metrics_a['boxes_covered']:,} / {metrics_a['boxes_total']:,}",
-        delta=f"{metrics_a['boxes_pct']}% covered",
-        delta_color="off"
-    )
-    mc4.metric("📊 Avg Docs/Covered Folder", f"{metrics_a['avg_docs_per_folder']:.2f}")
+    with mc1:
+        st.markdown(
+            f'<div style="background:#F8FAFC; border:1px solid #E2E8F0; border-radius:12px; padding:14px 16px; margin-bottom:20px;">'
+            f'<div style="color:#64748B; font-size:0.85rem; font-weight:600;">📄 Documents Included</div>'
+            f'<div style="color:#0F172A; font-weight:700; font-size:1.25rem; margin-top:2px;">{metrics_a["docs_included"]:,} / {metrics_a["docs_total"]:,}</div>'
+            f'<div style="color:#64748B; font-size:0.85rem; margin-top:2px;">{metrics_a["docs_pct"]}% of total</div>'
+            f'</div>',
+            unsafe_allow_html=True
+        )
+    with mc2:
+        st.markdown(
+            f'<div style="background:#F8FAFC; border:1px solid #E2E8F0; border-radius:12px; padding:14px 16px; margin-bottom:20px;">'
+            f'<div style="color:#64748B; font-size:0.85rem; font-weight:600;">📂 Folders with ≥1 Doc</div>'
+            f'<div style="color:#0F172A; font-weight:700; font-size:1.25rem; margin-top:2px;">{metrics_a["folders_covered"]:,} / {metrics_a["folders_total"]:,}</div>'
+            f'<div style="color:#64748B; font-size:0.85rem; margin-top:2px;">{metrics_a["folders_pct"]}% covered</div>'
+            f'</div>',
+            unsafe_allow_html=True
+        )
+    with mc3:
+        st.markdown(
+            f'<div style="background:#F8FAFC; border:1px solid #E2E8F0; border-radius:12px; padding:14px 16px; margin-bottom:20px;">'
+            f'<div style="color:#64748B; font-size:0.85rem; font-weight:600;">📦 Boxes Represented</div>'
+            f'<div style="color:#0F172A; font-weight:700; font-size:1.25rem; margin-top:2px;">{metrics_a["boxes_covered"]:,} / {metrics_a["boxes_total"]:,}</div>'
+            f'<div style="color:#64748B; font-size:0.85rem; margin-top:2px;">{metrics_a["boxes_pct"]}% covered</div>'
+            f'</div>',
+            unsafe_allow_html=True
+        )
+    with mc4:
+        st.markdown(
+            f'<div style="background:#F8FAFC; border:1px solid #E2E8F0; border-radius:12px; padding:14px 16px; margin-bottom:20px;">'
+            f'<div style="color:#64748B; font-size:0.85rem; font-weight:600;">📊 Avg Docs/Covered Folder</div>'
+            f'<div style="color:#0F172A; font-weight:700; font-size:1.25rem; margin-top:2px;">{metrics_a["avg_docs_per_folder"]:.2f}</div>'
+            f'<div style="color:#64748B; font-size:0.85rem; margin-top:2px;">&nbsp;</div>'
+            f'</div>',
+            unsafe_allow_html=True
+        )
 
     # Tabs — added "📂 By Folder" between Box and Relevance Coverage
     tab_names = ["📊 Overview", "🏷️ By SNC", "📂 By Folder", "📦 By Box", "🎯 Relevance Coverage"]
@@ -1285,7 +1516,7 @@ def run_ecf_inspector_ui():
             fdc_df = pd.DataFrame(list(fdc.items()), columns=["Folder", "Doc Count"])
             fig = px.histogram(fdc_df, x="Doc Count", nbins=30, color_discrete_sequence=[_DA_COLORS["primary"]],
                 labels={"Doc Count": "Documents per Folder", "count": "Folders"})
-            st.plotly_chart(_apply_dark_theme(fig, 400), width="stretch")
+            st.plotly_chart(_apply_light_theme(fig, 400), width="stretch")
 
     # Tab 2: By SNC — removed stacked bar, added "SNCs with No Docs" KPI
     with tabs[1]:
@@ -1313,7 +1544,7 @@ def run_ecf_inspector_ui():
             st.caption(f"**{len(folder_detail_df)}** folders covered by this ECF (have ≥1 training document).")
             folder_dropdown_labels = folder_detail_df["Dropdown Label"].tolist()
             sel_folder_ecf_idx = st.selectbox(
-                "Select Folder:",
+                "Select Folder (Folder ID - SNC - Folder Label)",
                 range(len(folder_detail_df)),
                 format_func=lambda i: folder_dropdown_labels[i],
                 key="ecf_folder_select"
@@ -1375,15 +1606,11 @@ the remaining **{s['uncovered_pairs']}** ({s['uncovered_pairs']/s['total_pairs']
         pct_g1 = round(s['covered_grade1'] / s['total_grade1'] * 100, 1) if s['total_grade1'] > 0 else 0.0
         rc1.metric(
             "⭐⭐⭐ Highly Relevant (Grade 3)",
-            f"{s['covered_grade3']} / {s['total_grade3']} covered",
-            delta=f"{pct_g3}% covered",
-            delta_color="off"
+            f"{s['covered_grade3']} / {s['total_grade3']} ({pct_g3}%)"
         )
         rc2.metric(
             "⭐ Relevant (Grade 1)",
-            f"{s['covered_grade1']} / {s['total_grade1']} covered",
-            delta=f"{pct_g1}% covered",
-            delta_color="off"
+            f"{s['covered_grade1']} / {s['total_grade1']} ({pct_g1}%)"
         )
 
         st.subheader("Per-Topic Relevance Coverage")
@@ -1402,14 +1629,14 @@ the remaining **{s['uncovered_pairs']}** ({s['uncovered_pairs']/s['total_pairs']
             # Side-by-side metrics
             comp_col_a, comp_col_b = st.columns(2)
             with comp_col_a:
-                st.markdown(f"### 🟦 {ecf_a['label']}")
-                st.metric("Documents", f"{metrics_a['docs_included']:,}", delta=f"{metrics_a['docs_pct']}%", delta_color="off")
-                st.metric("Folders Covered", f"{metrics_a['folders_covered']:,}", delta=f"{metrics_a['folders_pct']}%", delta_color="off")
+                st.markdown(f"### {ecf_a['label']}")
+                st.metric("Documents", f"{metrics_a['docs_included']:,}", help=f"{metrics_a['docs_pct']}% of total")
+                st.metric("Folders Covered", f"{metrics_a['folders_covered']:,}", help=f"{metrics_a['folders_pct']}% covered")
                 st.metric("Avg Docs/Folder", f"{metrics_a['avg_docs_per_folder']:.2f}")
             with comp_col_b:
-                st.markdown(f"### 🟧 {ecf_b['label']}")
-                st.metric("Documents", f"{metrics_b['docs_included']:,}", delta=f"{metrics_b['docs_pct']}%", delta_color="off")
-                st.metric("Folders Covered", f"{metrics_b['folders_covered']:,}", delta=f"{metrics_b['folders_pct']}%", delta_color="off")
+                st.markdown(f"### {ecf_b['label']}")
+                st.metric("Documents", f"{metrics_b['docs_included']:,}", help=f"{metrics_b['docs_pct']}% of total")
+                st.metric("Folders Covered", f"{metrics_b['folders_covered']:,}", help=f"{metrics_b['folders_pct']}% covered")
                 st.metric("Avg Docs/Folder", f"{metrics_b['avg_docs_per_folder']:.2f}")
 
             lbl_a = ecf_a["label"]
@@ -1469,27 +1696,32 @@ the remaining **{s['uncovered_pairs']}** ({s['uncovered_pairs']/s['total_pairs']
 
 
 # ============================================================
-# MAIN ROUTER
-# ============================================================
-
 def main():
     st.sidebar.title("Navigation")
     app_mode = st.sidebar.radio(
         "Choose Application:",
-        ["📖 How-To Guide", "🔬 Experiment Analyzer", "📦 Data Overview", "🔍 Topic Viewer", "🧪 ECF Inspector"]
+        [
+            "📦 Collection Viewer",
+            "🔍 Task Viewer",
+            "🧪 Training Set Viewer",
+            "🔬 Single Experiment Viewer",
+            "⚔️ Two-Experiment Viewer",
+            "📖 How-To Guide"
+        ]
     )
-    st.sidebar.markdown("---")
 
-    if app_mode == "📖 How-To Guide":
-        run_howto_ui()
-    elif app_mode == "🔬 Experiment Analyzer":
-        run_experiment_analyzer_ui()
-    elif app_mode == "📦 Data Overview":
+    if app_mode == "📦 Collection Viewer":
         run_data_overview_ui()
-    elif app_mode == "🔍 Topic Viewer":
+    elif app_mode == "🔍 Task Viewer":
         run_topic_viewer_ui()
-    elif app_mode == "🧪 ECF Inspector":
+    elif app_mode == "🧪 Training Set Viewer":
         run_ecf_inspector_ui()
+    elif app_mode == "🔬 Single Experiment Viewer":
+        run_single_experiment_ui()
+    elif app_mode == "⚔️ Two-Experiment Viewer":
+        run_two_experiment_ui()
+    elif app_mode == "📖 How-To Guide":
+        run_howto_ui()
 
 
 if __name__ == "__main__":
