@@ -22,23 +22,36 @@ IMPOSSIBLE_TOPICS = {3, 8, 10, 13, 14, 17, 25, 26, 30, 31, 43}
 ALL_KNOWN_TOPICS = {f"T{i}" for i in range(1, 46)}
 
 COLOR_MAP = {
-    'B': '#1f77b4',                          # Blue
-    'C': '#ff7f0e',                          # Orange
-    'E': '#2ca02c',                          # Green
-    'BC': '#d62728',                         # Red
-    'BE': '#9467bd',                         # Purple
-    'CE': '#8c564b',                         # Brown
-    'BCE': '#e377c2',                        # Pink
-    'BM25': '#1f77b4',                       # Blue
-    'COLBERT': '#ff7f0e',                    # Orange
-    'EMBEDDINGS': '#2ca02c',                 # Green
-    'BM25-COLBERT': '#d62728',               # Red
-    'BM25-EMBEDDINGS': '#9467bd',            # Purple
-    'BM25-EMBEDDINGS-COLBERT': '#8c564b',    # Brown
-    'BM25-COLBERT-TUNED': '#e377c2',         # Pink
-    'BM25-EMBEDDINGS-COLBERT-TUNED': '#17becf', # Cyan/Teal
-    'BM25-EMBEDDINGS-COLBERT-TUNED-WRRF': '#bcbd22' # Olive/Yellow-Green
+    'B': '#1D4ED8',                          # Cobalt Blue
+    'C': '#EA580C',                          # Dark Orange / Rust
+    'E': '#047857',                          # Forest / Emerald Green
+    'BC': '#C2410C',                         # Deep Rust
+    'BE': '#065F46',                         # Deep Emerald
+    'CE': '#D97706',                         # Dark Amber
+    'BCE': '#1E293B',                        # Slate Navy
+    'BM25': '#1D4ED8',                       # Cobalt Blue
+    'COLBERT': '#EA580C',                    # Dark Orange / Rust
+    'EMBEDDINGS': '#047857',                 # Forest / Emerald Green
+    'BM25-COLBERT': '#C2410C',               # Deep Rust
+    'BM25-EMBEDDINGS': '#065F46',            # Deep Emerald
+    'BM25-EMBEDDINGS-COLBERT': '#1E293B',    # Slate Navy
+    'BM25-COLBERT-TUNED': '#2563EB',         # Cobalt Blue
+    'BM25-EMBEDDINGS-COLBERT-TUNED': '#059669', # Emerald Green
+    'BM25-EMBEDDINGS-COLBERT-TUNED-WRRF': '#9A3412' # Deep Rust
 }
+
+FALLBACK_PALETTE = [
+    '#1D4ED8', '#EA580C', '#047857', '#C2410C', '#065F46', 
+    '#D97706', '#1E293B', '#2563EB', '#059669', '#9A3412', 
+    '#7C3AED', '#0284C7', '#D97706'
+]
+
+def get_model_color(model_type: str, index: int = 0) -> str:
+    """Returns exact color if in COLOR_MAP, or a deterministic distinct color from FALLBACK_PALETTE."""
+    if model_type in COLOR_MAP:
+        return COLOR_MAP[model_type]
+    idx = (abs(hash(model_type)) + index) % len(FALLBACK_PALETTE)
+    return FALLBACK_PALETTE[idx]
 
 def parse_run_folder(folder_name: str) -> Optional[Dict[str, str]]:
     """
@@ -662,7 +675,7 @@ def run_wilcoxon_test(run_name_a: str, run_name_b: str,
     try:
         stat, p_val = sp_stats.wilcoxon(vals_a, vals_b)
         significant = p_val < 0.05
-        winner = run_name_a if mean_a > mean_b else run_name_b if mean_b > mean_a else "Tie"
+        winner = "Run A" if mean_a > mean_b else "Run B" if mean_b > mean_a else "Tie"
     except ValueError:
         stat, p_val, significant, winner = 0.0, 1.0, False, "Identical"
 
