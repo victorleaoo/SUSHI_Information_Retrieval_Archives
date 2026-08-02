@@ -1,176 +1,955 @@
 import streamlit as st
 import pandas as pd
 import altair as alt
+import plotly.express as px
+import plotly.graph_objects as go
+from plotly.subplots import make_subplots
+import os
+import json
+import re
+from collections import Counter, defaultdict
+from pathlib import Path
 
-# Importação dos Módulos
 import utils_experiments_viz as u1
 import utils_topics_viz as u2
+import utils_retrieval as u3
+import utils_ecf_inspector as u4
 
 st.set_page_config(layout="wide", page_title="SUSHI Research Platform")
 
-# ==========================================
-# UI COMPONENTS - APP 1 (Experiment Analyzer)
-# ==========================================
+# ============================================================
+# SHARED CSS
+# ============================================================
+st.markdown("""
+<style>
+    .stApp { background: linear-gradient(135deg, #0F172A 0%, #1E293B 50%, #0F172A 100%); }
+    div[data-testid="stMetric"] {
+        background: linear-gradient(135deg, #1E293B, #334155);
+        border: 1px solid rgba(99,102,241,0.3);
+        border-radius: 12px; padding: 16px;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    }
+    div[data-testid="stMetric"] label { color: #94A3B8 !important; font-size: 0.85rem !important; }
+    div[data-testid="stMetric"] [data-testid="stMetricValue"] { color: #F1F5F9 !important; font-weight: 700 !important; }
+    .stTabs [data-baseweb="tab-list"] { gap: 8px; }
+    .stTabs [data-baseweb="tab"] {
+        background: rgba(30,41,59,0.8); border-radius: 8px;
+        border: 1px solid rgba(99,102,241,0.2); color: #94A3B8; padding: 8px 20px;
+    }
+    .stTabs [aria-selected="true"] {
+        background: linear-gradient(135deg,#6366F1,#8B5CF6) !important;
+        color: white !important; border: none !important;
+    }
+    section[data-testid="stSidebar"] {
+        background: linear-gradient(180deg,#1E293B 0%,#0F172A 100%);
+        border-right: 1px solid rgba(99,102,241,0.2);
+    }
+    h1, h2, h3 { color: #F1F5F9 !important; }
+    .info-box {
+        background: linear-gradient(135deg,rgba(99,102,241,0.15),rgba(139,92,246,0.1));
+        border: 1px solid rgba(99,102,241,0.3); border-radius: 12px;
+        padding: 16px 20px; margin: 8px 0; color: #CBD5E1;
+    }
+    .info-box strong { color: #A5B4FC; }
+    .folder-card {
+        background: #161b27; border-radius: 8px; padding: 14px;
+        margin-bottom: 10px; border: 1px solid #2d3250;
+    }
+    .folder-card.rel3 { border-left: 4px solid #2ecc71; }
+    .folder-card.rel1 { border-left: 4px solid #f1c40f; }
+    .folder-card.rel0 { border-left: 4px solid #555; }
+    .metric-box { background: #1e2130; border-radius: 8px; padding: 12px; text-align: center; }
+    .tag { display:inline-block; padding:2px 8px; border-radius:12px; font-size:12px; margin:2px; }
+    .tag-top5 { background:#2a4080; color:#8fb4ff; }
+    .tag-top15 { background:#2a2a2a; color:#aaa; }
+</style>
+""", unsafe_allow_html=True)
 
-def render_charts(df_chart: pd.DataFrame, topics_to_display: list):
-    """Render the Dumbbell chart for selected topics."""
+
+# ============================================================
+# DATA OVERVIEW HELPERS
+# ============================================================
+_BASE_DIR_DA = Path(__file__).resolve().parent.parent
+_FOLDERS_PATH_DA = _BASE_DIR_DA / "data" / "folders_metadata" / "FoldersV1.3.json"
+_ITEMS_PATH_DA = _BASE_DIR_DA / "data" / "items_metadata" / "itemsV1.2.json"
+
+_DA_COLORS = {
+    "primary": "#6366F1", "secondary": "#8B5CF6", "accent": "#EC4899",
+    "success": "#10B981", "warning": "#F59E0B", "danger": "#EF4444",
+    "info": "#3B82F6", "rich": "#10B981", "moderate": "#F59E0B", "poor": "#EF4444",
+}
+
+_STOP_WORDS = {
+    "the","a","an","and","or","but","in","on","at","to","for","of","with","by","from",
+    "as","is","was","are","were","be","been","being","have","has","had","do","does",
+    "did","will","would","could","should","may","might","shall","can","this","that",
+    "these","those","it","its","he","she","they","them","his","her","their","we","our",
+    "my","your","not","no","nor","also","than","other","which","who","whom","what",
+    "when","where","how","all","each","every","both","few","more","most","some","any",
+    "such","only","own","same","so","very","just","about","up","out","into","over",
+    "after","before","between","under","above","below","during","through","while",
+    "against","documents","document","including","new","united","states","government",
+    "brazil","brazilian","u.s.","u.s","state","department","embassy","president",
+    "regarding","report","according","one","two","three","four","five","among","well",
+    "however","several","various","includes","related","discussed","described",
+    "reported","mentioned","involved","provided","based","within",
+    "1964","1965","1966","1967","1968","1969","1970","1971","1972","1973","1974",
+}
+
+
+def _apply_dark_theme(fig, height=500):
+    fig.update_layout(
+        template="plotly_dark", paper_bgcolor="rgba(0,0,0,0)",
+        plot_bgcolor="rgba(15,23,42,0.6)",
+        font=dict(family="Inter, sans-serif", color="#CBD5E1"),
+        height=height, margin=dict(l=40, r=40, t=50, b=40),
+    )
+    fig.update_xaxes(gridcolor="rgba(148,163,184,0.1)")
+    fig.update_yaxes(gridcolor="rgba(148,163,184,0.1)")
+    return fig
+
+
+def _extract_keywords(texts, top_n=25):
+    wc = Counter()
+    for text in texts:
+        if not text or not isinstance(text, str): continue
+        words = re.findall(r'\b[a-zA-ZÀ-ÿ]{3,}\b', text.lower())
+        wc.update(w for w in words if w not in _STOP_WORDS)
+    return wc.most_common(top_n)
+
+
+@st.cache_data(show_spinner="Loading folder metadata…")
+def _load_folders_df():
+    with open(_FOLDERS_PATH_DA, "r", encoding="utf-8") as f:
+        data = json.load(f)
+    rows = [{"folder_id": fid, **meta} for fid, meta in data.items()]
+    df = pd.DataFrame(rows)
+    df["start_date"] = pd.to_datetime(df["date"], format="%m/%d/%Y", errors="coerce")
+    df["end_date"] = pd.to_datetime(df["endDate"], format="%m/%d/%Y", errors="coerce")
+    df["snc_clean"] = df["snc"].fillna("").astype(str).str.strip()
+    df["snc_primary"] = df["snc_clean"].apply(lambda x: x.split()[0] if x else "")
+    def _snc2(s):
+        parts = s.split()
+        if len(parts) < 2: return s
+        return f"{parts[0]} {parts[1].split('-')[0]}"
+    df["snc_2level"] = df["snc_clean"].apply(_snc2)
+    df["snc_3level"] = df["snc_clean"]
+    df["has_scope"] = df["raw_scope"].fillna("").str.strip().apply(lambda x: bool(x) and x.lower() != "nan")
+    df["scope_text"] = df["raw_scope"].fillna("").str.strip()
+    df["start_year"] = df["start_date"].dt.year
+    return df
+
+
+@st.cache_data(show_spinner="Loading document metadata…")
+def _load_items_df():
+    with open(_ITEMS_PATH_DA, "r", encoding="utf-8") as f:
+        data = json.load(f)
+    rows = []
+    for doc_id, meta in data.items():
+        ocr_pages = meta.get("ocr", [])
+        ocr_text = " ".join(ocr_pages) if isinstance(ocr_pages, list) else ""
+        rows.append({
+            "doc_id": doc_id,
+            "box": meta.get("Sushi Box", ""),
+            "folder_id": meta.get("Sushi Folder", ""),
+            "title": meta.get("title", "") or meta.get("Brown Title", ""),
+            "date": meta.get("date", ""),
+            "summary": meta.get("summary", ""),
+            "ocr_pages": len(ocr_pages) if isinstance(ocr_pages, list) else 0,
+            "ocr_length": len(ocr_text),
+            "has_summary": bool(meta.get("summary", "")),
+            "has_title": bool(meta.get("title", "") or meta.get("Brown Title", "")),
+        })
+    return pd.DataFrame(rows)
+
+
+@st.cache_data(show_spinner="Building folder-document index…")
+def _build_folder_doc_index(_items_df):
+    folder_docs = _items_df.groupby("folder_id")["doc_id"].apply(list).to_dict()
+    folder_doc_counts = _items_df.groupby("folder_id")["doc_id"].count().to_dict()
+    return folder_docs, folder_doc_counts
+
+
+# ============================================================
+# EXPERIMENT ANALYZER UI COMPONENTS
+# ============================================================
+
+def _get_sorted_topic_labels(df_chart, sort_mode="topic_order"):
+    """Return sorted topic labels based on the chosen mode."""
+    title_map = u1.get_topic_title_map()
+    if sort_mode == "ndcg_desc":
+        # Sort by mean nDCG descending
+        topic_means = df_chart.groupby('Topic')['nDCG'].mean().sort_values(ascending=False)
+        return [title_map.get(t, t) for t in topic_means.index]
+    else:
+        # Default: topic order T1, T2, ...
+        return [title_map.get(f'T{i}', f'T{i}') for i in range(1, 46)]
+
+
+def render_charts(df_chart: pd.DataFrame, topics_to_display: list, sort_mode: str = "topic_order"):
     if df_chart.empty or not topics_to_display: return
-    
-    chart_data = df_chart[df_chart['Topic'].isin(topics_to_display)]
-    
-    color_scale = alt.Color(
-        'Type', 
-        scale=alt.Scale(domain=list(u1.COLOR_MAP.keys()), range=list(u1.COLOR_MAP.values())), 
-        legend=alt.Legend(title="Metric Type", orient="top")
+    title_map = u1.get_topic_title_map()
+
+    if sort_mode == "ndcg_desc":
+        topic_means = df_chart.groupby('Topic')['nDCG'].mean().sort_values(ascending=False)
+        sorted_topics = [t for t in topic_means.index if t in topics_to_display]
+        topic_labels = [title_map.get(t, t) for t in sorted_topics]
+    else:
+        topic_labels = [title_map.get(t, t) for t in topics_to_display]
+
+    chart_data = df_chart[df_chart['Topic'].isin(topics_to_display)].copy()
+    if 'Topic Label' not in chart_data.columns:
+        chart_data['Topic Label'] = chart_data['Topic'].map(lambda x: title_map.get(x, x))
+    present_types = list(chart_data['Type'].unique())
+    domain = [t for t in present_types if t in u1.COLOR_MAP] + [t for t in present_types if t not in u1.COLOR_MAP]
+    range_colors = [u1.COLOR_MAP.get(t, '#1f77b4') for t in domain]
+    color_scale = alt.Color('Type', scale=alt.Scale(domain=domain, range=range_colors),
+                            legend=alt.Legend(title="Model Type", orient="top"))
+    base = alt.Chart(chart_data).encode(
+        y=alt.Y('Topic Label:N', title="Topics", sort=topic_labels, axis=alt.Axis(labelLimit=1000))
     )
-    
-    base = alt.Chart(chart_data).encode(y=alt.Y('Topic', title="Topics", sort=topics_to_display))
-    
     rule_bg = base.mark_line(color='lightgray', strokeDash=[2,2], opacity=0.3).encode(
-        x='min(nDCG)', x2='max(nDCG)', detail='Topic'
+        x='min(nDCG)', x2='max(nDCG)', detail='Topic Label'
     )
-    ci_rule = base.mark_rule(opacity=0.6, thickness=2).encode(
-        x='min_ci', x2='max_ci', color=color_scale
-    )
+    ci_rule = base.mark_rule(opacity=0.6, thickness=2).encode(x='min_ci', x2='max_ci', color=color_scale)
     tick_min = base.mark_tick(thickness=2, height=12).encode(x='min_ci', color=color_scale)
     tick_max = base.mark_tick(thickness=2, height=12).encode(x='max_ci', color=color_scale)
     points = base.mark_circle(size=120, opacity=1).encode(
-        x=alt.X('nDCG', title="Mean nDCG@5 with 95% CI"), 
-        color=color_scale, 
-        tooltip=['Topic', 'Type', 'nDCG', 'min_ci', 'max_ci']
+        x=alt.X('nDCG', title="Mean nDCG@5 with 95% CI"),
+        color=color_scale,
+        tooltip=['Topic Label', 'Type', 'nDCG', 'min_ci', 'max_ci']
     )
-    
     final_chart = (rule_bg + ci_rule + tick_min + tick_max + points).properties(height=len(topics_to_display) * 65)
-    st.altair_chart(final_chart)
+    st.altair_chart(final_chart, width="stretch")
 
-def run_experiment_analyzer_ui():
-    """Render the Experiment Analyzer UI."""
-    # ==========================================
-    # PART 1: VISUAL ANALYSIS (Model Comparison)
-    # ==========================================
-    st.title("🔬 Experiment Analysis: Model Comparison")
-    
-    # 1. Scan and Group Runs for the Dropdown
-    grouped_runs = u1.get_grouped_run_configurations()
-    
-    if not grouped_runs:
-        st.error("No valid run folders found in ../all_runs/.")
+
+def render_two_run_comparison_chart(df_run_a, df_run_b, run_a_name, run_b_name, sort_mode="topic_order"):
+    if df_run_a.empty and df_run_b.empty:
+        st.warning("No metric data available to render comparison chart.")
+        return
+    title_map = u1.get_topic_title_map()
+
+    df_a = df_run_a.copy(); df_b = df_run_b.copy()
+    label_a = f"Run A: {run_a_name}"; label_b = f"Run B: {run_b_name}"
+    df_a['Run'] = label_a; df_b['Run'] = label_b
+    df_combined = pd.concat([df_a, df_b], ignore_index=True)
+    if 'Topic Label' not in df_combined.columns:
+        df_combined['Topic Label'] = df_combined['Topic'].map(lambda x: title_map.get(x, x))
+
+    if sort_mode == "ndcg_desc":
+        topic_means = df_combined.groupby('Topic')['nDCG'].mean().sort_values(ascending=False)
+        sorted_labels = [title_map.get(t, t) for t in topic_means.index]
+    else:
+        sorted_labels = [title_map.get(f'T{i}', f'T{i}') for i in range(1, 46)]
+
+    color_scale = alt.Color('Run:N',
+        scale=alt.Scale(domain=[label_a, label_b], range=['#1f77b4', '#ff7f0e']),
+        legend=alt.Legend(title="Experiment Run", orient="top"))
+    base = alt.Chart(df_combined).encode(
+        y=alt.Y('Topic Label:N', title="Topics & Titles", sort=sorted_labels, axis=alt.Axis(labelLimit=1000))
+    )
+    rule_bg = base.mark_line(color='lightgray', strokeDash=[2,2], opacity=0.3).encode(
+        x='min_ci:Q', x2='max_ci:Q', detail='Topic Label:N'
+    )
+    ci_rule = base.mark_rule(opacity=0.7, thickness=2.5).encode(x='min_ci:Q', x2='max_ci:Q', color=color_scale)
+    tick_min = base.mark_tick(thickness=2, height=10).encode(x='min_ci:Q', color=color_scale)
+    tick_max = base.mark_tick(thickness=2, height=10).encode(x='max_ci:Q', color=color_scale)
+    points = base.mark_circle(size=120, opacity=0.85).encode(
+        x=alt.X('nDCG:Q', title="Mean nDCG@5 with 95% CI", scale=alt.Scale(domain=[0, 1])),
+        color=color_scale,
+        tooltip=['Topic Label', 'Run', 'nDCG', 'min_ci', 'max_ci', 'Relevance']
+    )
+    chart = (rule_bg + ci_rule + tick_min + tick_max + points).properties(
+        title=f"Topic Performance Comparison: {run_a_name} (Blue) vs {run_b_name} (Orange)",
+        height=len(sorted_labels) * 28
+    )
+    st.altair_chart(chart, width="stretch")
+
+
+def render_seed_variance_chart(var_df: pd.DataFrame):
+    """Render a horizontal box plot showing per-topic nDCG@5 distributions across seeds."""
+    if var_df.empty:
+        return
+    import plotly.graph_objects as go
+
+    x_vals = []
+    y_vals = []
+    for _, row in var_df.iloc[::-1].iterrows():
+        title = row["Topic Title"]
+        for val in row["Values"]:
+            x_vals.append(val)
+            y_vals.append(title)
+
+    fig = go.Figure()
+    fig.add_trace(go.Box(
+        x=x_vals,
+        y=y_vals,
+        orientation="h",
+        marker_color="#6366F1",
+        boxpoints=False,
+        fillcolor="rgba(99, 102, 241, 0.4)",
+        line=dict(color="#818CF8", width=1.5),
+        hoverinfo="x+y",
+    ))
+
+    fig.update_layout(
+        showlegend=False,
+        xaxis=dict(title="nDCG@5", range=[-0.02, 1.05]),
+        yaxis=dict(title="", automargin=True),
+        margin=dict(l=10, r=20, t=10, b=30),
+    )
+    fig = _apply_dark_theme(fig, max(500, len(var_df) * 36))
+    st.plotly_chart(fig, width="stretch")
+
+
+def render_retrieval_analysis(run_name: str, run_dir: str, all_topics: dict, folders_meta: dict, top_n: int = 15):
+    """Render the Retrieval Analysis section: top-N retrieved folders per topic."""
+    if not run_dir or not os.path.exists(run_dir):
+        st.warning(f"Run directory not found for `{run_name}`.")
         return
 
-    config_options = sorted(list(grouped_runs.keys()))
-    
-    st.caption("Select a configuration to compare how different models performed under that specific setting.")
-    
-    # SINGLE SELECTION for the Chart
-    selected_config = st.selectbox(
-        "Select Configuration for Visualization:",
-        options=config_options,
-        index=0 if config_options else None,
-        help="Loads the Dumbbell Chart and Stats for all models within this specific configuration."
+    folder_qrels = u3.load_folder_qrels()
+    layer23 = u3.load_layer23_for_run(run_dir)
+
+    # Summary table for all topics
+    st.subheader("📋 All Topics Summary")
+    summary_df = u3.compute_all_topics_summary(run_dir, folder_qrels, top_n_values=[5, 10, 15, 20])
+    if not summary_df.empty:
+        st.dataframe(summary_df, width="stretch", hide_index=True, height=400)
+    else:
+        st.info("No ranking data found for this run.")
+        return
+
+    # Per-topic detail
+    st.subheader(f"📊 Top-{top_n} Retrieved Folders")
+    topic_rankings = u3.load_run_rankings(run_dir, top_n=top_n)
+
+    topic_ids_sorted = sorted(all_topics.keys())
+    topic_options = [f"{tid} — {all_topics[tid].get('TITLE', '')}" for tid in topic_ids_sorted]
+
+    sel_topic_str = st.selectbox(
+        "Select Topic for Retrieval Analysis:",
+        options=topic_options,
+        key="retrieval_topic_select"
     )
+    sel_topic_id = sel_topic_str.split(" — ")[0]
+    topic_data = all_topics[sel_topic_id]
+    topic_qrels = folder_qrels.get(sel_topic_id, {})
+    ranking = topic_rankings.get(sel_topic_id, [])
+
+    # Topic summary metrics
+    ndcg5 = u3.ndcg_at_k(ranking, topic_qrels, k=5)
+    n_rel_top5 = sum(1 for _, fid in ranking[:5] if topic_qrels.get(fid, 0) > 0)
+    n_rel_topn = sum(1 for _, fid in ranking[:top_n] if topic_qrels.get(fid, 0) > 0)
+    outside_top5 = [fid for _, fid in ranking[5:top_n] if topic_qrels.get(fid, 0) > 0]
+    has_potential = len(outside_top5) > 0
+
+    col_t1, col_t2, col_t3, col_t4 = st.columns([3, 1, 1, 1])
+    with col_t1:
+        st.markdown(f"**{sel_topic_id}: {topic_data.get('TITLE', '')}**")
+        st.caption(topic_data.get('DESCRIPTION', ''))
+    with col_t2:
+        ndcg_color = "#2ecc71" if ndcg5 > 0.4 else "#e74c3c" if ndcg5 < 0.2 else "#f1c40f"
+        st.markdown(f'<div class="metric-box"><div style="font-size:24px;font-weight:bold;color:{ndcg_color}">{ndcg5:.4f}</div><div style="color:#aaa">nDCG@5</div></div>', unsafe_allow_html=True)
+    with col_t3:
+        st.markdown(f'<div class="metric-box"><div style="font-size:20px;font-weight:bold;color:#8fb4ff">{n_rel_top5}/5</div><div style="color:#aaa">Rel in Top-5</div></div>', unsafe_allow_html=True)
+    with col_t4:
+        p_color = "#2ecc71" if has_potential else "#e74c3c"
+        p_label = "✅ Rerank Potential" if has_potential else "❌ No Potential"
+        st.markdown(f'<div class="metric-box"><div style="font-size:14px;font-weight:bold;color:{p_color}">{p_label}</div><div style="color:#aaa;font-size:11px">{len(outside_top5)} rel at rank 6-{top_n}</div></div>', unsafe_allow_html=True)
+
+    if not ranking:
+        st.info("No ranking data for this topic in the selected run.")
+        return
+
+    for rank, folder_id in ranking:
+        grade = topic_qrels.get(folder_id, 0)
+        folder_data = folders_meta.get(folder_id, {})
+        aug_data = layer23.get(folder_id, {})
+
+        in_top5 = rank <= 5
+        is_movable = (not in_top5) and grade > 0
+
+        rank_emoji = "🥇" if rank == 1 else "🥈" if rank == 2 else "🥉" if rank == 3 else f"#{rank}"
+        top_tag = '<span class="tag tag-top5">TOP-5</span>' if in_top5 else f'<span class="tag tag-top15">rank 6-{top_n}</span>'
+        # Use star-based grade display for consistency with Topic Viewer
+        grade_label = u3.grade_stars(grade)
+        movable_tag = '<span class="tag" style="background:#1a4a1a;color:#4dff4d">🎯 MOVABLE</span>' if is_movable else ''
+
+        label = folder_data.get('label', 'N/A')
+        snc = folder_data.get('snc', 'N/A')
+        parent_exp = folder_data.get('label_parent_expanded', '')
+
+        with st.expander(f"{rank_emoji} Rank {rank} — {folder_id} — {label} — {grade_label}", expanded=False):
+            col_f1, col_f2 = st.columns([3, 1])
+            with col_f1:
+                st.markdown(f"**SNC:** `{snc}` | **Box:** `{folder_data.get('box', 'N/A')}` | **Date:** `{folder_data.get('date', 'N/A')}`")
+                if parent_exp:
+                    st.markdown(f"**Parent Classification:** {parent_exp}")
+                if folder_data.get('raw_scope'):
+                    st.markdown(f"**Scope Note:** {str(folder_data['raw_scope'])[:300]}…")
+                st.markdown(top_tag + movable_tag, unsafe_allow_html=True)
+            with col_f2:
+                grade_color_map = {3: "#2ecc71", 1: "#f1c40f", 0: "#888"}
+                g_color = grade_color_map.get(grade, "#888")
+                st.markdown(f'<div class="metric-box"><div style="font-size:22px;font-weight:bold;color:{g_color}">Grade {grade}</div></div>', unsafe_allow_html=True)
+            if aug_data:
+                with st.expander("🤖 LLM Augmentation"):
+                    if aug_data.get('CORE_THEMES'): st.markdown(f"**CORE_THEMES:** {aug_data['CORE_THEMES']}")
+                    if aug_data.get('RELATED_CONCEPTS'): st.markdown(f"**RELATED_CONCEPTS:** {aug_data['RELATED_CONCEPTS']}")
+
+
+
+def run_experiment_analyzer_ui():
+    # ── PART 1: Single Experiment Analysis ──
+    st.title("🔬 Single Experiment Analysis")
+    st.caption("Select a configuration to see per-model nDCG@5 results. Models (suffix after last `_`) are shown for comparison within a single experiment.")
+
+    available_subfolders = ["All Subfolders"] + u1.get_available_subfolders()
+
+    c_folder, c_config = st.columns([1, 2])
+    with c_folder:
+        selected_subfolder = st.selectbox(
+            "Select Subfolder / Scope:", options=available_subfolders, index=0,
+            help="Filter experiments by directory folder."
+        )
+
+    grouped_runs = u1.get_grouped_run_configurations(selected_subfolder)
+    if not grouped_runs:
+        st.error("No valid run folders found for the selected subfolder.")
+        return
+
+    config_ndcg_map = u1.get_configuration_ndcg_map(grouped_runs)
+    config_options = sorted(grouped_runs.keys(), key=lambda c: config_ndcg_map.get(c, 0.0), reverse=True)
+
+    with c_config:
+        selected_config = st.selectbox(
+            "Select Configuration for Visualization:", options=config_options,
+            index=0 if config_options else None,
+            format_func=lambda c: f"{c} - {config_ndcg_map.get(c, 0.0):.4f}",
+        )
 
     if selected_config:
-        # Process data ONLY for this config for the visualizations
-        df_chart, df_table_dummy, all_topics, model_results = u1.process_experiment_data([selected_config], grouped_runs)
-
-        # --- DYNAMIC SCORE CARDS ---
+        df_chart, _, all_topics, model_results = u1.process_experiment_data([selected_config], grouped_runs)
         st.subheader("Global Performance (Mean nDCG@5)")
         sorted_models = sorted(model_results.keys(), key=lambda x: model_results[x]['stats']['val'], reverse=True)
-    
         cols = st.columns(min(len(sorted_models), 4))
         for i, model_key in enumerate(sorted_models):
             stats = model_results[model_key]['stats']
             count = model_results[model_key]['count']
-            
             with cols[i % 4]:
-                st.metric(
-                    label=f"{model_key} (N={count})", 
-                    # Combine the value and the margin into one string
-                    value=f"{stats['val']:.4f} ± {stats['margin']:.4f}",
-                    help=f"Mean nDCG@5 aggregated from {count} random seed executions."
-                )
-
-        # --- DUMBELL CHART ---
+                st.metric(label=f"{model_key} (N={count})", value=f"{stats['val']:.4f} ± {stats['margin']:.3f}")
         if all_topics:
+            # Dumbbell sort selector
+            sort_mode_single = st.radio(
+                "Sort topics by:", ["Topic Order (T1, T2, …)", "nDCG@5 Mean (Desc)"],
+                horizontal=True, key="sort_single"
+            )
+            sort_key = "ndcg_desc" if "Desc" in sort_mode_single else "topic_order"
             with st.expander("📈 Model Comparison Chart (nDCG@5)", expanded=True):
-                render_charts(df_chart, all_topics)
+                render_charts(df_chart, all_topics, sort_mode=sort_key)
+
+            with st.expander("📊 Seed Variance per Topic", expanded=True):
+                first_run_name = grouped_runs[selected_config][0]
+                var_df = u1.compute_seed_variance_df(first_run_name, selected_subfolder)
+                if var_df.empty:
+                    st.info("No multi-seed metric data available for this configuration.")
+                elif var_df["N_Seeds"].max() <= 1:
+                    st.caption("Only 1 seed available — no cross-seed variance to display.")
+                else:
+                    n_seeds = int(var_df["N_Seeds"].max())
+                    st.caption(f"Distribution of nDCG@5 across **{n_seeds} seeds** for `{first_run_name}`.")
+                    render_seed_variance_chart(var_df)
         else:
             st.warning("No topic data found for this configuration.")
 
-    # ==========================================
-    # PART 2: DETAILED COMPARISON TABLE (Global)
-    # Focus: Compare ANY run against ANY run
-    # ==========================================
-    st.markdown("---")
-    st.header("📑 Detailed Comparison Table (Cross-Experiment)")
-    st.caption("Select specific run folders to compare their detailed metrics side-by-side.")
+    # ── Retrieval Analysis (right after single experiment) ──
+    if selected_config and selected_config in grouped_runs:
+        first_run_name = grouped_runs[selected_config][0]
+        first_run_dir = u1.resolve_run_folder_path(first_run_name, selected_subfolder) or ""
 
-    # 1. Get ALL Run Folders (Flat List)
-    all_runs_df = u1.get_all_runs_statistics() 
+        folders_meta, _ = u2.load_metadata()
+        ecf_data = u2.load_ecf_data()
+        all_ecf_topics = {}
+        if "ExperimentSets" in ecf_data:
+            for es in ecf_data["ExperimentSets"]:
+                if "Topics" in es: all_ecf_topics.update(es["Topics"])
+
+        if all_ecf_topics and first_run_dir:
+            st.markdown("---")
+            st.header("🔬 Retrieval Analysis")
+            st.caption("Inspect the retrieved folders per topic alongside qrels grades for the selected run.")
+            top_n_sel = st.selectbox("Top-N retrieved folders to show:", [5, 10, 15, 20], index=2, key="ret_top_n")
+            render_retrieval_analysis(first_run_name, first_run_dir, all_ecf_topics, folders_meta, top_n=top_n_sel)
+
+    # ── PART 2: Two-Experiment Comparison ──
+    st.markdown("---")
+    st.header("⚔️ Direct Two-Experiment Overlay Comparison")
+
+    all_runs_df = u1.get_all_runs_statistics(selected_subfolder)
     if all_runs_df.empty:
-        st.warning("No runs found.")
+        st.warning("No runs found for comparison in the selected subfolder scope.")
         return
 
     all_run_names = all_runs_df['Run Name'].tolist()
 
-    # 2. Smart Defaults: Pre-select runs from the config chosen above (if any)
-    # This connects the two parts nicely without restricting the user.
-    default_selection = []
-    if selected_config and selected_config in grouped_runs:
-        default_selection = grouped_runs[selected_config]
-    
-    # Fallback if list is empty or too long
-    if not default_selection: 
-        default_selection = all_run_names[:3]
+    default_a = grouped_runs[selected_config][0] if selected_config and selected_config in grouped_runs and grouped_runs[selected_config] else all_run_names[0]
+    default_b = grouped_runs[selected_config][1] if selected_config and selected_config in grouped_runs and len(grouped_runs[selected_config]) > 1 else (all_run_names[1] if len(all_run_names) > 1 else all_run_names[0])
 
-    # 3. GLOBAL MULTI-SELECT
-    sel_runs_table = st.multiselect(
-        "Select Runs to Compare:",
-        options=all_run_names,
-        default=default_selection,
-        help="You can add runs from different configurations here to compare them."
-    )
+    col_sel_a, col_sel_b = st.columns(2)
+    with col_sel_a:
+        st.subheader("🟦 Run A Selection")
+        subfolder_a = st.selectbox("Subfolder for Run A:", options=available_subfolders, index=0, key="subfolder_run_a")
+        runs_a_df = u1.get_all_runs_statistics(subfolder_a)
+        runs_a_list = runs_a_df['Run Name'].tolist() if not runs_a_df.empty else []
+        run_ndcg_map_a = dict(zip(runs_a_df['Run Name'], runs_a_df['Mean'])) if not runs_a_df.empty else {}
+        default_a_idx = runs_a_list.index(default_a) if default_a in runs_a_list else 0
+        sel_run_a = st.selectbox("Select Run A (Blue):", options=runs_a_list,
+            index=default_a_idx if runs_a_list else 0,
+            format_func=lambda r: f"{r} - {run_ndcg_map_a.get(r, 0.0):.4f}", key="side_by_side_run_a")
 
-    if sel_runs_table:
-        # 4. Generate the Unified Dataframe for specific folders
-        df_unified = u1.get_unified_comparison_dataframe(sel_runs_table)
-        
-        # 5. Filter Topics Columns (Reuse the topics found in the chart logic if available)
-        # Or just show all columns available in the dataframe
-        fixed_cols = ["Experiment Folder", "Global nDCG@5", "Global Relevance"]
-        
-        # Get topic columns that exist in the dataframe
-        # We sort them naturally (T1, T2, T10...)
-        available_cols = [c for c in df_unified.columns if c not in fixed_cols]
-        # Sort using the natural keys helper from u1
-        available_cols.sort(key=u1.natural_keys)
-        
-        final_cols = fixed_cols + available_cols
-        
-        df_display = df_unified[final_cols]
+    with col_sel_b:
+        st.subheader("🟧 Run B Selection")
+        subfolder_b = st.selectbox("Subfolder for Run B:", options=available_subfolders, index=0, key="subfolder_run_b")
+        runs_b_df = u1.get_all_runs_statistics(subfolder_b)
+        runs_b_list = runs_b_df['Run Name'].tolist() if not runs_b_df.empty else []
+        run_ndcg_map_b = dict(zip(runs_b_df['Run Name'], runs_b_df['Mean'])) if not runs_b_df.empty else {}
+        default_b_idx = runs_b_list.index(default_b) if default_b in runs_b_list else (1 if len(runs_b_list) > 1 else 0)
+        sel_run_b = st.selectbox("Select Run B (Orange):", options=runs_b_list,
+            index=default_b_idx if runs_b_list else 0,
+            format_func=lambda r: f"{r} - {run_ndcg_map_b.get(r, 0.0):.4f}", key="side_by_side_run_b")
 
-        # 6. Render
-        st.dataframe(
-            df_display,
-            use_container_width=True,
-            hide_index=True,
-            column_config={
-                "Experiment Folder": st.column_config.TextColumn("Experiment Folder", width="medium"),
-                "Global nDCG@5": st.column_config.TextColumn("Global nDCG", width="small"),
-                "Global Relevance": st.column_config.TextColumn("Global Rel.", width="small")
-            }
+    if sel_run_a and sel_run_b:
+        folder_a = u1.resolve_run_folder_path(sel_run_a, subfolder_a) or ""
+        stats_a = u1.load_overall_stats(folder_a)
+        rel_a = u1.calculate_global_relevance_mean(u1.load_relevance_stats(folder_a))
+        mean_a, margin_a = stats_a.get('mean', 0.0), stats_a.get('margin', 0.0)
+
+        folder_b = u1.resolve_run_folder_path(sel_run_b, subfolder_b) or ""
+        stats_b = u1.load_overall_stats(folder_b)
+        rel_b = u1.calculate_global_relevance_mean(u1.load_relevance_stats(folder_b))
+        mean_b, margin_b = stats_b.get('mean', 0.0), stats_b.get('margin', 0.0)
+
+        delta_ndcg = mean_a - mean_b
+        m_col_a, m_col_b, m_col_delta = st.columns([2, 2, 1])
+        with m_col_a:
+            st.metric(label=f"🟦 Run A: {sel_run_a}", value=f"{mean_a:.4f} ± {margin_a:.4f}", help=f"Global Relevance: {rel_a:.2f}")
+        with m_col_b:
+            st.metric(label=f"🟧 Run B: {sel_run_b}", value=f"{mean_b:.4f} ± {margin_b:.4f}", help=f"Global Relevance: {rel_b:.2f}")
+        with m_col_delta:
+            # No green arrow — just show the numeric value
+            st.metric(label="Global Delta (A - B)", value=f"{delta_ndcg:+.4f}")
+
+        # Wilcoxon signed-rank test
+        wilcoxon_result = u1.run_wilcoxon_test(sel_run_a, sel_run_b, subfolder_a, subfolder_b)
+        if "error" not in wilcoxon_result:
+            w_col1, w_col2, w_col3 = st.columns(3)
+            with w_col1:
+                p_val = wilcoxon_result["p_value"]
+                sig_icon = "✅" if wilcoxon_result["significant"] else "❌"
+                st.metric("Wilcoxon p-value", f"{p_val:.5f}", help=f"{sig_icon} {'Significant' if wilcoxon_result['significant'] else 'Not significant'} (α=0.05)")
+            with w_col2:
+                st.metric("Winner", wilcoxon_result["winner"])
+            with w_col3:
+                st.metric("Seeds Compared", f"{wilcoxon_result['n_seeds']} (A wins: {wilcoxon_result['wins_a']}, B wins: {wilcoxon_result['wins_b']})")
+        elif wilcoxon_result.get("error"):
+            st.caption(f"⚠️ Wilcoxon test: {wilcoxon_result['error']}")
+
+        # Dumbbell sort selector for overlay
+        sort_mode_overlay = st.radio(
+            "Sort topics by:", ["Topic Order (T1, T2, …)", "nDCG@5 Mean (Desc)"],
+            horizontal=True, key="sort_overlay"
         )
-    else:
-        st.info("Select experiments to view the comparison table.")
+        sort_key_overlay = "ndcg_desc" if "Desc" in sort_mode_overlay else "topic_order"
 
-# ==========================================
-# UI COMPONENTS - APP 2 (SUSHI Visualization)
-# ==========================================
+        df_run_a = u1.get_single_run_topic_chart_dataset(sel_run_a, subfolder=subfolder_a)
+        df_run_b = u1.get_single_run_topic_chart_dataset(sel_run_b, subfolder=subfolder_b)
 
-def run_sushi_visualization_ui():
-    """Render the Topics and Data Visualization UI."""
-    st.sidebar.title("SUSHI Visual Controls")
-    
+        with st.expander("📊 Topic Performance Overlay Chart", expanded=True):
+            render_two_run_comparison_chart(df_run_a, df_run_b, sel_run_a, sel_run_b, sort_mode=sort_key_overlay)
+
+        with st.expander("🎯 Topic Separation Analysis (Run A vs Run B)", expanded=True):
+            st.caption("Categorization of topics by relative mean nDCG difference: **Better** (≥ +10%), **Equal** (between -10% and +10%), and **Worse** (≤ -10%).")
+            categories = u1.categorize_topics_comparison(df_run_a, df_run_b)
+            df_better = categories['better']; df_equal = categories['equal']; df_worse = categories['worse']
+            total_topics = len(df_better) + len(df_equal) + len(df_worse)
+            col_b, col_e, col_w = st.columns(3)
+            with col_b:
+                pct_b = (len(df_better) / total_topics * 100) if total_topics else 0.0
+                # No green arrow — show count and percentage directly in value
+                st.metric("🟢 Run A Better than B (≥ +10%)", f"{len(df_better)} topics ({pct_b:.1f}%)")
+            with col_e:
+                pct_e = (len(df_equal) / total_topics * 100) if total_topics else 0.0
+                st.metric("🟡 Run A Equal to B (within ±10%)", f"{len(df_equal)} topics ({pct_e:.1f}%)")
+            with col_w:
+                pct_w = (len(df_worse) / total_topics * 100) if total_topics else 0.0
+                st.metric("🔴 Run A Worse than B (≤ -10%)", f"{len(df_worse)} topics ({pct_w:.1f}%)")
+
+            tab_better, tab_equal, tab_worse = st.tabs([
+                f"🟢 Run A Better ({len(df_better)})",
+                f"🟡 Run A Equal ({len(df_equal)})",
+                f"🔴 Run A Worse ({len(df_worse)})"
+            ])
+
+            def _fmt_sep(df_cat):
+                if df_cat.empty: return pd.DataFrame()
+                res = df_cat.copy()
+                res['Run A nDCG'] = res['nDCG_A'].apply(lambda x: f"{x:.4f}")
+                res['Run B nDCG'] = res['nDCG_B'].apply(lambda x: f"{x:.4f}")
+                res['Delta (A - B)'] = res['Diff'].apply(lambda x: f"{x:+.4f}")
+                res['% Difference'] = res['Pct_Diff'].apply(lambda x: f"{x * 100:+.2f}%")
+                return res[['Topic Label', 'Run A nDCG', 'Run B nDCG', 'Delta (A - B)', '% Difference']]
+
+            with tab_better:
+                if not df_better.empty: st.dataframe(_fmt_sep(df_better), width="stretch", hide_index=True)
+                else: st.info("No topics where Run A is at least 10% better than Run B.")
+            with tab_equal:
+                if not df_equal.empty: st.dataframe(_fmt_sep(df_equal), width="stretch", hide_index=True)
+                else: st.info("No topics where Run A is within ±10% of Run B.")
+            with tab_worse:
+                if not df_worse.empty: st.dataframe(_fmt_sep(df_worse), width="stretch", hide_index=True)
+                else: st.info("No topics where Run A is at least 10% worse than Run B.")
+
+
+# ============================================================
+# DATA OVERVIEW UI
+# ============================================================
+
+def run_data_overview_ui():
+    st.title("📦 Data Overview — SUSHI Collection")
+
+    folders_df = _load_folders_df()
+    items_df = _load_items_df()
+    _, folder_doc_counts = _build_folder_doc_index(items_df)
+    folders_df["doc_count"] = folders_df["folder_id"].map(folder_doc_counts).fillna(0).astype(int)
+
+    # ── SECTION 1: Overview Metrics ──────────────────────────────────
+    st.markdown("## 📊 Collection Statistics")
+    n_folders = len(folders_df); n_docs = len(items_df)
+    n_boxes = folders_df["box"].nunique(); n_snc_distinct = folders_df["snc_3level"].nunique()
+    n_snc_primary = folders_df["snc_primary"].nunique(); n_with_scope = folders_df["has_scope"].sum()
+
+    c1, c2, c3 = st.columns(3)
+    c1.metric("📁 Total Folders", f"{n_folders:,}"); c2.metric("📄 Total Documents", f"{n_docs:,}"); c3.metric("📦 Total Boxes", f"{n_boxes:,}")
+    c4, c5, c6 = st.columns(3)
+    c4.metric("🏷️ Distinct SNCs (3-level)", f"{n_snc_distinct}"); c5.metric("🏷️ Primary SNC Codes", f"{n_snc_primary}"); c6.metric("📝 Folders with Scope Notes", f"{n_with_scope}")
+
+    st.markdown("---")
+    col_a, col_b = st.columns(2)
+    with col_a:
+        st.markdown("### Documents per Folder")
+        fig = px.histogram(folders_df, x="doc_count", nbins=50, color_discrete_sequence=[_DA_COLORS["primary"]],
+            labels={"doc_count": "Documents", "count": "Folders"})
+        st.plotly_chart(_apply_dark_theme(fig, 350), width="stretch")
+    with col_b:
+        st.markdown("### Folders per Box")
+        fpb = folders_df.groupby("box").size().reset_index(name="folder_count")
+        fig = px.histogram(fpb, x="folder_count", nbins=30, color_discrete_sequence=[_DA_COLORS["secondary"]],
+            labels={"folder_count": "Folders", "count": "Boxes"})
+        st.plotly_chart(_apply_dark_theme(fig, 350), width="stretch")
+
+    st.markdown("### Primary SNC Code — Folder & Document Counts")
+    primary_stats = folders_df.groupby("snc_primary").agg(
+        folder_count=("folder_id","count"), total_docs=("doc_count","sum")
+    ).reset_index().sort_values("folder_count", ascending=False)
+    fig = make_subplots(rows=1, cols=2, subplot_titles=("Folders per Primary SNC","Documents per Primary SNC"), shared_yaxes=True)
+    fig.add_trace(go.Bar(y=primary_stats["snc_primary"], x=primary_stats["folder_count"], orientation="h",
+        marker_color=_DA_COLORS["primary"], name="Folders"), row=1, col=1)
+    fig.add_trace(go.Bar(y=primary_stats["snc_primary"], x=primary_stats["total_docs"], orientation="h",
+        marker_color=_DA_COLORS["accent"], name="Documents"), row=1, col=2)
+    fig = _apply_dark_theme(fig, max(400, len(primary_stats) * 22))
+    fig.update_yaxes(autorange="reversed")
+    st.plotly_chart(fig, width="stretch")
+
+    # ── SECTION 2: SNC Distribution ──────────────────────────────────
+    st.markdown("---")
+    st.markdown("## 🏷️ SNC Distribution")
+
+    # Build count maps used across tabs
+    snc3_count_map = folders_df.groupby("snc_3level").size().to_dict()
+    snc2_count_map = folders_df.groupby("snc_2level").size().to_dict()
+    snc1_count_map = folders_df.groupby("snc_primary").size().to_dict()
+
+    tab_3l, tab_2l, tab_1l, tab_deepdive = st.tabs([
+        "3-Level SNC", "2-Level SNC", "1-Level (Primary)", "🔎 SNC Deep Dive"
+    ])
+
+    with tab_3l:
+        snc3 = folders_df.groupby("snc_3level").agg(
+            folder_count=("folder_id","count"), total_docs=("doc_count","sum"), has_scope=("has_scope","any")
+        ).reset_index().sort_values("folder_count", ascending=False)
+        st.metric("Distinct 3-Level SNCs", len(snc3))
+        c1, c2 = st.columns(2)
+        with c1:
+            st.markdown("#### Top-10 by Folder Count")
+            top10 = snc3.head(10).copy(); top10["scope?"] = top10["has_scope"].map({True:"✅",False:"❌"})
+            st.dataframe(top10[["snc_3level","folder_count","total_docs","scope?"]].rename(
+                columns={"snc_3level":"SNC","folder_count":"Folders","total_docs":"Documents"}),
+                width="stretch", hide_index=True)
+        with c2:
+            st.markdown("#### Bottom-10 by Folder Count")
+            bot10 = snc3.tail(10).copy(); bot10["scope?"] = bot10["has_scope"].map({True:"✅",False:"❌"})
+            st.dataframe(bot10[["snc_3level","folder_count","total_docs","scope?"]].rename(
+                columns={"snc_3level":"SNC","folder_count":"Folders","total_docs":"Documents"}),
+                width="stretch", hide_index=True)
+        fig = px.histogram(snc3, x="folder_count", nbins=40, color_discrete_sequence=[_DA_COLORS["primary"]],
+            labels={"folder_count":"Folders","count":"SNCs"}, title="Histogram: Folders per SNC (3-Level)")
+        st.plotly_chart(_apply_dark_theme(fig), width="stretch")
+        st.markdown("#### Top 40 SNCs (3-Level) by Folder Count")
+        fig_top40 = px.bar(snc3.head(40), x="snc_3level", y="folder_count",
+            color_discrete_sequence=[_DA_COLORS["primary"]],
+            labels={"snc_3level":"SNC (3-Level)","folder_count":"Folders"},
+            title="Top 40 SNCs (3-Level)")
+        fig_top40.update_xaxes(tickangle=45)
+        st.plotly_chart(_apply_dark_theme(fig_top40, 450), width="stretch")
+        with st.expander("All SNCs — Complete Table"):
+            st.dataframe(snc3.rename(columns={"snc_3level":"SNC","folder_count":"Folders","total_docs":"Documents","has_scope":"Has Scope"}),
+                width="stretch", hide_index=True, height=400)
+
+    with tab_2l:
+        snc2 = folders_df.groupby("snc_2level").agg(
+            folder_count=("folder_id","count"), total_docs=("doc_count","sum")
+        ).reset_index().sort_values("folder_count", ascending=False)
+        st.metric("Distinct 2-Level SNCs", len(snc2))
+        c1, c2 = st.columns(2)
+        with c1:
+            st.markdown("#### Top-10 by Folder Count")
+            st.dataframe(snc2.head(10).rename(columns={"snc_2level":"SNC","folder_count":"Folders","total_docs":"Documents"}),
+                width="stretch", hide_index=True)
+        with c2:
+            st.markdown("#### Bottom-10 by Folder Count")
+            st.dataframe(snc2.tail(10).rename(columns={"snc_2level":"SNC","folder_count":"Folders","total_docs":"Documents"}),
+                width="stretch", hide_index=True)
+        fig = px.histogram(snc2, x="folder_count", nbins=30, color_discrete_sequence=[_DA_COLORS["primary"]],
+            labels={"folder_count":"Folders","count":"SNCs"}, title="Histogram: Folders per SNC (2-Level)")
+        st.plotly_chart(_apply_dark_theme(fig), width="stretch")
+        fig_top40 = px.bar(snc2.head(40), x="snc_2level", y="folder_count",
+            color_discrete_sequence=[_DA_COLORS["primary"]],
+            labels={"snc_2level":"SNC (2-Level)","folder_count":"Folders"},
+            title="Top 40 SNCs (2-Level)")
+        fig_top40.update_xaxes(tickangle=45)
+        st.plotly_chart(_apply_dark_theme(fig_top40, 450), width="stretch")
+        with st.expander("All SNCs — Complete Table"):
+            st.dataframe(snc2.rename(columns={"snc_2level":"SNC","folder_count":"Folders","total_docs":"Documents"}),
+                width="stretch", hide_index=True, height=400)
+
+    with tab_1l:
+        snc1 = folders_df.groupby("snc_primary").agg(
+            folder_count=("folder_id","count"), total_docs=("doc_count","sum")
+        ).reset_index().sort_values("folder_count", ascending=False)
+        st.metric("Distinct Primary SNC Codes", len(snc1))
+        c1, c2 = st.columns(2)
+        with c1:
+            st.markdown("#### Top-10 by Folder Count")
+            st.dataframe(snc1.head(10).rename(columns={"snc_primary":"SNC","folder_count":"Folders","total_docs":"Documents"}),
+                width="stretch", hide_index=True)
+        with c2:
+            st.markdown("#### Bottom-10 by Folder Count")
+            st.dataframe(snc1.tail(10).rename(columns={"snc_primary":"SNC","folder_count":"Folders","total_docs":"Documents"}),
+                width="stretch", hide_index=True)
+        fig = px.histogram(snc1, x="folder_count", nbins=20, color_discrete_sequence=[_DA_COLORS["primary"]],
+            labels={"folder_count":"Folders","count":"SNCs"}, title="Histogram: Folders per Primary SNC")
+        st.plotly_chart(_apply_dark_theme(fig), width="stretch")
+        fig_top40 = px.bar(snc1, x="snc_primary", y="folder_count",
+            color_discrete_sequence=[_DA_COLORS["primary"]],
+            labels={"snc_primary":"Primary SNC","folder_count":"Folders"},
+            title="Folders per Primary SNC Code (All)")
+        fig_top40.update_xaxes(tickangle=45)
+        st.plotly_chart(_apply_dark_theme(fig_top40, 450), width="stretch")
+        with st.expander("All SNCs — Complete Table"):
+            st.dataframe(snc1.rename(columns={"snc_primary":"SNC","folder_count":"Folders","total_docs":"Documents"}),
+                width="stretch", hide_index=True, height=400)
+
+    with tab_deepdive:
+        snc_options = sorted(folders_df["snc_3level"].unique().tolist())
+        snc_labels_map = folders_df.groupby("snc_3level")["label"].first().to_dict()
+        # Dropdown: SNC — Label — Count of folders: N
+        snc_display = [
+            f"{s} — {snc_labels_map.get(s,'')} — Count of folders: {snc3_count_map.get(s,0)}"
+            for s in snc_options
+        ]
+        sel_idx = st.selectbox("Select SNC Code", range(len(snc_options)), format_func=lambda i: snc_display[i],
+            key="deepdive_snc_select")
+        selected_snc = snc_options[sel_idx]
+
+        snc_folders = folders_df[folders_df["snc_3level"] == selected_snc].copy()
+        snc_folder_ids = set(snc_folders["folder_id"].tolist())
+        snc_docs = items_df[items_df["folder_id"].isin(snc_folder_ids)]
+
+        expanded = snc_folders["label_parent_expanded"].iloc[0] if len(snc_folders) > 0 else "N/A"
+        st.markdown(f"## {selected_snc} — {expanded}")
+        scope_text = snc_folders[snc_folders["has_scope"]]["scope_text"].iloc[0] if snc_folders["has_scope"].any() else None
+        if scope_text: st.info(f"**Scope Note:** {scope_text}")
+        else: st.caption("No scope note available.")
+
+        cc1, cc2, cc3, cc4 = st.columns(4)
+        cc1.metric("📁 Folders", len(snc_folders)); cc2.metric("📄 Documents", len(snc_docs))
+        cc3.metric("📦 Boxes", snc_folders["box"].nunique())
+        cc4.metric("Avg Docs/Folder", f"{snc_folders['doc_count'].mean():.1f}" if len(snc_folders) > 0 else "0")
+
+        dd_tab1, dd_tab2 = st.tabs(["📁 Folders & Docs", "📊 Keywords & Themes"])
+        with dd_tab1:
+            folder_display = snc_folders[["folder_id","box","label","date","endDate","doc_count","has_scope"]].copy()
+            folder_display = folder_display.sort_values("doc_count", ascending=False)
+            folder_display["has_scope"] = folder_display["has_scope"].map({True:"✅",False:"❌"})
+            st.dataframe(folder_display.rename(columns={"folder_id":"Folder ID","box":"Box","label":"Label","date":"Start","endDate":"End","doc_count":"Docs","has_scope":"Scope"}),
+                width="stretch", hide_index=True, height=350)
+            st.markdown("### Browse Folder Documents")
+            folder_ids = snc_folders["folder_id"].tolist()
+            folder_labels_map = snc_folders.set_index("folder_id")["label"].to_dict()
+            sel_folder = st.selectbox("Select Folder", folder_ids, format_func=lambda x: f"{x} — {folder_labels_map.get(x,'')}", key="deepdive_folder_select")
+            if sel_folder:
+                folder_docs_df = snc_docs[snc_docs["folder_id"] == sel_folder]
+                st.markdown(f"**{len(folder_docs_df)} documents in this folder:**")
+                for _, doc in folder_docs_df.iterrows():
+                    with st.expander(f"📄 {doc['doc_id']} — {doc['title']}"):
+                        if doc["has_summary"]: st.markdown(f"**Summary:** {doc['summary']}")
+                        st.caption(f"Date: {doc['date']} | OCR Pages: {doc['ocr_pages']}")
+        with dd_tab2:
+            st.markdown("### Top Keywords from Documents Titles")
+            title_kw = _extract_keywords(snc_docs["title"].dropna().tolist(), top_n=25)
+            if title_kw:
+                kw_df = pd.DataFrame(title_kw, columns=["Word","Count"])
+                fig = px.bar(kw_df, x="Count", y="Word", orientation="h",
+                    color_discrete_sequence=[_DA_COLORS["primary"]])
+                fig.update_yaxes(autorange="reversed")
+                st.plotly_chart(_apply_dark_theme(fig, 500), width="stretch")
+            st.markdown("### Top Keywords from Summaries")
+            sum_kw = _extract_keywords(snc_docs["summary"].dropna().tolist(), top_n=25)
+            if sum_kw:
+                kw_df2 = pd.DataFrame(sum_kw, columns=["Word","Count"])
+                fig2 = px.bar(kw_df2, x="Count", y="Word", orientation="h",
+                    color_discrete_sequence=[_DA_COLORS["secondary"]])
+                fig2.update_yaxes(autorange="reversed")
+                st.plotly_chart(_apply_dark_theme(fig2, 500), width="stretch")
+
+    # ── SECTION 3: Document Analysis ─────────────────────────────────
+    st.markdown("---")
+    st.markdown("## 📄 Document Analysis")
+
+    col1, col2, col3, col4 = st.columns(4)
+    col1.metric("Total Documents", f"{len(items_df):,}"); col2.metric("With Titles", f"{items_df['has_title'].sum():,}")
+    col3.metric("With Summaries", f"{items_df['has_summary'].sum():,}"); col4.metric("Avg OCR Pages", f"{items_df['ocr_pages'].mean():.1f}")
+
+    doc_tab1, doc_tab2, doc_tab3 = st.tabs(["📊 Statistics", "🔍 Browse by SNC", "🗂️ Browse by Folder"])
+
+    with doc_tab1:
+        ca, cb = st.columns(2)
+        with ca:
+            fig = px.histogram(items_df, x="ocr_pages", nbins=50, color_discrete_sequence=[_DA_COLORS["primary"]],
+                labels={"ocr_pages":"OCR Pages","count":"Documents"}, title="OCR Pages per Document")
+            st.plotly_chart(_apply_dark_theme(fig), width="stretch")
+        with cb:
+            dpf = items_df.groupby("folder_id").size().reset_index(name="doc_count")
+            fig = px.histogram(dpf, x="doc_count", nbins=50, color_discrete_sequence=[_DA_COLORS["accent"]],
+                labels={"doc_count":"Documents per Folder","count":"Folders"}, title="Documents per Folder")
+            st.plotly_chart(_apply_dark_theme(fig), width="stretch")
+        st.markdown("### Most Common Words in Document Titles")
+        title_kws = _extract_keywords(items_df["title"].dropna().tolist(), top_n=30)
+        if title_kws:
+            kw_df = pd.DataFrame(title_kws, columns=["Word","Count"])
+            fig = px.bar(kw_df, x="Count", y="Word", orientation="h",
+                color_discrete_sequence=[_DA_COLORS["primary"]],
+                title="Top 30 Words in Document Titles")
+            fig.update_yaxes(autorange="reversed")
+            st.plotly_chart(_apply_dark_theme(fig, 600), width="stretch")
+
+    with doc_tab2:
+        # Build dropdown: SNC — Label — Count of folders: N
+        snc_opts = sorted(folders_df["snc_3level"].unique().tolist())
+        snc_labels_map_da = folders_df.groupby("snc_3level")["label"].first().to_dict()
+        snc_display_da = [
+            f"{s} — {snc_labels_map_da.get(s,'')} — Count of folders: {snc3_count_map.get(s,0)}"
+            for s in snc_opts
+        ]
+        sel_snc_idx = st.selectbox("Select SNC Code", range(len(snc_opts)), format_func=lambda i: snc_display_da[i],
+            index=0, key="doc_browse_snc")
+        sel_snc = snc_opts[sel_snc_idx]
+        snc_flds = folders_df[folders_df["snc_3level"] == sel_snc]
+        snc_fld_ids = set(snc_flds["folder_id"].tolist())
+        snc_docs2 = items_df[items_df["folder_id"].isin(snc_fld_ids)]
+        cb1, cb2, cb3 = st.columns(3)
+        cb1.metric("Folders in SNC", len(snc_flds)); cb2.metric("Documents in SNC", len(snc_docs2))
+        cb3.metric("Expanded Label", snc_flds["label_parent_expanded"].iloc[0] if len(snc_flds) > 0 else "N/A")
+        snc_texts = snc_docs2["title"].dropna().tolist() + snc_docs2["summary"].dropna().tolist()
+        snc_kws = _extract_keywords(snc_texts, top_n=20)
+        if snc_kws:
+            kw_df3 = pd.DataFrame(snc_kws, columns=["Word","Count"])
+            fig = px.bar(kw_df3, x="Count", y="Word", orientation="h",
+                color_discrete_sequence=[_DA_COLORS["secondary"]])
+            fig.update_yaxes(autorange="reversed")
+            st.plotly_chart(_apply_dark_theme(fig, 450), width="stretch")
+        st.markdown("### Folders")
+        for _, folder_row in snc_flds.iterrows():
+            fid = folder_row["folder_id"]; n_docs2 = folder_row["doc_count"]
+            with st.expander(f"📁 {folder_row['label']} ({n_docs2} docs) — ID: {fid}"):
+                fitems = snc_docs2[snc_docs2["folder_id"] == fid]
+                for _, doc_row in fitems.head(20).iterrows():
+                    st.markdown(f"**📄 {doc_row['doc_id']}** — {doc_row['title']}")
+                    if doc_row["has_summary"]:
+                        s = str(doc_row.get("summary",""))
+                        st.caption(s[:300] + "…" if len(s) > 300 else s)
+                    st.markdown("---")
+                if len(fitems) > 20: st.info(f"Showing first 20 of {len(fitems)} documents.")
+
+    with doc_tab3:
+        # Browse By Folder — all folders, dropdown: FOLDER_ID — SNC — Label
+        all_folder_ids = sorted(folders_df["folder_id"].tolist())
+        folder_snc_map = folders_df.set_index("folder_id")["snc_clean"].to_dict()
+        folder_label_map = folders_df.set_index("folder_id")["label"].to_dict()
+        folder_doc_count_map = folders_df.set_index("folder_id")["doc_count"].to_dict()
+        folder_box_map = folders_df.set_index("folder_id")["box"].to_dict()
+        folder_date_map = folders_df.set_index("folder_id")["date"].to_dict()
+        folder_scope_map = folders_df.set_index("folder_id")["scope_text"].to_dict()
+        folder_expanded_map = folders_df.set_index("folder_id")["label_parent_expanded"].to_dict()
+
+        folder_display_labels = [
+            f"{fid} — {folder_snc_map.get(fid,'')} — {folder_label_map.get(fid,'')}"
+            for fid in all_folder_ids
+        ]
+        sel_folder_idx = st.selectbox(
+            "Select Folder",
+            range(len(all_folder_ids)),
+            format_func=lambda i: folder_display_labels[i],
+            key="da_browse_folder_select"
+        )
+        sel_folder_id = all_folder_ids[sel_folder_idx]
+        sel_folder_docs = items_df[items_df["folder_id"] == sel_folder_id]
+
+        # Folder metadata summary
+        fb1, fb2, fb3, fb4 = st.columns(4)
+        fb1.metric("📦 Box", folder_box_map.get(sel_folder_id, "N/A"))
+        fb2.metric("🏷️ SNC", folder_snc_map.get(sel_folder_id, "N/A"))
+        fb3.metric("📄 Documents", folder_doc_count_map.get(sel_folder_id, 0))
+        fb4.metric("📅 Date", folder_date_map.get(sel_folder_id, "N/A"))
+
+        parent_exp = folder_expanded_map.get(sel_folder_id, "")
+        if parent_exp:
+            st.markdown(f"**Classification:** {parent_exp}")
+        scope_note = folder_scope_map.get(sel_folder_id, "")
+        if scope_note and str(scope_note) not in ("", "nan"):
+            st.info(f"**Scope Note:** {str(scope_note)}")
+
+        st.markdown(f"### Documents in Folder `{sel_folder_id}`")
+        if sel_folder_docs.empty:
+            st.caption("No documents indexed for this folder.")
+        else:
+            for _, doc in sel_folder_docs.iterrows():
+                with st.expander(f"📄 {doc['doc_id']} — {doc['title']}"):
+                    if doc["has_summary"]: st.markdown(f"**Summary:** {doc['summary']}")
+                    st.caption(f"Date: {doc['date']} | OCR Pages: {doc['ocr_pages']}")
+
+
+
+
+
+
+
+# ============================================================
+# TOPIC VIEWER UI (Enhanced — Hierarchical)
+# ============================================================
+
+def run_topic_viewer_ui():
     folders_meta, items_meta = u2.load_metadata()
     ecf_data = u2.load_ecf_data()
     q_docs = u2.load_qrels_data(u2.PATH_QRELS_DOCS)
@@ -183,104 +962,535 @@ def run_sushi_visualization_ui():
     if "ExperimentSets" in ecf_data:
         for es in ecf_data["ExperimentSets"]:
             if "Topics" in es: all_topics.update(es["Topics"])
-            
-    topic_ids = sorted(list(all_topics.keys()))
-    sel_topic = st.sidebar.selectbox("Select Topic ID:", topic_ids)
 
-    if sel_topic:
-        t_data = all_topics[sel_topic]
-        with st.expander("Topic Details", expanded=True):
-            st.header(f"{sel_topic}: {t_data.get('TITLE','')}")
-            c1, c2 = st.columns([1, 2])
-            c1.info(f"**Description:**\n{t_data.get('DESCRIPTION','')}")
-            c2.warning(f"**Narrative:**\n{t_data.get('NARRATIVE','')}")
-        
-        st.divider()
-        rd = q_docs.get(sel_topic, [])
-        rf = q_folders.get(sel_topic, [])
-        rb = q_boxes.get(sel_topic, [])
-        
-        tab_docs, tab_folders, tab_boxes = st.tabs([f"📄 Documents ({len(rd)})", f"📂 Folders ({len(rf)})", f"📦 Boxes ({len(rb)})"])
-        
-        with tab_docs:
-            if not rd:
-                st.write("No relevant documents found.")
+    topic_ids = sorted(all_topics.keys())
+    # Topic selector in main page (not sidebar), showing number + title
+    topic_display = []
+    for tid in topic_ids:
+        match = re.search(r'\d+$', tid)
+        num = int(match.group()) if match else tid
+        title = all_topics[tid].get('TITLE', '')
+        topic_display.append(f"{num} — {title}")
+
+    sel_idx = st.selectbox("Select Topic:", range(len(topic_ids)), format_func=lambda i: topic_display[i])
+    sel_topic = topic_ids[sel_idx]
+
+    if not sel_topic: return
+
+    t_data = all_topics[sel_topic]
+    with st.expander("Topic Details", expanded=True):
+        st.header(f"{sel_topic}: {t_data.get('TITLE','')}")
+        c1, c2 = st.columns([1, 2])
+        c1.info(f"**Description:**\n{t_data.get('DESCRIPTION','')}")
+        c2.warning(f"**Narrative:**\n{t_data.get('NARRATIVE','')}")
+
+    st.divider()
+
+    # Collect all relevant items by grade
+    rd = q_docs.get(sel_topic, [])
+    rf = q_folders.get(sel_topic, [])
+    rb = q_boxes.get(sel_topic, [])
+
+    # Build hierarchical structure: Box → Folder → Document
+    # Maps
+    doc_grades = {did: sc for did, sc in rd}
+    folder_grades = {fid: sc for fid, sc in rf}
+    box_grades = {bid: sc for bid, sc in rb}
+
+    # Group folders by box
+    box_to_folders = defaultdict(set)
+    for fid, _ in rf:
+        f_meta = folders_meta.get(fid, {})
+        box_id = f_meta.get("box", "Unknown")
+        box_to_folders[box_id].add(fid)
+
+    # Group documents by folder
+    folder_to_docs = defaultdict(set)
+    for did, _ in rd:
+        d_meta = items_meta.get(did, {})
+        fid = d_meta.get("Sushi Folder", "Unknown")
+        folder_to_docs[fid].add(did)
+        # Also ensure the folder's box is captured
+        f_meta = folders_meta.get(fid, {})
+        box_id = f_meta.get("box", "Unknown")
+        box_to_folders[box_id].add(fid)
+
+    # Also add boxes from qrels that might not have folders
+    for bid, _ in rb:
+        if bid not in box_to_folders:
+            box_to_folders[bid] = set()
+
+    # Summary metrics
+    st.markdown(f"**Relevant Items:** {len(rb)} boxes, {len(rf)} folders, {len(rd)} documents")
+
+    # Render hierarchical tree
+    for box_id in sorted(box_to_folders.keys()):
+        b_grade = box_grades.get(box_id, 0)
+        b_stars = u3.grade_stars(b_grade) if b_grade > 0 else ""
+        folder_ids_in_box = box_to_folders[box_id]
+
+        with st.expander(f"📦 Box {box_id} {b_stars}", expanded=True):
+            if not folder_ids_in_box:
+                st.caption("No relevant folders in this box.")
+                continue
+
+            for fid in sorted(folder_ids_in_box):
+                f_grade = folder_grades.get(fid, 0)
+                f_stars = u3.grade_stars(f_grade)
+                f_meta = folders_meta.get(fid, {})
+                label = f_meta.get("label", "N/A")
+                snc = f_meta.get("snc", "N/A")
+                parent_exp = f_meta.get("label_parent_expanded", "")
+
+                with st.expander(f"📂 {fid} — {label} {f_stars}", expanded=False):
+                    st.markdown(f"**SNC:** `{snc}` | **Label:** {label}")
+                    if parent_exp:
+                        st.markdown(f"**Parent Classification:** {parent_exp}")
+                    scope = f_meta.get("raw_scope", "")
+                    if scope and str(scope) != 'nan':
+                        st.markdown(f"**Scope Note:** {str(scope)[:500]}")
+                    st.caption(f"Box: {f_meta.get('box','N/A')} | Date: {f_meta.get('date','N/A')}")
+
+                    # Documents in this folder
+                    docs_in_folder = folder_to_docs.get(fid, set())
+                    if docs_in_folder:
+                        st.markdown(f"**{len(docs_in_folder)} relevant document(s):**")
+                        for did in sorted(docs_in_folder):
+                            d_grade = doc_grades.get(did, 0)
+                            d_stars = u3.grade_stars(d_grade)
+                            d_meta = items_meta.get(did, {})
+                            title = u2.get_smart_title(d_meta, did)
+
+                            with st.expander(f"📄 {did} — {title} {d_stars}", expanded=False):
+                                summary = d_meta.get("summary", "")
+                                if summary and str(summary) != 'nan':
+                                    st.info(f"**Summary:** {summary}")
+                                else:
+                                    st.caption("No summary available.")
+
+                                ocr_pages = d_meta.get("ocr", [])
+                                if isinstance(ocr_pages, list) and len(ocr_pages) > 0:
+                                    first_page = ocr_pages[0]
+                                    if first_page and str(first_page) != 'nan':
+                                        with st.expander("📃 First Page OCR Text", expanded=False):
+                                            st.text(str(first_page)[:2000])
+                                else:
+                                    st.caption("No OCR text available.")
+                    else:
+                        st.caption("No relevant documents in this folder.")
+
+
+# ============================================================
+# HOW-TO GUIDE
+# ============================================================
+
+def run_howto_ui():
+    st.title("📖 How-To Guide — SUSHI Research Platform")
+
+    st.markdown("""
+## What is the SUSHI Task?
+
+The **SUSHI (Sparsely digitized Unstructured Special collections for History Investigation)** task focuses on
+**folder-level ranking** in sparsely digitized archives. The collection consists of U.S. State Department records
+on Brazil from the 1960s–1970s, organized in a physical hierarchy: **Boxes → Folders → Documents**.
+
+The challenge: only **~5 documents per box** have been digitized (with metadata like title, summary, OCR text).
+Most folders have **no digitized documents** at all. The task is to rank folders by relevance to a research topic,
+despite this severe data sparsity.
+
+---
+
+## Key Concepts
+
+### 📦 Box / 📂 Folder / 📄 Document Hierarchy
+
+| Level | Count | Description |
+|-------|-------|-------------|
+| **Box** | ~126 | Physical boxes storing folders. Each box contains 5–20+ folders. |
+| **Folder** | 1,336 | The unit of retrieval. Has a label, SNC code, dates, and optionally a scope note. |
+| **Document** | 31,681 | Individual records (cables, memos, reports). Only ~630 per ECF are "digitized." |
+
+### 🏷️ SNC (Subject-Numeric Code)
+
+The State Department's classification system. Examples:
+- **POL** = Political Affairs & Relations (561 folders — very generic)
+- **AGR** = Agriculture (82 folders — specific)
+- **DEF** = Defense Affairs, **LAB** = Labor & Manpower, **SCI** = Science & Technology
+
+SNCs can be **specific** (label tells you what's inside) or **generic** (like POL, which covers everything from elections to coups).
+
+### 🧪 ECF (Experiment Control File)
+
+Defines which documents are "digitized" (available as training data) for an experiment.
+- **Uniform ECFs**: 5 documents randomly sampled per box (~630 total).
+- **Skewed ECFs**: Uneven sampling across boxes.
+- **All Docs**: All 31,681 documents available (upper bound only).
+
+Different seeds produce different random samples, so experiments are run across multiple seeds and averaged.
+
+### 📊 nDCG@5 (Normalized Discounted Cumulative Gain at 5)
+
+
+The primary evaluation metric. Measures how well the top-5 ranked folders match the gold-standard relevance judgments.
+- **1.0** = Perfect ranking of the top-5 most relevant folders.
+- **0.0** = No relevant folders in the top-5.
+
+### ⭐ Relevance Grades
+
+| Grade | Meaning | Display |
+|-------|---------|---------| 
+| **3** | Highly Relevant | ⭐⭐⭐ |
+| **1** | Relevant | ⭐ |
+| **0** | Not Relevant | — |
+
+### 🎯 Rerank Potential
+
+Indicates whether relevant folders exist at ranks 6–N (outside top-5) in the current ranking.
+If yes, a re-ranking step could improve nDCG@5 by promoting these folders.
+
+---
+
+## App Pages
+
+
+### 🔬 Experiment Analyzer
+Analyzes experiment results at multiple levels of granularity:
+- **Single Experiment Analysis**: Select a configuration to compare models (e.g., BM25 vs ColBERT) within it. Metrics are shown as KPIs and a dumbbell chart per topic.
+- **Retrieval Analysis**: For a selected run, inspect the Top-N retrieved folders per topic alongside qrels grades. Use the "Top-N" selector (5/15/25/50) to control how many folders to display. All folders are listed collapsed — expand any to see details.
+- **Two-Experiment Comparison**: Pick any two runs from any subfolder and compare them side-by-side with a Wilcoxon signed-rank test, an overlay chart, and a topic separation table (Better / Equal / Worse).
+
+### 📦 Data Overview
+Explore the SUSHI collection structure:
+- **SNC Distribution tabs** (3-Level / 2-Level / 1-Level): For each SNC granularity, see the count of distinct codes, top-10 / bottom-10 by folder count, a histogram, a top-40 bar chart, and a complete table.
+- **SNC Deep Dive**: Pick an SNC code from the dropdown (shows `SNC — Label — Count of folders: N`) to explore all its folders, browse documents, and view keyword clouds.
+- **Document Analysis → Browse by SNC**: Filter documents by SNC code to see keyword summaries and folder listings.
+- **Document Analysis → Browse by Folder**: Pick any of the 1,336 folders by `FOLDER_ID — SNC — Label` to see its metadata and all its documents.
+
+### 🔍 Topic Viewer
+Browse the 45 evaluation topics (T1–T45). Select a topic to see its description and narrative, then explore the hierarchical tree of relevant **Boxes → Folders → Documents** with star-based relevance grades.
+
+### 🧪 ECF Inspector
+Analyze what the Experiment Control File (ECF) includes:
+- **Overview**: Histogram of documents per covered folder.
+- **By SNC**: Coverage table by SNC code with KPIs for SNCs with/without docs.
+- **By Box**: Coverage table sorted by coverage %.
+- **By Folder**: Browse only the folders covered by this ECF (dropdown: `FOLDER_ID — SNC — Label`).
+- **Relevance Coverage**: Cross-reference ECF coverage with the 45-topic qrels, including % coverage for Grade 3 and Grade 1 relevant folders.
+- **Compare ECFs**: Overlay two ECFs to compare their coverage distributions.
+
+---
+
+## Data Dictionary
+
+### Folder Metadata (`FoldersV1.3.json`)
+
+| Field | Type | Fill Rate | Description |
+|-------|------|-----------|-------------|
+| `box` | string | 100% | Physical box identifier |
+| `snc` | string | 95% | Subject-Numeric Code (68 folders = "Unknown") |
+| `label` | string | 100% | Original folder label |
+| `date` / `endDate` | string | 100% / 25% | Date range (75% have Unknown end date) |
+| `main_title` | string | 100% | Human-readable SNC meaning |
+| `label_parent_expanded` | string | 86% | Full hierarchical semantic path |
+| `raw_scope` | string | 38% | Scope note text |
+
+### Document Metadata (`itemsV1.2.json`)
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `Sushi Box` / `Sushi Folder` | string | Parent box and folder IDs |
+| `title` | string | Document title |
+| `date` | string | Document date |
+| `summary` | string | GPT-4o generated summary |
+| `ocr` | list[string] | OCR text per page |
+""")
+
+
+# ============================================================
+# ECF INSPECTOR
+# ============================================================
+
+def run_ecf_inspector_ui():
+    st.title("🧪 ECF Inspector")
+    st.caption("Analyze Experiment Control File coverage: which folders, SNCs, and boxes have digitized documents.")
+
+    folders_meta = u4._load_folders_meta()
+    all_ecfs = u4.list_available_ecfs()
+
+    if not all_ecfs:
+        st.error("No ECF files found.")
+        return
+
+    # Type filter + ECF selection
+    ecf_types = sorted(set(e["type"] for e in all_ecfs))
+    col_type, col_ecf_a, col_ecf_b = st.columns([1, 2, 2])
+
+    with col_type:
+        sel_type = st.selectbox("ECF Type:", ["All"] + ecf_types)
+
+    filtered_ecfs = [e for e in all_ecfs if sel_type == "All" or e["type"] == sel_type]
+
+    with col_ecf_a:
+        ecf_a_labels = [e["label"] for e in filtered_ecfs]
+        sel_ecf_a_idx = st.selectbox("Select ECF:", range(len(filtered_ecfs)),
+            format_func=lambda i: ecf_a_labels[i], key="ecf_a")
+        ecf_a = filtered_ecfs[sel_ecf_a_idx]
+
+    with col_ecf_b:
+        ecf_b_options = ["(None — no comparison)"] + [e["label"] for e in filtered_ecfs]
+        sel_ecf_b_idx = st.selectbox("Compare against:", range(len(ecf_b_options)),
+            format_func=lambda i: ecf_b_options[i], key="ecf_b")
+        ecf_b = filtered_ecfs[sel_ecf_b_idx - 1] if sel_ecf_b_idx > 0 else None
+
+    # Load ECF A
+    docs_a = u4.load_ecf_training_docs(ecf_a["path"])
+    parsed_a = u4.parse_ecf_docs(docs_a)
+    metrics_a = u4.compute_headline_metrics(parsed_a, folders_meta)
+
+    # Headline metrics — use value + delta to avoid truncation
+    st.markdown("---")
+    mc1, mc2, mc3, mc4 = st.columns(4)
+    mc1.metric(
+        "📄 Documents Included",
+        f"{metrics_a['docs_included']:,} / {metrics_a['docs_total']:,}",
+        delta=f"{metrics_a['docs_pct']}% of total",
+        delta_color="off"
+    )
+    mc2.metric(
+        "📂 Folders with ≥1 Doc",
+        f"{metrics_a['folders_covered']:,} / {metrics_a['folders_total']:,}",
+        delta=f"{metrics_a['folders_pct']}% covered",
+        delta_color="off"
+    )
+    mc3.metric(
+        "📦 Boxes Represented",
+        f"{metrics_a['boxes_covered']:,} / {metrics_a['boxes_total']:,}",
+        delta=f"{metrics_a['boxes_pct']}% covered",
+        delta_color="off"
+    )
+    mc4.metric("📊 Avg Docs/Covered Folder", f"{metrics_a['avg_docs_per_folder']:.2f}")
+
+    # Tabs — added "📂 By Folder" between Box and Relevance Coverage
+    tab_names = ["📊 Overview", "🏷️ By SNC", "📂 By Folder", "📦 By Box", "🎯 Relevance Coverage"]
+    if ecf_b:
+        tab_names.append("⚖️ Compare ECFs")
+
+    tabs = st.tabs(tab_names)
+
+    # Tab 1: Overview
+    with tabs[0]:
+        st.subheader("Documents per Covered Folder")
+        fdc = parsed_a.get("folder_doc_counts", {})
+        if fdc:
+            fdc_df = pd.DataFrame(list(fdc.items()), columns=["Folder", "Doc Count"])
+            fig = px.histogram(fdc_df, x="Doc Count", nbins=30, color_discrete_sequence=[_DA_COLORS["primary"]],
+                labels={"Doc Count": "Documents per Folder", "count": "Folders"})
+            st.plotly_chart(_apply_dark_theme(fig, 400), width="stretch")
+
+    # Tab 2: By SNC — removed stacked bar, added "SNCs with No Docs" KPI
+    with tabs[1]:
+        snc_level = st.radio("SNC Granularity:", ["Primary SNC", "3-Level SNC"], horizontal=True)
+        if snc_level == "Primary SNC":
+            snc_df = u4.compute_snc_coverage(parsed_a, folders_meta)
+        else:
+            snc_df = u4.compute_snc_3level_coverage(parsed_a, folders_meta)
+
+        snc_without_docs = int((snc_df["Covered Folders"] == 0).sum())
+        snc_with_docs = int((snc_df["Covered Folders"] > 0).sum())
+        kpi1, kpi2 = st.columns(2)
+        kpi1.metric("✅ SNCs with ≥1 Doc", snc_with_docs)
+        kpi2.metric("🚫 SNCs with No Docs", snc_without_docs)
+
+        st.subheader("SNC Coverage — Table")
+        st.dataframe(snc_df.sort_values("Coverage %", ascending=True), width="stretch", hide_index=True, height=400)
+
+    # Tab 4: By Folder — only ECF-covered folders, dropdown: FOLDER_ID — SNC — Label
+    with tabs[2]:
+        folder_detail_df = u4.compute_folder_detail(parsed_a, folders_meta)
+        if folder_detail_df.empty:
+            st.info("No folders covered by this ECF.")
+        else:
+            st.caption(f"**{len(folder_detail_df)}** folders covered by this ECF (have ≥1 training document).")
+            folder_dropdown_labels = folder_detail_df["Dropdown Label"].tolist()
+            sel_folder_ecf_idx = st.selectbox(
+                "Select Folder:",
+                range(len(folder_detail_df)),
+                format_func=lambda i: folder_dropdown_labels[i],
+                key="ecf_folder_select"
+            )
+            row = folder_detail_df.iloc[sel_folder_ecf_idx]
+
+            if row["Label Parent Expanded"]:
+                st.markdown(f"**Classification:** {row['Label Parent Expanded']}")
+            if row["Scope Note"]:
+                st.info(f"**Scope Note:** {row['Scope Note']}")
+
+            ef1, ef2, ef3 = st.columns(3)
+            ef1.metric("📦 Box", row["Box"])
+            ef2.metric("🏷️ SNC", row["SNC"])
+            ef3.metric("📄 Docs in ECF", int(row["Docs in ECF"]))
+
+            # List documents in folder with title and summary
+            sel_folder_id = row["Folder ID"]
+            folder_doc_ids = parsed_a.get("folder_doc_ids", {}).get(sel_folder_id, [])
+            items_meta = u4._load_items_meta()
+
+            st.markdown("---")
+            st.subheader(f"📄 Documents in ECF for Folder `{sel_folder_id}` ({len(folder_doc_ids)})")
+            if not folder_doc_ids:
+                st.caption("No document details available for this folder in this ECF.")
             else:
-                col_list, col_detail = st.columns([1, 2])
-                with col_list:
-                    st.subheader("Select Document")
-                    doc_options = {f"{did} ({'⭐'*sc}) - {u2.get_smart_title(items_meta.get(did), did)[:40]}...": did for did, sc in rd}
-                    selected_option = st.selectbox("Relevant Documents:", options=list(doc_options.keys()))
-                    selected_doc_id = doc_options[selected_option]
-                    score = next((sc for did, sc in rd if did == selected_doc_id), 0)
-                    st.caption(f"Relevance Score: {score}")
+                for doc_id in folder_doc_ids:
+                    item = items_meta.get(doc_id, {})
+                    title = item.get("title") or item.get("Brown Title") or item.get("NARA Title") or doc_id
+                    summary = item.get("summary", "")
+                    doc_date = item.get("date", "N/A")
 
-                with col_detail:
-                    st.subheader("Document Content & Metadata")
-                    if selected_doc_id:
-                        meta = items_meta.get(selected_doc_id, {})
-                        sub_t1, sub_t2 = st.tabs(["👁️ PDF Preview", "ℹ️ Metadata"])
-                        
-                        path = u2.get_file_path_from_metadata(selected_doc_id, items_meta, folders_meta)
-                        
-                        with sub_t1:
-                            b64_pdf = u2.get_pdf_base64(path) if path else None
-                            if b64_pdf:
-                                pdf_display = f'<iframe src="data:application/pdf;base64,{b64_pdf}" width="100%" height="800" type="application/pdf"></iframe>'
-                                st.markdown(pdf_display, unsafe_allow_html=True)
-                            else:
-                                st.warning("PDF not found or could not be loaded.")
-                        
-                        with sub_t2:
-                            st.markdown(f"**Title:** {u2.get_smart_title(meta, selected_doc_id)}")
-                            if "summary" in meta: st.info(f"**Summary:** {meta['summary']}")
-                            st.json(meta)
-                            if "ocr" in meta and meta["ocr"]:
-                                with st.expander("Show OCR Text"): st.text(meta["ocr"][0])
+                    with st.expander(f"📄 {doc_id} — {title}", expanded=False):
+                        if summary and str(summary) not in ("", "nan"):
+                            st.markdown(f"**Summary:** {summary}")
+                        else:
+                            st.caption("No summary available for this document.")
+                        st.caption(f"**Date:** `{doc_date}` | **Box:** `{item.get('Sushi Box', 'N/A')}`")
 
-                            sushi_folder_id = meta.get("Sushi Folder")
-                            if sushi_folder_id:
-                                st.markdown(f"**Document Sushi Folder Metadata:**")
-                                f_meta = folders_meta.get(sushi_folder_id, {})
-                                if f_meta:
-                                    st.json(f_meta)
-                                else: st.warning("No metadata found.")
+    # Tab 3: By Box
+    with tabs[3]:
+        box_df = u4.compute_box_coverage(parsed_a, folders_meta)
+        st.subheader("Box Coverage — Sorted by Coverage % (ascending)")
+        st.dataframe(box_df, width="stretch", hide_index=True, height=500)
 
-        with tab_folders:
-            if not rf: st.write("No relevant folders found.")
-            else:
-                col_f_list, col_f_detail = st.columns([1, 2])
-                with col_f_list:
-                    st.subheader("Select Folder")
-                    folder_options = {f"{fid} ({'⭐'*sc})": fid for fid, sc in rf}
-                    sel_folder_opt = st.selectbox("Relevant Folders:", options=list(folder_options.keys()))
-                    selected_folder_id = folder_options[sel_folder_opt]
-                with col_f_detail:
-                    st.subheader("Folder Metadata")
-                    if selected_folder_id:
-                        f_meta = folders_meta.get(selected_folder_id, {})
-                        if f_meta:
-                            st.json(f_meta)
-                        else: st.warning("No metadata found.")
+    # Tab 5: Relevance Coverage — with % for Grade 3 and Grade 1
+    with tabs[4]:
+        rel_cov = u4.compute_relevance_coverage(parsed_a)
+        s = rel_cov["summary"]
 
-        with tab_boxes:
-            for bid, sc in rb:
-                st.markdown(f"- **{bid}** ({'⭐'*sc})")
+        st.markdown(f"""
+Across all 45 topics, there are **{s['total_pairs']}** (topic, relevant-folder) pairs.
+In this ECF, **{s['covered_pairs']}** ({s['covered_pairs']/s['total_pairs']*100:.1f}%) have a training document available;
+the remaining **{s['uncovered_pairs']}** ({s['uncovered_pairs']/s['total_pairs']*100:.1f}%) can only be found via label match or box/SNC expansion.
+        """)
+
+        rc1, rc2 = st.columns(2)
+        pct_g3 = round(s['covered_grade3'] / s['total_grade3'] * 100, 1) if s['total_grade3'] > 0 else 0.0
+        pct_g1 = round(s['covered_grade1'] / s['total_grade1'] * 100, 1) if s['total_grade1'] > 0 else 0.0
+        rc1.metric(
+            "⭐⭐⭐ Highly Relevant (Grade 3)",
+            f"{s['covered_grade3']} / {s['total_grade3']} covered",
+            delta=f"{pct_g3}% covered",
+            delta_color="off"
+        )
+        rc2.metric(
+            "⭐ Relevant (Grade 1)",
+            f"{s['covered_grade1']} / {s['total_grade1']} covered",
+            delta=f"{pct_g1}% covered",
+            delta_color="off"
+        )
+
+        st.subheader("Per-Topic Relevance Coverage")
+        per_topic = rel_cov["per_topic"]
+        st.dataframe(per_topic.sort_values("Coverage %", ascending=True), width="stretch", hide_index=True, height=500)
+
+    # Tab 6: Compare ECFs (if selected)
+    if ecf_b and len(tabs) > 5:
+        with tabs[5]:
+            docs_b = u4.load_ecf_training_docs(ecf_b["path"])
+            parsed_b = u4.parse_ecf_docs(docs_b)
+            metrics_b = u4.compute_headline_metrics(parsed_b, folders_meta)
+
+            st.subheader(f"Comparison: {ecf_a['label']} vs {ecf_b['label']}")
+
+            # Side-by-side metrics
+            comp_col_a, comp_col_b = st.columns(2)
+            with comp_col_a:
+                st.markdown(f"### 🟦 {ecf_a['label']}")
+                st.metric("Documents", f"{metrics_a['docs_included']:,}", delta=f"{metrics_a['docs_pct']}%", delta_color="off")
+                st.metric("Folders Covered", f"{metrics_a['folders_covered']:,}", delta=f"{metrics_a['folders_pct']}%", delta_color="off")
+                st.metric("Avg Docs/Folder", f"{metrics_a['avg_docs_per_folder']:.2f}")
+            with comp_col_b:
+                st.markdown(f"### 🟧 {ecf_b['label']}")
+                st.metric("Documents", f"{metrics_b['docs_included']:,}", delta=f"{metrics_b['docs_pct']}%", delta_color="off")
+                st.metric("Folders Covered", f"{metrics_b['folders_covered']:,}", delta=f"{metrics_b['folders_pct']}%", delta_color="off")
+                st.metric("Avg Docs/Folder", f"{metrics_b['avg_docs_per_folder']:.2f}")
+
+            lbl_a = ecf_a["label"]
+            lbl_b = ecf_b["label"]
+
+            # SNC Coverage Comparison Table
+            st.subheader("SNC Coverage Comparison Table")
+            snc_a = u4.compute_snc_coverage(parsed_a, folders_meta)
+            snc_b = u4.compute_snc_coverage(parsed_b, folders_meta)
+
+            merged_snc = snc_a[["SNC", "Total Folders", "Covered Folders", "Coverage %"]].rename(
+                columns={
+                    "Covered Folders": f"Covered ({lbl_a})",
+                    "Coverage %": f"Coverage % ({lbl_a})",
+                }
+            )
+            merged_snc_b = snc_b[["SNC", "Covered Folders", "Coverage %"]].rename(
+                columns={
+                    "Covered Folders": f"Covered ({lbl_b})",
+                    "Coverage %": f"Coverage % ({lbl_b})",
+                }
+            )
+
+            comp_df = merged_snc.merge(merged_snc_b, on="SNC", how="outer").fillna(0)
+            comp_df["Covered Diff"] = comp_df[f"Covered ({lbl_a})"] - comp_df[f"Covered ({lbl_b})"]
+
+            st.dataframe(
+                comp_df.sort_values(f"Coverage % ({lbl_a})", ascending=True),
+                width="stretch",
+                hide_index=True,
+                height=450,
+            )
+
+            # Per-Topic Relevance Coverage Comparison Table
+            st.subheader("Per-Topic Relevance Coverage Comparison Table")
+            rel_cov_a = u4.compute_relevance_coverage(parsed_a)
+            rel_cov_b = u4.compute_relevance_coverage(parsed_b)
+
+            df_rel_a = rel_cov_a["per_topic"][["Topic", "Relevant Folders", "Covered", "Coverage %"]].rename(
+                columns={"Covered": f"Covered ({lbl_a})", "Coverage %": f"Coverage % ({lbl_a})"}
+            )
+            df_rel_b = rel_cov_b["per_topic"][["Topic", "Covered", "Coverage %"]].rename(
+                columns={"Covered": f"Covered ({lbl_b})", "Coverage %": f"Coverage % ({lbl_b})"}
+            )
+
+            topic_comp_df = df_rel_a.merge(df_rel_b, on="Topic", how="outer").fillna(0)
+            topic_comp_df["Coverage Diff %"] = (
+                topic_comp_df[f"Coverage % ({lbl_a})"] - topic_comp_df[f"Coverage % ({lbl_b})"]
+            ).round(1)
+
+            st.dataframe(
+                topic_comp_df.sort_values("Coverage Diff %", ascending=False),
+                width="stretch",
+                hide_index=True,
+                height=450,
+            )
+
+
+# ============================================================
+# MAIN ROUTER
+# ============================================================
 
 def main():
-    """Application entry point and navigation router."""
-    st.sidebar.title("📱 App Navigation")
+    st.sidebar.title("Navigation")
     app_mode = st.sidebar.radio(
         "Choose Application:",
-        ["Experiment Analyzer", "Topics and Data Visualizer"]
+        ["📖 How-To Guide", "🔬 Experiment Analyzer", "📦 Data Overview", "🔍 Topic Viewer", "🧪 ECF Inspector"]
     )
-    
     st.sidebar.markdown("---")
-    
-    if app_mode == "Experiment Analyzer":
+
+    if app_mode == "📖 How-To Guide":
+        run_howto_ui()
+    elif app_mode == "🔬 Experiment Analyzer":
         run_experiment_analyzer_ui()
-    elif app_mode == "Topics and Data Visualizer":
-        run_sushi_visualization_ui()
+    elif app_mode == "📦 Data Overview":
+        run_data_overview_ui()
+    elif app_mode == "🔍 Topic Viewer":
+        run_topic_viewer_ui()
+    elif app_mode == "🧪 ECF Inspector":
+        run_ecf_inspector_ui()
+
 
 if __name__ == "__main__":
     main()

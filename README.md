@@ -423,147 +423,240 @@ Provides a detailed analysis for a specific topic ID (e.g., `T18Eval-00001`).
 
 ## [SUSHI Visualizer Web Application](https://tinyurl.com/sushisigir)
 
-The **Visualizer** is the primary interface for analyzing experiment results and exploring the dataset. It is divided into two distinct applications, accessible via the sidebar navigation. It is a web application developed using Streamlit (Python library). It can be accessed at [https://tinyurl.com/sushisigir](https://tinyurl.com/sushisigir).
+The **SUSHI Visualizer** is the main interactive interface for analyzing experiment runs and exploring the archival collection. Built with Streamlit, it combines experiment benchmarking, topic inspection, metadata exploration, and ECF analysis in a single application. The app is launched from the [web_app/app_sushi.py](web_app/app_sushi.py) entry point and can be accessed at [https://tinyurl.com/sushisigir](https://tinyurl.com/sushisigir).
 
-The tool is designed to bridge the gap between raw metric files and actionable insights, offering features like confidence interval visualization, topic-by-topic breakdowns, and dynamic filtering.
+The interface is organized around a left-side navigation menu, where each entry exposes a different analysis workflow.
 
-The SUSHI visualizer has two main screens:
+### Side Menu Navigation
 
-- **Experiment Analyzer**: performance benchmarking;
-- **Topics and Data Visualizer**: dataset exploration.
+The side menu contains five main sections:
 
-### Experiment Analyzer
+1. **How-To Guide**
+   - Introduces the SUSHI task, the box/folder/document hierarchy, the concept of sparse digitization, and the meaning of evaluation metrics such as nDCG@5 and relevance grades.
 
-This dashboard is a "Command Center" for evaluating models performances. It allows to answer two key questions: *"Which model is better?"* and *"Why is it better?"*.
+2. **Experiment Analyzer**
+   - The main dashboard for comparing retrieval runs.
+   - Supports three complementary analysis modes:
+     - **Single Experiment Analysis**: select a configuration and compare the models contained in that experiment.
+     - **Retrieval Analysis**: inspect the top-ranked folders for each topic and review qrels grades for those folders.
+     - **Two-Experiment Comparison**: compare any two runs side-by-side, including a Wilcoxon signed-rank test and a topic-level overlay chart.
 
-The models that are shown for selection and comparing are the ones present at the **all_runs** folder. They are presented for the application with the following name structure: STRATEGY-SEARCHINGFIELDS_EXPANSIONMETHOD_TD_RETRIEVALMODELS. They can be interpreted in the following way:
+3. **Data Overview**
+   - A collection exploration page for understanding the dataset beyond the retrieval metrics.
+   - Includes:
+     - collection statistics such as number of folders, documents, boxes, and SNCs;
+     - histograms for documents per folder and folders per box;
+     - SNC distribution views at three granularity levels (3-level, 2-level, and primary SNC);
+     - a deep-dive view to inspect folder and document content by selected SNC;
+     - document analysis tools to browse documents by SNC or by folder.
 
-| Strategy | Searching Fields | Expansion Method | Query Fields | Retrieval Models |
-| :- | :- | :- | :- | :- |
-| If **HYBRID**: it combines with the AllF strategy<br/>If **XperBox**, it means that different ECFs for uniform sampling was used.<br/>If **UNEVEN**, it used Uneven sampling for the ECFs. | Searching fields (T,O,F,S) and their combination used for indexing.<br/>ALLFL means the usage of AllF strategy. | **SB:** Same Box<br/>**SS:** Same SNC<br/>**SMS:** Similar SNC<br/>**CD:** Close date<br/>**NEX:** No Expansion<br/>The number beside it is the n-th top rank that infered folders can't pass. | TD for Title and Description as Query Fields | When more than one model is present, it was performed RRF in the results.<br/>When **TUNED**, it used Tuned BM25F params. |
+4. **Topic Viewer**
+   - Lets the user browse the 45 evaluation topics and inspect their descriptions, narratives, and relevant gold-standard items.
+   - The page builds a hierarchical view of the relevant structure: box → folder → document.
+   - Each relevant item is shown with star-based relevance grades, and the viewer can reveal metadata such as SNC, scope notes, summaries, and OCR text.
+
+5. **ECF Inspector**
+   - Focuses on the Experiment Control Files (ECFs), which define which documents are visible during training.
+   - Provides multiple views for understanding coverage:
+     - overall coverage statistics;
+     - coverage by SNC;
+     - coverage by folder;
+     - coverage by box;
+     - relevance coverage for the 45 topics;
+     - direct comparison between two ECFs.
+
+### Experiment Analyzer in Detail
+
+This is the main page for answering the core research questions: “Which model performs better?” and “Why?”. It is designed for comparative analysis rather than simple browsing.
+
+#### Inputs and run selection
+
+The app discovers available experiment results from the [all_runs](all_runs) directory and groups them by configuration. Before looking at the charts, users should first select:
+
+- a subfolder/scope to narrow the candidate runs;
+- a target experiment configuration;
+- one or two specific runs for comparison.
+
+This selection step matters because the best interpretation comes from comparing runs that share a similar setup and differ mainly in the retrieval strategy or expansion method.
+
+#### What is shown in the single-experiment view
+
+- **Global performance cards**: show the mean nDCG@5, the margin of error, and the number of seeds contributing to the estimate. These are the first indicators of whether a method is consistently strong.
+- **Topic-level dumbbell chart**: displays each topic’s mean score and its confidence interval. This is useful for understanding whether a model is uniformly good or only strong on a few topics.
+- **Seed variance view**: shows how much the score changes across random seeds. A narrow distribution suggests stable behavior; a wide distribution suggests that the outcome depends heavily on the sampled training documents.
+
+<p align="center">
+  <img src="img/single_experiments.png" alt="Single Experiments" width="900" />
+</p>
+
+<p align="center">
+  <img src="img/comparison_experiments.png" alt="Comparison Experiments" width="900" />
+</p>
+
+#### Run naming convention
+
+Experiment folders are interpreted using a four-part naming convention:
+
+- **Search fields**
+- **Expansion strategy**
+- **Query type**
+- **Model name**
+
+For example, a folder such as `TOFS_SB_TD_BM25` indicates:
+
+- `TOFS`: title/ocr/folderlabel/summary-based search fields;
+- `SB`: same-box expansion;
+- `TD`: title + description query fields;
+- `BM25`: the retrieval model name.
+
+### Data Overview in Detail
+
+This section is intended for dataset exploration rather than model benchmarking. It helps explain the collection conditions behind the retrieval metrics and is particularly useful when you suspect that the data distribution is affecting the results.
+
+#### What is shown in the collection statistics
+
+The opening view displays:
+
+- total folders, documents, and boxes;
+- how many distinct SNCs exist at different levels;
+- how many folders contain scope notes;
+- distributional summaries such as OCR page counts and the number of documents per folder.
+
+These metrics help you understand whether the collection is balanced or skewed, which is important because retrieval performance can be strongly influenced by the underlying metadata structure.
+
+<p align="center">
+  <img src="img/data_overview1.png" alt="Data Overview Stats" width="900" />
+</p>
+
+#### What is shown in the SNC exploration views
+
+The SNC tabs provide a structured view of the archival classification system:
+
+- **3-Level SNC**: the most detailed view, useful for fine-grained analysis.
+- **2-Level SNC**: a middle layer that can reveal broader semantic clusters.
+- **1-Level (Primary)**: a broader overview of the main classification families.
+
+Each tab includes tables, histograms, and bar charts. The deep-dive view also allows you to inspect the folders and documents attached to a selected SNC.
+
+<p align="center">
+  <img src="img/data_overview2.png" alt="Data Overview SNC" width="900" />
+</p>
 
 
-**A. Model Global Performance (The Score Cards)**
+#### What is shown in the document browsing tabs
 
-At the top of the page, it's possible to see score cards for each model in the selected configuration (e.g., BM25 vs. ColBERT).
+The document analysis tabs let you:
 
-* **Mean nDCG@5:** The large number represents the average retrieval quality across all 45 topics. Higher is better (0.0 to 1.0).
-* **Margin of Error (±):** The number aside shows the 95% Confidence Interval. If the intervals of two models overlap significantly, their performance difference might not be statistically significant.
-* **N=30:** Indicates that the score is calculated from 30 separate random trials (simulating different digitization scenarios).
+- inspect keyword distributions in titles and summaries;
+- browse documents grouped by SNC;
+- browse all documents belonging to a selected folder.
 
-**B. Topic Performance (The Dumbbell Chart)**
+### Topic Viewer in Detail
 
-This chart  breaks down performance by individual topic. It is crucial for diagnosing "hard" vs. "easy" topics.
+The Topic Viewer is designed for qualitative inspection of the relevance judgments and the archival context behind each topic. It is the best place to move from metric-driven analysis to understanding why a certain result is considered correct or incorrect.
 
-* **The Dot:** Represents the mean nDCG score for a specific topic.
-* **The Line (Whiskers):** Represents the confidence interval. A long line means the model's performance was unstable across different random seeds (it depended heavily on *which* documents were digitized).
-* **Comparison:** You will see multiple colored dots on the same line.
-    * *Example:* If the **Orange Dot (ColBERT)** is consistently to the right of the **Blue Dot (BM25)**, the neural model is outperforming the keyword model on that specific topic.
- 
-![Experiment and Topics](https://raw.githubusercontent.com/victorleaoo/SUSHI_Information_Retrieval_Archives/refs/heads/main/img/experiment-topics.png)
+#### What is shown on this page
 
-**C. Cross-Experimental Table**
+For a selected topic, the page displays:
 
-Located at the bottom, this table allows you to compare **different configurations** side-by-side (e.g., comparing a run with `Expansion` vs. a run `Without Expansion`).
+- the topic title, description, and narrative;
+- a summary of how many relevant boxes, folders, and documents are associated with the topic;
+- a hierarchical expansion of the relevant structure:
+  - box-level grouping;
+  - folder-level metadata and scope notes;
+  - document-level summaries and OCR previews.
 
-* **Global nDCG:** The overall effectiveness of the run.
-* **Global Rel:** The average number of relevant folders found in the top 5 results.
-* **Per-Topic Columns:** Shows the detailed score for every single topic. Useful for spotting changes (e.g., *"Did adding expansion hurt Topic 12?"*).
+This gives you the actual archival context behind the evaluation topic, not just the score.
 
-![Models](https://raw.githubusercontent.com/victorleaoo/SUSHI_Information_Retrieval_Archives/refs/heads/main/img/models.png)
+<p align="center">
+  <img src="img/topic_viewer.png" alt="Topic Viewer" width="900" />
+</p>
 
-### Topics and Data Visualizer
+### ECF Inspector in Detail
 
-This section is an explorer for the dataset itself (The "Ground Truth"). It helps you understand what the users are actually looking for and what the relevant documents look like.
+The ECF Inspector focuses on the experimental conditions used to train the system. It helps answer questions such as: Which documents were visible to the model during training, and how much of the collection was actually available to learn from?
 
-**A. Topic Selection**
+#### What is shown in the overview and coverage views
 
-Select a Topic ID (e.g., `T1`) from the sidebar. You will see:
+The app presents several complementary views:
 
-* **Title:** The short query.
-* **Description:** A sentence explaining the user's intent.
-* **Narrative:** A paragraph helping to define for assessors what counts as relevant or irrelevant.
+- **Overview**: a histogram of documents per covered folder.
+- **By SNC**: a table of coverage by classification code, including counts of SNCs with and without documents.
+- **By Folder**: a detailed inspection of the folders included in the selected ECF.
+- **By Box**: box-level coverage statistics.
+- **Relevance Coverage**: how much of the relevant-folder set for the 45 topics is covered by the ECF.
+- **Compare ECFs**: a side-by-side view to compare the training visibility of two different experimental settings.
 
-**B. Document View**
+<p align="center">
+  <img src="img/ecf_inspector.png" alt="ECF Inspector" width="900" />
+</p>
 
-This tab shows all documents marked as relevant for the selected topic.
+<p align="center">
+  <img src="img/ecf_comparison.png" alt="ECF Comparison" width="900" />
+</p>
 
-* **PDF Preview:** On the left, you can read the actual scanned document content.
-* **Metadata Inspector:** On the right, you can see the file's indexed metadata (OCR text, Date, Box ID).
-* **Sushi Folder Metadata:** Crucially, it shows the metadata of the *folder* and *box* this document belongs to, helping you understand the context of the match.
+### Setup for New Experiments and Visualizer Inputs
 
-![Topics and Docs](https://raw.githubusercontent.com/victorleaoo/SUSHI_Information_Retrieval_Archives/refs/heads/main/img/topic-doc.png)
+The visualizer is dynamic and discovers available experiment results from the filesystem. To add a new run, make sure that the output files follow the expected structure under the [all_runs](all_runs) directory.
 
-**C. Folder View**
-
-This tab lists the "Gold Standard" folders — the physical folders that the user *should* have found.
-
-* **Star Rating (⭐):** Indicates the relevance level: 1 as relevant; 3 as highly relevant.
-* **Folder metadata:** The folder metadata for the selected folder.
-
-![Folder Metadata](https://raw.githubusercontent.com/victorleaoo/SUSHI_Information_Retrieval_Archives/refs/heads/main/img/folder.png)
-
-### Setup Experiments for the Visualizer
-
-The Visualizer is built to be **dynamic**. It does not hardcode model names (except for colors); instead, it scans the file system to discover available experiments. To add a new model or experiment, you simply need to ensure your data follows the expected directory structure.
-
-**1. Directory Structure**
-
-All experiment results must live inside the `all_runs/` directory at the project root.
+#### Required directory layout
 
 ```text
 ProjectRoot/
 ├── all_runs/
-│   ├── TOFS_SB_TD_BM25/                 <-- Existing Run
-│   └── TOFS_SB_TD_MY-NEW-MODEL/         <-- Your New Run (See naming convention below)
-│       ├── model_overall_stats.json     <-- REQUIRED: Global aggregates (Mean/Margin)
-│       ├── topics_mean_margin.json      <-- REQUIRED: Per-topic statistics
-│       ├── topics_relevant_count_stats.json <-- REQUIRED: Relevance counts
-│       ├── Random1_TopicsFolderMetrics.json   <-- REQUIRED: Individual seed data
-│       ├── Random42_TopicsFolderMetrics.json
+│   ├── TOFS_SB_TD_BM25/
+│   └── TOFS_SB_TD_MY-NEW-MODEL/
+│       ├── model_overall_stats.json
+│       ├── topics_mean_margin.json
+│       ├── topics_relevant_count_stats.json
+│       ├── Random1_TopicsFolderMetrics.json
 │       └── ...
 ```
 
-**2. Folder Naming Convention**
+#### Required files
 
-The Visualizer parses folder names to automatically group experiments in the UI. You must follow this 4-part convention, separated by underscores: ```[SearchFields]_[ExpansionStrategy]_[QueryType]_[ModelName]```.
+- `model_overall_stats.json`: global mean nDCG and margin of error.
+- `topics_mean_margin.json`: per-topic statistics used by the dumbbell chart.
+- `topics_relevant_count_stats.json`: relevance counts used by the comparison views.
+- `Random{SEED}_TopicsFolderMetrics.json`: one file per seed for detailed analysis and N-count computation.
 
-**Example: TOFS_SB_TD_MY-NEW-MODEL**
+#### Naming convention
 
-- **SearchFields (TOFS):** Title, Ocr, FolderLabel, Summary.
-- **Expansion (SB):** Same Box.
-- **Query (TD):** Title + Description.
-- **Model (MY-NEW-MODEL):** The name that will appear in the charts.
+Use a four-part folder name separated by underscores:
 
-⚠️ Important: If your model name has underscores (e.g., MY_NEW_MODEL), the parser will break. Use hyphens (-) for model names instead.
+```text
+[SearchFields]_[ExpansionStrategy]_[QueryType]_[ModelName]
+```
 
-**3. Required JSON Files**
+Example:
 
-For the visualizer to render your charts, the following files must exist inside your run folder. These are automatically generated by the Evaluator class:
+```text
+TOFS_SB_TD_MY-NEW-MODEL
+```
 
-- *model_overall_stats.json:* Contains the single global "Mean nDCG" and "Margin of Error" used for the score cards.
-- *topics_mean_margin.json:* Contains the [Min, Mean, Max] nDCG values for every topic. This drives the Dumbbell Chart.
-- *Random{SEED}_TopicsFolderMetrics.json:* One file per random seed executed. Used to calculate the "N=" count and for detailed drill-downs.
+If the model name contains underscores, replace them with hyphens to avoid parsing issues.
 
-**4. Registering a New Model Color**
+#### Optional color registration
 
-While the system will automatically detect and list your new model, it won't know what color to assign it in the charts (it may default to a generic color or crash if strict mapping is on).
-
-To assign a specific color to your new model:
-
-- Open web_app/utils_experiments_viz.py.
-- Locate the COLOR_MAP dictionary constant.
-- Add your model name (exactly as it appears in the folder name) and a hex color code.
+If you add a new model name and want it to appear with a specific color in the charts, add it to the `COLOR_MAP` dictionary in [web_app/utils_experiments_viz.py](web_app/utils_experiments_viz.py).
 
 ### How to Run
 
-In order to run the SUSHI Experiment Runner, the follow steps must be followed:
+To run the application locally:
 
-1. **Install Python**: [https://www.python.org](https://www.python.org).
-2. **Install Python libraries**: run the command ```pip install -r requirements.txt```. It is recommended to use a [virtualenv](https://virtualenv.pypa.io/en/latest/user_guide.html) or a [conda](https://www.anaconda.com/docs/getting-started/miniconda/install) env.
-3. **Download all necessary files**: make sure to follow all the steps in the **Repository Setup** section of this README file.
-4. **Setup experiments**: make sure the experiments are in the expected way.
-5. **Run the Streamlit application**: now run the application inside the *web_app* folder and access it in the browser: ```streamlit run app_sushi.py```.
+1. Install Python from [https://www.python.org](https://www.python.org).
+2. Install the dependencies with:
+
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+3. Follow the repository setup steps described earlier in this README so the required data files are available.
+4. Start the Streamlit app from the [web_app](web_app) directory:
+
+   ```bash
+   streamlit run app_sushi.py
+   ```
 
 ---
 
