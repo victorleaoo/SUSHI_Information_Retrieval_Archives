@@ -400,19 +400,23 @@ def render_seed_variance_chart(var_df: pd.DataFrame):
         x=x_vals,
         y=y_vals,
         orientation="h",
+        name="",
         marker_color="#1D4ED8",
         boxpoints=False,
         fillcolor="rgba(29, 78, 216, 0.2)",
         line=dict(color="#1E40AF", width=1.5),
         hovertemplate=(
-            "<b>%{y}</b><br>"
-            "Median nDCG@5: %{median:.4f}<br>"
-            "Q1: %{q1:.4f} | Q3: %{q3:.4f}<br>"
-            "Min: %{min:.4f} | Max: %{max:.4f}<extra></extra>"
+            "<b>Median:</b> %{median:.3f}<br>"
+            "Q1: %{q1:.3f} &nbsp; Q3: %{q3:.3f}<br>"
+            "Min: %{min:.3f} &nbsp; Max: %{max:.3f}"
+            "<extra></extra>"
         ),
     ))
 
+    fig.update_layout(hovermode="closest")
+
     fig = _apply_light_theme(fig, max(500, len(var_df) * 36))
+
     fig.update_layout(
         showlegend=False,
         xaxis=dict(title="nDCG@5", range=[-0.02, 1.05]),
@@ -526,33 +530,29 @@ def render_retrieval_analysis(run_name: str, run_dir: str, all_topics: dict, fol
 def run_single_experiment_ui():
     """Screen 1: Single Experiment Analysis & Retrieval Analysis"""
     st.title("🔬 Single Experiment Viewer")
-    st.caption("Select a configuration to see per-model nDCG@5 results, seed variance, and detailed retrieval rankings.")
+    st.caption("Select an experiment folder to see per-model nDCG@5 results, seed variance, and detailed retrieval rankings.")
 
-    available_subfolders = ["All Subfolders"] + u1.get_available_subfolders()
-
-    c_folder, c_config = st.columns([1, 2])
-    with c_folder:
-        selected_subfolder = st.selectbox(
-            "Select Subfolder / Scope:", options=available_subfolders, index=0,
-            help="Filter experiments by directory folder."
-        )
-
-    grouped_runs = u1.get_grouped_run_configurations(selected_subfolder)
-    if not grouped_runs:
-        st.error("No valid run folders found for the selected subfolder.")
+    all_runs_df = u1.get_all_runs_statistics()
+    if all_runs_df.empty:
+        st.error("No valid run folders found.")
         return
 
-    config_ndcg_map = u1.get_configuration_ndcg_map(grouped_runs)
-    config_options = sorted(grouped_runs.keys(), key=lambda c: config_ndcg_map.get(c, 0.0), reverse=True)
+    grouped_runs = u1.get_grouped_run_configurations()
+    all_run_names = u1.sort_run_names(all_runs_df['Run Name'].tolist())
+    run_ndcg_map = dict(zip(all_runs_df['Run Name'], all_runs_df['Mean']))
 
-    with c_config:
-        selected_config = st.selectbox(
-            "Select Configuration for Visualization:", options=config_options,
-            index=0 if config_options else None,
-            format_func=lambda c: f"{c} - {config_ndcg_map.get(c, 0.0):.4f}",
-        )
+    selected_run = st.selectbox(
+        "Select Experiment Folder:",
+        options=all_run_names,
+        index=0 if all_run_names else None,
+        format_func=lambda r: f"{r} - {run_ndcg_map.get(r, 0.0):.4f}",
+        help="Select an experiment run folder from all_runs/."
+    )
 
-    if selected_config:
+    if selected_run:
+        parsed_sel = u1.parse_run_folder(selected_run)
+        selected_config = parsed_sel["config"] if parsed_sel else selected_run
+
         df_chart, _, all_topics, model_results = u1.process_experiment_data([selected_config], grouped_runs)
         st.subheader("Global Performance (Mean nDCG@5)")
         sorted_models = sorted(model_results.keys(), key=lambda x: model_results[x]['stats']['val'], reverse=True)
@@ -566,16 +566,11 @@ def run_single_experiment_ui():
                 with cols[i]:
                     st.metric(label=f"{model_key} (N={count})", value=f"{stats['val']:.4f} ± {stats['margin']:.3f}")
         if all_topics:
-            sort_mode_single = st.radio(
-                "Sort topics by:", ["Topic Order (T1, T2, …)", "nDCG@5 Mean (Desc)"],
-                horizontal=True, key="sort_single"
-            )
-            sort_key = "ndcg_desc" if "Desc" in sort_mode_single else "topic_order"
             with st.expander("📈 Model Comparison Chart (nDCG@5)", expanded=True):
-                render_charts(df_chart, all_topics, sort_mode=sort_key)
+                render_charts(df_chart, all_topics, sort_mode="topic_order")
 
             with st.expander("📊 Seed Variance per Topic", expanded=True):
-                config_runs = grouped_runs[selected_config]
+                config_runs = grouped_runs.get(selected_config, [selected_run])
                 run_model_map = {}
                 for r in config_runs:
                     parsed = u1.parse_run_folder(r)
@@ -585,14 +580,16 @@ def run_single_experiment_ui():
                 if len(config_runs) == 1:
                     selected_var_run = config_runs[0]
                 else:
+                    default_var_idx = config_runs.index(selected_run) if selected_run in config_runs else 0
                     selected_var_run = st.selectbox(
                         "Select Model for Seed Variance:",
                         options=config_runs,
+                        index=default_var_idx,
                         format_func=lambda r: run_model_map[r],
                         key="seed_var_run_select"
                     )
 
-                var_df = u1.compute_seed_variance_df(selected_var_run, selected_subfolder)
+                var_df = u1.compute_seed_variance_df(selected_var_run)
                 if var_df.empty:
                     st.info("No multi-seed metric data available for this model run.")
                 elif var_df["N_Seeds"].max() <= 1:
@@ -605,11 +602,11 @@ def run_single_experiment_ui():
             st.warning("No topic data found for this configuration.")
 
     # ── Retrieval Analysis ──
-    if selected_config and selected_config in grouped_runs:
+    if selected_run and selected_config in grouped_runs:
         config_runs = grouped_runs[selected_config]
         valid_runs = []
         for r in config_runs:
-            r_dir = u1.resolve_run_folder_path(r, selected_subfolder) or ""
+            r_dir = u1.resolve_run_folder_path(r) or ""
             if r_dir and os.path.isfile(os.path.join(r_dir, "run.txt")):
                 valid_runs.append((r, r_dir))
 
@@ -628,13 +625,15 @@ def run_single_experiment_ui():
                         r: f"{u1.parse_run_folder(r)['model'] if u1.parse_run_folder(r) else r} ({r})"
                         for r, _ in valid_runs
                     }
+                    default_ret_idx = ret_run_options.index(selected_run) if selected_run in ret_run_options else 0
                     sel_ret_run = st.selectbox(
                         "Select Model for Retrieval Analysis:",
                         options=ret_run_options,
+                        index=default_ret_idx,
                         format_func=lambda r: ret_run_map[r],
                         key="ret_run_select"
                     )
-                    sel_ret_dir = u1.resolve_run_folder_path(sel_ret_run, selected_subfolder) or ""
+                    sel_ret_dir = u1.resolve_run_folder_path(sel_ret_run) or ""
             with c_ret_topn:
                 top_n_sel = st.selectbox("Top-N retrieved folders to show:", [5, 10, 15, 20], index=2, key="ret_top_n")
 
@@ -652,48 +651,44 @@ def run_single_experiment_ui():
 def run_two_experiment_ui():
     """Screen 2: Direct Two-Experiment Overlay Comparison"""
     st.title("⚔️ Two-Experiment Viewer")
-    st.caption("Directly compare two experiment runs side-by-side with statistical significance tests and topic separation analysis.")
+    st.caption("Directly compare two experiments side-by-side with statistical significance tests and topic separation analysis.")
 
-    available_subfolders = ["All Subfolders"] + u1.get_available_subfolders()
-    all_runs_df = u1.get_all_runs_statistics("All Subfolders")
+    all_runs_df = u1.get_all_runs_statistics()
     if all_runs_df.empty:
         st.warning("No runs found for comparison.")
         return
 
-    all_run_names = all_runs_df['Run Name'].tolist()
-    default_a = all_run_names[0] if all_run_names else ""
-    default_b = all_run_names[1] if len(all_run_names) > 1 else default_a
+    all_run_names = u1.sort_run_names(all_runs_df['Run Name'].tolist())
+    run_ndcg_map = dict(zip(all_runs_df['Run Name'], all_runs_df['Mean']))
 
     col_sel_a, col_sel_b = st.columns(2)
     with col_sel_a:
-        st.subheader("🟦 Run A Selection")
-        subfolder_a = st.selectbox("Subfolder for Run A:", options=available_subfolders, index=0, key="subfolder_run_a")
-        runs_a_df = u1.get_all_runs_statistics(subfolder_a)
-        runs_a_list = runs_a_df['Run Name'].tolist() if not runs_a_df.empty else []
-        run_ndcg_map_a = dict(zip(runs_a_df['Run Name'], runs_a_df['Mean'])) if not runs_a_df.empty else {}
-        default_a_idx = runs_a_list.index(default_a) if default_a in runs_a_list else 0
-        sel_run_a = st.selectbox("Select Run A (Blue):", options=runs_a_list,
-            index=default_a_idx if runs_a_list else 0,
-            format_func=lambda r: f"{r} - {run_ndcg_map_a.get(r, 0.0):.4f}", key="side_by_side_run_a")
+        st.subheader("🟦 Experiment A Selection")
+        sel_run_a = st.selectbox(
+            "Select Experiment A (Blue):",
+            options=all_run_names,
+            index=0 if all_run_names else 0,
+            format_func=lambda r: f"{r} - {run_ndcg_map.get(r, 0.0):.4f}",
+            key="side_by_side_run_a"
+        )
 
     with col_sel_b:
-        st.subheader("🟧 Run B Selection")
-        subfolder_b = st.selectbox("Subfolder for Run B:", options=available_subfolders, index=0, key="subfolder_run_b")
-        runs_b_df = u1.get_all_runs_statistics(subfolder_b)
-        runs_b_list = runs_b_df['Run Name'].tolist() if not runs_b_df.empty else []
-        run_ndcg_map_b = dict(zip(runs_b_df['Run Name'], runs_b_df['Mean'])) if not runs_b_df.empty else {}
-        default_b_idx = runs_b_list.index(default_b) if default_b in runs_b_list else (1 if len(runs_b_list) > 1 else 0)
-        sel_run_b = st.selectbox("Select Run B (Orange):", options=runs_b_list,
-            index=default_b_idx if runs_b_list else 0,
-            format_func=lambda r: f"{r} - {run_ndcg_map_b.get(r, 0.0):.4f}", key="side_by_side_run_b")
+        st.subheader("🟧 Experiment B Selection")
+        sel_run_b = st.selectbox(
+            "Select Experiment B (Orange):",
+            options=all_run_names,
+            index=1 if len(all_run_names) > 1 else 0,
+            format_func=lambda r: f"{r} - {run_ndcg_map.get(r, 0.0):.4f}",
+            key="side_by_side_run_b"
+        )
 
     if sel_run_a and sel_run_b:
-        folder_a = u1.resolve_run_folder_path(sel_run_a, subfolder_a) or ""
+        folder_a = u1.resolve_run_folder_path(sel_run_a) or ""
         stats_a = u1.load_overall_stats(folder_a)
         rel_a = u1.calculate_global_relevance_mean(u1.load_relevance_stats(folder_a))
         mean_a, margin_a = stats_a.get('mean', 0.0), stats_a.get('margin', 0.0)
 
-        folder_b = u1.resolve_run_folder_path(sel_run_b, subfolder_b) or ""
+        folder_b = u1.resolve_run_folder_path(sel_run_b) or ""
         stats_b = u1.load_overall_stats(folder_b)
         rel_b = u1.calculate_global_relevance_mean(u1.load_relevance_stats(folder_b))
         mean_b, margin_b = stats_b.get('mean', 0.0), stats_b.get('margin', 0.0)
@@ -708,7 +703,7 @@ def run_two_experiment_ui():
             st.metric(label="Global Delta (A - B)", value=f"{delta_ndcg:+.4f}")
 
         # Wilcoxon signed-rank test
-        wilcoxon_result = u1.run_wilcoxon_test(sel_run_a, sel_run_b, subfolder_a, subfolder_b)
+        wilcoxon_result = u1.run_wilcoxon_test(sel_run_a, sel_run_b)
         if "error" not in wilcoxon_result:
             p_val = wilcoxon_result["p_value"]
             sig_icon = "✅" if wilcoxon_result["significant"] else "❌"
@@ -733,7 +728,7 @@ def run_two_experiment_ui():
                 st.metric(
                     label="Winner",
                     value=winner_disp,
-                    delta=f"Run A: {wilcoxon_result['wins_a']} wins | Run B: {wilcoxon_result['wins_b']} wins",
+                    delta=f"Experiment A: {wilcoxon_result['wins_a']} wins | Experiment B: {wilcoxon_result['wins_b']} wins",
                     delta_color="off"
                 )
             with w_col3:
@@ -746,19 +741,13 @@ def run_two_experiment_ui():
         elif wilcoxon_result.get("error"):
             st.caption(f"⚠️ Wilcoxon test: {wilcoxon_result['error']}")
 
-        sort_mode_overlay = st.radio(
-            "Sort topics by:", ["Topic Order (T1, T2, …)", "nDCG@5 Mean (Desc)"],
-            horizontal=True, key="sort_overlay"
-        )
-        sort_key_overlay = "ndcg_desc" if "Desc" in sort_mode_overlay else "topic_order"
-
-        df_run_a = u1.get_single_run_topic_chart_dataset(sel_run_a, subfolder=subfolder_a)
-        df_run_b = u1.get_single_run_topic_chart_dataset(sel_run_b, subfolder=subfolder_b)
+        df_run_a = u1.get_single_run_topic_chart_dataset(sel_run_a)
+        df_run_b = u1.get_single_run_topic_chart_dataset(sel_run_b)
 
         with st.expander("📊 Topic Performance Overlay Chart", expanded=True):
-            render_two_run_comparison_chart(df_run_a, df_run_b, sel_run_a, sel_run_b, sort_mode=sort_key_overlay)
+            render_two_run_comparison_chart(df_run_a, df_run_b, sel_run_a, sel_run_b, sort_mode="topic_order")
 
-        with st.expander("🎯 Topic Separation Analysis (Run A vs Run B)", expanded=True):
+        with st.expander("🎯 Topic Separation Analysis (Experiment A vs Experiment B)", expanded=True):
             st.caption("Categorization of topics by relative mean nDCG difference: **Better** (≥ +10%), **Equal** (between -10% and +10%), and **Worse** (≤ -10%).")
             categories = u1.categorize_topics_comparison(df_run_a, df_run_b)
             df_better = categories['better']; df_equal = categories['equal']; df_worse = categories['worse']
@@ -766,28 +755,28 @@ def run_two_experiment_ui():
             col_b, col_e, col_w = st.columns(3)
             with col_b:
                 pct_b = (len(df_better) / total_topics * 100) if total_topics else 0.0
-                st.metric("🟢 Run A Better than B (≥ +10%)", f"{len(df_better)} topics ({pct_b:.1f}%)")
+                st.metric("🟢 Experiment A Better than B (≥ +10%)", f"{len(df_better)} topics ({pct_b:.1f}%)")
             with col_e:
                 pct_e = (len(df_equal) / total_topics * 100) if total_topics else 0.0
-                st.metric("🟡 Run A Equal to B (within ±10%)", f"{len(df_equal)} topics ({pct_e:.1f}%)")
+                st.metric("🟡 Experiment A Equal to B (within ±10%)", f"{len(df_equal)} topics ({pct_e:.1f}%)")
             with col_w:
                 pct_w = (len(df_worse) / total_topics * 100) if total_topics else 0.0
-                st.metric("🔴 Run A Worse than B (≤ -10%)", f"{len(df_worse)} topics ({pct_w:.1f}%)")
+                st.metric("🔴 Experiment A Worse than B (≤ -10%)", f"{len(df_worse)} topics ({pct_w:.1f}%)")
 
             tab_better, tab_equal, tab_worse = st.tabs([
-                f"🟢 Run A Better ({len(df_better)})",
-                f"🟡 Run A Equal ({len(df_equal)})",
-                f"🔴 Run A Worse ({len(df_worse)})"
+                f"🟢 Experiment A Better ({len(df_better)})",
+                f"🟡 Experiment A Equal ({len(df_equal)})",
+                f"🔴 Experiment A Worse ({len(df_worse)})"
             ])
 
             def _fmt_sep(df_cat):
                 if df_cat.empty: return pd.DataFrame()
                 res = df_cat.copy()
-                res['Run A nDCG'] = res['nDCG_A'].apply(lambda x: f"{x:.4f}")
-                res['Run B nDCG'] = res['nDCG_B'].apply(lambda x: f"{x:.4f}")
+                res['Experiment A nDCG'] = res['nDCG_A'].apply(lambda x: f"{x:.4f}")
+                res['Experiment B nDCG'] = res['nDCG_B'].apply(lambda x: f"{x:.4f}")
                 res['Delta (A - B)'] = res['Diff'].apply(lambda x: f"{x:+.4f}")
                 res['% Difference'] = res['Pct_Diff'].apply(lambda x: f"{x * 100:+.2f}%")
-                return res[['Topic Label', 'Run A nDCG', 'Run B nDCG', 'Delta (A - B)', '% Difference']]
+                return res[['Topic Label', 'Experiment A nDCG', 'Experiment B nDCG', 'Delta (A - B)', '% Difference']]
 
             with tab_better:
                 if not df_better.empty: st.dataframe(_fmt_sep(df_better), width="stretch", hide_index=True)
@@ -816,12 +805,12 @@ def run_data_overview_ui():
     st.markdown("## 📊 Collection Statistics")
     n_folders = len(folders_df); n_docs = len(items_df)
     n_boxes = folders_df["box"].nunique(); n_snc_distinct = folders_df["snc_3level"].nunique()
-    n_snc_primary = folders_df["snc_primary"].nunique(); n_with_scope = folders_df["has_scope"].sum()
+    n_snc_primary = folders_df["snc_primary"].nunique()
 
-    c1, c2, c3 = st.columns(3)
-    c1.metric("📁 Total Folders", f"{n_folders:,}"); c2.metric("📄 Total Documents", f"{n_docs:,}"); c3.metric("📦 Total Boxes", f"{n_boxes:,}")
-    c4, c5, c6 = st.columns(3)
-    c4.metric("🏷️ Distinct SNCs (3-level)", f"{n_snc_distinct}"); c5.metric("🏷️ Primary SNC Codes", f"{n_snc_primary}"); c6.metric("📝 Folders with Scope Notes", f"{n_with_scope}")
+    c3, c1, c2 = st.columns(3)
+    c3.metric("📦 Total Boxes", f"{n_boxes:,}"); c1.metric("📁 Total Folders", f"{n_folders:,}"); c2.metric("📄 Total Documents", f"{n_docs:,}")
+    c4, c5 = st.columns(2)
+    c4.metric("🏷️ Distinct 3-level SNCs", f"{n_snc_distinct}"); c5.metric("🏷️ 1-Level SNC Codes", f"{n_snc_primary}")
 
     st.markdown("---")
     col_a, col_b = st.columns(2)
@@ -837,11 +826,11 @@ def run_data_overview_ui():
             labels={"folder_count": "Folders", "count": "Boxes"})
         st.plotly_chart(_apply_light_theme(fig, 350), width="stretch")
 
-    st.markdown("### Primary SNC Code — Folder & Document Counts")
+    st.markdown("### 1-Level SNC Code — Folder & Document Counts")
     primary_stats = folders_df.groupby("snc_primary").agg(
         folder_count=("folder_id","count"), total_docs=("doc_count","sum")
     ).reset_index().sort_values("folder_count", ascending=False)
-    fig = make_subplots(rows=1, cols=2, subplot_titles=("Folders per Primary SNC","Documents per Primary SNC"), shared_yaxes=True)
+    fig = make_subplots(rows=1, cols=2, subplot_titles=("Folders per 1-Level SNC","Documents per 1-Level SNC"), shared_yaxes=True)
     fig.add_trace(go.Bar(y=primary_stats["snc_primary"], x=primary_stats["folder_count"], orientation="h",
         marker_color=_DA_COLORS["primary"], name="Folders"), row=1, col=1)
     fig.add_trace(go.Bar(y=primary_stats["snc_primary"], x=primary_stats["total_docs"], orientation="h",
@@ -860,25 +849,25 @@ def run_data_overview_ui():
     snc1_count_map = folders_df.groupby("snc_primary").size().to_dict()
 
     tab_3l, tab_2l, tab_1l, tab_deepdive = st.tabs([
-        "3-Level SNC", "2-Level SNC", "1-Level (Primary)", "🔎 SNC Deep Dive"
+        "3-Level SNC", "2-Level SNC", "1-Level SNC", "🔎 SNC Deep Dive"
     ])
 
     with tab_3l:
         snc3 = folders_df.groupby("snc_3level").agg(
-            folder_count=("folder_id","count"), total_docs=("doc_count","sum"), has_scope=("has_scope","any")
+            folder_count=("folder_id","count"), total_docs=("doc_count","sum")
         ).reset_index().sort_values("folder_count", ascending=False)
         st.metric("Distinct 3-Level SNCs", len(snc3))
         c1, c2 = st.columns(2)
         with c1:
             st.markdown("#### Top-10 by Folder Count")
-            top10 = snc3.head(10).copy(); top10["scope?"] = top10["has_scope"].map({True:"✅",False:"❌"})
-            st.dataframe(top10[["snc_3level","folder_count","total_docs","scope?"]].rename(
+            top10 = snc3.head(10).copy()
+            st.dataframe(top10[["snc_3level","folder_count","total_docs"]].rename(
                 columns={"snc_3level":"SNC","folder_count":"Folders","total_docs":"Documents"}),
                 width="stretch", hide_index=True)
         with c2:
             st.markdown("#### Bottom-10 by Folder Count")
-            bot10 = snc3.tail(10).copy(); bot10["scope?"] = bot10["has_scope"].map({True:"✅",False:"❌"})
-            st.dataframe(bot10[["snc_3level","folder_count","total_docs","scope?"]].rename(
+            bot10 = snc3.tail(10).copy()
+            st.dataframe(bot10[["snc_3level","folder_count","total_docs"]].rename(
                 columns={"snc_3level":"SNC","folder_count":"Folders","total_docs":"Documents"}),
                 width="stretch", hide_index=True)
         fig = px.histogram(snc3, x="folder_count", nbins=40, color_discrete_sequence=[_DA_COLORS["primary"]],
@@ -892,7 +881,7 @@ def run_data_overview_ui():
         fig_top40.update_xaxes(tickangle=45)
         st.plotly_chart(_apply_light_theme(fig_top40, 450), width="stretch")
         with st.expander("All SNCs — Complete Table"):
-            st.dataframe(snc3.rename(columns={"snc_3level":"SNC","folder_count":"Folders","total_docs":"Documents","has_scope":"Has Scope"}),
+            st.dataframe(snc3.rename(columns={"snc_3level":"SNC","folder_count":"Folders","total_docs":"Documents"}),
                 width="stretch", hide_index=True, height=400)
 
     with tab_2l:
@@ -926,7 +915,7 @@ def run_data_overview_ui():
         snc1 = folders_df.groupby("snc_primary").agg(
             folder_count=("folder_id","count"), total_docs=("doc_count","sum")
         ).reset_index().sort_values("folder_count", ascending=False)
-        st.metric("Distinct Primary SNC Codes", len(snc1))
+        st.metric("Distinct 1-Level SNC Codes", len(snc1))
         c1, c2 = st.columns(2)
         with c1:
             st.markdown("#### Top-10 by Folder Count")
@@ -937,12 +926,12 @@ def run_data_overview_ui():
             st.dataframe(snc1.tail(10).rename(columns={"snc_primary":"SNC","folder_count":"Folders","total_docs":"Documents"}),
                 width="stretch", hide_index=True)
         fig = px.histogram(snc1, x="folder_count", nbins=20, color_discrete_sequence=[_DA_COLORS["primary"]],
-            labels={"folder_count":"Folders","count":"SNCs"}, title="Histogram: Folders per Primary SNC")
+            labels={"folder_count":"Folders","count":"SNCs"}, title="Histogram: Folders per 1-Level SNC")
         st.plotly_chart(_apply_light_theme(fig), width="stretch")
         fig_top40 = px.bar(snc1, x="snc_primary", y="folder_count",
             color_discrete_sequence=[_DA_COLORS["primary"]],
-            labels={"snc_primary":"Primary SNC","folder_count":"Folders"},
-            title="Folders per Primary SNC Code (All)")
+            labels={"snc_primary":"1-Level SNC","folder_count":"Folders"},
+            title="Folders per 1-Level SNC Code (All)")
         fig_top40.update_xaxes(tickangle=45)
         st.plotly_chart(_apply_light_theme(fig_top40, 450), width="stretch")
         with st.expander("All SNCs — Complete Table"):
@@ -967,9 +956,6 @@ def run_data_overview_ui():
 
         expanded = snc_folders["label_parent_expanded"].iloc[0] if len(snc_folders) > 0 else "N/A"
         st.markdown(f"## {selected_snc} — {expanded}")
-        scope_text = snc_folders[snc_folders["has_scope"]]["scope_text"].iloc[0] if snc_folders["has_scope"].any() else None
-        if scope_text: st.info(f"**Scope Note:** {scope_text}")
-        else: st.caption("No scope note available.")
 
         cc1, cc2, cc3, cc4 = st.columns(4)
         cc1.metric("📁 Folders", len(snc_folders)); cc2.metric("📄 Documents", len(snc_docs))
@@ -978,10 +964,9 @@ def run_data_overview_ui():
 
         dd_tab1, dd_tab2 = st.tabs(["📁 Folders & Docs", "📊 Keywords & Themes"])
         with dd_tab1:
-            folder_display = snc_folders[["folder_id","box","label","date","endDate","doc_count","has_scope"]].copy()
+            folder_display = snc_folders[["folder_id","box","label","date","endDate","doc_count"]].copy()
             folder_display = folder_display.sort_values("doc_count", ascending=False)
-            folder_display["has_scope"] = folder_display["has_scope"].map({True:"✅",False:"❌"})
-            st.dataframe(folder_display.rename(columns={"folder_id":"Folder ID","box":"Box","label":"Label","date":"Start","endDate":"End","doc_count":"Docs","has_scope":"Scope"}),
+            st.dataframe(folder_display.rename(columns={"folder_id":"Folder ID","box":"Box","label":"Label","date":"Start","endDate":"End","doc_count":"Docs"}),
                 width="stretch", hide_index=True, height=350)
             st.markdown("### Browse Folder Documents")
             folder_ids = snc_folders["folder_id"].tolist()
@@ -1058,8 +1043,17 @@ def run_data_overview_ui():
         snc_fld_ids = set(snc_flds["folder_id"].tolist())
         snc_docs2 = items_df[items_df["folder_id"].isin(snc_fld_ids)]
         cb1, cb2, cb3 = st.columns(3)
-        cb1.metric("Folders in SNC", len(snc_flds)); cb2.metric("Documents in SNC", len(snc_docs2))
-        cb3.metric("Expanded Label", snc_flds["label_parent_expanded"].iloc[0] if len(snc_flds) > 0 else "N/A")
+        cb1.metric("Folders in SNC", len(snc_flds))
+        cb2.metric("Documents in SNC", len(snc_docs2))
+        with cb3:
+            expanded_txt = snc_flds["label_parent_expanded"].iloc[0] if len(snc_flds) > 0 else "N/A"
+            st.markdown(
+                f'<div style="background-color: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 12px; padding: 12px 16px; min-height: 82px;">'
+                f'<div style="color: #64748B; font-size: 0.85rem;">Expanded Label</div>'
+                f'<div style="color: #0F172A; font-size: 0.88rem; font-weight: 600; margin-top: 4px; line-height: 1.3;">{expanded_txt}</div>'
+                f'</div>',
+                unsafe_allow_html=True
+            )
         snc_texts = snc_docs2["title"].dropna().tolist() + snc_docs2["summary"].dropna().tolist()
         snc_kws = _extract_keywords(snc_texts, top_n=20)
         if snc_kws:
@@ -1089,7 +1083,6 @@ def run_data_overview_ui():
         folder_doc_count_map = folders_df.set_index("folder_id")["doc_count"].to_dict()
         folder_box_map = folders_df.set_index("folder_id")["box"].to_dict()
         folder_date_map = folders_df.set_index("folder_id")["date"].to_dict()
-        folder_scope_map = folders_df.set_index("folder_id")["scope_text"].to_dict()
         folder_expanded_map = folders_df.set_index("folder_id")["label_parent_expanded"].to_dict()
 
         folder_display_labels = [
@@ -1115,9 +1108,6 @@ def run_data_overview_ui():
         parent_exp = folder_expanded_map.get(sel_folder_id, "")
         if parent_exp:
             st.markdown(f"**Classification:** {parent_exp}")
-        scope_note = folder_scope_map.get(sel_folder_id, "")
-        if scope_note and str(scope_note) not in ("", "nan"):
-            st.info(f"**Scope Note:** {str(scope_note)}")
 
         st.markdown(f"### Documents in Folder `{sel_folder_id}`")
         if sel_folder_docs.empty:
@@ -1370,7 +1360,7 @@ Select an experiment configuration to compare models (e.g., BM25 vs ColBERT) wit
 - **Retrieval Analysis**: Detailed inspection of retrieved folders per topic alongside qrels grades, movable tags, scope notes, and OCR text.
 
 ### ⚔️ Two-Experiment Viewer
-Direct side-by-side comparison of any two experiment runs across any subfolders:
+Direct side-by-side comparison of any two experiment runs across any sets of experiments:
 - **Side-by-Side KPIs & Delta**: Global mean nDCG@5 metrics and exact performance delta (A - B).
 - **Wilcoxon Signed-Rank Test**: Statistical significance test results (p-value, winner, win counts).
 - **Overlay Comparison Chart**: Side-by-side topic overlay dumbbell chart comparing Run A (Blue) vs Run B (Orange).
@@ -1404,57 +1394,44 @@ Direct side-by-side comparison of any two experiment runs across any subfolders:
 
 ---
 
-### 🧪 Experiment Naming Conventions & Dictionary Mappings
+### 🧪 Experiment Naming Conventions (5-Element Dotted Notation)
 
-Run folders in `all_runs/` are named according to encoded short codes representing search field combinations, expansion techniques, and model architectures.
+Run folders in `all_runs/` follow the structured 5-element dotted pattern:
+`{Sample}.{Ranker}.{Fields}.{LabelSearch}.{ScorePropagation}`
 
-#### Search Field Dictionary (`SEARCH_FIELD_CONFIG`)
+#### 1. Sample (`Sample`)
+- **`U`**: Uniform random sampling (~630 digitized docs, 5 per box)
+- **`K`**: Skewed non-uniform sampling (~630 digitized docs)
+- **`A`**: All 31,681 documents indexed (upper bound ceiling)
 
-| Code | Original Name | Included Fields / Search Mode |
-|:---:|:---:|:---|
-| **1** | `T` | Title only |
-| **2** | `F` | Folder Label only |
-| **3** | `O` | OCR text only |
-| **4** | `S` | GPT-4o Summary only |
-| **5** | `TSF` | Title + Summary + Folder Label |
-| **6** | `TOF` | Title + OCR + Folder Label |
-| **7** | `TOFS` | Title + OCR + Folder Label + Summary (All Document Fields) |
-| **8** | `ALLFL` | All Folders Label mode (Folder-level retrieval) |
-| **9** | `TFS` | Title + Folder Label + Summary |
+#### 2. Ranker / Model (`Ranker`)
+- **`B`**: Okapi BM25F
+- **`C`**: ColBERT late-interaction
+- **`E`**: Dense Embedding Similarity (`all-mpnet-base-v2`)
+- **`W`**: Reciprocal Rank Fusion (RRF) of Weighted BM25 + ColBERT + Embeddings
+- **`X`**: RRF of BM25 + ColBERT
+- **`Y`**: RRF of BM25 + Embeddings
+- **`Z`**: RRF of BM25 + ColBERT + Embeddings
 
-#### Expansion Strategy Dictionary (`EXPANSION_CONFIG`)
+#### 3. Fields (`Fields`, 4-character string: `T`, `O`, `F`, `S`)
+- **`T`**: Title, **`O`**: OCR, **`F`**: Folder Label, **`S`**: Summary
+- Unused fields are represented with dashes (`-`).
+- Examples: `T---` (Title only), `-O--` (OCR only), `--F-` (Folder Label only), `---S` (Summary only), `T-FS` (Title+Folder+Summary), `TOF-` (Title+OCR+Folder), `TOFS` (All document fields), `----` (No doc fields, label search only).
 
-| Code | Original Name | Expansion Technique |
-|:---:|:---:|:---|
-| **A** | `NEX` | No Expansion |
-| **B** | `SMS` | Similar SNC Expansion |
-| **C** | `SB` | Same Box Expansion |
-| **D** | `SS` | Same SNC Expansion |
-| **E** | `CD` | Close Date / Same SNC Close Date Expansion |
+#### 4. Label Search (`LabelSearch`)
+- **`L`**: Weighted RRF with full-collection folder Label search
+- **`x`**: No label search
 
-#### Model Architecture Dictionary (`MODEL_CONFIG`)
+#### 5. Score Propagation (`ScorePropagation`)
+- **`1`**: Same SNC code score propagation depth 1
+- **`2`**: Same SNC code score propagation depth 2
+- **`x`**: No score propagation
 
-| Code | Original Name | Retrieval / Fusion Model |
-|:---:|:---:|:---|
-| **BM25** | `BM25` | Lexical Okapi BM25 model |
-| **BM25(TUNED)** | `BM25-TUNED` | Hyperparameter-tuned BM25F weights |
-| **EMB** | `EMBEDDINGS` | Dense BGE-m3 Embeddings model |
-| **CBERT** | `COLBERT` | Dense Late-Interaction ColBERT model |
-
-#### 📁 Document Availability & Sampling Scope Dictionary
-
-| Scope / Prefix | Strategy | Description |
-|:---:|:---:|:---|
-| **All Docs (`ALLDOCS`)** | Unconstrained Upper Bound | All 31,681 documents across all folders are fully indexed and available for retrieval. Serves as the empirical performance ceiling. |
-| **Uniform (`UNIFORM`)** | Uniform Random Sampling | Digitization is evenly distributed, randomly sampling ~5 documents per physical box (~630 total digitized documents across the archive). |
-| **Uneven (`UNEVEN`)** | Skewed Box Sampling | Non-uniform document sampling per box, simulating realistic, uneven archival digitization where some boxes are heavily digitized while others remain sparse. |
-
-#### Folder Naming Format Examples
-
-Folder names follow the structured pattern `[CategoryFolder]/[SearchField]_[Expansion]_[Models]`:
-- **`7/7_A_BM25`**: Search Field `TOFS` (7), No Expansion `NEX` (A), Model `BM25`
-- **`2/2_A_BM25-CBERT`**: Search Field `F` (2), No Expansion `NEX` (A), Models `BM25` + `ColBERT` (BM25-CBERT)
-- **`7/7_B-1_BM25(TUNED)-EMB-CBERT`**: Search Field `TOFS` (7), Expansion `SMS` with ceiling k=1 (B-1), Models Ensembled `BM25(TUNED)` + `EMBEDDINGS` + `ColBERT` (BM25(TUNED)-EMB-CBERT)
+#### Folder Naming Examples
+- **`U.B.T---.x.x`**: Uniform sample, BM25 ranker, Title field only, no label search, no score propagation.
+- **`U.W.TOFS.L.2`**: Uniform sample, Weighted RRF ranker, all document fields, Label search enabled, propagation depth 2.
+- **`K.Z.TOFS.x.x`**: Skewed sample, RRF(B+C+E) ranker, all document fields, no label search, no score propagation.
+- **`A.Y.T-FS.x.x`**: All documents sample, RRF(B+E) ranker, Title+Folder+Summary fields, no label search, no score propagation.
 """)
 
 
@@ -1559,8 +1536,8 @@ def run_ecf_inspector_ui():
 
     # Tab 2: By SNC — removed stacked bar, added "SNCs with No Docs" KPI
     with tabs[1]:
-        snc_level = st.radio("SNC Granularity:", ["Primary SNC", "3-Level SNC"], horizontal=True)
-        if snc_level == "Primary SNC":
+        snc_level = st.radio("SNC Granularity:", ["1-Level SNC", "3-Level SNC"], horizontal=True)
+        if snc_level == "1-Level SNC":
             snc_df = u4.compute_snc_coverage(parsed_a, folders_meta)
         else:
             snc_df = u4.compute_snc_3level_coverage(parsed_a, folders_meta)
