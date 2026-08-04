@@ -53,21 +53,77 @@ def get_model_color(model_type: str, index: int = 0) -> str:
     idx = (abs(hash(model_type)) + index) % len(FALLBACK_PALETTE)
     return FALLBACK_PALETTE[idx]
 
-def parse_run_folder(folder_name: str) -> Optional[Dict[str, str]]:
+def sort_key_run_name(run_name: str) -> Tuple:
     """
-    Parses folder name assuming format: <search>_<expansion>_<query>_<model>
-    Example: F_SB-SS_T_BM25-COLBERT
+    Sort key according to the exact requested ordering pattern:
+    1. Sample (U -> K -> A)
+    2. Fields (T--- -> -O-- -> --F- -> ---S -> T-FS -> TOF- -> TOFS -> ----)
+    3. Ranker (Alphabetical: B, C, E, W, X, Y, Z)
+    4. LabelSearch (x -> L)
+    5. ScorePropagation (x -> 1 -> 2)
     """
-    parts = folder_name.rsplit('_', 1)
-    if len(parts) == 2:
+    parts = run_name.split('.')
+    if len(parts) >= 5:
+        sample, ranker, fields, label, prop = parts[0], parts[1], parts[2], parts[3], parts[4]
+    else:
+        sample, ranker, fields, label, prop = run_name, "", "", "", ""
+    
+    sample_map = {'U': 0, 'K': 1, 'A': 2}
+    sample_rank = sample_map.get(sample, 99)
+
+    field_map = {
+        'T---': 0,
+        '-O--': 1,
+        '--F-': 2,
+        '---S': 3,
+        'T-FS': 4,
+        'TOF-': 5,
+        'TOFS': 6,
+        '----': 7,
+    }
+    field_rank = field_map.get(fields, 99)
+
+    ranker_rank = ranker
+
+    label_map = {'x': 0, 'L': 1}
+    label_rank = label_map.get(label, 99)
+
+    prop_map = {'x': 0, '1': 1, '2': 2}
+    prop_rank = prop_map.get(prop, 99)
+
+    return (sample_rank, field_rank, ranker_rank, label_rank, prop_rank)
+
+def sort_run_names(run_list: List[str]) -> List[str]:
+    """Sorts a list of run folder names using sort_key_run_name."""
+    return sorted(run_list, key=sort_key_run_name)
+
+def parse_run_folder(folder_name: str) -> Dict[str, str]:
+    """
+    Parses folder name assuming format: <Sample>.<Ranker>.<Fields>.<Label>.<Prop>
+    Example: U.B.T---.x.x
+    """
+    parts = folder_name.split('.')
+    if len(parts) >= 5:
         return {
-            "config": parts[0],
+            "sample": parts[0],
+            "ranker": parts[1],
+            "fields": parts[2],
+            "label": parts[3],
+            "prop": parts[4],
+            "config": f"{parts[0]}.{parts[2]}.{parts[3]}.{parts[4]}",
             "model": parts[1],
+            "full_name": folder_name
+        }
+    parts_old = folder_name.rsplit('_', 1)
+    if len(parts_old) == 2:
+        return {
+            "config": parts_old[0],
+            "model": parts_old[1],
             "full_name": folder_name
         }
     return {
         "config": folder_name,
-        "model": "DEFAULT",
+        "model": folder_name,
         "full_name": folder_name
     }
 
@@ -144,7 +200,7 @@ def is_subfolder_match(target_subfolder: Optional[str], current_subfolder: str) 
     """
     Checks if current_subfolder matches target_subfolder (exact match or parent phase prefix).
     """
-    if not target_subfolder or target_subfolder == "All Subfolders":
+    if not target_subfolder or target_subfolder in ("All Subfolders", "All Sets of Experiments"):
         return True
     if current_subfolder == target_subfolder:
         return True
@@ -204,11 +260,11 @@ def resolve_run_folder_path(run_name: str, subfolder: Optional[str] = None) -> O
     # 1. If run_name is an exact key in info_map (e.g. relative path)
     if run_name in info_map:
         info = info_map[run_name]
-        if not subfolder or subfolder == "All Subfolders" or is_subfolder_match(subfolder, info['subfolder']):
+        if not subfolder or subfolder in ("All Subfolders", "All Sets of Experiments") or is_subfolder_match(subfolder, info['subfolder']):
             return info['path']
 
     # 2. Match both info['name'] == run_name and subfolder scope (preferring non-seed directories)
-    if subfolder and subfolder != "All Subfolders":
+    if subfolder and subfolder not in ("All Subfolders", "All Sets of Experiments"):
         best_path = None
         for info in info_map.values():
             if info['name'] == run_name and is_subfolder_match(subfolder, info['subfolder']):
@@ -244,20 +300,22 @@ def get_grouped_run_configurations(subfolder: Optional[str] = None) -> Dict[str,
     grouped: Dict[str, List[str]] = {}
     seen_paths = set()
     
-    for key, info in sorted(info_map.items()):
+    for key, info in info_map.items():
         folder_path = info['path']
         if folder_path in seen_paths:
             continue
-        if not is_subfolder_match(subfolder, info['subfolder']):
+        if subfolder and not is_subfolder_match(subfolder, info['subfolder']):
             continue
         
         seen_paths.add(folder_path)
         fname = info['name']
-        if '_' in fname:
-            cfg, _ = fname.rsplit('_', 1)
-        else:
-            cfg = fname
+        parsed = parse_run_folder(fname)
+        cfg = parsed['config'] if parsed else fname
         grouped.setdefault(cfg, []).append(fname)
+
+    for cfg in grouped:
+        grouped[cfg] = sort_run_names(grouped[cfg])
+
     return grouped
 
 def process_experiment_data(selected_configs: List[str], grouped_runs: Dict[str, List[str]]) -> Tuple[pd.DataFrame, pd.DataFrame, List[str], Dict[str, Dict]]:
@@ -282,8 +340,8 @@ def process_experiment_data(selected_configs: List[str], grouped_runs: Dict[str,
             if not fpath or not os.path.exists(fpath):
                 continue
             
-            parts = fname.rsplit('_', 1)
-            model_key = parts[1] if len(parts) == 2 else fname
+            parsed = parse_run_folder(fname)
+            model_key = parsed['model'] if parsed else fname
 
             # Overall stats
             g = load_overall_stats(fpath)
@@ -499,7 +557,7 @@ def get_all_runs_statistics(subfolder: Optional[str] = None) -> pd.DataFrame:
         
         rows.append({
             "Run Name": info['name'],
-            "Subfolder": info['subfolder'],
+            "Set of Experiments": info['subfolder'],
             "Mean": mean_val,
             "Margin": margin_val,
             "Random Runs Count": random_count
