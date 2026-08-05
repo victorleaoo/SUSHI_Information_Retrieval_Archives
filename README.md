@@ -211,9 +211,9 @@ After downloading, reproduce the following steps:
 
 ---
 
-## [SUSHI BAR Web Application](https://tinyurl.com/sushisigir)
+## [SUSHI BAR Web Application](https://tinyurl.com/sushibarapp)
 
-The **SUSHI BAR** (SUSHI Visualizer) is the main interactive interface for analyzing experiment runs and exploring the archival collection. Built with Streamlit, it combines experiment benchmarking, task inspection, metadata exploration, and training set analysis in a single application. The app is launched from the [web_app/app_sushi.py](web_app/app_sushi.py) entry point and can be accessed at [https://tinyurl.com/sushisigir](https://tinyurl.com/sushisigir).
+The **SUSHI BAR** (SUSHI Visualizer) is the main interactive interface for analyzing experiment runs and exploring the archival collection. Built with Streamlit, it combines experiment benchmarking, task inspection, metadata exploration, and training set analysis in a single application. The app is launched from the [web_app/app_sushi.py](web_app/app_sushi.py) entry point and can be accessed at [https://tinyurl.com/sushibarapp](https://tinyurl.com/sushibarapp).
 
 The interface is organized around a left-side navigation menu (**SUSHI BAR**), where each entry exposes a different analysis workflow.
 
