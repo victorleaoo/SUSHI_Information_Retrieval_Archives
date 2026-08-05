@@ -21,7 +21,6 @@
     - [Topics and Data Visualizer](#topics-and-data-visualizer)
     - [Setup Experiments for the Visualizer](#setup-experiments-for-the-visualizer)
     - [How to Run](#how-to-run)
-- [Acknowledgements](#acknowledgements)
 
 ---
 
@@ -212,278 +211,74 @@ After downloading, reproduce the following steps:
 
 ---
 
-## SUSHI Experiment Running
+## [SUSHI BAR Web Application](https://tinyurl.com/sushisigir)
 
-This system is designed to simulate Information Retrieval scenarios on sparsely digitized archival collections (SUSHI). It runs experiments by sampling subsets of the collection (using random seeds), training models on those subsets, expanding results for folders that have no documents in the ECF, and evaluating the performance.
+The **SUSHI BAR** (SUSHI Visualizer) is the main interactive interface for analyzing experiment runs and exploring the archival collection. Built with Streamlit, it combines experiment benchmarking, task inspection, metadata exploration, and training set analysis in a single application. The app is launched from the [web_app/app_sushi.py](web_app/app_sushi.py) entry point and can be accessed at [https://tinyurl.com/sushisigir](https://tinyurl.com/sushisigir).
 
-### 1. System/File Architecture
-
-The pipeline workflow is built on four modular classes, each with a distinct responsibility.
-
-- **1. RunGenerator (*src/run_generator.py*)**
-    * **Role:** The main controller. It manages the experiment loop, initializes models, coordinates data flow, and executes the retrieval pipeline.
-    * **Responsibility:** It delegates tasks to the helper classes below. It creates the "Experiment Collection Format" (ECF) which defines which documents are "visible" (digitized) for a specific run.
-
-- **2. DataLoader (*src/data_loader.py*)**
-    * **Role:** Manages file I/O and data structure.
-    * **Responsibility:**
-        * Loads metadata (`FoldersV1.3.json`, `itemsV1.2.json`).
-        * Maps the physical directory structure (`Box -> Folder -> File`).
-        * Generates the **ECF (Experimental Collection Format)**. This involves randomly sampling documents per box based on a specific random seed to create a training set.
-
-- **3. RetrievalModel (*src/models.py*)**
-    * **Role:** Abstract base class for search algorithms.
-    * **Subclasses:**
-        * `BM25Model`: Uses **PyTerrier** for sparse, frequency-based retrieval. Can automatically switch between BM25 and BM25F (field-weighted) based on input.
-        * `EmbeddingsModel`: Uses **SentenceTransformers** (e.g., all-mpnet-base-v2) for dense vector retrieval via Cosine Similarity.
-        * `ColBERTModel`: Uses **PyLate/ColBERT** for late-interaction retrieval (token-to-token matching) using PLAID indexing.
-    * **Standard:** Every model must implement `train(data)` to build an index and `search(query)` to return a DataFrame of results.
-
-- **4. Evaluator (*src/evaluator.py*)**
-    * **Role:** Computes performance metrics.
-    * **Responsibility:**
-        * Converts model outputs into standard **TREC Run Files**.
-        * Compares results against QRELs (Ground Truth) using `pytrec_eval`.
-        * Calculates **nDCG@5**, **MAP**, and a custom metric: **Top-5 Relevant Folder Count**.
-        * Aggregates results across all random seeds to produce Mean scores and 95% Confidence Intervals.
-
-### 2. The Experiment Workflow (Step-by-Step)
-
-By executing `RunGenerator.run_experiments()`, the system follows this lifecycle:
-
-**Phase A: Setup**
-
-1.  **Configuration:** The system reads the parameters (fields to index, models to use, expansion techniques).
-2.  **Directory Prep:** Creates a unique output folder name based on the config (e.g., `F_SB-SS_TD_BM25-COLBERT`).
-
-**Phase B: The Simulation Loop (Per Random Seed)**
-
-For `run_type='random'`, the system iterates through 30 fixed random seeds. For each seed:
-
-1.  **Sampling (ECF Creation):**
-    * The `DataLoader` selects 5 random documents from every box in the collection.
-    * These documents become the "Training Set." All other documents are considered "undigitized" and not described by document-level metadata, and invisible to the model training.
-2.  **Model Training:**
-    * The active models (`BM25`, `ColBERT`, etc.) build their indexes **only** using the sampled Training Set.
-3.  **Retrieval:**
-    * The system iterates through the 45 standard Topics.
-    * It constructs a query (e.g., Title + Description).
-    * Each model searches its index and returns a ranked list of candidates.
-4.  **Fusion & Expansion (The Complex Part):**
-    * **RRF:** Results from multiple models (e.g., BM25 + ColBERT) are merged using Reciprocal Rank Fusion (RRF) at the *document* or *folder* level first.
-    * **Expansion:** The system looks for "Ghost Folders" (folders not retrieved by the model). It checks the retrieved documents for relationships (Same Box, Same Classification Code). If enough evidence exists, the empty folder is assigned an inferred score.
-    * **Safety Ceiling:** The score of inferred folders is mathematically capped so they cannot rank higher than the Top-K original results (controlled by `expansion_ceiling_k`).
-5.  **Evaluation:**
-    * The final ranked list of folders is saved.
-    * Metrics (nDCG@5, Precision) are calculated for this specific seed.
-    * For each topic, it saves how many relevant folders (qrels_value > 0) are in the top 5.
-
-**Configuration Arguments**
-
-The `RunGenerator` is highly configurable. Here is what each argument controls:
-
-| Argument | Type | Description |
-| :--- | :--- | :--- |
-| `searching_fields` | `List[List[str]]` | Which metadata fields to index. <br>Ex: `[['title', 'ocr']]`. If multiple fields are provided, BM25 upgrades to BM25F automatically. |
-| `query_fields` | `List[str]` | Which parts of the Topic to use as the query.<br>`'T'`: Title only.<br>`'TD'`: Title + Description.<br>`'TDN'`: Title + Desc + Narrative. |
-| `run_type` | `str` | `'random'`: Runs the loop over 30 seeds with uniform 5 docs/box (simulating sparsity).<br>`'uneven'`: Runs the loop over 30 seeds with skewed distribution.<br>`'all_documents'`: Runs once using the entire collection (Oracle mode). |
-| `models` | `List[str]` | The models to ensemble. Options: `'bm25'`, `'embeddings'`, `'colbert'`. If more than one is given, it is performed RRF between the different models results. |
-| `expansion` | `List[str]` | Strategies to infer missing folders scores.<br>`'same_box'`: Neighbor is in the same box.<br>`'same_snc'`: Neighbor has same Classification Code.<br>`'close_date'`: Neighbor has same SNC and is temporally close.<br>`[]`: No expansion. |
-| `rrf_input` | `str` | **`'docs'`**: Fuses model results at document level.<br>**`'folders'`**: Expands each model independently, then fuses final folders. |
-| `expansion_ceiling_k` | `int` | **Trust Threshold**. Determines the rank `k` that expanded results cannot beat.<br>`1`: Expansion can take Rank #2 but not #1.<br>`2`: Expansion can take Rank #3 but not #2.<br>`3`: Expansion can take Rank #4, but Top 3 are preserved.<br>... |
-| `all_folders_folder_label` | `bool` | If `True`, ignores document contents and retrieves based ONLY on folder metadata labels. The `searching_fields` must be only ['folderlabel'] |
-
-### 3. Output Structure
-
-After running an experiment, the `../all_runs/` directory will contain a folder named after your configuration (e.g., `TOFS_SB_TD_BM25`). Inside:
-
-1.  **`Random{SEED}_TopicsFolderMetrics.json`**:
-    * Detailed metrics for that specific seed run.
-    * Contains `ndcg_cut_5` and `count_relevant_top5` for every topic.
-2.  **`model_overall_stats.json`**:
-    * Contains the **Global Mean nDCG@5** and the **Margin of Error** (95% CI) aggregated across all seeds.
-3.  **`topics_mean_margin.json`**:
-    * The Mean nDCG and Confidence Interval for *each specific topic* across all seeds.
-4.  **`topics_relevant_count_stats.json`**:
-    * The average number of relevant folders found in the Top 5 for each topic.
-
-### 4. Usage Example
-
-To run a hybrid experiment using **BM25 and ColBERT, searching Titles and OCR, using 'Same Box' expansion, and fusing results at the document level**:
-
-1. **Install Python**: [https://www.python.org](https://www.python.org).
-2. **Install Python libraries**: run the command ```pip install -r requirements.txt```. It is recommended to use a [virtualenv](https://virtualenv.pypa.io/en/latest/user_guide.html) or a [conda](https://www.anaconda.com/docs/getting-started/miniconda/install) env.
-3. **Install Java for Pyterrier**: [https://pyterrier.readthedocs.io/en/latest/troubleshooting/java.html](https://pyterrier.readthedocs.io/en/latest/troubleshooting/java.html)
-    - If you're running on Windows, change the ```java_home```, in the ```src/models.py``` file (line 112);
-4. **Run the RunGenerator**: Change the parameters for the *src/run_generator.py* and run it (python3 run_generator.py) or create a new file, import the class and run:
-
-```python
-from run_generator import RunGenerator
-
-# Configure the experiment
-gen = RunGenerator(
-    searching_fields=[['title', 'ocr']],
-    query_fields=['TD'],
-    run_type='random',
-    models=['bm25', 'colbert'],
-    expansion=['same_box'],
-    rrf_input='docs',
-    expansion_ceiling_k=3
-)
-
-# Execute
-gen.run_experiments()
-```
-
-**IMPORTANT NOTE**: the code doesn't automatically delete the terrierindex folder that is created for each run, therefore, it is necessary to **manually delete it after the run generator stops** running.
-
-### 5. Hybrid Models (Combining two different techniques with RRF) - `hybrid_models.py`
-
-This script is an advanced tool designed to **fuse distinct retrieval strategies** into a single, optimized ranking. While the standard `RunGenerator` ensembles models that share the same configuration (e.g., BM25 + ColBERT both using the same document text), this script allows you to combine fundamentally different approaches.
-
-**Key Use Case:** Combining **Document Retrieval** (using OCR content) with **Folder Retrieval** (using only folder metadata).
-
-**1. How It Works**
-
-The script defines two separate `RunGenerator` instances (`gen_A` and `gen_B`) and fuses their outputs using **Weighted Reciprocal Rank Fusion (RRF)**.
-
-1.  **Run Config A (Content-Based):**
-    * Typically uses rich document fields (`Title`, `OCR`, `Summary`).
-    * Applies expansion techniques (e.g., `Same Box`) to infer folder relevance from document hits.
-2.  **Run Config B (Metadata-Based):**
-    * Uses **`all_folders_folder_label=True`**. This ignores file content and retrieves based purely on the folder's label.
-3.  **Fusion (RRF):**
-    * The results from A and B are merged.
-    * You can assign weights (e.g., `1.0` for Content, `0.65` for Metadata) to prioritize one strategy over the other.
-
-**2. Usage Guide**
-
-To create your own hybrid experiment, open `src/hybrid_models.py` and modify the `run_hybrid_experiment` function.
-
-Set up the two generators. Note how `gen_B` is set to `all_folders_folder_label=True`, making it a pure metadata run.
-
-```python
-# Configuration A: The "Deep Diver" (Document Content)
-gen_A = RunGenerator(
-    searching_fields=[['title', 'ocr']],
-    models=['bm25', 'colbert'],
-    expansion=['same_box'],
-    rrf_input='docs',
-    all_folders_folder_label=False  # <--- Standard Mode
-)
-
-# Configuration B: The "Overviewer" (Folder Metadata)
-gen_B = RunGenerator(
-    searching_fields=[['folderlabel']],
-    models=['colbert'],
-    expansion=[],
-    all_folders_folder_label=True   # <--- Metadata Mode
-)
-```
-
-**3. Name the Output**
-
-Update the run_folder_name variable. This will be the directory created in all_runs/, so make it descriptive.
-
-```Python
-run_folder_name = "HYBRID-TOFS-SMS-1-ALLFL-COLBERT_NE_TD_BM25-EMBEDDINGS-COLBERT-TUNED-WRRF"
-```
-
-**4. Run the script directly from your terminal:**
-
-```Bash
-python src/hybrid_models.py
-```
-
-The results will be saved and evaluated automatically, ready for inspection in the Visualizer.
-
-### 6. Wilcoxon Test Analysis Notebook
-
-The [wilcoxon_test.ipynb](https://github.com/victorleaoo/SUSHI_Information_Retrieval_Archives/blob/main/src/stats_test/wilcoxon_test.ipynb) performs statistical significance testing to compare the performance of two models. Specifically, it uses the **Wilcoxon Signed-Rank Test** to evaluate whether the difference in performance metrics between two models is statistically significant across multiple random seed trials. 
-
-It has 2 main type of analysis:
-
-**1. Global Performance Comparison**
-
-Computes the aggregate performance difference across all topics.
-
-* **Outputs:**
-    * **P-value:** Determines significance ($p < 0.05$).
-    * **Win/Loss Count:** Shows how many seeds favored each model.
-    * **Rank Breakdown:** A DataFrame detailing the score difference for each seed.
-
-**2. Single Topic Deep Dive**
-
-Provides a detailed analysis for a specific topic ID (e.g., `T18Eval-00001`).
-
-* **Visualization:** Plots the score distribution across the 30 seeds for that specific query.
-* **Robustness Check:** Verifies if the improvement on a specific topic is consistent or an outlier.
-
----
-
-## [SUSHI Visualizer Web Application](https://tinyurl.com/sushisigir)
-
-The **SUSHI Visualizer** is the main interactive interface for analyzing experiment runs and exploring the archival collection. Built with Streamlit, it combines experiment benchmarking, topic inspection, metadata exploration, and ECF analysis in a single application. The app is launched from the [web_app/app_sushi.py](web_app/app_sushi.py) entry point and can be accessed at [https://tinyurl.com/sushisigir](https://tinyurl.com/sushisigir).
-
-The interface is organized around a left-side navigation menu, where each entry exposes a different analysis workflow.
+The interface is organized around a left-side navigation menu (**SUSHI BAR**), where each entry exposes a different analysis workflow.
 
 ### Side Menu Navigation
 
-The side menu contains five main sections:
+The navigation menu contains six main sections:
 
-1. **How-To Guide**
-   - Introduces the SUSHI task, the box/folder/document hierarchy, the concept of sparse digitization, and the meaning of evaluation metrics such as nDCG@5 and relevance grades.
-
-2. **Experiment Analyzer**
-   - The main dashboard for comparing retrieval runs.
-   - Supports three complementary analysis modes:
-     - **Single Experiment Analysis**: select a configuration and compare the models contained in that experiment.
-     - **Retrieval Analysis**: inspect the top-ranked folders for each topic and review qrels grades for those folders.
-     - **Two-Experiment Comparison**: compare any two runs side-by-side, including a Wilcoxon signed-rank test and a topic-level overlay chart.
-
-3. **Data Overview**
-   - A collection exploration page for understanding the dataset beyond the retrieval metrics.
+1. **📦 Collection Viewer**
+   - A collection exploration page for understanding dataset structure beyond retrieval metrics.
    - Includes:
      - collection statistics such as number of folders, documents, boxes, and SNCs;
      - histograms for documents per folder and folders per box;
-     - SNC distribution views at three granularity levels (3-level, 2-level, and primary SNC);
+     - SNC distribution views at three granularity levels (3-Level, 2-Level, and 1-Level primary SNC);
      - a deep-dive view to inspect folder and document content by selected SNC;
      - document analysis tools to browse documents by SNC or by folder.
 
-4. **Topic Viewer**
-   - Lets the user browse the 45 evaluation topics and inspect their descriptions, narratives, and relevant gold-standard items.
-   - The page builds a hierarchical view of the relevant structure: box → folder → document.
-   - Each relevant item is shown with star-based relevance grades, and the viewer can reveal metadata such as SNC, scope notes, summaries, and OCR text.
+2. **🔍 Task Viewer**
+   - Lets the user browse the 45 evaluation topics (T1–T45).
+   - Displays topic details with a clear topic number header (e.g., **Topic 1**), dedicated title card, description, and narrative.
+   - Builds a hierarchical view of the relevant structure: **Boxes → Folders → Documents**.
+   - Each item is shown with star-based relevance grades, scope notes, summaries, and OCR previews.
 
-5. **ECF Inspector**
-   - Focuses on the Experiment Control Files (ECFs), which define which documents are visible during training.
+3. **🧪 Training Set Viewer**
+   - Focuses on the training sets (sampling conditions), which define which documents are digitized and visible during model index creation.
    - Provides multiple views for understanding coverage:
-     - overall coverage statistics;
+     - overall document distribution histograms;
      - coverage by SNC;
      - coverage by folder;
      - coverage by box;
-     - relevance coverage for the 45 topics;
-     - direct comparison between two ECFs.
+     - relevance coverage for the 45 evaluation topics;
+     - direct side-by-side comparison between two training sets (`⚖️ Compare Training Sets`).
 
-### Experiment Analyzer in Detail
+4. **🔬 Single Experiment Viewer**
+   - Benchmarks a single experiment run configuration.
+   - Features:
+     - **Global Performance Card**: displays mean nDCG@5 and margin of error (95% CI);
+     - **Topic Performance Chart**: interactive dumbbell chart showing per-topic mean nDCG@5 and confidence intervals;
+     - **Seed Variance**: horizontal box plot displaying cross-seed nDCG@5 distribution per topic with clean 3-decimal hover tooltips.
 
-This is the main page for answering the core research questions: “Which model performs better?” and “Why?”. It is designed for comparative analysis rather than simple browsing.
+5. **⚔️ Two-Experiment Viewer**
+   - Direct side-by-side comparison of two experiment runs (**Experiment A** vs **Experiment B**).
+   - Includes:
+     - **Side-by-Side KPIs & Delta**: global mean nDCG@5 metrics and exact performance delta;
+     - **Wilcoxon Signed-Rank Test**: statistical significance test results (p-value, winner, win counts);
+     - **Overlay Comparison Chart**: side-by-side topic overlay dumbbell chart;
+     - **Topic Separation Analysis**: categorized breakdown of topics into **Better** (≥ +10%), **About Equal** (within ±10%), and **Worse** (≤ -10%).
 
-#### Inputs and run selection
+6. **📖 How-To Guide — SUSHI BAR**
+   - Comprehensive interactive documentation introducing:
+     - the SUSHI task and box/folder/document hierarchy;
+     - **SNC (Subject-Numeric Code)** classification and its 3 levels of granularity (1-Level, 2-Level, 3-Level), explaining that each folder can have an SNC code attached to it;
+     - **Training Sets** (Uniform, Skewed, All Docs);
+     - **nDCG@5** evaluation metric details, clarifying that folders are evaluated based on containing one or more relevant documents;
+     - relevance grades (Grade 3 = Highly Relevant, Grade 1 = Relevant).
 
-The app discovers available experiment results from the [all_runs](all_runs) directory and groups them by configuration. Before looking at the charts, users should first select:
+### Single and Two-Experiment Viewers in Detail
 
-- a subfolder/scope to narrow the candidate runs;
-- a target experiment configuration;
-- one or two specific runs for comparison.
+These pages answer core research questions: *“Which model performs better?”* and *“Why?”*.
 
-This selection step matters because the best interpretation comes from comparing runs that share a similar setup and differ mainly in the retrieval strategy or expansion method.
+#### Inputs and experiment selection
 
-#### What is shown in the single-experiment view
+The app discovers available experiment results from the [all_runs](all_runs) directory. Users select:
 
-- **Global performance cards**: show the mean nDCG@5, the margin of error, and the number of seeds contributing to the estimate. These are the first indicators of whether a method is consistently strong.
-- **Topic-level dumbbell chart**: displays each topic’s mean score and its confidence interval. This is useful for understanding whether a model is uniformly good or only strong on a few topics.
-- **Seed variance view**: shows how much the score changes across random seeds. A narrow distribution suggests stable behavior; a wide distribution suggests that the outcome depends heavily on the sampled training documents.
+- **Single Experiment Viewer**: select an experiment from the dropdown menu to inspect its global score, topic dumbbell chart, and cross-seed variance.
+- **Two-Experiment Viewer**: select **Experiment A (Blue)** and **Experiment B (Orange)** to perform head-to-head comparative analysis.
 
 <p align="center">
   <img src="img/single_experiments.png" alt="Single Experiments" width="900" />
@@ -495,117 +290,100 @@ This selection step matters because the best interpretation comes from comparing
 
 #### Run naming convention
 
-Experiment folders are interpreted using a four-part naming convention:
+Experiment folders follow a **5-Element Dotted Notation**:
 
-- **Search fields**
-- **Expansion strategy**
-- **Query type**
-- **Model name**
+```text
+{Sample}.{Ranker}.{Fields}.{LabelSearch}.{ScorePropagation}
+```
 
-For example, a folder such as `TOFS_SB_TD_BM25` indicates:
+- **Sample**: `U` (Uniform 5/box), `K` (Skewed), `A` (All Docs)
+- **Ranker**: `B` (BM25F), `C` (ColBERT), `E` (Embeddings), `W`/`X`/`Y`/`Z` (RRF Ensembles)
+- **Fields**: 4-char string (`T` Title, `O` OCR, `F` Folder Label, `S` Summary, `-` Unused)
+- **LabelSearch**: `L` (Weighted RRF with Label search), `x` (None)
+- **ScorePropagation**: `1`/`2` (SNC Score Propagation depth 1 or 2), `x` (None)
 
-- `TOFS`: title/ocr/folderlabel/summary-based search fields;
-- `SB`: same-box expansion;
-- `TD`: title + description query fields;
-- `BM25`: the retrieval model name.
+For example, `U.B.T---.x.x` indicates Uniform sampling, BM25F ranker, Title field only, no label search, and no score propagation.
 
-### Data Overview in Detail
+### Collection Viewer in Detail
 
-This section is intended for dataset exploration rather than model benchmarking. It helps explain the collection conditions behind the retrieval metrics and is particularly useful when you suspect that the data distribution is affecting the results.
+This section is intended for dataset exploration rather than model benchmarking. It helps explain the collection conditions behind retrieval metrics.
 
-#### What is shown in the collection statistics
+#### What is shown in collection statistics
 
 The opening view displays:
 
 - total folders, documents, and boxes;
-- how many distinct SNCs exist at different levels;
+- how many distinct SNCs exist at different levels (3-Level, 2-Level, 1-Level);
 - how many folders contain scope notes;
 - distributional summaries such as OCR page counts and the number of documents per folder.
-
-These metrics help you understand whether the collection is balanced or skewed, which is important because retrieval performance can be strongly influenced by the underlying metadata structure.
 
 <p align="center">
   <img src="img/data_overview1.png" alt="Data Overview Stats" width="900" />
 </p>
 
-#### What is shown in the SNC exploration views
+#### What is shown in SNC exploration views
 
 The SNC tabs provide a structured view of the archival classification system:
 
 - **3-Level SNC**: the most detailed view, useful for fine-grained analysis.
-- **2-Level SNC**: a middle layer that can reveal broader semantic clusters.
-- **1-Level (Primary)**: a broader overview of the main classification families.
-
-Each tab includes tables, histograms, and bar charts. The deep-dive view also allows you to inspect the folders and documents attached to a selected SNC.
+- **2-Level SNC**: a middle layer that reveals broader semantic clusters.
+- **1-Level (Primary)**: a top-level overview of the main classification families (`POL`, `AGR`, `DEF`, etc.).
 
 <p align="center">
   <img src="img/data_overview2.png" alt="Data Overview SNC" width="900" />
 </p>
 
+### Task Viewer in Detail
 
-#### What is shown in the document browsing tabs
-
-The document analysis tabs let you:
-
-- inspect keyword distributions in titles and summaries;
-- browse documents grouped by SNC;
-- browse all documents belonging to a selected folder.
-
-### Topic Viewer in Detail
-
-The Topic Viewer is designed for qualitative inspection of the relevance judgments and the archival context behind each topic. It is the best place to move from metric-driven analysis to understanding why a certain result is considered correct or incorrect.
+The Task Viewer is designed for qualitative inspection of the relevance judgments and the archival context behind each topic.
 
 #### What is shown on this page
 
 For a selected topic, the page displays:
 
-- the topic title, description, and narrative;
+- a clean **Topic {number}** header with dedicated title card, description, and narrative;
 - a summary of how many relevant boxes, folders, and documents are associated with the topic;
 - a hierarchical expansion of the relevant structure:
   - box-level grouping;
   - folder-level metadata and scope notes;
   - document-level summaries and OCR previews.
 
-This gives you the actual archival context behind the evaluation topic, not just the score.
-
 <p align="center">
-  <img src="img/topic_viewer.png" alt="Topic Viewer" width="900" />
+  <img src="img/topic_viewer.png" alt="Task Viewer" width="900" />
 </p>
 
-### ECF Inspector in Detail
+### Training Set Viewer in Detail
 
-The ECF Inspector focuses on the experimental conditions used to train the system. It helps answer questions such as: Which documents were visible to the model during training, and how much of the collection was actually available to learn from?
+The Training Set Viewer focuses on the experimental conditions used to train models. It answers: *Which documents were visible to the model during training, and how much of the collection was available to learn from?*
 
-#### What is shown in the overview and coverage views
+#### What is shown in coverage views
 
-The app presents several complementary views:
-
-- **Overview**: a histogram of documents per covered folder.
-- **By SNC**: a table of coverage by classification code, including counts of SNCs with and without documents.
-- **By Folder**: a detailed inspection of the folders included in the selected ECF.
+- **Overview**: histogram of documents per covered folder.
+- **By SNC**: table of coverage by classification code, including counts of SNCs with and without documents.
+- **By Folder**: detailed inspection of folders covered by the training set.
 - **By Box**: box-level coverage statistics.
-- **Relevance Coverage**: how much of the relevant-folder set for the 45 topics is covered by the ECF.
-- **Compare ECFs**: a side-by-side view to compare the training visibility of two different experimental settings.
+- **Relevance Coverage**: how much of the relevant-folder set across the 45 topics is covered by the training set.
+- **Compare Training Sets**: side-by-side view to compare training visibility between two experimental settings.
 
 <p align="center">
-  <img src="img/ecf_inspector.png" alt="ECF Inspector" width="900" />
+  <img src="img/ecf_inspector.png" alt="Training Set Viewer" width="900" />
 </p>
 
 <p align="center">
-  <img src="img/ecf_comparison.png" alt="ECF Comparison" width="900" />
+  <img src="img/ecf_comparison.png" alt="Training Set Comparison" width="900" />
 </p>
 
 ### Setup for New Experiments and Visualizer Inputs
 
-The visualizer is dynamic and discovers available experiment results from the filesystem. To add a new run, make sure that the output files follow the expected structure under the [all_runs](all_runs) directory.
+The visualizer is dynamic and discovers available experiment results from the filesystem. To add a new run, make sure that output files follow the expected structure under the [all_runs](all_runs) directory.
 
 #### Required directory layout
 
 ```text
 ProjectRoot/
 ├── all_runs/
-│   ├── TOFS_SB_TD_BM25/
-│   └── TOFS_SB_TD_MY-NEW-MODEL/
+│   ├── U.B.T---.x.x/
+│   └── U.W.TOFS.L.2/
 │       ├── model_overall_stats.json
 │       ├── topics_mean_margin.json
 │       ├── topics_relevant_count_stats.json
@@ -617,24 +395,20 @@ ProjectRoot/
 
 - `model_overall_stats.json`: global mean nDCG and margin of error.
 - `topics_mean_margin.json`: per-topic statistics used by the dumbbell chart.
-- `topics_relevant_count_stats.json`: relevance counts used by the comparison views.
-- `Random{SEED}_TopicsFolderMetrics.json`: one file per seed for detailed analysis and N-count computation.
+- `topics_relevant_count_stats.json`: relevance counts used by comparison views.
+- `Random{SEED}_TopicsFolderMetrics.json`: one file per seed for detailed analysis.
 
 #### Naming convention
 
-Use a four-part folder name separated by underscores:
+Use the 5-element dotted pattern for experiment folder names:
 
 ```text
-[SearchFields]_[ExpansionStrategy]_[QueryType]_[ModelName]
+{Sample}.{Ranker}.{Fields}.{LabelSearch}.{ScorePropagation}
 ```
 
-Example:
-
-```text
-TOFS_SB_TD_MY-NEW-MODEL
-```
-
-If the model name contains underscores, replace them with hyphens to avoid parsing issues.
+Examples:
+- `U.B.T---.x.x`: Uniform sampling, BM25F ranker, Title only, no label search, no score propagation.
+- `U.W.TOFS.L.2`: Uniform sampling, Weighted RRF ranker, all document fields, Label search enabled, SNC propagation depth 2.
 
 #### Optional color registration
 
@@ -657,11 +431,3 @@ To run the application locally:
    ```bash
    streamlit run app_sushi.py
    ```
-
----
-
-## Acknowledgements
-
-Development of the SUSHI test collection was supported in part by Japan Society for the Promotion of Science KAKENHI Grant 23KK0005 and National Institute of Informatics Open Collaborative Research 2024 (24S0505).
-
-In addition, part of the work was also supported by Fundação de Apoio e Pesquisa do Distrito Federal (FAPDF).
