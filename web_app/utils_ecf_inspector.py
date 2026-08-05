@@ -307,7 +307,7 @@ def compute_folder_detail(ecf_data: dict, folders_meta: dict) -> pd.DataFrame:
             "End Date": end_date,
             "Scope Note": scope if scope and str(scope) != "nan" else "",
             "Label Parent Expanded": label_parent_expanded,
-            "Docs in ECF": doc_count,
+            "Docs in Training Set": doc_count,
             "Dropdown Label": f"{fid} — {snc} — {label}",
         })
 

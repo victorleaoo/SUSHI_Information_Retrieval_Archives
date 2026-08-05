@@ -607,7 +607,7 @@ def get_unified_comparison_dataframe(selected_run_names: List[str]) -> pd.DataFr
         g_rel_mean = calculate_global_relevance_mean(topic_rel)
 
         row = {
-            "Experiment Folder": run_name,
+            "Experiment": run_name,
             "Global nDCG@5": f"{g_ndcg_mean:.4f} ± {g_ndcg_margin:.4f}",
             "Global Relevance": f"{g_rel_mean:.2f}"
         }
@@ -631,7 +631,7 @@ def get_unified_comparison_dataframe(selected_run_names: List[str]) -> pd.DataFr
 
     df = pd.DataFrame(rows)
     if not df.empty:
-        cols = ["Experiment Folder", "Global nDCG@5", "Global Relevance"] + all_topics
+        cols = ["Experiment", "Global nDCG@5", "Global Relevance"] + all_topics
         cols = [c for c in cols if c in df.columns]
         df = df[cols]
         
