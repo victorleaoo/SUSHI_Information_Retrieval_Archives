@@ -14,8 +14,12 @@ import utils_experiments_viz as u1
 import utils_topics_viz as u2
 import utils_retrieval as u3
 import utils_ecf_inspector as u4
+try:
+    from streamlit_scroll_to_top import scroll_to_here
+except ImportError:
+    scroll_to_here = None
 
-st.set_page_config(layout="wide", page_title="SUSHI Research Platform")
+st.set_page_config(layout="wide", page_title="SUSHI BAR")
 
 # ============================================================
 # DYNAMIC THEME & CSS SYSTEM
@@ -405,21 +409,21 @@ def render_seed_variance_chart(var_df: pd.DataFrame):
         boxpoints=False,
         fillcolor="rgba(29, 78, 216, 0.2)",
         line=dict(color="#1E40AF", width=1.5),
+        hoveron="boxes",
+        xhoverformat=".3f",
         hovertemplate=(
             "<b>Median:</b> %{median:.3f}<br>"
-            "Q1: %{q1:.3f} &nbsp; Q3: %{q3:.3f}<br>"
-            "Min: %{min:.3f} &nbsp; Max: %{max:.3f}"
+            "<b>Q1:</b> %{q1:.3f} &nbsp; <b>Q3:</b> %{q3:.3f}<br>"
+            "<b>Min:</b> %{min:.3f} &nbsp; <b>Max:</b> %{max:.3f}"
             "<extra></extra>"
         ),
     ))
-
-    fig.update_layout(hovermode="closest")
 
     fig = _apply_light_theme(fig, max(500, len(var_df) * 36))
 
     fig.update_layout(
         showlegend=False,
-        xaxis=dict(title="nDCG@5", range=[-0.02, 1.05]),
+        xaxis=dict(title="nDCG@5", range=[-0.02, 1.05], hoverformat=".3f"),
         yaxis=dict(title="", automargin=True),
         margin=dict(l=10, r=20, t=10, b=30),
     )
@@ -539,13 +543,11 @@ def run_single_experiment_ui():
 
     grouped_runs = u1.get_grouped_run_configurations()
     all_run_names = u1.sort_run_names(all_runs_df['Run Name'].tolist())
-    run_ndcg_map = dict(zip(all_runs_df['Run Name'], all_runs_df['Mean']))
 
     selected_run = st.selectbox(
-        "Select Experiment Folder:",
+        "Select Experiment:",
         options=all_run_names,
         index=0 if all_run_names else None,
-        format_func=lambda r: f"{r} - {run_ndcg_map.get(r, 0.0):.4f}",
         help="Select an experiment run folder from all_runs/."
     )
 
@@ -555,7 +557,7 @@ def run_single_experiment_ui():
         for model_key, m_info in model_results.items():
             stats = m_info['stats']
             count = m_info['count']
-            st.metric(label=f"{selected_run} (N={count})", value=f"{stats['val']:.4f} ± {stats['margin']:.3f}")
+            st.metric(label=f"{selected_run}", value=f"{stats['val']:.4f} ± {stats['margin']:.3f}")
 
         if all_topics:
             with st.expander("📈 Topic Performance Chart (nDCG@5)", expanded=True):
@@ -606,7 +608,6 @@ def run_two_experiment_ui():
         return
 
     all_run_names = u1.sort_run_names(all_runs_df['Run Name'].tolist())
-    run_ndcg_map = dict(zip(all_runs_df['Run Name'], all_runs_df['Mean']))
 
     col_sel_a, col_sel_b = st.columns(2)
     with col_sel_a:
@@ -615,7 +616,6 @@ def run_two_experiment_ui():
             "Select Experiment A (Blue):",
             options=all_run_names,
             index=0 if all_run_names else 0,
-            format_func=lambda r: f"{r} - {run_ndcg_map.get(r, 0.0):.4f}",
             key="side_by_side_run_a"
         )
 
@@ -625,7 +625,6 @@ def run_two_experiment_ui():
             "Select Experiment B (Orange):",
             options=all_run_names,
             index=1 if len(all_run_names) > 1 else 0,
-            format_func=lambda r: f"{r} - {run_ndcg_map.get(r, 0.0):.4f}",
             key="side_by_side_run_b"
         )
 
@@ -695,7 +694,7 @@ def run_two_experiment_ui():
             render_two_run_comparison_chart(df_run_a, df_run_b, sel_run_a, sel_run_b, sort_mode="topic_order")
 
         with st.expander("🎯 Topic Separation Analysis (Experiment A vs Experiment B)", expanded=True):
-            st.caption("Categorization of topics by relative mean nDCG difference: **Better** (≥ +10%), **Equal** (between -10% and +10%), and **Worse** (≤ -10%).")
+            st.caption("Categorization of topics by relative mean nDCG difference: **Better** (≥ +10%), **About Equal** (between -10% and +10%), and **Worse** (≤ -10%).")
             categories = u1.categorize_topics_comparison(df_run_a, df_run_b)
             df_better = categories['better']; df_equal = categories['equal']; df_worse = categories['worse']
             total_topics = len(df_better) + len(df_equal) + len(df_worse)
@@ -705,14 +704,14 @@ def run_two_experiment_ui():
                 st.metric("🟢 Experiment A Better than B (≥ +10%)", f"{len(df_better)} topics ({pct_b:.1f}%)")
             with col_e:
                 pct_e = (len(df_equal) / total_topics * 100) if total_topics else 0.0
-                st.metric("🟡 Experiment A Equal to B (within ±10%)", f"{len(df_equal)} topics ({pct_e:.1f}%)")
+                st.metric("🟡 Experiment A About Equal to B (within ±10%)", f"{len(df_equal)} topics ({pct_e:.1f}%)")
             with col_w:
                 pct_w = (len(df_worse) / total_topics * 100) if total_topics else 0.0
                 st.metric("🔴 Experiment A Worse than B (≤ -10%)", f"{len(df_worse)} topics ({pct_w:.1f}%)")
 
             tab_better, tab_equal, tab_worse = st.tabs([
                 f"🟢 Experiment A Better ({len(df_better)})",
-                f"🟡 Experiment A Equal ({len(df_equal)})",
+                f"🟡 Experiment A About Equal ({len(df_equal)})",
                 f"🔴 Experiment A Worse ({len(df_worse)})"
             ])
 
@@ -1082,7 +1081,7 @@ def run_topic_viewer_ui():
     q_folders = u2.load_qrels_data(u2.PATH_QRELS_FOLDERS)
     q_boxes = u2.load_qrels_data(u2.PATH_QRELS_BOXES)
 
-    st.title("🔍 Task Viewer & Content Explorer")
+    st.title("🔍 Task Viewer")
     st.caption("⭐ **Relevance Legend:** ⭐⭐⭐ = Highly Relevant (Grade 3) | ⭐ = Relevant (Grade 1)")
 
     all_topics = {}
@@ -1105,9 +1104,14 @@ def run_topic_viewer_ui():
     if not sel_topic: return
 
     t_data = all_topics[sel_topic]
+    match = re.search(r'\d+$', sel_topic)
+    topic_num = int(match.group()) if match else sel_topic
+
     with st.expander("Topic Details", expanded=True):
-        st.header(f"{sel_topic}: {t_data.get('TITLE','')}")
-        c1, c2 = st.columns([1, 2])
+        st.subheader(f"Topic {topic_num}")
+        st.caption(f"ID: `{sel_topic}`")
+        st.info(f"**Title:** {t_data.get('TITLE','')}")
+        c1, c2 = st.columns([1, 1])
         c1.info(f"**Description:**\n{t_data.get('DESCRIPTION','')}")
         c2.warning(f"**Narrative:**\n{t_data.get('NARRATIVE','')}")
 
@@ -1212,12 +1216,12 @@ def run_topic_viewer_ui():
 # ============================================================
 
 def run_howto_ui():
-    st.title("📖 How-To Guide — SUSHI Research Platform")
+    st.title("📖 How-To Guide — SUSHI BAR")
 
     st.markdown("""
 ## What is the SUSHI Task?
 
-The **SUSHI (Sparsely digitized Unstructured Special collections for History Investigation)** task focuses on
+The **SUSHI (Searching Unseen Sources for Historical Information)** task focuses on
 **folder-level ranking** in sparsely digitized archives. The collection consists of U.S. State Department records
 on Brazil from the 1960s–1970s, organized in a physical hierarchy: **Boxes → Folders → Documents**.
 
@@ -1235,45 +1239,54 @@ despite this severe data sparsity.
 |-------|-------|-------------|
 | **Box** | ~126 | Physical boxes storing folders. Each box contains 5–20+ folders. |
 | **Folder** | 1,336 | The unit of retrieval. Has a label, SNC code, dates, and optionally a scope note. |
-| **Document** | 31,681 | Individual records (cables, memos, reports). Only ~630 per ECF are "digitized." |
+| **Document** | 31,681 | Individual records (cables, memos, reports). Only ~630 per Training Set are "digitized." |
 
 ### 🏷️ SNC (Subject-Numeric Code)
 
-The State Department's classification system. Examples:
-- **POL** = Political Affairs & Relations (561 folders — very generic)
-- **AGR** = Agriculture (82 folders — specific)
-- **DEF** = Defense Affairs, **LAB** = Labor & Manpower, **SCI** = Science & Technology
+The U.S. State Department's subject classification system used to organize diplomatic records. Each folder in the collection can have an SNC code attached to it.
 
-SNCs can be **specific** (label tells you what's inside) or **generic** (like POL, which covers everything from elections to coups).
+In the **Collection Viewer**, SNC codes can be explored across **three levels of granularity**:
 
-### 🧪 ECF (Experiment Control File)
+- **1-Level SNC**:
+  The top-level subject area represented by a 3-letter alphabetic prefix (e.g., `POL` for Political Affairs, `AGR` for Agriculture, `DEF` for Defense Affairs, `LAB` for Labor & Manpower, `SCI` for Science & Technology).
+  - *Broadest aggregation*: Groups all folders under primary domains (`POL` alone covers 561 folders across many sub-topics).
+
+- **2-Level SNC**:
+  The primary category combined with the major numeric topic code (e.g., `POL 15` for Government/Elections, `AGR 12` for Agricultural Production).
+  - *Intermediate grouping*: Clusters closely related thematic sub-topics together.
+
+- **3-Level SNC**:
+  The complete, fine-grained classification code including numeric extensions and qualifiers (e.g., `POL 15-1` for Specific Election Reports).
+  - *Finest granularity*: Provides exact subject specificity across distinct individual codes in the collection.
+
+### 🧪 Training Sets
 
 Defines which documents are "digitized" (available as training data) for an experiment.
-- **Uniform ECFs**: 5 documents randomly sampled per box (~630 total).
-- **Skewed ECFs**: Uneven sampling across boxes.
+- **Uniform Training Sets**: 5 documents randomly sampled per box (~630 total).
+- **Skewed Training Sets**: Uneven sampling across boxes.
 - **All Docs**: All 31,681 documents available (upper bound only).
 
 Different seeds produce different random samples, so experiments are run across multiple seeds and averaged.
 
 ### 📊 nDCG@5 (Normalized Discounted Cumulative Gain at 5)
 
+The primary evaluation metric used across all experiments. It measures how effectively an IR model ranks folders that contain one or more relevant documents within the top-5 positions.
 
-The primary evaluation metric. Measures how well the top-5 ranked folders match the gold-standard relevance judgments.
-- **1.0** = Perfect ranking of the top-5 most relevant folders.
-- **0.0** = No relevant folders in the top-5.
+- **How nDCG@5 is calculated:**
+  - **Relevance Gain:** Higher relevance grades (e.g. Grade 3 for Highly Relevant vs Grade 1 for Relevant) yield higher gain values for folders containing relevant documents.
+  - **Position Discount:** Gain is logarithmically discounted based on rank position, placing greater value on placing folders that contain one or more relevant documents at ranks 1–2 than ranks 4–5.
+  - **Normalization:** The resulting Discounted Cumulative Gain (DCG@5) is divided by the Ideal DCG (IDCG@5)—the maximum possible score achievable if folders that contain one or more relevant documents were placed in optimal order at the top.
+- **Score Interpretation:**
+  - **1.0** = Perfect ranking (the top-5 positions contain folders with relevant documents in optimal order).
+  - **0.0** = No folders with relevant documents appear within the top-5 retrieved positions.
 
 ### ⭐ Relevance Grades
 
-| Grade | Meaning | Display |
-|-------|---------|---------| 
-| **3** | Highly Relevant | ⭐⭐⭐ |
-| **1** | Relevant | ⭐ |
-| **0** | Not Relevant | — |
-
-### 🎯 Rerank Potential
-
-Indicates whether relevant folders exist at ranks 6–N (outside top-5) in the current ranking.
-If yes, a re-ranking step could improve nDCG@5 by promoting these folders.
+| Grade | Meaning | Description | Display |
+|-------|---------|-------------|---------| 
+| **3** | Highly Relevant | Folder contains highly relevant documents for the topic | ⭐⭐⭐ |
+| **1** | Relevant | Folder contains relevant documents for the topic | ⭐ |
+| **0** | Not Relevant | Folder contains no relevant documents for the topic | — |
 
 ---
 
@@ -1291,27 +1304,26 @@ Explore the SUSHI collection structure:
 Browse the 45 evaluation topics (T1–T45). Select a topic to see its description and narrative, then explore the hierarchical tree of relevant **Boxes → Folders → Documents** with star-based relevance grades.
 
 ### 🧪 Training Set Viewer
-Analyze what the Experiment Control File (ECF) includes:
+Analyze what the Training Set includes:
 - **Overview**: Histogram of documents per covered folder.
 - **By SNC**: Coverage table by SNC code with KPIs for SNCs with/without docs.
 - **By Box**: Coverage table sorted by coverage %.
-- **By Folder**: Browse only the folders covered by this ECF (dropdown: `FOLDER_ID — SNC — Label`).
-- **Relevance Coverage**: Cross-reference ECF coverage with the 45-topic qrels, including % coverage for Grade 3 and Grade 1 relevant folders.
-- **Compare ECFs**: Overlay two ECFs to compare their coverage distributions.
+- **By Folder**: Browse only the folders covered by this Training Set (dropdown: `FOLDER_ID — SNC — Label`).
+- **Relevance Coverage**: Cross-reference Training Set coverage with the 45-topic qrels, including % coverage for Grade 3 and Grade 1 relevant folders.
+- **Compare Training Sets**: Overlay two Training Sets to compare their coverage distributions.
 
 ### 🔬 Single Experiment Viewer
 Select an experiment configuration to compare models (e.g., BM25 vs ColBERT) within it:
 - **Global Performance**: KPI metrics showing mean nDCG@5 ± 95% margin per model.
 - **Model Comparison Chart**: Interactive dumbbell chart showing per-topic mean nDCG@5 and confidence intervals.
 - **Seed Variance**: Horizontal box plot displaying nDCG@5 distribution across seeds per topic.
-- **Retrieval Analysis**: Detailed inspection of retrieved folders per topic alongside qrels grades, movable tags, scope notes, and OCR text.
 
 ### ⚔️ Two-Experiment Viewer
 Direct side-by-side comparison of any two experiment runs across any sets of experiments:
 - **Side-by-Side KPIs & Delta**: Global mean nDCG@5 metrics and exact performance delta (A - B).
 - **Wilcoxon Signed-Rank Test**: Statistical significance test results (p-value, winner, win counts).
 - **Overlay Comparison Chart**: Side-by-side topic overlay dumbbell chart comparing Run A (Blue) vs Run B (Orange).
-- **Topic Separation Analysis**: Categorized breakdown of topics into Better (≥ +10%), Equal (within ±10%), and Worse (≤ -10%).
+- **Topic Separation Analysis**: Categorized breakdown of topics into Better (≥ +10%), About Equal (within ±10%), and Worse (≤ -10%).
 
 ---
 
@@ -1352,7 +1364,7 @@ Run folders in `all_runs/` follow the structured 5-element dotted pattern:
 - **`A`**: All 31,681 documents indexed (upper bound ceiling)
 
 #### 2. Ranker / Model (`Ranker`)
-- **`B`**: Okapi BM25F
+- **`B`**: BM25F
 - **`C`**: ColBERT late-interaction
 - **`E`**: Dense Embedding Similarity (`all-mpnet-base-v2`)
 - **`W`**: Reciprocal Rank Fusion (RRF) of Weighted BM25 + ColBERT + Embeddings
@@ -1388,27 +1400,27 @@ Run folders in `all_runs/` follow the structured 5-element dotted pattern:
 
 def run_ecf_inspector_ui():
     st.title("🧪 Training Set Viewer")
-    st.caption("Analyze Experiment Control File coverage: which folders, SNCs, and boxes have digitized documents.")
+    st.caption("Analyze Training Set coverage: which folders, SNCs, and boxes have digitized documents.")
 
     folders_meta = u4._load_folders_meta()
     all_ecfs = u4.list_available_ecfs()
 
     if not all_ecfs:
-        st.error("No ECF files found.")
+        st.error("No Training Set files found.")
         return
 
-    # Type filter + ECF selection
+    # Type filter + Training Set selection
     ecf_types = sorted(set(e["type"] for e in all_ecfs))
     col_type, col_ecf_a, col_ecf_b = st.columns([1, 2, 2])
 
     with col_type:
-        sel_type = st.selectbox("ECF Type:", ["All"] + ecf_types)
+        sel_type = st.selectbox("Training Set Sampling Type:", ["All"] + ecf_types)
 
     filtered_ecfs = [e for e in all_ecfs if sel_type == "All" or e["type"] == sel_type]
 
     with col_ecf_a:
         ecf_a_labels = [e["label"] for e in filtered_ecfs]
-        sel_ecf_a_idx = st.selectbox("Select ECF:", range(len(filtered_ecfs)),
+        sel_ecf_a_idx = st.selectbox("Select Training Set:", range(len(filtered_ecfs)),
             format_func=lambda i: ecf_a_labels[i], key="ecf_a")
         ecf_a = filtered_ecfs[sel_ecf_a_idx]
 
@@ -1467,7 +1479,7 @@ def run_ecf_inspector_ui():
     # Tabs — added "📂 By Folder" between Box and Relevance Coverage
     tab_names = ["📊 Overview", "🏷️ By SNC", "📂 By Folder", "📦 By Box", "🎯 Relevance Coverage"]
     if ecf_b:
-        tab_names.append("⚖️ Compare ECFs")
+        tab_names.append("⚖️ Compare Training Sets")
 
     tabs = st.tabs(tab_names)
 
@@ -1498,13 +1510,13 @@ def run_ecf_inspector_ui():
         st.subheader("SNC Coverage — Table")
         st.dataframe(snc_df.sort_values("Coverage %", ascending=True), width="stretch", hide_index=True, height=400)
 
-    # Tab 4: By Folder — only ECF-covered folders, dropdown: FOLDER_ID — SNC — Label
+    # Tab 4: By Folder — only training set-covered folders, dropdown: FOLDER_ID — SNC — Label
     with tabs[2]:
         folder_detail_df = u4.compute_folder_detail(parsed_a, folders_meta)
         if folder_detail_df.empty:
-            st.info("No folders covered by this ECF.")
+            st.info("No folders covered by this Training Set.")
         else:
-            st.caption(f"**{len(folder_detail_df)}** folders covered by this ECF (have ≥1 training document).")
+            st.caption(f"**{len(folder_detail_df)}** folders covered by this Training Set (have ≥1 training document).")
             folder_dropdown_labels = folder_detail_df["Dropdown Label"].tolist()
             sel_folder_ecf_idx = st.selectbox(
                 "Select Folder (Folder ID - SNC - Folder Label)",
@@ -1522,7 +1534,8 @@ def run_ecf_inspector_ui():
             ef1, ef2, ef3 = st.columns(3)
             ef1.metric("📦 Box", row["Box"])
             ef2.metric("🏷️ SNC", row["SNC"])
-            ef3.metric("📄 Docs in ECF", int(row["Docs in ECF"]))
+            docs_col_name = "Docs in Training Set" if "Docs in Training Set" in row else "Docs in ECF"
+            ef3.metric("📄 Docs in Training Set", int(row[docs_col_name]))
 
             # List documents in folder with title and summary
             sel_folder_id = row["Folder ID"]
@@ -1530,9 +1543,9 @@ def run_ecf_inspector_ui():
             items_meta = u4._load_items_meta()
 
             st.markdown("---")
-            st.subheader(f"📄 Documents in ECF for Folder `{sel_folder_id}` ({len(folder_doc_ids)})")
+            st.subheader(f"📄 Documents in Training Set for Folder `{sel_folder_id}` ({len(folder_doc_ids)})")
             if not folder_doc_ids:
-                st.caption("No document details available for this folder in this ECF.")
+                st.caption("No document details available for this folder in this Training Set.")
             else:
                 for doc_id in folder_doc_ids:
                     item = items_meta.get(doc_id, {})
@@ -1560,7 +1573,7 @@ def run_ecf_inspector_ui():
 
         st.markdown(f"""
 Across all 45 topics, there are **{s['total_pairs']}** (topic, relevant-folder) pairs.
-In this ECF, **{s['covered_pairs']}** ({s['covered_pairs']/s['total_pairs']*100:.1f}%) have a training document available;
+In this Training Set, **{s['covered_pairs']}** ({s['covered_pairs']/s['total_pairs']*100:.1f}%) have a training document available;
 the remaining **{s['uncovered_pairs']}** ({s['uncovered_pairs']/s['total_pairs']*100:.1f}%) can only be found via label match or box/SNC expansion.
         """)
 
@@ -1659,8 +1672,46 @@ the remaining **{s['uncovered_pairs']}** ({s['uncovered_pairs']/s['total_pairs']
 
 
 # ============================================================
+def scroll_to_top():
+    """Inject fallback JS snippet to scroll the main Streamlit container to the top."""
+    st.components.v1.html(
+        """
+        <script>
+            function performScroll() {
+                try {
+                    const doc = window.parent.document;
+                    const targets = [
+                        doc.querySelector('section.main'),
+                        doc.querySelector('[data-testid="stAppViewContainer"]'),
+                        doc.querySelector('.main'),
+                        doc.documentElement,
+                        doc.body
+                    ];
+                    targets.forEach(function(el) {
+                        if (el) {
+                            el.scrollTop = 0;
+                            if (typeof el.scrollTo === 'function') {
+                                el.scrollTo({top: 0, left: 0, behavior: 'instant'});
+                            }
+                        }
+                    });
+                    window.parent.scrollTo({top: 0, left: 0, behavior: 'instant'});
+                } catch (e) {
+                    console.error('Scroll error:', e);
+                }
+            }
+            performScroll();
+            setTimeout(performScroll, 50);
+            setTimeout(performScroll, 150);
+        </script>
+        """,
+        height=0,
+        width=0,
+    )
+
+
 def main():
-    st.sidebar.title("Navigation")
+    st.sidebar.title("SUSHI BAR")
     app_mode = st.sidebar.radio(
         "Choose Application:",
         [
@@ -1672,6 +1723,13 @@ def main():
             "📖 How-To Guide"
         ]
     )
+
+    if st.session_state.get("_last_app_mode") != app_mode:
+        st.session_state["_last_app_mode"] = app_mode
+        if scroll_to_here is not None:
+            scroll_to_here(delay=0)
+        else:
+            scroll_to_top()
 
     if app_mode == "📦 Collection Viewer":
         run_data_overview_ui()
@@ -1689,3 +1747,5 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+
