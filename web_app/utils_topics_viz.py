@@ -3,7 +3,7 @@ import json
 import base64
 import streamlit as st
 
-current_dir = os.path.dirname(__file__)
+current_dir = os.path.dirname(os.path.abspath(__file__))
 
 PROJECT_ROOT = os.path.abspath(os.path.join(current_dir, '..'))
 PATH_ECF = os.path.join(PROJECT_ROOT, 'ecf', 'random_generated', 'ECF_ALL_TRAINING_SET.json')
