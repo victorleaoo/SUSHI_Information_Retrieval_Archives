@@ -67,7 +67,8 @@ class RunGenerator:
                  expansion=[],
                  all_folders_folder_label=False,
                  rrf_input='docs',
-                 expansion_ceiling_k=2
+                 expansion_ceiling_k=2,
+                 bm25_tuned=True
                  ):
         self.searching_fields = searching_fields
         self.query_fields = query_fields
@@ -78,6 +79,7 @@ class RunGenerator:
         self.all_folders_folder_label = all_folders_folder_label
         self.rrf_input = rrf_input
         self.expansion_ceiling_k = expansion_ceiling_k
+        self.bm25_tuned = bm25_tuned
 
         self.loader = DataLoader(PROJECT_ROOT)
         self.items = self.loader.items
@@ -176,7 +178,7 @@ class RunGenerator:
         self.active_models = {}
         for model_name in self.models:
             if model_name == 'bm25':
-                model = BM25Model(self.current_searching_field)
+                model = BM25Model(self.current_searching_field, tuned_weights=self.bm25_tuned)
             elif model_name == 'embeddings':
                 model = EmbeddingsModel()
             elif model_name == 'colbert':

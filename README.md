@@ -1,5 +1,7 @@
 # SUSHI (Searching Unseen Sources for Historical Information) Test Collection and Experiments
 
+nohup python run_new_experiments.py > ../new_experiments.log 2>&1 &
+
 ## Index
 - [About the Collection](#about-the-collection)
     - [Data Hierarchy: Boxes, Folders, and Documents](#data-hierarchy-boxes-folders-and-documents)

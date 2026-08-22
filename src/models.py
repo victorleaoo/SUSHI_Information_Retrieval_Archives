@@ -90,14 +90,21 @@ class BM25Model(RetrievalModel):
     Automatically switches between standard BM25 (single field) and BM25F (multifield) based on the number of searching fields provided.
     """
     def __init__(self, 
-                 searching_fields):
+                 searching_fields,
+                 tuned_weights=True):
         """
         Initializes the BM25/BM25F model configuration.
 
         Args:
             searching_fields (list): List of fields to index (e.g., ['title', 'ocr']).
+            tuned_weights (bool): If True, uses learned BM25F field weights from
+                BM_25_FIELD_WEIGHTS (Learned BM25F = 'L' in run notation).
+                If False, uses default equal weights for all fields
+                (Unweighted BM25F = 'B' in run notation).
+                Only affects multi-field BM25F; single-field BM25 is unaffected.
         """
         self.searching_fields = searching_fields
+        self.tuned_weights = tuned_weights
         self.retriever = None
         self._init_pyterrier()
 
@@ -120,7 +127,9 @@ class BM25Model(RetrievalModel):
         
         Logic:
         1. Checks `self.searching_fields`.
-        2. If > 1 field is used, it configures **BM25F** using weights `w` and saturation params `c` defined in `BM_25_FIELD_WEIGHTS`.
+        2. If > 1 field is used, it configures **BM25F**:
+           - With `tuned_weights=True`: uses learned `w` and `c` from `BM_25_FIELD_WEIGHTS`.
+           - With `tuned_weights=False`: uses PyTerrier defaults (w=1.0 for all fields).
         3. If 1 field is used, it configures standard **BM25**.
         4. Creates an IterDictIndexer to build the index on disk.
         """
@@ -137,9 +146,11 @@ class BM25Model(RetrievalModel):
                 if field in BM_25_FIELD_WEIGHTS:
                     col_name = BM_25_FIELD_WEIGHTS[field]['index_col']
                     active_text_attrs.append(col_name)
-                    # Map weights to PyTerrier controls (w.0, c.0, etc.)
-                    controls[f'w.{idx}'] = BM_25_FIELD_WEIGHTS[field]['w']
-                    controls[f'c.{idx}'] = BM_25_FIELD_WEIGHTS[field]['c']
+                    if self.tuned_weights:
+                        # Learned BM25F (L): use tuned weights
+                        controls[f'w.{idx}'] = BM_25_FIELD_WEIGHTS[field]['w']
+                        controls[f'c.{idx}'] = BM_25_FIELD_WEIGHTS[field]['c']
+                    # else: Unweighted BM25F (B): PyTerrier defaults (w=1.0)
         else:
             # Simple BM25 on the specific field
             active_text_attrs = [BM_25_FIELD_WEIGHTS[f]['index_col'] for f in current_fields if f in BM_25_FIELD_WEIGHTS]
