@@ -29,6 +29,7 @@ import sys
 from tqdm import tqdm
 
 from run_generator import RunGenerator, RANDOM_SEED_LIST, RESULTS_PATH, Style
+from models import BM25Model, EmbeddingsModel, ColBERTModel
 from hybrid_models import perform_hybrid_fusion
 
 # ---------------------------------------------------------------------------
@@ -55,9 +56,17 @@ def make_output_folder(name: str) -> str:
 
 
 def run_standard(gen, search_fields, query_field, run_folder_name):
-    """Run a standard (non-hybrid) experiment with a custom output folder name."""
+    """Run a standard random experiment (30 seeds) with a custom output folder name."""
     print(f"\n{Style.BOLD}{Style.GREEN}> Running: {run_folder_name}{Style.RESET}")
     metrics_folder = make_output_folder(run_folder_name)
+
+    if gen.all_folders_folder_label:
+        results = gen.run_single_seed(0, search_fields, query_field)
+        gen.evaluator.save_run_file(results, RESULTS_PATH, 'AllFolderLabel')
+        json_path = os.path.join(metrics_folder, 'AllFolderLabel_TopicsFolderMetrics.json')
+        gen.evaluator.evaluate(RESULTS_PATH, json_path)
+        gen.evaluator.generate_aggregated_metrics(metrics_folder, 'all_folder_label')
+        return
 
     for seed in tqdm(RANDOM_SEED_LIST, desc=f"({run_folder_name})"):
         results = gen.run_single_seed(seed, search_fields, query_field)
@@ -68,6 +77,67 @@ def run_standard(gen, search_fields, query_field, run_folder_name):
 
     print(f"> Generating aggregated metrics in {metrics_folder}...")
     gen.evaluator.generate_aggregated_metrics(metrics_folder, 'random')
+
+
+def run_official(gen, search_fields, query_field, run_folder_name):
+    """Run an official ECF experiment (3 ExperimentSets) with a custom output folder name."""
+    official_folder_name = f"OfficialECF-{run_folder_name}" if not run_folder_name.startswith("OfficialECF-") else run_folder_name
+    print(f"\n{Style.BOLD}{Style.CYAN}> Running Official ECF: {official_folder_name}{Style.RESET}")
+    metrics_folder = make_output_folder(official_folder_name)
+
+    gen.run_type = 'official_ecf'
+    gen.current_searching_field = search_fields
+    gen.current_query_field = query_field
+
+    official_ecf = gen.loader.load_official_ecf()
+    all_results = []
+
+    for set_idx, experiment_set in enumerate(official_ecf['ExperimentSets']):
+        set_num = set_idx + 1
+        topics_in_set = list(experiment_set['Topics'].keys())
+        print(f"{Style.BOLD}{Style.CYAN}  > Official ECF Set {set_num}/3{Style.RESET} "
+              f"({len(experiment_set['TrainingDocuments'])} training docs, "
+              f"topics {topics_in_set[0]}–{topics_in_set[-1]})")
+
+        gen.ecf = {'ExperimentSets': [experiment_set]}
+        clean_data = gen.prepare_training_data()
+
+        if not gen.all_folders_folder_label:
+            gen.relations = gen.create_folder_relations_for_expansion(clean_data)
+
+        gen.active_models = {}
+        for model_name in gen.models:
+            if model_name == 'bm25':
+                model = BM25Model(gen.current_searching_field, tuned_weights=gen.bm25_tuned)
+            elif model_name == 'embeddings':
+                model = EmbeddingsModel()
+            elif model_name == 'colbert':
+                model = ColBERTModel()
+
+            model.train(clean_data)
+            gen.active_models[model_name] = model
+
+        set_results = gen.produce_topics_results()
+        all_results.extend(set_results)
+
+    run_name = 'OfficialECF-3Sets-45Topics'
+    gen.evaluator.save_run_file(all_results, RESULTS_PATH, run_name)
+    json_path = os.path.join(metrics_folder, 'OfficialECF_TopicsFolderMetrics.json')
+    gen.evaluator.evaluate(RESULTS_PATH, json_path)
+    gen.evaluator.generate_aggregated_metrics(metrics_folder, 'official_ecf')
+
+
+def run_standard_and_official(gen, search_fields, query_field, run_folder_name):
+    """Executes both the random (30 seeds) run and the official ECF run."""
+    # 1. Standard Random Run
+    run_standard(gen, search_fields, query_field, run_folder_name)
+    # 2. Official ECF Run
+    run_official(gen, search_fields, query_field, run_folder_name)
+
+
+def run_once(gen):
+    """Run a single-shot experiment (official_ecf or all_documents)."""
+    gen.run_experiments()
 
 
 def run_hybrid(gen_A, search_field_A, gen_B, search_field_B, query_field, run_folder_name):
@@ -89,6 +159,87 @@ def run_hybrid(gen_A, search_field_A, gen_B, search_field_B, query_field, run_fo
     gen_A.evaluator.generate_aggregated_metrics(metrics_folder, 'random')
 
 
+def run_hybrid_official(gen_A, search_field_A, gen_B, search_field_B, query_field, run_folder_name):
+    """Run an official ECF hybrid (document ranker + ALLFL ranker RRF) experiment."""
+    official_folder_name = f"OfficialECF-{run_folder_name}" if not run_folder_name.startswith("OfficialECF-") else run_folder_name
+    print(f"\n{Style.BOLD}{Style.CYAN}> Running Hybrid Official ECF: {official_folder_name}{Style.RESET}")
+    metrics_folder = make_output_folder(official_folder_name)
+
+    gen_A.run_type = 'official_ecf'
+    gen_A.current_searching_field = search_field_A
+    gen_A.current_query_field = query_field
+
+    gen_B.run_type = 'official_ecf'
+    gen_B.current_searching_field = search_field_B
+    gen_B.current_query_field = query_field
+
+    official_ecf = gen_A.loader.load_official_ecf()
+    all_results = []
+
+    for set_idx, experiment_set in enumerate(official_ecf['ExperimentSets']):
+        set_num = set_idx + 1
+        topics_in_set = list(experiment_set['Topics'].keys())
+        print(f"{Style.BOLD}{Style.CYAN}  > Hybrid Official ECF Set {set_num}/3{Style.RESET} "
+              f"({len(experiment_set['TrainingDocuments'])} training docs, "
+              f"topics {topics_in_set[0]}–{topics_in_set[-1]})")
+
+        # 1. Run gen_A for this set
+        gen_A.ecf = {'ExperimentSets': [experiment_set]}
+        clean_data_A = gen_A.prepare_training_data()
+        if not gen_A.all_folders_folder_label:
+            gen_A.relations = gen_A.create_folder_relations_for_expansion(clean_data_A)
+
+        gen_A.active_models = {}
+        for model_name in gen_A.models:
+            if model_name == 'bm25':
+                model = BM25Model(gen_A.current_searching_field, tuned_weights=gen_A.bm25_tuned)
+            elif model_name == 'embeddings':
+                model = EmbeddingsModel()
+            elif model_name == 'colbert':
+                model = ColBERTModel()
+            model.train(clean_data_A)
+            gen_A.active_models[model_name] = model
+
+        set_results_A = gen_A.produce_topics_results()
+
+        # 2. Run gen_B for this set
+        gen_B.ecf = {'ExperimentSets': [experiment_set]}
+        clean_data_B = gen_B.prepare_training_data()
+        if not gen_B.all_folders_folder_label:
+            gen_B.relations = gen_B.create_folder_relations_for_expansion(clean_data_B)
+
+        gen_B.active_models = {}
+        for model_name in gen_B.models:
+            if model_name == 'bm25':
+                model = BM25Model(gen_B.current_searching_field, tuned_weights=gen_B.bm25_tuned)
+            elif model_name == 'embeddings':
+                model = EmbeddingsModel()
+            elif model_name == 'colbert':
+                model = ColBERTModel()
+            model.train(clean_data_B)
+            gen_B.active_models[model_name] = model
+
+        set_results_B = gen_B.produce_topics_results()
+
+        # 3. Fuse results for this set
+        set_final = perform_hybrid_fusion(set_results_A, set_results_B)
+        all_results.extend(set_final)
+
+    run_name = 'OfficialECF-3Sets-45Topics'
+    gen_A.evaluator.save_run_file(all_results, RESULTS_PATH, run_name)
+    json_path = os.path.join(metrics_folder, 'OfficialECF_TopicsFolderMetrics.json')
+    gen_A.evaluator.evaluate(RESULTS_PATH, json_path)
+    gen_A.evaluator.generate_aggregated_metrics(metrics_folder, 'official_ecf')
+
+
+def run_hybrid_and_official(gen_A, search_field_A, gen_B, search_field_B, query_field, run_folder_name):
+    """Executes both the random (30 seeds) hybrid run and the official ECF hybrid run."""
+    # 1. Standard Random Hybrid Run
+    run_hybrid(gen_A, search_field_A, gen_B, search_field_B, query_field, run_folder_name)
+    # 2. Official ECF Hybrid Run
+    run_hybrid_official(gen_A, search_field_A, gen_B, search_field_B, query_field, run_folder_name)
+
+
 def make_allfl_colbert():
     """Shared ALLFL ColBERT RunGenerator for hybrid experiments."""
     gen = RunGenerator(
@@ -107,10 +258,12 @@ def make_allfl_bm25():
         searching_fields=[ALLFL_FIELDS],
         query_fields=['TD'],
         models=['bm25'],
+        bm25_tuned=False,
         expansion=[],
         all_folders_folder_label=True,
     )
     return gen, ALLFL_FIELDS
+
 
 
 # ---------------------------------------------------------------------------
@@ -129,7 +282,7 @@ def exp1():
         rrf_input='docs',
     )
     gen_B, sf_B = make_allfl_bm25()
-    run_hybrid(gen_A, TOFS_FIELDS, gen_B, sf_B, 'TD', 'U5.TD-.V.TOFS.mx--2.b')
+    run_hybrid_and_official(gen_A, TOFS_FIELDS, gen_B, sf_B, 'TD', 'U5.TD-.V.TOFS.mx--2.b')
 
 
 def exp2():
@@ -142,19 +295,19 @@ def exp2():
         rrf_input='docs',
     )
     gen_B, sf_B = make_allfl_bm25()
-    run_hybrid(gen_A, TOFS_FIELDS, gen_B, sf_B, 'TD', 'U5.TD-.X.TOFS.mx--2.b')
+    run_hybrid_and_official(gen_A, TOFS_FIELDS, gen_B, sf_B, 'TD', 'U5.TD-.X.TOFS.mx--2.b')
 
 
 def exp3():
-    """Exp 3 — U5.TD-.X.TOFS.mx--2.-: X (B+C) TOFS, same_snc+same_box k=2, no hybrid."""
-    print(f"\n{Style.BOLD}{Style.CYAN}=== EXP 3: U5.TD-.X.TOFS.mx--2.- ==={Style.RESET}")
+    """Exp 3 — U5.TD-.L.TOFS.mx--2.-: L TOFS, same_snc+same_box k=2, no hybrid."""
+    print(f"\n{Style.BOLD}{Style.CYAN}=== EXP 3: U5.TD-.L.TOFS.mx--2.- ==={Style.RESET}")
     gen = RunGenerator(
         searching_fields=[TOFS_FIELDS], query_fields=['TD'],
-        models=['bm25', 'colbert'], bm25_tuned=False,
+        models=['bm25'], bm25_tuned=True,
         expansion=['same_snc', 'same_box'], expansion_ceiling_k=2,
         rrf_input='docs',
     )
-    run_standard(gen, TOFS_FIELDS, 'TD', 'U5.TD-.X.TOFS.mx--2.-')
+    run_standard_and_official(gen, TOFS_FIELDS, 'TD', 'U5.TD-.L.TOFS.mx--2.-')
 
 
 def exp4():
@@ -165,7 +318,7 @@ def exp4():
         models=['bm25'], bm25_tuned=False,
         expansion=[], rrf_input='docs',
     )
-    run_standard(gen, TOFS_FIELDS, 'TD', 'U5.TD-.B.TOFS.-.-')
+    run_standard_and_official(gen, TOFS_FIELDS, 'TD', 'U5.TD-.B.TOFS.-.-')
 
 
 def exp5():
@@ -176,7 +329,7 @@ def exp5():
         models=['bm25'], bm25_tuned=True,
         expansion=[], rrf_input='docs',
     )
-    run_standard(gen, ['title'], 'TD', 'U5.TD-.L.T---.-.-')
+    run_standard_and_official(gen, ['title'], 'TD', 'U5.TD-.L.T---.-.-')
 
 
 def exp6():
@@ -187,7 +340,7 @@ def exp6():
         models=['bm25'], bm25_tuned=True,
         expansion=[], rrf_input='docs',
     )
-    run_standard(gen, ['ocr'], 'TD', 'U5.TD-.L.-O--.-.-')
+    run_standard_and_official(gen, ['ocr'], 'TD', 'U5.TD-.L.-O--.-.-')
 
 
 def exp7():
@@ -198,7 +351,7 @@ def exp7():
         models=['bm25'], bm25_tuned=True,
         expansion=[], rrf_input='docs',
     )
-    run_standard(gen, ['folderlabel'], 'TD', 'U5.TD-.L.--F-.-.-')
+    run_standard_and_official(gen, ['folderlabel'], 'TD', 'U5.TD-.L.--F-.-.-')
 
 
 def exp8():
@@ -209,7 +362,7 @@ def exp8():
         models=['bm25'], bm25_tuned=True,
         expansion=[], rrf_input='docs',
     )
-    run_standard(gen, ['summary'], 'TD', 'U5.TD-.L.---S.-.-')
+    run_standard_and_official(gen, ['summary'], 'TD', 'U5.TD-.L.---S.-.-')
 
 
 def exp9():
@@ -221,7 +374,7 @@ def exp9():
         expansion=['same_snc'], expansion_ceiling_k=2,
         rrf_input='docs',
     )
-    run_standard(gen, TOFS_FIELDS, 'TD', 'U5.TD-.C.TOFS.m---2.-')
+    run_standard_and_official(gen, TOFS_FIELDS, 'TD', 'U5.TD-.C.TOFS.m---2.-')
 
 
 def exp10():
@@ -233,7 +386,7 @@ def exp10():
         expansion=['same_box'], expansion_ceiling_k=2,
         rrf_input='docs',
     )
-    run_standard(gen, TOFS_FIELDS, 'TD', 'U5.TD-.C.TOFS.--x-2.-')
+    run_standard_and_official(gen, TOFS_FIELDS, 'TD', 'U5.TD-.C.TOFS.--x-2.-')
 
 
 def exp11():
@@ -525,13 +678,13 @@ def exp35():
 # ---------------------------------------------------------------------------
 
 EXPERIMENTS = {
-    1: exp1,    2: exp2,    3: exp3,    4: exp4,    5: exp5,
-    6: exp6,    7: exp7,    8: exp8,    9: exp9,   10: exp10,
-   11: exp11,  12: exp12,  13: exp13,  14: exp14,  15: exp15,
-   16: exp16,  17: exp17,  18: exp18,  19: exp19,  20: exp20,
-   21: exp21,  22: exp22,  23: exp23,  24: exp24,  25: exp25,
-   26: exp26,  27: exp27,  28: exp28,  29: exp29,  30: exp30,
-   31: exp31,  32: exp32,  33: exp33,  34: exp34,  35: exp35,
+     1: exp1,#    2: exp2,    3: exp3,    4: exp4,    5: exp5,
+#     6: exp6,    7: exp7,    8: exp8,    9: exp9,   10: exp10,
+#    11: exp11,  12: exp12,#  13: exp13,  14: exp14,  15: exp15,
+#    16: exp16,  17: exp17,  18: exp18,  19: exp19,  20: exp20,
+#    21: exp21,  22: exp22,  23: exp23,  24: exp24,  25: exp25,
+#    26: exp26,  27: exp27,  28: exp28,  29: exp29,  30: exp30,
+#    31: exp31,  32: exp32,  33: exp33,  34: exp34,  35: exp35,
 }
 
 if __name__ == "__main__":
