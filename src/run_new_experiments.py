@@ -127,13 +127,10 @@ def run_official(gen, search_fields, query_field, run_folder_name):
     gen.evaluator.generate_aggregated_metrics(metrics_folder, 'official_ecf')
 
 
-def run_standard_and_official(gen, search_fields, query_field, run_folder_name):
-    """Executes both the random (30 seeds) run and the official ECF run."""
-    # 1. Standard Random Run
-    run_standard(gen, search_fields, query_field, run_folder_name)
-    # 2. Official ECF Run
-    run_official(gen, search_fields, query_field, run_folder_name)
-
+# def run_standard(gen, search_fields, query_field, run_folder_name):
+#     """Executes both the random (30 seeds) run and the official ECF run."""
+#     # 1. Standard Random Run
+#     run_standard(gen, search_fields, query_field, run_folder_name)
 
 def run_once(gen):
     """Run a single-shot experiment (official_ecf or all_documents)."""
@@ -232,12 +229,10 @@ def run_hybrid_official(gen_A, search_field_A, gen_B, search_field_B, query_fiel
     gen_A.evaluator.generate_aggregated_metrics(metrics_folder, 'official_ecf')
 
 
-def run_hybrid_and_official(gen_A, search_field_A, gen_B, search_field_B, query_field, run_folder_name):
+def run_hybrid(gen_A, search_field_A, gen_B, search_field_B, query_field, run_folder_name):
     """Executes both the random (30 seeds) hybrid run and the official ECF hybrid run."""
     # 1. Standard Random Hybrid Run
     run_hybrid(gen_A, search_field_A, gen_B, search_field_B, query_field, run_folder_name)
-    # 2. Official ECF Hybrid Run
-    run_hybrid_official(gen_A, search_field_A, gen_B, search_field_B, query_field, run_folder_name)
 
 
 def make_allfl_colbert():
@@ -264,8 +259,6 @@ def make_allfl_bm25():
     )
     return gen, ALLFL_FIELDS
 
-
-
 # ---------------------------------------------------------------------------
 # Experiment Definitions
 # ---------------------------------------------------------------------------
@@ -282,7 +275,7 @@ def exp1():
         rrf_input='docs',
     )
     gen_B, sf_B = make_allfl_bm25()
-    run_hybrid_and_official(gen_A, TOFS_FIELDS, gen_B, sf_B, 'TD', 'U5.TD-.V.TOFS.mx--2.b')
+    run_hybrid(gen_A, TOFS_FIELDS, gen_B, sf_B, 'TD', 'U5.TD-.V.TOFS.mx--2.b')
 
 
 def exp2():
@@ -295,7 +288,7 @@ def exp2():
         rrf_input='docs',
     )
     gen_B, sf_B = make_allfl_bm25()
-    run_hybrid_and_official(gen_A, TOFS_FIELDS, gen_B, sf_B, 'TD', 'U5.TD-.X.TOFS.mx--2.b')
+    run_hybrid(gen_A, TOFS_FIELDS, gen_B, sf_B, 'TD', 'U5.TD-.X.TOFS.mx--2.b')
 
 
 def exp3():
@@ -307,7 +300,7 @@ def exp3():
         expansion=['same_snc', 'same_box'], expansion_ceiling_k=2,
         rrf_input='docs',
     )
-    run_standard_and_official(gen, TOFS_FIELDS, 'TD', 'U5.TD-.L.TOFS.mx--2.-')
+    run_standard(gen, TOFS_FIELDS, 'TD', 'U5.TD-.L.TOFS.mx--2.-')
 
 
 def exp4():
@@ -318,7 +311,18 @@ def exp4():
         models=['bm25'], bm25_tuned=False,
         expansion=[], rrf_input='docs',
     )
-    run_standard_and_official(gen, TOFS_FIELDS, 'TD', 'U5.TD-.B.TOFS.-.-')
+    run_standard(gen, TOFS_FIELDS, 'TD', 'U5.TD-.B.TOFS.-.-')
+
+def exp4v2():
+    """Exp 4v2 — U5.TD-.L.TOFS.-.-: Unweighted BM25F TOFS baseline (true B, not L)."""
+    print(f"\n{Style.BOLD}{Style.CYAN}=== EXP 4: U5.TD-.B.TOFS.-.- ==={Style.RESET}")
+    gen = RunGenerator(
+        searching_fields=[TOFS_FIELDS], query_fields=['TD'],
+        models=['bm25'], bm25_tuned=True,
+        expansion=[], rrf_input='docs',
+    )
+    run_standard(gen, TOFS_FIELDS, 'TD', 'U5.TD-.L.TOFS.-.-v2')
+
 
 
 def exp5():
@@ -329,7 +333,7 @@ def exp5():
         models=['bm25'], bm25_tuned=True,
         expansion=[], rrf_input='docs',
     )
-    run_standard_and_official(gen, ['title'], 'TD', 'U5.TD-.L.T---.-.-')
+    run_standard(gen, ['title'], 'TD', 'U5.TD-.L.T---.-.-')
 
 
 def exp6():
@@ -340,7 +344,7 @@ def exp6():
         models=['bm25'], bm25_tuned=True,
         expansion=[], rrf_input='docs',
     )
-    run_standard_and_official(gen, ['ocr'], 'TD', 'U5.TD-.L.-O--.-.-')
+    run_standard(gen, ['ocr'], 'TD', 'U5.TD-.L.-O--.-.-')
 
 
 def exp7():
@@ -351,7 +355,7 @@ def exp7():
         models=['bm25'], bm25_tuned=True,
         expansion=[], rrf_input='docs',
     )
-    run_standard_and_official(gen, ['folderlabel'], 'TD', 'U5.TD-.L.--F-.-.-')
+    run_standard(gen, ['folderlabel'], 'TD', 'U5.TD-.L.--F-.-.-')
 
 
 def exp8():
@@ -362,7 +366,7 @@ def exp8():
         models=['bm25'], bm25_tuned=True,
         expansion=[], rrf_input='docs',
     )
-    run_standard_and_official(gen, ['summary'], 'TD', 'U5.TD-.L.---S.-.-')
+    run_standard(gen, ['summary'], 'TD', 'U5.TD-.L.---S.-.-')
 
 
 def exp9():
@@ -374,7 +378,7 @@ def exp9():
         expansion=['same_snc'], expansion_ceiling_k=2,
         rrf_input='docs',
     )
-    run_standard_and_official(gen, TOFS_FIELDS, 'TD', 'U5.TD-.C.TOFS.m---2.-')
+    run_standard(gen, TOFS_FIELDS, 'TD', 'U5.TD-.C.TOFS.m---2.-')
 
 
 def exp10():
@@ -386,7 +390,7 @@ def exp10():
         expansion=['same_box'], expansion_ceiling_k=2,
         rrf_input='docs',
     )
-    run_standard_and_official(gen, TOFS_FIELDS, 'TD', 'U5.TD-.C.TOFS.--x-2.-')
+    run_standard(gen, TOFS_FIELDS, 'TD', 'U5.TD-.C.TOFS.--x-2.-')
 
 
 def exp11():
@@ -678,9 +682,11 @@ def exp35():
 # ---------------------------------------------------------------------------
 
 EXPERIMENTS = {
-     1: exp1,#    2: exp2,    3: exp3,    4: exp4,    5: exp5,
-#     6: exp6,    7: exp7,    8: exp8,    9: exp9,   10: exp10,
-#    11: exp11,  12: exp12,#  13: exp13,  14: exp14,  15: exp15,
+     #1: exp1,    2: exp2,    3: exp3,    
+     42: exp4v2,    
+    #5: exp5, 6: exp6,    7: exp7,    8: exp8,
+#     9: exp9,   10: exp10,
+#    11: exp11,  12: exp12,  13: exp13,  14: exp14,  15: exp15,
 #    16: exp16,  17: exp17,  18: exp18,  19: exp19,  20: exp20,
 #    21: exp21,  22: exp22,  23: exp23,  24: exp24,  25: exp25,
 #    26: exp26,  27: exp27,  28: exp28,  29: exp29,  30: exp30,
