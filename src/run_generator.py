@@ -346,11 +346,13 @@ class RunGenerator:
             narrative = self.ecf['ExperimentSets'][0]['Topics'][topics[j]].get('NARRATIVE', '')
 
             if self.current_query_field == "TDN":
-                query = f"{title} {description} {narrative}".strip()
+                query = f"{title}. {description}. {narrative}".strip()
             elif self.current_query_field == "TD":
                 query = f"{title}. {description}".strip()
             else:
                 query = title.strip()
+
+            #print(query)
 
             # 1. Get Raw Results from all models
             raw_results_map = {}

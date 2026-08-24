@@ -228,13 +228,6 @@ def run_hybrid_official(gen_A, search_field_A, gen_B, search_field_B, query_fiel
     gen_A.evaluator.evaluate(RESULTS_PATH, json_path)
     gen_A.evaluator.generate_aggregated_metrics(metrics_folder, 'official_ecf')
 
-
-def run_hybrid(gen_A, search_field_A, gen_B, search_field_B, query_field, run_folder_name):
-    """Executes both the random (30 seeds) hybrid run and the official ECF hybrid run."""
-    # 1. Standard Random Hybrid Run
-    run_hybrid(gen_A, search_field_A, gen_B, search_field_B, query_field, run_folder_name)
-
-
 def make_allfl_colbert():
     """Shared ALLFL ColBERT RunGenerator for hybrid experiments."""
     gen = RunGenerator(
@@ -682,15 +675,19 @@ def exp35():
 # ---------------------------------------------------------------------------
 
 EXPERIMENTS = {
-     #1: exp1,    2: exp2,    3: exp3,    
-     42: exp4v2,    
+    # 1: exp1,    2: exp2,    3: exp3,    
     #5: exp5, 6: exp6,    7: exp7,    8: exp8,
-#     9: exp9,   10: exp10,
-#    11: exp11,  12: exp12,  13: exp13,  14: exp14,  15: exp15,
-#    16: exp16,  17: exp17,  18: exp18,  19: exp19,  20: exp20,
-#    21: exp21,  22: exp22,  23: exp23,  24: exp24,  25: exp25,
-#    26: exp26,  27: exp27,  28: exp28,  29: exp29,  30: exp30,
-#    31: exp31,  32: exp32,  33: exp33,  34: exp34,  35: exp35,
+     
+     #9: exp9,   10: exp10,
+    #11: exp11,  12: exp12,
+   #13: exp13,  14: exp14,  15: exp15,
+   #16: exp16,  17: exp17,  18: exp18,  19: exp19,  20: exp20,
+   #21: exp21,  22: exp22,  23: exp23,  
+   
+   #24: exp24,
+   25: exp25,
+   26: exp26,  27: exp27,  28: exp28,  29: exp29,  30: exp30,
+   31: exp31,  32: exp32,  33: exp33,  34: exp34,  35: exp35,
 }
 
 if __name__ == "__main__":
