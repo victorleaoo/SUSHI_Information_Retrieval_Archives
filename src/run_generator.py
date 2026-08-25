@@ -275,7 +275,7 @@ class RunGenerator:
         if self.all_folders_folder_label:
              for folder in self.folderMetadata:
                 try:
-                    label = self.folderMetadata[folder]['label_parent_expanded']
+                    label = self.folderMetadata[folder]['label']
                 except:
                     label = self.folderMetadata[folder]['label']
                 
