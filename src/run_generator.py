@@ -69,7 +69,8 @@ class RunGenerator:
                  all_folders_folder_label=False,
                  rrf_input='docs',
                  expansion_ceiling_k=2,
-                 bm25_tuned=True
+                 bm25_tuned=True,
+                 docs_per_box=5
                  ):
         self.searching_fields = searching_fields
         self.query_fields = query_fields
@@ -81,6 +82,7 @@ class RunGenerator:
         self.rrf_input = rrf_input
         self.expansion_ceiling_k = expansion_ceiling_k
         self.bm25_tuned = bm25_tuned
+        self.docs_per_box = docs_per_box
 
         self.loader = DataLoader(PROJECT_ROOT)
         self.items = self.loader.items
@@ -233,7 +235,7 @@ class RunGenerator:
         if self.run_type == 'all_documents':
             self.ecf = self.loader.load_all_docs_ecf()
         else:
-            self.ecf = self.loader.create_random_ecf(random_seed, self.sampling)
+            self.ecf = self.loader.create_random_ecf(random_seed, self.sampling, docs_per_box=self.docs_per_box)
 
         # 2. Prepare Data
         clean_data = self.prepare_training_data()
