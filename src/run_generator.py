@@ -165,45 +165,9 @@ class RunGenerator:
                     # Official NTCIR-18 protocol: 3 ExperimentSets, each with its own
                     # TrainingDocuments and 15 Topics. Train independently per set,
                     # then collect all 45 topic results into a single run file.
-                    official_ecf = self.loader.load_official_ecf()
-                    all_results = []
+                    all_results = self.run_official_ecf(searching_field, query_field)
 
-                    for set_idx, experiment_set in enumerate(official_ecf['ExperimentSets']):
-                        set_num = set_idx + 1
-                        topics_in_set = list(experiment_set['Topics'].keys())
-                        print(f"{Style.BOLD}{Style.CYAN}  > Official ECF Set {set_num}/3{Style.RESET} "
-                              f"({len(experiment_set['TrainingDocuments'])} training docs, "
-                              f"topics {topics_in_set[0]}–{topics_in_set[-1]})")
-
-                        # Point self.ecf at this set so prepare_training_data() and
-                        # produce_topics_results() work without modification.
-                        self.ecf = {'ExperimentSets': [experiment_set]}
-
-                        # 1. Prepare training data from this set's documents
-                        clean_data = self.prepare_training_data()
-
-                        # 2. Build expansion relations (same behaviour as random mode)
-                        if self.all_folders_folder_label == False:
-                            self.relations = self.create_folder_relations_for_expansion(clean_data)
-
-                        # 3. Train all active models on this set's documents
-                        self.active_models = {}
-                        for model_name in self.models:
-                            if model_name == 'bm25':
-                                model = BM25Model(self.current_searching_field, tuned_weights=self.bm25_tuned)
-                            elif model_name == 'embeddings':
-                                model = EmbeddingsModel()
-                            elif model_name == 'colbert':
-                                model = ColBERTModel()
-
-                            model.train(clean_data)
-                            self.active_models[model_name] = model
-
-                        # 4. Produce results for this set's 15 topics
-                        set_results = self.produce_topics_results()
-                        all_results.extend(set_results)
-
-                    # 5. Save combined 45-topic run file and evaluate
+                    # Save combined 45-topic run file and evaluate
                     run_name = 'OfficialECF-3Sets-45Topics'
                     self.evaluator.save_run_file(all_results, RESULTS_PATH, run_name)
 
@@ -260,6 +224,61 @@ class RunGenerator:
         # 4. Generate Results
         results = self.produce_topics_results()
         return results
+
+    def run_official_ecf(self, searching_field, query_field):
+        """
+        Executes the full retrieval pipeline under the NTCIR-18 official protocol.
+
+        Loops over the 3 ExperimentSets in the official ECF, training the active
+        models independently on each set's TrainingDocuments, and collects all
+        45 topic results into a single list (mirrors run_single_seed's return
+        shape, but with no random seed involved).
+
+        Returns:
+            list: Ranked results for all 45 topics across the 3 sets.
+        """
+        self.current_searching_field = searching_field
+        self.current_query_field = query_field
+
+        official_ecf = self.loader.load_official_ecf()
+        all_results = []
+
+        for set_idx, experiment_set in enumerate(official_ecf['ExperimentSets']):
+            set_num = set_idx + 1
+            topics_in_set = list(experiment_set['Topics'].keys())
+            print(f"{Style.BOLD}{Style.CYAN}  > Official ECF Set {set_num}/3{Style.RESET} "
+                  f"({len(experiment_set['TrainingDocuments'])} training docs, "
+                  f"topics {topics_in_set[0]}–{topics_in_set[-1]})")
+
+            # Point self.ecf at this set so prepare_training_data() and
+            # produce_topics_results() work without modification.
+            self.ecf = {'ExperimentSets': [experiment_set]}
+
+            # 1. Prepare training data from this set's documents
+            clean_data = self.prepare_training_data()
+
+            # 2. Build expansion relations (same behaviour as random mode)
+            if self.all_folders_folder_label == False:
+                self.relations = self.create_folder_relations_for_expansion(clean_data)
+
+            # 3. Train all active models on this set's documents
+            self.active_models = {}
+            for model_name in self.models:
+                if model_name == 'bm25':
+                    model = BM25Model(self.current_searching_field, tuned_weights=self.bm25_tuned)
+                elif model_name == 'embeddings':
+                    model = EmbeddingsModel()
+                elif model_name == 'colbert':
+                    model = ColBERTModel()
+
+                model.train(clean_data)
+                self.active_models[model_name] = model
+
+            # 4. Produce results for this set's 15 topics
+            set_results = self.produce_topics_results()
+            all_results.extend(set_results)
+
+        return all_results
 
     def prepare_training_data(self):
         """
@@ -561,7 +580,10 @@ class RunGenerator:
 
         sorted_scores = sorted(scores.values(), reverse=True)
 
-        top_score = sorted_scores[min(self.expansion_ceiling_k - 1, len(sorted_scores) - 1)]
+        if len(sorted_scores) > 0:
+            top_score = sorted_scores[min(self.expansion_ceiling_k - 1, len(sorted_scores) - 1)]
+        else:
+            top_score = 0
         sorted_new_folder_scores = sorted(new_folder_scores.values(), reverse=True)
 
         if len(sorted_scores)>0 and len(sorted_new_folder_scores)>0 and sorted_new_folder_scores[0] > top_score:
