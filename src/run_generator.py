@@ -296,7 +296,7 @@ class RunGenerator:
         if self.all_folders_folder_label:
              for folder in self.folderMetadata:
                 try:
-                    label = self.folderMetadata[folder]['label']
+                    label = self.folderMetadata[folder]['label'] + " " + self.folderMetadata[folder]['scope_truncated']
                 except:
                     label = self.folderMetadata[folder]['label']
                 
@@ -325,7 +325,7 @@ class RunGenerator:
                 }
 
                 try:
-                    label = self.folderMetadata[folder]['label_parent_expanded']
+                    label = self.folderMetadata[folder]['label_parent_expanded'] + " " + self.folderMetadata[folder]['scope_truncated']
                 except:
                     label = self.folderMetadata[folder]['label']
                 doc_entry['folderlabel'] = label

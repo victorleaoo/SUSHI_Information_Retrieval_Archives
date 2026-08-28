@@ -542,7 +542,7 @@ def run_single_experiment_ui():
         return
 
     grouped_runs = u1.get_grouped_run_configurations()
-    all_run_names = u1.sort_run_names(all_runs_df['Run Name'].tolist())
+    all_run_names = sorted(all_runs_df['Run Name'].tolist())
 
     selected_run = st.selectbox(
         "Select Experiment:",
@@ -607,7 +607,7 @@ def run_two_experiment_ui():
         st.warning("No runs found for comparison.")
         return
 
-    all_run_names = u1.sort_run_names(all_runs_df['Run Name'].tolist())
+    all_run_names = sorted(all_runs_df['Run Name'].tolist())
 
     col_sel_a, col_sel_b = st.columns(2)
     with col_sel_a:
