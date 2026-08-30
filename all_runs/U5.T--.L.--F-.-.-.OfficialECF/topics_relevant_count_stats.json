@@ -3,13 +3,13 @@
         "mean": 3.0
     },
     "T2": {
-        "mean": 0.0
-    },
-    "T3": {
         "mean": NaN
     },
-    "T4": {
+    "T3": {
         "mean": 0.0
+    },
+    "T4": {
+        "mean": NaN
     },
     "T5": {
         "mean": 0.0
@@ -39,13 +39,13 @@
         "mean": NaN
     },
     "T14": {
-        "mean": NaN
+        "mean": 0.0
     },
     "T15": {
         "mean": 0.0
     },
     "T16": {
-        "mean": 0.0
+        "mean": NaN
     },
     "T17": {
         "mean": 0.0
@@ -60,13 +60,13 @@
         "mean": 1.0
     },
     "T21": {
-        "mean": 0.0
+        "mean": NaN
     },
     "T22": {
         "mean": 0.0
     },
     "T23": {
-        "mean": 0.0
+        "mean": NaN
     },
     "T24": {
         "mean": NaN
@@ -81,7 +81,7 @@
         "mean": 1.0
     },
     "T28": {
-        "mean": 0.0
+        "mean": NaN
     },
     "T29": {
         "mean": 0.0
@@ -90,7 +90,7 @@
         "mean": 0.0
     },
     "T31": {
-        "mean": 0.0
+        "mean": NaN
     },
     "T32": {
         "mean": NaN
@@ -111,7 +111,7 @@
         "mean": 0.0
     },
     "T38": {
-        "mean": 0.0
+        "mean": NaN
     },
     "T39": {
         "mean": NaN
@@ -120,10 +120,10 @@
         "mean": 0.0
     },
     "T41": {
-        "mean": 0.0
+        "mean": NaN
     },
     "T42": {
-        "mean": NaN
+        "mean": 0.0
     },
     "T43": {
         "mean": 0.0
