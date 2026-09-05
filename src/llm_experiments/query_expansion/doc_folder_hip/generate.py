@@ -33,7 +33,7 @@ from src.llm_experiments.query_expansion.doc_folder_hip.prompts import (
 
 PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", "..", ".."))
 TOPICS_PATH = os.path.join(PROJECT_ROOT, "src", "data_creation", "topics_output.txt")
-OUTPUT_DIR = os.path.join(PROJECT_ROOT, "data", "llm_calls", "query_expansion")
+OUTPUT_DIR = os.path.join(PROJECT_ROOT, "data", "llm_calls", "query_expansion", "1_doc_folder_hip")
 CACHE_DIR = os.path.join(PROJECT_ROOT, "data", "llm_calls", "cache")
 LOG_PATH = os.path.join(PROJECT_ROOT, "data", "llm_calls", "calls.jsonl")
 
