@@ -17,6 +17,7 @@ underlying LLMRunner cache also means a re-run never repeats an API call.
 
 import json
 import os
+import time
 from datetime import datetime
 
 from src.llm_experiments.collection_context import COLLECTION_CONTEXT
@@ -80,24 +81,49 @@ def build_call_result(entry: dict, parsed: dict) -> dict:
     }
 
 
+def log(message: str):
+    print(f"[{datetime.now().isoformat(timespec='seconds')}] {message}", flush=True)
+
+
+def run_prompt(runner: LLMRunner, label: str, prompt: str) -> dict:
+    log(f"    -> calling {label} prompt...")
+    entry = runner.run_with_meta(prompt)
+
+    status = "CACHED" if entry.get("cached") else "LIVE"
+    duration = entry.get("duration_seconds")
+    duration_str = f"{duration:.2f}s" if duration is not None else "n/a"
+    log(
+        f"    <- {label} {status} | in={entry.get('input_tokens')} tokens "
+        f"out={entry.get('output_tokens')} tokens | {duration_str}"
+    )
+    return entry
+
+
 def generate_for_query_type(query_type: str, fields: list, runner: LLMRunner):
     output_path = os.path.join(OUTPUT_DIR, f"{query_type}.json")
     data = load_or_init_output(output_path, query_type, runner.model)
     topics = load_topics()
 
-    for topic in topics:
+    log(f"=== query_type={query_type} | fields={fields} | {len(topics)} topics total ===")
+
+    for i, topic in enumerate(topics, start=1):
         topic_id = topic["ID"]
         if topic_id in data["topics"]:
+            log(f"[{query_type}] ({i}/{len(topics)}) {topic_id} already done, skipping")
             continue
 
         query_text = build_query_text(topic, fields)
+        topic_start = time.monotonic()
+
+        log(f"[{query_type}] ({i}/{len(topics)}) {topic_id} starting")
+        log(f"    query_text: {query_text!r}")
 
         documents_prompt = render_documents_prompt(COLLECTION_CONTEXT, query_text)
-        documents_entry = runner.run_with_meta(documents_prompt)
+        documents_entry = run_prompt(runner, "DOCUMENTS", documents_prompt)
         documents_result = build_call_result(documents_entry, parse_documents_response(documents_entry.get("response", "")))
 
         folder_label_prompt = render_folder_label_prompt(COLLECTION_CONTEXT, query_text)
-        folder_label_entry = runner.run_with_meta(folder_label_prompt)
+        folder_label_entry = run_prompt(runner, "FOLDER_LABEL", folder_label_prompt)
         folder_label_result = build_call_result(folder_label_entry, parse_folder_label_response(folder_label_entry.get("response", "")))
 
         data["topics"][topic_id] = {
@@ -109,15 +135,20 @@ def generate_for_query_type(query_type: str, fields: list, runner: LLMRunner):
         }
 
         save_output(output_path, data)
-        print(f"[{query_type}] {topic_id} done")
+        topic_duration = time.monotonic() - topic_start
+        log(f"[{query_type}] ({i}/{len(topics)}) {topic_id} done in {topic_duration:.2f}s -> saved to {output_path}")
+
+    log(f"=== query_type={query_type} finished ===")
 
 
 def main():
     os.makedirs(OUTPUT_DIR, exist_ok=True)
     runner = LLMRunner(cache_dir=CACHE_DIR, log_path=LOG_PATH)
 
+    log(f"Starting doc_folder_hip generation | model={runner.model} | output_dir={OUTPUT_DIR}")
     for query_type, fields in QUERY_TYPE_FIELDS.items():
         generate_for_query_type(query_type, fields, runner)
+    log("All query types finished.")
 
 
 if __name__ == "__main__":

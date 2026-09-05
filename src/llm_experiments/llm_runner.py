@@ -121,7 +121,11 @@ class LLMRunner:
             except Exception as e:
                 last_exception = e
                 duration_seconds = time.monotonic() - start
-                print(f"[LLMRunner] attempt {attempt}/{self.max_retries} failed: {e}")
+                print(
+                    f"[{datetime.now().isoformat(timespec='seconds')}] [LLMRunner] "
+                    f"attempt {attempt}/{self.max_retries} failed: {e}",
+                    flush=True,
+                )
                 if attempt < self.max_retries:
                     time.sleep(self.retry_delay)
 
