@@ -148,6 +148,18 @@ classification metadata (label, SNC code, expanded meaning, scope note, date ran
 }
 ```
 
+## `runs/`
+
+Consumes the LLM outputs above to drive actual IR experiments (not more LLM
+calls). See `runs/runs.md` for full details and a run-tracking table.
+
+- **`run_query_augmentated_experiments.py`** — re-runs the 15 core `CONFIGS`
+  from `src/run_new_experiments.py`, for T/TD/TDN, against three query
+  variants built from `query_expansion/doc_folder_hip`'s output (`DOC` =
+  hypothetical documents, `FL` = hypothetical folder label, `AUG` = both).
+  135 experiments total. Depends on `RunGenerator`'s `query_augmentation`
+  param in `src/run_generator.py`.
+
 ## Where things get stored
 
 - `data/llm_calls/cache/` — `LLMRunner`'s raw per-prompt cache (one JSON file per SHA1 hash of the prompt). This is the low-level cache; you normally don't need to look in here.

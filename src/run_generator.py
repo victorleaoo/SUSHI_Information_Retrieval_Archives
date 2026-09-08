@@ -1,3 +1,4 @@
+import json
 import os
 import statistics
 import warnings
@@ -27,6 +28,43 @@ PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 RESULTS_PATH = os.path.join(PROJECT_ROOT, 'results', 'RunResults.tsv')
 FOLDER_QRELS_PATH = os.path.join(PROJECT_ROOT, 'qrels', 'formal-folder-qrel.txt')
 BOX_QRELS_PATH = os.path.join(PROJECT_ROOT, 'qrels', 'formal-box-qrel.txt')
+DOC_FOLDER_HIP_DIR = os.path.join(PROJECT_ROOT, 'data', 'llm_calls', 'query_expansion', '1_doc_folder_hip')
+
+QUERY_AUGMENTATION_VARIANTS = ('DOC', 'FL', 'AUG')
+
+
+def build_augmentation_text(topic_entry, variant):
+    """
+    Builds the extra query text for a single topic from a doc_folder_hip entry.
+
+    - 'DOC': the three hypothetical documents (doc_1/doc_2/doc_3), joined by ". ".
+    - 'FL': the hypothetical folder label(s) — label_text lines plus subject_terms —
+      joined by " " and ", " respectively. Raw SNC codes (e.g. "POL 15-1") are
+      skipped: they are filing-system tokens, not query vocabulary, and BM25's
+      alphanumeric-only cleaning would mangle them anyway.
+    - 'AUG': 'DOC' text and 'FL' text concatenated with ". ".
+
+    Returns "" if the requested pieces are missing (caller falls back to the
+    plain original query in that case).
+    """
+    documents_parsed = topic_entry.get('documents', {}).get('parsed', {})
+    folder_label_parsed = topic_entry.get('folder_label', {}).get('parsed', {})
+
+    doc_text = ". ".join(
+        documents_parsed[f'doc_{i}'] for i in (1, 2, 3) if documents_parsed.get(f'doc_{i}')
+    )
+
+    label_text = " ".join(folder_label_parsed.get('label_text', []))
+    subject_terms = ", ".join(folder_label_parsed.get('subject_terms', []))
+    fl_text = " ".join(t for t in (label_text, subject_terms) if t)
+
+    if variant == 'DOC':
+        return doc_text
+    elif variant == 'FL':
+        return fl_text
+    elif variant == 'AUG':
+        return ". ".join(t for t in (doc_text, fl_text) if t)
+    return ""
 
 RANDOM_SEED_LIST = [1, 42, 100, 300, 333, 777, 999, 2025, 6159, 12345, 19865, 53819,
                     56782, 62537, 72738, 75259, 81236, 91823, 98665, 98765, 99009, 999777333,
@@ -70,7 +108,8 @@ class RunGenerator:
                  rrf_input='docs',
                  expansion_ceiling_k=2,
                  bm25_tuned=True,
-                 docs_per_box=5
+                 docs_per_box=5,
+                 query_augmentation=None
                  ):
         self.searching_fields = searching_fields
         self.query_fields = query_fields
@@ -83,6 +122,11 @@ class RunGenerator:
         self.expansion_ceiling_k = expansion_ceiling_k
         self.bm25_tuned = bm25_tuned
         self.docs_per_box = docs_per_box
+
+        assert query_augmentation is None or query_augmentation in QUERY_AUGMENTATION_VARIANTS, \
+            f"query_augmentation must be one of {QUERY_AUGMENTATION_VARIANTS} or None"
+        self.query_augmentation = query_augmentation
+        self._augmentation_data_cache = {}  # query_field -> {topic_id: entry}
 
         self.loader = DataLoader(PROJECT_ROOT)
         self.items = self.loader.items
@@ -344,6 +388,41 @@ class RunGenerator:
 
         return trainingSet
     
+    def _load_augmentation_data(self, query_field):
+        """Lazily loads and caches data/llm_calls/query_expansion/1_doc_folder_hip/{query_field}.json."""
+        if query_field not in self._augmentation_data_cache:
+            path = os.path.join(DOC_FOLDER_HIP_DIR, f'{query_field}.json')
+            if not os.path.isfile(path):
+                raise FileNotFoundError(
+                    f"query_augmentation='{self.query_augmentation}' requires {path}, "
+                    f"which does not exist. Run src.llm_experiments.query_expansion."
+                    f"doc_folder_hip.generate first (or copy its output here)."
+                )
+            with open(path, 'r', encoding='utf-8') as f:
+                data = json.load(f)
+            self._augmentation_data_cache[query_field] = data.get('topics', {})
+        return self._augmentation_data_cache[query_field]
+
+    def get_augmented_query(self, base_query, query_field, topic_id):
+        """
+        Appends the configured query_augmentation ('DOC' / 'FL' / 'AUG') text for
+        this topic to the base query. Falls back to the plain base_query if the
+        topic is missing from the loaded data or has no usable augmentation text.
+        """
+        if not self.query_augmentation:
+            return base_query
+
+        topics = self._load_augmentation_data(query_field)
+        topic_entry = topics.get(topic_id)
+        if topic_entry is None:
+            return base_query
+
+        augmentation_text = build_augmentation_text(topic_entry, self.query_augmentation)
+        if not augmentation_text:
+            return base_query
+
+        return f"{base_query}. {augmentation_text}".strip()
+
     def produce_topics_results(self):
         """
         Runs search for all topics defined in the ECF.
@@ -372,6 +451,9 @@ class RunGenerator:
                 query = f"{title}. {description}".strip()
             else:
                 query = title.strip()
+
+            if self.query_augmentation:
+                query = self.get_augmented_query(query, self.current_query_field, topics[j])
 
             #print(query)
 

@@ -60,7 +60,7 @@ import os
 import sys
 from tqdm import tqdm
 
-from run_generator import RunGenerator, RANDOM_SEED_LIST, RESULTS_PATH, Style
+from run_generator import RunGenerator, RANDOM_SEED_LIST, RESULTS_PATH, Style, PROJECT_ROOT
 from hybrid_models import perform_hybrid_fusion
 
 # ---------------------------------------------------------------------------
@@ -82,7 +82,7 @@ QUERY_FIELD_ID_BASE = {'T': 0, 'TD': 30, 'TDN': 60}
 # ---------------------------------------------------------------------------
 
 def make_output_folder(name: str) -> str:
-    path = os.path.abspath(f'../all_runs/{name}')
+    path = os.path.join(PROJECT_ROOT, 'all_runs', name)
     os.makedirs(path, exist_ok=True)
     return path
 
@@ -122,7 +122,7 @@ def run_hybrid(gen_A, search_field_A, gen_B, search_field_B, query_field, run_fo
     gen_A.evaluator.generate_aggregated_metrics(metrics_folder, 'random')
 
 
-def make_allfl_bm25(query_field):
+def make_allfl_bm25(query_field, query_augmentation=None):
     """Shared ALLFL BM25 RunGenerator used as ranker B in the hybrid experiments."""
     gen = RunGenerator(
         searching_fields=[ALLFL_FIELDS],
@@ -131,11 +131,12 @@ def make_allfl_bm25(query_field):
         bm25_tuned=False,
         expansion=[],
         all_folders_folder_label=True,
+        query_augmentation=query_augmentation,
     )
     return gen, ALLFL_FIELDS
 
 
-def make_allfl_colbert(query_field):
+def make_allfl_colbert(query_field, query_augmentation=None):
     """Shared ALLFL ColBERT RunGenerator used as ranker B in the colbert-hybrid experiments."""
     gen = RunGenerator(
         searching_fields=[ALLFL_FIELDS],
@@ -143,6 +144,7 @@ def make_allfl_colbert(query_field):
         models=['colbert'],
         expansion=[],
         all_folders_folder_label=True,
+        query_augmentation=query_augmentation,
     )
     return gen, ALLFL_FIELDS
 
@@ -517,7 +519,7 @@ def is_experiment_done(name):
     skip it forever, even though it has no results in it. Checking for the
     marker file avoids that trap.
     """
-    folder = os.path.abspath(f'../all_runs/{name}')
+    folder = os.path.join(PROJECT_ROOT, 'all_runs', name)
     return any(os.path.isfile(os.path.join(folder, marker)) for marker in DONE_MARKER_FILES)
 
 
