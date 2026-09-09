@@ -71,7 +71,7 @@ def augmented_tag(query_field: str, variant: str) -> str:
 
 # id = 1000 + query_field_offset + variant_offset + config_offset(1..15)
 QUERY_FIELD_ID_OFFSET = {'T': 0, 'TD': 100, 'TDN': 200}
-VARIANT_ID_OFFSET = {'DOC': 0, 'FL': 15, 'AUG': 30}
+VARIANT_ID_OFFSET = {'AUG': 30}
 ID_BASE = 1000
 
 

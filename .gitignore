@@ -42,3 +42,5 @@ RUN_NOTATION.md
 calls.jsonl
 
 cache/
+
+*env/
