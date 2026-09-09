@@ -1,22 +1,21 @@
 """
-Generates hypothetical-document and hypothetical-folder-label query expansions
-for every topic, for each of the T / TD / TDN query types.
+Generates a core-themes/related-concepts query expansion for every topic, for each of
+the T / TD / TDN query types.
 
 Usage (from the project root, so it survives a terminal disconnect):
-    nohup python -m src.llm_experiments.query_expansion.doc_folder_hip.generate \
+    nohup python -m src.llm_experiments.query_expansion.core_themes_and_related_concepts.generate \
         > data/llm_calls/query_expansion/generate.out 2>&1 &
 
-Writes one file per query type to data/llm_calls/query_expansion/{T,TD,TDN}.json.
-Each file is a dict keyed by topic ID; each topic holds the original topic
-fields, the constructed query_text, and both a "documents" and a
-"folder_label" result (raw_response text + parsed structured fields + token/
-timing metadata). The script re-reads its own output file on startup and,
-per topic, skips the "documents" and/or "folder_label" half independently
-if its parsed fields are already non-empty/complete. A re-run therefore
-leaves already-valid topics untouched (no API call, since the LLMRunner
-cache is still consulted) but regenerates any half that previously parsed
-as invalid/incomplete -- forcing past its stale cache entry so it isn't
-just replayed -- so it's safe to re-run to backfill or repair the dataset.
+Writes one file per query type to
+data/llm_calls/query_expansion/2_core_themes_and_related_concepts/{T,TD,TDN}.json.
+Each file is a dict keyed by topic ID; each topic holds the original topic fields, the
+constructed query_text, and a "core_themes" result (raw_response text + parsed structured
+fields + token/timing metadata). The script re-reads its own output file on startup and,
+per topic, skips it if its parsed fields are already non-empty/complete. A re-run therefore
+leaves already-valid topics untouched (no API call, since the LLMRunner cache is still
+consulted) but regenerates any topic that previously parsed as invalid/incomplete --
+forcing past its stale cache entry so it isn't just replayed -- so it's safe to re-run to
+backfill or repair the dataset.
 """
 
 import json
@@ -26,18 +25,19 @@ from datetime import datetime
 
 from src.llm_experiments.collection_context import COLLECTION_CONTEXT
 from src.llm_experiments.llm_runner import LLMRunner
-from src.llm_experiments.query_expansion.doc_folder_hip.parsing import (
-    parse_documents_response,
-    parse_folder_label_response,
+from src.llm_experiments.query_expansion.core_themes_and_related_concepts.parsing import (
+    is_valid_core_themes,
+    parse_core_themes_response,
 )
-from src.llm_experiments.query_expansion.doc_folder_hip.prompts import (
-    render_documents_prompt,
-    render_folder_label_prompt,
+from src.llm_experiments.query_expansion.core_themes_and_related_concepts.prompts import (
+    render_core_themes_prompt,
 )
 
 PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", "..", ".."))
 TOPICS_PATH = os.path.join(PROJECT_ROOT, "src", "data_creation", "topics_output.txt")
-OUTPUT_DIR = os.path.join(PROJECT_ROOT, "data", "llm_calls", "query_expansion", "1_doc_folder_hip")
+OUTPUT_DIR = os.path.join(
+    PROJECT_ROOT, "data", "llm_calls", "query_expansion", "2_core_themes_and_related_concepts"
+)
 CACHE_DIR = os.path.join(PROJECT_ROOT, "data", "llm_calls", "cache")
 LOG_PATH = os.path.join(PROJECT_ROOT, "data", "llm_calls", "calls.jsonl")
 
@@ -72,16 +72,6 @@ def load_or_init_output(output_path: str, query_type: str, model: str) -> dict:
 def save_output(output_path: str, data: dict):
     with open(output_path, "w", encoding="utf-8") as f:
         json.dump(data, f, indent=2, ensure_ascii=False)
-
-
-def is_valid_documents(result: dict) -> bool:
-    parsed = result.get("parsed") or {}
-    return all(parsed.get(f"doc_{i}") for i in (1, 2, 3))
-
-
-def is_valid_folder_label(result: dict) -> bool:
-    parsed = result.get("parsed") or {}
-    return bool(parsed.get("snc_codes")) and bool(parsed.get("label_text")) and bool(parsed.get("subject_terms"))
 
 
 def build_call_result(entry: dict, parsed: dict) -> dict:
@@ -124,10 +114,7 @@ def generate_for_query_type(query_type: str, fields: list, runner: LLMRunner):
         topic_id = topic["ID"]
         existing = data["topics"].get(topic_id)
 
-        need_documents = existing is None or not is_valid_documents(existing["documents"])
-        need_folder_label = existing is None or not is_valid_folder_label(existing["folder_label"])
-
-        if not need_documents and not need_folder_label:
+        if existing is not None and is_valid_core_themes(existing["core_themes"]):
             log(f"[{query_type}] ({i}/{len(topics)}) {topic_id} already valid, skipping")
             continue
 
@@ -135,33 +122,18 @@ def generate_for_query_type(query_type: str, fields: list, runner: LLMRunner):
         topic_start = time.monotonic()
 
         redo = existing is not None
-        log(
-            f"[{query_type}] ({i}/{len(topics)}) {topic_id} starting "
-            f"(documents={'redo' if need_documents else 'keep'}, "
-            f"folder_label={'redo' if need_folder_label else 'keep'})"
-        )
+        log(f"[{query_type}] ({i}/{len(topics)}) {topic_id} starting ({'redo' if redo else 'new'})")
         log(f"    query_text: {query_text!r}")
 
-        if need_documents:
-            documents_prompt = render_documents_prompt(COLLECTION_CONTEXT, query_text)
-            documents_entry = run_prompt(runner, "DOCUMENTS", documents_prompt, force=redo)
-            documents_result = build_call_result(documents_entry, parse_documents_response(documents_entry.get("response", "")))
-        else:
-            documents_result = existing["documents"]
-
-        if need_folder_label:
-            folder_label_prompt = render_folder_label_prompt(COLLECTION_CONTEXT, query_text)
-            folder_label_entry = run_prompt(runner, "FOLDER_LABEL", folder_label_prompt, force=redo)
-            folder_label_result = build_call_result(folder_label_entry, parse_folder_label_response(folder_label_entry.get("response", "")))
-        else:
-            folder_label_result = existing["folder_label"]
+        prompt = render_core_themes_prompt(COLLECTION_CONTEXT, query_text)
+        entry = run_prompt(runner, "CORE_THEMES", prompt, force=redo)
+        core_themes_result = build_call_result(entry, parse_core_themes_response(entry.get("response", "")))
 
         data["topics"][topic_id] = {
             "topic_id": topic_id,
             "original_query": {field: topic.get(field, "") for field in fields},
             "query_text": query_text,
-            "documents": documents_result,
-            "folder_label": folder_label_result,
+            "core_themes": core_themes_result,
         }
 
         save_output(output_path, data)
@@ -175,7 +147,7 @@ def main():
     os.makedirs(OUTPUT_DIR, exist_ok=True)
     runner = LLMRunner(cache_dir=CACHE_DIR, log_path=LOG_PATH)
 
-    log(f"Starting doc_folder_hip generation | model={runner.model} | output_dir={OUTPUT_DIR}")
+    log(f"Starting core_themes_and_related_concepts generation | model={runner.model} | output_dir={OUTPUT_DIR}")
     for query_type, fields in QUERY_TYPE_FIELDS.items():
         generate_for_query_type(query_type, fields, runner)
     log("All query types finished.")
