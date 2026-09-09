@@ -60,17 +60,23 @@ class LLMRunner:
         with open(self.log_path, "a", encoding="utf-8") as f:
             f.write(json.dumps(entry, ensure_ascii=False) + "\n")
 
-    def run(self, prompt: str, system_prompt: str = "", temperature: float = 0.0, model: str = None) -> str:
+    def run(self, prompt: str, system_prompt: str = "", temperature: float = 0.0, model: str = None, force: bool = False) -> str:
         """Returns just the response text. Use `run_with_meta` for token counts, timing, etc."""
-        return self.run_with_meta(prompt, system_prompt=system_prompt, temperature=temperature, model=model)["response"]
+        return self.run_with_meta(prompt, system_prompt=system_prompt, temperature=temperature, model=model, force=force)["response"]
 
-    def run_with_meta(self, prompt: str, system_prompt: str = "", temperature: float = 0.0, model: str = None) -> dict:
-        """Same as `run`, but returns the full call record (response, token counts, raw_response, created_at, duration_seconds, cached)."""
+    def run_with_meta(self, prompt: str, system_prompt: str = "", temperature: float = 0.0, model: str = None, force: bool = False) -> dict:
+        """Same as `run`, but returns the full call record (response, token counts, raw_response, created_at, duration_seconds, cached).
+
+        `force=True` skips a cache hit and makes a live call instead, overwriting the
+        cache entry with the fresh result. Use this to redo a call whose cached response
+        parsed as invalid/incomplete, since replaying the same prompt from cache would
+        otherwise just return the same bad response forever.
+        """
         model = model or self.model
         key = self._cache_key(system_prompt, prompt)
         cache_path = self._cache_path(key)
 
-        if os.path.exists(cache_path):
+        if os.path.exists(cache_path) and not force:
             with open(cache_path, "r", encoding="utf-8") as f:
                 entry = json.load(f)
             entry = {**entry, "cached": True}

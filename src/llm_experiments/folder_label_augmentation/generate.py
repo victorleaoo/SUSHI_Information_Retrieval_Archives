@@ -11,9 +11,12 @@ Writes a single file, data/llm_calls/folder_label_augmentation/2_folder_context/
 a dict keyed by folder ID (the FoldersV1.3.json key, e.g. "A99990001"). Each entry holds
 the classification fields used, the raw response, the parsed fields (core_themes,
 related_concepts), whether the parse was valid, how many attempts it took, and token/
-timing metadata. The script re-reads its own output file on startup and skips folders
-already present, so it can be safely re-run/resumed; the underlying LLMRunner cache also
-means a re-run never repeats an API call for an identical prompt.
+timing metadata. The script re-reads its own output file on startup and skips only folders
+whose stored result is already valid; a folder that's missing entirely or previously came
+out invalid is (re)generated, forcing past any stale cache entry so a re-run actually fixes
+it rather than replaying the same bad response. It's therefore safe and useful to re-run
+this script at any time to backfill missing folders and repair invalid ones, at no cost for
+folders that are already valid.
 
 Each folder is retried up to 3 times if the parsed result comes out invalid (core_themes
 null/empty/<25 chars, or related_concepts empty) -- each retry uses a distinguishing
@@ -92,15 +95,23 @@ def log(message: str):
     print(f"[{datetime.now().isoformat(timespec='seconds')}] {message}", flush=True)
 
 
-def generate_with_retries(runner: LLMRunner, prompt: str) -> tuple:
+def generate_with_retries(runner: LLMRunner, prompt: str, force_first: bool = False) -> tuple:
     """Calls the prompt up to MAX_PARSE_ATTEMPTS times until parsed output is valid.
     Returns (entry, parsed, attempts_used, valid).
+
+    Attempts 2+ all share one cache key (same RETRY_SYSTEM_PROMPT + prompt), so without
+    forcing, attempt 3 would just replay attempt 2's cached response instead of making a
+    real third call -- force=True for attempt > 1 guarantees each retry is a live call.
+    `force_first` additionally bypasses the cache on attempt 1, for redoing a folder that
+    a previous run already gave up on as invalid (replaying that stale response would just
+    reproduce the same invalid result).
     """
     entry = None
     parsed = None
     for attempt in range(1, MAX_PARSE_ATTEMPTS + 1):
         system_prompt = "" if attempt == 1 else RETRY_SYSTEM_PROMPT
-        entry = runner.run_with_meta(prompt, system_prompt=system_prompt)
+        force = force_first if attempt == 1 else True
+        entry = runner.run_with_meta(prompt, system_prompt=system_prompt, force=force)
         parsed = parse_folder_context_response(entry.get("response", ""))
         valid = is_valid_parsed(parsed)
 
@@ -128,18 +139,23 @@ def generate_for_all_folders(runner: LLMRunner):
     log(f"=== folder_context | {len(folder_ids)} folders total ===")
 
     for i, folder_id in enumerate(folder_ids, start=1):
-        if folder_id in data["folders"]:
-            log(f"({i}/{len(folder_ids)}) {folder_id} already done, skipping")
+        existing = data["folders"].get(folder_id)
+        if existing is not None and existing.get("valid"):
+            log(f"({i}/{len(folder_ids)}) {folder_id} already valid, skipping")
             continue
 
         folder = folders[folder_id]
         fields = build_folder_fields(folder)
         folder_start = time.monotonic()
 
-        log(f"({i}/{len(folder_ids)}) {folder_id} starting | snc={fields['snc']} | label={fields['folder_label']}")
+        redo = existing is not None
+        log(
+            f"({i}/{len(folder_ids)}) {folder_id} starting ({'redo, previously invalid' if redo else 'new'}) "
+            f"| snc={fields['snc']} | label={fields['folder_label']}"
+        )
 
         prompt = render_folder_context_prompt(COLLECTION_CONTEXT, **fields)
-        entry, parsed, attempts_used, valid = generate_with_retries(runner, prompt)
+        entry, parsed, attempts_used, valid = generate_with_retries(runner, prompt, force_first=redo)
 
         data["folders"][folder_id] = {
             "folder_id": folder_id,
