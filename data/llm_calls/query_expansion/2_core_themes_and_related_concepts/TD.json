@@ -1,0 +1,1841 @@
+{
+  "query_type": "TD",
+  "model": "UnB-Llama-3.3-70B-Instruct",
+  "generated_at": "2026-09-08T23:40:31.964748",
+  "topics": {
+    "T18Eval-00001": {
+      "topic_id": "T18Eval-00001",
+      "original_query": {
+        "TITLE": "Future space missions",
+        "DESCRIPTION": "Find documents that describe plans for one or more specific future space missions by any nation, organization, or individual."
+      },
+      "query_text": "Future space missions\nFind documents that describe plans for one or more specific future space missions by any nation, organization, or individual.",
+      "core_themes": {
+        "raw_response": "CORE_THEMES: Documents pertaining to space exploration plans and proposals, including those submitted by NASA, the Soviet space program, or other national and international organizations, as well as agreements and treaties related to outer space, such as the Outer Space Treaty, and discussions of space-related policies and cooperation between the US and Brazil, including the role of the Brazilian National Commission for Space Activities, Comissão Nacional de Atividades Espaciais.\n\nRELATED_CONCEPTS: NASA, Soviet space program, Outer Space Treaty, Comissão Nacional de Atividades Espaciais, US-Brazil space cooperation, Apollo program, Gemini program, Saturn V, Vostok, Sputnik, Cosmodrome, Baikonur, Cape Canaveral, Guiana Space Centre, INPE, National Commission for Space Activities, Ministério da Aeronáutica, Centro Técnico Aeroespacial, President Kennedy, President Goulart, NASA-Brazil agreements, space launch vehicles, satellite technology, rocket propulsion.",
+        "parsed": {
+          "core_themes": "Documents pertaining to space exploration plans and proposals, including those submitted by NASA, the Soviet space program, or other national and international organizations, as well as agreements and treaties related to outer space, such as the Outer Space Treaty, and discussions of space-related policies and cooperation between the US and Brazil, including the role of the Brazilian National Commission for Space Activities, Comissão Nacional de Atividades Espaciais.",
+          "related_concepts": [
+            "NASA",
+            "Soviet space program",
+            "Outer Space Treaty",
+            "Comissão Nacional de Atividades Espaciais",
+            "US-Brazil space cooperation",
+            "Apollo program",
+            "Gemini program",
+            "Saturn V",
+            "Vostok",
+            "Sputnik",
+            "Cosmodrome",
+            "Baikonur",
+            "Cape Canaveral",
+            "Guiana Space Centre",
+            "INPE",
+            "National Commission for Space Activities",
+            "Ministério da Aeronáutica",
+            "Centro Técnico Aeroespacial",
+            "President Kennedy",
+            "President Goulart",
+            "NASA-Brazil agreements",
+            "space launch vehicles",
+            "satellite technology",
+            "rocket propulsion."
+          ]
+        },
+        "input_tokens": 449,
+        "output_tokens": 207,
+        "duration_seconds": 8.938539432943799,
+        "created_at": "2026-09-08T23:40:31.964982"
+      }
+    },
+    "T18Eval-00002": {
+      "topic_id": "T18Eval-00002",
+      "original_query": {
+        "TITLE": "Brazilian submarines",
+        "DESCRIPTION": "Find documents that mention the operation of submarines by the Brazilian Navy."
+      },
+      "query_text": "Brazilian submarines\nFind documents that mention the operation of submarines by the Brazilian Navy.",
+      "core_themes": {
+        "raw_response": "CORE_THEMES: Documents pertaining to the Brazilian Navy's submarine operations, including those related to the Marinha do Brasil's acquisition, maintenance, and deployment of submarines, as well as U.S. diplomatic efforts to cooperate with or influence Brazil's naval modernization programs, particularly during the Goulart and subsequent military governments.\n\nRELATED_CONCEPTS: Marinha do Brasil, Brazilian Navy, submarine operations, naval modernization, Goulart government, Castelo Branco, Costa e Silva, Medici, Institutional Act No. 5, U.S. Military Assistance Program, Foreign Military Sales, submarine technology, Ikara missile system, Grumman aircraft, Lockheed Martin, North Atlantic Treaty Organization, NATO, Rio Treaty, Força de Submarinos, Base Naval de Aratu, Porto de Santos, Itaqui Naval Base, submarine base construction, naval cooperation agreements, defense cooperation, Brazilian Ministry of Navy, Estado-Maior da Marinha.",
+        "parsed": {
+          "core_themes": "Documents pertaining to the Brazilian Navy's submarine operations, including those related to the Marinha do Brasil's acquisition, maintenance, and deployment of submarines, as well as U.S. diplomatic efforts to cooperate with or influence Brazil's naval modernization programs, particularly during the Goulart and subsequent military governments.",
+          "related_concepts": [
+            "Marinha do Brasil",
+            "Brazilian Navy",
+            "submarine operations",
+            "naval modernization",
+            "Goulart government",
+            "Castelo Branco",
+            "Costa e Silva",
+            "Medici",
+            "Institutional Act No. 5",
+            "U.S. Military Assistance Program",
+            "Foreign Military Sales",
+            "submarine technology",
+            "Ikara missile system",
+            "Grumman aircraft",
+            "Lockheed Martin",
+            "North Atlantic Treaty Organization",
+            "NATO",
+            "Rio Treaty",
+            "Força de Submarinos",
+            "Base Naval de Aratu",
+            "Porto de Santos",
+            "Itaqui Naval Base",
+            "submarine base construction",
+            "naval cooperation agreements",
+            "defense cooperation",
+            "Brazilian Ministry of Navy",
+            "Estado-Maior da Marinha."
+          ]
+        },
+        "input_tokens": 440,
+        "output_tokens": 193,
+        "duration_seconds": 8.328712385962717,
+        "created_at": "2026-09-08T23:40:40.905836"
+      }
+    },
+    "T18Eval-00003": {
+      "topic_id": "T18Eval-00003",
+      "original_query": {
+        "TITLE": "Alagoas flood",
+        "DESCRIPTION": "I'm interested in learning about damage from flooding in Alagoas in 1969 and in American help with the recovery effort."
+      },
+      "query_text": "Alagoas flood\nI'm interested in learning about damage from flooding in Alagoas in 1969 and in American help with the recovery effort.",
+      "core_themes": {
+        "raw_response": "CORE_THEMES: Documents pertaining to natural disasters and relief efforts, specifically flooding in Alagoas, Brazil, in 1969, and the role of the United States government, including the Department of State, in providing assistance and aid to the affected areas, as well as interactions with the Brazilian government, including the Medici administration, and other relevant institutions.\n\nRELATED_CONCEPTS: Alagoas, flood relief, USAID, USIS, Brazilian Ministry of Foreign Affairs, Itamaraty, Medici government, Costa e Silva government, Institutional Act No. 5, censorship, repression, US-Brazil relations, diplomatic missions, consular posts, disaster assistance, humanitarian aid, Brazilian Red Cross, Cruz Vermelha Brasileira, US Embassy Brasilia, US Consulate Recife.",
+        "parsed": {
+          "core_themes": "Documents pertaining to natural disasters and relief efforts, specifically flooding in Alagoas, Brazil, in 1969, and the role of the United States government, including the Department of State, in providing assistance and aid to the affected areas, as well as interactions with the Brazilian government, including the Medici administration, and other relevant institutions.",
+          "related_concepts": [
+            "Alagoas",
+            "flood relief",
+            "USAID",
+            "USIS",
+            "Brazilian Ministry of Foreign Affairs",
+            "Itamaraty",
+            "Medici government",
+            "Costa e Silva government",
+            "Institutional Act No. 5",
+            "censorship",
+            "repression",
+            "US-Brazil relations",
+            "diplomatic missions",
+            "consular posts",
+            "disaster assistance",
+            "humanitarian aid",
+            "Brazilian Red Cross",
+            "Cruz Vermelha Brasileira",
+            "US Embassy Brasilia",
+            "US Consulate Recife."
+          ]
+        },
+        "input_tokens": 454,
+        "output_tokens": 162,
+        "duration_seconds": 7.01106490008533,
+        "created_at": "2026-09-08T23:40:49.237137"
+      }
+    },
+    "T18Eval-00004": {
+      "topic_id": "T18Eval-00004",
+      "original_query": {
+        "TITLE": "Grain sorghum",
+        "DESCRIPTION": "Tell me about grain sorghum operations in Northeast Brazil."
+      },
+      "query_text": "Grain sorghum\nTell me about grain sorghum operations in Northeast Brazil.",
+      "core_themes": {
+        "raw_response": "CORE_THEMES: Documents pertaining to agricultural development in Northeast Brazil, specifically grain sorghum operations, would involve the U.S. Department of State, the U.S. Agency for International Development (USAID), and the Brazilian Ministry of Agriculture, discussing topics such as agricultural modernization, crop production, and trade agreements during the Goulart and subsequent military governments.\n\nRELATED_CONCEPTS: USAID, Brazilian Ministry of Agriculture, Northeast Development Superintendence (SUDENE), grain sorghum, POL 17 BRAZ, agricultural credit, Instituto Brasileiro de Geografia e Estatística (IBGE), Companhia Nacional de Abastecimento (CONAB), agricultural extension, rural development, Plano de Metas, Operação Nordeste, Banco do Nordeste, agricultural mechanization, sorgo, cerrado, irrigation systems, agricultural trade agreements, Empresa Brasileira de Pesquisa Agropecuária (EMBRAPA)",
+        "parsed": {
+          "core_themes": "Documents pertaining to agricultural development in Northeast Brazil, specifically grain sorghum operations, would involve the U.S. Department of State, the U.S. Agency for International Development (USAID), and the Brazilian Ministry of Agriculture, discussing topics such as agricultural modernization, crop production, and trade agreements during the Goulart and subsequent military governments.",
+          "related_concepts": [
+            "USAID",
+            "Brazilian Ministry of Agriculture",
+            "Northeast Development Superintendence (SUDENE)",
+            "grain sorghum",
+            "POL 17 BRAZ",
+            "agricultural credit",
+            "Instituto Brasileiro de Geografia e Estatística (IBGE)",
+            "Companhia Nacional de Abastecimento (CONAB)",
+            "agricultural extension",
+            "rural development",
+            "Plano de Metas",
+            "Operação Nordeste",
+            "Banco do Nordeste",
+            "agricultural mechanization",
+            "sorgo",
+            "cerrado",
+            "irrigation systems",
+            "agricultural trade agreements",
+            "Empresa Brasileira de Pesquisa Agropecuária (EMBRAPA)"
+          ]
+        },
+        "input_tokens": 441,
+        "output_tokens": 200,
+        "duration_seconds": 8.616593718994409,
+        "created_at": "2026-09-08T23:40:56.251005"
+      }
+    },
+    "T18Eval-00005": {
+      "topic_id": "T18Eval-00005",
+      "original_query": {
+        "TITLE": "Beef cattle industry",
+        "DESCRIPTION": "Locate documents containing information on Brazil's beef cattle industry and the distribution of its products."
+      },
+      "query_text": "Beef cattle industry\nLocate documents containing information on Brazil's beef cattle industry and the distribution of its products.",
+      "core_themes": {
+        "raw_response": "CORE_THEMES: Documents pertaining to Brazil's livestock sector, specifically the beef cattle industry, including production, exportation, and distribution of beef products, as well as policies and agreements related to the industry, such as those involving the Brazilian Ministry of Agriculture, the U.S. Department of Agriculture, and international trade agreements.\n\nRELATED_CONCEPTS: Instituto Brasileiro de Geografia e Estatística, Ministério da Agricultura, Departamento de Economia Rural, Serviço de Inspeção Federal, Empresa Brasileira de Pesquisa Agropecuária, National Livestock Association, Brazilian Beef Packers Association, Frigoríficos, Marfrig, JBS, PL 480, Agricultural Trade Development and Assistance Act, GATT, Mercosul, Associação Brasileira das Indústrias Exportadoras de Carne, Sindicato Nacional da Indústria de Produtos de Carne, Câmara de Comércio Exterior, Conselho Nacional de Política Agrícola.",
+        "parsed": {
+          "core_themes": "Documents pertaining to Brazil's livestock sector, specifically the beef cattle industry, including production, exportation, and distribution of beef products, as well as policies and agreements related to the industry, such as those involving the Brazilian Ministry of Agriculture, the U.S. Department of Agriculture, and international trade agreements.",
+          "related_concepts": [
+            "Instituto Brasileiro de Geografia e Estatística",
+            "Ministério da Agricultura",
+            "Departamento de Economia Rural",
+            "Serviço de Inspeção Federal",
+            "Empresa Brasileira de Pesquisa Agropecuária",
+            "National Livestock Association",
+            "Brazilian Beef Packers Association",
+            "Frigoríficos",
+            "Marfrig",
+            "JBS",
+            "PL 480",
+            "Agricultural Trade Development and Assistance Act",
+            "GATT",
+            "Mercosul",
+            "Associação Brasileira das Indústrias Exportadoras de Carne",
+            "Sindicato Nacional da Indústria de Produtos de Carne",
+            "Câmara de Comércio Exterior",
+            "Conselho Nacional de Política Agrícola."
+          ]
+        },
+        "input_tokens": 446,
+        "output_tokens": 210,
+        "duration_seconds": 9.002925432985649,
+        "created_at": "2026-09-08T23:41:04.870533"
+      }
+    },
+    "T18Eval-00006": {
+      "topic_id": "T18Eval-00006",
+      "original_query": {
+        "TITLE": "Cocoa exports",
+        "DESCRIPTION": "I want to see documents about the exportation of cocoa out of Brazil."
+      },
+      "query_text": "Cocoa exports\nI want to see documents about the exportation of cocoa out of Brazil.",
+      "core_themes": {
+        "raw_response": "CORE_THEMES: Documents pertaining to Brazilian cocoa exports would involve the U.S. Department of State's interactions with the Brazilian government, particularly the Ministério da Agricultura, regarding trade policies and agreements affecting the exportation of cocoa from Brazil. These documents would discuss the role of the U.S. Embassy in Brasília and consular posts in facilitating or regulating cocoa exports, as well as any relevant legislation, such as tariffs or quotas, imposed by the Brazilian government or the U.S. government.\n\nRELATED_CONCEPTS: Cocoa, exportação, Ministério da Agricultura, U.S. Department of State, U.S. Embassy Brasília, Consulado Geral dos EUA, POL, BRAZ, ETRA, Companhia Nacional de Abastecimento, Instituto Brasileiro de Geografia e Estatística, Superintendência da Moeda e do Crédito, Banco Central do Brasil, Acordo de Comércio, Tratado de Comércio, Tarifa Aduaneira, Quota de Exportação, CEPLAC, Comissão Executiva do Plano da Lavoura Cacaueira",
+        "parsed": {
+          "core_themes": "Documents pertaining to Brazilian cocoa exports would involve the U.S. Department of State's interactions with the Brazilian government, particularly the Ministério da Agricultura, regarding trade policies and agreements affecting the exportation of cocoa from Brazil. These documents would discuss the role of the U.S. Embassy in Brasília and consular posts in facilitating or regulating cocoa exports, as well as any relevant legislation, such as tariffs or quotas, imposed by the Brazilian government or the U.S. government.",
+          "related_concepts": [
+            "Cocoa",
+            "exportação",
+            "Ministério da Agricultura",
+            "U.S. Department of State",
+            "U.S. Embassy Brasília",
+            "Consulado Geral dos EUA",
+            "POL",
+            "BRAZ",
+            "ETRA",
+            "Companhia Nacional de Abastecimento",
+            "Instituto Brasileiro de Geografia e Estatística",
+            "Superintendência da Moeda e do Crédito",
+            "Banco Central do Brasil",
+            "Acordo de Comércio",
+            "Tratado de Comércio",
+            "Tarifa Aduaneira",
+            "Quota de Exportação",
+            "CEPLAC",
+            "Comissão Executiva do Plano da Lavoura Cacaueira"
+          ]
+        },
+        "input_tokens": 442,
+        "output_tokens": 238,
+        "duration_seconds": 10.159082865924574,
+        "created_at": "2026-09-08T23:41:13.876734"
+      }
+    },
+    "T18Eval-00007": {
+      "topic_id": "T18Eval-00007",
+      "original_query": {
+        "TITLE": "Manioc cultivation",
+        "DESCRIPTION": "Tell me about manioc cultivation in Brazil."
+      },
+      "query_text": "Manioc cultivation\nTell me about manioc cultivation in Brazil.",
+      "core_themes": {
+        "raw_response": "CORE_THEMES: Documents pertaining to agricultural development in Brazil, specifically manioc cultivation, would involve the U.S. Department of State's interactions with the Brazilian Ministry of Agriculture, policies of the Goulart and subsequent military governments, and programs such as the Alliance for Progress. These documents would discuss the role of manioc in Brazil's economy, its impact on rural development, and U.S. assistance in improving agricultural productivity.\n\nRELATED_CONCEPTS: Instituto Brasileiro de Geografia e Estatística, Ministério da Agricultura, Alliance for Progress, USAID, manioc, açaí, mandioca, Instituto Nacional de Colonização e Reforma Agrária, Castelo Branco government, Costa e Silva government, Medici government, Empresa Brasileira de Pesquisa Agropecuária, rural development, Plano de Metas, Programa de Ação Econômica do Governo, Superintendência do Desenvolvimento do Nordeste, Conselho Nacional de Desenvolvimento, Banco Nacional de Desenvolvimento Econômico",
+        "parsed": {
+          "core_themes": "Documents pertaining to agricultural development in Brazil, specifically manioc cultivation, would involve the U.S. Department of State's interactions with the Brazilian Ministry of Agriculture, policies of the Goulart and subsequent military governments, and programs such as the Alliance for Progress. These documents would discuss the role of manioc in Brazil's economy, its impact on rural development, and U.S. assistance in improving agricultural productivity.",
+          "related_concepts": [
+            "Instituto Brasileiro de Geografia e Estatística",
+            "Ministério da Agricultura",
+            "Alliance for Progress",
+            "USAID",
+            "manioc",
+            "açaí",
+            "mandioca",
+            "Instituto Nacional de Colonização e Reforma Agrária",
+            "Castelo Branco government",
+            "Costa e Silva government",
+            "Medici government",
+            "Empresa Brasileira de Pesquisa Agropecuária",
+            "rural development",
+            "Plano de Metas",
+            "Programa de Ação Econômica do Governo",
+            "Superintendência do Desenvolvimento do Nordeste",
+            "Conselho Nacional de Desenvolvimento",
+            "Banco Nacional de Desenvolvimento Econômico"
+          ]
+        },
+        "input_tokens": 436,
+        "output_tokens": 218,
+        "duration_seconds": 9.341772929066792,
+        "created_at": "2026-09-08T23:41:24.039353"
+      }
+    },
+    "T18Eval-00008": {
+      "topic_id": "T18Eval-00008",
+      "original_query": {
+        "TITLE": "Peace Corps birth control ",
+        "DESCRIPTION": "Find documents that mention the Peace Corps distributing birth control to women in Brazil."
+      },
+      "query_text": "Peace Corps birth control \nFind documents that mention the Peace Corps distributing birth control to women in Brazil.",
+      "core_themes": {
+        "raw_response": "CORE_THEMES: Documents pertaining to the Peace Corps' family planning activities in Brazil, specifically the distribution of birth control measures to Brazilian women, as reported by U.S. diplomatic and consular posts, and the Brazilian government's response to such initiatives, including the Goulart and subsequent military governments' policies on population control and public health.\n\nRELATED_CONCEPTS: Peace Corps, birth control, family planning, population control, Brasil, Brazil, Goulart, Castelo Branco, Costa e Silva, Medici, Institutional Act No. 5, U.S. Agency for International Development, USAID, Assistência Médica, Planejamento Familiar, Controle de Natalidade, Serviço Nacional de Saúde Pública, SESP, Ministério da Saúde, U.S. Department of State, Embaixada dos EUA no Brasil, Consulado dos EUA no Rio de Janeiro, AID, USIS, Fundação Getúlio Vargas, Instituto Nacional de Estatística, IBGE",
+        "parsed": {
+          "core_themes": "Documents pertaining to the Peace Corps' family planning activities in Brazil, specifically the distribution of birth control measures to Brazilian women, as reported by U.S. diplomatic and consular posts, and the Brazilian government's response to such initiatives, including the Goulart and subsequent military governments' policies on population control and public health.",
+          "related_concepts": [
+            "Peace Corps",
+            "birth control",
+            "family planning",
+            "population control",
+            "Brasil",
+            "Brazil",
+            "Goulart",
+            "Castelo Branco",
+            "Costa e Silva",
+            "Medici",
+            "Institutional Act No. 5",
+            "U.S. Agency for International Development",
+            "USAID",
+            "Assistência Médica",
+            "Planejamento Familiar",
+            "Controle de Natalidade",
+            "Serviço Nacional de Saúde Pública",
+            "SESP",
+            "Ministério da Saúde",
+            "U.S. Department of State",
+            "Embaixada dos EUA no Brasil",
+            "Consulado dos EUA no Rio de Janeiro",
+            "AID",
+            "USIS",
+            "Fundação Getúlio Vargas",
+            "Instituto Nacional de Estatística",
+            "IBGE"
+          ]
+        },
+        "input_tokens": 443,
+        "output_tokens": 211,
+        "duration_seconds": 8.99916847795248,
+        "created_at": "2026-09-08T23:41:33.384045"
+      }
+    },
+    "T18Eval-00009": {
+      "topic_id": "T18Eval-00009",
+      "original_query": {
+        "TITLE": "Marijuana consumption",
+        "DESCRIPTION": "I want to find documents about marijuana consumption in Brazil."
+      },
+      "query_text": "Marijuana consumption\nI want to find documents about marijuana consumption in Brazil.",
+      "core_themes": {
+        "raw_response": "CORE_THEMES: Documents pertaining to narcotics control and social issues in Brazil, including reports on marijuana consumption, would likely be found in files related to Public Health and Welfare, and Law Enforcement, involving institutions such as the Brazilian Federal Police and the U.S. Bureau of Narcotics, during the governments of Goulart, Castelo Branco, Costa e Silva, and Medici.\n\nRELATED_CONCEPTS: Policia Federal, Departamento de Policia Federal, Lei de Entorpecentes, Ministerio da Saude, DNER, USAID, AID, DEA, Embassy Brasilia, Consulate Rio de Janeiro, Consulate Sao Paulo, Narcotics Control, Assistencia Medica, Saude Publica, Policia Civil, Policia Militar, Lei de Trafico de Entorpecentes, Instituto Nacional de Assistencia Medica da Previdencia Social, Fundacao Nacional de Saude.",
+        "parsed": {
+          "core_themes": "Documents pertaining to narcotics control and social issues in Brazil, including reports on marijuana consumption, would likely be found in files related to Public Health and Welfare, and Law Enforcement, involving institutions such as the Brazilian Federal Police and the U.S. Bureau of Narcotics, during the governments of Goulart, Castelo Branco, Costa e Silva, and Medici.",
+          "related_concepts": [
+            "Policia Federal",
+            "Departamento de Policia Federal",
+            "Lei de Entorpecentes",
+            "Ministerio da Saude",
+            "DNER",
+            "USAID",
+            "AID",
+            "DEA",
+            "Embassy Brasilia",
+            "Consulate Rio de Janeiro",
+            "Consulate Sao Paulo",
+            "Narcotics Control",
+            "Assistencia Medica",
+            "Saude Publica",
+            "Policia Civil",
+            "Policia Militar",
+            "Lei de Trafico de Entorpecentes",
+            "Instituto Nacional de Assistencia Medica da Previdencia Social",
+            "Fundacao Nacional de Saude."
+          ]
+        },
+        "input_tokens": 438,
+        "output_tokens": 187,
+        "duration_seconds": 8.004825073992833,
+        "created_at": "2026-09-08T23:41:42.386531"
+      }
+    },
+    "T18Eval-00010": {
+      "topic_id": "T18Eval-00010",
+      "original_query": {
+        "TITLE": "Wine industry",
+        "DESCRIPTION": "I want to find documents on Brazil's wine industry."
+      },
+      "query_text": "Wine industry\nI want to find documents on Brazil's wine industry.",
+      "core_themes": {
+        "raw_response": "CORE_THEMES: Documents pertaining to Brazil's wine industry would involve reports from the U.S. Embassy in Brasilia and consular posts in Rio de Janeiro and São Paulo, discussing trade policies, tariffs, and market trends affecting wine production and exportation, as well as interactions with the Brazilian Ministry of Agriculture and the Instituto Brasileiro do Vinho.\n\nRELATED_CONCEPTS: vinícola, Instituto Brasileiro do Vinho, Ministério da Agricultura, POL 17 BRAZ, wine tariffs, Rio Grande do Sul, São Francisco Valley, vinho brasileiro, exportação de vinho, Companhia Única de Armazéns e Silos, wine production, Brazilian wine market, trade agreements, Embrabra, Instituto Nacional de Estatística, wine industry development, Vale do São Francisco, Ministério do Comércio e Indústria, wine export quotas",
+        "parsed": {
+          "core_themes": "Documents pertaining to Brazil's wine industry would involve reports from the U.S. Embassy in Brasilia and consular posts in Rio de Janeiro and São Paulo, discussing trade policies, tariffs, and market trends affecting wine production and exportation, as well as interactions with the Brazilian Ministry of Agriculture and the Instituto Brasileiro do Vinho.",
+          "related_concepts": [
+            "vinícola",
+            "Instituto Brasileiro do Vinho",
+            "Ministério da Agricultura",
+            "POL 17 BRAZ",
+            "wine tariffs",
+            "Rio Grande do Sul",
+            "São Francisco Valley",
+            "vinho brasileiro",
+            "exportação de vinho",
+            "Companhia Única de Armazéns e Silos",
+            "wine production",
+            "Brazilian wine market",
+            "trade agreements",
+            "Embrabra",
+            "Instituto Nacional de Estatística",
+            "wine industry development",
+            "Vale do São Francisco",
+            "Ministério do Comércio e Indústria",
+            "wine export quotas"
+          ]
+        },
+        "input_tokens": 438,
+        "output_tokens": 187,
+        "duration_seconds": 8.105944328941405,
+        "created_at": "2026-09-08T23:41:50.395005"
+      }
+    },
+    "T18Eval-00011": {
+      "topic_id": "T18Eval-00011",
+      "original_query": {
+        "TITLE": "International reactions to coup",
+        "DESCRIPTION": "I need information on international reactions to the 1964 Brazilian coup d'etat."
+      },
+      "query_text": "International reactions to coup\nI need information on international reactions to the 1964 Brazilian coup d'etat.",
+      "core_themes": {
+        "raw_response": "CORE_THEMES: Documents pertaining to international reactions to the 1964 Brazilian coup d'etat would involve POL 23-8 BRAZ, detailing responses from foreign governments, international organizations, and other external entities to the overthrow of President Joao Goulart and the establishment of a military government in Brazil, including diplomatic notes, memoranda, and cables exchanged between the U.S. Department of State and its diplomatic posts in Brazil.\n\nRELATED_CONCEPTS: Organization of American States, OAS, United Nations, UN, European Economic Community, EEC, NATO, Warsaw Pact, USSR, Cuba, Fidel Castro, Latin American Free Trade Association, LAFTA, Alliance for Progress, Alianca para o Progresso, Agency for International Development, AID, USAID, USIA, Voice of America, Radio Libertad, Costa e Silva, Castelo Branco, Medici, Institutional Act No. 5, Ato Institucional No. 5, National Security Council, NSC, Department of State, Itamaraty, Brazilian Ministry of Foreign Affairs, Golpe de 1964, CIA, KGB, espionage, counterinsurgency, comunismo, comunista.",
+        "parsed": {
+          "core_themes": "Documents pertaining to international reactions to the 1964 Brazilian coup d'etat would involve POL 23-8 BRAZ, detailing responses from foreign governments, international organizations, and other external entities to the overthrow of President Joao Goulart and the establishment of a military government in Brazil, including diplomatic notes, memoranda, and cables exchanged between the U.S. Department of State and its diplomatic posts in Brazil.",
+          "related_concepts": [
+            "Organization of American States",
+            "OAS",
+            "United Nations",
+            "UN",
+            "European Economic Community",
+            "EEC",
+            "NATO",
+            "Warsaw Pact",
+            "USSR",
+            "Cuba",
+            "Fidel Castro",
+            "Latin American Free Trade Association",
+            "LAFTA",
+            "Alliance for Progress",
+            "Alianca para o Progresso",
+            "Agency for International Development",
+            "AID",
+            "USAID",
+            "USIA",
+            "Voice of America",
+            "Radio Libertad",
+            "Costa e Silva",
+            "Castelo Branco",
+            "Medici",
+            "Institutional Act No. 5",
+            "Ato Institucional No. 5",
+            "National Security Council",
+            "NSC",
+            "Department of State",
+            "Itamaraty",
+            "Brazilian Ministry of Foreign Affairs",
+            "Golpe de 1964",
+            "CIA",
+            "KGB",
+            "espionage",
+            "counterinsurgency",
+            "comunismo",
+            "comunista."
+          ]
+        },
+        "input_tokens": 445,
+        "output_tokens": 243,
+        "duration_seconds": 10.43250249500852,
+        "created_at": "2026-09-08T23:41:58.504671"
+      }
+    },
+    "T18Eval-00012": {
+      "topic_id": "T18Eval-00012",
+      "original_query": {
+        "TITLE": "Japanese fishing boat seizure",
+        "DESCRIPTION": "I'm looking for information on the seizure of Japanese fishing boats in Brazilian waters."
+      },
+      "query_text": "Japanese fishing boat seizure\nI'm looking for information on the seizure of Japanese fishing boats in Brazilian waters.",
+      "core_themes": {
+        "raw_response": "CORE_THEMES: Documents pertaining to maritime incidents involving Japanese fishing vessels in Brazilian territorial waters, including seizures by the Marinha do Brasil, and subsequent diplomatic exchanges between the U.S. Department of State, the Brazilian Ministry of Foreign Affairs, and the Japanese Government, potentially implicating issues of fisheries management, territorial jurisdiction, and bilateral relations.\n\nRELATED_CONCEPTS: Marinha do Brasil, Japanese Government, Itamaraty, U.S. Department of State, Brazilian Navy, fisheries agreements, territorial waters, EEZ, Brazilian Ministry of Foreign Affairs, Japanese Embassy, Brazilian Embassy, Tokyo, Brasilia, Washington D.C., Consulado Geral do Japao, Consulado Geral do Brasil, Incidentes Maritimos, Direito do Mar, Zona Economica Exclusiva.",
+        "parsed": {
+          "core_themes": "Documents pertaining to maritime incidents involving Japanese fishing vessels in Brazilian territorial waters, including seizures by the Marinha do Brasil, and subsequent diplomatic exchanges between the U.S. Department of State, the Brazilian Ministry of Foreign Affairs, and the Japanese Government, potentially implicating issues of fisheries management, territorial jurisdiction, and bilateral relations.",
+          "related_concepts": [
+            "Marinha do Brasil",
+            "Japanese Government",
+            "Itamaraty",
+            "U.S. Department of State",
+            "Brazilian Navy",
+            "fisheries agreements",
+            "territorial waters",
+            "EEZ",
+            "Brazilian Ministry of Foreign Affairs",
+            "Japanese Embassy",
+            "Brazilian Embassy",
+            "Tokyo",
+            "Brasilia",
+            "Washington D.C.",
+            "Consulado Geral do Japao",
+            "Consulado Geral do Brasil",
+            "Incidentes Maritimos",
+            "Direito do Mar",
+            "Zona Economica Exclusiva."
+          ]
+        },
+        "input_tokens": 444,
+        "output_tokens": 159,
+        "duration_seconds": 7.0459536199923605,
+        "created_at": "2026-09-08T23:42:08.940292"
+      }
+    },
+    "T18Eval-00013": {
+      "topic_id": "T18Eval-00013",
+      "original_query": {
+        "TITLE": "Brazilian immigration to America",
+        "DESCRIPTION": "I need to find documents that describe immigration process of Brazilian citizens to America."
+      },
+      "query_text": "Brazilian immigration to America\nI need to find documents that describe immigration process of Brazilian citizens to America.",
+      "core_themes": {
+        "raw_response": "CORE_THEMES: Documents pertaining to the emigration of Brazilian nationals to the United States, involving the U.S. Department of State, Brazilian Ministry of Foreign Affairs, and U.S. Immigration and Naturalization Service, as well as relevant policies, laws, and treaties governing immigration during this period, such as the Immigration and Nationality Act of 1965.\n\nRELATED_CONCEPTS: U.S. Embassy Brasilia, Consulate General Rio de Janeiro, Consulate General Sao Paulo, Brazilian Consulate New York, Visa Section, Immigration and Nationality Act, Lei de Imigração, Serviço Nacional de Imigração, Departamento de Estado dos EUA, Itamaraty, National Origins Act, Western Hemisphere immigration, Brazilian Ministry of Justice, U.S. Citizenship and Immigration Services, American Consular Officers, Brazilian passport, visto de entrada, green card, permanent residence, naturalization process, Treaty of Friendship and Navigation.",
+        "parsed": {
+          "core_themes": "Documents pertaining to the emigration of Brazilian nationals to the United States, involving the U.S. Department of State, Brazilian Ministry of Foreign Affairs, and U.S. Immigration and Naturalization Service, as well as relevant policies, laws, and treaties governing immigration during this period, such as the Immigration and Nationality Act of 1965.",
+          "related_concepts": [
+            "U.S. Embassy Brasilia",
+            "Consulate General Rio de Janeiro",
+            "Consulate General Sao Paulo",
+            "Brazilian Consulate New York",
+            "Visa Section",
+            "Immigration and Nationality Act",
+            "Lei de Imigração",
+            "Serviço Nacional de Imigração",
+            "Departamento de Estado dos EUA",
+            "Itamaraty",
+            "National Origins Act",
+            "Western Hemisphere immigration",
+            "Brazilian Ministry of Justice",
+            "U.S. Citizenship and Immigration Services",
+            "American Consular Officers",
+            "Brazilian passport",
+            "visto de entrada",
+            "green card",
+            "permanent residence",
+            "naturalization process",
+            "Treaty of Friendship and Navigation."
+          ]
+        },
+        "input_tokens": 444,
+        "output_tokens": 191,
+        "duration_seconds": 8.530904275015928,
+        "created_at": "2026-09-08T23:42:15.989844"
+      }
+    },
+    "T18Eval-00014": {
+      "topic_id": "T18Eval-00014",
+      "original_query": {
+        "TITLE": "El Chocon Dam",
+        "DESCRIPTION": "I'm looking for documents mentioning the El Chocon Dam."
+      },
+      "query_text": "El Chocon Dam\nI'm looking for documents mentioning the El Chocon Dam.",
+      "core_themes": {
+        "raw_response": "CORE_THEMES: Documents related to energy development and international cooperation, specifically referencing the El Chocon Dam, a hydroelectric project, and its implications for US-Brazil relations, including diplomatic correspondence and memoranda from the Department of State, Embassy Brasilia, and Consulate Rio de Janeiro, discussing the dam's construction, financing, and operational aspects, as well as its impact on bilateral relations and regional energy policies.\n\nRELATED_CONCEPTS: El Chocon Dam, Itaipu Dam, Paraná River, Rio de la Plata, Companhia Energética de São Paulo, Eletrobrás, National Security Council, USAID, Alliance for Progress, Inter-American Development Bank, Treaty of the Rio de la Plata, Comisión Técnica Mixta de Salto Grande, Salto Grande Dam, Paraná-Paraguay waterway, Brazilian Ministry of Mines and Energy, Conselho Nacional de Águas e Energia Elétrica, Departamento Nacional de Águas e Energia Elétrica, Agência Nacional de Energia Elétrica.",
+        "parsed": {
+          "core_themes": "Documents related to energy development and international cooperation, specifically referencing the El Chocon Dam, a hydroelectric project, and its implications for US-Brazil relations, including diplomatic correspondence and memoranda from the Department of State, Embassy Brasilia, and Consulate Rio de Janeiro, discussing the dam's construction, financing, and operational aspects, as well as its impact on bilateral relations and regional energy policies.",
+          "related_concepts": [
+            "El Chocon Dam",
+            "Itaipu Dam",
+            "Paraná River",
+            "Rio de la Plata",
+            "Companhia Energética de São Paulo",
+            "Eletrobrás",
+            "National Security Council",
+            "USAID",
+            "Alliance for Progress",
+            "Inter-American Development Bank",
+            "Treaty of the Rio de la Plata",
+            "Comisión Técnica Mixta de Salto Grande",
+            "Salto Grande Dam",
+            "Paraná-Paraguay waterway",
+            "Brazilian Ministry of Mines and Energy",
+            "Conselho Nacional de Águas e Energia Elétrica",
+            "Departamento Nacional de Águas e Energia Elétrica",
+            "Agência Nacional de Energia Elétrica."
+          ]
+        },
+        "input_tokens": 440,
+        "output_tokens": 225,
+        "duration_seconds": 9.933535842923447,
+        "created_at": "2026-09-08T23:42:24.524408"
+      }
+    },
+    "T18Eval-00015": {
+      "topic_id": "T18Eval-00015",
+      "original_query": {
+        "TITLE": "Coffee policies",
+        "DESCRIPTION": "Find documents that mention Brazilian policies on the production or distribution of coffee."
+      },
+      "query_text": "Coffee policies\nFind documents that mention Brazilian policies on the production or distribution of coffee.",
+      "core_themes": {
+        "raw_response": "CORE_THEMES: Documents pertaining to Brazilian coffee policies, including production and distribution, as discussed in communications between the U.S. Department of State and its diplomatic and consular posts in Brazil, involving the Brazilian Ministry of Agriculture, Instituto Brasileiro do Café, and other relevant institutions, during the Goulart government and subsequent military regimes.\n\nRELATED_CONCEPTS: Instituto Brasileiro do Café, Ministério da Agricultura, POL 17 BRAZ, coffee quotas, export controls, São Paulo state, Paraná state, Minas Gerais state, coffee cooperatives, Associação Brasileira da Indústria do Café, Instituto Nacional do Café, Plano de Ação Econômica do Governo, Política Agrícola, Acordo de Taubaté, Convênio de São Paulo, coffee price supports, Brazilian Coffee Institute, U.S.-Brazil coffee trade, coffee tariffs, Embaixada dos Estados Unidos no Brasil.",
+        "parsed": {
+          "core_themes": "Documents pertaining to Brazilian coffee policies, including production and distribution, as discussed in communications between the U.S. Department of State and its diplomatic and consular posts in Brazil, involving the Brazilian Ministry of Agriculture, Instituto Brasileiro do Café, and other relevant institutions, during the Goulart government and subsequent military regimes.",
+          "related_concepts": [
+            "Instituto Brasileiro do Café",
+            "Ministério da Agricultura",
+            "POL 17 BRAZ",
+            "coffee quotas",
+            "export controls",
+            "São Paulo state",
+            "Paraná state",
+            "Minas Gerais state",
+            "coffee cooperatives",
+            "Associação Brasileira da Indústria do Café",
+            "Instituto Nacional do Café",
+            "Plano de Ação Econômica do Governo",
+            "Política Agrícola",
+            "Acordo de Taubaté",
+            "Convênio de São Paulo",
+            "coffee price supports",
+            "Brazilian Coffee Institute",
+            "U.S.-Brazil coffee trade",
+            "coffee tariffs",
+            "Embaixada dos Estados Unidos no Brasil."
+          ]
+        },
+        "input_tokens": 440,
+        "output_tokens": 196,
+        "duration_seconds": 8.691629392909817,
+        "created_at": "2026-09-08T23:42:34.461867"
+      }
+    },
+    "T18Eval-00016": {
+      "topic_id": "T18Eval-00016",
+      "original_query": {
+        "TITLE": "Amateur radio",
+        "DESCRIPTION": "I am looking for information about amateur radio operations in Brazil."
+      },
+      "query_text": "Amateur radio\nI am looking for information about amateur radio operations in Brazil.",
+      "core_themes": {
+        "raw_response": "CORE_THEMES: Documents pertaining to amateur radio operations in Brazil would involve communications policies and regulations, Brazilian Ministry of Communications oversight, and U.S.-Brazil cooperation on telecommunications, including International Telecommunication Union agreements and Federal Communications Commission interactions with Brazilian authorities.\n\nRELATED_CONCEPTS: Radioamadorismo, Ministério das Comunicações, Departamento de Telecomunicações, International Telecommunication Union, Federal Communications Commission, Comissão Nacional de Telecomunicações, Serviço de Radiocomunicações, Instituto Nacional de Telecomunicações, Radio Club do Brasil, Liga de Amadores Brasileiros de Rádio Emissão, ITU Region 2, Brazilian Navy, Marinha do Brasil, Sistema Brasileiro de Telecomunicações, Conselho Nacional de Telecomunicações, Agência Nacional de Telecomunicações.",
+        "parsed": {
+          "core_themes": "Documents pertaining to amateur radio operations in Brazil would involve communications policies and regulations, Brazilian Ministry of Communications oversight, and U.S.-Brazil cooperation on telecommunications, including International Telecommunication Union agreements and Federal Communications Commission interactions with Brazilian authorities.",
+          "related_concepts": [
+            "Radioamadorismo",
+            "Ministério das Comunicações",
+            "Departamento de Telecomunicações",
+            "International Telecommunication Union",
+            "Federal Communications Commission",
+            "Comissão Nacional de Telecomunicações",
+            "Serviço de Radiocomunicações",
+            "Instituto Nacional de Telecomunicações",
+            "Radio Club do Brasil",
+            "Liga de Amadores Brasileiros de Rádio Emissão",
+            "ITU Region 2",
+            "Brazilian Navy",
+            "Marinha do Brasil",
+            "Sistema Brasileiro de Telecomunicações",
+            "Conselho Nacional de Telecomunicações",
+            "Agência Nacional de Telecomunicações."
+          ]
+        },
+        "input_tokens": 439,
+        "output_tokens": 176,
+        "duration_seconds": 7.814525734982453,
+        "created_at": "2026-09-08T23:42:43.157419"
+      }
+    },
+    "T18Eval-00017": {
+      "topic_id": "T18Eval-00017",
+      "original_query": {
+        "TITLE": "German war criminals",
+        "DESCRIPTION": "Find documents that mention people who were, or are suspected of having been, involved with war crimes or other serious offense where the Nazi party was in power."
+      },
+      "query_text": "German war criminals\nFind documents that mention people who were, or are suspected of having been, involved with war crimes or other serious offense where the Nazi party was in power.",
+      "core_themes": {
+        "raw_response": "CORE_THEMES: Documents pertaining to Nazi war criminals, including those suspected of involvement in atrocities, would be found in files related to Political Affairs & Relations, specifically those dealing with the Brazilian government's stance on extradition and prosecution of such individuals, as well as the U.S. Department of State's efforts to track and apprehend them, in the context of post-war international cooperation and the Cold War.\n\nRELATED_CONCEPTS: Nazi Party, SS, Gestapo, Auschwitz, Nuremberg Trials, Extradition Treaty, Brazilian Federal Police, Departamento de Ordem Política e Social, DOPS, Comissão Especial de Investigação, CEI, Operation Condor, Ratline, ODESSA, Simon Wiesenthal Center, Centro de Informações do Exército, CIE, Serviço Nacional de Informações, SNI, Estado de Sítio, Institutional Act No. 5, Lei de Segurança Nacional, National War Crimes Office.",
+        "parsed": {
+          "core_themes": "Documents pertaining to Nazi war criminals, including those suspected of involvement in atrocities, would be found in files related to Political Affairs & Relations, specifically those dealing with the Brazilian government's stance on extradition and prosecution of such individuals, as well as the U.S. Department of State's efforts to track and apprehend them, in the context of post-war international cooperation and the Cold War.",
+          "related_concepts": [
+            "Nazi Party",
+            "SS",
+            "Gestapo",
+            "Auschwitz",
+            "Nuremberg Trials",
+            "Extradition Treaty",
+            "Brazilian Federal Police",
+            "Departamento de Ordem Política e Social",
+            "DOPS",
+            "Comissão Especial de Investigação",
+            "CEI",
+            "Operation Condor",
+            "Ratline",
+            "ODESSA",
+            "Simon Wiesenthal Center",
+            "Centro de Informações do Exército",
+            "CIE",
+            "Serviço Nacional de Informações",
+            "SNI",
+            "Estado de Sítio",
+            "Institutional Act No. 5",
+            "Lei de Segurança Nacional",
+            "National War Crimes Office."
+          ]
+        },
+        "input_tokens": 458,
+        "output_tokens": 201,
+        "duration_seconds": 8.947956079035066,
+        "created_at": "2026-09-08T23:42:50.975981"
+      }
+    },
+    "T18Eval-00018": {
+      "topic_id": "T18Eval-00018",
+      "original_query": {
+        "TITLE": "Lumber industry ",
+        "DESCRIPTION": "Find documents that provide information on the lumber industry in Brazil."
+      },
+      "query_text": "Lumber industry \nFind documents that provide information on the lumber industry in Brazil.",
+      "core_themes": {
+        "raw_response": "CORE_THEMES: Documents pertaining to the Brazilian lumber industry, including those related to forestry management, wood production, and trade policies, as well as interactions between the U.S. Department of State, the Brazilian government, and private sector entities such as the Instituto Brasileiro de Desenvolvimento Florestal and the Serviço Florestal Brasileiro, during the Goulart and subsequent military governments.\n\nRELATED_CONCEPTS: Instituto Brasileiro de Desenvolvimento Florestal, Serviço Florestal Brasileiro, Madeira, cellulose, pulp, paper, export controls, tariffs, trade agreements, IBDF, SFB, Política Florestal, Plano de Desenvolvimento Florestal, Amazonas, Paraná, Mato Grosso, US-Brazil trade relations, Foreign Agricultural Service, USDA, Embassy Brasília, Consulate São Paulo, ITT Rayonier, Georgia-Pacific, Weyerhaeuser, Companhia Vale do Rio Doce.",
+        "parsed": {
+          "core_themes": "Documents pertaining to the Brazilian lumber industry, including those related to forestry management, wood production, and trade policies, as well as interactions between the U.S. Department of State, the Brazilian government, and private sector entities such as the Instituto Brasileiro de Desenvolvimento Florestal and the Serviço Florestal Brasileiro, during the Goulart and subsequent military governments.",
+          "related_concepts": [
+            "Instituto Brasileiro de Desenvolvimento Florestal",
+            "Serviço Florestal Brasileiro",
+            "Madeira",
+            "cellulose",
+            "pulp",
+            "paper",
+            "export controls",
+            "tariffs",
+            "trade agreements",
+            "IBDF",
+            "SFB",
+            "Política Florestal",
+            "Plano de Desenvolvimento Florestal",
+            "Amazonas",
+            "Paraná",
+            "Mato Grosso",
+            "US-Brazil trade relations",
+            "Foreign Agricultural Service",
+            "USDA",
+            "Embassy Brasília",
+            "Consulate São Paulo",
+            "ITT Rayonier",
+            "Georgia-Pacific",
+            "Weyerhaeuser",
+            "Companhia Vale do Rio Doce."
+          ]
+        },
+        "input_tokens": 439,
+        "output_tokens": 208,
+        "duration_seconds": 9.249579149996862,
+        "created_at": "2026-09-08T23:42:59.927685"
+      }
+    },
+    "T18Eval-00019": {
+      "topic_id": "T18Eval-00019",
+      "original_query": {
+        "TITLE": "Guaíra Falls border dispute",
+        "DESCRIPTION": "Find documents that mention the dispute between Brazil and Paraguay over the Guaíra Falls."
+      },
+      "query_text": "Guaíra Falls border dispute\nFind documents that mention the dispute between Brazil and Paraguay over the Guaíra Falls.",
+      "core_themes": {
+        "raw_response": "CORE_THEMES: Documents pertaining to border disputes between Brazil and Paraguay, specifically the Guaíra Falls controversy, involving the U.S. Department of State, Brazilian and Paraguayan governments, and related diplomatic efforts, including negotiations, treaties, and agreements, during the 1963-1973 period, under the administrations of Presidents Goulart, Castelo Branco, Costa e Silva, and Medici.\n\nRELATED_CONCEPTS: Guaíra Falls, Itaipu Dam, Paraná River, Brazil-Paraguay border, Treaty of Limits, Acordo de Limites, Ministério das Relações Exteriores, Itamaraty, Paraguayan Ministry of Foreign Affairs, U.S. Embassy Brasília, U.S. Embassy Asunción, American-Brazilian relations, American-Paraguayan relations, Organization of American States, OAS, Border Commission, Comissão de Limites, Sete Quedas, Salto del Guairá, Tratado de Paz e Amizade.",
+        "parsed": {
+          "core_themes": "Documents pertaining to border disputes between Brazil and Paraguay, specifically the Guaíra Falls controversy, involving the U.S. Department of State, Brazilian and Paraguayan governments, and related diplomatic efforts, including negotiations, treaties, and agreements, during the 1963-1973 period, under the administrations of Presidents Goulart, Castelo Branco, Costa e Silva, and Medici.",
+          "related_concepts": [
+            "Guaíra Falls",
+            "Itaipu Dam",
+            "Paraná River",
+            "Brazil-Paraguay border",
+            "Treaty of Limits",
+            "Acordo de Limites",
+            "Ministério das Relações Exteriores",
+            "Itamaraty",
+            "Paraguayan Ministry of Foreign Affairs",
+            "U.S. Embassy Brasília",
+            "U.S. Embassy Asunción",
+            "American-Brazilian relations",
+            "American-Paraguayan relations",
+            "Organization of American States",
+            "OAS",
+            "Border Commission",
+            "Comissão de Limites",
+            "Sete Quedas",
+            "Salto del Guairá",
+            "Tratado de Paz e Amizade."
+          ]
+        },
+        "input_tokens": 450,
+        "output_tokens": 214,
+        "duration_seconds": 9.549998990958557,
+        "created_at": "2026-09-08T23:43:09.181155"
+      }
+    },
+    "T18Eval-00020": {
+      "topic_id": "T18Eval-00020",
+      "original_query": {
+        "TITLE": "Rice cultivation",
+        "DESCRIPTION": "Tell me about rice cultivation in Brazil."
+      },
+      "query_text": "Rice cultivation\nTell me about rice cultivation in Brazil.",
+      "core_themes": {
+        "raw_response": "CORE_THEMES: Documents pertaining to agricultural development in Brazil, specifically rice cultivation, would involve the U.S. Department of State's interactions with the Brazilian Ministry of Agriculture, policies of the Goulart and subsequent military governments, and programs such as the Alliance for Progress. These documents would discuss the economic and political aspects of rice production, trade, and consumption in Brazil during the 1960s.\n\nRELATED_CONCEPTS: Instituto Brasileiro de Geografia e Estatística, Ministério da Agricultura, Plano de Metas, Operação Pan-Americana, Aliança para o Progresso, USAID, Food for Peace, Companhia Nacional de Abastecimento, Instituto Nacional de Colonização e Reforma Agrária, Superintendência do Desenvolvimento do Nordeste, arroz, irrigação, crédito rural, cooperativas agrícolas, Zoneamento Agrícola, Instituto Interamericano de Cooperação para a Agricultura.",
+        "parsed": {
+          "core_themes": "Documents pertaining to agricultural development in Brazil, specifically rice cultivation, would involve the U.S. Department of State's interactions with the Brazilian Ministry of Agriculture, policies of the Goulart and subsequent military governments, and programs such as the Alliance for Progress. These documents would discuss the economic and political aspects of rice production, trade, and consumption in Brazil during the 1960s.",
+          "related_concepts": [
+            "Instituto Brasileiro de Geografia e Estatística",
+            "Ministério da Agricultura",
+            "Plano de Metas",
+            "Operação Pan-Americana",
+            "Aliança para o Progresso",
+            "USAID",
+            "Food for Peace",
+            "Companhia Nacional de Abastecimento",
+            "Instituto Nacional de Colonização e Reforma Agrária",
+            "Superintendência do Desenvolvimento do Nordeste",
+            "arroz",
+            "irrigação",
+            "crédito rural",
+            "cooperativas agrícolas",
+            "Zoneamento Agrícola",
+            "Instituto Interamericano de Cooperação para a Agricultura."
+          ]
+        },
+        "input_tokens": 435,
+        "output_tokens": 203,
+        "duration_seconds": 9.078296576975845,
+        "created_at": "2026-09-08T23:43:18.734796"
+      }
+    },
+    "T18Eval-00021": {
+      "topic_id": "T18Eval-00021",
+      "original_query": {
+        "TITLE": "Nuts",
+        "DESCRIPTION": "Find documents that contain information about the production of nuts in Brazil and how these nuts are distributed."
+      },
+      "query_text": "Nuts\nFind documents that contain information about the production of nuts in Brazil and how these nuts are distributed.",
+      "core_themes": {
+        "raw_response": "CORE_THEMES: Documents pertaining to Brazilian agricultural production, specifically the cultivation and distribution of nuts, would be classified under the primary subject code ECON, with a focus on the Brazilian government's agricultural policies and trade agreements, including those with the United States, as well as the role of institutions such as the Instituto Brasileiro de Geografia e Estatística and the Ministério da Agricultura.\n\nRELATED_CONCEPTS: Instituto Brasileiro de Geografia e Estatística, Ministério da Agricultura, Empresa Brasileira de Pesquisa Agropecuária, Castelo Branco government, Costa e Silva government, Medici government, POL, ECON, BRAZ, nuts, amendoim, castanha, açaí, cacau, exportação, importação, comércio exterior, Acordo de Comércio Brasil-Estados Unidos, Tratado de Montevidéu, Organização dos Estados Americanos, Banco Nacional de Desenvolvimento Econômico, Superintendência do Desenvolvimento do Nordeste.",
+        "parsed": {
+          "core_themes": "Documents pertaining to Brazilian agricultural production, specifically the cultivation and distribution of nuts, would be classified under the primary subject code ECON, with a focus on the Brazilian government's agricultural policies and trade agreements, including those with the United States, as well as the role of institutions such as the Instituto Brasileiro de Geografia e Estatística and the Ministério da Agricultura.",
+          "related_concepts": [
+            "Instituto Brasileiro de Geografia e Estatística",
+            "Ministério da Agricultura",
+            "Empresa Brasileira de Pesquisa Agropecuária",
+            "Castelo Branco government",
+            "Costa e Silva government",
+            "Medici government",
+            "POL",
+            "ECON",
+            "BRAZ",
+            "nuts",
+            "amendoim",
+            "castanha",
+            "açaí",
+            "cacau",
+            "exportação",
+            "importação",
+            "comércio exterior",
+            "Acordo de Comércio Brasil-Estados Unidos",
+            "Tratado de Montevidéu",
+            "Organização dos Estados Americanos",
+            "Banco Nacional de Desenvolvimento Econômico",
+            "Superintendência do Desenvolvimento do Nordeste."
+          ]
+        },
+        "input_tokens": 445,
+        "output_tokens": 221,
+        "duration_seconds": 9.851997672929429,
+        "created_at": "2026-09-08T23:43:27.817177"
+      }
+    },
+    "T18Eval-00022": {
+      "topic_id": "T18Eval-00022",
+      "original_query": {
+        "TITLE": "Freight shipping policies",
+        "DESCRIPTION": "I want to know about freight shipping policies in Brazil."
+      },
+      "query_text": "Freight shipping policies\nI want to know about freight shipping policies in Brazil.",
+      "core_themes": {
+        "raw_response": "CORE_THEMES: Documents pertaining to Brazilian freight shipping policies would involve discussions of transportation infrastructure, maritime trade agreements, and regulatory frameworks established by the Brazilian government, including the Ministério da Viação e Obras Públicas, and would be reflected in Subject-Numeric Files under codes such as TRA for Transportation and BRAZ for Brazil, with subdivisions related to shipping and ports.\n\nRELATED_CONCEPTS: Ministério da Viação e Obras Públicas, Porto de Santos, Companhia Docas do Estado de São Paulo, TRA, BRAZ, shipping lanes, Port of Rio de Janeiro, freight rates, Conselho Nacional de Transportes, Acordo de Alcântara, Treaty of Montevideo, Mercosur precursor agreements, Brazilian Navy, Marinha do Brasil, Lloyd Brasileiro, Varig, ports of Paranaguá and Suape, Brasil Marítimo, Política Nacional de Transportes, Lei dos Portos, Código de Navegação.",
+        "parsed": {
+          "core_themes": "Documents pertaining to Brazilian freight shipping policies would involve discussions of transportation infrastructure, maritime trade agreements, and regulatory frameworks established by the Brazilian government, including the Ministério da Viação e Obras Públicas, and would be reflected in Subject-Numeric Files under codes such as TRA for Transportation and BRAZ for Brazil, with subdivisions related to shipping and ports.",
+          "related_concepts": [
+            "Ministério da Viação e Obras Públicas",
+            "Porto de Santos",
+            "Companhia Docas do Estado de São Paulo",
+            "TRA",
+            "BRAZ",
+            "shipping lanes",
+            "Port of Rio de Janeiro",
+            "freight rates",
+            "Conselho Nacional de Transportes",
+            "Acordo de Alcântara",
+            "Treaty of Montevideo",
+            "Mercosur precursor agreements",
+            "Brazilian Navy",
+            "Marinha do Brasil",
+            "Lloyd Brasileiro",
+            "Varig",
+            "ports of Paranaguá and Suape",
+            "Brasil Marítimo",
+            "Política Nacional de Transportes",
+            "Lei dos Portos",
+            "Código de Navegação."
+          ]
+        },
+        "input_tokens": 439,
+        "output_tokens": 208,
+        "duration_seconds": 9.25614216492977,
+        "created_at": "2026-09-08T23:43:37.672857"
+      }
+    },
+    "T18Eval-00023": {
+      "topic_id": "T18Eval-00023",
+      "original_query": {
+        "TITLE": "Smallpox vaccination",
+        "DESCRIPTION": "I want to find documents on smallpox vaccination in Brazil."
+      },
+      "query_text": "Smallpox vaccination\nI want to find documents on smallpox vaccination in Brazil.",
+      "core_themes": {
+        "raw_response": "CORE_THEMES: Documents pertaining to health affairs and relations between the U.S. and Brazil, specifically those concerning smallpox vaccination programs, campaigns, and policies implemented by the Brazilian government, the U.S. Department of State, and other relevant institutions, such as the U.S. Agency for International Development, the Pan American Health Organization, and the Brazilian Ministry of Health, during the period of 1963-1973.\n\nRELATED_CONCEPTS: Serviço Nacional de Saúde Pública, U.S. Public Health Service, Organização Pan-Americana da Saúde, Vacinação contra a Varíola, Instituto Oswaldo Cruz, Fundação Serviços de Saúde Pública, Campanha de Erradicação da Varíola, Ministério da Saúde, USAID, OPAS, PAHO, smallpox eradication, vaccine distribution, health diplomacy, international health cooperation, Brazilian health policy, U.S.-Brazil health cooperation, varíola, vacinação em massa.",
+        "parsed": {
+          "core_themes": "Documents pertaining to health affairs and relations between the U.S. and Brazil, specifically those concerning smallpox vaccination programs, campaigns, and policies implemented by the Brazilian government, the U.S. Department of State, and other relevant institutions, such as the U.S. Agency for International Development, the Pan American Health Organization, and the Brazilian Ministry of Health, during the period of 1963-1973.",
+          "related_concepts": [
+            "Serviço Nacional de Saúde Pública",
+            "U.S. Public Health Service",
+            "Organização Pan-Americana da Saúde",
+            "Vacinação contra a Varíola",
+            "Instituto Oswaldo Cruz",
+            "Fundação Serviços de Saúde Pública",
+            "Campanha de Erradicação da Varíola",
+            "Ministério da Saúde",
+            "USAID",
+            "OPAS",
+            "PAHO",
+            "smallpox eradication",
+            "vaccine distribution",
+            "health diplomacy",
+            "international health cooperation",
+            "Brazilian health policy",
+            "U.S.-Brazil health cooperation",
+            "varíola",
+            "vacinação em massa."
+          ]
+        },
+        "input_tokens": 441,
+        "output_tokens": 208,
+        "duration_seconds": 9.323706893017516,
+        "created_at": "2026-09-08T23:43:46.933263"
+      }
+    },
+    "T18Eval-00024": {
+      "topic_id": "T18Eval-00024",
+      "original_query": {
+        "TITLE": "Brazilian anti-semitism",
+        "DESCRIPTION": "I want to find documents on Brazilian anti-semitism."
+      },
+      "query_text": "Brazilian anti-semitism\nI want to find documents on Brazilian anti-semitism.",
+      "core_themes": {
+        "raw_response": "CORE_THEMES: Documents pertaining to social unrest and minority relations in Brazil, specifically those addressing anti-Jewish sentiment and discrimination, including reports from the U.S. Embassy in Brasilia and consular posts, as well as correspondence with the Brazilian Ministry of Foreign Affairs and the Jewish community in Brazil, during the governments of Goulart, Castelo Branco, Costa e Silva, and Medici.\n\nRELATED_CONCEPTS: Itamaraty, Brazilian-Israeli relations, Jewish Federation of Brazil, Confederação Israelita do Brasil, Anti-Defamation League, B'nai B'rith, Comunidade Israelita, Estado de São Paulo, Folha de S.Paulo, Jornal do Brasil, Marcha, IPES, IBAD, SNI, DOPS, Lei de Segurança Nacional, Institutional Act No. 5, AI-5, DOI-CODI, Brazilian Bar Association, Ordem dos Advogados do Brasil.",
+        "parsed": {
+          "core_themes": "Documents pertaining to social unrest and minority relations in Brazil, specifically those addressing anti-Jewish sentiment and discrimination, including reports from the U.S. Embassy in Brasilia and consular posts, as well as correspondence with the Brazilian Ministry of Foreign Affairs and the Jewish community in Brazil, during the governments of Goulart, Castelo Branco, Costa e Silva, and Medici.",
+          "related_concepts": [
+            "Itamaraty",
+            "Brazilian-Israeli relations",
+            "Jewish Federation of Brazil",
+            "Confederação Israelita do Brasil",
+            "Anti-Defamation League",
+            "B'nai B'rith",
+            "Comunidade Israelita",
+            "Estado de São Paulo",
+            "Folha de S.Paulo",
+            "Jornal do Brasil",
+            "Marcha",
+            "IPES",
+            "IBAD",
+            "SNI",
+            "DOPS",
+            "Lei de Segurança Nacional",
+            "Institutional Act No. 5",
+            "AI-5",
+            "DOI-CODI",
+            "Brazilian Bar Association",
+            "Ordem dos Advogados do Brasil."
+          ]
+        },
+        "input_tokens": 442,
+        "output_tokens": 196,
+        "duration_seconds": 8.736178103950806,
+        "created_at": "2026-09-08T23:43:56.260941"
+      }
+    },
+    "T18Eval-00025": {
+      "topic_id": "T18Eval-00025",
+      "original_query": {
+        "TITLE": "Montevideo airport strikes",
+        "DESCRIPTION": "I'm looking for documents on airport strikes in the Uruguayan capital of Montevideo."
+      },
+      "query_text": "Montevideo airport strikes\nI'm looking for documents on airport strikes in the Uruguayan capital of Montevideo.",
+      "core_themes": {
+        "raw_response": "CORE_THEMES: Documents pertaining to labor disputes and work stoppages at the Montevideo airport, involving Uruguayan airport employees, airlines, and government agencies, and potentially impacting international air travel and U.S. diplomatic relations with Uruguay and neighboring countries, including Brazil, during the 1960s and early 1970s.\n\nRELATED_CONCEPTS: Montevideo, Uruguay, airport strikes, labor unions, Carrasco International Airport, PLUNA, Varig, Aerolíneas Uruguayas, U.S. Embassy Montevideo, U.S. Department of State, American Airlines, Pan Am, IATA, airport security, air traffic control, labor relations, greve de trabalhadores, sindicatos, Ministério do Trabalho, Itamaraty, Brazilian-Uruguayan relations, U.S.-Uruguayan relations, U.S.-Brazil relations, Cold War diplomacy, Western Hemisphere affairs.",
+        "parsed": {
+          "core_themes": "Documents pertaining to labor disputes and work stoppages at the Montevideo airport, involving Uruguayan airport employees, airlines, and government agencies, and potentially impacting international air travel and U.S. diplomatic relations with Uruguay and neighboring countries, including Brazil, during the 1960s and early 1970s.",
+          "related_concepts": [
+            "Montevideo",
+            "Uruguay",
+            "airport strikes",
+            "labor unions",
+            "Carrasco International Airport",
+            "PLUNA",
+            "Varig",
+            "Aerolíneas Uruguayas",
+            "U.S. Embassy Montevideo",
+            "U.S. Department of State",
+            "American Airlines",
+            "Pan Am",
+            "IATA",
+            "airport security",
+            "air traffic control",
+            "labor relations",
+            "greve de trabalhadores",
+            "sindicatos",
+            "Ministério do Trabalho",
+            "Itamaraty",
+            "Brazilian-Uruguayan relations",
+            "U.S.-Uruguayan relations",
+            "U.S.-Brazil relations",
+            "Cold War diplomacy",
+            "Western Hemisphere affairs."
+          ]
+        },
+        "input_tokens": 448,
+        "output_tokens": 190,
+        "duration_seconds": 8.479029573965818,
+        "created_at": "2026-09-08T23:44:05.001387"
+      }
+    },
+    "T18Eval-00026": {
+      "topic_id": "T18Eval-00026",
+      "original_query": {
+        "TITLE": "Sesame seed trade",
+        "DESCRIPTION": "I want to find information on the commercial viability of sesame seeds in Brazil."
+      },
+      "query_text": "Sesame seed trade\nI want to find information on the commercial viability of sesame seeds in Brazil.",
+      "core_themes": {
+        "raw_response": "CORE_THEMES: Documents pertaining to the commercial viability of sesame seeds in Brazil would involve reports from the U.S. Embassy in Brasilia and consular posts regarding trade negotiations, market research, and agricultural policies of the Brazilian government, including the Ministry of Agriculture and the Instituto Brasileiro de Geografia e Estatística, as well as interactions with the U.S. Department of Agriculture and the U.S. Trade Representative.\n\nRELATED_CONCEPTS: Empresa Brasileira de Pesquisa Agropecuária, Instituto Nacional de Estatística, Ministério da Agricultura, POL 17 BRAZ, EMBTEL, USDAO, USDA, Foreign Agricultural Service, Companhia Nacional de Abastecimento, Sesamo, oleaginosas, Plano de Metas, Operação Pan-América, Aliança para o Progresso, Acordo de Comércio, Tratado de Montevidéu, Conselho Nacional de Pesquisa, Instituto de Pesquisas Econômicas, Superintendência da Moeda e do Crédito.",
+        "parsed": {
+          "core_themes": "Documents pertaining to the commercial viability of sesame seeds in Brazil would involve reports from the U.S. Embassy in Brasilia and consular posts regarding trade negotiations, market research, and agricultural policies of the Brazilian government, including the Ministry of Agriculture and the Instituto Brasileiro de Geografia e Estatística, as well as interactions with the U.S. Department of Agriculture and the U.S. Trade Representative.",
+          "related_concepts": [
+            "Empresa Brasileira de Pesquisa Agropecuária",
+            "Instituto Nacional de Estatística",
+            "Ministério da Agricultura",
+            "POL 17 BRAZ",
+            "EMBTEL",
+            "USDAO",
+            "USDA",
+            "Foreign Agricultural Service",
+            "Companhia Nacional de Abastecimento",
+            "Sesamo",
+            "oleaginosas",
+            "Plano de Metas",
+            "Operação Pan-América",
+            "Aliança para o Progresso",
+            "Acordo de Comércio",
+            "Tratado de Montevidéu",
+            "Conselho Nacional de Pesquisa",
+            "Instituto de Pesquisas Econômicas",
+            "Superintendência da Moeda e do Crédito."
+          ]
+        },
+        "input_tokens": 444,
+        "output_tokens": 220,
+        "duration_seconds": 9.811707732034847,
+        "created_at": "2026-09-08T23:44:13.484157"
+      }
+    },
+    "T18Eval-00027": {
+      "topic_id": "T18Eval-00027",
+      "original_query": {
+        "TITLE": "Disaster relief powdered milk",
+        "DESCRIPTION": "I'm looking for information on the distribution of powdered milk in disaster relief."
+      },
+      "query_text": "Disaster relief powdered milk\nI'm looking for information on the distribution of powdered milk in disaster relief.",
+      "core_themes": {
+        "raw_response": "CORE_THEMES: Documents pertaining to humanitarian assistance and disaster relief efforts, specifically the distribution of powdered milk, would involve the U.S. Department of State, U.S. Agency for International Development (USAID), and Brazilian government agencies, such as the Ministério do Bem-Estar Social, in response to natural disasters or crises, including the provision of food aid and emergency supplies.\n\nRELATED_CONCEPTS: USAID, U.S. Department of State, Ministério do Bem-Estar Social, powdered milk, disaster relief, humanitarian assistance, food aid, emergency supplies, Brazilian Red Cross, Cruz Vermelha Brasileira, U.S. Embassy Brasília, U.S. Consulate Rio de Janeiro, Ação Social, Assistência Social, Programa de Ajuda ao Desenvolvimento, Plano de Emergência, Ajuda Humanitária, Desastres Naturais, Alimentos para Emergência.",
+        "parsed": {
+          "core_themes": "Documents pertaining to humanitarian assistance and disaster relief efforts, specifically the distribution of powdered milk, would involve the U.S. Department of State, U.S. Agency for International Development (USAID), and Brazilian government agencies, such as the Ministério do Bem-Estar Social, in response to natural disasters or crises, including the provision of food aid and emergency supplies.",
+          "related_concepts": [
+            "USAID",
+            "U.S. Department of State",
+            "Ministério do Bem-Estar Social",
+            "powdered milk",
+            "disaster relief",
+            "humanitarian assistance",
+            "food aid",
+            "emergency supplies",
+            "Brazilian Red Cross",
+            "Cruz Vermelha Brasileira",
+            "U.S. Embassy Brasília",
+            "U.S. Consulate Rio de Janeiro",
+            "Ação Social",
+            "Assistência Social",
+            "Programa de Ajuda ao Desenvolvimento",
+            "Plano de Emergência",
+            "Ajuda Humanitária",
+            "Desastres Naturais",
+            "Alimentos para Emergência."
+          ]
+        },
+        "input_tokens": 444,
+        "output_tokens": 191,
+        "duration_seconds": 8.644120912998915,
+        "created_at": "2026-09-08T23:44:23.299668"
+      }
+    },
+    "T18Eval-00028": {
+      "topic_id": "T18Eval-00028",
+      "original_query": {
+        "TITLE": "Spread of equine influenza",
+        "DESCRIPTION": "I want to find documents on the spread of equine influenza in Brazil."
+      },
+      "query_text": "Spread of equine influenza\nI want to find documents on the spread of equine influenza in Brazil.",
+      "core_themes": {
+        "raw_response": "CORE_THEMES: Documents pertaining to the outbreak and dissemination of equine influenza in Brazil, including reports from the U.S. Embassy in Brasilia, the Brazilian Ministry of Agriculture, and the U.S. Department of Agriculture, as well as discussions of quarantine measures, vaccine distribution, and cooperation between the U.S. and Brazilian governments to combat the disease.\n\nRELATED_CONCEPTS: Equine influenza, Ministério da Agricultura, U.S. Embassy Brasilia, USDA, Serviço de Defesa Sanitária Animal, Rio de Janeiro, São Paulo, vaccine distribution, quarantine measures, Brazilian Ministry of Health, Pan American Health Organization, Organização Pan-Americana da Saúde, Instituto Oswaldo Cruz, Fiocruz, Centro Pan-Americano de Febre Aftosa, animal health, zoonoses, disease control, sanitary measures, international cooperation.",
+        "parsed": {
+          "core_themes": "Documents pertaining to the outbreak and dissemination of equine influenza in Brazil, including reports from the U.S. Embassy in Brasilia, the Brazilian Ministry of Agriculture, and the U.S. Department of Agriculture, as well as discussions of quarantine measures, vaccine distribution, and cooperation between the U.S. and Brazilian governments to combat the disease.",
+          "related_concepts": [
+            "Equine influenza",
+            "Ministério da Agricultura",
+            "U.S. Embassy Brasilia",
+            "USDA",
+            "Serviço de Defesa Sanitária Animal",
+            "Rio de Janeiro",
+            "São Paulo",
+            "vaccine distribution",
+            "quarantine measures",
+            "Brazilian Ministry of Health",
+            "Pan American Health Organization",
+            "Organização Pan-Americana da Saúde",
+            "Instituto Oswaldo Cruz",
+            "Fiocruz",
+            "Centro Pan-Americano de Febre Aftosa",
+            "animal health",
+            "zoonoses",
+            "disease control",
+            "sanitary measures",
+            "international cooperation."
+          ]
+        },
+        "input_tokens": 444,
+        "output_tokens": 176,
+        "duration_seconds": 7.42681488499511,
+        "created_at": "2026-09-09T19:47:43.251712"
+      }
+    },
+    "T18Eval-00029": {
+      "topic_id": "T18Eval-00029",
+      "original_query": {
+        "TITLE": "Formation of labor unions",
+        "DESCRIPTION": "Find documents that describe the inception of labor unions in Brazil, specifically focusing on the initial motivations, key figures, and early challenges faced in the establishment of unions."
+      },
+      "query_text": "Formation of labor unions\nFind documents that describe the inception of labor unions in Brazil, specifically focusing on the initial motivations, key figures, and early challenges faced in the establishment of unions.",
+      "core_themes": {
+        "raw_response": "CORE_THEMES: Documents pertaining to labor organization and union formation in Brazil, including the role of the Brazilian Labor Ministry, the Ministry of Labor and Employment, and the National Confederation of Workers, as well as the influence of the U.S. Department of Labor and the American Federation of Labor and Congress of Industrial Organizations on Brazilian labor movements, and the impact of the Goulart government's labor policies and the subsequent military regimes on union development.\n\nRELATED_CONCEPTS: CGT, Conferência Nacional da Classe Trabalhadora, Confederação Nacional dos Trabalhadores, Departamento Intersindical de Estatística e Estudos Socioeconômicos, Força Sindical, Fundo de Garantia por Tempo de Serviço, Instituto Nacional de Previdência Social, João Goulart, Lei de Greve, Marcha da Família com Deus pela Liberdade, Movimento dos Trabalhadores Rurais Sem Terra, Partido Comunista Brasileiro, Partido dos Trabalhadores, Sindicato dos Metalúrgicos, Sindicato dos Trabalhadores na Indústria da Construção Civil, União Geral dos Trabalhadores, Workers' Party of Brazil",
+        "parsed": {
+          "core_themes": "Documents pertaining to labor organization and union formation in Brazil, including the role of the Brazilian Labor Ministry, the Ministry of Labor and Employment, and the National Confederation of Workers, as well as the influence of the U.S. Department of Labor and the American Federation of Labor and Congress of Industrial Organizations on Brazilian labor movements, and the impact of the Goulart government's labor policies and the subsequent military regimes on union development.",
+          "related_concepts": [
+            "CGT",
+            "Conferência Nacional da Classe Trabalhadora",
+            "Confederação Nacional dos Trabalhadores",
+            "Departamento Intersindical de Estatística e Estudos Socioeconômicos",
+            "Força Sindical",
+            "Fundo de Garantia por Tempo de Serviço",
+            "Instituto Nacional de Previdência Social",
+            "João Goulart",
+            "Lei de Greve",
+            "Marcha da Família com Deus pela Liberdade",
+            "Movimento dos Trabalhadores Rurais Sem Terra",
+            "Partido Comunista Brasileiro",
+            "Partido dos Trabalhadores",
+            "Sindicato dos Metalúrgicos",
+            "Sindicato dos Trabalhadores na Indústria da Construção Civil",
+            "União Geral dos Trabalhadores",
+            "Workers' Party of Brazil"
+          ]
+        },
+        "input_tokens": 460,
+        "output_tokens": 260,
+        "duration_seconds": 11.51879539899528,
+        "created_at": "2026-09-08T23:44:41.238771"
+      }
+    },
+    "T18Eval-00030": {
+      "topic_id": "T18Eval-00030",
+      "original_query": {
+        "TITLE": "International soccer",
+        "DESCRIPTION": "Find documents that mention international aspects of soccer, such as games with teams from other countries."
+      },
+      "query_text": "International soccer\nFind documents that mention international aspects of soccer, such as games with teams from other countries.",
+      "core_themes": {
+        "raw_response": "CORE_THEMES: Documents pertaining to international athletic competitions, specifically soccer matches and tournaments involving Brazilian teams and foreign teams, including interactions with the Confederação Brasileira de Futebol, FIFA, and other national soccer federations, as well as diplomatic efforts to promote international sporting events and exchanges.\n\nRELATED_CONCEPTS: Copa do Mundo, FIFA, Confederação Brasileira de Futebol, Seleção Brasileira, Pelé, Garrincha, Estádio do Maracanã, Taça das Nações, Jogo amistoso, Torneio Rio-São Paulo, CONMEBOL, UEFA, Copa Libertadores, Intercontinental Cup, Brazilian Ministry of Education and Culture, Itamaraty, Embaixada do Brasil em Washington, Consulado dos EUA no Rio de Janeiro, Esportes olímpicos, Diplomacia esportiva, Relações internacionais, Comitê Olímpico Brasileiro, Comitê Olímpico Internacional.",
+        "parsed": {
+          "core_themes": "Documents pertaining to international athletic competitions, specifically soccer matches and tournaments involving Brazilian teams and foreign teams, including interactions with the Confederação Brasileira de Futebol, FIFA, and other national soccer federations, as well as diplomatic efforts to promote international sporting events and exchanges.",
+          "related_concepts": [
+            "Copa do Mundo",
+            "FIFA",
+            "Confederação Brasileira de Futebol",
+            "Seleção Brasileira",
+            "Pelé",
+            "Garrincha",
+            "Estádio do Maracanã",
+            "Taça das Nações",
+            "Jogo amistoso",
+            "Torneio Rio-São Paulo",
+            "CONMEBOL",
+            "UEFA",
+            "Copa Libertadores",
+            "Intercontinental Cup",
+            "Brazilian Ministry of Education and Culture",
+            "Itamaraty",
+            "Embaixada do Brasil em Washington",
+            "Consulado dos EUA no Rio de Janeiro",
+            "Esportes olímpicos",
+            "Diplomacia esportiva",
+            "Relações internacionais",
+            "Comitê Olímpico Brasileiro",
+            "Comitê Olímpico Internacional."
+          ]
+        },
+        "input_tokens": 444,
+        "output_tokens": 211,
+        "duration_seconds": 9.419089353992604,
+        "created_at": "2026-09-08T23:44:52.761926"
+      }
+    },
+    "T18Eval-00031": {
+      "topic_id": "T18Eval-00031",
+      "original_query": {
+        "TITLE": "Aircraft accidents in Brazil",
+        "DESCRIPTION": "Please find documents about plane crashes on Brazilian territory."
+      },
+      "query_text": "Aircraft accidents in Brazil\nPlease find documents about plane crashes on Brazilian territory.",
+      "core_themes": {
+        "raw_response": "CORE_THEMES: Documents pertaining to aviation accidents and incidents in Brazil, involving the Brazilian Air Force, Varig, and other airlines, as well as the U.S. Department of State's Consular Affairs and the U.S. Embassy in Brasilia, would be classified under the subject code AV for Aviation, with a country code of BRAZ, and would discuss the role of the Brazilian government, including the Ministério da Aeronáutica, in investigating and responding to such incidents.\n\nRELATED_CONCEPTS: Varig, Cruzeiro do Sul, Força Aérea Brasileira, Ministério da Aeronáutica, Departamento de Aviação Civil, Infraero, Aeroporto do Galeão, Aeroporto de Congonhas, Boeing 707, Douglas DC-8, Embraer, Instituto de Pesquisas e Estudos Aeronáuticos, Comissão de Investigação de Acidentes Aeronáuticos, Acordo de Chicago, Convenção de Aviação Civil Internacional, Corpo de Bombeiros, Polícia Federal, Serviço Regional de Trânsito Aéreo",
+        "parsed": {
+          "core_themes": "Documents pertaining to aviation accidents and incidents in Brazil, involving the Brazilian Air Force, Varig, and other airlines, as well as the U.S. Department of State's Consular Affairs and the U.S. Embassy in Brasilia, would be classified under the subject code AV for Aviation, with a country code of BRAZ, and would discuss the role of the Brazilian government, including the Ministério da Aeronáutica, in investigating and responding to such incidents.",
+          "related_concepts": [
+            "Varig",
+            "Cruzeiro do Sul",
+            "Força Aérea Brasileira",
+            "Ministério da Aeronáutica",
+            "Departamento de Aviação Civil",
+            "Infraero",
+            "Aeroporto do Galeão",
+            "Aeroporto de Congonhas",
+            "Boeing 707",
+            "Douglas DC-8",
+            "Embraer",
+            "Instituto de Pesquisas e Estudos Aeronáuticos",
+            "Comissão de Investigação de Acidentes Aeronáuticos",
+            "Acordo de Chicago",
+            "Convenção de Aviação Civil Internacional",
+            "Corpo de Bombeiros",
+            "Polícia Federal",
+            "Serviço Regional de Trânsito Aéreo"
+          ]
+        },
+        "input_tokens": 439,
+        "output_tokens": 238,
+        "duration_seconds": 10.573718684026971,
+        "created_at": "2026-09-08T23:45:02.185517"
+      }
+    },
+    "T18Eval-00032": {
+      "topic_id": "T18Eval-00032",
+      "original_query": {
+        "TITLE": "Solar eclipse",
+        "DESCRIPTION": "I am looking for information about eclipses of the sun that could be seen from Brazil."
+      },
+      "query_text": "Solar eclipse\nI am looking for information about eclipses of the sun that could be seen from Brazil.",
+      "core_themes": {
+        "raw_response": "CORE_THEMES: Documents pertaining to astronomical events observable from Brazil, specifically solar eclipses, as reported by the U.S. Embassy in Brasilia, Consulates in Rio de Janeiro and São Paulo, and other diplomatic and consular posts, including scientific and technical information, observations, and reactions from the Brazilian government, military, and civilian populations, as well as U.S. scientific and diplomatic communities.\n\nRELATED_CONCEPTS: NASA, USIA, Embaixada dos Estados Unidos no Brasil, Consulado Geral dos Estados Unidos no Rio de Janeiro, Observatório Nacional, Instituto Nacional de Pesquisas Espaciais, INPE, Forças Armadas Brasileiras, Ministério das Relações Exteriores, Itamaraty, Agência Brasileira de Cooperação, ABC, National Science Foundation, NSF, Solar Eclipse Committee, Comitê do Eclipse Solar, Brasil, Brazil, Rio de Janeiro, São Paulo, Brasilia, Amazonas, NASA-Brazil cooperation, Ciência e Tecnologia, Science and Technology.",
+        "parsed": {
+          "core_themes": "Documents pertaining to astronomical events observable from Brazil, specifically solar eclipses, as reported by the U.S. Embassy in Brasilia, Consulates in Rio de Janeiro and São Paulo, and other diplomatic and consular posts, including scientific and technical information, observations, and reactions from the Brazilian government, military, and civilian populations, as well as U.S. scientific and diplomatic communities.",
+          "related_concepts": [
+            "NASA",
+            "USIA",
+            "Embaixada dos Estados Unidos no Brasil",
+            "Consulado Geral dos Estados Unidos no Rio de Janeiro",
+            "Observatório Nacional",
+            "Instituto Nacional de Pesquisas Espaciais",
+            "INPE",
+            "Forças Armadas Brasileiras",
+            "Ministério das Relações Exteriores",
+            "Itamaraty",
+            "Agência Brasileira de Cooperação",
+            "ABC",
+            "National Science Foundation",
+            "NSF",
+            "Solar Eclipse Committee",
+            "Comitê do Eclipse Solar",
+            "Brasil",
+            "Brazil",
+            "Rio de Janeiro",
+            "São Paulo",
+            "Brasilia",
+            "Amazonas",
+            "NASA-Brazil cooperation",
+            "Ciência e Tecnologia",
+            "Science and Technology."
+          ]
+        },
+        "input_tokens": 444,
+        "output_tokens": 213,
+        "duration_seconds": 9.477400816045702,
+        "created_at": "2026-09-08T23:45:12.763880"
+      }
+    },
+    "T18Eval-00033": {
+      "topic_id": "T18Eval-00033",
+      "original_query": {
+        "TITLE": "Coffee rust eradication",
+        "DESCRIPTION": "I am looking for documents that mention eradication practices for coffee rust in Brazil."
+      },
+      "query_text": "Coffee rust eradication\nI am looking for documents that mention eradication practices for coffee rust in Brazil.",
+      "core_themes": {
+        "raw_response": "CORE_THEMES: Documents pertaining to the eradication of coffee rust in Brazil would likely involve the U.S. Department of State's interactions with the Brazilian Ministry of Agriculture, as well as the Instituto Brasileiro do Café, and would discuss policies and practices implemented during the Goulart and subsequent military governments to combat the disease, including the use of fungicides and other control measures.\n\nRELATED_CONCEPTS: Instituto Brasileiro do Café, Ministério da Agricultura, U.S. Agency for International Development, USAID, coffee rust, ferrugem do café, fungicides, DDT, 2,4-D, herbicidas, Café do Brasil, Conselho Nacional de Café, Plano de Erradicação da Ferrugem, Operação Ferrugem, USDA, Foreign Agricultural Service, Café Solúvel, Santos, São Paulo, Paraná, Minas Gerais, Bahia, Instituto Biológico de São Paulo, Fundação Getúlio Vargas, Comissão Técnica de Café.",
+        "parsed": {
+          "core_themes": "Documents pertaining to the eradication of coffee rust in Brazil would likely involve the U.S. Department of State's interactions with the Brazilian Ministry of Agriculture, as well as the Instituto Brasileiro do Café, and would discuss policies and practices implemented during the Goulart and subsequent military governments to combat the disease, including the use of fungicides and other control measures.",
+          "related_concepts": [
+            "Instituto Brasileiro do Café",
+            "Ministério da Agricultura",
+            "U.S. Agency for International Development",
+            "USAID",
+            "coffee rust",
+            "ferrugem do café",
+            "fungicides",
+            "DDT",
+            "2",
+            "4-D",
+            "herbicidas",
+            "Café do Brasil",
+            "Conselho Nacional de Café",
+            "Plano de Erradicação da Ferrugem",
+            "Operação Ferrugem",
+            "USDA",
+            "Foreign Agricultural Service",
+            "Café Solúvel",
+            "Santos",
+            "São Paulo",
+            "Paraná",
+            "Minas Gerais",
+            "Bahia",
+            "Instituto Biológico de São Paulo",
+            "Fundação Getúlio Vargas",
+            "Comissão Técnica de Café."
+          ]
+        },
+        "input_tokens": 444,
+        "output_tokens": 213,
+        "duration_seconds": 9.523973114904948,
+        "created_at": "2026-09-08T23:45:22.245492"
+      }
+    },
+    "T18Eval-00034": {
+      "topic_id": "T18Eval-00034",
+      "original_query": {
+        "TITLE": "Dairy cattle industry",
+        "DESCRIPTION": "Locate documents containing information on Brazil's dairy cattle industry and the distribution of its products."
+      },
+      "query_text": "Dairy cattle industry\nLocate documents containing information on Brazil's dairy cattle industry and the distribution of its products.",
+      "core_themes": {
+        "raw_response": "CORE_THEMES: Documents pertaining to Brazil's dairy cattle industry would involve reports from the U.S. Embassy in Brasilia and consular posts, discussing the development of the industry, trade agreements, and market trends, as well as interactions with the Brazilian Ministry of Agriculture and the Instituto Brasileiro de Geografia e Estatística. These documents would also cover the impact of government policies, such as those implemented during the Goulart and subsequent military governments, on the industry's growth and export capabilities.\n\nRELATED_CONCEPTS: dairy products, cattle ranching, Brazilian Ministry of Agriculture, Instituto Brasileiro de Geografia e Estatística, U.S. Department of Agriculture, Foreign Agricultural Service, PL 480, Alliance for Progress, Latin American Free Trade Association, Mercado Comum do Sul, Instituto Nacional de Colonização e Reforma Agrária, Empresa Brasileira de Pesquisa Agropecuária, dairy cooperatives, leite, queijo, Embassy Brasilia, Consulate Rio de Janeiro, Consulate São Paulo, agricultural trade agreements, livestock exports",
+        "parsed": {
+          "core_themes": "Documents pertaining to Brazil's dairy cattle industry would involve reports from the U.S. Embassy in Brasilia and consular posts, discussing the development of the industry, trade agreements, and market trends, as well as interactions with the Brazilian Ministry of Agriculture and the Instituto Brasileiro de Geografia e Estatística. These documents would also cover the impact of government policies, such as those implemented during the Goulart and subsequent military governments, on the industry's growth and export capabilities.",
+          "related_concepts": [
+            "dairy products",
+            "cattle ranching",
+            "Brazilian Ministry of Agriculture",
+            "Instituto Brasileiro de Geografia e Estatística",
+            "U.S. Department of Agriculture",
+            "Foreign Agricultural Service",
+            "PL 480",
+            "Alliance for Progress",
+            "Latin American Free Trade Association",
+            "Mercado Comum do Sul",
+            "Instituto Nacional de Colonização e Reforma Agrária",
+            "Empresa Brasileira de Pesquisa Agropecuária",
+            "dairy cooperatives",
+            "leite",
+            "queijo",
+            "Embassy Brasilia",
+            "Consulate Rio de Janeiro",
+            "Consulate São Paulo",
+            "agricultural trade agreements",
+            "livestock exports"
+          ]
+        },
+        "input_tokens": 446,
+        "output_tokens": 218,
+        "duration_seconds": 9.851070045027882,
+        "created_at": "2026-09-08T23:45:31.773923"
+      }
+    },
+    "T18Eval-00035": {
+      "topic_id": "T18Eval-00035",
+      "original_query": {
+        "TITLE": "International Cocoa Agreement",
+        "DESCRIPTION": "I want to know about the International Cocoa Agreement."
+      },
+      "query_text": "International Cocoa Agreement\nI want to know about the International Cocoa Agreement.",
+      "core_themes": {
+        "raw_response": "CORE_THEMES: Documents related to the International Cocoa Agreement would pertain to ECON 12 BRAZ, covering negotiations, implementation, and impact of the agreement on the global cocoa market, particularly in relation to Brazil's role as a major cocoa producer, and would involve the U.S. Department of State, the Brazilian government, and other international organizations.\n\nRELATED_CONCEPTS: International Cocoa Agreement, ECON 12 BRAZ, Brazilian Ministry of Agriculture, Instituto Brasileiro de Café, U.S. Department of Agriculture, Cocoa Producers' Alliance, Comissão Executiva do Plano da Lavoura Cacaueira, International Commodity Agreements, United Nations Conference on Trade and Development, Organização para a Cooperação e Desenvolvimento Econômico, Acordo Internacional do Cacau, Convenção Internacional do Cacau, Conselho Inter governamental do Cacau, International Cocoa Organization, Cocoa prices, quotas, tariffs, trade negotiations, Brazilian export policies.",
+        "parsed": {
+          "core_themes": "Documents related to the International Cocoa Agreement would pertain to ECON 12 BRAZ, covering negotiations, implementation, and impact of the agreement on the global cocoa market, particularly in relation to Brazil's role as a major cocoa producer, and would involve the U.S. Department of State, the Brazilian government, and other international organizations.",
+          "related_concepts": [
+            "International Cocoa Agreement",
+            "ECON 12 BRAZ",
+            "Brazilian Ministry of Agriculture",
+            "Instituto Brasileiro de Café",
+            "U.S. Department of Agriculture",
+            "Cocoa Producers' Alliance",
+            "Comissão Executiva do Plano da Lavoura Cacaueira",
+            "International Commodity Agreements",
+            "United Nations Conference on Trade and Development",
+            "Organização para a Cooperação e Desenvolvimento Econômico",
+            "Acordo Internacional do Cacau",
+            "Convenção Internacional do Cacau",
+            "Conselho Inter governamental do Cacau",
+            "International Cocoa Organization",
+            "Cocoa prices",
+            "quotas",
+            "tariffs",
+            "trade negotiations",
+            "Brazilian export policies."
+          ]
+        },
+        "input_tokens": 437,
+        "output_tokens": 205,
+        "duration_seconds": 9.174158609006554,
+        "created_at": "2026-09-08T23:45:41.629462"
+      }
+    },
+    "T18Eval-00036": {
+      "topic_id": "T18Eval-00036",
+      "original_query": {
+        "TITLE": "Shrimp fishing policies",
+        "DESCRIPTION": "Find documents that mention Brazilian shrimp fishing policies."
+      },
+      "query_text": "Shrimp fishing policies\nFind documents that mention Brazilian shrimp fishing policies.",
+      "core_themes": {
+        "raw_response": "CORE_THEMES: Documents pertaining to Brazilian fisheries management, particularly those related to camarão fishing, would be classified under the subject code POL, with a focus on the policies and regulations implemented by the Brazilian government, including the Ministério da Agricultura and the Serviço de Pesca, in relation to the shrimp fishing industry, and interactions with the U.S. Department of State and other foreign entities.\n\nRELATED_CONCEPTS: Ministério da Agricultura, Serviço de Pesca, POL 15-1, camarão, Marinha do Brasil, Instituto Brasileiro de Geografia e Estatística, Conselho Nacional de Pesca, Acordo de Pesca entre Brasil e Estados Unidos, Tratado de Pesca do Atlântico Sul, FAO, Organização das Nações Unidas para Alimentação e Agricultura, Departamento de Pesca, Superintendência do Desenvolvimento da Pesca, Porto de Santos, Porto do Rio de Janeiro, frota pesqueira, indústria de processamento de pescado, exportação de camarão.",
+        "parsed": {
+          "core_themes": "Documents pertaining to Brazilian fisheries management, particularly those related to camarão fishing, would be classified under the subject code POL, with a focus on the policies and regulations implemented by the Brazilian government, including the Ministério da Agricultura and the Serviço de Pesca, in relation to the shrimp fishing industry, and interactions with the U.S. Department of State and other foreign entities.",
+          "related_concepts": [
+            "Ministério da Agricultura",
+            "Serviço de Pesca",
+            "POL 15-1",
+            "camarão",
+            "Marinha do Brasil",
+            "Instituto Brasileiro de Geografia e Estatística",
+            "Conselho Nacional de Pesca",
+            "Acordo de Pesca entre Brasil e Estados Unidos",
+            "Tratado de Pesca do Atlântico Sul",
+            "FAO",
+            "Organização das Nações Unidas para Alimentação e Agricultura",
+            "Departamento de Pesca",
+            "Superintendência do Desenvolvimento da Pesca",
+            "Porto de Santos",
+            "Porto do Rio de Janeiro",
+            "frota pesqueira",
+            "indústria de processamento de pescado",
+            "exportação de camarão."
+          ]
+        },
+        "input_tokens": 437,
+        "output_tokens": 229,
+        "duration_seconds": 10.2674221949419,
+        "created_at": "2026-09-08T23:45:50.807970"
+      }
+    },
+    "T18Eval-00037": {
+      "topic_id": "T18Eval-00037",
+      "original_query": {
+        "TITLE": "Catholic birth control",
+        "DESCRIPTION": "Find documents documenting Catholic perspectives on female birth control in Brazil."
+      },
+      "query_text": "Catholic birth control\nFind documents documenting Catholic perspectives on female birth control in Brazil.",
+      "core_themes": {
+        "raw_response": "CORE_THEMES: Documents pertaining to the Brazilian Catholic Church's stance on family planning and birth control methods, including the perspectives of the National Conference of Brazilian Bishops, the Vatican's influence on Brazilian Catholicism, and the intersection of religious and government policies on population control and women's reproductive health during the Goulart and subsequent military governments.\n\nRELATED_CONCEPTS: Conferência Nacional dos Bispos do Brasil, Vatican II, Humanae Vitae, birth control pills, Igreja Católica Brasileira, population control, family planning, women's rights, reproductive health, Brasilian Ministry of Health, National Family Planning Program, Instituto Nacional de Estatística, Centro Brasileiro de Estudos Demográficos, Comissão de População e Desenvolvimento, Plano Nacional de Desenvolvimento, Política de População, Lei de Planejamento Familiar, Contracepção, Planejamento Familiar.",
+        "parsed": {
+          "core_themes": "Documents pertaining to the Brazilian Catholic Church's stance on family planning and birth control methods, including the perspectives of the National Conference of Brazilian Bishops, the Vatican's influence on Brazilian Catholicism, and the intersection of religious and government policies on population control and women's reproductive health during the Goulart and subsequent military governments.",
+          "related_concepts": [
+            "Conferência Nacional dos Bispos do Brasil",
+            "Vatican II",
+            "Humanae Vitae",
+            "birth control pills",
+            "Igreja Católica Brasileira",
+            "population control",
+            "family planning",
+            "women's rights",
+            "reproductive health",
+            "Brasilian Ministry of Health",
+            "National Family Planning Program",
+            "Instituto Nacional de Estatística",
+            "Centro Brasileiro de Estudos Demográficos",
+            "Comissão de População e Desenvolvimento",
+            "Plano Nacional de Desenvolvimento",
+            "Política de População",
+            "Lei de Planejamento Familiar",
+            "Contracepção",
+            "Planejamento Familiar."
+          ]
+        },
+        "input_tokens": 440,
+        "output_tokens": 193,
+        "duration_seconds": 8.87475754704792,
+        "created_at": "2026-09-08T23:46:01.079520"
+      }
+    },
+    "T18Eval-00038": {
+      "topic_id": "T18Eval-00038",
+      "original_query": {
+        "TITLE": "Herbicide circulation",
+        "DESCRIPTION": "I'm looking for documents describing the circulation (development, shipment, use, etc.) of herbicides in Brazil."
+      },
+      "query_text": "Herbicide circulation\nI'm looking for documents describing the circulation (development, shipment, use, etc.) of herbicides in Brazil.",
+      "core_themes": {
+        "raw_response": "CORE_THEMES: Documents pertaining to the circulation of herbicides in Brazil would involve discussions of agricultural development, pesticide usage, and environmental policies, as well as the roles of the U.S. Department of State, the U.S. Department of Agriculture, and the Brazilian Ministry of Agriculture, particularly during the Goulart and subsequent military governments.\n\nRELATED_CONCEPTS: herbicidas, defoliants, Agent Orange, USDA, Ministério da Agricultura, IBAM, Política Agrícola, Plano de Ação Econômica do Governo, USAID, Fundo de Defesa da Borracha, Instituto Brasileiro de Geografia e Estatística, Comissão de Desenvolvimento da Amazônia, herbicida 2,4-D, herbicida 2,4,5-T, Operação Amazônia, Programa de Desenvolvimento da Região Norte, Acordo de Cooperação Técnica Brasil-Estados Unidos.",
+        "parsed": {
+          "core_themes": "Documents pertaining to the circulation of herbicides in Brazil would involve discussions of agricultural development, pesticide usage, and environmental policies, as well as the roles of the U.S. Department of State, the U.S. Department of Agriculture, and the Brazilian Ministry of Agriculture, particularly during the Goulart and subsequent military governments.",
+          "related_concepts": [
+            "herbicidas",
+            "defoliants",
+            "Agent Orange",
+            "USDA",
+            "Ministério da Agricultura",
+            "IBAM",
+            "Política Agrícola",
+            "Plano de Ação Econômica do Governo",
+            "USAID",
+            "Fundo de Defesa da Borracha",
+            "Instituto Brasileiro de Geografia e Estatística",
+            "Comissão de Desenvolvimento da Amazônia",
+            "herbicida 2",
+            "4-D",
+            "herbicida 2",
+            "4",
+            "5-T",
+            "Operação Amazônia",
+            "Programa de Desenvolvimento da Região Norte",
+            "Acordo de Cooperação Técnica Brasil-Estados Unidos."
+          ]
+        },
+        "input_tokens": 451,
+        "output_tokens": 207,
+        "duration_seconds": 9.968151559005491,
+        "created_at": "2026-09-08T23:46:09.958905"
+      }
+    },
+    "T18Eval-00039": {
+      "topic_id": "T18Eval-00039",
+      "original_query": {
+        "TITLE": "Anti-cancer efforts",
+        "DESCRIPTION": "I'm looking for documents on anti-cancer efforts in Brazil."
+      },
+      "query_text": "Anti-cancer efforts\nI'm looking for documents on anti-cancer efforts in Brazil.",
+      "core_themes": {
+        "raw_response": "CORE_THEMES: Documents pertaining to health affairs and medical research in Brazil, specifically those related to cancer treatment and prevention, including efforts by the U.S. Department of State, U.S. Public Health Service, and Brazilian government agencies such as the Ministério da Saúde, would be of interest. These documents would likely discuss cooperation between U.S. and Brazilian health organizations, cancer research initiatives, and public health policies.\n\nRELATED_CONCEPTS: Instituto Nacional do Câncer, U.S. National Cancer Institute, American Cancer Society, Fundação Rockefeller, Ministério da Saúde, Serviço Nacional de Saúde, U.S. Public Health Service, Pan American Health Organization, Organização Mundial da Saúde, cancer research grants, radiation therapy, chemotherapy, hospital equipment donations, medical training programs, Brasilian medical schools, Hospital do Câncer, Centro de Pesquisas do Câncer",
+        "parsed": {
+          "core_themes": "Documents pertaining to health affairs and medical research in Brazil, specifically those related to cancer treatment and prevention, including efforts by the U.S. Department of State, U.S. Public Health Service, and Brazilian government agencies such as the Ministério da Saúde, would be of interest. These documents would likely discuss cooperation between U.S. and Brazilian health organizations, cancer research initiatives, and public health policies.",
+          "related_concepts": [
+            "Instituto Nacional do Câncer",
+            "U.S. National Cancer Institute",
+            "American Cancer Society",
+            "Fundação Rockefeller",
+            "Ministério da Saúde",
+            "Serviço Nacional de Saúde",
+            "U.S. Public Health Service",
+            "Pan American Health Organization",
+            "Organização Mundial da Saúde",
+            "cancer research grants",
+            "radiation therapy",
+            "chemotherapy",
+            "hospital equipment donations",
+            "medical training programs",
+            "Brasilian medical schools",
+            "Hospital do Câncer",
+            "Centro de Pesquisas do Câncer"
+          ]
+        },
+        "input_tokens": 441,
+        "output_tokens": 188,
+        "duration_seconds": 9.038775035995059,
+        "created_at": "2026-09-08T23:46:19.931533"
+      }
+    },
+    "T18Eval-00040": {
+      "topic_id": "T18Eval-00040",
+      "original_query": {
+        "TITLE": "Gemini 10 spaceflight",
+        "DESCRIPTION": "I want to find documents on the Gemini 10 spaceflight."
+      },
+      "query_text": "Gemini 10 spaceflight\nI want to find documents on the Gemini 10 spaceflight.",
+      "core_themes": {
+        "raw_response": "CORE_THEMES: Documents related to the Gemini 10 spaceflight would be classified under the subject of Scientific and Technical Matters, specifically Space Exploration, and would involve the National Aeronautics and Space Administration (NASA) and the U.S. Embassy in Brazil, discussing the mission's objectives, launch, and outcome, as well as its implications for U.S.-Brazil relations and cooperation in the field of space research during the 1960s.\n\nRELATED_CONCEPTS: NASA, Gemini 10, Astronautics, Space Exploration, U.S. Embassy Brazil, Consulate General Rio de Janeiro, Consulate General São Paulo, Itamaraty, Ministério das Relações Exteriores, Agência Espacial Brasileira, Centro Técnico Aeroespacial, Presidente Castelo Branco, Presidente Costa e Silva, Presidente Medici, Instituto Nacional de Pesquisas Espaciais, INPE, Comissão Nacional de Atividades Espaciais, CNAE, Acordo de Cooperação Espacial, Space Cooperation Agreement",
+        "parsed": {
+          "core_themes": "Documents related to the Gemini 10 spaceflight would be classified under the subject of Scientific and Technical Matters, specifically Space Exploration, and would involve the National Aeronautics and Space Administration (NASA) and the U.S. Embassy in Brazil, discussing the mission's objectives, launch, and outcome, as well as its implications for U.S.-Brazil relations and cooperation in the field of space research during the 1960s.",
+          "related_concepts": [
+            "NASA",
+            "Gemini 10",
+            "Astronautics",
+            "Space Exploration",
+            "U.S. Embassy Brazil",
+            "Consulate General Rio de Janeiro",
+            "Consulate General São Paulo",
+            "Itamaraty",
+            "Ministério das Relações Exteriores",
+            "Agência Espacial Brasileira",
+            "Centro Técnico Aeroespacial",
+            "Presidente Castelo Branco",
+            "Presidente Costa e Silva",
+            "Presidente Medici",
+            "Instituto Nacional de Pesquisas Espaciais",
+            "INPE",
+            "Comissão Nacional de Atividades Espaciais",
+            "CNAE",
+            "Acordo de Cooperação Espacial",
+            "Space Cooperation Agreement"
+          ]
+        },
+        "input_tokens": 443,
+        "output_tokens": 217,
+        "duration_seconds": 10.379216627916321,
+        "created_at": "2026-09-08T23:46:28.974945"
+      }
+    },
+    "T18Eval-00041": {
+      "topic_id": "T18Eval-00041",
+      "original_query": {
+        "TITLE": "Rare earth chloride sales",
+        "DESCRIPTION": "I want information on the sale of rare earth chlorides by the Brazilian government."
+      },
+      "query_text": "Rare earth chloride sales\nI want information on the sale of rare earth chlorides by the Brazilian government.",
+      "core_themes": {
+        "raw_response": "CORE_THEMES: Documents pertaining to the sale of rare earth chlorides by the Brazilian government would involve the Ministry of Mines and Energy, the National Nuclear Energy Commission, and the U.S. Atomic Energy Commission, and would be classified under the subject code ECAT for Economic Affairs - Commodities. These documents would discuss the policies and negotiations surrounding the export of rare earth chlorides, including the role of the Brazilian government and state-owned enterprises.\n\nRELATED_CONCEPTS: Companhia Vale do Rio Doce, National Nuclear Energy Commission, U.S. Atomic Energy Commission, Ministry of Mines and Energy, ECAT, rare earth elements, thorium, uranium, monazite, Instituto de Energia Atômica, Conselho Nacional de Energia Nuclear, Acordo de Cooperação Nuclear, Tratado de Não Proliferação Nuclear, Itatiaia, Piquia, Araxá, Goiás, Parana, rare earth chloride exports, Comissão Nacional de Energia Nuclear, Departamento Nacional de Minas e Energia.",
+        "parsed": {
+          "core_themes": "Documents pertaining to the sale of rare earth chlorides by the Brazilian government would involve the Ministry of Mines and Energy, the National Nuclear Energy Commission, and the U.S. Atomic Energy Commission, and would be classified under the subject code ECAT for Economic Affairs - Commodities. These documents would discuss the policies and negotiations surrounding the export of rare earth chlorides, including the role of the Brazilian government and state-owned enterprises.",
+          "related_concepts": [
+            "Companhia Vale do Rio Doce",
+            "National Nuclear Energy Commission",
+            "U.S. Atomic Energy Commission",
+            "Ministry of Mines and Energy",
+            "ECAT",
+            "rare earth elements",
+            "thorium",
+            "uranium",
+            "monazite",
+            "Instituto de Energia Atômica",
+            "Conselho Nacional de Energia Nuclear",
+            "Acordo de Cooperação Nuclear",
+            "Tratado de Não Proliferação Nuclear",
+            "Itatiaia",
+            "Piquia",
+            "Araxá",
+            "Goiás",
+            "Parana",
+            "rare earth chloride exports",
+            "Comissão Nacional de Energia Nuclear",
+            "Departamento Nacional de Minas e Energia."
+          ]
+        },
+        "input_tokens": 444,
+        "output_tokens": 217,
+        "duration_seconds": 10.391291899955831,
+        "created_at": "2026-09-08T23:46:39.358500"
+      }
+    },
+    "T18Eval-00042": {
+      "topic_id": "T18Eval-00042",
+      "original_query": {
+        "TITLE": "Import of color television",
+        "DESCRIPTION": "I'm looking for information on the import of color television into Brazil."
+      },
+      "query_text": "Import of color television\nI'm looking for information on the import of color television into Brazil.",
+      "core_themes": {
+        "raw_response": "CORE_THEMES: Documents pertaining to the importation of color television sets into Brazil, including those related to trade policies, tariffs, and regulations imposed by the Brazilian government, as well as the role of the U.S. Department of State, the U.S. Embassy in Brasilia, and the Brazilian Ministry of Foreign Affairs in facilitating or restricting such imports during the Goulart and subsequent military governments.\n\nRELATED_CONCEPTS: color television, TV sets, import quotas, tariffs, Brazilian Ministry of Foreign Affairs, Itamaraty, U.S. Embassy Brasilia, U.S. Department of State, POL 6, BRAZ, trade agreements, GATT, Tariff Code, Lei de Informática, Conselho Nacional de Telecomunicações, EMBRATEL, Radio Corporation of America, RCA do Brasil, Sociedade Brasileira de Televisão, TV Tupi, TV Globo, Instituto Nacional de Telecomunicações, Ministério das Comunicações.",
+        "parsed": {
+          "core_themes": "Documents pertaining to the importation of color television sets into Brazil, including those related to trade policies, tariffs, and regulations imposed by the Brazilian government, as well as the role of the U.S. Department of State, the U.S. Embassy in Brasilia, and the Brazilian Ministry of Foreign Affairs in facilitating or restricting such imports during the Goulart and subsequent military governments.",
+          "related_concepts": [
+            "color television",
+            "TV sets",
+            "import quotas",
+            "tariffs",
+            "Brazilian Ministry of Foreign Affairs",
+            "Itamaraty",
+            "U.S. Embassy Brasilia",
+            "U.S. Department of State",
+            "POL 6",
+            "BRAZ",
+            "trade agreements",
+            "GATT",
+            "Tariff Code",
+            "Lei de Informática",
+            "Conselho Nacional de Telecomunicações",
+            "EMBRATEL",
+            "Radio Corporation of America",
+            "RCA do Brasil",
+            "Sociedade Brasileira de Televisão",
+            "TV Tupi",
+            "TV Globo",
+            "Instituto Nacional de Telecomunicações",
+            "Ministério das Comunicações."
+          ]
+        },
+        "input_tokens": 442,
+        "output_tokens": 201,
+        "duration_seconds": 9.633318924927153,
+        "created_at": "2026-09-08T23:46:49.754777"
+      }
+    },
+    "T18Eval-00043": {
+      "topic_id": "T18Eval-00043",
+      "original_query": {
+        "TITLE": "Vampire bat control",
+        "DESCRIPTION": "I'm looking for documents on controlling Brazil's vampire bat population."
+      },
+      "query_text": "Vampire bat control\nI'm looking for documents on controlling Brazil's vampire bat population.",
+      "core_themes": {
+        "raw_response": "CORE_THEMES: Documents pertaining to vampire bat control in Brazil would involve correspondence and reports from the U.S. Department of State, the U.S. Agency for International Development, and the Brazilian Ministry of Health, discussing measures to combat the spread of rabies and other diseases transmitted by vampire bats, including the use of pesticides, vaccination programs, and public health campaigns, during the governments of Goulart, Castelo Branco, Costa e Silva, and Medici.\n\nRELATED_CONCEPTS: Serviço Nacional de Febre Amarela, Ministério da Saúde, USAID, U.S. Department of Agriculture, vampire bat, rabies, disease control, pesticide use, vaccination programs, public health campaigns, Brazilian Ministry of Agriculture, Instituto Oswaldo Cruz, Fundação Nacional de Saúde, Centro de Controle de Zoonoses, Rio de Janeiro, São Paulo, Brasília, hemocultura, controle de vetores, campanha de vacinação, Programa de Controle da Raiva.",
+        "parsed": {
+          "core_themes": "Documents pertaining to vampire bat control in Brazil would involve correspondence and reports from the U.S. Department of State, the U.S. Agency for International Development, and the Brazilian Ministry of Health, discussing measures to combat the spread of rabies and other diseases transmitted by vampire bats, including the use of pesticides, vaccination programs, and public health campaigns, during the governments of Goulart, Castelo Branco, Costa e Silva, and Medici.",
+          "related_concepts": [
+            "Serviço Nacional de Febre Amarela",
+            "Ministério da Saúde",
+            "USAID",
+            "U.S. Department of Agriculture",
+            "vampire bat",
+            "rabies",
+            "disease control",
+            "pesticide use",
+            "vaccination programs",
+            "public health campaigns",
+            "Brazilian Ministry of Agriculture",
+            "Instituto Oswaldo Cruz",
+            "Fundação Nacional de Saúde",
+            "Centro de Controle de Zoonoses",
+            "Rio de Janeiro",
+            "São Paulo",
+            "Brasília",
+            "hemocultura",
+            "controle de vetores",
+            "campanha de vacinação",
+            "Programa de Controle da Raiva."
+          ]
+        },
+        "input_tokens": 441,
+        "output_tokens": 210,
+        "duration_seconds": 10.045221546082757,
+        "created_at": "2026-09-08T23:46:59.392470"
+      }
+    },
+    "T18Eval-00044": {
+      "topic_id": "T18Eval-00044",
+      "original_query": {
+        "TITLE": "Rural agriculture",
+        "DESCRIPTION": "Find documents that discuss the development and impact of rural agriculture in Brazil, including practices, benefits, challenges, and examples."
+      },
+      "query_text": "Rural agriculture\nFind documents that discuss the development and impact of rural agriculture in Brazil, including practices, benefits, challenges, and examples.",
+      "core_themes": {
+        "raw_response": "CORE_THEMES: Documents pertaining to agricultural development in rural Brazil, including policies and programs implemented by the Brazilian government, such as the Ministério da Agricultura, and their impact on the country's agricultural sector, as well as the role of international organizations and US assistance programs in supporting rural agriculture in Brazil during the 1960s.\n\nRELATED_CONCEPTS: Instituto Brasileiro de Reforma Agrária, Plano de Metas, Operação Pan-Americana, Aliança para o Progresso, USAID, Fundo de Estabilização Monetária, Banco Nacional de Desenvolvimento Econômico, Superintendência do Desenvolvimento do Nordeste, Política Agrícola, Reforma Agrária, Colonização, Cooperativismo, Empresa Brasileira de Pesquisa Agropecuária, Instituto Nacional de Colonização e Reforma Agrária, Grupo de Trabalho para a Reforma Agrária, Lei de Reforma Agrária, Estatuto da Terra.",
+        "parsed": {
+          "core_themes": "Documents pertaining to agricultural development in rural Brazil, including policies and programs implemented by the Brazilian government, such as the Ministério da Agricultura, and their impact on the country's agricultural sector, as well as the role of international organizations and US assistance programs in supporting rural agriculture in Brazil during the 1960s.",
+          "related_concepts": [
+            "Instituto Brasileiro de Reforma Agrária",
+            "Plano de Metas",
+            "Operação Pan-Americana",
+            "Aliança para o Progresso",
+            "USAID",
+            "Fundo de Estabilização Monetária",
+            "Banco Nacional de Desenvolvimento Econômico",
+            "Superintendência do Desenvolvimento do Nordeste",
+            "Política Agrícola",
+            "Reforma Agrária",
+            "Colonização",
+            "Cooperativismo",
+            "Empresa Brasileira de Pesquisa Agropecuária",
+            "Instituto Nacional de Colonização e Reforma Agrária",
+            "Grupo de Trabalho para a Reforma Agrária",
+            "Lei de Reforma Agrária",
+            "Estatuto da Terra."
+          ]
+        },
+        "input_tokens": 451,
+        "output_tokens": 206,
+        "duration_seconds": 9.900399842998013,
+        "created_at": "2026-09-08T23:47:09.442790"
+      }
+    },
+    "T18Eval-00045": {
+      "topic_id": "T18Eval-00045",
+      "original_query": {
+        "TITLE": "Oil price changes",
+        "DESCRIPTION": "I want to find any documents from which I can learn both influence and effect oil prices on Brazilian society."
+      },
+      "query_text": "Oil price changes\nI want to find any documents from which I can learn both influence and effect oil prices on Brazilian society.",
+      "core_themes": {
+        "raw_response": "CORE_THEMES: Documents pertaining to the impact of oil price fluctuations on the Brazilian economy and society, including the role of Petrobras, the Ministry of Mines and Energy, and the U.S. Embassy in Brazil, as well as the effects on inflation, trade balances, and social unrest during the Goulart and military governments.\n\nRELATED_CONCEPTS: Petrobras, Ministry of Mines and Energy, U.S. Embassy Brazil, Conselho Nacional do Petróleo, oil embargo, OPEC, Organization of American States, Inter-American Development Bank, Alliance for Progress, Plano de Ação Econômica do Governo, Instituto Brasileiro de Petróleo, Refinaria de Duque de Caxias, Petroquímica União, Companhia Brasileira de Petróleo, Consulado Americano no Rio, Itamaraty, Departamento de Estado dos EUA, Agência Nacional do Petróleo.",
+        "parsed": {
+          "core_themes": "Documents pertaining to the impact of oil price fluctuations on the Brazilian economy and society, including the role of Petrobras, the Ministry of Mines and Energy, and the U.S. Embassy in Brazil, as well as the effects on inflation, trade balances, and social unrest during the Goulart and military governments.",
+          "related_concepts": [
+            "Petrobras",
+            "Ministry of Mines and Energy",
+            "U.S. Embassy Brazil",
+            "Conselho Nacional do Petróleo",
+            "oil embargo",
+            "OPEC",
+            "Organization of American States",
+            "Inter-American Development Bank",
+            "Alliance for Progress",
+            "Plano de Ação Econômica do Governo",
+            "Instituto Brasileiro de Petróleo",
+            "Refinaria de Duque de Caxias",
+            "Petroquímica União",
+            "Companhia Brasileira de Petróleo",
+            "Consulado Americano no Rio",
+            "Itamaraty",
+            "Departamento de Estado dos EUA",
+            "Agência Nacional do Petróleo."
+          ]
+        },
+        "input_tokens": 448,
+        "output_tokens": 193,
+        "duration_seconds": 9.233185798977502,
+        "created_at": "2026-09-08T23:47:19.348273"
+      }
+    }
+  }
+}
