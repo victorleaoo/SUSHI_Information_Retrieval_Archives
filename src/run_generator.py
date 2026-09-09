@@ -29,8 +29,11 @@ RESULTS_PATH = os.path.join(PROJECT_ROOT, 'results', 'RunResults.tsv')
 FOLDER_QRELS_PATH = os.path.join(PROJECT_ROOT, 'qrels', 'formal-folder-qrel.txt')
 BOX_QRELS_PATH = os.path.join(PROJECT_ROOT, 'qrels', 'formal-box-qrel.txt')
 DOC_FOLDER_HIP_DIR = os.path.join(PROJECT_ROOT, 'data', 'llm_calls', 'query_expansion', '1_doc_folder_hip')
+CORE_THEMES_DIR = os.path.join(PROJECT_ROOT, 'data', 'llm_calls', 'query_expansion', '2_core_themes_and_related_concepts')
+FOLDER_LABEL_AUGMENTATION_PATH = os.path.join(
+    PROJECT_ROOT, 'data', 'llm_calls', 'folder_label_augmentation', '2_folder_context', 'folders.json')
 
-QUERY_AUGMENTATION_VARIANTS = ('DOC', 'FL', 'AUG')
+QUERY_AUGMENTATION_VARIANTS = ('DOC', 'FL', 'AUG', 'CT')
 
 
 def build_augmentation_text(topic_entry, variant):
@@ -65,6 +68,39 @@ def build_augmentation_text(topic_entry, variant):
     elif variant == 'AUG':
         return ". ".join(t for t in (doc_text, fl_text) if t)
     return ""
+
+
+def build_core_themes_augmentation_text(topic_entry):
+    """
+    Builds the extra query text for a single topic from a
+    core_themes_and_related_concepts entry ('CT' variant): the core_themes
+    paragraph plus related_concepts, joined the same way build_augmentation_text's
+    'FL' variant joins label_text + subject_terms (space-joined prose, then a
+    comma-joined term list appended).
+
+    Returns "" if the parsed fields are missing (caller falls back to the
+    plain original query in that case).
+    """
+    parsed = topic_entry.get('core_themes', {}).get('parsed', {})
+    core_themes = parsed.get('core_themes') or ''
+    related_concepts = ", ".join(parsed.get('related_concepts', []))
+    return " ".join(t for t in (core_themes, related_concepts) if t)
+
+
+def build_folder_label_augmentation_text(folder_entry):
+    """
+    Builds the extra folder-label text from a folder_label_augmentation entry:
+    the folder's core_themes paragraph plus related_concepts, same composition
+    as build_core_themes_augmentation_text.
+
+    Returns "" if the parsed fields are missing (caller falls back to the
+    plain original label in that case).
+    """
+    parsed = folder_entry.get('parsed', {})
+    core_themes = parsed.get('core_themes') or ''
+    related_concepts = ", ".join(parsed.get('related_concepts', []))
+    return " ".join(t for t in (core_themes, related_concepts) if t)
+
 
 RANDOM_SEED_LIST = [1, 42, 100, 300, 333, 777, 999, 2025, 6159, 12345, 19865, 53819,
                     56782, 62537, 72738, 75259, 81236, 91823, 98665, 98765, 99009, 999777333,
@@ -105,6 +141,7 @@ class RunGenerator:
                  sampling='uniform',
                  expansion=[],
                  all_folders_folder_label=False,
+                 all_folders_folder_label_augmented=False,
                  rrf_input='docs',
                  expansion_ceiling_k=2,
                  bm25_tuned=True,
@@ -118,6 +155,7 @@ class RunGenerator:
         self.sampling = sampling
         self.expansion = expansion
         self.all_folders_folder_label = all_folders_folder_label
+        self.all_folders_folder_label_augmented = all_folders_folder_label_augmented
         self.rrf_input = rrf_input
         self.expansion_ceiling_k = expansion_ceiling_k
         self.bm25_tuned = bm25_tuned
@@ -127,6 +165,8 @@ class RunGenerator:
             f"query_augmentation must be one of {QUERY_AUGMENTATION_VARIANTS} or None"
         self.query_augmentation = query_augmentation
         self._augmentation_data_cache = {}  # query_field -> {topic_id: entry}
+        self._core_themes_data_cache = {}  # query_field -> {topic_id: entry}
+        self._folder_label_augmentation_cache = None  # {folder_id: entry}
 
         self.loader = DataLoader(PROJECT_ROOT)
         self.items = self.loader.items
@@ -338,12 +378,20 @@ class RunGenerator:
 
         # If ALLFL is True, it uses a folder metadata label approach only
         if self.all_folders_folder_label:
+             folder_label_augmentation = (
+                 self._load_folder_label_augmentation_data() if self.all_folders_folder_label_augmented else {}
+             )
              for folder in self.folderMetadata:
                 try:
                     label = self.folderMetadata[folder]['label_parent_expanded'] + " " + self.folderMetadata[folder]['scope_truncated']
                 except:
                     label = self.folderMetadata[folder]['label']
-                
+
+                if self.all_folders_folder_label_augmented:
+                    augmentation_text = build_folder_label_augmentation_text(folder_label_augmentation.get(folder, {}))
+                    if augmentation_text:
+                        label = f"{label}. {augmentation_text}"
+
                 trainingSet.append({
                     'docno': folder,
                     'folder': folder,
@@ -403,21 +451,59 @@ class RunGenerator:
             self._augmentation_data_cache[query_field] = data.get('topics', {})
         return self._augmentation_data_cache[query_field]
 
+    def _load_core_themes_data(self, query_field):
+        """Lazily loads and caches
+        data/llm_calls/query_expansion/2_core_themes_and_related_concepts/{query_field}.json."""
+        if query_field not in self._core_themes_data_cache:
+            path = os.path.join(CORE_THEMES_DIR, f'{query_field}.json')
+            if not os.path.isfile(path):
+                raise FileNotFoundError(
+                    f"query_augmentation='CT' requires {path}, which does not exist. Run "
+                    f"src.llm_experiments.query_expansion.core_themes_and_related_concepts.generate "
+                    f"first (or copy its output here)."
+                )
+            with open(path, 'r', encoding='utf-8') as f:
+                data = json.load(f)
+            self._core_themes_data_cache[query_field] = data.get('topics', {})
+        return self._core_themes_data_cache[query_field]
+
+    def _load_folder_label_augmentation_data(self):
+        """Lazily loads and caches
+        data/llm_calls/folder_label_augmentation/2_folder_context/folders.json."""
+        if self._folder_label_augmentation_cache is None:
+            if not os.path.isfile(FOLDER_LABEL_AUGMENTATION_PATH):
+                raise FileNotFoundError(
+                    f"all_folders_folder_label_augmented=True requires {FOLDER_LABEL_AUGMENTATION_PATH}, "
+                    f"which does not exist. Run src.llm_experiments.folder_label_augmentation.generate "
+                    f"first (or copy its output here)."
+                )
+            with open(FOLDER_LABEL_AUGMENTATION_PATH, 'r', encoding='utf-8') as f:
+                data = json.load(f)
+            self._folder_label_augmentation_cache = data.get('folders', {})
+        return self._folder_label_augmentation_cache
+
     def get_augmented_query(self, base_query, query_field, topic_id):
         """
-        Appends the configured query_augmentation ('DOC' / 'FL' / 'AUG') text for
-        this topic to the base query. Falls back to the plain base_query if the
+        Appends the configured query_augmentation ('DOC' / 'FL' / 'AUG' / 'CT') text
+        for this topic to the base query. Falls back to the plain base_query if the
         topic is missing from the loaded data or has no usable augmentation text.
         """
         if not self.query_augmentation:
             return base_query
 
-        topics = self._load_augmentation_data(query_field)
-        topic_entry = topics.get(topic_id)
-        if topic_entry is None:
-            return base_query
+        if self.query_augmentation == 'CT':
+            topics = self._load_core_themes_data(query_field)
+            topic_entry = topics.get(topic_id)
+            if topic_entry is None:
+                return base_query
+            augmentation_text = build_core_themes_augmentation_text(topic_entry)
+        else:
+            topics = self._load_augmentation_data(query_field)
+            topic_entry = topics.get(topic_id)
+            if topic_entry is None:
+                return base_query
+            augmentation_text = build_augmentation_text(topic_entry, self.query_augmentation)
 
-        augmentation_text = build_augmentation_text(topic_entry, self.query_augmentation)
         if not augmentation_text:
             return base_query
 

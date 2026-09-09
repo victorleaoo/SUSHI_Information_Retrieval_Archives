@@ -1,11 +1,11 @@
 """
 run_new_experiments.py
 ----------------------
-Full re-run of the 15 core configurations for EVERY query field (T, TD, TDN),
+Full re-run of the 17 core configurations for EVERY query field (T, TD, TDN),
 plus the docs-per-box sweep (U1-U4/K5/A-) and the official-ECF re-runs of
 configs 1-8.
 
-15 configurations x 3 query fields = 45 experiments, all under the 'random'
+17 configurations x 3 query fields = 51 experiments, all under the 'random'
 protocol (30 seeds from RANDOM_SEED_LIST).
 
 Configurations (shown with the T-- query tag; TD- / TDN are the counterparts):
@@ -27,11 +27,13 @@ Configurations (shown with the T-- query tag; TD- / TDN are the counterparts):
     U5.<QF>.W.TOFS.-.c      - W, TOFS, hybrid RRF with the ALLFL ColBERT ranker
     U5.<QF>.W.TOFS.s---2.c  - W, TOFS, similar_snc k=2 expansion, hybrid RRF with
                               the ALLFL ColBERT ranker
+    U5.<QF>.-.----.-.b      - ALLFL untuned-BM25 baseline (no main-ranker fields)
+    U5.<QF>.-.----.-.e      - ALLFL Embeddings baseline (no main-ranker fields)
 
-Experiment ids (core 15x3 = 45):
-    T   ->  1..15     (folders U5.T--.*)
-    TD  -> 31..45     (folders U5.TD-.*)
-    TDN -> 61..75     (folders U5.TDN.*)
+Experiment ids (core 17x3 = 51):
+    T   ->  1..17     (folders U5.T--.*)
+    TD  -> 31..47     (folders U5.TD-.*)
+    TDN -> 61..77     (folders U5.TDN.*)
 
 Docs-per-box sweep (6 variants x 3 query fields = 18), all using the 'W'
 config (tuned BM25F + Embeddings + ColBERT, TOFS, no expansion/hybrid):
@@ -122,7 +124,7 @@ def run_hybrid(gen_A, search_field_A, gen_B, search_field_B, query_field, run_fo
     gen_A.evaluator.generate_aggregated_metrics(metrics_folder, 'random')
 
 
-def make_allfl_bm25(query_field, query_augmentation=None):
+def make_allfl_bm25(query_field, query_augmentation=None, all_folders_folder_label_augmented=False):
     """Shared ALLFL BM25 RunGenerator used as ranker B in the hybrid experiments."""
     gen = RunGenerator(
         searching_fields=[ALLFL_FIELDS],
@@ -131,12 +133,13 @@ def make_allfl_bm25(query_field, query_augmentation=None):
         bm25_tuned=False,
         expansion=[],
         all_folders_folder_label=True,
+        all_folders_folder_label_augmented=all_folders_folder_label_augmented,
         query_augmentation=query_augmentation,
     )
     return gen, ALLFL_FIELDS
 
 
-def make_allfl_colbert(query_field, query_augmentation=None):
+def make_allfl_colbert(query_field, query_augmentation=None, all_folders_folder_label_augmented=False):
     """Shared ALLFL ColBERT RunGenerator used as ranker B in the colbert-hybrid experiments."""
     gen = RunGenerator(
         searching_fields=[ALLFL_FIELDS],
@@ -144,6 +147,7 @@ def make_allfl_colbert(query_field, query_augmentation=None):
         models=['colbert'],
         expansion=[],
         all_folders_folder_label=True,
+        all_folders_folder_label_augmented=all_folders_folder_label_augmented,
         query_augmentation=query_augmentation,
     )
     return gen, ALLFL_FIELDS
@@ -332,6 +336,21 @@ CONFIGS = [
         'hybrid_partner': 'colbert',
         'kwargs': dict(models=['bm25', 'embeddings', 'colbert'], bm25_tuned=True,
                        expansion=['similar_snc'], expansion_ceiling_k=2, rrf_input='docs'),
+    },
+    {
+        'offset': 16,
+        'suffix': '-.----.-.b',
+        'fields': ALLFL_FIELDS,
+        'hybrid': False,
+        'kwargs': dict(models=['bm25'], bm25_tuned=False,
+                       expansion=[], all_folders_folder_label=True),
+    },
+    {
+        'offset': 17,
+        'suffix': '-.----.-.e',
+        'fields': ALLFL_FIELDS,
+        'hybrid': False,
+        'kwargs': dict(models=['embeddings'], expansion=[], all_folders_folder_label=True),
     },
 ]
 
