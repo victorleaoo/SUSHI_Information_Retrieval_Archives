@@ -36,3 +36,9 @@ RUN_NOTATION.md
 .env
 
 *.log
+
+*.out
+
+calls.jsonl
+
+cache/

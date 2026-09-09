@@ -1,0 +1,2419 @@
+{
+  "query_type": "T",
+  "model": "UnB-Llama-3.3-70B-Instruct",
+  "generated_at": "2026-09-04T22:14:53.151150",
+  "topics": {
+    "T18Eval-00001": {
+      "topic_id": "T18Eval-00001",
+      "original_query": {
+        "TITLE": "Future space missions"
+      },
+      "query_text": "Future space missions",
+      "documents": {
+        "raw_response": "DOC_1: This document is about future space missions. The Brazilian Ministry of Aeronautics has expressed interest in collaborating with NASA on upcoming projects. Ambassador John W. Tuthill discussed potential cooperation with Minister of Aeronautics, Brigadier Francisco de Assis Correia de Melo, at a meeting in Brasilia.\n\nDOC_2: This document is about future space missions. Consul General in Rio de Janeiro, Alfred Atherton, reports that the Brazilian Space Commission is seeking US assistance in developing its space program. The Commission's president, Colonel Fernando Galvao, has requested meetings with US space officials to discuss potential areas of cooperation.\n\nDOC_3: This document is about future space missions. The US Embassy in Brasilia has been informed that the Brazilian government plans to launch its own satellite in the near future. The Ministry of Aeronautics is working with the National Institute for Space Research to develop the necessary technology, with potential support from the US Agency for International Development.",
+        "parsed": {
+          "doc_1": "This document is about future space missions. The Brazilian Ministry of Aeronautics has expressed interest in collaborating with NASA on upcoming projects. Ambassador John W. Tuthill discussed potential cooperation with Minister of Aeronautics, Brigadier Francisco de Assis Correia de Melo, at a meeting in Brasilia.",
+          "doc_2": "This document is about future space missions. Consul General in Rio de Janeiro, Alfred Atherton, reports that the Brazilian Space Commission is seeking US assistance in developing its space program. The Commission's president, Colonel Fernando Galvao, has requested meetings with US space officials to discuss potential areas of cooperation.",
+          "doc_3": "This document is about future space missions. The US Embassy in Brasilia has been informed that the Brazilian government plans to launch its own satellite in the near future. The Ministry of Aeronautics is working with the National Institute for Space Research to develop the necessary technology, with potential support from the US Agency for International Development."
+        },
+        "input_tokens": 419,
+        "output_tokens": 204,
+        "duration_seconds": 8.571786139975302,
+        "created_at": "2026-09-04T22:14:53.163349"
+      },
+      "folder_label": {
+        "raw_response": "SNC_CODES: SPA 2, SPA 8, TSP 11\nLABEL_TEXT: SPA 2 Space Technology BRAZ 1963-1973\nSPA 8 Space Exploration BRAZ 1965-1968\nTSP 11 Space Program BRAZ 1969-1972\nSUBJECT_TERMS: Space Agency, NASA, Space Technology, Space Exploration, Satellite Communications, BRAZ, USNASA, Space Program, Astronautics, Space Missions, Space Research, TSP, SPA",
+        "parsed": {
+          "snc_codes": [
+            "SPA 2",
+            "SPA 8",
+            "TSP 11"
+          ],
+          "label_text": [
+            "SPA 2 Space Technology BRAZ 1963-1973",
+            "SPA 8 Space Exploration BRAZ 1965-1968",
+            "TSP 11 Space Program BRAZ 1969-1972"
+          ],
+          "subject_terms": [
+            "Space Agency",
+            "NASA",
+            "Space Technology",
+            "Space Exploration",
+            "Satellite Communications",
+            "BRAZ",
+            "USNASA",
+            "Space Program",
+            "Astronautics",
+            "Space Missions",
+            "Space Research",
+            "TSP",
+            "SPA"
+          ]
+        },
+        "input_tokens": 445,
+        "output_tokens": 107,
+        "duration_seconds": 4.3299442359711975,
+        "created_at": "2026-09-04T22:15:01.738420"
+      }
+    },
+    "T18Eval-00002": {
+      "topic_id": "T18Eval-00002",
+      "original_query": {
+        "TITLE": "Brazilian submarines"
+      },
+      "query_text": "Brazilian submarines",
+      "documents": {
+        "raw_response": "DOC_1: This document is about Brazilian submarines. The Brazilian Navy has acquired two new submarines from the UK. Ambassador John W. Tuthill discussed the purchase with Brazilian Minister of Navy Admiral Paulo Bosísio. The submarines will be based in Rio de Janeiro. The acquisition is seen as a significant upgrade to Brazil's naval capabilities.\n\nDOC_2: This document is about Brazilian submarines. Consul General in Rio de Janeiro reported that the Brazilian Navy is seeking to expand its submarine fleet. The Navy has requested US assistance in acquiring new submarines. The US Navy Department has been approached for possible sales. Brazilian officials believe an expanded submarine fleet is essential for national security.\n\nDOC_3: This document is about Brazilian submarines. The US Defense Attaché in Brasília reported that the Brazilian Ministry of Navy has established a new submarine training program. The program will be conducted in cooperation with the US Navy. Brazilian submarine crews will receive training in the US. The program aims to improve the operational effectiveness of the Brazilian submarine fleet.",
+        "parsed": {
+          "doc_1": "This document is about Brazilian submarines. The Brazilian Navy has acquired two new submarines from the UK. Ambassador John W. Tuthill discussed the purchase with Brazilian Minister of Navy Admiral Paulo Bosísio. The submarines will be based in Rio de Janeiro. The acquisition is seen as a significant upgrade to Brazil's naval capabilities.",
+          "doc_2": "This document is about Brazilian submarines. Consul General in Rio de Janeiro reported that the Brazilian Navy is seeking to expand its submarine fleet. The Navy has requested US assistance in acquiring new submarines. The US Navy Department has been approached for possible sales. Brazilian officials believe an expanded submarine fleet is essential for national security.",
+          "doc_3": "This document is about Brazilian submarines. The US Defense Attaché in Brasília reported that the Brazilian Ministry of Navy has established a new submarine training program. The program will be conducted in cooperation with the US Navy. Brazilian submarine crews will receive training in the US. The program aims to improve the operational effectiveness of the Brazilian submarine fleet."
+        },
+        "input_tokens": 419,
+        "output_tokens": 205,
+        "duration_seconds": 8.253278967924416,
+        "created_at": "2026-09-04T22:18:48.818858"
+      },
+      "folder_label": {
+        "raw_response": "SNC_CODES: DEF 6, POL 15-1, DEF 15\nLABEL_TEXT: DEF 6 Defense Affairs BRAZ 1963-1973\nDEF 15 Naval Forces BRAZ 1963-1973\nPOL 15-1 Political-Military Relations BRAZ 1963-1973\nSUBJECT_TERMS: submarines, naval forces, defense affairs, Brazil, military government, Castelo Branco, Medici, Institutional Act No. 5, censorship, repression, U.S. Department of State, U.S. National Archives, Subject-Numeric Files, POL, DEF, BRAZ",
+        "parsed": {
+          "snc_codes": [
+            "DEF 6",
+            "POL 15-1",
+            "DEF 15"
+          ],
+          "label_text": [
+            "DEF 6 Defense Affairs BRAZ 1963-1973",
+            "DEF 15 Naval Forces BRAZ 1963-1973",
+            "POL 15-1 Political-Military Relations BRAZ 1963-1973"
+          ],
+          "subject_terms": [
+            "submarines",
+            "naval forces",
+            "defense affairs",
+            "Brazil",
+            "military government",
+            "Castelo Branco",
+            "Medici",
+            "Institutional Act No. 5",
+            "censorship",
+            "repression",
+            "U.S. Department of State",
+            "U.S. National Archives",
+            "Subject-Numeric Files",
+            "POL",
+            "DEF",
+            "BRAZ"
+          ]
+        },
+        "input_tokens": 445,
+        "output_tokens": 129,
+        "duration_seconds": 5.181407083990052,
+        "created_at": "2026-09-04T22:18:57.075491"
+      }
+    },
+    "T18Eval-00003": {
+      "topic_id": "T18Eval-00003",
+      "original_query": {
+        "TITLE": "Alagoas flood"
+      },
+      "query_text": "Alagoas flood",
+      "documents": {
+        "raw_response": "DOC_1: This document is about the recent flood in Alagoas, which has affected thousands of people. The American Consul in Recife, Brazil, reports that the Brazilian Ministry of Interior has declared a state of emergency in the region. The US Embassy in Brasilia is in contact with the Ministry of Foreign Affairs to offer assistance.\n\nDOC_2: This document is about the relief efforts in Alagoas, where heavy rainfall caused severe flooding. The US Agency for International Development (USAID) is providing aid to the affected areas through the Brazilian Red Cross. The Consulate in Recife is coordinating with local authorities to distribute food and medicine to those in need.\n\nDOC_3: This document is about the economic impact of the Alagoas flood on the region's agricultural sector. The Brazilian Ministry of Agriculture has reported significant losses in crops and livestock. The US Embassy in Brasilia is monitoring the situation and considering possible assistance through the Alliance for Progress program to support the region's recovery.",
+        "parsed": {
+          "doc_1": "This document is about the recent flood in Alagoas, which has affected thousands of people. The American Consul in Recife, Brazil, reports that the Brazilian Ministry of Interior has declared a state of emergency in the region. The US Embassy in Brasilia is in contact with the Ministry of Foreign Affairs to offer assistance.",
+          "doc_2": "This document is about the relief efforts in Alagoas, where heavy rainfall caused severe flooding. The US Agency for International Development (USAID) is providing aid to the affected areas through the Brazilian Red Cross. The Consulate in Recife is coordinating with local authorities to distribute food and medicine to those in need.",
+          "doc_3": "This document is about the economic impact of the Alagoas flood on the region's agricultural sector. The Brazilian Ministry of Agriculture has reported significant losses in crops and livestock. The US Embassy in Brasilia is monitoring the situation and considering possible assistance through the Alliance for Progress program to support the region's recovery."
+        },
+        "input_tokens": 420,
+        "output_tokens": 202,
+        "duration_seconds": 7.999032464926131,
+        "created_at": "2026-09-04T22:19:02.259623"
+      },
+      "folder_label": {
+        "raw_response": "SNC_CODES: DIS 10, DIS 12, POL 23\nLABEL_TEXT: DIS 10 Disaster Relief BRAZ 1963-1969\nDIS 12 Natural Disasters BRAZ 1964-1970\nPOL 23 Provincial and Local Government BRAZ 1963-1973\nSUBJECT_TERMS: Disaster Relief, Floods, Alagoas, Brazil, Natural Disasters, Provincial Government, Local Affairs, Emergency Assistance, Humanitarian Aid, Brazilian Provinces",
+        "parsed": {
+          "snc_codes": [
+            "DIS 10",
+            "DIS 12",
+            "POL 23"
+          ],
+          "label_text": [
+            "DIS 10 Disaster Relief BRAZ 1963-1969",
+            "DIS 12 Natural Disasters BRAZ 1964-1970",
+            "POL 23 Provincial and Local Government BRAZ 1963-1973"
+          ],
+          "subject_terms": [
+            "Disaster Relief",
+            "Floods",
+            "Alagoas",
+            "Brazil",
+            "Natural Disasters",
+            "Provincial Government",
+            "Local Affairs",
+            "Emergency Assistance",
+            "Humanitarian Aid",
+            "Brazilian Provinces"
+          ]
+        },
+        "input_tokens": 446,
+        "output_tokens": 102,
+        "duration_seconds": 4.1306858729803935,
+        "created_at": "2026-09-04T22:19:10.260439"
+      }
+    },
+    "T18Eval-00004": {
+      "topic_id": "T18Eval-00004",
+      "original_query": {
+        "TITLE": "Grain sorghum"
+      },
+      "query_text": "Grain sorghum",
+      "documents": {
+        "raw_response": "DOC_1: This document is about grain sorghum imports from the US to Brazil. The Embassy in Brasilia reports that the Brazilian Ministry of Agriculture has increased imports of grain sorghum to meet domestic demand. The US Agricultural Attaché in Rio de Janeiro notes that this development presents opportunities for American farmers.\n\nDOC_2: This document is about the Brazilian government's decision to reduce tariffs on grain sorghum imports. The Consulate General in São Paulo informs that the Ministry of Foreign Relations has notified the US Embassy of this change, effective immediately. The American Chamber of Commerce in Brazil welcomes this move.\n\nDOC_3: This document is about the sale of grain sorghum to Brazil under the US Agency for International Development (AID) program. The US Ambassador to Brazil reports that the Brazilian Ministry of Finance has approved the purchase of 100,000 tons of grain sorghum from the US, financed through AID credits, to support Brazil's food security programs.",
+        "parsed": {
+          "doc_1": "This document is about grain sorghum imports from the US to Brazil. The Embassy in Brasilia reports that the Brazilian Ministry of Agriculture has increased imports of grain sorghum to meet domestic demand. The US Agricultural Attaché in Rio de Janeiro notes that this development presents opportunities for American farmers.",
+          "doc_2": "This document is about the Brazilian government's decision to reduce tariffs on grain sorghum imports. The Consulate General in São Paulo informs that the Ministry of Foreign Relations has notified the US Embassy of this change, effective immediately. The American Chamber of Commerce in Brazil welcomes this move.",
+          "doc_3": "This document is about the sale of grain sorghum to Brazil under the US Agency for International Development (AID) program. The US Ambassador to Brazil reports that the Brazilian Ministry of Finance has approved the purchase of 100,000 tons of grain sorghum from the US, financed through AID credits, to support Brazil's food security programs."
+        },
+        "input_tokens": 421,
+        "output_tokens": 199,
+        "duration_seconds": 7.885638242005371,
+        "created_at": "2026-09-04T22:19:14.393005"
+      },
+      "folder_label": {
+        "raw_response": "SNC_CODES: EAG 6,AGR 6\nLABEL_TEXT: EAG 6 Economic Affairs Grain BRAZ 1963-1973\nAGR 6 Agricultural Trade Grain BRAZ 1963-1973\nSUBJECT_TERMS: Grain sorghum, agricultural trade, economic affairs, Brazil, U.S. Department of Agriculture, U.S. Embassy Brasilia, agricultural commodities, food production, export markets, import regulations, agricultural policy, trade agreements, commodity prices, crop yields, farming practices",
+        "parsed": {
+          "snc_codes": [
+            "EAG 6",
+            "AGR 6"
+          ],
+          "label_text": [
+            "EAG 6 Economic Affairs Grain BRAZ 1963-1973",
+            "AGR 6 Agricultural Trade Grain BRAZ 1963-1973"
+          ],
+          "subject_terms": [
+            "Grain sorghum",
+            "agricultural trade",
+            "economic affairs",
+            "Brazil",
+            "U.S. Department of Agriculture",
+            "U.S. Embassy Brasilia",
+            "agricultural commodities",
+            "food production",
+            "export markets",
+            "import regulations",
+            "agricultural policy",
+            "trade agreements",
+            "commodity prices",
+            "crop yields",
+            "farming practices"
+          ]
+        },
+        "input_tokens": 447,
+        "output_tokens": 106,
+        "duration_seconds": 4.3022406350355595,
+        "created_at": "2026-09-04T22:19:22.280402"
+      }
+    },
+    "T18Eval-00005": {
+      "topic_id": "T18Eval-00005",
+      "original_query": {
+        "TITLE": "Beef cattle industry"
+      },
+      "query_text": "Beef cattle industry",
+      "documents": {
+        "raw_response": "DOC_1: This document is about the Brazilian beef cattle industry. Ambassador Lincoln Gordon reports from Rio de Janeiro that the Ministry of Agriculture is implementing policies to increase beef production. The US Agency for International Development (AID) is providing technical assistance to Brazilian ranchers through the Alliance for Progress program.\n\nDOC_2: This document is about the growth of the beef cattle industry in Brazil. Consul General in São Paulo, Alfred Atherton, notes that the state of Mato Grosso is emerging as a major cattle-producing region. The Brazilian National Development Bank (BNDE) is financing ranching operations and infrastructure development in the area.\n\nDOC_3: This document is about US-Brazil cooperation in the beef cattle industry. The Embassy in Brasília reports that the Brazilian Ministry of Foreign Affairs has approached the US Department of Agriculture to discuss potential exports of Brazilian beef to the US market. The Brazilian government is seeking to diversify its agricultural exports and reduce dependence on coffee exports.",
+        "parsed": {
+          "doc_1": "This document is about the Brazilian beef cattle industry. Ambassador Lincoln Gordon reports from Rio de Janeiro that the Ministry of Agriculture is implementing policies to increase beef production. The US Agency for International Development (AID) is providing technical assistance to Brazilian ranchers through the Alliance for Progress program.",
+          "doc_2": "This document is about the growth of the beef cattle industry in Brazil. Consul General in São Paulo, Alfred Atherton, notes that the state of Mato Grosso is emerging as a major cattle-producing region. The Brazilian National Development Bank (BNDE) is financing ranching operations and infrastructure development in the area.",
+          "doc_3": "This document is about US-Brazil cooperation in the beef cattle industry. The Embassy in Brasília reports that the Brazilian Ministry of Foreign Affairs has approached the US Department of Agriculture to discuss potential exports of Brazilian beef to the US market. The Brazilian government is seeking to diversify its agricultural exports and reduce dependence on coffee exports."
+        },
+        "input_tokens": 420,
+        "output_tokens": 197,
+        "duration_seconds": 7.81501236197073,
+        "created_at": "2026-09-04T22:19:26.585200"
+      },
+      "folder_label": {
+        "raw_response": "SNC_CODES: ECON 17,AGR 6,POL 15-1\nLABEL_TEXT: ECON 17 Economic Conditions BRAZ 1963-1973\nLABEL_TEXT: AGR 6 Animal Husbandry BRAZ 1963-1973\nLABEL_TEXT: POL 15-1 Trade Policy BRAZ 1963-1973\nSUBJECT_TERMS: Beef Cattle, Livestock, Animal Husbandry, Economic Conditions, Trade Policy, Brazil, Agriculture, Cattle Industry, Ranching, Farming, US Embassy Brasilia, USDA, Department of Agriculture, Brazilian Ministry of Agriculture",
+        "parsed": {
+          "snc_codes": [
+            "ECON 17",
+            "AGR 6",
+            "POL 15-1"
+          ],
+          "label_text": [
+            "ECON 17 Economic Conditions BRAZ 1963-1973",
+            "LABEL_TEXT: AGR 6 Animal Husbandry BRAZ 1963-1973",
+            "LABEL_TEXT: POL 15-1 Trade Policy BRAZ 1963-1973"
+          ],
+          "subject_terms": [
+            "Beef Cattle",
+            "Livestock",
+            "Animal Husbandry",
+            "Economic Conditions",
+            "Trade Policy",
+            "Brazil",
+            "Agriculture",
+            "Cattle Industry",
+            "Ranching",
+            "Farming",
+            "US Embassy Brasilia",
+            "USDA",
+            "Department of Agriculture",
+            "Brazilian Ministry of Agriculture"
+          ]
+        },
+        "input_tokens": 446,
+        "output_tokens": 128,
+        "duration_seconds": 5.160129431984387,
+        "created_at": "2026-09-04T22:19:34.401954"
+      }
+    },
+    "T18Eval-00006": {
+      "topic_id": "T18Eval-00006",
+      "original_query": {
+        "TITLE": "Cocoa exports"
+      },
+      "query_text": "Cocoa exports",
+      "documents": {
+        "raw_response": "DOC_1: This document is about Brazilian cocoa exports. The Embassy in Brasilia reports that the Ministry of Agriculture has announced a 10% increase in cocoa exports for 1965. The Brazilian Institute of Coffee, Cocoa, and Sugar estimates that total exports will reach 100,000 tons. The US Agricultural Attaché in Rio de Janeiro confirms this trend, citing improved harvests in the states of Bahia and Pará.\n\nDOC_2: This document is about the impact of Brazilian cocoa exports on US trade. The Consulate General in São Paulo notes that American chocolate manufacturers are major buyers of Brazilian cocoa. The US Department of Commerce reports that cocoa imports from Brazil have increased by 15% in the past year, totaling $10 million. The Brazilian government has expressed interest in expanding trade with the US.\n\nDOC_3: This document is about the Brazilian government's efforts to promote cocoa exports. The Ministry of Foreign Affairs has informed the Embassy that it will provide subsidies to cocoa exporters. The National Bank for Economic Development will offer low-interest loans to farmers and processors. The US Agency for International Development is considering a program to provide technical assistance to Brazilian cocoa producers, in cooperation with the Brazilian Ministry of Agriculture.",
+        "parsed": {
+          "doc_1": "This document is about Brazilian cocoa exports. The Embassy in Brasilia reports that the Ministry of Agriculture has announced a 10% increase in cocoa exports for 1965. The Brazilian Institute of Coffee, Cocoa, and Sugar estimates that total exports will reach 100,000 tons. The US Agricultural Attaché in Rio de Janeiro confirms this trend, citing improved harvests in the states of Bahia and Pará.",
+          "doc_2": "This document is about the impact of Brazilian cocoa exports on US trade. The Consulate General in São Paulo notes that American chocolate manufacturers are major buyers of Brazilian cocoa. The US Department of Commerce reports that cocoa imports from Brazil have increased by 15% in the past year, totaling $10 million. The Brazilian government has expressed interest in expanding trade with the US.",
+          "doc_3": "This document is about the Brazilian government's efforts to promote cocoa exports. The Ministry of Foreign Affairs has informed the Embassy that it will provide subsidies to cocoa exporters. The National Bank for Economic Development will offer low-interest loans to farmers and processors. The US Agency for International Development is considering a program to provide technical assistance to Brazilian cocoa producers, in cooperation with the Brazilian Ministry of Agriculture."
+        },
+        "input_tokens": 419,
+        "output_tokens": 245,
+        "duration_seconds": 9.6906029030215,
+        "created_at": "2026-09-04T22:19:39.565420"
+      },
+      "folder_label": {
+        "raw_response": "SNC_CODES: ECO 9, ECO 17, TRD 15\nLABEL_TEXT: ECO 9 Economic Commodities BRAZ 1963-1973\nECO 17 Trade Agreements BRAZ 1963-1973\nTRD 15 Export Controls BRAZ 1963-1973\nSUBJECT_TERMS: Cocoa, Exports, Brazil, Trade Agreements, Economic Commodities, Export Controls, Department of Commerce, U.S. Embassy Brasilia, Brazilian Ministry of Agriculture, Foreign Trade, Customs Regulations, Tariffs, Quotas, International Trade",
+        "parsed": {
+          "snc_codes": [
+            "ECO 9",
+            "ECO 17",
+            "TRD 15"
+          ],
+          "label_text": [
+            "ECO 9 Economic Commodities BRAZ 1963-1973",
+            "ECO 17 Trade Agreements BRAZ 1963-1973",
+            "TRD 15 Export Controls BRAZ 1963-1973"
+          ],
+          "subject_terms": [
+            "Cocoa",
+            "Exports",
+            "Brazil",
+            "Trade Agreements",
+            "Economic Commodities",
+            "Export Controls",
+            "Department of Commerce",
+            "U.S. Embassy Brasilia",
+            "Brazilian Ministry of Agriculture",
+            "Foreign Trade",
+            "Customs Regulations",
+            "Tariffs",
+            "Quotas",
+            "International Trade"
+          ]
+        },
+        "input_tokens": 445,
+        "output_tokens": 123,
+        "duration_seconds": 4.963736161007546,
+        "created_at": "2026-09-04T22:19:49.257841"
+      }
+    },
+    "T18Eval-00007": {
+      "topic_id": "T18Eval-00007",
+      "original_query": {
+        "TITLE": "Manioc cultivation"
+      },
+      "query_text": "Manioc cultivation",
+      "documents": {
+        "raw_response": "DOC_1: This document is about manioc cultivation in Brazil. The Embassy in Brasilia reports that the Ministry of Agriculture has initiated a program to increase manioc production in the Northeast. The US Agency for International Development (USAID) is providing technical assistance to the program, which aims to improve crop yields and processing techniques.\n\nDOC_2: This document is about the economic impact of manioc cultivation in Brazil. The Consulate in Recife notes that manioc is a major crop in the state of Pernambuco, with most production going to local markets. The Brazilian Institute of Agricultural Planning (PLANEJAGRO) is studying ways to increase manioc exports, potentially benefiting the national economy.\n\nDOC_3: This document is about the role of manioc cultivation in Brazilian rural development. The US Mission to Brazil reports that the Castelo Branco government is promoting manioc as a crop for small farmers, particularly in the poverty-stricken Northeast. The Ministry of Agriculture is working with the National Institute of Colonization and Agrarian Reform (INCRA) to provide support to manioc farmers.",
+        "parsed": {
+          "doc_1": "This document is about manioc cultivation in Brazil. The Embassy in Brasilia reports that the Ministry of Agriculture has initiated a program to increase manioc production in the Northeast. The US Agency for International Development (USAID) is providing technical assistance to the program, which aims to improve crop yields and processing techniques.",
+          "doc_2": "This document is about the economic impact of manioc cultivation in Brazil. The Consulate in Recife notes that manioc is a major crop in the state of Pernambuco, with most production going to local markets. The Brazilian Institute of Agricultural Planning (PLANEJAGRO) is studying ways to increase manioc exports, potentially benefiting the national economy.",
+          "doc_3": "This document is about the role of manioc cultivation in Brazilian rural development. The US Mission to Brazil reports that the Castelo Branco government is promoting manioc as a crop for small farmers, particularly in the poverty-stricken Northeast. The Ministry of Agriculture is working with the National Institute of Colonization and Agrarian Reform (INCRA) to provide support to manioc farmers."
+        },
+        "input_tokens": 419,
+        "output_tokens": 224,
+        "duration_seconds": 8.863410796038806,
+        "created_at": "2026-09-04T22:19:54.224767"
+      },
+      "folder_label": {
+        "raw_response": "SNC_CODES: AGR 15, AGR 17, ECON 19\nLABEL_TEXT: AGR 15 Agricultural Production BRAZ 1963-1973\nAGR 17 Agricultural Trade BRAZ 1963-1973\nECON 19 Economic Development BRAZ 1963-1973\nSUBJECT_TERMS: Manioc, Cassava, Root Crops, Agricultural Development, Brazil, Ministry of Agriculture, US Department of Agriculture, Food Production, Crop Yields, Farming Practices, Rural Development, Economic Growth",
+        "parsed": {
+          "snc_codes": [
+            "AGR 15",
+            "AGR 17",
+            "ECON 19"
+          ],
+          "label_text": [
+            "AGR 15 Agricultural Production BRAZ 1963-1973",
+            "AGR 17 Agricultural Trade BRAZ 1963-1973",
+            "ECON 19 Economic Development BRAZ 1963-1973"
+          ],
+          "subject_terms": [
+            "Manioc",
+            "Cassava",
+            "Root Crops",
+            "Agricultural Development",
+            "Brazil",
+            "Ministry of Agriculture",
+            "US Department of Agriculture",
+            "Food Production",
+            "Crop Yields",
+            "Farming Practices",
+            "Rural Development",
+            "Economic Growth"
+          ]
+        },
+        "input_tokens": 445,
+        "output_tokens": 112,
+        "duration_seconds": 4.5378812429262325,
+        "created_at": "2026-09-04T22:20:03.089897"
+      }
+    },
+    "T18Eval-00008": {
+      "topic_id": "T18Eval-00008",
+      "original_query": {
+        "TITLE": "Peace Corps birth control "
+      },
+      "query_text": "Peace Corps birth control ",
+      "documents": {
+        "raw_response": "DOC_1: This document is about Peace Corps activities in Brazil. The US Embassy in Brasilia reports that Peace Corps volunteers are providing family planning education, including birth control methods, in rural areas. The Brazilian Ministry of Health has expressed interest in collaborating with the Peace Corps on population control programs.\n\nDOC_2: This document is about a meeting between US Ambassador John W. Tuthill and Brazilian Minister of Health Leonel Miranda. Discussion centered on potential cooperation between the Peace Corps and the Ministry on birth control initiatives. The Minister noted that the Brazilian government is increasingly concerned about rapid population growth.\n\nDOC_3: This document is about a report from the Consulate in Rio de Janeiro on Peace Corps projects in the Northeast. Peace Corps volunteers are working with local health agencies to distribute birth control information and materials. The report notes that these efforts have been well-received by the local population, but have also drawn criticism from some Catholic Church officials.",
+        "parsed": {
+          "doc_1": "This document is about Peace Corps activities in Brazil. The US Embassy in Brasilia reports that Peace Corps volunteers are providing family planning education, including birth control methods, in rural areas. The Brazilian Ministry of Health has expressed interest in collaborating with the Peace Corps on population control programs.",
+          "doc_2": "This document is about a meeting between US Ambassador John W. Tuthill and Brazilian Minister of Health Leonel Miranda. Discussion centered on potential cooperation between the Peace Corps and the Ministry on birth control initiatives. The Minister noted that the Brazilian government is increasingly concerned about rapid population growth.",
+          "doc_3": "This document is about a report from the Consulate in Rio de Janeiro on Peace Corps projects in the Northeast. Peace Corps volunteers are working with local health agencies to distribute birth control information and materials. The report notes that these efforts have been well-received by the local population, but have also drawn criticism from some Catholic Church officials."
+        },
+        "input_tokens": 420,
+        "output_tokens": 190,
+        "duration_seconds": 7.573993530939333,
+        "created_at": "2026-09-04T22:20:07.631052"
+      },
+      "folder_label": {
+        "raw_response": "SNC_CODES: SOC 14, POL 15-1, HEA 3\nLABEL_TEXT: SOC 14 Social Conditions BRAZ 1963-1973\nPOL 15-1 Political Affairs: Health and Medical Affairs BRAZ 1963-1973\nHEA 3 Health: Family Planning BRAZ 1963-1973\nSUBJECT_TERMS: Peace Corps, birth control, family planning, health education, social conditions, Brazil, U.S. Agency for International Development, Department of State, health services, medical care, population control, public health, social welfare, medical assistance, health programs",
+        "parsed": {
+          "snc_codes": [
+            "SOC 14",
+            "POL 15-1",
+            "HEA 3"
+          ],
+          "label_text": [
+            "SOC 14 Social Conditions BRAZ 1963-1973",
+            "POL 15-1 Political Affairs: Health and Medical Affairs BRAZ 1963-1973",
+            "HEA 3 Health: Family Planning BRAZ 1963-1973"
+          ],
+          "subject_terms": [
+            "Peace Corps",
+            "birth control",
+            "family planning",
+            "health education",
+            "social conditions",
+            "Brazil",
+            "U.S. Agency for International Development",
+            "Department of State",
+            "health services",
+            "medical care",
+            "population control",
+            "public health",
+            "social welfare",
+            "medical assistance",
+            "health programs"
+          ]
+        },
+        "input_tokens": 446,
+        "output_tokens": 129,
+        "duration_seconds": 5.19222341303248,
+        "created_at": "2026-09-04T22:20:15.206766"
+      }
+    },
+    "T18Eval-00009": {
+      "topic_id": "T18Eval-00009",
+      "original_query": {
+        "TITLE": "Marijuana consumption"
+      },
+      "query_text": "Marijuana consumption",
+      "documents": {
+        "raw_response": "DOC_1: This document is about marijuana consumption in Brazil. The Consulate in Rio de Janeiro reports an increase in marijuana use among Brazilian youth. The Brazilian Ministry of Health has expressed concern over the growing trend. Ambassador Lincoln Gordon has been briefed on the matter and will discuss it with Minister of Health, Dr. Paulo Pinheiro.\n\nDOC_2: This document is about marijuana trafficking in Brazil. The US Embassy in Brasilia has received information on marijuana smuggling operations in the northeast region. The Brazilian Federal Police are cooperating with US authorities to combat the trade. The US Narcotics Bureau is providing assistance to the Brazilians through the USOM/Brazil program.\n\nDOC_3: This document is about marijuana laws in Brazil. The Brazilian government has strengthened laws against marijuana possession and use. The Ministry of Justice has issued new regulations, increasing penalties for those caught with the drug. The US Consulate in São Paulo reports that local authorities are cracking down on marijuana users, with several high-profile arrests made recently.",
+        "parsed": {
+          "doc_1": "This document is about marijuana consumption in Brazil. The Consulate in Rio de Janeiro reports an increase in marijuana use among Brazilian youth. The Brazilian Ministry of Health has expressed concern over the growing trend. Ambassador Lincoln Gordon has been briefed on the matter and will discuss it with Minister of Health, Dr. Paulo Pinheiro.",
+          "doc_2": "This document is about marijuana trafficking in Brazil. The US Embassy in Brasilia has received information on marijuana smuggling operations in the northeast region. The Brazilian Federal Police are cooperating with US authorities to combat the trade. The US Narcotics Bureau is providing assistance to the Brazilians through the USOM/Brazil program.",
+          "doc_3": "This document is about marijuana laws in Brazil. The Brazilian government has strengthened laws against marijuana possession and use. The Ministry of Justice has issued new regulations, increasing penalties for those caught with the drug. The US Consulate in São Paulo reports that local authorities are cracking down on marijuana users, with several high-profile arrests made recently."
+        },
+        "input_tokens": 419,
+        "output_tokens": 202,
+        "duration_seconds": 8.082830165047199,
+        "created_at": "2026-09-04T22:20:20.402365"
+      },
+      "folder_label": {
+        "raw_response": "SNC_CODES: SOC 14, POL 15-1, SOC 9\nLABEL_TEXT: SOC 14 Social Conditions BRAZ 1963-1973\nPOL 15-1 Narcotics BRAZ 1963-1973\nSOC 9 Public Health BRAZ 1963-1973\nSUBJECT_TERMS: Social Conditions, Narcotics, Public Health, Marijuana, Drug Abuse, Brazil, U.S. Embassy, Department of State, Health Services, Law Enforcement, Crime, Addiction, Rio de Janeiro, Brasilia",
+        "parsed": {
+          "snc_codes": [
+            "SOC 14",
+            "POL 15-1",
+            "SOC 9"
+          ],
+          "label_text": [
+            "SOC 14 Social Conditions BRAZ 1963-1973",
+            "POL 15-1 Narcotics BRAZ 1963-1973",
+            "SOC 9 Public Health BRAZ 1963-1973"
+          ],
+          "subject_terms": [
+            "Social Conditions",
+            "Narcotics",
+            "Public Health",
+            "Marijuana",
+            "Drug Abuse",
+            "Brazil",
+            "U.S. Embassy",
+            "Department of State",
+            "Health Services",
+            "Law Enforcement",
+            "Crime",
+            "Addiction",
+            "Rio de Janeiro",
+            "Brasilia"
+          ]
+        },
+        "input_tokens": 445,
+        "output_tokens": 112,
+        "duration_seconds": 4.536003996967338,
+        "created_at": "2026-09-04T22:20:28.486939"
+      }
+    },
+    "T18Eval-00010": {
+      "topic_id": "T18Eval-00010",
+      "original_query": {
+        "TITLE": "Wine industry"
+      },
+      "query_text": "Wine industry",
+      "documents": {
+        "raw_response": "DOC_1: This document is about the Brazilian wine industry. The American Embassy in Brasilia reports that the Ministry of Agriculture has implemented new regulations to improve wine production. The Consulate in Rio de Janeiro notes that local wine producers are seeking US investment to expand exports. POL 17 BRAZ, Wine Industry Development.\n\nDOC_2: This document is about US-Brazil trade relations, specifically the wine industry. The US Consul in São Paulo met with officials from the Brazilian Ministry of Foreign Relations to discuss tariffs on wine imports. The meeting was facilitated by the US Department of Commerce, Brasilia. ECON 19 BRAZ, Wine Tariffs.\n\nDOC_3: This document is about the Brazilian government's efforts to promote the wine industry. The US Embassy in Brasilia reports that the Ministry of Industry and Commerce has launched a program to support small wine producers in the states of Rio Grande do Sul and Santa Catarina. AID 14 BRAZ, Wine Industry Assistance.",
+        "parsed": {
+          "doc_1": "This document is about the Brazilian wine industry. The American Embassy in Brasilia reports that the Ministry of Agriculture has implemented new regulations to improve wine production. The Consulate in Rio de Janeiro notes that local wine producers are seeking US investment to expand exports. POL 17 BRAZ, Wine Industry Development.",
+          "doc_2": "This document is about US-Brazil trade relations, specifically the wine industry. The US Consul in São Paulo met with officials from the Brazilian Ministry of Foreign Relations to discuss tariffs on wine imports. The meeting was facilitated by the US Department of Commerce, Brasilia. ECON 19 BRAZ, Wine Tariffs.",
+          "doc_3": "This document is about the Brazilian government's efforts to promote the wine industry. The US Embassy in Brasilia reports that the Ministry of Industry and Commerce has launched a program to support small wine producers in the states of Rio Grande do Sul and Santa Catarina. AID 14 BRAZ, Wine Industry Assistance."
+        },
+        "input_tokens": 419,
+        "output_tokens": 200,
+        "duration_seconds": 7.938234479981475,
+        "created_at": "2026-09-04T22:20:33.025931"
+      },
+      "folder_label": {
+        "raw_response": "SNC_CODES: ECO 9, ECO 17, POL 15-1\nLABEL_TEXT: ECO 9 Economic Commodities BRAZ 1963-1973\nLABEL_TEXT: ECO 17 Trade Agreements BRAZ 1963-1973\nLABEL_TEXT: POL 15-1 Economic Policy BRAZ 1963-1973\nSUBJECT_TERMS: Wine, Brazil, Trade Agreements, Economic Policy, Commodities, Exports, Imports, Agriculture, Industry, Manufacturing, Economic Development, Foreign Relations, Commercial Relations, Tariffs, Embargoes",
+        "parsed": {
+          "snc_codes": [
+            "ECO 9",
+            "ECO 17",
+            "POL 15-1"
+          ],
+          "label_text": [
+            "ECO 9 Economic Commodities BRAZ 1963-1973",
+            "LABEL_TEXT: ECO 17 Trade Agreements BRAZ 1963-1973",
+            "LABEL_TEXT: POL 15-1 Economic Policy BRAZ 1963-1973"
+          ],
+          "subject_terms": [
+            "Wine",
+            "Brazil",
+            "Trade Agreements",
+            "Economic Policy",
+            "Commodities",
+            "Exports",
+            "Imports",
+            "Agriculture",
+            "Industry",
+            "Manufacturing",
+            "Economic Development",
+            "Foreign Relations",
+            "Commercial Relations",
+            "Tariffs",
+            "Embargoes"
+          ]
+        },
+        "input_tokens": 445,
+        "output_tokens": 123,
+        "duration_seconds": 4.963045172044076,
+        "created_at": "2026-09-04T22:20:40.965881"
+      }
+    },
+    "T18Eval-00011": {
+      "topic_id": "T18Eval-00011",
+      "original_query": {
+        "TITLE": "International reactions to coup"
+      },
+      "query_text": "International reactions to coup",
+      "documents": {
+        "raw_response": "DOC_1: This document is about international reactions to the coup. Embtel Rio reports that British Embassy officials have expressed concern over the situation, while French diplomats remain neutral. The Ministry of Foreign Affairs in Brasilia has received notes of recognition from several Latin American governments, including Argentina and Chile.\n\nDOC_2: This document is about international reactions to the coup. Amembassy Brasilia informs that the Soviet Union has issued a statement condemning the military takeover, while the Polish Embassy has followed suit. The USG has been in close contact with the Brazilian Ministry of Foreign Affairs to coordinate a unified Western response.\n\nDOC_3: This document is about international reactions to the coup. Consul General in Sao Paulo reports that local Italian and German business leaders have welcomed the new government, citing improved economic stability. The Brazilian press has highlighted statements of support from the US, with Itamaraty officials praising the OAS for its prompt recognition of the new regime.",
+        "parsed": {
+          "doc_1": "This document is about international reactions to the coup. Embtel Rio reports that British Embassy officials have expressed concern over the situation, while French diplomats remain neutral. The Ministry of Foreign Affairs in Brasilia has received notes of recognition from several Latin American governments, including Argentina and Chile.",
+          "doc_2": "This document is about international reactions to the coup. Amembassy Brasilia informs that the Soviet Union has issued a statement condemning the military takeover, while the Polish Embassy has followed suit. The USG has been in close contact with the Brazilian Ministry of Foreign Affairs to coordinate a unified Western response.",
+          "doc_3": "This document is about international reactions to the coup. Consul General in Sao Paulo reports that local Italian and German business leaders have welcomed the new government, citing improved economic stability. The Brazilian press has highlighted statements of support from the US, with Itamaraty officials praising the OAS for its prompt recognition of the new regime."
+        },
+        "input_tokens": 420,
+        "output_tokens": 192,
+        "duration_seconds": 7.628103841096163,
+        "created_at": "2026-09-04T22:20:45.932257"
+      },
+      "folder_label": {
+        "raw_response": "SNC_CODES: POL 15-1, POL 15-2, POL 17\nLABEL_TEXT: POL 15-1 Political Affairs & Relations: Reactions to Coup BRAZ 1964, POL 15-2 Political Affairs & Relations: International Reaction BRAZ 1964-1965, POL 17 Political Affairs & Relations: Military Affairs BRAZ 1964\nSUBJECT_TERMS: Political Affairs, International Relations, Coup, Brazil, United States, State Department, Embassy, Consulate, Military Government, Castelo Branco, Medici, Costa e Silva, Goulart, Latin America, Foreign Policy, Diplomacy",
+        "parsed": {
+          "snc_codes": [
+            "POL 15-1",
+            "POL 15-2",
+            "POL 17"
+          ],
+          "label_text": [
+            "POL 15-1 Political Affairs & Relations: Reactions to Coup BRAZ 1964, POL 15-2 Political Affairs & Relations: International Reaction BRAZ 1964-1965, POL 17 Political Affairs & Relations: Military Affairs BRAZ 1964"
+          ],
+          "subject_terms": [
+            "Political Affairs",
+            "International Relations",
+            "Coup",
+            "Brazil",
+            "United States",
+            "State Department",
+            "Embassy",
+            "Consulate",
+            "Military Government",
+            "Castelo Branco",
+            "Medici",
+            "Costa e Silva",
+            "Goulart",
+            "Latin America",
+            "Foreign Policy",
+            "Diplomacy"
+          ]
+        },
+        "input_tokens": 446,
+        "output_tokens": 137,
+        "duration_seconds": 5.523938030935824,
+        "created_at": "2026-09-04T22:20:53.562068"
+      }
+    },
+    "T18Eval-00012": {
+      "topic_id": "T18Eval-00012",
+      "original_query": {
+        "TITLE": "Japanese fishing boat seizure"
+      },
+      "query_text": "Japanese fishing boat seizure",
+      "documents": {
+        "raw_response": "DOC_1: This document is about the seizure of a Japanese fishing boat by the Brazilian Navy. The incident occurred off the coast of Rio Grande do Norte. The Japanese Embassy in Brasilia has lodged a formal protest with the Brazilian Ministry of Foreign Affairs. Ambassador John W. Tuthill has been informed of the situation and is monitoring developments.\n\nDOC_2: This document is about the Brazilian government's response to the seizure of a Japanese fishing boat. The Ministry of Foreign Affairs has stated that the boat was operating in Brazilian territorial waters without permission. The US Consulate in Recife reports that local authorities are holding the boat's crew for questioning. The Japanese government is seeking the release of the crew and the return of the vessel.\n\nDOC_3: This document is about the economic implications of the Japanese fishing boat seizure. The Brazilian Ministry of Agriculture has announced plans to increase inspections of foreign fishing vessels. The US Embassy in Brasilia believes this may be an attempt to restrict Japanese fishing activities in the area. The Embassy is consulting with the Agency for International Development (AID) to assess the potential impact on US-Brazilian fisheries cooperation.",
+        "parsed": {
+          "doc_1": "This document is about the seizure of a Japanese fishing boat by the Brazilian Navy. The incident occurred off the coast of Rio Grande do Norte. The Japanese Embassy in Brasilia has lodged a formal protest with the Brazilian Ministry of Foreign Affairs. Ambassador John W. Tuthill has been informed of the situation and is monitoring developments.",
+          "doc_2": "This document is about the Brazilian government's response to the seizure of a Japanese fishing boat. The Ministry of Foreign Affairs has stated that the boat was operating in Brazilian territorial waters without permission. The US Consulate in Recife reports that local authorities are holding the boat's crew for questioning. The Japanese government is seeking the release of the crew and the return of the vessel.",
+          "doc_3": "This document is about the economic implications of the Japanese fishing boat seizure. The Brazilian Ministry of Agriculture has announced plans to increase inspections of foreign fishing vessels. The US Embassy in Brasilia believes this may be an attempt to restrict Japanese fishing activities in the area. The Embassy is consulting with the Agency for International Development (AID) to assess the potential impact on US-Brazilian fisheries cooperation."
+        },
+        "input_tokens": 420,
+        "output_tokens": 230,
+        "duration_seconds": 9.089678470045328,
+        "created_at": "2026-09-04T22:20:59.089522"
+      },
+      "folder_label": {
+        "raw_response": "SNC_CODES: MAR 15, POL 15-1, DEF 6\nLABEL_TEXT: MAR 15 Marine Conservation BRAZ 1963-1973\nPOL 15-1 Fisheries BRAZ 1963-1973\nDEF 6 Naval Operations BRAZ 1963-1973\nSUBJECT_TERMS: Marine Fisheries, Japanese Interests, Fishing Boat Seizure, Brazil, Maritime Conservation, Naval Operations, Fisheries Management, International Waters, Territorial Disputes, Foreign Relations, Brazilian Navy, Japanese Government, Maritime Law",
+        "parsed": {
+          "snc_codes": [
+            "MAR 15",
+            "POL 15-1",
+            "DEF 6"
+          ],
+          "label_text": [
+            "MAR 15 Marine Conservation BRAZ 1963-1973",
+            "POL 15-1 Fisheries BRAZ 1963-1973",
+            "DEF 6 Naval Operations BRAZ 1963-1973"
+          ],
+          "subject_terms": [
+            "Marine Fisheries",
+            "Japanese Interests",
+            "Fishing Boat Seizure",
+            "Brazil",
+            "Maritime Conservation",
+            "Naval Operations",
+            "Fisheries Management",
+            "International Waters",
+            "Territorial Disputes",
+            "Foreign Relations",
+            "Brazilian Navy",
+            "Japanese Government",
+            "Maritime Law"
+          ]
+        },
+        "input_tokens": 446,
+        "output_tokens": 115,
+        "duration_seconds": 4.635375909041613,
+        "created_at": "2026-09-04T22:21:08.180992"
+      }
+    },
+    "T18Eval-00013": {
+      "topic_id": "T18Eval-00013",
+      "original_query": {
+        "TITLE": "Brazilian immigration to America"
+      },
+      "query_text": "Brazilian immigration to America",
+      "documents": {
+        "raw_response": "DOC_1: This document is about Brazilian immigration to America. The American Consulate General in Rio de Janeiro reports an increase in visa applications. The Brazilian Ministry of Foreign Affairs has expressed interest in facilitating travel between the two countries. Ambassador John W. Tuthill has met with Minister of Foreign Affairs Vasco Leitao da Cunha to discuss immigration policies.\n\nDOC_2: This document is about Brazilian immigration to America. The US Embassy in Brasilia notes a rise in Brazilian students seeking to study in the US. The Fulbright Program has been instrumental in promoting educational exchange. Consul General in Sao Paulo, James R. Burke, has been in touch with the Brazilian Ministry of Education to explore opportunities for increased cooperation.\n\nDOC_3: This document is about Brazilian immigration to America. The Department of State has received inquiries from Brazilian nationals regarding immigration procedures. The US Immigration and Naturalization Service has provided guidance on requirements for entry into the US. The American Consulate in Recife has reported an increase in applications for immigrant visas, particularly from northeastern Brazil.",
+        "parsed": {
+          "doc_1": "This document is about Brazilian immigration to America. The American Consulate General in Rio de Janeiro reports an increase in visa applications. The Brazilian Ministry of Foreign Affairs has expressed interest in facilitating travel between the two countries. Ambassador John W. Tuthill has met with Minister of Foreign Affairs Vasco Leitao da Cunha to discuss immigration policies.",
+          "doc_2": "This document is about Brazilian immigration to America. The US Embassy in Brasilia notes a rise in Brazilian students seeking to study in the US. The Fulbright Program has been instrumental in promoting educational exchange. Consul General in Sao Paulo, James R. Burke, has been in touch with the Brazilian Ministry of Education to explore opportunities for increased cooperation.",
+          "doc_3": "This document is about Brazilian immigration to America. The Department of State has received inquiries from Brazilian nationals regarding immigration procedures. The US Immigration and Naturalization Service has provided guidance on requirements for entry into the US. The American Consulate in Recife has reported an increase in applications for immigrant visas, particularly from northeastern Brazil."
+        },
+        "input_tokens": 421,
+        "output_tokens": 215,
+        "duration_seconds": 8.511112648062408,
+        "created_at": "2026-09-04T22:21:12.819888"
+      },
+      "folder_label": {
+        "raw_response": "SNC_CODES: SOC 14, POL 15-1, EMY 1\nLABEL_TEXT: SOC 14 Social Conditions BRAZ 1963-1973\nPOL 15-1 Immigration Policy BRAZ 1963-1973\nEMY 1 Emigration BRAZ 1963-1973\nSUBJECT_TERMS: Immigration, Emigration, Social Conditions, Brazil, United States, Consular Affairs, Visa Policy, Border Control, Alien Registration, Refugee Affairs, American Embassy, Brazilian Government",
+        "parsed": {
+          "snc_codes": [
+            "SOC 14",
+            "POL 15-1",
+            "EMY 1"
+          ],
+          "label_text": [
+            "SOC 14 Social Conditions BRAZ 1963-1973",
+            "POL 15-1 Immigration Policy BRAZ 1963-1973",
+            "EMY 1 Emigration BRAZ 1963-1973"
+          ],
+          "subject_terms": [
+            "Immigration",
+            "Emigration",
+            "Social Conditions",
+            "Brazil",
+            "United States",
+            "Consular Affairs",
+            "Visa Policy",
+            "Border Control",
+            "Alien Registration",
+            "Refugee Affairs",
+            "American Embassy",
+            "Brazilian Government"
+          ]
+        },
+        "input_tokens": 447,
+        "output_tokens": 106,
+        "duration_seconds": 4.290127173997462,
+        "created_at": "2026-09-04T22:21:21.332761"
+      }
+    },
+    "T18Eval-00014": {
+      "topic_id": "T18Eval-00014",
+      "original_query": {
+        "TITLE": "El Chocon Dam"
+      },
+      "query_text": "El Chocon Dam",
+      "documents": {
+        "raw_response": "DOC_1: This document is about the El Chocon Dam project in Argentina, which may impact Brazil's hydroelectric plans. The Brazilian Ministry of Mines and Energy has expressed concerns to Ambassador John W. Tuthill at the US Embassy in Brasilia. We are monitoring the situation through our consular post in Rio de Janeiro.\n\nDOC_2: This document is about a meeting between US Consul General in Sao Paulo, Alfred Atherton, and Brazilian officials to discuss the El Chocon Dam's potential effects on the Parana River basin. The Ministry of Foreign Affairs has requested US assistance in negotiating with Argentina. The US Agency for International Development (AID) is reviewing possible aid packages.\n\nDOC_3: This document is about the Brazilian government's response to the El Chocon Dam, as reported by the US Embassy in Brasilia. President Castelo Branco's administration is seeking to strengthen ties with Argentina while protecting Brazilian interests. The US Department of State has been informed of Brazil's position through diplomatic channels, including the Brazilian Embassy in Washington.",
+        "parsed": {
+          "doc_1": "This document is about the El Chocon Dam project in Argentina, which may impact Brazil's hydroelectric plans. The Brazilian Ministry of Mines and Energy has expressed concerns to Ambassador John W. Tuthill at the US Embassy in Brasilia. We are monitoring the situation through our consular post in Rio de Janeiro.",
+          "doc_2": "This document is about a meeting between US Consul General in Sao Paulo, Alfred Atherton, and Brazilian officials to discuss the El Chocon Dam's potential effects on the Parana River basin. The Ministry of Foreign Affairs has requested US assistance in negotiating with Argentina. The US Agency for International Development (AID) is reviewing possible aid packages.",
+          "doc_3": "This document is about the Brazilian government's response to the El Chocon Dam, as reported by the US Embassy in Brasilia. President Castelo Branco's administration is seeking to strengthen ties with Argentina while protecting Brazilian interests. The US Department of State has been informed of Brazil's position through diplomatic channels, including the Brazilian Embassy in Washington."
+        },
+        "input_tokens": 420,
+        "output_tokens": 213,
+        "duration_seconds": 8.435133890947327,
+        "created_at": "2026-09-04T22:21:25.626279"
+      },
+      "folder_label": {
+        "raw_response": "SNC_CODES: ENR 10-3, IND 17, POL 15-1\nLABEL_TEXT: ENR 10-3 Energy Resources BRAZ 1963-1973\nIND 17 Industrial Projects BRAZ 1965-1970\nPOL 15-1 Political Affairs: Energy BRAZ 1964-1968\nSUBJECT_TERMS: Energy, Dams, Hydroelectric Power, Brazil, El Chocon, Argentina, Parana River, Itaipu Dam, Industrial Development, National Energy Policy, Ministry of Mines and Energy, U.S. Agency for International Development, Brazilian National Commission of Nuclear Energy, Energy Resources, Latin America",
+        "parsed": {
+          "snc_codes": [
+            "ENR 10-3",
+            "IND 17",
+            "POL 15-1"
+          ],
+          "label_text": [
+            "ENR 10-3 Energy Resources BRAZ 1963-1973",
+            "IND 17 Industrial Projects BRAZ 1965-1970",
+            "POL 15-1 Political Affairs: Energy BRAZ 1964-1968"
+          ],
+          "subject_terms": [
+            "Energy",
+            "Dams",
+            "Hydroelectric Power",
+            "Brazil",
+            "El Chocon",
+            "Argentina",
+            "Parana River",
+            "Itaipu Dam",
+            "Industrial Development",
+            "National Energy Policy",
+            "Ministry of Mines and Energy",
+            "U.S. Agency for International Development",
+            "Brazilian National Commission of Nuclear Energy",
+            "Energy Resources",
+            "Latin America"
+          ]
+        },
+        "input_tokens": 446,
+        "output_tokens": 139,
+        "duration_seconds": 5.577695408952422,
+        "created_at": "2026-09-04T22:21:34.063123"
+      }
+    },
+    "T18Eval-00015": {
+      "topic_id": "T18Eval-00015",
+      "original_query": {
+        "TITLE": "Coffee policies"
+      },
+      "query_text": "Coffee policies",
+      "documents": {
+        "raw_response": "DOC_1: This document is about coffee policies in Brazil. The Embassy in Brasilia reports that the Ministry of Agriculture has implemented new measures to stabilize coffee prices. Minister of Agriculture, Ney Braga, met with Ambassador John Tuthill to discuss the impact of these policies on US-Brazil trade relations.\n\nDOC_2: This document is about coffee policies affecting US imports. The Consulate in São Paulo notes that the Brazilian Coffee Institute (IBC) has increased export quotas, benefiting US coffee roasters. IBC President, Luiz de Arruda Botelho, assured Consul General, William Belton, that quality control measures will be maintained.\n\nDOC_3: This document is about government support for coffee producers. The US Agency for International Development (USAID) mission in Rio de Janeiro reports that the Brazilian government has allocated funds to assist small coffee farmers in the state of Minas Gerais. Governor of Minas Gerais, Israel Pinheiro, has pledged to work with USAID to implement the program.",
+        "parsed": {
+          "doc_1": "This document is about coffee policies in Brazil. The Embassy in Brasilia reports that the Ministry of Agriculture has implemented new measures to stabilize coffee prices. Minister of Agriculture, Ney Braga, met with Ambassador John Tuthill to discuss the impact of these policies on US-Brazil trade relations.",
+          "doc_2": "This document is about coffee policies affecting US imports. The Consulate in São Paulo notes that the Brazilian Coffee Institute (IBC) has increased export quotas, benefiting US coffee roasters. IBC President, Luiz de Arruda Botelho, assured Consul General, William Belton, that quality control measures will be maintained.",
+          "doc_3": "This document is about government support for coffee producers. The US Agency for International Development (USAID) mission in Rio de Janeiro reports that the Brazilian government has allocated funds to assist small coffee farmers in the state of Minas Gerais. Governor of Minas Gerais, Israel Pinheiro, has pledged to work with USAID to implement the program."
+        },
+        "input_tokens": 418,
+        "output_tokens": 206,
+        "duration_seconds": 8.164047525962815,
+        "created_at": "2026-09-04T22:21:39.644495"
+      },
+      "folder_label": {
+        "raw_response": "SNC_CODES: ECO 9, POL 15-1, AGR 6\nLABEL_TEXT: ECO 9 Economic Commodities BRAZ 1963-1973\nLABEL_TEXT: POL 15-1 Political Affairs, Government Policies BRAZ 1963-1973\nLABEL_TEXT: AGR 6 Agricultural Products, Coffee BRAZ 1963-1973\nSUBJECT_TERMS: Coffee, Brazil, Economic Affairs, Agricultural Policy, Trade Agreements, Import Regulations, Export Controls, Ministry of Agriculture, U.S. Department of Agriculture, Brazilian Coffee Institute, International Coffee Agreement",
+        "parsed": {
+          "snc_codes": [
+            "ECO 9",
+            "POL 15-1",
+            "AGR 6"
+          ],
+          "label_text": [
+            "ECO 9 Economic Commodities BRAZ 1963-1973",
+            "LABEL_TEXT: POL 15-1 Political Affairs, Government Policies BRAZ 1963-1973",
+            "LABEL_TEXT: AGR 6 Agricultural Products, Coffee BRAZ 1963-1973"
+          ],
+          "subject_terms": [
+            "Coffee",
+            "Brazil",
+            "Economic Affairs",
+            "Agricultural Policy",
+            "Trade Agreements",
+            "Import Regulations",
+            "Export Controls",
+            "Ministry of Agriculture",
+            "U.S. Department of Agriculture",
+            "Brazilian Coffee Institute",
+            "International Coffee Agreement"
+          ]
+        },
+        "input_tokens": 444,
+        "output_tokens": 125,
+        "duration_seconds": 5.0295407850062475,
+        "created_at": "2026-09-04T22:21:47.810270"
+      }
+    },
+    "T18Eval-00016": {
+      "topic_id": "T18Eval-00016",
+      "original_query": {
+        "TITLE": "Amateur radio"
+      },
+      "query_text": "Amateur radio",
+      "documents": {
+        "raw_response": "DOC_1: This document is about amateur radio operations in Brazil. The American Embassy in Brasilia reports that the Brazilian Ministry of Communications has issued new regulations governing amateur radio transmissions. The Embassy notes that these regulations may affect American amateurs operating in Brazil, and has informed the Federal Communications Commission (FCC) of the changes.\n\nDOC_2: This document is about amateur radio activity in São Paulo. The Consulate General in São Paulo reports that local amateur radio operators have expressed concern about interference from military communications equipment. The Consulate has contacted the Brazilian Ministry of War to request assistance in resolving the issue, and is working with the US Army Attaché to monitor the situation.\n\nDOC_3: This document is about amateur radio licensing in Brazil. The US Embassy in Rio de Janeiro reports that the Brazilian government has simplified the process for obtaining amateur radio licenses, and that several American citizens have recently been issued licenses. The Embassy notes that this development may be of interest to the American Radio Relay League (ARRL) and other organizations promoting amateur radio activity.",
+        "parsed": {
+          "doc_1": "This document is about amateur radio operations in Brazil. The American Embassy in Brasilia reports that the Brazilian Ministry of Communications has issued new regulations governing amateur radio transmissions. The Embassy notes that these regulations may affect American amateurs operating in Brazil, and has informed the Federal Communications Commission (FCC) of the changes.",
+          "doc_2": "This document is about amateur radio activity in São Paulo. The Consulate General in São Paulo reports that local amateur radio operators have expressed concern about interference from military communications equipment. The Consulate has contacted the Brazilian Ministry of War to request assistance in resolving the issue, and is working with the US Army Attaché to monitor the situation.",
+          "doc_3": "This document is about amateur radio licensing in Brazil. The US Embassy in Rio de Janeiro reports that the Brazilian government has simplified the process for obtaining amateur radio licenses, and that several American citizens have recently been issued licenses. The Embassy notes that this development may be of interest to the American Radio Relay League (ARRL) and other organizations promoting amateur radio activity."
+        },
+        "input_tokens": 419,
+        "output_tokens": 211,
+        "duration_seconds": 8.348919000010937,
+        "created_at": "2026-09-04T22:21:52.842937"
+      },
+      "folder_label": {
+        "raw_response": "SNC_CODES: TEL 12, POL 15-1, SCI 10\nLABEL_TEXT: TEL 12 Telecommunications BRAZ 1963-1973\nPOL 15-1 Political Affairs, Communications BRAZ 1963-1973\nSCI 10 Science, Technology BRAZ 1963-1973\nSUBJECT_TERMS: Telecommunications, Amateur Radio, Brazil, Radio Licenses, Frequency Allocation, Communications Policy, U.S. Embassy Brasilia, State Department, Federal Communications Commission, Radio Operators, Broadcasting Board, International Telecommunication Union",
+        "parsed": {
+          "snc_codes": [
+            "TEL 12",
+            "POL 15-1",
+            "SCI 10"
+          ],
+          "label_text": [
+            "TEL 12 Telecommunications BRAZ 1963-1973",
+            "POL 15-1 Political Affairs, Communications BRAZ 1963-1973",
+            "SCI 10 Science, Technology BRAZ 1963-1973"
+          ],
+          "subject_terms": [
+            "Telecommunications",
+            "Amateur Radio",
+            "Brazil",
+            "Radio Licenses",
+            "Frequency Allocation",
+            "Communications Policy",
+            "U.S. Embassy Brasilia",
+            "State Department",
+            "Federal Communications Commission",
+            "Radio Operators",
+            "Broadcasting Board",
+            "International Telecommunication Union"
+          ]
+        },
+        "input_tokens": 445,
+        "output_tokens": 118,
+        "duration_seconds": 4.769371055997908,
+        "created_at": "2026-09-04T22:22:01.193670"
+      }
+    },
+    "T18Eval-00017": {
+      "topic_id": "T18Eval-00017",
+      "original_query": {
+        "TITLE": "German war criminals"
+      },
+      "query_text": "German war criminals",
+      "documents": {
+        "raw_response": "DOC_1: This document is about reports from the American Embassy in Brasilia regarding alleged German war criminals residing in Brazil. The Brazilian Ministry of Justice has been cooperative in investigating these claims. Ambassador Lincoln Gordon has been in close contact with Minister Luis Vianna Filho to facilitate extradition proceedings.\n\nDOC_2: This document is about a meeting between Consul General in Rio de Janeiro, William Belton, and Brazilian Federal Police officials to discuss the case of a suspected German war criminal living in São Paulo. The police have agreed to monitor the individual's activities and provide regular updates to the Consulate.\n\nDOC_3: This document is about a memo from the Department of State's Bureau of East Asian and Pacific Affairs regarding a list of suspected German war criminals provided by the Israeli government, some of whom are believed to be living in Brazil. The American Embassy in Brasilia has been instructed to investigate these claims and work with the Brazilian government to bring those responsible to justice.",
+        "parsed": {
+          "doc_1": "This document is about reports from the American Embassy in Brasilia regarding alleged German war criminals residing in Brazil. The Brazilian Ministry of Justice has been cooperative in investigating these claims. Ambassador Lincoln Gordon has been in close contact with Minister Luis Vianna Filho to facilitate extradition proceedings.",
+          "doc_2": "This document is about a meeting between Consul General in Rio de Janeiro, William Belton, and Brazilian Federal Police officials to discuss the case of a suspected German war criminal living in São Paulo. The police have agreed to monitor the individual's activities and provide regular updates to the Consulate.",
+          "doc_3": "This document is about a memo from the Department of State's Bureau of East Asian and Pacific Affairs regarding a list of suspected German war criminals provided by the Israeli government, some of whom are believed to be living in Brazil. The American Embassy in Brasilia has been instructed to investigate these claims and work with the Brazilian government to bring those responsible to justice."
+        },
+        "input_tokens": 419,
+        "output_tokens": 195,
+        "duration_seconds": 7.720123630948365,
+        "created_at": "2026-09-04T22:22:05.967122"
+      },
+      "folder_label": {
+        "raw_response": "SNC_CODES: POL 15-1, POL 29, REF 3\nLABEL_TEXT: POL 15-1 Political Affairs & Relations: War Crimes BRAZ 1963-1973\nPOL 29 Political Affairs & Relations: Extradition BRAZ 1963-1973\nREF 3 Refugee and Migration Affairs: War Crimes and Persecution BRAZ 1963-1973\nSUBJECT_TERMS: War Crimes, Germany, Brazil, Extradition, Refugees, Political Affairs, Relations, Nazi, Persecution, Human Rights, International Law, State Department, Embassy Brazil, Consular Affairs",
+        "parsed": {
+          "snc_codes": [
+            "POL 15-1",
+            "POL 29",
+            "REF 3"
+          ],
+          "label_text": [
+            "POL 15-1 Political Affairs & Relations: War Crimes BRAZ 1963-1973",
+            "POL 29 Political Affairs & Relations: Extradition BRAZ 1963-1973",
+            "REF 3 Refugee and Migration Affairs: War Crimes and Persecution BRAZ 1963-1973"
+          ],
+          "subject_terms": [
+            "War Crimes",
+            "Germany",
+            "Brazil",
+            "Extradition",
+            "Refugees",
+            "Political Affairs",
+            "Relations",
+            "Nazi",
+            "Persecution",
+            "Human Rights",
+            "International Law",
+            "State Department",
+            "Embassy Brazil",
+            "Consular Affairs"
+          ]
+        },
+        "input_tokens": 445,
+        "output_tokens": 131,
+        "duration_seconds": 5.267059282981791,
+        "created_at": "2026-09-04T22:22:13.688994"
+      }
+    },
+    "T18Eval-00018": {
+      "topic_id": "T18Eval-00018",
+      "original_query": {
+        "TITLE": "Lumber industry "
+      },
+      "query_text": "Lumber industry ",
+      "documents": {
+        "raw_response": "DOC_1: This document is about the Brazilian lumber industry. The Embassy in Brasilia reports that the Ministry of Agriculture has implemented new regulations on timber exports. The American Chamber of Commerce in Rio de Janeiro has expressed concerns to Ambassador John W. Tuthill about the potential impact on US-Brazil trade.\n\nDOC_2: This document is about the growth of the lumber industry in Brazil. The Consulate in São Paulo notes that the state of Paraná has become a major producer of lumber, with many sawmills operating in the region. The Brazilian Institute of Forest Development is providing technical assistance to local producers.\n\nDOC_3: This document is about US investment in Brazil's lumber industry. The Economic Section of the Embassy in Brasilia reports that several American companies, including Weyerhaeuser, are considering investments in Brazilian lumber operations. The Ministry of Finance has offered incentives to foreign investors in the sector, including tax breaks and low-interest loans.",
+        "parsed": {
+          "doc_1": "This document is about the Brazilian lumber industry. The Embassy in Brasilia reports that the Ministry of Agriculture has implemented new regulations on timber exports. The American Chamber of Commerce in Rio de Janeiro has expressed concerns to Ambassador John W. Tuthill about the potential impact on US-Brazil trade.",
+          "doc_2": "This document is about the growth of the lumber industry in Brazil. The Consulate in São Paulo notes that the state of Paraná has become a major producer of lumber, with many sawmills operating in the region. The Brazilian Institute of Forest Development is providing technical assistance to local producers.",
+          "doc_3": "This document is about US investment in Brazil's lumber industry. The Economic Section of the Embassy in Brasilia reports that several American companies, including Weyerhaeuser, are considering investments in Brazilian lumber operations. The Ministry of Finance has offered incentives to foreign investors in the sector, including tax breaks and low-interest loans."
+        },
+        "input_tokens": 419,
+        "output_tokens": 193,
+        "duration_seconds": 7.7403309379005805,
+        "created_at": "2026-09-04T22:22:18.959655"
+      },
+      "folder_label": {
+        "raw_response": "SNC_CODES: ECO 9, IND 2, POL 15-1\nLABEL_TEXT: ECO 9 Economic Commodities BRAZ 1963-1973\nLABEL_TEXT: IND 2 Industry BRAZ 1963-1973\nLABEL_TEXT: POL 15-1 Economic Policy BRAZ 1963-1973\nSUBJECT_TERMS: lumber, timber, forestry, wood products, Brazil, industry, trade, commerce, economic development, foreign investment, Department of Commerce, U.S. Embassy Brasilia, Brazilian Ministry of Agriculture",
+        "parsed": {
+          "snc_codes": [
+            "ECO 9",
+            "IND 2",
+            "POL 15-1"
+          ],
+          "label_text": [
+            "ECO 9 Economic Commodities BRAZ 1963-1973",
+            "LABEL_TEXT: IND 2 Industry BRAZ 1963-1973",
+            "LABEL_TEXT: POL 15-1 Economic Policy BRAZ 1963-1973"
+          ],
+          "subject_terms": [
+            "lumber",
+            "timber",
+            "forestry",
+            "wood products",
+            "Brazil",
+            "industry",
+            "trade",
+            "commerce",
+            "economic development",
+            "foreign investment",
+            "Department of Commerce",
+            "U.S. Embassy Brasilia",
+            "Brazilian Ministry of Agriculture"
+          ]
+        },
+        "input_tokens": 445,
+        "output_tokens": 117,
+        "duration_seconds": 4.756656149984337,
+        "created_at": "2026-09-04T22:22:26.701747"
+      }
+    },
+    "T18Eval-00019": {
+      "topic_id": "T18Eval-00019",
+      "original_query": {
+        "TITLE": "Guaíra Falls border dispute"
+      },
+      "query_text": "Guaíra Falls border dispute",
+      "documents": {
+        "raw_response": "DOC_1: This document is about the Guaíra Falls border dispute between Brazil and Paraguay. The Brazilian Ministry of Foreign Affairs has informed the American Embassy in Brasilia that negotiations are ongoing to resolve the issue. The Embassy has been in close contact with the Brazilian government, particularly with Minister of Foreign Affairs Vasco Leitao da Cunha.\n\nDOC_2: This document is about the Guaíra Falls border dispute, which has been a point of contention between Brazil and Paraguay. The Consulate in São Paulo reports that the Brazilian military has increased its presence in the region. The US Consul General in São Paulo has met with local officials, including the Governor of Paraná, to discuss the situation.\n\nDOC_3: This document is about the Guaíra Falls border dispute and its implications for US-Brazil relations. The Department of State has instructed the American Embassy in Brasilia to monitor the situation closely. Ambassador Lincoln Gordon has met with Brazilian officials, including President Castelo Branco, to discuss the dispute and its potential impact on regional stability.",
+        "parsed": {
+          "doc_1": "This document is about the Guaíra Falls border dispute between Brazil and Paraguay. The Brazilian Ministry of Foreign Affairs has informed the American Embassy in Brasilia that negotiations are ongoing to resolve the issue. The Embassy has been in close contact with the Brazilian government, particularly with Minister of Foreign Affairs Vasco Leitao da Cunha.",
+          "doc_2": "This document is about the Guaíra Falls border dispute, which has been a point of contention between Brazil and Paraguay. The Consulate in São Paulo reports that the Brazilian military has increased its presence in the region. The US Consul General in São Paulo has met with local officials, including the Governor of Paraná, to discuss the situation.",
+          "doc_3": "This document is about the Guaíra Falls border dispute and its implications for US-Brazil relations. The Department of State has instructed the American Embassy in Brasilia to monitor the situation closely. Ambassador Lincoln Gordon has met with Brazilian officials, including President Castelo Branco, to discuss the dispute and its potential impact on regional stability."
+        },
+        "input_tokens": 423,
+        "output_tokens": 220,
+        "duration_seconds": 8.715858274954371,
+        "created_at": "2026-09-04T22:22:31.462000"
+      },
+      "folder_label": {
+        "raw_response": "SNC_CODES: POL 15-1, POL 32, BRAZ 15\nLABEL_TEXT: POL 15-1 Border Disputes BRAZ 1963-1973\nPOL 32 Territorial Claims BRAZ 1963-1973\nBRAZ 15 Geographic Boundaries BRAZ 1963-1973\nSUBJECT_TERMS: Border Disputes, Territorial Claims, Geographic Boundaries, Guaíra Falls, Brazil, Paraguay, South America, Political Affairs, International Relations, Diplomatic Posts, U.S. Embassy Brasilia, Department of State",
+        "parsed": {
+          "snc_codes": [
+            "POL 15-1",
+            "POL 32",
+            "BRAZ 15"
+          ],
+          "label_text": [
+            "POL 15-1 Border Disputes BRAZ 1963-1973",
+            "POL 32 Territorial Claims BRAZ 1963-1973",
+            "BRAZ 15 Geographic Boundaries BRAZ 1963-1973"
+          ],
+          "subject_terms": [
+            "Border Disputes",
+            "Territorial Claims",
+            "Geographic Boundaries",
+            "Guaíra Falls",
+            "Brazil",
+            "Paraguay",
+            "South America",
+            "Political Affairs",
+            "International Relations",
+            "Diplomatic Posts",
+            "U.S. Embassy Brasilia",
+            "Department of State"
+          ]
+        },
+        "input_tokens": 449,
+        "output_tokens": 127,
+        "duration_seconds": 5.120646547991782,
+        "created_at": "2026-09-04T22:22:40.179621"
+      }
+    },
+    "T18Eval-00020": {
+      "topic_id": "T18Eval-00020",
+      "original_query": {
+        "TITLE": "Rice cultivation"
+      },
+      "query_text": "Rice cultivation",
+      "documents": {
+        "raw_response": "DOC_1: This document is about rice cultivation in Brazil. The Embassy in Brasilia reports that the Ministry of Agriculture has implemented new policies to increase rice production. The Brazilian Institute of Agricultural Planning (IBPA) is working closely with the US Agency for International Development (USAID) to provide technical assistance to rice farmers in the states of Rio Grande do Sul and Santa Catarina.\n\nDOC_2: This document is about the impact of government policies on rice cultivation. The Consulate in Rio de Janeiro notes that the Goulart government's price controls have led to a decline in rice production. The National Confederation of Agriculture (CNA) has expressed concerns to the Ministry of Agriculture about the effects of these policies on rice farmers in the northeastern states.\n\nDOC_3: This document is about US-Brazil cooperation on rice research. The US Agricultural Attaché in São Paulo reports that the University of São Paulo is collaborating with the US Department of Agriculture on a project to develop new rice varieties. The Brazilian Ministry of Agriculture is providing funding for the project, which aims to increase rice yields and improve disease resistance in the states of Paraná and Mato Grosso.",
+        "parsed": {
+          "doc_1": "This document is about rice cultivation in Brazil. The Embassy in Brasilia reports that the Ministry of Agriculture has implemented new policies to increase rice production. The Brazilian Institute of Agricultural Planning (IBPA) is working closely with the US Agency for International Development (USAID) to provide technical assistance to rice farmers in the states of Rio Grande do Sul and Santa Catarina.",
+          "doc_2": "This document is about the impact of government policies on rice cultivation. The Consulate in Rio de Janeiro notes that the Goulart government's price controls have led to a decline in rice production. The National Confederation of Agriculture (CNA) has expressed concerns to the Ministry of Agriculture about the effects of these policies on rice farmers in the northeastern states.",
+          "doc_3": "This document is about US-Brazil cooperation on rice research. The US Agricultural Attaché in São Paulo reports that the University of São Paulo is collaborating with the US Department of Agriculture on a project to develop new rice varieties. The Brazilian Ministry of Agriculture is providing funding for the project, which aims to increase rice yields and improve disease resistance in the states of Paraná and Mato Grosso."
+        },
+        "input_tokens": 419,
+        "output_tokens": 236,
+        "duration_seconds": 9.333463752060197,
+        "created_at": "2026-09-04T22:22:45.304264"
+      },
+      "folder_label": {
+        "raw_response": "SNC_CODES: AGR 6, ECON 17, POL 15-1\nLABEL_TEXT: AGR 6 Agricultural Production BRAZ 1963-1973\nLABEL_TEXT: ECON 17 Economic Development BRAZ 1963-1973\nLABEL_TEXT: POL 15-1 Agricultural Policy BRAZ 1963-1973\nSUBJECT_TERMS: Agriculture, Brazil, Rice, Crops, Farming, Economic Development, Trade, Commerce, Food Production, Agricultural Policy, Rural Development, Latin America",
+        "parsed": {
+          "snc_codes": [
+            "AGR 6",
+            "ECON 17",
+            "POL 15-1"
+          ],
+          "label_text": [
+            "AGR 6 Agricultural Production BRAZ 1963-1973",
+            "LABEL_TEXT: ECON 17 Economic Development BRAZ 1963-1973",
+            "LABEL_TEXT: POL 15-1 Agricultural Policy BRAZ 1963-1973"
+          ],
+          "subject_terms": [
+            "Agriculture",
+            "Brazil",
+            "Rice",
+            "Crops",
+            "Farming",
+            "Economic Development",
+            "Trade",
+            "Commerce",
+            "Food Production",
+            "Agricultural Policy",
+            "Rural Development",
+            "Latin America"
+          ]
+        },
+        "input_tokens": 445,
+        "output_tokens": 111,
+        "duration_seconds": 4.491710953996517,
+        "created_at": "2026-09-04T22:22:54.639555"
+      }
+    },
+    "T18Eval-00021": {
+      "topic_id": "T18Eval-00021",
+      "original_query": {
+        "TITLE": "Nuts"
+      },
+      "query_text": "Nuts",
+      "documents": {
+        "raw_response": "DOC_1: This document is about Brazilian agricultural exports, specifically nuts. The Embassy in Brasilia reports that the Ministry of Agriculture has increased subsidies for peanut and walnut farmers in the states of São Paulo and Paraná. This move is expected to boost production and exports to the US.\n\nDOC_2: This document is about US-Brazil trade negotiations. The Consulate in Rio de Janeiro notes that the Brazilian government has expressed interest in increasing nut exports to the US. The Americans are receptive, but want Brazil to reduce tariffs on US soybean imports. Talks are ongoing between the US Department of Agriculture and the Brazilian Ministry of Foreign Affairs.\n\nDOC_3: This document is about economic development in northeastern Brazil. The US Agency for International Development (USAID) is funding a project to improve peanut cultivation in the state of Pernambuco. The Brazilian Ministry of Planning is cooperating, and the project is expected to benefit local farmers and increase regional economic growth.",
+        "parsed": {
+          "doc_1": "This document is about Brazilian agricultural exports, specifically nuts. The Embassy in Brasilia reports that the Ministry of Agriculture has increased subsidies for peanut and walnut farmers in the states of São Paulo and Paraná. This move is expected to boost production and exports to the US.",
+          "doc_2": "This document is about US-Brazil trade negotiations. The Consulate in Rio de Janeiro notes that the Brazilian government has expressed interest in increasing nut exports to the US. The Americans are receptive, but want Brazil to reduce tariffs on US soybean imports. Talks are ongoing between the US Department of Agriculture and the Brazilian Ministry of Foreign Affairs.",
+          "doc_3": "This document is about economic development in northeastern Brazil. The US Agency for International Development (USAID) is funding a project to improve peanut cultivation in the state of Pernambuco. The Brazilian Ministry of Planning is cooperating, and the project is expected to benefit local farmers and increase regional economic growth."
+        },
+        "input_tokens": 418,
+        "output_tokens": 193,
+        "duration_seconds": 7.676691552973352,
+        "created_at": "2026-09-04T22:22:59.135828"
+      },
+      "folder_label": {
+        "raw_response": "SNC_CODES: ECO 9, COM 7, AGR 6\nLABEL_TEXT: ECO 9 Economic Commodities BRAZ 1963-1973\nLABEL_TEXT: COM 7 Commercial Activities BRAZ 1963-1973\nLABEL_TEXT: AGR 6 Agricultural Products BRAZ 1963-1973\nSUBJECT_TERMS: Nuts, Brazil, Agriculture, Commerce, Trade, Economic Development, Exports, Imports, Food Products, Forest Products, Tropical Products, US Embassy Brasilia, Department of Commerce, USDA",
+        "parsed": {
+          "snc_codes": [
+            "ECO 9",
+            "COM 7",
+            "AGR 6"
+          ],
+          "label_text": [
+            "ECO 9 Economic Commodities BRAZ 1963-1973",
+            "LABEL_TEXT: COM 7 Commercial Activities BRAZ 1963-1973",
+            "LABEL_TEXT: AGR 6 Agricultural Products BRAZ 1963-1973"
+          ],
+          "subject_terms": [
+            "Nuts",
+            "Brazil",
+            "Agriculture",
+            "Commerce",
+            "Trade",
+            "Economic Development",
+            "Exports",
+            "Imports",
+            "Food Products",
+            "Forest Products",
+            "Tropical Products",
+            "US Embassy Brasilia",
+            "Department of Commerce",
+            "USDA"
+          ]
+        },
+        "input_tokens": 444,
+        "output_tokens": 116,
+        "duration_seconds": 4.703864992014132,
+        "created_at": "2026-09-04T22:23:06.814221"
+      }
+    },
+    "T18Eval-00022": {
+      "topic_id": "T18Eval-00022",
+      "original_query": {
+        "TITLE": "Freight shipping policies"
+      },
+      "query_text": "Freight shipping policies",
+      "documents": {
+        "raw_response": "DOC_1: This document is about freight shipping policies in Brazil. The Embassy in Brasilia reports that the Brazilian Ministry of Transportation has implemented new regulations governing freight shipments. Ambassador John W. Tuthill has met with Minister of Transportation Jarbas Passarinho to discuss the impact on US-Brazil trade.\n\nDOC_2: This document is about freight shipping policies affecting US businesses in Brazil. Consul General in São Paulo, Alfred Atherton, notes that the new policies have increased costs for American companies shipping goods to Brazil. The Consulate is working with the American Chamber of Commerce to address these concerns with the Brazilian government.\n\nDOC_3: This document is about Brazilian freight shipping policies and their effect on US aid programs. The US Agency for International Development (USAID) mission in Rio de Janeiro reports that the new regulations are delaying shipments of aid materials. The mission is coordinating with the Brazilian Ministry of Planning to expedite these shipments and ensure the success of USAID programs.",
+        "parsed": {
+          "doc_1": "This document is about freight shipping policies in Brazil. The Embassy in Brasilia reports that the Brazilian Ministry of Transportation has implemented new regulations governing freight shipments. Ambassador John W. Tuthill has met with Minister of Transportation Jarbas Passarinho to discuss the impact on US-Brazil trade.",
+          "doc_2": "This document is about freight shipping policies affecting US businesses in Brazil. Consul General in São Paulo, Alfred Atherton, notes that the new policies have increased costs for American companies shipping goods to Brazil. The Consulate is working with the American Chamber of Commerce to address these concerns with the Brazilian government.",
+          "doc_3": "This document is about Brazilian freight shipping policies and their effect on US aid programs. The US Agency for International Development (USAID) mission in Rio de Janeiro reports that the new regulations are delaying shipments of aid materials. The mission is coordinating with the Brazilian Ministry of Planning to expedite these shipments and ensure the success of USAID programs."
+        },
+        "input_tokens": 420,
+        "output_tokens": 198,
+        "duration_seconds": 7.847074819961563,
+        "created_at": "2026-09-04T22:23:11.521969"
+      },
+      "folder_label": {
+        "raw_response": "SNC_CODES: ETR 9, TRV 17, POL 15-1\nLABEL_TEXT: ETR 9 Economic Transportation BRAZ 1963-1973\nLABEL_TEXT: TRV 17 Transportation Regulations BRAZ 1963-1973\nLABEL_TEXT: POL 15-1 Political Affairs: Transportation Policies BRAZ 1963-1973\nSUBJECT_TERMS: Freight, Shipping, Transportation, Brazil, U.S. Department of State, Economic Affairs, Trade Agreements, Customs Regulations, Maritime Transport, Air Transport, Rail Transport, Highway Transport, Transportation Infrastructure, Port Facilities, Shipping Policies",
+        "parsed": {
+          "snc_codes": [
+            "ETR 9",
+            "TRV 17",
+            "POL 15-1"
+          ],
+          "label_text": [
+            "ETR 9 Economic Transportation BRAZ 1963-1973",
+            "LABEL_TEXT: TRV 17 Transportation Regulations BRAZ 1963-1973",
+            "LABEL_TEXT: POL 15-1 Political Affairs: Transportation Policies BRAZ 1963-1973"
+          ],
+          "subject_terms": [
+            "Freight",
+            "Shipping",
+            "Transportation",
+            "Brazil",
+            "U.S. Department of State",
+            "Economic Affairs",
+            "Trade Agreements",
+            "Customs Regulations",
+            "Maritime Transport",
+            "Air Transport",
+            "Rail Transport",
+            "Highway Transport",
+            "Transportation Infrastructure",
+            "Port Facilities",
+            "Shipping Policies"
+          ]
+        },
+        "input_tokens": 446,
+        "output_tokens": 129,
+        "duration_seconds": 5.1837826509727165,
+        "created_at": "2026-09-04T22:23:19.370772"
+      }
+    },
+    "T18Eval-00023": {
+      "topic_id": "T18Eval-00023",
+      "original_query": {
+        "TITLE": "Smallpox vaccination"
+      },
+      "query_text": "Smallpox vaccination",
+      "documents": {
+        "raw_response": "DOC_1: This document is about smallpox vaccination efforts in Brazil. The US Embassy in Brasilia reports that the Brazilian Ministry of Health has launched a nationwide campaign to eradicate smallpox, with assistance from the Pan American Health Organization (PAHO) and the US Agency for International Development (USAID). Ambassador John W. Tuthill has offered support for this initiative.\n\nDOC_2: This document is about the status of smallpox vaccination in Brazil. The Consulate General in Rio de Janeiro notes that the state of Guanabara has achieved a high vaccination rate, thanks to a joint effort by local health authorities and the US Public Health Service. The Brazilian government aims to extend this success to other states.\n\nDOC_3: This document is about smallpox vaccination programs in rural Brazil. The American Consul in Recife reports that the USAID-funded \"Alliance for Progress\" program is providing funding and technical assistance to support vaccination campaigns in northeastern Brazil, in cooperation with the Brazilian Ministry of Health and the state government of Pernambuco.",
+        "parsed": {
+          "doc_1": "This document is about smallpox vaccination efforts in Brazil. The US Embassy in Brasilia reports that the Brazilian Ministry of Health has launched a nationwide campaign to eradicate smallpox, with assistance from the Pan American Health Organization (PAHO) and the US Agency for International Development (USAID). Ambassador John W. Tuthill has offered support for this initiative.",
+          "doc_2": "This document is about the status of smallpox vaccination in Brazil. The Consulate General in Rio de Janeiro notes that the state of Guanabara has achieved a high vaccination rate, thanks to a joint effort by local health authorities and the US Public Health Service. The Brazilian government aims to extend this success to other states.",
+          "doc_3": "This document is about smallpox vaccination programs in rural Brazil. The American Consul in Recife reports that the USAID-funded \"Alliance for Progress\" program is providing funding and technical assistance to support vaccination campaigns in northeastern Brazil, in cooperation with the Brazilian Ministry of Health and the state government of Pernambuco."
+        },
+        "input_tokens": 420,
+        "output_tokens": 217,
+        "duration_seconds": 8.584890388068743,
+        "created_at": "2026-09-04T22:23:24.558346"
+      },
+      "folder_label": {
+        "raw_response": "SNC_CODES: SCI 12, HEA 3, POL 15-1\nLABEL_TEXT: SCI 12 Scientific Research BRAZ 1963-1973\nSCI 12 Scientific Research BRAZ 1965\nHEA 3 Health Conditions BRAZ 1963-1968\nPOL 15-1 Political Affairs, Health BRAZ 1964-1972\nLABEL_TEXT: HEA 3 Health Conditions BRAZ 1969-1973\nLABEL_TEXT: POL 15-1 Political Affairs, Health BRAZ 1963-1964\nSUBJECT_TERMS: Smallpox, Vaccination, Health Conditions, Scientific Research, Brazil, U.S. Department of State, Public Health, Medicine, Disease Control, Immunization, World Health Organization, Pan American Health Organization, Brazilian Government, Health Services, Medical Research",
+        "parsed": {
+          "snc_codes": [
+            "SCI 12",
+            "HEA 3",
+            "POL 15-1"
+          ],
+          "label_text": [
+            "SCI 12 Scientific Research BRAZ 1963-1973",
+            "SCI 12 Scientific Research BRAZ 1965",
+            "HEA 3 Health Conditions BRAZ 1963-1968",
+            "POL 15-1 Political Affairs, Health BRAZ 1964-1972",
+            "LABEL_TEXT: HEA 3 Health Conditions BRAZ 1969-1973",
+            "LABEL_TEXT: POL 15-1 Political Affairs, Health BRAZ 1963-1964"
+          ],
+          "subject_terms": [
+            "Smallpox",
+            "Vaccination",
+            "Health Conditions",
+            "Scientific Research",
+            "Brazil",
+            "U.S. Department of State",
+            "Public Health",
+            "Medicine",
+            "Disease Control",
+            "Immunization",
+            "World Health Organization",
+            "Pan American Health Organization",
+            "Brazilian Government",
+            "Health Services",
+            "Medical Research"
+          ]
+        },
+        "input_tokens": 446,
+        "output_tokens": 175,
+        "duration_seconds": 7.002210431965068,
+        "created_at": "2026-09-04T22:23:33.145016"
+      }
+    },
+    "T18Eval-00024": {
+      "topic_id": "T18Eval-00024",
+      "original_query": {
+        "TITLE": "Brazilian anti-semitism"
+      },
+      "query_text": "Brazilian anti-semitism",
+      "documents": {
+        "raw_response": "DOC_1: This document is about anti-semitic incidents in Brazil. The American Embassy in Brasilia reports a rise in anti-Jewish graffiti in Rio de Janeiro and Sao Paulo. The Brazilian Ministry of Justice has been notified, but no action has been taken. The Embassy attributes this to the current political climate under President Goulart.\n\nDOC_2: This document is about the growth of anti-semitism in Brazil. The Consulate General in Sao Paulo notes an increase in anti-Jewish propaganda distributed by right-wing groups. The Brazilian Bar Association has condemned these actions, but the Medici government remains silent. The USIS has increased efforts to counter this trend through cultural programs.\n\nDOC_3: This document is about anti-semitic sentiments among Brazilian military officers. The Defense Attache in Rio de Janeiro reports that some officers have expressed anti-Jewish views, citing the influence of the Brazilian Integralist Action. The Embassy is concerned about the potential impact on US-Brazil relations and has requested guidance from the Department on how to address this issue.",
+        "parsed": {
+          "doc_1": "This document is about anti-semitic incidents in Brazil. The American Embassy in Brasilia reports a rise in anti-Jewish graffiti in Rio de Janeiro and Sao Paulo. The Brazilian Ministry of Justice has been notified, but no action has been taken. The Embassy attributes this to the current political climate under President Goulart.",
+          "doc_2": "This document is about the growth of anti-semitism in Brazil. The Consulate General in Sao Paulo notes an increase in anti-Jewish propaganda distributed by right-wing groups. The Brazilian Bar Association has condemned these actions, but the Medici government remains silent. The USIS has increased efforts to counter this trend through cultural programs.",
+          "doc_3": "This document is about anti-semitic sentiments among Brazilian military officers. The Defense Attache in Rio de Janeiro reports that some officers have expressed anti-Jewish views, citing the influence of the Brazilian Integralist Action. The Embassy is concerned about the potential impact on US-Brazil relations and has requested guidance from the Department on how to address this issue."
+        },
+        "input_tokens": 422,
+        "output_tokens": 214,
+        "duration_seconds": 8.47823942604009,
+        "created_at": "2026-09-04T22:23:40.151452"
+      },
+      "folder_label": {
+        "raw_response": "SNC_CODES: SOC 14, POL 15-1, SOC 17\nLABEL_TEXT: SOC 14 Social Conditions BRAZ 1963-1973\nPOL 15-1 Political Affairs, Human Rights BRAZ 1963-1973\nSOC 17 Minority Groups BRAZ 1963-1973\nSUBJECT_TERMS: Social Conditions, Anti-Semitism, Human Rights, Minority Groups, Brazil, Jewish Community, Racial Tensions, Political Unrest, Civil Rights, Religious Freedom, Ethnic Relations, Brazilian Government, US Embassy Brasilia",
+        "parsed": {
+          "snc_codes": [
+            "SOC 14",
+            "POL 15-1",
+            "SOC 17"
+          ],
+          "label_text": [
+            "SOC 14 Social Conditions BRAZ 1963-1973",
+            "POL 15-1 Political Affairs, Human Rights BRAZ 1963-1973",
+            "SOC 17 Minority Groups BRAZ 1963-1973"
+          ],
+          "subject_terms": [
+            "Social Conditions",
+            "Anti-Semitism",
+            "Human Rights",
+            "Minority Groups",
+            "Brazil",
+            "Jewish Community",
+            "Racial Tensions",
+            "Political Unrest",
+            "Civil Rights",
+            "Religious Freedom",
+            "Ethnic Relations",
+            "Brazilian Government",
+            "US Embassy Brasilia"
+          ]
+        },
+        "input_tokens": 448,
+        "output_tokens": 116,
+        "duration_seconds": 4.682352829026058,
+        "created_at": "2026-09-04T22:23:48.631424"
+      }
+    },
+    "T18Eval-00025": {
+      "topic_id": "T18Eval-00025",
+      "original_query": {
+        "TITLE": "Montevideo airport strikes"
+      },
+      "query_text": "Montevideo airport strikes",
+      "documents": {
+        "raw_response": "DOC_1: This document is about the Montevideo airport strikes. The American Embassy in Montevideo reports that Uruguayan labor unions have initiated a series of work stoppages at Carrasco International Airport, affecting flights to and from Brazil. The Embassy notes that the Brazilian Ministry of Foreign Affairs is monitoring the situation closely, with potential implications for air travel between Brazil and Uruguay.\n\nDOC_2: This document is about the Montevideo airport strikes. The U.S. Consulate in Rio de Janeiro informs the Department of State that VARIG Airlines has cancelled several flights to Montevideo due to the ongoing labor disputes at Carrasco International Airport. The Consulate General notes that Brazilian travelers are being advised to seek alternative routes or postpone their travel plans until the situation is resolved.\n\nDOC_3: This document is about the Montevideo airport strikes. The American Embassy in Brasilia reports that the Brazilian Ministry of Transportation has been in contact with Uruguayan authorities to discuss the impact of the airport strikes on regional air traffic. The Embassy notes that the Brazilian government is concerned about potential disruptions to trade and commerce between the two countries, and is seeking a swift resolution to the labor disputes in Montevideo.",
+        "parsed": {
+          "doc_1": "This document is about the Montevideo airport strikes. The American Embassy in Montevideo reports that Uruguayan labor unions have initiated a series of work stoppages at Carrasco International Airport, affecting flights to and from Brazil. The Embassy notes that the Brazilian Ministry of Foreign Affairs is monitoring the situation closely, with potential implications for air travel between Brazil and Uruguay.",
+          "doc_2": "This document is about the Montevideo airport strikes. The U.S. Consulate in Rio de Janeiro informs the Department of State that VARIG Airlines has cancelled several flights to Montevideo due to the ongoing labor disputes at Carrasco International Airport. The Consulate General notes that Brazilian travelers are being advised to seek alternative routes or postpone their travel plans until the situation is resolved.",
+          "doc_3": "This document is about the Montevideo airport strikes. The American Embassy in Brasilia reports that the Brazilian Ministry of Transportation has been in contact with Uruguayan authorities to discuss the impact of the airport strikes on regional air traffic. The Embassy notes that the Brazilian government is concerned about potential disruptions to trade and commerce between the two countries, and is seeking a swift resolution to the labor disputes in Montevideo."
+        },
+        "input_tokens": 421,
+        "output_tokens": 244,
+        "duration_seconds": 9.63470568403136,
+        "created_at": "2026-09-04T22:23:53.317774"
+      },
+      "folder_label": {
+        "raw_response": "SNC_CODES: LAB 6, POL 15-1, TRA 2\nLABEL_TEXT: LAB 6 Labor Strikes BRAZ 1963-1973\nLABEL_TEXT: POL 15-1 Government Relations with Labor BRAZ 1963-1973\nLABEL_TEXT: TRA 2 Transportation Strikes BRAZ 1963-1973\nSUBJECT_TERMS: Labor Strikes, Montevideo Airport, Brazil, Uruguay, Transportation, Aviation, Airport Strikes, Government Relations, Labor Unions, State Department, U.S. Embassy Brazil, Consular Posts, Political Affairs, Labor Relations",
+        "parsed": {
+          "snc_codes": [
+            "LAB 6",
+            "POL 15-1",
+            "TRA 2"
+          ],
+          "label_text": [
+            "LAB 6 Labor Strikes BRAZ 1963-1973",
+            "LABEL_TEXT: POL 15-1 Government Relations with Labor BRAZ 1963-1973",
+            "LABEL_TEXT: TRA 2 Transportation Strikes BRAZ 1963-1973"
+          ],
+          "subject_terms": [
+            "Labor Strikes",
+            "Montevideo Airport",
+            "Brazil",
+            "Uruguay",
+            "Transportation",
+            "Aviation",
+            "Airport Strikes",
+            "Government Relations",
+            "Labor Unions",
+            "State Department",
+            "U.S. Embassy Brazil",
+            "Consular Posts",
+            "Political Affairs",
+            "Labor Relations"
+          ]
+        },
+        "input_tokens": 447,
+        "output_tokens": 125,
+        "duration_seconds": 5.027440769947134,
+        "created_at": "2026-09-04T22:24:02.954232"
+      }
+    },
+    "T18Eval-00026": {
+      "topic_id": "T18Eval-00026",
+      "original_query": {
+        "TITLE": "Sesame seed trade"
+      },
+      "query_text": "Sesame seed trade",
+      "documents": {
+        "raw_response": "DOC_1: This document is about the sesame seed trade between the US and Brazil. The American Embassy in Brasilia reports that the Brazilian Ministry of Agriculture has increased imports of sesame seeds from the US. The Embassy notes that this development is a result of efforts by the US Department of Agriculture and the US Agency for International Development (USAID) to promote American agricultural products in Brazil.\n\nDOC_2: This document is about the growth of sesame seed exports from the US to Brazil. The Consulate General in Sao Paulo informs the Department of State that the Brazilian market for sesame seeds is expanding rapidly, driven by increasing demand from the food processing industry. The Consulate attributes this trend to the success of the Alliance for Progress program in promoting economic development in Brazil.\n\nDOC_3: This document is about trade negotiations between the US and Brazil regarding sesame seeds. The Embassy in Rio de Janeiro reports that the Brazilian Ministry of Foreign Affairs has expressed interest in discussing a potential trade agreement on sesame seeds with the US Department of State. The Embassy notes that the Brazilian government is seeking to reduce tariffs on sesame seed imports from the US, citing the importance of this commodity to Brazil's food industry.",
+        "parsed": {
+          "doc_1": "This document is about the sesame seed trade between the US and Brazil. The American Embassy in Brasilia reports that the Brazilian Ministry of Agriculture has increased imports of sesame seeds from the US. The Embassy notes that this development is a result of efforts by the US Department of Agriculture and the US Agency for International Development (USAID) to promote American agricultural products in Brazil.",
+          "doc_2": "This document is about the growth of sesame seed exports from the US to Brazil. The Consulate General in Sao Paulo informs the Department of State that the Brazilian market for sesame seeds is expanding rapidly, driven by increasing demand from the food processing industry. The Consulate attributes this trend to the success of the Alliance for Progress program in promoting economic development in Brazil.",
+          "doc_3": "This document is about trade negotiations between the US and Brazil regarding sesame seeds. The Embassy in Rio de Janeiro reports that the Brazilian Ministry of Foreign Affairs has expressed interest in discussing a potential trade agreement on sesame seeds with the US Department of State. The Embassy notes that the Brazilian government is seeking to reduce tariffs on sesame seed imports from the US, citing the importance of this commodity to Brazil's food industry."
+        },
+        "input_tokens": 421,
+        "output_tokens": 237,
+        "duration_seconds": 9.399887198000215,
+        "created_at": "2026-09-04T22:24:07.986098"
+      },
+      "folder_label": {
+        "raw_response": "SNC_CODES: ECT 15, TRD 17, EGT 10\nLABEL_TEXT: ECT 15 Economic Trade Agreements BRAZ 1963-1973\nLABEL_TEXT: TRD 17 Trade Policy BRAZ 1963-1973\nLABEL_TEXT: EGT 10 Grains and Seeds BRAZ 1963-1973\nSUBJECT_TERMS: Sesame seeds, trade agreements, Brazil, economic policy, import export, grains, seeds, agriculture, commerce, industry, foreign trade, customs, tariffs, embargoes",
+        "parsed": {
+          "snc_codes": [
+            "ECT 15",
+            "TRD 17",
+            "EGT 10"
+          ],
+          "label_text": [
+            "ECT 15 Economic Trade Agreements BRAZ 1963-1973",
+            "LABEL_TEXT: TRD 17 Trade Policy BRAZ 1963-1973",
+            "LABEL_TEXT: EGT 10 Grains and Seeds BRAZ 1963-1973"
+          ],
+          "subject_terms": [
+            "Sesame seeds",
+            "trade agreements",
+            "Brazil",
+            "economic policy",
+            "import export",
+            "grains",
+            "seeds",
+            "agriculture",
+            "commerce",
+            "industry",
+            "foreign trade",
+            "customs",
+            "tariffs",
+            "embargoes"
+          ]
+        },
+        "input_tokens": 447,
+        "output_tokens": 118,
+        "duration_seconds": 4.756052452954464,
+        "created_at": "2026-09-04T22:24:17.387782"
+      }
+    },
+    "T18Eval-00027": {
+      "topic_id": "T18Eval-00027",
+      "original_query": {
+        "TITLE": "Disaster relief powdered milk"
+      },
+      "query_text": "Disaster relief powdered milk",
+      "documents": {
+        "raw_response": "DOC_1: This document is about disaster relief efforts in Brazil. The American Embassy in Brasilia reports that the U.S. Agency for International Development (AID) has shipped 100 tons of powdered milk to assist flood victims in the state of Rio Grande do Sul. The Brazilian Ministry of Health will distribute the milk through local health clinics.\n\nDOC_2: This document is about humanitarian aid to Brazil. Consul General in São Paulo, John P. Shaw, notes that the U.S. Department of State has approved a shipment of powdered milk to support disaster relief efforts in the northeastern region. The milk will be transported via the U.S. Air Force to the city of Recife.\n\nDOC_3: This document is about U.S. assistance to Brazil. The U.S. Embassy in Rio de Janeiro informs the Department of State that the Brazilian government has requested additional powdered milk to aid victims of the recent drought in the state of Ceará. The U.S. Operations Mission in Brazil will coordinate with the Ministry of Agriculture to deliver the milk to affected areas.",
+        "parsed": {
+          "doc_1": "This document is about disaster relief efforts in Brazil. The American Embassy in Brasilia reports that the U.S. Agency for International Development (AID) has shipped 100 tons of powdered milk to assist flood victims in the state of Rio Grande do Sul. The Brazilian Ministry of Health will distribute the milk through local health clinics.",
+          "doc_2": "This document is about humanitarian aid to Brazil. Consul General in São Paulo, John P. Shaw, notes that the U.S. Department of State has approved a shipment of powdered milk to support disaster relief efforts in the northeastern region. The milk will be transported via the U.S. Air Force to the city of Recife.",
+          "doc_3": "This document is about U.S. assistance to Brazil. The U.S. Embassy in Rio de Janeiro informs the Department of State that the Brazilian government has requested additional powdered milk to aid victims of the recent drought in the state of Ceará. The U.S. Operations Mission in Brazil will coordinate with the Ministry of Agriculture to deliver the milk to affected areas."
+        },
+        "input_tokens": 421,
+        "output_tokens": 216,
+        "duration_seconds": 8.557508456986398,
+        "created_at": "2026-09-04T22:24:22.148324"
+      },
+      "folder_label": {
+        "raw_response": "SNC_CODES: AID 9, POL 15-1, REF 3\nLABEL_TEXT: AID 9 Humanitarian Assistance BRAZ 1963-1973\nPOL 15-1 Disaster Relief BRAZ 1963-1973\nREF 3 Refugee Assistance BRAZ 1963-1973\nSUBJECT_TERMS: Disaster Relief, Humanitarian Assistance, Refugee Assistance, AID, POL, REF, BRAZ, USAID, Department of State, U.S. Embassy Brasilia, Food Assistance, Powdered Milk, Emergency Aid",
+        "parsed": {
+          "snc_codes": [
+            "AID 9",
+            "POL 15-1",
+            "REF 3"
+          ],
+          "label_text": [
+            "AID 9 Humanitarian Assistance BRAZ 1963-1973",
+            "POL 15-1 Disaster Relief BRAZ 1963-1973",
+            "REF 3 Refugee Assistance BRAZ 1963-1973"
+          ],
+          "subject_terms": [
+            "Disaster Relief",
+            "Humanitarian Assistance",
+            "Refugee Assistance",
+            "AID",
+            "POL",
+            "REF",
+            "BRAZ",
+            "USAID",
+            "Department of State",
+            "U.S. Embassy Brasilia",
+            "Food Assistance",
+            "Powdered Milk",
+            "Emergency Aid"
+          ]
+        },
+        "input_tokens": 447,
+        "output_tokens": 117,
+        "duration_seconds": 4.743552712025121,
+        "created_at": "2026-09-04T22:24:30.707580"
+      }
+    },
+    "T18Eval-00028": {
+      "topic_id": "T18Eval-00028",
+      "original_query": {
+        "TITLE": "Spread of equine influenza"
+      },
+      "query_text": "Spread of equine influenza",
+      "documents": {
+        "raw_response": "DOC_1: This document is about the outbreak of equine influenza in Brazil. The American Embassy in Brasilia reports that the Ministry of Agriculture has confirmed cases in several states, including Sao Paulo and Rio Grande do Sul. The USDA and the Brazilian Ministry of Agriculture are cooperating to contain the spread.\n\nDOC_2: This document is about the economic impact of equine influenza on Brazil's horse breeding industry. Consul General in Sao Paulo reports that local breeders are concerned about the disease's effect on exports. The Brazilian Government has implemented quarantine measures to prevent further spread, with assistance from the US Agency for International Development (USAID).\n\nDOC_3: This document is about the response to equine influenza in Brazil's rural areas. The Consulate in Recife notes that the disease has affected horse populations in the Northeast, with significant losses reported in Pernambuco and Bahia. The Brazilian Ministry of Agriculture is working with state authorities to vaccinate horses and prevent further outbreaks.",
+        "parsed": {
+          "doc_1": "This document is about the outbreak of equine influenza in Brazil. The American Embassy in Brasilia reports that the Ministry of Agriculture has confirmed cases in several states, including Sao Paulo and Rio Grande do Sul. The USDA and the Brazilian Ministry of Agriculture are cooperating to contain the spread.",
+          "doc_2": "This document is about the economic impact of equine influenza on Brazil's horse breeding industry. Consul General in Sao Paulo reports that local breeders are concerned about the disease's effect on exports. The Brazilian Government has implemented quarantine measures to prevent further spread, with assistance from the US Agency for International Development (USAID).",
+          "doc_3": "This document is about the response to equine influenza in Brazil's rural areas. The Consulate in Recife notes that the disease has affected horse populations in the Northeast, with significant losses reported in Pernambuco and Bahia. The Brazilian Ministry of Agriculture is working with state authorities to vaccinate horses and prevent further outbreaks."
+        },
+        "input_tokens": 421,
+        "output_tokens": 199,
+        "duration_seconds": 7.907446539029479,
+        "created_at": "2026-09-04T22:24:35.455697"
+      },
+      "folder_label": {
+        "raw_response": "SNC_CODES: SCI 15, AGR 17, POL 15-1\nLABEL_TEXT: SCI 15 Scientific and Technical Affairs BRAZ 1963-1973\nAGR 17 Animal Husbandry BRAZ 1963-1973\nPOL 15-1 Political Affairs and Relations: Health BRAZ 1963-1973\nSUBJECT_TERMS: equine influenza, animal diseases, veterinary science, public health, agriculture, Brazil, U.S. Department of Agriculture, U.S. Public Health Service, World Health Organization, disease control, livestock, veterinary medicine",
+        "parsed": {
+          "snc_codes": [
+            "SCI 15",
+            "AGR 17",
+            "POL 15-1"
+          ],
+          "label_text": [
+            "SCI 15 Scientific and Technical Affairs BRAZ 1963-1973",
+            "AGR 17 Animal Husbandry BRAZ 1963-1973",
+            "POL 15-1 Political Affairs and Relations: Health BRAZ 1963-1973"
+          ],
+          "subject_terms": [
+            "equine influenza",
+            "animal diseases",
+            "veterinary science",
+            "public health",
+            "agriculture",
+            "Brazil",
+            "U.S. Department of Agriculture",
+            "U.S. Public Health Service",
+            "World Health Organization",
+            "disease control",
+            "livestock",
+            "veterinary medicine"
+          ]
+        },
+        "input_tokens": 447,
+        "output_tokens": 121,
+        "duration_seconds": 4.897320430027321,
+        "created_at": "2026-09-04T22:24:43.364851"
+      }
+    },
+    "T18Eval-00029": {
+      "topic_id": "T18Eval-00029",
+      "original_query": {
+        "TITLE": "Formation of labor unions"
+      },
+      "query_text": "Formation of labor unions",
+      "documents": {
+        "raw_response": "DOC_1: This document is about labor union formation in Brazil. The American Embassy in Brasilia reports that the Ministry of Labor has authorized the creation of new unions in key industries, including automotive and textiles. CGT and UGT are actively organizing workers in Sao Paulo and Rio de Janeiro.\n\nDOC_2: This document is about the growth of labor unions in Brazil's industrial sector. Consulate General in Sao Paulo notes that workers at Volkswagen and Ford plants have formed new unions, affiliated with the CGT. The Brazilian Labor Ministry has recognized these unions, paving the way for collective bargaining.\n\nDOC_3: This document is about government oversight of labor union formation. The US Consulate in Rio de Janeiro reports that the Medici government has established a new agency to monitor and regulate union activities, ensuring compliance with Institutional Act No. 5. The Ministry of Justice will work closely with the Labor Ministry to enforce these regulations.",
+        "parsed": {
+          "doc_1": "This document is about labor union formation in Brazil. The American Embassy in Brasilia reports that the Ministry of Labor has authorized the creation of new unions in key industries, including automotive and textiles. CGT and UGT are actively organizing workers in Sao Paulo and Rio de Janeiro.",
+          "doc_2": "This document is about the growth of labor unions in Brazil's industrial sector. Consulate General in Sao Paulo notes that workers at Volkswagen and Ford plants have formed new unions, affiliated with the CGT. The Brazilian Labor Ministry has recognized these unions, paving the way for collective bargaining.",
+          "doc_3": "This document is about government oversight of labor union formation. The US Consulate in Rio de Janeiro reports that the Medici government has established a new agency to monitor and regulate union activities, ensuring compliance with Institutional Act No. 5. The Ministry of Justice will work closely with the Labor Ministry to enforce these regulations."
+        },
+        "input_tokens": 420,
+        "output_tokens": 187,
+        "duration_seconds": 7.451521803042851,
+        "created_at": "2026-09-04T22:24:48.266991"
+      },
+      "folder_label": {
+        "raw_response": "SNC_CODES: LAB 6, POL 15-1, LAB 17\nLABEL_TEXT: LAB 6 Labor Unions BRAZ 1963-1973\nLAB 17 Labor Laws BRAZ 1963-1973\nPOL 15-1 Political Affairs: Labor BRAZ 1963-1973\nSUBJECT_TERMS: Labor Unions, Labor Laws, Workers Rights, Brazilian Labor Movement, Ministry of Labor, U.S. Labor Department, AFL-CIO, Brazilian Confederation of Workers, Labor Relations, Collective Bargaining, Strike Actions, Labor Legislation, Industrial Relations, Trade Unions, Brazilian Government",
+        "parsed": {
+          "snc_codes": [
+            "LAB 6",
+            "POL 15-1",
+            "LAB 17"
+          ],
+          "label_text": [
+            "LAB 6 Labor Unions BRAZ 1963-1973",
+            "LAB 17 Labor Laws BRAZ 1963-1973",
+            "POL 15-1 Political Affairs: Labor BRAZ 1963-1973"
+          ],
+          "subject_terms": [
+            "Labor Unions",
+            "Labor Laws",
+            "Workers Rights",
+            "Brazilian Labor Movement",
+            "Ministry of Labor",
+            "U.S. Labor Department",
+            "AFL-CIO",
+            "Brazilian Confederation of Workers",
+            "Labor Relations",
+            "Collective Bargaining",
+            "Strike Actions",
+            "Labor Legislation",
+            "Industrial Relations",
+            "Trade Unions",
+            "Brazilian Government"
+          ]
+        },
+        "input_tokens": 446,
+        "output_tokens": 130,
+        "duration_seconds": 5.227192144957371,
+        "created_at": "2026-09-04T22:24:55.720199"
+      }
+    },
+    "T18Eval-00030": {
+      "topic_id": "T18Eval-00030",
+      "original_query": {
+        "TITLE": "International soccer"
+      },
+      "query_text": "International soccer",
+      "documents": {
+        "raw_response": "DOC_1: This document is about international soccer in Brazil. The American Embassy in Brasilia reports that the Brazilian Ministry of Foreign Affairs has expressed interest in hosting an international soccer tournament. Ambassador John W. Tuthill notes that this event could enhance US-Brazil relations and promote cultural exchange.\n\nDOC_2: This document is about the US-Brazil soccer match. Consul General in Rio de Janeiro, Alfred Atherton, observes that the recent match between the US and Brazilian national teams has generated significant interest among Brazilians. The Consulate General believes this event can foster goodwill and cooperation between the two nations.\n\nDOC_3: This document is about soccer diplomacy in Brazil. The US Information Agency (USIA) in Sao Paulo reports that Brazilian soccer star, Pelé, has expressed admiration for American soccer players. The USIA suggests that Pelé's positive sentiments towards the US could be leveraged to promote mutual understanding and friendship between the US and Brazil.",
+        "parsed": {
+          "doc_1": "This document is about international soccer in Brazil. The American Embassy in Brasilia reports that the Brazilian Ministry of Foreign Affairs has expressed interest in hosting an international soccer tournament. Ambassador John W. Tuthill notes that this event could enhance US-Brazil relations and promote cultural exchange.",
+          "doc_2": "This document is about the US-Brazil soccer match. Consul General in Rio de Janeiro, Alfred Atherton, observes that the recent match between the US and Brazilian national teams has generated significant interest among Brazilians. The Consulate General believes this event can foster goodwill and cooperation between the two nations.",
+          "doc_3": "This document is about soccer diplomacy in Brazil. The US Information Agency (USIA) in Sao Paulo reports that Brazilian soccer star, Pelé, has expressed admiration for American soccer players. The USIA suggests that Pelé's positive sentiments towards the US could be leveraged to promote mutual understanding and friendship between the US and Brazil."
+        },
+        "input_tokens": 418,
+        "output_tokens": 194,
+        "duration_seconds": 7.735146778053604,
+        "created_at": "2026-09-04T22:25:00.951536"
+      },
+      "folder_label": {
+        "raw_response": "SNC_CODES: SOC 9, POL 15-1, EDU 7\nLABEL_TEXT: SOC 9 Social Affairs BRAZ 1963-1973\nPOL 15-1 Sports BRAZ 1963-1973\nEDU 7 Cultural Exchange Programs BRAZ 1963-1973\nSUBJECT_TERMS: Soccer, Football, Sports, Brazil, International Sports, Cultural Exchange, Social Affairs, Public Diplomacy, Embassy Brasilia, Consulate Rio, USIS, State Department, Brazilian Government, FIFA, World Cup",
+        "parsed": {
+          "snc_codes": [
+            "SOC 9",
+            "POL 15-1",
+            "EDU 7"
+          ],
+          "label_text": [
+            "SOC 9 Social Affairs BRAZ 1963-1973",
+            "POL 15-1 Sports BRAZ 1963-1973",
+            "EDU 7 Cultural Exchange Programs BRAZ 1963-1973"
+          ],
+          "subject_terms": [
+            "Soccer",
+            "Football",
+            "Sports",
+            "Brazil",
+            "International Sports",
+            "Cultural Exchange",
+            "Social Affairs",
+            "Public Diplomacy",
+            "Embassy Brasilia",
+            "Consulate Rio",
+            "USIS",
+            "State Department",
+            "Brazilian Government",
+            "FIFA",
+            "World Cup"
+          ]
+        },
+        "input_tokens": 444,
+        "output_tokens": 116,
+        "duration_seconds": 4.695748310070485,
+        "created_at": "2026-09-04T22:25:08.688444"
+      }
+    },
+    "T18Eval-00031": {
+      "topic_id": "T18Eval-00031",
+      "original_query": {
+        "TITLE": "Aircraft accidents in Brazil"
+      },
+      "query_text": "Aircraft accidents in Brazil",
+      "documents": {
+        "raw_response": "DOC_1: This document is about aircraft accidents in Brazil. The American Embassy in Brasilia reports a recent crash of a VARIG airliner near Rio de Janeiro, resulting in multiple fatalities. The Brazilian Ministry of Aeronautics is investigating the incident. Embassy officials are in contact with local authorities to provide assistance to affected American citizens.\n\nDOC_2: This document is about aircraft accidents in Brazil. The Consulate General in Sao Paulo informs the Department of a small plane crash in the state of Minas Gerais, killing two American businessmen on board. The Brazilian Air Force is conducting an investigation. The Consulate is working with the families of the victims to provide support and facilitate repatriation of remains.\n\nDOC_3: This document is about aircraft accidents in Brazil. The U.S. Embassy in Brasilia notes an increase in aircraft accidents involving small planes and helicopters in the Amazon region. The Brazilian Ministry of Transportation is reviewing safety regulations and procedures. The Embassy recommends that American citizens exercise caution when using local air transportation services in remote areas of Brazil.",
+        "parsed": {
+          "doc_1": "This document is about aircraft accidents in Brazil. The American Embassy in Brasilia reports a recent crash of a VARIG airliner near Rio de Janeiro, resulting in multiple fatalities. The Brazilian Ministry of Aeronautics is investigating the incident. Embassy officials are in contact with local authorities to provide assistance to affected American citizens.",
+          "doc_2": "This document is about aircraft accidents in Brazil. The Consulate General in Sao Paulo informs the Department of a small plane crash in the state of Minas Gerais, killing two American businessmen on board. The Brazilian Air Force is conducting an investigation. The Consulate is working with the families of the victims to provide support and facilitate repatriation of remains.",
+          "doc_3": "This document is about aircraft accidents in Brazil. The U.S. Embassy in Brasilia notes an increase in aircraft accidents involving small planes and helicopters in the Amazon region. The Brazilian Ministry of Transportation is reviewing safety regulations and procedures. The Embassy recommends that American citizens exercise caution when using local air transportation services in remote areas of Brazil."
+        },
+        "input_tokens": 421,
+        "output_tokens": 213,
+        "duration_seconds": 8.438085683970712,
+        "created_at": "2026-09-04T22:25:13.388745"
+      },
+      "folder_label": {
+        "raw_response": "SNC_CODES: AVI 16, TRA 19, POL 15-1\nLABEL_TEXT: AVI 16 Aviation Accidents BRAZ 1963-1973\nTRA 19 Transportation Accidents BRAZ 1963-1973\nPOL 15-1 Political Affairs: Aviation BRAZ 1963-1973\nSUBJECT_TERMS: Aviation Accidents, Aircraft Crashes, Brazil, Transportation, Air Travel, Air Safety, Federal Aviation Agency, U.S. Embassy Brazil, Brazilian Air Force, Civil Aviation, Air Disasters, Crash Investigations",
+        "parsed": {
+          "snc_codes": [
+            "AVI 16",
+            "TRA 19",
+            "POL 15-1"
+          ],
+          "label_text": [
+            "AVI 16 Aviation Accidents BRAZ 1963-1973",
+            "TRA 19 Transportation Accidents BRAZ 1963-1973",
+            "POL 15-1 Political Affairs: Aviation BRAZ 1963-1973"
+          ],
+          "subject_terms": [
+            "Aviation Accidents",
+            "Aircraft Crashes",
+            "Brazil",
+            "Transportation",
+            "Air Travel",
+            "Air Safety",
+            "Federal Aviation Agency",
+            "U.S. Embassy Brazil",
+            "Brazilian Air Force",
+            "Civil Aviation",
+            "Air Disasters",
+            "Crash Investigations"
+          ]
+        },
+        "input_tokens": 447,
+        "output_tokens": 119,
+        "duration_seconds": 4.804446290945634,
+        "created_at": "2026-09-04T22:25:21.828628"
+      }
+    },
+    "T18Eval-00032": {
+      "topic_id": "T18Eval-00032",
+      "original_query": {
+        "TITLE": "Solar eclipse"
+      },
+      "query_text": "Solar eclipse",
+      "documents": {
+        "raw_response": "DOC_1: This document is about the solar eclipse observed in Brazil on March 30, 1965. The American Embassy in Rio de Janeiro reported that the eclipse was visible in the northern regions of the country. The Brazilian Ministry of Education issued a statement encouraging schools to participate in the observation of this rare phenomenon.\n\nDOC_2: This document is about the USIS-sponsored lecture on the solar eclipse given by Dr. Carlos Lobo, a Brazilian astronomer, at the USIS Binational Center in São Paulo. The lecture was attended by over 200 people, including students and faculty from the University of São Paulo. The event was considered a success by the Consulate General in São Paulo.\n\nDOC_3: This document is about the AID-funded astronomy program at the National Observatory in Rio de Janeiro, which tracked the solar eclipse on March 30, 1965. The program, implemented in cooperation with NASA, provided training and equipment to Brazilian astronomers. The Embassy in Rio de Janeiro considered the program a valuable contribution to the development of scientific cooperation between the US and Brazil.",
+        "parsed": {
+          "doc_1": "This document is about the solar eclipse observed in Brazil on March 30, 1965. The American Embassy in Rio de Janeiro reported that the eclipse was visible in the northern regions of the country. The Brazilian Ministry of Education issued a statement encouraging schools to participate in the observation of this rare phenomenon.",
+          "doc_2": "This document is about the USIS-sponsored lecture on the solar eclipse given by Dr. Carlos Lobo, a Brazilian astronomer, at the USIS Binational Center in São Paulo. The lecture was attended by over 200 people, including students and faculty from the University of São Paulo. The event was considered a success by the Consulate General in São Paulo.",
+          "doc_3": "This document is about the AID-funded astronomy program at the National Observatory in Rio de Janeiro, which tracked the solar eclipse on March 30, 1965. The program, implemented in cooperation with NASA, provided training and equipment to Brazilian astronomers. The Embassy in Rio de Janeiro considered the program a valuable contribution to the development of scientific cooperation between the US and Brazil."
+        },
+        "input_tokens": 418,
+        "output_tokens": 220,
+        "duration_seconds": 8.783164695953019,
+        "created_at": "2026-09-04T22:25:26.640087"
+      },
+      "folder_label": {
+        "raw_response": "SNC_CODES: SCI 10, POL 15-1\nLABEL_TEXT: SCI 10 Scientific Events BRAZ 1963-1973\nSCI 10 Scientific Events BRAZ 1963-1973\nPOL 15-1 Public Information, Science BRAZ 1963-1973\nSUBJECT_TERMS: Science, Technology, Brazil, Astronomy, Solar Eclipse, NASA, Scientific Events, Public Information, USIS, Department of State, Brazil Posts, Scientific Research, Space Exploration",
+        "parsed": {
+          "snc_codes": [
+            "SCI 10",
+            "POL 15-1"
+          ],
+          "label_text": [
+            "SCI 10 Scientific Events BRAZ 1963-1973",
+            "SCI 10 Scientific Events BRAZ 1963-1973",
+            "POL 15-1 Public Information, Science BRAZ 1963-1973"
+          ],
+          "subject_terms": [
+            "Science",
+            "Technology",
+            "Brazil",
+            "Astronomy",
+            "Solar Eclipse",
+            "NASA",
+            "Scientific Events",
+            "Public Information",
+            "USIS",
+            "Department of State",
+            "Brazil Posts",
+            "Scientific Research",
+            "Space Exploration"
+          ]
+        },
+        "input_tokens": 444,
+        "output_tokens": 103,
+        "duration_seconds": 4.17948809498921,
+        "created_at": "2026-09-04T22:25:35.424995"
+      }
+    },
+    "T18Eval-00033": {
+      "topic_id": "T18Eval-00033",
+      "original_query": {
+        "TITLE": "Coffee rust eradication"
+      },
+      "query_text": "Coffee rust eradication",
+      "documents": {
+        "raw_response": "DOC_1: This document is about coffee rust eradication efforts in Brazil. The Ministry of Agriculture has launched a nationwide campaign to combat the disease, with technical assistance from the US Agency for International Development (USAID). The American Embassy in Brasilia and the Consulate General in São Paulo are monitoring the situation closely.\n\nDOC_2: This document is about the Brazilian government's request for US assistance in coffee rust eradication. The Minister of Agriculture, André Franco Montoro, has approached the US Ambassador to Brazil, Lincoln Gordon, to discuss possible aid. The US Department of Agriculture is being consulted on the matter.\n\nDOC_3: This document is about the progress of coffee rust eradication in the state of Minas Gerais. The Brazilian Institute for Coffee (IBC) reports a significant reduction in infected areas, thanks to the efforts of the Ministry of Agriculture and the support of the US Department of State's International Cooperation Administration (ICA).",
+        "parsed": {
+          "doc_1": "This document is about coffee rust eradication efforts in Brazil. The Ministry of Agriculture has launched a nationwide campaign to combat the disease, with technical assistance from the US Agency for International Development (USAID). The American Embassy in Brasilia and the Consulate General in São Paulo are monitoring the situation closely.",
+          "doc_2": "This document is about the Brazilian government's request for US assistance in coffee rust eradication. The Minister of Agriculture, André Franco Montoro, has approached the US Ambassador to Brazil, Lincoln Gordon, to discuss possible aid. The US Department of Agriculture is being consulted on the matter.",
+          "doc_3": "This document is about the progress of coffee rust eradication in the state of Minas Gerais. The Brazilian Institute for Coffee (IBC) reports a significant reduction in infected areas, thanks to the efforts of the Ministry of Agriculture and the support of the US Department of State's International Cooperation Administration (ICA)."
+        },
+        "input_tokens": 420,
+        "output_tokens": 190,
+        "duration_seconds": 7.539347324986011,
+        "created_at": "2026-09-04T22:25:39.609424"
+      },
+      "folder_label": {
+        "raw_response": "SNC_CODES: AGR 17, AGR 6, POL 15-1\nLABEL_TEXT: AGR 17 Agricultural Pests and Diseases BRAZ 1963-1973\nAGR 6 Agricultural Commodities BRAZ 1963-1973\nPOL 15-1 Political Affairs: Health and Sanitation BRAZ 1963-1973\nSUBJECT_TERMS: Agriculture, Coffee, Rust, Eradication, Brazil, USDA, Health, Sanitation, Pests, Diseases, Commodities, Trade, Embassy Brasilia, Consulate Rio de Janeiro, AID, USAID",
+        "parsed": {
+          "snc_codes": [
+            "AGR 17",
+            "AGR 6",
+            "POL 15-1"
+          ],
+          "label_text": [
+            "AGR 17 Agricultural Pests and Diseases BRAZ 1963-1973",
+            "AGR 6 Agricultural Commodities BRAZ 1963-1973",
+            "POL 15-1 Political Affairs: Health and Sanitation BRAZ 1963-1973"
+          ],
+          "subject_terms": [
+            "Agriculture",
+            "Coffee",
+            "Rust",
+            "Eradication",
+            "Brazil",
+            "USDA",
+            "Health",
+            "Sanitation",
+            "Pests",
+            "Diseases",
+            "Commodities",
+            "Trade",
+            "Embassy Brasilia",
+            "Consulate Rio de Janeiro",
+            "AID",
+            "USAID"
+          ]
+        },
+        "input_tokens": 446,
+        "output_tokens": 127,
+        "duration_seconds": 5.1144297670107335,
+        "created_at": "2026-09-04T22:25:47.150506"
+      }
+    },
+    "T18Eval-00034": {
+      "topic_id": "T18Eval-00034",
+      "original_query": {
+        "TITLE": "Dairy cattle industry"
+      },
+      "query_text": "Dairy cattle industry",
+      "documents": {
+        "raw_response": "DOC_1: This document is about the dairy cattle industry in Brazil. The Embassy in Brasilia reports that the Ministry of Agriculture has initiated a program to improve dairy farming techniques. Ambassador John W. Tuthill met with Minister of Agriculture, Paulo de Tarso Santos, to discuss US-Brazil cooperation in this area.\n\nDOC_2: This document is about the growth of the dairy cattle industry in São Paulo state. Consul General in São Paulo, James R. Burke, notes that local farmers are increasing their dairy herds due to government incentives. The São Paulo State Secretary of Agriculture has requested US technical assistance to support this expansion.\n\nDOC_3: This document is about US investment in Brazil's dairy cattle industry. The American Embassy in Rio de Janeiro reports that several US companies, including Swift and Company, are exploring opportunities to invest in Brazilian dairy farms. The Brazilian Ministry of Foreign Relations has expressed support for such investments, citing their potential to increase dairy production and exports.",
+        "parsed": {
+          "doc_1": "This document is about the dairy cattle industry in Brazil. The Embassy in Brasilia reports that the Ministry of Agriculture has initiated a program to improve dairy farming techniques. Ambassador John W. Tuthill met with Minister of Agriculture, Paulo de Tarso Santos, to discuss US-Brazil cooperation in this area.",
+          "doc_2": "This document is about the growth of the dairy cattle industry in São Paulo state. Consul General in São Paulo, James R. Burke, notes that local farmers are increasing their dairy herds due to government incentives. The São Paulo State Secretary of Agriculture has requested US technical assistance to support this expansion.",
+          "doc_3": "This document is about US investment in Brazil's dairy cattle industry. The American Embassy in Rio de Janeiro reports that several US companies, including Swift and Company, are exploring opportunities to invest in Brazilian dairy farms. The Brazilian Ministry of Foreign Relations has expressed support for such investments, citing their potential to increase dairy production and exports."
+        },
+        "input_tokens": 420,
+        "output_tokens": 198,
+        "duration_seconds": 7.865758397034369,
+        "created_at": "2026-09-04T22:25:52.269878"
+      },
+      "folder_label": {
+        "raw_response": "SNC_CODES: EAG 6, POL 15-1, EGT 1\nLABEL_TEXT: EAG 6 Economic Affairs - Agriculture BRAZ 1963-1973\nLABEL_TEXT: POL 15-1 Political Affairs & Relations - Agriculture BRAZ 1963-1973\nLABEL_TEXT: EGT 1 Economic Affairs - Commodities BRAZ 1963-1973\nSUBJECT_TERMS: dairy cattle, livestock, agriculture, Brazil, economic development, trade policies, agricultural commodities, farming, ranching, cattle industry, livestock production, animal husbandry, agricultural trade, Brazilian economy",
+        "parsed": {
+          "snc_codes": [
+            "EAG 6",
+            "POL 15-1",
+            "EGT 1"
+          ],
+          "label_text": [
+            "EAG 6 Economic Affairs - Agriculture BRAZ 1963-1973",
+            "LABEL_TEXT: POL 15-1 Political Affairs & Relations - Agriculture BRAZ 1963-1973",
+            "LABEL_TEXT: EGT 1 Economic Affairs - Commodities BRAZ 1963-1973"
+          ],
+          "subject_terms": [
+            "dairy cattle",
+            "livestock",
+            "agriculture",
+            "Brazil",
+            "economic development",
+            "trade policies",
+            "agricultural commodities",
+            "farming",
+            "ranching",
+            "cattle industry",
+            "livestock production",
+            "animal husbandry",
+            "agricultural trade",
+            "Brazilian economy"
+          ]
+        },
+        "input_tokens": 446,
+        "output_tokens": 128,
+        "duration_seconds": 5.159255512058735,
+        "created_at": "2026-09-04T22:26:00.137388"
+      }
+    },
+    "T18Eval-00035": {
+      "topic_id": "T18Eval-00035",
+      "original_query": {
+        "TITLE": "International Cocoa Agreement"
+      },
+      "query_text": "International Cocoa Agreement",
+      "documents": {
+        "raw_response": "DOC_1: This document is about the International Cocoa Agreement. The Brazilian Ministry of Agriculture has informed Embassy Brasilia that Brazil will participate in the upcoming negotiations in Geneva. The Ministry's representative, Dr. Luiz Vieira, will lead the Brazilian delegation. The US Department of State has been briefed on the matter by the Brazilian Embassy in Washington.\n\nDOC_2: This document is about the International Cocoa Agreement. Consulate Rio de Janeiro reports that the Brazilian cocoa industry is concerned about the potential impact of the agreement on domestic production. The Consulate has met with representatives of the Brazilian Cocoa Institute to discuss their concerns. The Institute has requested that the US Agency for International Development (AID) provide technical assistance to the Brazilian cocoa sector.\n\nDOC_3: This document is about the International Cocoa Agreement. The US Ambassador to Brazil, John W. Tuthill, has discussed the agreement with Brazilian Minister of Foreign Affairs, Vasco Leitao da Cunha. The Minister expressed Brazil's support for the agreement and its desire to cooperate with the US on international commodity agreements. The Embassy will continue to monitor developments and report to the Department of State.",
+        "parsed": {
+          "doc_1": "This document is about the International Cocoa Agreement. The Brazilian Ministry of Agriculture has informed Embassy Brasilia that Brazil will participate in the upcoming negotiations in Geneva. The Ministry's representative, Dr. Luiz Vieira, will lead the Brazilian delegation. The US Department of State has been briefed on the matter by the Brazilian Embassy in Washington.",
+          "doc_2": "This document is about the International Cocoa Agreement. Consulate Rio de Janeiro reports that the Brazilian cocoa industry is concerned about the potential impact of the agreement on domestic production. The Consulate has met with representatives of the Brazilian Cocoa Institute to discuss their concerns. The Institute has requested that the US Agency for International Development (AID) provide technical assistance to the Brazilian cocoa sector.",
+          "doc_3": "This document is about the International Cocoa Agreement. The US Ambassador to Brazil, John W. Tuthill, has discussed the agreement with Brazilian Minister of Foreign Affairs, Vasco Leitao da Cunha. The Minister expressed Brazil's support for the agreement and its desire to cooperate with the US on international commodity agreements. The Embassy will continue to monitor developments and report to the Department of State."
+        },
+        "input_tokens": 419,
+        "output_tokens": 233,
+        "duration_seconds": 9.246554795070551,
+        "created_at": "2026-09-04T22:26:05.301251"
+      },
+      "folder_label": {
+        "raw_response": "SNC_CODES: EFT 9, TRV 10, ETR 1\nLABEL_TEXT: EFT 9 Economic Affairs, Trade Agreements BRAZ 1963-1973\nLABEL_TEXT: TRV 10 Trade, International Commodity Agreements BRAZ 1963-1973\nLABEL_TEXT: ETR 1 Economic Relations, International Economic Organizations BRAZ 1963-1973\nSUBJECT_TERMS: International Cocoa Agreement, Economic Affairs, Trade Agreements, Brazil, United States, Commodity Agreements, International Trade, Economic Relations, Foreign Trade, Cocoa, Agriculture, Trade Negotiations, International Economic Organizations, Export Controls, Import Regulations, Tariffs, Customs",
+        "parsed": {
+          "snc_codes": [
+            "EFT 9",
+            "TRV 10",
+            "ETR 1"
+          ],
+          "label_text": [
+            "EFT 9 Economic Affairs, Trade Agreements BRAZ 1963-1973",
+            "LABEL_TEXT: TRV 10 Trade, International Commodity Agreements BRAZ 1963-1973",
+            "LABEL_TEXT: ETR 1 Economic Relations, International Economic Organizations BRAZ 1963-1973"
+          ],
+          "subject_terms": [
+            "International Cocoa Agreement",
+            "Economic Affairs",
+            "Trade Agreements",
+            "Brazil",
+            "United States",
+            "Commodity Agreements",
+            "International Trade",
+            "Economic Relations",
+            "Foreign Trade",
+            "Cocoa",
+            "Agriculture",
+            "Trade Negotiations",
+            "International Economic Organizations",
+            "Export Controls",
+            "Import Regulations",
+            "Tariffs",
+            "Customs"
+          ]
+        },
+        "input_tokens": 445,
+        "output_tokens": 144,
+        "duration_seconds": 5.809286086005159,
+        "created_at": "2026-09-04T22:26:14.549603"
+      }
+    },
+    "T18Eval-00036": {
+      "topic_id": "T18Eval-00036",
+      "original_query": {
+        "TITLE": "Shrimp fishing policies"
+      },
+      "query_text": "Shrimp fishing policies",
+      "documents": {
+        "raw_response": "DOC_1: This document is about shrimp fishing policies in Brazil. The Brazilian Ministry of Agriculture has announced new regulations governing shrimp fishing off the coast of Rio Grande do Norte. The American Embassy in Brasilia has been informed by the Ministry that these regulations are intended to conserve shrimp stocks and ensure sustainable fishing practices.\n\nDOC_2: This document is about shrimp fishing policies affecting US-Brazil relations. The US Consul in Recife reports that local fishermen are concerned about the impact of new Brazilian regulations on their livelihoods. The Consul notes that the regulations may affect US-Brazil trade in shrimp products, and recommends that the Department of State monitor the situation.\n\nDOC_3: This document is about Brazilian shrimp fishing policies and their implementation. The Ministry of Agriculture, in cooperation with the Instituto Brasileiro de Geografia e Estatística (IBGE), is conducting a survey of shrimp fishing activities in the states of Bahia and Ceará. The survey aims to gather data on shrimp stocks and fishing practices, and will inform future policy decisions on shrimp fishing in Brazil.",
+        "parsed": {
+          "doc_1": "This document is about shrimp fishing policies in Brazil. The Brazilian Ministry of Agriculture has announced new regulations governing shrimp fishing off the coast of Rio Grande do Norte. The American Embassy in Brasilia has been informed by the Ministry that these regulations are intended to conserve shrimp stocks and ensure sustainable fishing practices.",
+          "doc_2": "This document is about shrimp fishing policies affecting US-Brazil relations. The US Consul in Recife reports that local fishermen are concerned about the impact of new Brazilian regulations on their livelihoods. The Consul notes that the regulations may affect US-Brazil trade in shrimp products, and recommends that the Department of State monitor the situation.",
+          "doc_3": "This document is about Brazilian shrimp fishing policies and their implementation. The Ministry of Agriculture, in cooperation with the Instituto Brasileiro de Geografia e Estatística (IBGE), is conducting a survey of shrimp fishing activities in the states of Bahia and Ceará. The survey aims to gather data on shrimp stocks and fishing practices, and will inform future policy decisions on shrimp fishing in Brazil."
+        },
+        "input_tokens": 420,
+        "output_tokens": 217,
+        "duration_seconds": 8.641515977913514,
+        "created_at": "2026-09-04T22:26:20.363623"
+      },
+      "folder_label": {
+        "raw_response": "SNC_CODES: ECON 17, POL 15-1, MAR 12\nLABEL_TEXT: ECON 17 Economic Conditions BRAZ 1963-1973\nLABEL_TEXT: POL 15-1 Fisheries Policy BRAZ 1963-1973\nLABEL_TEXT: MAR 12 Marine Fisheries BRAZ 1963-1973\nSUBJECT_TERMS: Shrimp Fishing, Fisheries Policy, Marine Resources, Brazil, ECON, POL, MAR, Department of State, U.S. Embassy Brazil, Fishing Industry, Coastal Zones, Marine Conservation, Brazilian Government, Fisheries Management",
+        "parsed": {
+          "snc_codes": [
+            "ECON 17",
+            "POL 15-1",
+            "MAR 12"
+          ],
+          "label_text": [
+            "ECON 17 Economic Conditions BRAZ 1963-1973",
+            "LABEL_TEXT: POL 15-1 Fisheries Policy BRAZ 1963-1973",
+            "LABEL_TEXT: MAR 12 Marine Fisheries BRAZ 1963-1973"
+          ],
+          "subject_terms": [
+            "Shrimp Fishing",
+            "Fisheries Policy",
+            "Marine Resources",
+            "Brazil",
+            "ECON",
+            "POL",
+            "MAR",
+            "Department of State",
+            "U.S. Embassy Brazil",
+            "Fishing Industry",
+            "Coastal Zones",
+            "Marine Conservation",
+            "Brazilian Government",
+            "Fisheries Management"
+          ]
+        },
+        "input_tokens": 446,
+        "output_tokens": 122,
+        "duration_seconds": 4.941071139997803,
+        "created_at": "2026-09-04T22:26:29.006889"
+      }
+    },
+    "T18Eval-00037": {
+      "topic_id": "T18Eval-00037",
+      "original_query": {
+        "TITLE": "Catholic birth control"
+      },
+      "query_text": "Catholic birth control",
+      "documents": {
+        "raw_response": "DOC_1: This document is about Catholic birth control in Brazil. The Embassy in Brasilia reports that the Brazilian Catholic Church has taken a strong stance against birth control, opposing government family planning initiatives. Archbishop of Sao Paulo, Dom Agnello Rossi, has publicly denounced artificial birth control methods.\n\nDOC_2: This document is about Catholic birth control policies. The Consulate in Rio de Janeiro notes that the Ministry of Health is promoting family planning programs, despite opposition from the Catholic Church. USAID is providing funding for these programs, which include distribution of birth control pills and condoms.\n\nDOC_3: This document is about Catholic birth control views. The American Consul in Sao Paulo met with Bishop Jose Goncalves da Costa, who expressed concerns about the Brazilian government's birth control policies. The Bishop stated that the Church will continue to oppose any efforts to promote artificial birth control methods, citing moral and ethical objections.",
+        "parsed": {
+          "doc_1": "This document is about Catholic birth control in Brazil. The Embassy in Brasilia reports that the Brazilian Catholic Church has taken a strong stance against birth control, opposing government family planning initiatives. Archbishop of Sao Paulo, Dom Agnello Rossi, has publicly denounced artificial birth control methods.",
+          "doc_2": "This document is about Catholic birth control policies. The Consulate in Rio de Janeiro notes that the Ministry of Health is promoting family planning programs, despite opposition from the Catholic Church. USAID is providing funding for these programs, which include distribution of birth control pills and condoms.",
+          "doc_3": "This document is about Catholic birth control views. The American Consul in Sao Paulo met with Bishop Jose Goncalves da Costa, who expressed concerns about the Brazilian government's birth control policies. The Bishop stated that the Church will continue to oppose any efforts to promote artificial birth control methods, citing moral and ethical objections."
+        },
+        "input_tokens": 420,
+        "output_tokens": 185,
+        "duration_seconds": 7.372330980957486,
+        "created_at": "2026-09-04T22:26:33.952892"
+      },
+      "folder_label": {
+        "raw_response": "SNC_CODES: SOC 14, POL 15-1, SOC 15\nLABEL_TEXT: SOC 14 Social Conditions BRAZ 1963-1973\nPOL 15-1 Religious Affairs BRAZ 1963-1973\nSOC 15 Public Health BRAZ 1963-1973\nSUBJECT_TERMS: Catholic Church, birth control, population growth, family planning, social welfare, public health, religious affairs, Brazil, Brazilian government, US Embassy Brasilia, Department of State, Social Conditions, Religious Organizations",
+        "parsed": {
+          "snc_codes": [
+            "SOC 14",
+            "POL 15-1",
+            "SOC 15"
+          ],
+          "label_text": [
+            "SOC 14 Social Conditions BRAZ 1963-1973",
+            "POL 15-1 Religious Affairs BRAZ 1963-1973",
+            "SOC 15 Public Health BRAZ 1963-1973"
+          ],
+          "subject_terms": [
+            "Catholic Church",
+            "birth control",
+            "population growth",
+            "family planning",
+            "social welfare",
+            "public health",
+            "religious affairs",
+            "Brazil",
+            "Brazilian government",
+            "US Embassy Brasilia",
+            "Department of State",
+            "Social Conditions",
+            "Religious Organizations"
+          ]
+        },
+        "input_tokens": 446,
+        "output_tokens": 111,
+        "duration_seconds": 4.496848038979806,
+        "created_at": "2026-09-04T22:26:41.327085"
+      }
+    },
+    "T18Eval-00038": {
+      "topic_id": "T18Eval-00038",
+      "original_query": {
+        "TITLE": "Herbicide circulation"
+      },
+      "query_text": "Herbicide circulation",
+      "documents": {
+        "raw_response": "DOC_1: This document is about herbicide circulation in Brazil. The Embassy in Brasilia reports that the Ministry of Agriculture has begun distributing herbicides to farmers in the states of São Paulo and Minas Gerais. The US Agency for International Development (USAID) is providing technical assistance through its Agricultural Development Program.\n\nDOC_2: This document is about herbicide circulation in Brazil. Consulate Rio de Janeiro informs that the Brazilian Institute of Agricultural Research (IBRA) is conducting trials on the use of herbicides in coffee plantations. The trials are being funded by the US Department of Agriculture and the Brazilian Ministry of Agriculture.\n\nDOC_3: This document is about herbicide circulation in Brazil. The American Consul in São Paulo notes that the state government has launched a program to control weeds in soybean fields using herbicides. The program is supported by the US Agricultural Attaché in Brasilia and the Brazilian National Agricultural Confederation (CNA).",
+        "parsed": {
+          "doc_1": "This document is about herbicide circulation in Brazil. The Embassy in Brasilia reports that the Ministry of Agriculture has begun distributing herbicides to farmers in the states of São Paulo and Minas Gerais. The US Agency for International Development (USAID) is providing technical assistance through its Agricultural Development Program.",
+          "doc_2": "This document is about herbicide circulation in Brazil. Consulate Rio de Janeiro informs that the Brazilian Institute of Agricultural Research (IBRA) is conducting trials on the use of herbicides in coffee plantations. The trials are being funded by the US Department of Agriculture and the Brazilian Ministry of Agriculture.",
+          "doc_3": "This document is about herbicide circulation in Brazil. The American Consul in São Paulo notes that the state government has launched a program to control weeds in soybean fields using herbicides. The program is supported by the US Agricultural Attaché in Brasilia and the Brazilian National Agricultural Confederation (CNA)."
+        },
+        "input_tokens": 420,
+        "output_tokens": 193,
+        "duration_seconds": 7.680557876010425,
+        "created_at": "2026-09-04T22:26:45.829142"
+      },
+      "folder_label": {
+        "raw_response": "SNC_CODES: SCI 15, POL 15-1, ECO 14\nLABEL_TEXT: SCI 15 Scientific and Technical Matters BRAZ 1963-1973\nPOL 15-1 Environmental Affairs BRAZ 1963-1973\nECO 14 Agriculture BRAZ 1963-1973\nSUBJECT_TERMS: Herbicides, Pesticides, Environmental Health, Agriculture, Science, Technology, Brazil, United States, Department of State, Agency for International Development, Environmental Protection, Pollution, Public Health",
+        "parsed": {
+          "snc_codes": [
+            "SCI 15",
+            "POL 15-1",
+            "ECO 14"
+          ],
+          "label_text": [
+            "SCI 15 Scientific and Technical Matters BRAZ 1963-1973",
+            "POL 15-1 Environmental Affairs BRAZ 1963-1973",
+            "ECO 14 Agriculture BRAZ 1963-1973"
+          ],
+          "subject_terms": [
+            "Herbicides",
+            "Pesticides",
+            "Environmental Health",
+            "Agriculture",
+            "Science",
+            "Technology",
+            "Brazil",
+            "United States",
+            "Department of State",
+            "Agency for International Development",
+            "Environmental Protection",
+            "Pollution",
+            "Public Health"
+          ]
+        },
+        "input_tokens": 446,
+        "output_tokens": 111,
+        "duration_seconds": 4.495787017978728,
+        "created_at": "2026-09-04T22:26:53.511437"
+      }
+    },
+    "T18Eval-00039": {
+      "topic_id": "T18Eval-00039",
+      "original_query": {
+        "TITLE": "Anti-cancer efforts"
+      },
+      "query_text": "Anti-cancer efforts",
+      "documents": {
+        "raw_response": "DOC_1: This document is about anti-cancer efforts in Brazil. The Embassy in Brasilia reports that the Brazilian Ministry of Health has launched a national cancer control program. Ambassador John W. Tuthill met with Minister of Health Leonel Miranda to discuss US assistance, including a potential partnership with the National Cancer Institute.\n\nDOC_2: This document is about cooperation between the US and Brazil on cancer research. The Consulate in Rio de Janeiro notes that the Brazilian Cancer Institute has requested technical assistance from the US Public Health Service. The Institute's director, Dr. Octávio Lombardi, will visit the US to discuss potential collaborations with the National Institutes of Health.\n\nDOC_3: This document is about US support for anti-cancer initiatives in Brazil. The USAID mission in Brazil has allocated funds for a cancer treatment project in São Paulo, in partnership with the state government and the American Cancer Society. The project will provide training and equipment for local healthcare professionals, according to USAID Director James M. Wilson.",
+        "parsed": {
+          "doc_1": "This document is about anti-cancer efforts in Brazil. The Embassy in Brasilia reports that the Brazilian Ministry of Health has launched a national cancer control program. Ambassador John W. Tuthill met with Minister of Health Leonel Miranda to discuss US assistance, including a potential partnership with the National Cancer Institute.",
+          "doc_2": "This document is about cooperation between the US and Brazil on cancer research. The Consulate in Rio de Janeiro notes that the Brazilian Cancer Institute has requested technical assistance from the US Public Health Service. The Institute's director, Dr. Octávio Lombardi, will visit the US to discuss potential collaborations with the National Institutes of Health.",
+          "doc_3": "This document is about US support for anti-cancer initiatives in Brazil. The USAID mission in Brazil has allocated funds for a cancer treatment project in São Paulo, in partnership with the state government and the American Cancer Society. The project will provide training and equipment for local healthcare professionals, according to USAID Director James M. Wilson."
+        },
+        "input_tokens": 420,
+        "output_tokens": 206,
+        "duration_seconds": 8.157644969061948,
+        "created_at": "2026-09-04T22:26:58.012608"
+      },
+      "folder_label": {
+        "raw_response": "SNC_CODES: SCI 15, SCI 17, POL 15-1\nLABEL_TEXT: SCI 15 Scientific Research BRAZ 1963-1973\nSCI 17 Medical Research BRAZ 1963-1973\nPOL 15-1 Health Policy BRAZ 1963-1973\nSUBJECT_TERMS: Science, Health, Medicine, Cancer, Research, Brazil, U.S. Department of State, National Institutes of Health, World Health Organization, Medical Science, Public Health, Disease Control, Scientific Cooperation, Health Services, Medical Research",
+        "parsed": {
+          "snc_codes": [
+            "SCI 15",
+            "SCI 17",
+            "POL 15-1"
+          ],
+          "label_text": [
+            "SCI 15 Scientific Research BRAZ 1963-1973",
+            "SCI 17 Medical Research BRAZ 1963-1973",
+            "POL 15-1 Health Policy BRAZ 1963-1973"
+          ],
+          "subject_terms": [
+            "Science",
+            "Health",
+            "Medicine",
+            "Cancer",
+            "Research",
+            "Brazil",
+            "U.S. Department of State",
+            "National Institutes of Health",
+            "World Health Organization",
+            "Medical Science",
+            "Public Health",
+            "Disease Control",
+            "Scientific Cooperation",
+            "Health Services",
+            "Medical Research"
+          ]
+        },
+        "input_tokens": 446,
+        "output_tokens": 116,
+        "duration_seconds": 4.692138139973395,
+        "created_at": "2026-09-04T22:27:06.171999"
+      }
+    },
+    "T18Eval-00040": {
+      "topic_id": "T18Eval-00040",
+      "original_query": {
+        "TITLE": "Gemini 10 spaceflight"
+      },
+      "query_text": "Gemini 10 spaceflight",
+      "documents": {
+        "raw_response": "DOC_1: This document is about the Gemini 10 spaceflight. The American Embassy in Brasilia reports that the Brazilian Ministry of Aeronautics has expressed interest in the mission. Ambassador John W. Tuthill has been briefed by NASA officials on the spacecraft's objectives, including rendezvous with two Agena target vehicles.\n\nDOC_2: This document is about the Gemini 10 spaceflight. Consul General in Rio de Janeiro, Alfred Atherton, notes that local press coverage of the mission has been extensive, with major dailies such as O Globo and Jornal do Brasil providing detailed accounts of the astronauts' activities. The USIS has distributed press releases and photographs to Brazilian media outlets.\n\nDOC_3: This document is about the Gemini 10 spaceflight. The Department of State instructs the American Embassy in Brasilia to congratulate the Brazilian government on its cooperation with the US on the tracking of the Gemini 10 spacecraft. The Embassy is to inform the Ministry of Foreign Affairs that NASA appreciates the use of Brazilian tracking facilities in support of the mission.",
+        "parsed": {
+          "doc_1": "This document is about the Gemini 10 spaceflight. The American Embassy in Brasilia reports that the Brazilian Ministry of Aeronautics has expressed interest in the mission. Ambassador John W. Tuthill has been briefed by NASA officials on the spacecraft's objectives, including rendezvous with two Agena target vehicles.",
+          "doc_2": "This document is about the Gemini 10 spaceflight. Consul General in Rio de Janeiro, Alfred Atherton, notes that local press coverage of the mission has been extensive, with major dailies such as O Globo and Jornal do Brasil providing detailed accounts of the astronauts' activities. The USIS has distributed press releases and photographs to Brazilian media outlets.",
+          "doc_3": "This document is about the Gemini 10 spaceflight. The Department of State instructs the American Embassy in Brasilia to congratulate the Brazilian government on its cooperation with the US on the tracking of the Gemini 10 spacecraft. The Embassy is to inform the Ministry of Foreign Affairs that NASA appreciates the use of Brazilian tracking facilities in support of the mission."
+        },
+        "input_tokens": 422,
+        "output_tokens": 221,
+        "duration_seconds": 8.770657840999775,
+        "created_at": "2026-09-04T22:27:10.869098"
+      },
+      "folder_label": {
+        "raw_response": "SNC_CODES: SCI 10, TEC 10-3, POL 15-1\nLABEL_TEXT: SCI 10 Scientific Affairs BRAZ 1966, TEC 10-3 Space Technology BRAZ 1966, POL 15-1 International Scientific Cooperation BRAZ 1966\nSUBJECT_TERMS: Space Exploration, Gemini Program, NASA, Scientific Cooperation, Brazil, United States, Space Technology, Satellite Launches, Astronautics, International Cooperation, Science Policy, Technology Transfer, BRAZ, USNASA, Spaceflight Operations",
+        "parsed": {
+          "snc_codes": [
+            "SCI 10",
+            "TEC 10-3",
+            "POL 15-1"
+          ],
+          "label_text": [
+            "SCI 10 Scientific Affairs BRAZ 1966, TEC 10-3 Space Technology BRAZ 1966, POL 15-1 International Scientific Cooperation BRAZ 1966"
+          ],
+          "subject_terms": [
+            "Space Exploration",
+            "Gemini Program",
+            "NASA",
+            "Scientific Cooperation",
+            "Brazil",
+            "United States",
+            "Space Technology",
+            "Satellite Launches",
+            "Astronautics",
+            "International Cooperation",
+            "Science Policy",
+            "Technology Transfer",
+            "BRAZ",
+            "USNASA",
+            "Spaceflight Operations"
+          ]
+        },
+        "input_tokens": 448,
+        "output_tokens": 114,
+        "duration_seconds": 4.623404595069587,
+        "created_at": "2026-09-04T22:27:19.641499"
+      }
+    },
+    "T18Eval-00041": {
+      "topic_id": "T18Eval-00041",
+      "original_query": {
+        "TITLE": "Rare earth chloride sales"
+      },
+      "query_text": "Rare earth chloride sales",
+      "documents": {
+        "raw_response": "DOC_1: This document is about rare earth chloride sales to Brazil. The Embassy in Brasilia reports that the Ministry of Mines and Energy has expressed interest in purchasing rare earth chlorides from US suppliers. Ambassador John W. Tuthill recommends that the Department of State facilitate contacts between Brazilian officials and American companies.\n\nDOC_2: This document is about rare earth chloride sales negotiations. Consul General in Rio de Janeiro, Alfred Atherton, met with representatives of the Brazilian mining company, Companhia Vale do Rio Doce, to discuss potential purchases of rare earth chlorides from the US. The company plans to use the chlorides in their production of specialized ceramics.\n\nDOC_3: This document is about rare earth chloride sales agreements. The US Commercial Attaché in São Paulo, James M. Riddle, reports that an agreement has been reached between the Brazilian government and the American firm, W.R. Grace & Co., for the sale of rare earth chlorides. The agreement is valued at $1.2 million and is expected to be finalized by the end of the quarter.",
+        "parsed": {
+          "doc_1": "This document is about rare earth chloride sales to Brazil. The Embassy in Brasilia reports that the Ministry of Mines and Energy has expressed interest in purchasing rare earth chlorides from US suppliers. Ambassador John W. Tuthill recommends that the Department of State facilitate contacts between Brazilian officials and American companies.",
+          "doc_2": "This document is about rare earth chloride sales negotiations. Consul General in Rio de Janeiro, Alfred Atherton, met with representatives of the Brazilian mining company, Companhia Vale do Rio Doce, to discuss potential purchases of rare earth chlorides from the US. The company plans to use the chlorides in their production of specialized ceramics.",
+          "doc_3": "This document is about rare earth chloride sales agreements. The US Commercial Attaché in São Paulo, James M. Riddle, reports that an agreement has been reached between the Brazilian government and the American firm, W.R. Grace & Co., for the sale of rare earth chlorides. The agreement is valued at $1.2 million and is expected to be finalized by the end of the quarter."
+        },
+        "input_tokens": 420,
+        "output_tokens": 221,
+        "duration_seconds": 8.758605384966359,
+        "created_at": "2026-09-04T22:27:24.270285"
+      },
+      "folder_label": {
+        "raw_response": "SNC_CODES: ECON 10, ECON 15-2, SCI 10\nLABEL_TEXT: ECON 10 Economic Conditions BRAZ 1963-1973\nECON 15-2 Trade Agreements BRAZ 1963-1973\nSCI 10 Science and Technology BRAZ 1963-1973\nSUBJECT_TERMS: Economic Affairs, Trade Agreements, Science and Technology, Rare Earth Minerals, Chlorides, Sales, Brazil, U.S. Department of State, U.S. Embassy Brazil, Ministry of Mines and Energy, Export Controls, Import Regulations",
+        "parsed": {
+          "snc_codes": [
+            "ECON 10",
+            "ECON 15-2",
+            "SCI 10"
+          ],
+          "label_text": [
+            "ECON 10 Economic Conditions BRAZ 1963-1973",
+            "ECON 15-2 Trade Agreements BRAZ 1963-1973",
+            "SCI 10 Science and Technology BRAZ 1963-1973"
+          ],
+          "subject_terms": [
+            "Economic Affairs",
+            "Trade Agreements",
+            "Science and Technology",
+            "Rare Earth Minerals",
+            "Chlorides",
+            "Sales",
+            "Brazil",
+            "U.S. Department of State",
+            "U.S. Embassy Brazil",
+            "Ministry of Mines and Energy",
+            "Export Controls",
+            "Import Regulations"
+          ]
+        },
+        "input_tokens": 446,
+        "output_tokens": 123,
+        "duration_seconds": 4.955617713043466,
+        "created_at": "2026-09-04T22:27:33.030649"
+      }
+    },
+    "T18Eval-00042": {
+      "topic_id": "T18Eval-00042",
+      "original_query": {
+        "TITLE": "Import of color television"
+      },
+      "query_text": "Import of color television",
+      "documents": {
+        "raw_response": "DOC_1: This document is about the import of color television sets into Brazil. The Brazilian Ministry of Foreign Affairs has informed the American Embassy in Brasilia that imports of color TV sets will be restricted due to balance of payments concerns. The US Commercial Attaché in Rio de Janeiro will monitor the situation and report on any developments.\n\nDOC_2: This document is about the growing demand for color television in Brazil. The US Consul in São Paulo reports that several Brazilian companies, including Gradiente and Philco, are planning to import color TV sets from the US. The Consul notes that the Brazilian government's restrictions on imports may hinder the growth of this market.\n\nDOC_3: This document is about the Brazilian government's decision to allow the import of color television sets. The Ministry of Industry and Commerce has issued a decree permitting the import of a limited number of color TV sets for commercial exhibition purposes. The American Embassy in Brasilia believes this decision may signal a relaxation of Brazil's restrictive import policies.",
+        "parsed": {
+          "doc_1": "This document is about the import of color television sets into Brazil. The Brazilian Ministry of Foreign Affairs has informed the American Embassy in Brasilia that imports of color TV sets will be restricted due to balance of payments concerns. The US Commercial Attaché in Rio de Janeiro will monitor the situation and report on any developments.",
+          "doc_2": "This document is about the growing demand for color television in Brazil. The US Consul in São Paulo reports that several Brazilian companies, including Gradiente and Philco, are planning to import color TV sets from the US. The Consul notes that the Brazilian government's restrictions on imports may hinder the growth of this market.",
+          "doc_3": "This document is about the Brazilian government's decision to allow the import of color television sets. The Ministry of Industry and Commerce has issued a decree permitting the import of a limited number of color TV sets for commercial exhibition purposes. The American Embassy in Brasilia believes this decision may signal a relaxation of Brazil's restrictive import policies."
+        },
+        "input_tokens": 420,
+        "output_tokens": 203,
+        "duration_seconds": 8.037897376925685,
+        "created_at": "2026-09-04T22:27:37.991604"
+      },
+      "folder_label": {
+        "raw_response": "SNC_CODES: ECO 10, ECO 15-2, TN 15\nLABEL_TEXT: ECO 10 Economic Conditions BRAZ 1963-1973\nECO 15-2 Balance of Payments BRAZ 1963-1973\nTN 15 Science and Technology BRAZ 1963-1973\nSUBJECT_TERMS: Economic Affairs, Trade Agreements, Balance of Payments, Television, Color TV, Import Regulations, Brazil, U.S. Embassy, Department of Commerce, National Science Foundation, Science and Technology, Communications, Broadcasting, Electronics",
+        "parsed": {
+          "snc_codes": [
+            "ECO 10",
+            "ECO 15-2",
+            "TN 15"
+          ],
+          "label_text": [
+            "ECO 10 Economic Conditions BRAZ 1963-1973",
+            "ECO 15-2 Balance of Payments BRAZ 1963-1973",
+            "TN 15 Science and Technology BRAZ 1963-1973"
+          ],
+          "subject_terms": [
+            "Economic Affairs",
+            "Trade Agreements",
+            "Balance of Payments",
+            "Television",
+            "Color TV",
+            "Import Regulations",
+            "Brazil",
+            "U.S. Embassy",
+            "Department of Commerce",
+            "National Science Foundation",
+            "Science and Technology",
+            "Communications",
+            "Broadcasting",
+            "Electronics"
+          ]
+        },
+        "input_tokens": 446,
+        "output_tokens": 120,
+        "duration_seconds": 4.832717287004925,
+        "created_at": "2026-09-04T22:27:46.031255"
+      }
+    },
+    "T18Eval-00043": {
+      "topic_id": "T18Eval-00043",
+      "original_query": {
+        "TITLE": "Vampire bat control"
+      },
+      "query_text": "Vampire bat control",
+      "documents": {
+        "raw_response": "DOC_1: This document is about vampire bat control efforts in Brazil. The Ministry of Health, in cooperation with the US Agency for International Development (USAID), has initiated a program to combat the spread of rabies transmitted by vampire bats. The program will focus on the states of São Paulo and Rio Grande do Sul.\n\nDOC_2: This document is about a meeting between American Consul General in São Paulo, John P. Shaw, and Brazilian Minister of Agriculture, José Sarney. They discussed the use of insecticides to control vampire bat populations in rural areas. The Minister requested US technical assistance to implement the control measures.\n\nDOC_3: This document is about a report from the US Embassy in Brasília on vampire bat control. The report states that the Brazilian government has established a task force to coordinate efforts to eradicate vampire bats. The task force includes representatives from the Ministry of Health, the Ministry of Agriculture, and the National Research Council (CNPq).",
+        "parsed": {
+          "doc_1": "This document is about vampire bat control efforts in Brazil. The Ministry of Health, in cooperation with the US Agency for International Development (USAID), has initiated a program to combat the spread of rabies transmitted by vampire bats. The program will focus on the states of São Paulo and Rio Grande do Sul.",
+          "doc_2": "This document is about a meeting between American Consul General in São Paulo, John P. Shaw, and Brazilian Minister of Agriculture, José Sarney. They discussed the use of insecticides to control vampire bat populations in rural areas. The Minister requested US technical assistance to implement the control measures.",
+          "doc_3": "This document is about a report from the US Embassy in Brasília on vampire bat control. The report states that the Brazilian government has established a task force to coordinate efforts to eradicate vampire bats. The task force includes representatives from the Ministry of Health, the Ministry of Agriculture, and the National Research Council (CNPq)."
+        },
+        "input_tokens": 420,
+        "output_tokens": 196,
+        "duration_seconds": 7.762987931957468,
+        "created_at": "2026-09-04T22:27:50.869174"
+      },
+      "folder_label": {
+        "raw_response": "SNC_CODES: SCI 15, AGR 17, POL 15-1\nLABEL_TEXT: SCI 15 Scientific Research BRAZ 1963-1973\nAGR 17 Animal Health BRAZ 1963-1973\nPOL 15-1 Public Health BRAZ 1963-1973\nSUBJECT_TERMS: Vampire Bat Control, Public Health, Scientific Research, Animal Health, Brazil, Disease Control, Wildlife Management, USDA, US Department of Agriculture, Brazilian Ministry of Health, Epidemiology, Zoonotic Diseases, Veterinary Medicine",
+        "parsed": {
+          "snc_codes": [
+            "SCI 15",
+            "AGR 17",
+            "POL 15-1"
+          ],
+          "label_text": [
+            "SCI 15 Scientific Research BRAZ 1963-1973",
+            "AGR 17 Animal Health BRAZ 1963-1973",
+            "POL 15-1 Public Health BRAZ 1963-1973"
+          ],
+          "subject_terms": [
+            "Vampire Bat Control",
+            "Public Health",
+            "Scientific Research",
+            "Animal Health",
+            "Brazil",
+            "Disease Control",
+            "Wildlife Management",
+            "USDA",
+            "US Department of Agriculture",
+            "Brazilian Ministry of Health",
+            "Epidemiology",
+            "Zoonotic Diseases",
+            "Veterinary Medicine"
+          ]
+        },
+        "input_tokens": 446,
+        "output_tokens": 115,
+        "duration_seconds": 4.636419486021623,
+        "created_at": "2026-09-04T22:27:58.633923"
+      }
+    },
+    "T18Eval-00044": {
+      "topic_id": "T18Eval-00044",
+      "original_query": {
+        "TITLE": "Rural agriculture"
+      },
+      "query_text": "Rural agriculture",
+      "documents": {
+        "raw_response": "DOC_1: This document is about rural agriculture in Brazil. The Embassy in Brasilia reports that the Ministry of Agriculture is implementing new policies to increase crop yields. Ambassador Lincoln Gordon met with Minister of Agriculture, Ney Braga, to discuss US-Brazil cooperation on agricultural development, including the Alliance for Progress program.\n\nDOC_2: This document is about rural agriculture in Brazil. The Consulate in Recife notes that the northeastern states are experiencing drought, affecting rural agriculture. USAID is providing assistance to farmers through the Agricultural Development Program, in cooperation with the Brazilian Ministry of Agriculture and the State of Pernambuco.\n\nDOC_3: This document is about rural agriculture in Brazil. The US Agency for International Development (USAID) mission in Brazil is working with the Brazilian Institute of Agricultural Planning (IBPA) to improve rural agriculture. The program focuses on modernizing farming techniques and increasing production, with an emphasis on the states of Minas Gerais and São Paulo.",
+        "parsed": {
+          "doc_1": "This document is about rural agriculture in Brazil. The Embassy in Brasilia reports that the Ministry of Agriculture is implementing new policies to increase crop yields. Ambassador Lincoln Gordon met with Minister of Agriculture, Ney Braga, to discuss US-Brazil cooperation on agricultural development, including the Alliance for Progress program.",
+          "doc_2": "This document is about rural agriculture in Brazil. The Consulate in Recife notes that the northeastern states are experiencing drought, affecting rural agriculture. USAID is providing assistance to farmers through the Agricultural Development Program, in cooperation with the Brazilian Ministry of Agriculture and the State of Pernambuco.",
+          "doc_3": "This document is about rural agriculture in Brazil. The US Agency for International Development (USAID) mission in Brazil is working with the Brazilian Institute of Agricultural Planning (IBPA) to improve rural agriculture. The program focuses on modernizing farming techniques and increasing production, with an emphasis on the states of Minas Gerais and São Paulo."
+        },
+        "input_tokens": 419,
+        "output_tokens": 197,
+        "duration_seconds": 7.79763354791794,
+        "created_at": "2026-09-04T22:28:03.273688"
+      },
+      "folder_label": {
+        "raw_response": "SNC_CODES: AGR 6, AGR 17, ECO 9\nLABEL_TEXT: AGR 6 Agricultural Production BRAZ 1963-1973\nAGR 17 Agricultural Trade BRAZ 1963-1973\nECO 9 Economic Development BRAZ 1963-1973\nSUBJECT_TERMS: Agriculture, Rural Development, Brazil, Farms, Farming, Crops, Livestock, Agricultural Trade, Economic Development, U.S. Department of State, U.S. Embassy Brazil, Ministry of Agriculture, Brazilian Government, Agricultural Policy, Rural Credit, Land Reform",
+        "parsed": {
+          "snc_codes": [
+            "AGR 6",
+            "AGR 17",
+            "ECO 9"
+          ],
+          "label_text": [
+            "AGR 6 Agricultural Production BRAZ 1963-1973",
+            "AGR 17 Agricultural Trade BRAZ 1963-1973",
+            "ECO 9 Economic Development BRAZ 1963-1973"
+          ],
+          "subject_terms": [
+            "Agriculture",
+            "Rural Development",
+            "Brazil",
+            "Farms",
+            "Farming",
+            "Crops",
+            "Livestock",
+            "Agricultural Trade",
+            "Economic Development",
+            "U.S. Department of State",
+            "U.S. Embassy Brazil",
+            "Ministry of Agriculture",
+            "Brazilian Government",
+            "Agricultural Policy",
+            "Rural Credit",
+            "Land Reform"
+          ]
+        },
+        "input_tokens": 445,
+        "output_tokens": 125,
+        "duration_seconds": 5.034747636993416,
+        "created_at": "2026-09-04T22:28:11.073064"
+      }
+    },
+    "T18Eval-00045": {
+      "topic_id": "T18Eval-00045",
+      "original_query": {
+        "TITLE": "Oil price changes"
+      },
+      "query_text": "Oil price changes",
+      "documents": {
+        "raw_response": "DOC_1: This document is about oil price changes in Brazil. The Embassy in Brasilia reports that the Brazilian Ministry of Mines and Energy has announced a 10 percent increase in petroleum prices, effective immediately. This move is expected to have significant impacts on the Brazilian economy, particularly on the transportation and industrial sectors.\n\nDOC_2: This document is about the impact of oil price changes on the Brazilian economy. Consul General in Rio de Janeiro notes that the recent oil price hike has led to increased costs for Brazilian industries, particularly in the northeastern region. The Consul General expects this to affect US-Brazil trade, particularly in the textile and manufacturing sectors.\n\nDOC_3: This document is about Brazilian government reactions to oil price changes. The US Ambassador in Brasilia has met with Minister of Finance, Antonio Delfim Netto, to discuss the implications of the recent oil price increase on the Brazilian balance of payments. The Minister expressed concerns about the potential for increased inflation and its effects on the Medici government's economic stabilization program.",
+        "parsed": {
+          "doc_1": "This document is about oil price changes in Brazil. The Embassy in Brasilia reports that the Brazilian Ministry of Mines and Energy has announced a 10 percent increase in petroleum prices, effective immediately. This move is expected to have significant impacts on the Brazilian economy, particularly on the transportation and industrial sectors.",
+          "doc_2": "This document is about the impact of oil price changes on the Brazilian economy. Consul General in Rio de Janeiro notes that the recent oil price hike has led to increased costs for Brazilian industries, particularly in the northeastern region. The Consul General expects this to affect US-Brazil trade, particularly in the textile and manufacturing sectors.",
+          "doc_3": "This document is about Brazilian government reactions to oil price changes. The US Ambassador in Brasilia has met with Minister of Finance, Antonio Delfim Netto, to discuss the implications of the recent oil price increase on the Brazilian balance of payments. The Minister expressed concerns about the potential for increased inflation and its effects on the Medici government's economic stabilization program."
+        },
+        "input_tokens": 419,
+        "output_tokens": 209,
+        "duration_seconds": 8.277048203977756,
+        "created_at": "2026-09-04T22:28:16.113608"
+      },
+      "folder_label": {
+        "raw_response": "SNC_CODES: ECON 10, PETR 3, TRAD 17\nLABEL_TEXT: ECON 10 Economic Conditions BRAZ 1963-1973\nPETR 3 Petroleum BRAZ 1963-1973\nTRAD 17 Trade Agreements BRAZ 1963-1973\nSUBJECT_TERMS: Oil prices, petroleum, economic conditions, trade agreements, Brazil, energy, fuel, imports, exports, Department of State, Embassy Brasilia",
+        "parsed": {
+          "snc_codes": [
+            "ECON 10",
+            "PETR 3",
+            "TRAD 17"
+          ],
+          "label_text": [
+            "ECON 10 Economic Conditions BRAZ 1963-1973",
+            "PETR 3 Petroleum BRAZ 1963-1973",
+            "TRAD 17 Trade Agreements BRAZ 1963-1973"
+          ],
+          "subject_terms": [
+            "Oil prices",
+            "petroleum",
+            "economic conditions",
+            "trade agreements",
+            "Brazil",
+            "energy",
+            "fuel",
+            "imports",
+            "exports",
+            "Department of State",
+            "Embassy Brasilia"
+          ]
+        },
+        "input_tokens": 445,
+        "output_tokens": 101,
+        "duration_seconds": 4.0942373289726675,
+        "created_at": "2026-09-04T22:28:24.392415"
+      }
+    }
+  }
+}
