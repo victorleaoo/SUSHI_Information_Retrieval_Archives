@@ -1,57 +1,66 @@
-\begin{table*} [t]
+% NOTE: these tables use \begin{sidewaystable*}, which requires \usepackage{rotating}
+% in the document that includes this file (15 data columns no longer fit in portrait
+% orientation even with \resizebox).
+\begin{sidewaystable*}
 \centering
-\caption{NTCIR-18 result replication (30-Run ECF), with query augmentation (\textbf{+AUG}) shown side by side for comparison. +AUG queries are expanded with core themes and related concepts. Bold marks the higher of the base vs.\ +AUG value in each row. The * in a run code stands for T{-}{-}, TD- or TDN from the header row.}
+\caption{NTCIR-18 result replication (30-Run ECF), with query augmentation (\textbf{+AUG}), folder-label augmentation (\textbf{+FLAug}), and core-themes query augmentation combined with folder-label augmentation (\textbf{CT+FLAug}) shown side by side for comparison. +AUG queries are expanded with core themes and related concepts on the query side; +FLAug runs additionally augment the folder label text; CT+FLAug runs use a core-themes-augmented query together with folder-label augmentation. Bold marks the highest value among the populated columns in each row's group. ``---'' marks a run that has not been generated yet. The * in a run code stands for T{-}{-}, TD- or TDN from the header row.}
 \resizebox{\textwidth}{!}{
-\begin{tabular}{| l || c | c || c | c || c | c |}
+\begin{tabular}{| l || c | c | c || c | c || c | c | c || c | c || c | c | c || c | c |}
 \hline
 \multicolumn{1}{|c||}{} &
-\multicolumn{2}{c||}{\textbf{Title Queries (T{-}{-})}} &
-\multicolumn{2}{c||}{\textbf{Title+Desc Queries (TD-)}} &
-\multicolumn{2}{c|}{\textbf{Title+Desc+Narr Queries (TDN)}} \\
+\multicolumn{3}{c||}{\textbf{Title Queries (T{-}{-})}} &
+\multicolumn{2}{c||}{\textbf{Title+CT (T{-}{-}CT)}} &
+\multicolumn{3}{c||}{\textbf{Title+Desc Queries (TD-)}} &
+\multicolumn{2}{c||}{\textbf{Title+Desc+CT (TD-CT)}} &
+\multicolumn{3}{c||}{\textbf{Title+Desc+Narr Queries (TDN)}} &
+\multicolumn{2}{c|}{\textbf{TDN+CT (TDNCT)}} \\
 \hline
-\textbf{Our New Experiment} & \textbf{30-Run ECF} & \textbf{+AUG} & \textbf{30-Run ECF} & \textbf{+AUG} & \textbf{30-Run ECF} & \textbf{+AUG} \\
+\textbf{Our New Experiment} & \textbf{30-Run ECF} & \textbf{+AUG} & \textbf{+FLAug} & \textbf{30-Run ECF} & \textbf{CT+FLAug} & \textbf{30-Run ECF} & \textbf{+AUG} & \textbf{+FLAug} & \textbf{30-Run ECF} & \textbf{CT+FLAug} & \textbf{30-Run ECF} & \textbf{+AUG} & \textbf{+FLAug} & \textbf{30-Run ECF} & \textbf{CT+FLAug} \\
 \hline
-\texttt{U5.*.V.TOFS.mx-2.b} & 0.2158 $\pm$0.047 & \textbf{0.2532} $\pm$0.052 & 0.2127 $\pm$0.051 & \textbf{0.2499} $\pm$0.048 & 0.2163 $\pm$0.047 & \textbf{0.2536} $\pm$0.050 \\
-\texttt{U5.*.X.TOFS.mx-2.b} & 0.2101 $\pm$0.046 & \textbf{0.2519} $\pm$0.052 & 0.2074 $\pm$0.051 & \textbf{0.2470} $\pm$0.049 & 0.2113 $\pm$0.048 & \textbf{0.2477} $\pm$0.050 \\
-\texttt{U5.*.L.TOFS.mx-2.-} & 0.1849 $\pm$0.041 & \textbf{0.2335} $\pm$0.046 & 0.1852 $\pm$0.043 & \textbf{0.2364} $\pm$0.045 & 0.2071 $\pm$0.043 & \textbf{0.2403} $\pm$0.045 \\
-\texttt{U5.*.B.TOFS.{-}{-}{-}{-}.-} & 0.1801 $\pm$0.041 & \textbf{0.2293} $\pm$0.047 & 0.1810 $\pm$0.043 & \textbf{0.2294} $\pm$0.044 & 0.1991 $\pm$0.043 & \textbf{0.2331} $\pm$0.044 \\
+\texttt{U5.*.V.TOFS.mx-2.b} & 0.2158 $\pm$0.047 & \textbf{0.2532} $\pm$0.052 & 0.2338 $\pm$0.049 & 0.2158 $\pm$0.047 & \textbf{0.2603} $\pm$0.049 & 0.2127 $\pm$0.051 & \textbf{0.2499} $\pm$0.048 & 0.2426 $\pm$0.050 & 0.2127 $\pm$0.051 & \textbf{0.2937} $\pm$0.052 & 0.2163 $\pm$0.047 & \textbf{0.2536} $\pm$0.050 & --- & 0.2163 $\pm$0.047 & --- \\
+\texttt{U5.*.X.TOFS.mx-2.b} & 0.2101 $\pm$0.046 & \textbf{0.2519} $\pm$0.052 & 0.2335 $\pm$0.050 & 0.2101 $\pm$0.046 & \textbf{0.2561} $\pm$0.050 & 0.2074 $\pm$0.051 & \textbf{0.2470} $\pm$0.049 & 0.2365 $\pm$0.049 & 0.2074 $\pm$0.051 & \textbf{0.2897} $\pm$0.052 & 0.2113 $\pm$0.048 & \textbf{0.2477} $\pm$0.050 & --- & 0.2113 $\pm$0.048 & --- \\
+\texttt{U5.*.L.TOFS.mx-2.-} & 0.1849 $\pm$0.041 & \textbf{0.2335} $\pm$0.046 & --- & 0.1849 $\pm$0.041 & --- & 0.1852 $\pm$0.043 & \textbf{0.2364} $\pm$0.045 & --- & 0.1852 $\pm$0.043 & --- & 0.2071 $\pm$0.043 & \textbf{0.2403} $\pm$0.045 & --- & 0.2071 $\pm$0.043 & --- \\
+\texttt{U5.*.B.TOFS.{-}{-}{-}{-}.-} & 0.1801 $\pm$0.041 & \textbf{0.2293} $\pm$0.047 & --- & 0.1801 $\pm$0.041 & --- & 0.1810 $\pm$0.043 & \textbf{0.2294} $\pm$0.044 & --- & 0.1810 $\pm$0.043 & --- & 0.1991 $\pm$0.043 & \textbf{0.2331} $\pm$0.044 & --- & 0.1991 $\pm$0.043 & --- \\
 %\hline
-\texttt{U5.*.B.{-}O{-}{-}.{-}{-}{-}{-}.-} & 0.1574 $\pm$0.040 & \textbf{0.1754} $\pm$0.042 & 0.1546 $\pm$0.041 & \textbf{0.1744} $\pm$0.040 & 0.1661 $\pm$0.038 & \textbf{0.1842} $\pm$0.038 \\
-\texttt{U5.*.B.{-}{-}{-}S.{-}{-}{-}{-}.-} & 0.1468 $\pm$0.036 & \textbf{0.1735} $\pm$0.039 & 0.1530 $\pm$0.039 & \textbf{0.1733} $\pm$0.037 & 0.1620 $\pm$0.038 & \textbf{0.1811} $\pm$0.037 \\
-\texttt{U5.*.B.T{-}{-}{-}.{-}{-}{-}{-}.-} & 0.1285 $\pm$0.037 & \textbf{0.1370} $\pm$0.033 & 0.1286 $\pm$0.037 & \textbf{0.1341} $\pm$0.032 & 0.1419 $\pm$0.038 & \textbf{0.1476} $\pm$0.035 \\
-\texttt{U5.*.B.{-}{-}F{-}.{-}{-}{-}{-}.-} & 0.0525 $\pm$0.030 & \textbf{0.1178} $\pm$0.038 & 0.0488 $\pm$0.028 & \textbf{0.1000} $\pm$0.034 & 0.0716 $\pm$0.035 & \textbf{0.1219} $\pm$0.042 \\
+\texttt{U5.*.B.{-}O{-}{-}.{-}{-}{-}{-}.-} & 0.1574 $\pm$0.040 & \textbf{0.1754} $\pm$0.042 & --- & 0.1574 $\pm$0.040 & --- & 0.1546 $\pm$0.041 & \textbf{0.1744} $\pm$0.040 & --- & 0.1546 $\pm$0.041 & --- & 0.1661 $\pm$0.038 & \textbf{0.1842} $\pm$0.038 & --- & 0.1661 $\pm$0.038 & --- \\
+\texttt{U5.*.B.{-}{-}{-}S.{-}{-}{-}{-}.-} & 0.1468 $\pm$0.036 & \textbf{0.1735} $\pm$0.039 & --- & 0.1468 $\pm$0.036 & --- & 0.1530 $\pm$0.039 & \textbf{0.1733} $\pm$0.037 & --- & 0.1530 $\pm$0.039 & --- & 0.1620 $\pm$0.038 & \textbf{0.1811} $\pm$0.037 & --- & 0.1620 $\pm$0.038 & --- \\
+\texttt{U5.*.B.T{-}{-}{-}.{-}{-}{-}{-}.-} & 0.1285 $\pm$0.037 & \textbf{0.1370} $\pm$0.033 & --- & 0.1285 $\pm$0.037 & --- & 0.1286 $\pm$0.037 & \textbf{0.1341} $\pm$0.032 & --- & 0.1286 $\pm$0.037 & --- & 0.1419 $\pm$0.038 & \textbf{0.1476} $\pm$0.035 & --- & 0.1419 $\pm$0.038 & --- \\
+\texttt{U5.*.B.{-}{-}F{-}.{-}{-}{-}{-}.-} & 0.0525 $\pm$0.030 & \textbf{0.1178} $\pm$0.038 & --- & 0.0525 $\pm$0.030 & --- & 0.0488 $\pm$0.028 & \textbf{0.1000} $\pm$0.034 & --- & 0.0488 $\pm$0.028 & --- & 0.0716 $\pm$0.035 & \textbf{0.1219} $\pm$0.042 & --- & 0.0716 $\pm$0.035 & --- \\
 \hline
 \end{tabular}
 }
 \label{tab:replication}
-\end{table*}
+\end{sidewaystable*}
 
-\begin{table*} [t]
+\begin{sidewaystable*}
 \centering
-\caption{nDCG@5 Uniform sampling results by query length, with query augmentation (\textbf{+AUG}) shown side by side for comparison. +AUG queries are expanded with core themes and related concepts. Bold marks the higher of the base vs.\ +AUG value in each row. * in the run code stands for T{-}{-}, TD-, or TDN queries.}
+\caption{nDCG@5 Uniform sampling results by query length, with query augmentation (\textbf{+AUG}), folder-label augmentation (\textbf{+FLAug}), and core-themes query augmentation combined with folder-label augmentation (\textbf{CT+FLAug}) shown side by side for comparison. +AUG queries are expanded with core themes and related concepts on the query side; +FLAug runs additionally augment the folder label text; CT+FLAug runs use a core-themes-augmented query together with folder-label augmentation. Bold marks the highest value among the populated columns in each row's group. ``---'' marks a run that has not been generated yet. * in the run code stands for T{-}{-}, TD-, or TDN queries.}
 \resizebox{\textwidth}{!}{
-\begin{tabular}{| l || c | c || c | c || c | c |}
+\begin{tabular}{| l || c | c | c || c | c || c | c | c || c | c || c | c | c || c | c |}
 \hline
 \multicolumn{1}{|c||}{} &
-\multicolumn{2}{c||}{\textbf{T{-}{-}}} &
-\multicolumn{2}{c||}{\textbf{TD-}} &
-\multicolumn{2}{c|}{\textbf{TDN}} \\
+\multicolumn{3}{c||}{\textbf{T{-}{-}}} &
+\multicolumn{2}{c||}{\textbf{T{-}{-}CT}} &
+\multicolumn{3}{c||}{\textbf{TD-}} &
+\multicolumn{2}{c||}{\textbf{TD-CT}} &
+\multicolumn{3}{c||}{\textbf{TDN}} &
+\multicolumn{2}{c|}{\textbf{TDNCT}} \\
 \hline
-\textbf{Our New Experiment} & \textbf{Base} & \textbf{+AUG} & \textbf{Base} & \textbf{+AUG} & \textbf{Base} & \textbf{+AUG} \\
+\textbf{Our New Experiment} & \textbf{Base} & \textbf{+AUG} & \textbf{+FLAug} & \textbf{Base} & \textbf{CT+FLAug} & \textbf{Base} & \textbf{+AUG} & \textbf{+FLAug} & \textbf{Base} & \textbf{CT+FLAug} & \textbf{Base} & \textbf{+AUG} & \textbf{+FLAug} & \textbf{Base} & \textbf{CT+FLAug} \\
 \hline
-\texttt{U5.*.-.{-}{-}{-}{-}.{-}{-}{-}{-}.c} & \textbf{0.1347} $\pm$0.060 & 0.0327 $\pm$0.029 & \textbf{0.0940} $\pm$0.058 & 0.0586 $\pm$0.051 & \textbf{0.0949} $\pm$0.059 & 0.0775 $\pm$0.055 \\
+\texttt{U5.*.-.{-}{-}{-}{-}.{-}{-}{-}{-}.c} & 0.1347 $\pm$0.060 & 0.0327 $\pm$0.029 & \textbf{0.1774} $\pm$0.067 & 0.1347 $\pm$0.060 & \textbf{0.1733} $\pm$0.065 & 0.0940 $\pm$0.058 & 0.0586 $\pm$0.051 & \textbf{0.1933} $\pm$0.068 & 0.0940 $\pm$0.058 & --- & \textbf{0.0949} $\pm$0.059 & 0.0775 $\pm$0.055 & --- & 0.0949 $\pm$0.059 & --- \\
 %\hline
-\texttt{U5.*.C.TOFS.{-}{-}{-}{-}.-} & \textbf{0.1833} $\pm$0.042 & 0.1519 $\pm$0.039 & \textbf{0.1734} $\pm$0.043 & 0.1626 $\pm$0.034 & \textbf{0.1679} $\pm$0.042 & 0.1655 $\pm$0.036 \\
-\texttt{U5.*.B.TOFS.{-}{-}{-}{-}.-} & 0.1801 $\pm$0.041 & \textbf{0.2293} $\pm$0.047 & 0.1810 $\pm$0.043 & \textbf{0.2294} $\pm$0.044 & 0.1991 $\pm$0.043 & \textbf{0.2331} $\pm$0.044 \\
-\texttt{U5.*.E.TOFS.{-}{-}{-}{-}.-} & \textbf{0.2195} $\pm$0.045 & 0.1978 $\pm$0.047 & 0.1802 $\pm$0.044 & \textbf{0.1836} $\pm$0.041 & 0.1927 $\pm$0.045 & \textbf{0.1940} $\pm$0.042 \\
+\texttt{U5.*.C.TOFS.{-}{-}{-}{-}.-} & \textbf{0.1833} $\pm$0.042 & 0.1519 $\pm$0.039 & --- & 0.1833 $\pm$0.042 & --- & \textbf{0.1734} $\pm$0.043 & 0.1626 $\pm$0.034 & --- & 0.1734 $\pm$0.043 & --- & \textbf{0.1679} $\pm$0.042 & 0.1655 $\pm$0.036 & --- & 0.1679 $\pm$0.042 & --- \\
+\texttt{U5.*.B.TOFS.{-}{-}{-}{-}.-} & 0.1801 $\pm$0.041 & \textbf{0.2293} $\pm$0.047 & --- & 0.1801 $\pm$0.041 & --- & 0.1810 $\pm$0.043 & \textbf{0.2294} $\pm$0.044 & --- & 0.1810 $\pm$0.043 & --- & 0.1991 $\pm$0.043 & \textbf{0.2331} $\pm$0.044 & --- & 0.1991 $\pm$0.043 & --- \\
+\texttt{U5.*.E.TOFS.{-}{-}{-}{-}.-} & \textbf{0.2195} $\pm$0.045 & 0.1978 $\pm$0.047 & --- & 0.2195 $\pm$0.045 & --- & 0.1802 $\pm$0.044 & \textbf{0.1836} $\pm$0.041 & --- & 0.1802 $\pm$0.044 & --- & 0.1927 $\pm$0.045 & \textbf{0.1940} $\pm$0.042 & --- & 0.1927 $\pm$0.045 & --- \\
 %\hline
-\texttt{U5.*.Z.TOFS.{-}{-}{-}{-}.-} & 0.2133 $\pm$0.043 & \textbf{0.2277} $\pm$0.046 & 0.1987 $\pm$0.044 & \textbf{0.2250} $\pm$0.043 & 0.2114 $\pm$0.044 & \textbf{0.2289} $\pm$0.042 \\
-\texttt{U5.*.W.TOFS.{-}{-}{-}{-}.-} & 0.2167 $\pm$0.044 & \textbf{0.2299} $\pm$0.045 & 0.2044 $\pm$0.044 & \textbf{0.2273} $\pm$0.043 & 0.2156 $\pm$0.044 & \textbf{0.2361} $\pm$0.043 \\
+\texttt{U5.*.Z.TOFS.{-}{-}{-}{-}.-} & 0.2133 $\pm$0.043 & \textbf{0.2277} $\pm$0.046 & --- & 0.2133 $\pm$0.043 & --- & 0.1987 $\pm$0.044 & \textbf{0.2250} $\pm$0.043 & --- & 0.1987 $\pm$0.044 & --- & 0.2114 $\pm$0.044 & \textbf{0.2289} $\pm$0.042 & --- & 0.2114 $\pm$0.044 & --- \\
+\texttt{U5.*.W.TOFS.{-}{-}{-}{-}.-} & 0.2167 $\pm$0.044 & \textbf{0.2299} $\pm$0.045 & --- & 0.2167 $\pm$0.044 & --- & 0.2044 $\pm$0.044 & \textbf{0.2273} $\pm$0.043 & --- & 0.2044 $\pm$0.044 & --- & 0.2156 $\pm$0.044 & \textbf{0.2361} $\pm$0.043 & --- & 0.2156 $\pm$0.044 & --- \\
 %\hline
-\texttt{U5.*.W.TOFS.{-}{-}{-}{-}.c} & \textbf{0.2347} $\pm$0.047 & 0.2081 $\pm$0.041 & 0.2132 $\pm$0.050 & \textbf{0.2186} $\pm$0.045 & 0.2226 $\pm$0.049 & \textbf{0.2326} $\pm$0.046 \\
-\texttt{U5.*.W.TOFS.s{-}{-}2.c} & \textbf{0.2390} $\pm$0.047 & 0.2134 $\pm$0.043 & 0.2144 $\pm$0.051 & \textbf{0.2229} $\pm$0.046 & 0.2302 $\pm$0.051 & \textbf{0.2366} $\pm$0.048 \\
+\texttt{U5.*.W.TOFS.{-}{-}{-}{-}.c} & 0.2347 $\pm$0.047 & 0.2081 $\pm$0.041 & \textbf{0.2584} $\pm$0.049 & 0.2347 $\pm$0.047 & \textbf{0.2547} $\pm$0.052 & 0.2132 $\pm$0.050 & 0.2186 $\pm$0.045 & \textbf{0.2569} $\pm$0.050 & 0.2132 $\pm$0.050 & --- & 0.2226 $\pm$0.049 & \textbf{0.2326} $\pm$0.046 & --- & 0.2226 $\pm$0.049 & --- \\
+\texttt{U5.*.W.TOFS.s{-}{-}2.c} & 0.2390 $\pm$0.047 & 0.2134 $\pm$0.043 & \textbf{0.2651} $\pm$0.049 & 0.2390 $\pm$0.047 & \textbf{0.2643} $\pm$0.052 & 0.2144 $\pm$0.051 & 0.2229 $\pm$0.046 & \textbf{0.2647} $\pm$0.050 & 0.2144 $\pm$0.051 & --- & 0.2302 $\pm$0.051 & \textbf{0.2366} $\pm$0.048 & --- & 0.2302 $\pm$0.051 & --- \\
 \hline
 \end{tabular}
 }
 \label{tab:results}
-\end{table*}
+\end{sidewaystable*}
