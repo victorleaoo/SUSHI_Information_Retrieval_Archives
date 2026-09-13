@@ -284,19 +284,21 @@ The app discovers available experiment results from the [all_runs](all_runs) dir
 
 #### Run naming convention
 
-Experiment folders follow a **5-Element Dotted Notation**:
+Experiment folders follow a **6-segment dotted notation**, fully specified in [RUN_NOTATION.md](RUN_NOTATION.md):
 
 ```text
-{Sample}.{Ranker}.{Fields}.{LabelSearch}.{ScorePropagation}
+[Training Sample].[Query Type].[Sample Ranker].[Sample Fields].[Score Propagation].[All-Labels Ranker]
 ```
 
-- **Sample**: `U` (Uniform 5/box), `K` (Skewed), `A` (All Docs)
-- **Ranker**: `B` (BM25F), `C` (ColBERT), `E` (Embeddings), `W`/`X`/`Y`/`Z` (RRF Ensembles)
-- **Fields**: 4-char string (`T` Title, `O` OCR, `F` Folder Label, `S` Summary, `-` Unused)
-- **LabelSearch**: `L` (Weighted RRF with Label search), `x` (None)
-- **ScorePropagation**: `1`/`2` (SNC Score Propagation depth 1 or 2), `x` (None)
+- **Training Sample**: `U1`-`U5` (Uniform 1-5 docs/box), `K5` (Skewed, avg. 5 docs/box), `A-` (All Docs / ALLFL)
+- **Query Type**: `[T][D][N]` positional flags for Title/Description/Narrative (e.g. `TD-`)
+- **Sample Ranker**: `B` (BM25F), `C` (ColBERT), `E` (Embeddings), `L` (Learned BM25F), `V`/`W`/`X`/`Y`/`Z` (RRF ensembles), `-` (unused)
+- **Sample Fields**: `[T][O][F][S]` positional flags for Title/OCR/FolderLabel/Summary (e.g. `TOFS`)
+- **Score Propagation**: `-` (none) or 5 chars `[m][s][x][d][ceiling_k]` for exact SNC / similar SNC / same box / close date expansion
+- **All-Labels Ranker**: `b`/`c`/`e`/`l`/`w`/`x`/`y`/`z` (folder-level rankers/ensembles), `-` (unused)
+- Optional `.WRRF*` suffix for weighted RRF fusion between the document ranker and the All-Labels ranker.
 
-For example, `U.B.T---.x.x` indicates Uniform sampling, BM25F ranker, Title field only, no label search, and no score propagation.
+For example, `U5.TD-.W.TOFS.-.-` indicates Uniform 5 docs/box sampling, Title+Description query, Learned BM25F+ColBERT+Embeddings RRF ranker, all document fields, no score propagation, and no All-Labels ranker. See [RUN_NOTATION.md](RUN_NOTATION.md) for the full segment specification and a complete old-name-to-new-notation mapping table.
 
 ### Collection Viewer in Detail
 
@@ -376,8 +378,8 @@ The visualizer is dynamic and discovers available experiment results from the fi
 ```text
 ProjectRoot/
 ├── all_runs/
-│   ├── U.B.T---.x.x/
-│   └── U.W.TOFS.L.2/
+│   ├── U5.TD-.B.T---.-.-/
+│   └── U5.TD-.W.TOFS.m---2.-/
 │       ├── model_overall_stats.json
 │       ├── topics_mean_margin.json
 │       ├── topics_relevant_count_stats.json
@@ -394,15 +396,15 @@ ProjectRoot/
 
 #### Naming convention
 
-Use the 5-element dotted pattern for experiment folder names:
+Use the 6-segment dotted pattern described in [RUN_NOTATION.md](RUN_NOTATION.md) for experiment folder names:
 
 ```text
-{Sample}.{Ranker}.{Fields}.{LabelSearch}.{ScorePropagation}
+[Training Sample].[Query Type].[Sample Ranker].[Sample Fields].[Score Propagation].[All-Labels Ranker]
 ```
 
 Examples:
-- `U.B.T---.x.x`: Uniform sampling, BM25F ranker, Title only, no label search, no score propagation.
-- `U.W.TOFS.L.2`: Uniform sampling, Weighted RRF ranker, all document fields, Label search enabled, SNC propagation depth 2.
+- `U5.TD-.B.T---.-.-`: Uniform 5 docs/box, Title+Description query, BM25F ranker, Title field only, no score propagation, no All-Labels ranker.
+- `U5.TD-.W.TOFS.m---2.-`: Uniform 5 docs/box, Title+Description query, Learned BM25F+ColBERT+Embeddings RRF ranker, all document fields, exact SNC score propagation with ceiling rank 2, no All-Labels ranker.
 
 #### Optional color registration
 
