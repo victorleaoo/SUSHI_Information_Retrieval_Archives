@@ -142,6 +142,7 @@ class RunGenerator:
                  expansion=[],
                  all_folders_folder_label=False,
                  all_folders_folder_label_augmented=False,
+                 folder_label_augmented=False,
                  rrf_input='docs',
                  expansion_ceiling_k=2,
                  bm25_tuned=True,
@@ -156,6 +157,7 @@ class RunGenerator:
         self.expansion = expansion
         self.all_folders_folder_label = all_folders_folder_label
         self.all_folders_folder_label_augmented = all_folders_folder_label_augmented
+        self.folder_label_augmented = folder_label_augmented
         self.rrf_input = rrf_input
         self.expansion_ceiling_k = expansion_ceiling_k
         self.bm25_tuned = bm25_tuned
@@ -402,10 +404,18 @@ class RunGenerator:
                 })
         else:
             # Standard Document-level Training
-            for trainingDoc in self.ecf["ExperimentSets"][0]["TrainingDocuments"]: 
-                file = trainingDoc[-10:-4] 
+            # folder_label_augmented only has an effect when 'folderlabel' is
+            # actually one of the searched fields; otherwise there's nothing
+            # to augment and this is a no-op (not an error).
+            augment_folder_label = self.folder_label_augmented and 'folderlabel' in current_fields
+            folder_label_augmentation = (
+                self._load_folder_label_augmentation_data() if augment_folder_label else {}
+            )
+
+            for trainingDoc in self.ecf["ExperimentSets"][0]["TrainingDocuments"]:
+                file = trainingDoc[-10:-4]
                 folder = self.items[file]['Sushi Folder']
-                
+
                 doc_entry = {
                     'docno': file,
                     'folder': folder,
@@ -420,6 +430,12 @@ class RunGenerator:
                     label = self.folderMetadata[folder]['label_parent_expanded'] + " " + self.folderMetadata[folder]['scope_truncated']
                 except:
                     label = self.folderMetadata[folder]['label']
+
+                if augment_folder_label:
+                    augmentation_text = build_folder_label_augmentation_text(folder_label_augmentation.get(folder, {}))
+                    if augmentation_text:
+                        label = f"{label}. {augmentation_text}"
+
                 doc_entry['folderlabel'] = label
 
                 text_blob = ""
@@ -473,9 +489,9 @@ class RunGenerator:
         if self._folder_label_augmentation_cache is None:
             if not os.path.isfile(FOLDER_LABEL_AUGMENTATION_PATH):
                 raise FileNotFoundError(
-                    f"all_folders_folder_label_augmented=True requires {FOLDER_LABEL_AUGMENTATION_PATH}, "
-                    f"which does not exist. Run src.llm_experiments.folder_label_augmentation.generate "
-                    f"first (or copy its output here)."
+                    f"all_folders_folder_label_augmented=True / folder_label_augmented=True requires "
+                    f"{FOLDER_LABEL_AUGMENTATION_PATH}, which does not exist. Run "
+                    f"src.llm_experiments.folder_label_augmentation.generate first (or copy its output here)."
                 )
             with open(FOLDER_LABEL_AUGMENTATION_PATH, 'r', encoding='utf-8') as f:
                 data = json.load(f)

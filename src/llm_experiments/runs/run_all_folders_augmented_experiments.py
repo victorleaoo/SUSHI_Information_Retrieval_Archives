@@ -1,12 +1,9 @@
 """
 run_all_folders_augmented_experiments.py
 -----------------------------------------
-Re-runs the "all folders" (ALLFL) CONFIGS entries from run_new_experiments.py --
-the ones whose suffix ends in '.b' or '.c', i.e. every config that touches the
-ALLFL ("all folders label") ranker, either as the hybrid RRF partner (offsets
-1, 2, 14, 15) or as the ranker itself (offsets 9, 16, 17 -- the ColBERT/BM25/
-Embeddings ALLFL baselines) -- for every query field (T, TD, TDN), in two
-query variants:
+Re-runs every CONFIGS entry from run_new_experiments.py whose fields include
+the folder-label field ('F' in the TOFS code), for every query field
+(T, TD, TDN), in two query variants:
 
     STD  - the plain, un-augmented query (title/description/narrative only)
     CT   - the plain query plus the topic's core_themes + related_concepts
@@ -14,25 +11,56 @@ query variants:
            LLM experiment
            (data/llm_calls/query_expansion/2_core_themes_and_related_concepts/{T,TD,TDN}.json)
 
-In BOTH variants, the ALLFL ranker's folder-level content is the *augmented*
-folder label: the original folderMetadata label (label_parent_expanded +
-scope_truncated) plus the folder's core_themes + related_concepts text from
-the folder_label_augmentation LLM experiment
-(data/llm_calls/folder_label_augmentation/2_folder_context/folders.json) --
-never just the plain original label. That's a fixed property of every run in
-this script, not a 3rd axis: it's what distinguishes these runs from the
-plain ALLFL runs already in all_runs/ produced by run_new_experiments.py.
+In BOTH variants, every folder-label field touched by these runs -- whether
+it's the ALLFL ("all folders label") ranker's content or the main ranker's
+own per-document 'folderlabel' field -- uses the *augmented* label: the
+original folderMetadata label (label_parent_expanded + scope_truncated) plus
+the folder's core_themes + related_concepts text from the
+folder_label_augmentation LLM experiment
+(data/llm_calls/folder_label_augmentation/2_folder_context/folders.json).
+That's a fixed property of every run in this script, not a 3rd axis.
 
-7 configs x 3 query fields x 2 variants = 42 experiments, all under the
-'random' protocol (30 seeds from RANDOM_SEED_LIST), U5 (default
+Three groups of configs, by how the folder-label field appears in them:
+
+  Group A -- hybrid configs whose main ranker also searches 'folderlabel'
+  directly (it's part of TOFS_FIELDS) AND fuse in a separate ALLFL ranker as
+  hybrid partner B (offsets 1, 2, 14, 15: 'V', 'X', 'W.TOFS.-.c',
+  'W.TOFS.s---2.c'). Both sides now get the augmented label: the main
+  ranker via RunGenerator(folder_label_augmented=True), the ALLFL partner via
+  all_folders_folder_label_augmented=True (as before). Older FLAug runs of
+  these same 4 configs already exist in all_runs/ under a plain 'TOFS' fields
+  code -- those only had the ALLFL partner augmented, not the main ranker's
+  own F field, so they are a DIFFERENT (weaker) run and are deliberately left
+  in place rather than overwritten. These re-runs use a distinct name: the
+  fields code has 'F' replaced with 'FAUG' (TOFS -> TOFAUGS), keeping the
+  trailing '.FLAug' marker since an ALLFL ranker using FLAug is still present:
+      U5.T--.V.TOFAUGS.mx--2.b.FLAug   (STD)
+      U5.T--CT.V.TOFAUGS.mx--2.b.FLAug (CT)
+
+  Group B -- standalone (non-hybrid) configs whose only ranker searches
+  'folderlabel' as one of its plain fields, with NO separate ALLFL ranker
+  involved at all (offsets 3, 4, 8, 10, 11, 12, 13: 'L.TOFS.mx--2.-',
+  'B.TOFS.-.-', 'L.--F-.-.-', 'C.TOFS.-.-', 'E.TOFS.-.-', 'Z.TOFS.-.-',
+  'W.TOFS.-.-'). These have no prior FLAug run to collide with. The main
+  ranker gets RunGenerator(folder_label_augmented=True); the fields code has
+  'F' replaced with 'FAUG' same as Group A, but WITHOUT a trailing '.FLAug'
+  suffix -- that suffix specifically marks "an ALLFL ranker in this run is
+  using FLAug", which doesn't apply here:
+      U5.T--.L.TOFAUGS.mx--2.-    (STD)
+      U5.T--CT.L.TOFAUGS.mx--2.- (CT)
+      U5.T--.L.--FAUG-.-.-        (STD, offset 8)
+
+  Group C -- the pure ALLFL baselines, whose only ranker IS the ALLFL ranker
+  (offsets 9, 16, 17: '-.----.-.c', '-.----.-.b', '-.----.-.e'). Fields are
+  all dashes -- there's no separate main-ranker F field to further augment.
+  Unchanged from the original version of this script:
+      U5.TDN.-.----.-.e.FLAug         (STD)
+      U5.TDNCT.-.----.-.e.FLAug       (CT)
+
+14 configs (4 + 7 + 3) x 3 query fields x 2 variants = 84 experiments, all
+under the 'random' protocol (30 seeds from RANDOM_SEED_LIST), U5 (default
 docs_per_box=5, uniform sampling) only -- no DOCSBOX sweep, no OfficialECF
 re-runs.
-
-Two of the 7 configs (offsets 16 and 17) are new ALLFL-only baselines added to
-CONFIGS in run_new_experiments.py alongside this script: an untuned-BM25 ALLFL
-baseline ('-.----.-.b') and an Embeddings ALLFL baseline ('-.----.-.e'),
-mirroring the pre-existing ColBERT ALLFL baseline (offset 9, '-.----.-.c').
-They're also available un-augmented via run_new_experiments.py directly.
 
 See runs_all_folders.md in this folder for the run-tracking table.
 
@@ -44,27 +72,20 @@ This script does not generate either of them.
 Naming: run folder names keep the plain U5.<QF_TAG>.<suffix> pattern for the
 STD variant, and use the same 4th-slot query-tag trick as
 run_query_augmentated_experiments.py for the CT variant (dropping the base
-tag's last char and appending 'CT'). Every folder name additionally gets a
-trailing '.FLAug' suffix marking "ALLFL content is the augmented folder
-label", so these runs never collide with the plain ALLFL runs already in
-all_runs/:
-    U5.T--.V.TOFS.mx--2.b.FLAug     (STD)
-    U5.T--CT.V.TOFS.mx--2.b.FLAug   (CT)
-    U5.TDN.-.----.-.e.FLAug         (STD, new Embeddings ALLFL baseline)
-    U5.TDNCT.-.----.-.e.FLAug       (CT, new Embeddings ALLFL baseline)
+tag's last char and appending 'CT'). See the group descriptions above for the
+fields-code ('F' -> 'FAUG') and trailing '.FLAug' rules.
 
-Known limitation: ColBERT query truncation. All 7 configs involve ColBERT
-(as the main ranker in 1/2, as the sole ranker in 9, as the hybrid partner in
-14/15) except the two new BM25/Embeddings-only baselines (16, 17). Per the
-precedent set in runs.md for the doc_folder_hip DOC/AUG variants, the CT
-variant's augmentation text (a core_themes paragraph + related_concepts list)
-is likely to be mostly or entirely truncated by ColBERT's ~32-token query
-limit. Run these configs anyway rather than excluding them -- a
-close-to-null result for a ColBERT-containing config's CT row may reflect
-truncation, not a finding about the augmentation itself.
+Known limitation: ColBERT query truncation. Every Group A config and several
+Group B configs (C, W, Z, and the ColBERT-only ALLFL baseline) involve
+ColBERT. Per the precedent set in runs.md for the doc_folder_hip DOC/AUG
+variants, the CT variant's augmentation text (a core_themes paragraph +
+related_concepts list) is likely to be mostly or entirely truncated by
+ColBERT's ~32-token query limit. Run these configs anyway rather than
+excluding them -- a close-to-null result for a ColBERT-containing config's CT
+row may reflect truncation, not a finding about the augmentation itself.
 
 Run from the project root:
-    python -m src.llm_experiments.runs.run_all_folders_augmented_experiments              # all 42
+    python -m src.llm_experiments.runs.run_all_folders_augmented_experiments              # all 84
     python -m src.llm_experiments.runs.run_all_folders_augmented_experiments 2001 2002    # specific ids
     python -m src.llm_experiments.runs.run_all_folders_augmented_experiments T TD         # every config/variant for those query fields
     python -m src.llm_experiments.runs.run_all_folders_augmented_experiments CT           # every config/query-field for that variant only
@@ -93,9 +114,18 @@ from run_new_experiments import (  # noqa: E402
     is_experiment_done,
 )
 
-# The "all folders" configs: every CONFIGS offset whose suffix ends in '.b' or
-# '.c' (touches the ALLFL ranker, as hybrid partner or directly).
-ALL_FOLDERS_CONFIG_OFFSETS = (1, 2, 9, 14, 15, 16, 17)
+# Group A: hybrid configs -- main ranker searches 'folderlabel' directly AND
+# fuses in a separate ALLFL ranker as hybrid partner.
+GROUP_A_OFFSETS = (1, 2, 14, 15)
+
+# Group B: standalone configs -- main ranker searches 'folderlabel' directly,
+# no separate ALLFL ranker involved.
+GROUP_B_OFFSETS = (3, 4, 8, 10, 11, 12, 13)
+
+# Group C: pure ALLFL baselines -- the only ranker IS the ALLFL ranker.
+GROUP_C_OFFSETS = (9, 16, 17)
+
+ALL_FOLDERS_CONFIG_OFFSETS = GROUP_A_OFFSETS + GROUP_B_OFFSETS + GROUP_C_OFFSETS
 ALL_FOLDERS_CONFIGS = [c for c in CONFIGS if c['offset'] in ALL_FOLDERS_CONFIG_OFFSETS]
 
 QUERY_VARIANTS = ('STD', 'CT')
@@ -112,34 +142,64 @@ def run_folder_tag(query_field: str, variant: str) -> str:
     return QUERY_FIELD_AUG_BASE_TAGS[query_field][:-1] + variant
 
 
-# id = 2000 + query_field_offset + variant_offset + config_offset
-QUERY_FIELD_ID_OFFSET = {'T': 0, 'TD': 100, 'TDN': 200}
-VARIANT_ID_OFFSET = {'STD': 0, 'CT': 30}
-ID_BASE = 2000
+def augmented_fields_code(suffix: str) -> str:
+    """Replaces 'F' with 'FAUG' in a config suffix's fields-code segment
+    (2nd dot-separated slot, e.g. 'TOFS' -> 'TOFAUGS', '--F-' -> '--FAUG-'),
+    marking that the main ranker's own folderlabel field is augmented."""
+    parts = suffix.split('.')
+    parts[1] = parts[1].replace('F', 'FAUG')
+    return '.'.join(parts)
+
+
+def build_run_folder_name(config, query_field, variant):
+    offset = config['offset']
+    tag = run_folder_tag(query_field, variant)
+
+    if offset in GROUP_C_OFFSETS:
+        return f"U5.{tag}.{config['suffix']}.FLAug"
+    # Group A and Group B both use the 'FAUG'-coded fields segment; only
+    # Group A keeps the trailing '.FLAug' (it still has an ALLFL ranker).
+    suffix = augmented_fields_code(config['suffix'])
+    if offset in GROUP_A_OFFSETS:
+        return f"U5.{tag}.{suffix}.FLAug"
+    return f"U5.{tag}.{suffix}"
 
 
 def run_all_folders_config(config, query_field, variant):
     """Execute one ALL_FOLDERS_CONFIGS entry for one (query_field, query variant) pair."""
-    run_folder_name = f"U5.{run_folder_tag(query_field, variant)}.{config['suffix']}.FLAug"
+    offset = config['offset']
+    run_folder_name = build_run_folder_name(config, query_field, variant)
     fields = config['fields']
     query_augmentation = None if variant == 'STD' else variant
 
     print(f"\n{Style.BOLD}{Style.CYAN}=== {run_folder_name} "
           f"(query_field={query_field}, variant={variant}) ==={Style.RESET}")
 
+    if offset in GROUP_C_OFFSETS:
+        # Pure ALLFL baseline: the only ranker IS the ALLFL ranker.
+        gen_A = RunGenerator(
+            searching_fields=[fields],
+            query_fields=[query_field],
+            query_augmentation=query_augmentation,
+            all_folders_folder_label_augmented=True,
+            **config['kwargs'],
+        )
+        run_standard(gen_A, fields, query_field, run_folder_name)
+        return
+
+    # Groups A and B: the main ranker searches 'folderlabel' directly, so its
+    # own F field is augmented via folder_label_augmented=True.
     gen_A = RunGenerator(
         searching_fields=[fields],
         query_fields=[query_field],
         query_augmentation=query_augmentation,
-        all_folders_folder_label_augmented=True,
+        folder_label_augmented=True,
         **config['kwargs'],
     )
 
-    if config['hybrid']:
-        # The ALLFL partner ranker searches with the same query variant as the
-        # main ranker, and always uses the augmented folder label -- both are
-        # properties of this script's runs, not of one particular ranker in
-        # the fusion.
+    if offset in GROUP_A_OFFSETS:
+        # Group A additionally fuses in a separate ALLFL ranker as hybrid
+        # partner, also augmented -- both sides of the fusion use FLAug.
         if config.get('hybrid_partner', 'bm25') == 'colbert':
             gen_B, sf_B = make_allfl_colbert(
                 query_field, query_augmentation=query_augmentation,
@@ -150,6 +210,7 @@ def run_all_folders_config(config, query_field, variant):
                 all_folders_folder_label_augmented=True)
         run_hybrid(gen_A, fields, gen_B, sf_B, query_field, run_folder_name)
     else:
+        # Group B: standalone, no ALLFL ranker involved.
         run_standard(gen_A, fields, query_field, run_folder_name)
 
 
@@ -160,13 +221,18 @@ def _build_registry():
         for variant, v_offset in VARIANT_ID_OFFSET.items():
             for config in ALL_FOLDERS_CONFIGS:
                 exp_id = ID_BASE + qf_offset + v_offset + config['offset']
-                name = f"U5.{run_folder_tag(query_field, variant)}.{config['suffix']}.FLAug"
+                name = build_run_folder_name(config, query_field, variant)
                 registry[exp_id] = (
                     name,
                     (lambda c=config, qf=query_field, v=variant: run_all_folders_config(c, qf, v)),
                 )
     return registry
 
+
+# id = 2000 + query_field_offset + variant_offset + config_offset
+QUERY_FIELD_ID_OFFSET = {'T': 0, 'TD': 100, 'TDN': 200}
+VARIANT_ID_OFFSET = {'STD': 0, 'CT': 30}
+ID_BASE = 2000
 
 EXPERIMENTS = _build_registry()
 
