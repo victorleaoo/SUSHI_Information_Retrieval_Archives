@@ -31,4 +31,8 @@ UNUSED*
 
 lastest_runs/
 
-*env
+RUN_NOTATION.md
+
+.env
+
+*.log

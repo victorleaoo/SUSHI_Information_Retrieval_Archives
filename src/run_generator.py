@@ -51,7 +51,8 @@ class RunGenerator:
     Attributes:
         searching_fields (list): List of field combinations to search (e.g., [['title'], ['ocr'], ['title', 'ocr']]).
         query_fields (list): List of query modes to use (e.g., ['T', 'TD']).
-        run_type (str): 'random' (for sparse sampling) or 'all_documents' (oracle).
+        run_type (str): 'random' (for sparse sampling), 'all_documents' (oracle), or
+            'official_ecf' (NTCIR-18 official protocol with 3 ExperimentSets x 15 topics).
         models (list): List of model names to ensemble (e.g., ['bm25', 'colbert']).
         sampling (str): 'uniform' for uniform sampling or 'uneven' for skewed sampling.
         expansion (list): List of expansion techniques to apply (e.g., ['same_box', 'similar_snc']).
@@ -67,7 +68,9 @@ class RunGenerator:
                  expansion=[],
                  all_folders_folder_label=False,
                  rrf_input='docs',
-                 expansion_ceiling_k=2
+                 expansion_ceiling_k=2,
+                 bm25_tuned=True,
+                 docs_per_box=5
                  ):
         self.searching_fields = searching_fields
         self.query_fields = query_fields
@@ -78,6 +81,8 @@ class RunGenerator:
         self.all_folders_folder_label = all_folders_folder_label
         self.rrf_input = rrf_input
         self.expansion_ceiling_k = expansion_ceiling_k
+        self.bm25_tuned = bm25_tuned
+        self.docs_per_box = docs_per_box
 
         self.loader = DataLoader(PROJECT_ROOT)
         self.items = self.loader.items
@@ -88,9 +93,13 @@ class RunGenerator:
     def run_experiments(self):
         """
         Main execution loop.
-        
-        Iterates through all configured field combinations and query types. 
-        For 'random' runs, it iterates through a fixed list of random seeds to ensure statistical significance. For 'all_documents', it runs once.
+
+        Iterates through all configured field combinations and query types.
+        - 'random': iterates through 30 fixed seeds for statistical significance.
+        - 'all_documents': single run using every document in the collection.
+        - 'official_ecf': single run following the NTCIR-18 official protocol —
+          loops over the 3 ExperimentSets, training independently per set, then
+          collects all 45 topic results into one run file and evaluates once.
         Results are saved to disk and evaluated immediately.
         """
         for searching_field in self.searching_fields:
@@ -114,20 +123,31 @@ class RunGenerator:
                 os.makedirs(metrics_output_folder, exist_ok=True)
 
                 if self.run_type == 'random':
-                    for random_seed in tqdm(RANDOM_SEED_LIST, desc=f"Runs ({run_folder_name})"):
-                        # 1. Execute Run (Delegated to run_single_seed)
-                        results = self.run_single_seed(random_seed, searching_field, query_field)
-
-                        # 2. Save Run File
-                        run_name = f'45-Topics-Random-{random_seed}'
+                    if self.all_folders_folder_label:
+                        # ALLFL training data is built purely from folderMetadata —
+                        # it is completely seed-independent. Running 30 seeds would
+                        # produce identical results every time, so run just once.
+                        results = self.run_single_seed(0, searching_field, query_field)
+                        run_name = 'AllFolderLabel'
                         self.evaluator.save_run_file(results, RESULTS_PATH, run_name)
-
-                        # 3. Evaluate & Save Metrics
-                        json_path = os.path.join(metrics_output_folder, f'Random{random_seed}_TopicsFolderMetrics.json')
+                        json_path = os.path.join(metrics_output_folder, 'AllFolderLabel_TopicsFolderMetrics.json')
                         self.evaluator.evaluate(RESULTS_PATH, json_path)
+                        self.evaluator.generate_aggregated_metrics(metrics_output_folder, 'all_folder_label')
+                    else:
+                        for random_seed in tqdm(RANDOM_SEED_LIST, desc=f"Runs ({run_folder_name})"):
+                            # 1. Execute Run (Delegated to run_single_seed)
+                            results = self.run_single_seed(random_seed, searching_field, query_field)
 
-                    # 4. Generate Aggregate Stats (After all seeds are done)
-                    self.evaluator.generate_aggregated_metrics(metrics_output_folder, 'random')
+                            # 2. Save Run File
+                            run_name = f'45-Topics-Random-{random_seed}'
+                            self.evaluator.save_run_file(results, RESULTS_PATH, run_name)
+
+                            # 3. Evaluate & Save Metrics
+                            json_path = os.path.join(metrics_output_folder, f'Random{random_seed}_TopicsFolderMetrics.json')
+                            self.evaluator.evaluate(RESULTS_PATH, json_path)
+
+                        # 4. Generate Aggregate Stats (After all seeds are done)
+                        self.evaluator.generate_aggregated_metrics(metrics_output_folder, 'random')
 
                 elif self.run_type == 'all_documents':
                     # Single execution
@@ -140,6 +160,22 @@ class RunGenerator:
                     self.evaluator.evaluate(RESULTS_PATH, json_path)
                     
                     self.evaluator.generate_aggregated_metrics(metrics_output_folder, 'all_documents')
+
+                elif self.run_type == 'official_ecf':
+                    # Official NTCIR-18 protocol: 3 ExperimentSets, each with its own
+                    # TrainingDocuments and 15 Topics. Train independently per set,
+                    # then collect all 45 topic results into a single run file.
+                    all_results = self.run_official_ecf(searching_field, query_field)
+
+                    # Save combined 45-topic run file and evaluate
+                    run_name = 'OfficialECF-3Sets-45Topics'
+                    self.evaluator.save_run_file(all_results, RESULTS_PATH, run_name)
+
+                    json_path = os.path.join(metrics_output_folder, 'OfficialECF_TopicsFolderMetrics.json')
+                    self.evaluator.evaluate(RESULTS_PATH, json_path)
+
+                    self.evaluator.generate_aggregated_metrics(metrics_output_folder, 'official_ecf')
+
 
     def run_single_seed(self, random_seed, searching_field, query_field):
         """
@@ -163,7 +199,7 @@ class RunGenerator:
         if self.run_type == 'all_documents':
             self.ecf = self.loader.load_all_docs_ecf()
         else:
-            self.ecf = self.loader.create_random_ecf(random_seed, self.sampling)
+            self.ecf = self.loader.create_random_ecf(random_seed, self.sampling, docs_per_box=self.docs_per_box)
 
         # 2. Prepare Data
         clean_data = self.prepare_training_data()
@@ -176,7 +212,7 @@ class RunGenerator:
         self.active_models = {}
         for model_name in self.models:
             if model_name == 'bm25':
-                model = BM25Model(self.current_searching_field)
+                model = BM25Model(self.current_searching_field, tuned_weights=self.bm25_tuned)
             elif model_name == 'embeddings':
                 model = EmbeddingsModel()
             elif model_name == 'colbert':
@@ -188,6 +224,61 @@ class RunGenerator:
         # 4. Generate Results
         results = self.produce_topics_results()
         return results
+
+    def run_official_ecf(self, searching_field, query_field):
+        """
+        Executes the full retrieval pipeline under the NTCIR-18 official protocol.
+
+        Loops over the 3 ExperimentSets in the official ECF, training the active
+        models independently on each set's TrainingDocuments, and collects all
+        45 topic results into a single list (mirrors run_single_seed's return
+        shape, but with no random seed involved).
+
+        Returns:
+            list: Ranked results for all 45 topics across the 3 sets.
+        """
+        self.current_searching_field = searching_field
+        self.current_query_field = query_field
+
+        official_ecf = self.loader.load_official_ecf()
+        all_results = []
+
+        for set_idx, experiment_set in enumerate(official_ecf['ExperimentSets']):
+            set_num = set_idx + 1
+            topics_in_set = list(experiment_set['Topics'].keys())
+            print(f"{Style.BOLD}{Style.CYAN}  > Official ECF Set {set_num}/3{Style.RESET} "
+                  f"({len(experiment_set['TrainingDocuments'])} training docs, "
+                  f"topics {topics_in_set[0]}–{topics_in_set[-1]})")
+
+            # Point self.ecf at this set so prepare_training_data() and
+            # produce_topics_results() work without modification.
+            self.ecf = {'ExperimentSets': [experiment_set]}
+
+            # 1. Prepare training data from this set's documents
+            clean_data = self.prepare_training_data()
+
+            # 2. Build expansion relations (same behaviour as random mode)
+            if self.all_folders_folder_label == False:
+                self.relations = self.create_folder_relations_for_expansion(clean_data)
+
+            # 3. Train all active models on this set's documents
+            self.active_models = {}
+            for model_name in self.models:
+                if model_name == 'bm25':
+                    model = BM25Model(self.current_searching_field, tuned_weights=self.bm25_tuned)
+                elif model_name == 'embeddings':
+                    model = EmbeddingsModel()
+                elif model_name == 'colbert':
+                    model = ColBERTModel()
+
+                model.train(clean_data)
+                self.active_models[model_name] = model
+
+            # 4. Produce results for this set's 15 topics
+            set_results = self.produce_topics_results()
+            all_results.extend(set_results)
+
+        return all_results
 
     def prepare_training_data(self):
         """
@@ -205,7 +296,7 @@ class RunGenerator:
         if self.all_folders_folder_label:
              for folder in self.folderMetadata:
                 try:
-                    label = self.folderMetadata[folder]['label_parent_expanded']
+                    label = self.folderMetadata[folder]['label_parent_expanded'] + " " + self.folderMetadata[folder]['scope_truncated']
                 except:
                     label = self.folderMetadata[folder]['label']
                 
@@ -234,7 +325,7 @@ class RunGenerator:
                 }
 
                 try:
-                    label = self.folderMetadata[folder]['label_parent_expanded']
+                    label = self.folderMetadata[folder]['label_parent_expanded'] + " " + self.folderMetadata[folder]['scope_truncated']
                 except:
                     label = self.folderMetadata[folder]['label']
                 doc_entry['folderlabel'] = label
@@ -276,11 +367,13 @@ class RunGenerator:
             narrative = self.ecf['ExperimentSets'][0]['Topics'][topics[j]].get('NARRATIVE', '')
 
             if self.current_query_field == "TDN":
-                query = f"{title} {description} {narrative}".strip()
+                query = f"{title}. {description}. {narrative}".strip()
             elif self.current_query_field == "TD":
                 query = f"{title}. {description}".strip()
             else:
                 query = title.strip()
+
+            #print(query)
 
             # 1. Get Raw Results from all models
             raw_results_map = {}
@@ -487,7 +580,10 @@ class RunGenerator:
 
         sorted_scores = sorted(scores.values(), reverse=True)
 
-        top_score = sorted_scores[min(self.expansion_ceiling_k - 1, len(sorted_scores) - 1)]
+        if len(sorted_scores) > 0:
+            top_score = sorted_scores[min(self.expansion_ceiling_k - 1, len(sorted_scores) - 1)]
+        else:
+            top_score = 0
         sorted_new_folder_scores = sorted(new_folder_scores.values(), reverse=True)
 
         if len(sorted_scores)>0 and len(sorted_new_folder_scores)>0 and sorted_new_folder_scores[0] > top_score:
@@ -525,7 +621,12 @@ class RunGenerator:
 
         uneven = "-UNEVEN" if self.sampling == "uneven" else ""
 
-        return f"4perBox-{search_field_name}{uneven}_{expansion_name[:-1]}{query_part}_{model_name}"
+        base_name = f"4perBox-{search_field_name}{uneven}_{expansion_name[:-1]}_{query_fields_name}_{model_name}"
+
+        if self.run_type == 'official_ecf':
+            return f"OfficialECF-{base_name}"
+
+        return base_name
 
 if __name__ == "__main__":
    gen = RunGenerator()

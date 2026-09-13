@@ -129,9 +129,14 @@ class Evaluator:
                     t_id = int(topic[1:])
                     topic_accumulator[topic].append(run_values.get(t_id, 0.0))
 
-        elif run_type == 'all_documents':
-            # Logic for single run
-            single_file = os.path.join(folder_path, "AllDocuments_TopicsFolderMetrics.json")
+        elif run_type in ('all_documents', 'official_ecf', 'all_folder_label'):
+            # Map each run_type to its saved JSON filename
+            filename_map = {
+                'all_documents':   'AllDocuments_TopicsFolderMetrics.json',
+                'official_ecf':    'OfficialECF_TopicsFolderMetrics.json',
+                'all_folder_label':'AllFolderLabel_TopicsFolderMetrics.json',
+            }
+            single_file = os.path.join(folder_path, filename_map[run_type])
             if os.path.exists(single_file):
                 with open(single_file, 'r', encoding='utf-8') as f:
                     raw_data = json.load(f)
@@ -140,7 +145,10 @@ class Evaluator:
                     key = f"T{t_id}"
                     if key in topic_accumulator:
                         val = v.get('ndcg_cut_5', 0.0)
-                        topic_accumulator[key] = [val] # Single item list
+                        topic_accumulator[key] = [val]  # Single item list
+                        count_accumulator[key] = [v.get('count_relevant_top5', 0)]
+            else:
+                print(f"Warning: expected metrics file not found: {single_file}")
 
         # 2. Calculate Stats
         topics_intervals = {}

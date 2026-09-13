@@ -1,0 +1,25 @@
+\begin{table}
+\centering
+\caption{Four-way ANOVA on nDCG@5. Effect sizes $\hat{\omega}^2$ follow Olejnik and Algina; $\ge 0.14$ is a large effect.}
+\label{tab:anova}
+\begin{tabular}{lrrrrrr}
+\toprule
+Source & SS & DF & MS & $F$ & $p$ & $\hat{\omega}^2$ \\
+\midrule
+$\tau$ & 218.7748 & 44 & 4.972155 & 387.18 & $<10^{-4}$ & 0.4563 \\
+$\gamma$ & 10.1454 & 29 & 0.349843 & 27.24 & $<10^{-4}$ & 0.0362 \\
+$q$ & 1.0158 & 2 & 0.507887 & 39.55 & $<10^{-4}$ & 0.0038 \\
+$\varphi$ & 38.7511 & 4 & 9.687772 & 754.39 & $<10^{-4}$ & 0.1295 \\
+$\tau$ $\times$ $\gamma$ & 467.9001 & 1276 & 0.366693 & 28.55 & $<10^{-4}$ & 0.6345 \\
+$\tau$ $\times$ $q$ & 7.9159 & 88 & 0.089953 & 7.00 & $<10^{-4}$ & 0.0254 \\
+$\tau$ $\times$ $\varphi$ & 81.5440 & 176 & 0.463318 & 36.08 & $<10^{-4}$ & 0.2336 \\
+$\gamma$ $\times$ $q$ & 0.3030 & 58 & 0.005224 & 0.41 & 1.0000 & 0.0000 \\
+$\gamma$ $\times$ $\varphi$ & 5.6784 & 116 & 0.048952 & 3.81 & $<10^{-4}$ & 0.0159 \\
+$q$ $\times$ $\varphi$ & 0.1156 & 8 & 0.014451 & 1.13 & 0.3422 & 0.0000 \\
+\midrule
+Error & 236.9081 & 18448 & 0.012842 &  &  &  \\
+\midrule
+Total & 1069.0521 & 20249 &  &  &  &  \\
+\bottomrule
+\end{tabular}
+\end{table}

@@ -238,3 +238,21 @@ class DataLoader:
         This loads a specific, pre-generated ECF file that includes *every* document in the collection.
         """
         return self._load_json(self.all_docs_ecf_path)
+
+    def load_official_ecf(self):
+        """
+        Loads the official NTCIR-18 SUSHI ECF file.
+
+        This file contains 3 ExperimentSets, each with its own TrainingDocuments
+        and 15 Topics (T1-T15, T16-T30, T31-T45). The correct evaluation protocol
+        is to train on each set's documents independently and evaluate on that
+        set's topics.
+
+        Returns:
+            dict: The official ECF dictionary with 3 ExperimentSets.
+        """
+        official_ecf_path = os.path.join(
+            self.project_root, 'ecf', 'ntcir18',
+            'Ntcir18SushiOfficialExperimentControlFileV1.1.json'
+        )
+        return self._load_json(official_ecf_path)
