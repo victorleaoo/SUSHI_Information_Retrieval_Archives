@@ -1,34 +1,35 @@
 # SUSHI (Searching Unseen Sources for Historical Information) Test Collection and Experiments
 
 ## Index
+
 - [About the Collection](#about-the-collection)
-    - [Data Hierarchy: Boxes, Folders, and Documents](#data-hierarchy-boxes-folders-and-documents)
-    - [Folder Metadata](#folder-metadata)
-    - [Documents Metadata](#documents-metadata)
-    - [Topics](#topics)
-    - [Relevance judgment (QRels)](#relevance-judgment-qrels)
-    - [Experiment Control Files (ECFs)](#experiment-control-files-ecfs)
+  - [Data Hierarchy: Boxes, Folders, and Documents](#data-hierarchy-boxes-folders-and-documents)
+  - [Folder Metadata](#folder-metadata)
+  - [Documents Metadata](#documents-metadata)
+  - [Topics](#topics)
+  - [Relevance judgment (QRels)](#relevance-judgment-qrels)
+  - [Experiment Control Files (ECFs)](#experiment-control-files-ecfs)
 - [Repository Setup](#repository-setup)
-    - [Adding missing files](#adding-missing-files)
+  - [Adding missing files](#adding-missing-files)
 - [SUSHI Visualizer Web Application](#sushi-visualizer-web-application)
-    - [Experiment Analyzer](#experiment-analyzer)
-    - [Topics and Data Visualizer](#topics-and-data-visualizer)
-    - [Setup Experiments for the Visualizer](#setup-experiments-for-the-visualizer)
-    - [How to Run](#how-to-run)
+  - [Experiment Analyzer](#experiment-analyzer)
+  - [Topics and Data Visualizer](#topics-and-data-visualizer)
+  - [Setup Experiments for the Visualizer](#setup-experiments-for-the-visualizer)
+  - [How to Run](#how-to-run)
 
 ---
 
-This repository presents the SUSHI Test Collection and provides a walk-through on how to access and use it. 
+This repository presents the SUSHI Test Collection and provides a walk-through on how to access and use it.
 
 It also houses the code required to reproduce initial experiments, as well as a Python Streamlit web application for data and experiment visualization.
 
 ## About the Collection
 
-The SUSHI Collection seeks to facilitate the development of archival Information Retrieval (IR). In many archival contexts, describing every individual document with metadata is impractical; often, the finest-grained descriptions available are for sets of boxes and folders, which may contain sparsely digitized documents. 
+The SUSHI Collection seeks to facilitate the development of archival Information Retrieval (IR). In many archival contexts, describing every individual document with metadata is impractical; often, the finest-grained descriptions available are for sets of boxes and folders, which may contain sparsely digitized documents.
 
 Consequently, the most common search task in an archive is not to find specific documents directly, but to identify *where* in the repository to look for them. Searchers typically identify promising boxes or folders, request them, and then physically or digitally browse the contents to find relevant information.
 
-The first version of the NTCIR-18 SUSHI Collection is available at:  
+The first version of the NTCIR-18 SUSHI Collection is available at:
 [https://sites.google.com/view/ntcir-sushi-task/test-collection](https://sites.google.com/view/ntcir-sushi-task/test-collection)
 
 ### Data Hierarchy: Boxes, Folders, and Documents
@@ -46,7 +47,7 @@ The raw data structure follows a strict hierarchy representing the physical arch
 
 **Directory Structure:**
 
-The test collection file system mirrors this hierarchy: one directory for each Box $\rightarrow$ one subdirectory for each Folder $\rightarrow$ one PDF file for each digitized Document. 
+The test collection file system mirrors this hierarchy: one directory for each Box $\rightarrow$ one subdirectory for each Folder $\rightarrow$ one PDF file for each digitized Document.
 
 > **Note:** The PDF files contain embedded (uncorrected) OCR text, allowing the users of the collection to utilize raw text features in their experiments.
 
@@ -61,44 +62,44 @@ This enrichment is handled by the `FolderLabelConstructor` class ([src/data_crea
 The file can be found at [FoldersV1.3.json](https://github.com/victorleaoo/SUSHI_Information_Retrieval_Archives/blob/main/data/folders_metadata/FoldersV1.3.json).
 
 * **Input Source:** [SncTranslationV1.3.xlsx](https://github.com/victorleaoo/SUSHI_Information_Retrieval_Archives/blob/main/data/folders_metadata/SncTranslationV1.3.xlsx)
-    * `SNC`: The code (e.g., `POL 1`).
-    * `1965`: Label from the 1965 classification (Preferred).
-    * `1963`: Label from the 1963 classification (Fallback).
-    * `Scope Note`: Description of the category's inclusion/exclusion criteria.
+  * `SNC`: The code (e.g., `POL 1`).
+  * `1965`: Label from the 1965 classification (Preferred).
+  * `1963`: Label from the 1963 classification (Fallback).
+  * `Scope Note`: Description of the category's inclusion/exclusion criteria.
 
 **Output Fields (JSON):**
 
-| Field | Description | Purpose |
-| :--- | :--- | :--- |
-| `label1965` | Literal text from 1965 column. | Preferred term source. |
-| `label1963` | Literal text from 1963 column. | Fallback source. |
-| `main_title` | Resolved primary label (1965 or 1963). | Core display name for the folder. |
-| `raw_scope` | Full scope note text. | Provides maximum context. |
-| `scope_truncated` | Cleaned scope note. "Stopper Keywords" (e.g., `SEE`, `Exclude`) are used to cut off negative definitions. | High-precision context; removes confusing negative keywords. |
-| `parent` | SNC code of the immediate parent. | hierarchy traversal. |
-| `label_parent_expanded` | Full semantic path string. | e.g., Resolves `POL 15-1` to "POLITICAL -> GENERAL" rather than just "General". |
+| Field                     | Description                                                                                                  | Purpose                                                                          |
+| :------------------------ | :----------------------------------------------------------------------------------------------------------- | :------------------------------------------------------------------------------- |
+| `label1965`             | Literal text from 1965 column.                                                                               | Preferred term source.                                                           |
+| `label1963`             | Literal text from 1963 column.                                                                               | Fallback source.                                                                 |
+| `main_title`            | Resolved primary label (1965 or 1963).                                                                       | Core display name for the folder.                                                |
+| `raw_scope`             | Full scope note text.                                                                                        | Provides maximum context.                                                        |
+| `scope_truncated`       | Cleaned scope note. "Stopper Keywords" (e.g.,`SEE`, `Exclude`) are used to cut off negative definitions. | High-precision context; removes confusing negative keywords.                     |
+| `parent`                | SNC code of the immediate parent.                                                                            | hierarchy traversal.                                                             |
+| `label_parent_expanded` | Full semantic path string.                                                                                   | e.g., Resolves`POL 15-1` to "POLITICAL -> GENERAL" rather than just "General". |
 
 ### Documents Metadata
 
 The **Document Metadata** file aggregates information available for each document, sourcing data from NARA and Brown University records. It can be loaded at [itemsV1.2.json](https://drive.google.com/file/d/1c_hpR_lgdGeskXaNQTdCS7nO9s1R2NOb/view?usp=share_link).
 
 * **Input Source:** [SubtaskACollectionMetadataV1.1.xlsx](https://github.com/victorleaoo/SUSHI_Information_Retrieval_Archives/blob/main/data/items_metadata/SubtaskACollectionMetadataV1.1.xlsx)
-    * Contains SUSHI unique identifiers.
-    * Merges available original NARA and Brown metadata.
+  * Contains SUSHI unique identifiers.
+  * Merges available original NARA and Brown metadata.
 
 **Output Fields (JSON):**
 
-| Field | Description |
-| :--- | :--- |
-| `Sushi Box` | The SUSHI unique ID for the box. |
-| `Sushi Folder` | The SUSHI unique ID for the folder. |
-| `Sushi File` | The SUSHI unique ID for the document (including `.pdf` extension). |
-| `NARA <metadata>` | The set of raw fields provided by NARA. |
-| `Brown <metadata>` | The set of raw fields provided by Brown. |
-| `date` | The resolved date of the file (prioritizes Brown metadata if available, falls back to NARA). |
-| `title` | The resolved title of the file (prioritizes Brown metadata if available, falls back to NARA). |
-| `ocr` | A list containing the OCR text for each page. Generated primarily using ABBYY FineReader. |
-| `summary` | A generated summary of the document content produced by GPT4o. |
+| Field                | Description                                                                                   |
+| :------------------- | :-------------------------------------------------------------------------------------------- |
+| `Sushi Box`        | The SUSHI unique ID for the box.                                                              |
+| `Sushi Folder`     | The SUSHI unique ID for the folder.                                                           |
+| `Sushi File`       | The SUSHI unique ID for the document (including`.pdf` extension).                           |
+| `NARA <metadata>`  | The set of raw fields provided by NARA.                                                       |
+| `Brown <metadata>` | The set of raw fields provided by Brown.                                                      |
+| `date`             | The resolved date of the file (prioritizes Brown metadata if available, falls back to NARA).  |
+| `title`            | The resolved title of the file (prioritizes Brown metadata if available, falls back to NARA). |
+| `ocr`              | A list containing the OCR text for each page. Generated primarily using ABBYY FineReader.     |
+| `summary`          | A generated summary of the document content produced by GPT4o.                                |
 
 ### Topics
 
@@ -131,12 +132,12 @@ Each line maps a topic to a Box/Folder/Document ID with a relevance score:
 
 The [raw judgments for documents](./qrels/OLD-formal-document-qrel.txt) contained a wider range of labels. These were normalized to the standard 3-point scale as follows:
 
-| Original Assessor Label | Final Qrels Score | Meaning |
-| :--- | :--- | :--- |
-| **4** | **3** | Highly Relevant |
-| **3** | **1** | Relevant |
-| **1, 2** | **0** | Not Relevant |
-| **-1** | *(Removed)* | Not judgeable |
+| Original Assessor Label | Final Qrels Score | Meaning         |
+| :---------------------- | :---------------- | :-------------- |
+| **4**             | **3**       | Highly Relevant |
+| **3**             | **1**       | Relevant        |
+| **1, 2**          | **0**       | Not Relevant    |
+| **-1**            | *(Removed)*     | Not judgeable   |
 
 ### Experiment Control Files (ECFs)
 
@@ -153,10 +154,10 @@ Each ECF defines specific **Experiment Sets**. An experiment set maps a list of 
 
 We provide [ECFs](https://github.com/victorleaoo/SUSHI_Information_Retrieval_Archives/tree/main/ecf/random_generated) covering three different experimental conditions:
 
-1.  **[All Training Documents (No Mask)](https://github.com/victorleaoo/SUSHI_Information_Retrieval_Archives/blob/main/ecf/random_generated/ECF_ALL_TRAINING_SET.json):** * ECF containing all available training documents for all topics.
-2.  **Random (Uniform):** * ECF simulating a uniform digitization strategy (e.g., 5 documents per box), selected via different random seeds. These are the ECFs that have the name such as *ECF_RANDOM_seed.json*.
-3.  **Uneven (Skewed):** * ECF simulating a skewed distribution of digitized documents per box. These are the ECFs that have the name such as *ECF_UNEVEN_Random_Seed_seed.json*.
-    * The distribution logic is detailed in [src/RGdistribution.xlsx](https://github.com/victorleaoo/SUSHI_Information_Retrieval_Archives/blob/main/src/RGdistribution.xlsx).
+1. **[All Training Documents (No Mask)](https://github.com/victorleaoo/SUSHI_Information_Retrieval_Archives/blob/main/ecf/random_generated/ECF_ALL_TRAINING_SET.json):** * ECF containing all available training documents for all topics.
+2. **Random (Uniform):** * ECF simulating a uniform digitization strategy (e.g., 5 documents per box), selected via different random seeds. These are the ECFs that have the name such as *ECF_RANDOM_seed.json*.
+3. **Uneven (Skewed):** * ECF simulating a skewed distribution of digitized documents per box. These are the ECFs that have the name such as *ECF_UNEVEN_Random_Seed_seed.json*.
+   * The distribution logic is detailed in [src/RGdistribution.xlsx](https://github.com/victorleaoo/SUSHI_Information_Retrieval_Archives/blob/main/src/RGdistribution.xlsx).
 
 *The ECF creation logic is located at [create_random_ecf](https://github.com/victorleaoo/SUSHI_Information_Retrieval_Archives/blob/main/src/data_loader.py#L77).*
 
@@ -168,7 +169,7 @@ To run the applications correctly, it is necessary to reproduce the data structu
 
 ```
 ├── all_runs/ # It contains runs that were already made from models  
-├── data/                           
+├── data/                         
 │   ├── folders_metadata/
 │   │   └── FoldersV1.3.json
 │   ├── items_metadata/
@@ -178,8 +179,8 @@ To run the applications correctly, it is necessary to reproduce the data structu
 │   │   └── A0002
 │   │   └── A0003
 │   │   └── ...
-├── ecf/                            
-├── qrels/                          
+├── ecf/                          
+├── qrels/                        
 │   ├── formal-box-qrel.txt
 │   ├── formal-document-qrel.txt
 │   └── formal-folder-qrel.txt
@@ -199,9 +200,9 @@ All files can be found at the [SUSHI Test Collection](https://sites.google.com/v
 
 After downloading, reproduce the following steps:
 
-1. Create a dir called ```data```;
-2. Inside the dir ```data/items_metadata```, place the ```itemsV1.2.json``` file;
-3. Inside the dir ```data/raw```, place the ```sushi-files.zip``` inside it and unzip it. After unziping, bring all folders out to the ```raw``` dir and delete the ```sushi-files``` folder and the ```sushi-files.zip``` file.
+1. Create a dir called ``data``;
+2. Inside the dir ``data/items_metadata``, place the ``itemsV1.2.json`` file;
+3. Inside the dir ``data/raw``, place the ``sushi-files.zip`` inside it and unzip it. After unziping, bring all folders out to the ``raw`` dir and delete the ``sushi-files`` folder and the ``sushi-files.zip`` file.
 
 ---
 
@@ -216,6 +217,7 @@ The interface is organized around a left-side navigation menu (**SUSHI BAR**), w
 The navigation menu contains six main sections:
 
 1. **📦 Collection Viewer**
+
    - A collection exploration page for understanding dataset structure beyond retrieval metrics.
    - Includes:
      - collection statistics such as number of folders, documents, boxes, and SNCs;
@@ -223,14 +225,14 @@ The navigation menu contains six main sections:
      - SNC distribution views at three granularity levels (3-Level, 2-Level, and 1-Level primary SNC);
      - a deep-dive view to inspect folder and document content by selected SNC;
      - document analysis tools to browse documents by SNC or by folder.
-
 2. **🔍 Task Viewer**
+
    - Lets the user browse the 45 evaluation topics (T1–T45).
    - Displays topic details with a clear topic number header (e.g., **Topic 1**), dedicated title card, description, and narrative.
    - Builds a hierarchical view of the relevant structure: **Boxes → Folders → Documents**.
    - Each item is shown with star-based relevance grades, scope notes, summaries, and OCR previews.
-
 3. **🧪 Training Set Viewer**
+
    - Focuses on the training sets (sampling conditions), which define which documents are digitized and visible during model index creation.
    - Provides multiple views for understanding coverage:
      - overall document distribution histograms;
@@ -239,23 +241,23 @@ The navigation menu contains six main sections:
      - coverage by box;
      - relevance coverage for the 45 evaluation topics;
      - direct side-by-side comparison between two training sets (`⚖️ Compare Training Sets`).
-
 4. **🔬 Single Experiment Viewer**
+
    - Benchmarks a single experiment run configuration.
    - Features:
      - **Global Performance Card**: displays mean nDCG@5 and margin of error (95% CI);
      - **Topic Performance Chart**: interactive dumbbell chart showing per-topic mean nDCG@5 and confidence intervals;
      - **Seed Variance**: horizontal box plot displaying cross-seed nDCG@5 distribution per topic with clean 3-decimal hover tooltips.
-
 5. **⚔️ Two-Experiment Viewer**
+
    - Direct side-by-side comparison of two experiment runs (**Experiment A** vs **Experiment B**).
    - Includes:
      - **Side-by-Side KPIs & Delta**: global mean nDCG@5 metrics and exact performance delta;
      - **Wilcoxon Signed-Rank Test**: statistical significance test results (p-value, winner, win counts);
      - **Overlay Comparison Chart**: side-by-side topic overlay dumbbell chart;
      - **Topic Separation Analysis**: categorized breakdown of topics into **Better** (≥ +10%), **About Equal** (within ±10%), and **Worse** (≤ -10%).
-
 6. **📖 How-To Guide — SUSHI BAR**
+
    - Comprehensive interactive documentation introducing:
      - the SUSHI task and box/folder/document hierarchy;
      - **SNC (Subject-Numeric Code)** classification and its 3 levels of granularity (1-Level, 2-Level, 3-Level), explaining that each folder can have an SNC code attached to it;
@@ -403,6 +405,7 @@ Use the 6-segment dotted pattern described in [RUN_NOTATION.md](RUN_NOTATION.md)
 ```
 
 Examples:
+
 - `U5.TD-.B.T---.-.-`: Uniform 5 docs/box, Title+Description query, BM25F ranker, Title field only, no score propagation, no All-Labels ranker.
 - `U5.TD-.W.TOFS.m---2.-`: Uniform 5 docs/box, Title+Description query, Learned BM25F+ColBERT+Embeddings RRF ranker, all document fields, exact SNC score propagation with ceiling rank 2, no All-Labels ranker.
 
@@ -420,7 +423,6 @@ To run the application locally:
    ```bash
    pip install -r requirements.txt
    ```
-
 3. Follow the repository setup steps described earlier in this README so the required data files are available.
 4. Start the Streamlit app from the [web_app](web_app) directory:
 
