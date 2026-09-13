@@ -51,13 +51,13 @@ def run_hybrid_experiment():
     """
     Runs the hybrid RRF experiment.
     """
-    print(f"{Style.BOLD}{Style.GREEN}> Starting Hybrid RRF Experiment (TOFS_NEX_TD_BM25-EMBEDDINGS-COLBERT-TUNED + ALLFL_NEX_TD_COLBERT){Style.RESET}")
+    print(f"{Style.BOLD}{Style.GREEN}> Starting Hybrid RRF Experiment (TOFS_NEX_BM25-EMBEDDINGS-COLBERT-TUNED + ALLFL_NEX_COLBERT){Style.RESET}")
 
     # --- CONFIGURATION 1: TOFS (Document-based) ---
     search_field_A = ['title', 'ocr', 'folderlabel', 'summary']
     gen_A = RunGenerator(
         searching_fields=[search_field_A],
-        query_fields=['TD'],
+        query_fields=[''],
         models=['bm25', 'embeddings', 'colbert'],
         expansion=['similar_snc'], 
         rrf_input='docs',
@@ -69,7 +69,7 @@ def run_hybrid_experiment():
     search_field_B = ['folderlabel'] 
     gen_B = RunGenerator(
         searching_fields=[search_field_B],
-        query_fields=['TD'],
+        query_fields=[''],
         models=['colbert'],
         expansion=[], # No expansion for folder-based
         all_folders_folder_label=True

@@ -61,7 +61,7 @@ class RunGenerator:
     """
     def __init__(self, 
                  searching_fields=[['title', 'ocr', 'folderlabel', 'summary']],
-                 query_fields=['TD'],
+                 query_fields=[''],
                  run_type='random',
                  models=['bm25', 'embeddings', 'colbert'],
                  sampling='uniform',
@@ -616,7 +616,7 @@ class RunGenerator:
             expansion_name = expansion_name + f"{self.expansion_ceiling_k}-"
         else:
             expansion_name = "NEX-"
-        query_fields_name = self.current_query_field
+        query_part = f"_{self.current_query_field}" if self.current_query_field else ""
         model_name        = "-".join(self.models).upper()
 
         uneven = "-UNEVEN" if self.sampling == "uneven" else ""
