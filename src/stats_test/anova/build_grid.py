@@ -44,6 +44,14 @@ DIMS = ["sample", "query", "scoring", "fields", "prop", "labels"]
 # Matches e.g. U5.TD-.W.TOFS.mx-2.b  /  A-.T--.L.-O--.----.-  /  U5.T--.B.TOFS.-.-
 # prop and labels are variable-length in the actual run trees (e.g. "-", "mx--2",
 # "s---2"), not the fixed 4/1-char tokens the original regex assumed.
+#
+# KNOWN GAP: this regex silently skips the folder-label-augmentation batch from
+# run_all_folders_augmented_experiments.py. The fields group ([TOFS-]{4}) does
+# not match the 7-char 'TOFAUGS'/'--FAUG-' codes, and the query group
+# ([TDN-]{3}) does not match the 5-char 'T--CT'/'TD-CT'/'TDNCT' tags. Those runs
+# therefore never appear in `inventory` output -- they are absent, not excluded.
+# Widening it needs a decision about whether the FLAug level becomes its own
+# ANOVA factor, so it is left as-is rather than patched blindly.
 RUN_RE = re.compile(
     r"([A-Z0-9-]{2})\.([TDN-]{3})\.([A-Z-])\.([TOFS-]{4})\.([^.\s]+)\.([^.\s]+)"
 )

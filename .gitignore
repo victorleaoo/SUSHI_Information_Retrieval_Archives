@@ -45,4 +45,6 @@ cache/
 
 *env/
 
-preview*
+*.pdf
+
+*.tex
