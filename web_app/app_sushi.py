@@ -324,21 +324,27 @@ def render_charts(df_chart: pd.DataFrame, topics_to_display: list, sort_mode: st
     range_colors = [u1.get_model_color(t, i) for i, t in enumerate(domain)]
     color_scale = alt.Color('Type', scale=alt.Scale(domain=domain, range=range_colors),
                             legend=alt.Legend(title="Model Type", orient="top", columns=3, labelLimit=2000, titleLimit=2000))
+    x_axis = alt.Axis(title="Mean nDCG@5 with 95% CI", format=".2f", grid=True)
     base = alt.Chart(chart_data).encode(
         y=alt.Y('Topic Label:N', title="Topics", sort=topic_labels, axis=alt.Axis(labelLimit=1000))
     )
     rule_bg = base.mark_line(color='lightgray', strokeDash=[2,2], opacity=0.3).encode(
-        x='min(nDCG)', x2='max(nDCG)', detail='Topic Label'
+        x=alt.X('min(nDCG):Q', axis=x_axis, scale=alt.Scale(domain=[0, 1])),
+        x2='max(nDCG):Q', detail='Topic Label'
     )
-    ci_rule = base.mark_rule(opacity=0.6, thickness=2).encode(x='min_ci', x2='max_ci', color=color_scale)
-    tick_min = base.mark_tick(thickness=2, height=12).encode(x='min_ci', color=color_scale)
-    tick_max = base.mark_tick(thickness=2, height=12).encode(x='max_ci', color=color_scale)
+    ci_rule = base.mark_rule(opacity=0.6, thickness=2).encode(
+        x=alt.X('min_ci:Q', axis=x_axis, scale=alt.Scale(domain=[0, 1])), x2='max_ci:Q', color=color_scale
+    )
+    tick_min = base.mark_tick(thickness=2, height=12).encode(x=alt.X('min_ci:Q', axis=x_axis), color=color_scale)
+    tick_max = base.mark_tick(thickness=2, height=12).encode(x=alt.X('max_ci:Q', axis=x_axis), color=color_scale)
     points = base.mark_circle(size=120, opacity=1).encode(
-        x=alt.X('nDCG', title="Mean nDCG@5 with 95% CI"),
+        x=alt.X('nDCG:Q', axis=x_axis, scale=alt.Scale(domain=[0, 1])),
         color=color_scale,
         tooltip=['Topic Label', 'Type', 'nDCG', 'min_ci', 'max_ci']
     )
-    final_chart = (rule_bg + ci_rule + tick_min + tick_max + points).properties(height=len(topics_to_display) * 65)
+    final_chart = (rule_bg + ci_rule + tick_min + tick_max + points).properties(
+        height=len(topics_to_display) * 65
+    ).resolve_scale(x='shared')
     st.altair_chart(final_chart, width="stretch")
 
 
@@ -364,24 +370,28 @@ def render_two_run_comparison_chart(df_run_a, df_run_b, run_a_name, run_b_name, 
     color_scale = alt.Color('Run:N',
         scale=alt.Scale(domain=[label_a, label_b], range=['#1D4ED8', '#EA580C']),
         legend=alt.Legend(title="Experiment Run", orient="top"))
+    x_axis = alt.Axis(title="Mean nDCG@5 with 95% CI", format=".2f", grid=True)
     base = alt.Chart(df_combined).encode(
         y=alt.Y('Topic Label:N', title="Topics & Titles", sort=sorted_labels, axis=alt.Axis(labelLimit=1000))
     )
     rule_bg = base.mark_line(color='lightgray', strokeDash=[2,2], opacity=0.3).encode(
-        x='min_ci:Q', x2='max_ci:Q', detail='Topic Label:N'
+        x=alt.X('min_ci:Q', axis=x_axis, scale=alt.Scale(domain=[0, 1])),
+        x2='max_ci:Q', detail='Topic Label:N'
     )
-    ci_rule = base.mark_rule(opacity=0.7, thickness=2.5).encode(x='min_ci:Q', x2='max_ci:Q', color=color_scale)
-    tick_min = base.mark_tick(thickness=2, height=10).encode(x='min_ci:Q', color=color_scale)
-    tick_max = base.mark_tick(thickness=2, height=10).encode(x='max_ci:Q', color=color_scale)
+    ci_rule = base.mark_rule(opacity=0.7, thickness=2.5).encode(
+        x=alt.X('min_ci:Q', axis=x_axis, scale=alt.Scale(domain=[0, 1])), x2='max_ci:Q', color=color_scale
+    )
+    tick_min = base.mark_tick(thickness=2, height=10).encode(x=alt.X('min_ci:Q', axis=x_axis), color=color_scale)
+    tick_max = base.mark_tick(thickness=2, height=10).encode(x=alt.X('max_ci:Q', axis=x_axis), color=color_scale)
     points = base.mark_circle(size=120, opacity=0.85).encode(
-        x=alt.X('nDCG:Q', title="Mean nDCG@5 with 95% CI", scale=alt.Scale(domain=[0, 1])),
+        x=alt.X('nDCG:Q', axis=x_axis, scale=alt.Scale(domain=[0, 1])),
         color=color_scale,
         tooltip=['Topic Label', 'Run', 'nDCG', 'min_ci', 'max_ci', 'Relevance']
     )
     chart = (rule_bg + ci_rule + tick_min + tick_max + points).properties(
         title=f"Topic Performance Comparison: {run_a_name} (Blue) vs {run_b_name} (Orange)",
         height=len(sorted_labels) * 28
-    )
+    ).resolve_scale(x='shared')
     st.altair_chart(chart, width="stretch")
 
 
@@ -423,9 +433,13 @@ def render_seed_variance_chart(var_df: pd.DataFrame):
 
     fig.update_layout(
         showlegend=False,
-        xaxis=dict(title="nDCG@5", range=[-0.02, 1.05], hoverformat=".3f"),
+        xaxis=dict(
+            title="nDCG@5", range=[-0.02, 1.05], hoverformat=".3f",
+            tickmode="linear", tick0=0, dtick=0.2, tickformat=".1f",
+            automargin=True,
+        ),
         yaxis=dict(title="", automargin=True),
-        margin=dict(l=10, r=20, t=10, b=30),
+        margin=dict(l=10, r=20, t=10, b=50),
     )
     st.plotly_chart(fig, width="stretch")
 
