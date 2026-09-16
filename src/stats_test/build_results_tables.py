@@ -11,9 +11,9 @@ single table produced something too wide to read. Splitting by query field
 lets the columns carry the axis that actually varies here -- how much
 folder-label augmentation is applied, and whether the query is expanded.
 
-Column layout (6 numeric columns + one shared margin column):
+Column layout (7 numeric columns):
 
-    Base | +HyDE || FL-aug: partner (Base, +CT) || FL-aug: doc field (Base, +HyDE, +CT) | +-
+    Base | +HyDE || FL-aug: partner (Base, +CT) || FL-aug: doc field (Base, +HyDE, +CT)
 
   Base              plain query, plain folder label
   +HyDE             query + hypothetical documents + hypothetical folder label
@@ -318,38 +318,31 @@ def render_table(qf: str, data) -> str:
         'hypothetical folder label; \\textbf{+CT} expands it with the topic\'s core themes and '
         'related concepts --- these are two different expansions. Bold marks the highest value '
         'in each row; no significance testing is applied, so bold indicates only the larger '
-        'number and not a demonstrated difference. The $\\pm$ column gives the range of the '
-        '95\\% confidence half-widths across that row\'s cells, reported once per row rather '
-        'than repeated in every column. Note that these half-widths are large relative to the '
-        'differences between columns. \\texttt{---} marks a cell with no run behind it, either '
+        'number and not a demonstrated difference. \\texttt{---} marks a cell with no run behind it, either '
         'because the configuration does not exist for that row (the partner columns for '
         'non-hybrid rows, the doc.\\ field columns for the pure-ALLFL rows) or because it has '
         'not been generated yet.}'
     )
     lines.append(f'\\label{{tab:fl-{qf.replace("-", "")}}}')
     lines.append('\\resizebox{\\textwidth}{!}{')
-    lines.append('\\begin{tabular}{| l || c | c || c | c || c | c | c || c |}')
+    lines.append('\\begin{tabular}{| l || c | c || c | c || c | c | c |}')
     lines.append('\\hline')
     lines.append('\\multicolumn{1}{|c||}{} &')
     lines.append('\\multicolumn{2}{c||}{\\textbf{Plain folder label}} &')
     lines.append('\\multicolumn{2}{c||}{\\textbf{FL-aug: ALLFL partner}} &')
-    lines.append('\\multicolumn{3}{c||}{\\textbf{FL-aug: doc.\\ field}} &')
-    lines.append('\\multicolumn{1}{c|}{} \\\\')
+    lines.append('\\multicolumn{3}{c|}{\\textbf{FL-aug: doc.\\ field}} \\\\')
     lines.append('\\hline')
     lines.append('\\textbf{Configuration} & \\textbf{Base} & \\textbf{+HyDE} & '
                  '\\textbf{Base} & \\textbf{+CT} & '
-                 '\\textbf{Base} & \\textbf{+HyDE} & \\textbf{+CT} & '
-                 '$\\pm$ \\\\')
+                 '\\textbf{Base} & \\textbf{+HyDE} & \\textbf{+CT} \\\\')
     lines.append('\\hline')
 
     pending_notes = []
     for block in BLOCK_ORDER:
         for entry in [d for d in data if d['row']['block'] == block]:
             cells = [fmt(entry['scores'][c], c == entry['best']) for c in COLUMNS]
-            margin = fmt_margin(entry['margins'])
             lines.append(
-                f"\\texttt{{{tt(entry['row']['suffix'])}}} & " + ' & '.join(cells)
-                + f' & {margin} \\\\'
+                f"\\texttt{{{tt(entry['row']['suffix'])}}} & " + ' & '.join(cells) + ' \\\\'
             )
             pending_notes.extend(entry['pending'])
         lines.append('\\hline')
