@@ -286,7 +286,7 @@ The app discovers available experiment results from the [all_runs](all_runs) dir
 
 #### Run naming convention
 
-Experiment folders follow a **6-segment dotted notation**, fully specified in [RUN_NOTATION.md](RUN_NOTATION.md):
+Experiment folders follow a **6-segment dotted notation**:
 
 ```text
 [Training Sample].[Query Type].[Sample Ranker].[Sample Fields].[Score Propagation].[All-Labels Ranker]
@@ -300,7 +300,7 @@ Experiment folders follow a **6-segment dotted notation**, fully specified in [R
 - **All-Labels Ranker**: `b`/`c`/`e`/`l`/`w`/`x`/`y`/`z` (folder-level rankers/ensembles), `-` (unused)
 - Optional `.WRRF*` suffix for weighted RRF fusion between the document ranker and the All-Labels ranker.
 
-For example, `U5.TD-.W.TOFS.-.-` indicates Uniform 5 docs/box sampling, Title+Description query, Learned BM25F+ColBERT+Embeddings RRF ranker, all document fields, no score propagation, and no All-Labels ranker. See [RUN_NOTATION.md](RUN_NOTATION.md) for the full segment specification and a complete old-name-to-new-notation mapping table.
+For example, `U5.TD-.W.TOFS.-.-` indicates Uniform 5 docs/box sampling, Title+Description query, Learned BM25F+ColBERT+Embeddings RRF ranker, all document fields, no score propagation, and no All-Labels ranker.
 
 ### Collection Viewer in Detail
 
@@ -398,7 +398,7 @@ ProjectRoot/
 
 #### Naming convention
 
-Use the 6-segment dotted pattern described in [RUN_NOTATION.md](RUN_NOTATION.md) for experiment folder names:
+Use the 6-segment dotted pattern for experiment folder names:
 
 ```text
 [Training Sample].[Query Type].[Sample Ranker].[Sample Fields].[Score Propagation].[All-Labels Ranker]
