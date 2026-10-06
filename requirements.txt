@@ -1,3 +1,4 @@
 pylate
 pyterrier
 pip install pyterrier[java]
+dspy==3.4.0

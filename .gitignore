@@ -46,3 +46,5 @@ cache/
 *env/
 
 *.pdf
+
+data/llm_calls_luna/dspy_cache/
