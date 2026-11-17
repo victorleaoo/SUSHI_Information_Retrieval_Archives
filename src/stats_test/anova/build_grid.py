@@ -41,9 +41,9 @@ import pandas as pd
 
 DIMS = ["sample", "query", "scoring", "fields", "prop", "labels"]
 
-# Matches e.g. U5.TD-.W.TOFS.mx-2.b  /  A-.T--.L.-O--.----.-  /  U5.T--.B.TOFS.-.-
-# prop and labels are variable-length in the actual run trees (e.g. "-", "mx--2",
-# "s---2"), not the fixed 4/1-char tokens the original regex assumed.
+# Matches e.g. U5.TD-.W.TOFS.mx-2.b  /  A-.T--.L.-O--.----.-  /  U5.T--.B.TOFS.----.-
+# prop is a 4-char positional token (e.g. "----", "mx-2", "s--2") and labels a
+# 1-char token; both are matched loosely here to stay tolerant of older names.
 RUN_RE = re.compile(
     r"([A-Z0-9-]{2})\.([TDN-]{3})\.([A-Z-])\.([TOFS-]{4})\.([^.\s]+)\.([^.\s]+)"
 )

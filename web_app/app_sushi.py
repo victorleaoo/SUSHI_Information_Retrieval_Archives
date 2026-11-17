@@ -1367,44 +1367,58 @@ Direct side-by-side comparison of any two experiment runs across any sets of exp
 
 ---
 
-### 🧪 Experiment Naming Conventions (5-Element Dotted Notation)
+### 🧪 Experiment Naming Conventions (6-Segment Dotted Notation)
 
-Run folders in `all_runs/` follow the structured 5-element dotted pattern:
-`{Sample}.{Ranker}.{Fields}.{LabelSearch}.{ScorePropagation}`
+Run folders in `all_runs/` follow the structured 6-segment dotted pattern (full spec in `RUN_NOTATION.md`):
+`{TrainingSample}.{QueryType}.{SampleRanker}.{SampleFields}.{ScorePropagation}.{AllLabelsRanker}`
 
-#### 1. Sample (`Sample`)
-- **`U`**: Uniform random sampling (~630 digitized docs, 5 per box)
-- **`K`**: Skewed non-uniform sampling (~630 digitized docs)
-- **`A`**: All 31,681 documents indexed (upper bound ceiling)
+Unused positions are filled with dashes (`-`).
 
-#### 2. Ranker / Model (`Ranker`)
-- **`B`**: BM25F
+#### 1. Training Sample (2 characters)
+- **`U1`**–**`U5`**: Uniform sampling, 1–5 documents per box (`U5` is the standard sparse simulation)
+- **`K5`**: Skewed / uneven sampling, average of 5 documents per box
+- **`A-`**: All documents (oracle) or ALLFL (all folder labels) mode
+
+#### 2. Query Type (3 characters: `[T][D][N]`)
+- **`T`**: Title, **`D`**: Description, **`N`**: Narrative
+- Examples: `TD-` (Title+Description, standard), `T--` (Title only), `TDN` (all three)
+
+#### 3. Sample Ranker (1 character)
+- **`B`**: BM25F (default equal field weights)
 - **`C`**: ColBERT late-interaction
-- **`E`**: Dense Embedding Similarity (`all-mpnet-base-v2`)
-- **`W`**: Reciprocal Rank Fusion (RRF) of Weighted BM25 + ColBERT + Embeddings
-- **`X`**: RRF of BM25 + ColBERT
-- **`Y`**: RRF of BM25 + Embeddings
-- **`Z`**: RRF of BM25 + ColBERT + Embeddings
+- **`E`**: Dense Embedding Similarity
+- **`L`**: Learned / tuned BM25F weights
+- **`V`**: RRF of Learned BM25F + ColBERT
+- **`W`**: RRF of Learned BM25F + ColBERT + Embeddings
+- **`X`**: RRF of BM25F + ColBERT
+- **`Y`**: RRF of BM25F + Embeddings
+- **`Z`**: RRF of BM25F + ColBERT + Embeddings
+- **`-`**: Not used (standalone ALLFL runs)
 
-#### 3. Fields (`Fields`, 4-character string: `T`, `O`, `F`, `S`)
+#### 4. Sample Fields (4 characters: `[T][O][F][S]`)
 - **`T`**: Title, **`O`**: OCR, **`F`**: Folder Label, **`S`**: Summary
-- Unused fields are represented with dashes (`-`).
-- Examples: `T---` (Title only), `-O--` (OCR only), `--F-` (Folder Label only), `---S` (Summary only), `T-FS` (Title+Folder+Summary), `TOF-` (Title+OCR+Folder), `TOFS` (All document fields), `----` (No doc fields, label search only).
+- Examples: `T---` (Title only), `-O--` (OCR only), `--F-` (Folder Label only), `---S` (Summary only), `T-FS` (Title+Folder+Summary), `TOF-` (Title+OCR+Folder), `TOFS` (all document fields), `----` (no document fields, ALLFL only)
 
-#### 4. Label Search (`LabelSearch`)
-- **`L`**: Weighted RRF with full-collection folder Label search
-- **`x`**: No label search
+#### 5. Score Propagation (4 characters: `[m|s][x][d][k]`)
+- Position 1: **`m`** = exact SNC match, **`s`** = similar SNC
+- Position 2: **`x`** = same box
+- Position 3: **`d`** = close date
+- Position 4: **`1`**, **`2`**, **`3`**, ... = rank ceiling *k* (expanded folders cannot rank higher than rank *k+1*)
+- **`----`**: No score propagation
+- Examples: `s--2` (similar SNC, k=2), `m--1` (exact SNC, k=1), `-x-2` (same box, k=2), `--d2` (close date, k=2), `mx-2` (exact SNC + same box, k=2), `sx-2` (similar SNC + same box, k=2)
 
-#### 5. Score Propagation (`ScorePropagation`)
-- **`1`**: Same SNC code score propagation depth 1
-- **`2`**: Same SNC code score propagation depth 2
-- **`x`**: No score propagation
+#### 6. All-Labels Ranker (1 character)
+Folder-label ranker used in hybrid RRF runs or standalone ALLFL runs.
+- **`b`**: BM25F, **`c`**: ColBERT, **`e`**: Embeddings, **`l`**: Learned BM25F
+- **`w`**: RRF of Learned BM25F + ColBERT + Embeddings, **`x`**: RRF of BM25F + ColBERT, **`y`**: RRF of BM25F + Embeddings, **`z`**: RRF of BM25F + ColBERT + Embeddings
+- **`-`**: Not used (document-only retrieval)
 
 #### Folder Naming Examples
-- **`U.B.T---.x.x`**: Uniform sample, BM25 ranker, Title field only, no label search, no score propagation.
-- **`U.W.TOFS.L.2`**: Uniform sample, Weighted RRF ranker, all document fields, Label search enabled, propagation depth 2.
-- **`K.Z.TOFS.x.x`**: Skewed sample, RRF(B+C+E) ranker, all document fields, no label search, no score propagation.
-- **`A.Y.T-FS.x.x`**: All documents sample, RRF(B+E) ranker, Title+Folder+Summary fields, no label search, no score propagation.
+- **`U5.TD-.B.T---.----.-`**: Uniform 5 docs/box, Title+Description query, BM25F ranker, Title field only, no score propagation, no All-Labels ranker.
+- **`U5.TD-.W.TOFS.m--2.-`**: Uniform 5 docs/box, Title+Description query, RRF(L+C+E) ranker, all document fields, exact SNC propagation with ceiling 2.
+- **`U5.TD-.W.TOFS.s--2.c`**: Same as above with similar SNC propagation (k=2), fused with an ALLFL ColBERT ranker.
+- **`K5.TD-.W.TOFS.----.-`**: Skewed sample, Title+Description query, RRF(L+C+E) ranker, all document fields, no propagation.
+- **`U5.TD-.-.----.----.c`**: Standalone ALLFL run: no sample ranker or fields, ColBERT on folder labels only.
 """)
 
 

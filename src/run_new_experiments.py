@@ -9,24 +9,24 @@ configs 1-8.
 protocol (30 seeds from RANDOM_SEED_LIST).
 
 Configurations (shown with the T-- query tag; TD- / TDN are the counterparts):
-    U5.<QF>.V.TOFS.mx--2.b  - Tuned BM25F + ColBERT, TOFS, same_snc+same_box k=2,
-                              hybrid RRF with the ALLFL BM25 ranker
-    U5.<QF>.X.TOFS.mx--2.b  - Untuned BM25F + ColBERT, TOFS, same_snc+same_box k=2,
-                              hybrid RRF with the ALLFL BM25 ranker
-    U5.<QF>.L.TOFS.mx--2.-  - Tuned BM25F, TOFS, same_snc+same_box k=2, no hybrid
-    U5.<QF>.B.TOFS.-.-      - Untuned BM25F, TOFS, no expansion
-    U5.<QF>.L.-O--.-.-      - Tuned BM25F, OCR only
-    U5.<QF>.L.---S.-.-      - Tuned BM25F, Summary only
-    U5.<QF>.L.T---.-.-      - Tuned BM25F, Title only
-    U5.<QF>.L.--F-.-.-      - Tuned BM25F, FolderLabel only
-    U5.<QF>.-.----.-.c      - ALLFL ColBERT baseline (no main-ranker fields)
-    U5.<QF>.C.TOFS.-.-      - ColBERT only, TOFS
-    U5.<QF>.E.TOFS.-.-      - Embeddings only, TOFS
-    U5.<QF>.Z.TOFS.-.-      - Z (untuned BM25F + Embeddings + ColBERT), TOFS, no hybrid
-    U5.<QF>.W.TOFS.-.-      - W (tuned BM25F + Embeddings + ColBERT), TOFS, no hybrid
-    U5.<QF>.W.TOFS.-.c      - W, TOFS, hybrid RRF with the ALLFL ColBERT ranker
-    U5.<QF>.W.TOFS.s---2.c  - W, TOFS, similar_snc k=2 expansion, hybrid RRF with
-                              the ALLFL ColBERT ranker
+    U5.<QF>.V.TOFS.mx-2.b    - Tuned BM25F + ColBERT, TOFS, same_snc+same_box k=2,
+                               hybrid RRF with the ALLFL BM25 ranker
+    U5.<QF>.X.TOFS.mx-2.b    - Untuned BM25F + ColBERT, TOFS, same_snc+same_box k=2,
+                               hybrid RRF with the ALLFL BM25 ranker
+    U5.<QF>.L.TOFS.mx-2.-    - Tuned BM25F, TOFS, same_snc+same_box k=2, no hybrid
+    U5.<QF>.B.TOFS.----.-    - Untuned BM25F, TOFS, no expansion
+    U5.<QF>.L.-O--.----.-    - Tuned BM25F, OCR only
+    U5.<QF>.L.---S.----.-    - Tuned BM25F, Summary only
+    U5.<QF>.L.T---.----.-    - Tuned BM25F, Title only
+    U5.<QF>.L.--F-.----.-    - Tuned BM25F, FolderLabel only
+    U5.<QF>.-.----.----.c    - ALLFL ColBERT baseline (no main-ranker fields)
+    U5.<QF>.C.TOFS.----.-    - ColBERT only, TOFS
+    U5.<QF>.E.TOFS.----.-    - Embeddings only, TOFS
+    U5.<QF>.Z.TOFS.----.-    - Z (untuned BM25F + Embeddings + ColBERT), TOFS, no hybrid
+    U5.<QF>.W.TOFS.----.-    - W (tuned BM25F + Embeddings + ColBERT), TOFS, no hybrid
+    U5.<QF>.W.TOFS.----.c    - W, TOFS, hybrid RRF with the ALLFL ColBERT ranker
+    U5.<QF>.W.TOFS.s--2.c    - W, TOFS, similar_snc k=2 expansion, hybrid RRF with
+                               the ALLFL ColBERT ranker
 
 Experiment ids (core 15x3 = 45):
     T   ->  1..15     (folders U5.T--.*)
@@ -46,7 +46,7 @@ Official-ECF re-runs (offsets 1..8 of CONFIGS, 8 x 3 query fields = 24),
 using the NTCIR-18 official protocol (3 ExperimentSets, no random seeds)
 instead of the 30-seed random protocol:
     ids:  T -> 201..208   TD -> 231..238   TDN -> 261..268
-    (folders get an '.OfficialECF' suffix, e.g. U5.TD-.B.TOFS.-.-.OfficialECF)
+    (folders get an '.OfficialECF' suffix, e.g. U5.TD-.B.TOFS.----.-.OfficialECF)
 
 Run from the /src directory:
     python run_new_experiments.py              # Run ALL experiments (core + sweep + official)
@@ -211,7 +211,7 @@ def run_hybrid_official(gen_A, search_field_A, gen_B, search_field_B, query_fiel
 CONFIGS = [
     {
         'offset': 1,
-        'suffix': 'V.TOFS.mx--2.b',
+        'suffix': 'V.TOFS.mx-2.b',
         'fields': TOFS_FIELDS,
         'hybrid': True,
         'kwargs': dict(models=['bm25', 'colbert'], bm25_tuned=True,
@@ -220,7 +220,7 @@ CONFIGS = [
     },
     {
         'offset': 2,
-        'suffix': 'X.TOFS.mx--2.b',
+        'suffix': 'X.TOFS.mx-2.b',
         'fields': TOFS_FIELDS,
         'hybrid': True,
         'kwargs': dict(models=['bm25', 'colbert'], bm25_tuned=False,
@@ -229,7 +229,7 @@ CONFIGS = [
     },
     {
         'offset': 3,
-        'suffix': 'L.TOFS.mx--2.-',
+        'suffix': 'L.TOFS.mx-2.-',
         'fields': TOFS_FIELDS,
         'hybrid': False,
         'kwargs': dict(models=['bm25'], bm25_tuned=True,
@@ -238,7 +238,7 @@ CONFIGS = [
     },
     {
         'offset': 4,
-        'suffix': 'B.TOFS.-.-',
+        'suffix': 'B.TOFS.----.-',
         'fields': TOFS_FIELDS,
         'hybrid': False,
         'kwargs': dict(models=['bm25'], bm25_tuned=False,
@@ -246,7 +246,7 @@ CONFIGS = [
     },
     {
         'offset': 5,
-        'suffix': 'L.-O--.-.-',
+        'suffix': 'L.-O--.----.-',
         'fields': ['ocr'],
         'hybrid': False,
         'kwargs': dict(models=['bm25'], bm25_tuned=True,
@@ -254,7 +254,7 @@ CONFIGS = [
     },
     {
         'offset': 6,
-        'suffix': 'L.---S.-.-',
+        'suffix': 'L.---S.----.-',
         'fields': ['summary'],
         'hybrid': False,
         'kwargs': dict(models=['bm25'], bm25_tuned=True,
@@ -262,7 +262,7 @@ CONFIGS = [
     },
     {
         'offset': 7,
-        'suffix': 'L.T---.-.-',
+        'suffix': 'L.T---.----.-',
         'fields': ['title'],
         'hybrid': False,
         'kwargs': dict(models=['bm25'], bm25_tuned=True,
@@ -270,7 +270,7 @@ CONFIGS = [
     },
     {
         'offset': 8,
-        'suffix': 'L.--F-.-.-',
+        'suffix': 'L.--F-.----.-',
         'fields': ['folderlabel'],
         'hybrid': False,
         'kwargs': dict(models=['bm25'], bm25_tuned=True,
@@ -278,28 +278,28 @@ CONFIGS = [
     },
     {
         'offset': 9,
-        'suffix': '-.----.-.c',
+        'suffix': '-.----.----.c',
         'fields': ALLFL_FIELDS,
         'hybrid': False,
         'kwargs': dict(models=['colbert'], expansion=[], all_folders_folder_label=True),
     },
     {
         'offset': 10,
-        'suffix': 'C.TOFS.-.-',
+        'suffix': 'C.TOFS.----.-',
         'fields': TOFS_FIELDS,
         'hybrid': False,
         'kwargs': dict(models=['colbert'], expansion=[], rrf_input='docs'),
     },
     {
         'offset': 11,
-        'suffix': 'E.TOFS.-.-',
+        'suffix': 'E.TOFS.----.-',
         'fields': TOFS_FIELDS,
         'hybrid': False,
         'kwargs': dict(models=['embeddings'], expansion=[], rrf_input='docs'),
     },
     {
         'offset': 12,
-        'suffix': 'Z.TOFS.-.-',
+        'suffix': 'Z.TOFS.----.-',
         'fields': TOFS_FIELDS,
         'hybrid': False,
         'kwargs': dict(models=['bm25', 'embeddings', 'colbert'], bm25_tuned=False,
@@ -307,7 +307,7 @@ CONFIGS = [
     },
     {
         'offset': 13,
-        'suffix': 'W.TOFS.-.-',
+        'suffix': 'W.TOFS.----.-',
         'fields': TOFS_FIELDS,
         'hybrid': False,
         'kwargs': dict(models=['bm25', 'embeddings', 'colbert'], bm25_tuned=True,
@@ -315,7 +315,7 @@ CONFIGS = [
     },
     {
         'offset': 14,
-        'suffix': 'W.TOFS.-.c',
+        'suffix': 'W.TOFS.----.c',
         'fields': TOFS_FIELDS,
         'hybrid': True,
         'hybrid_partner': 'colbert',
@@ -324,7 +324,7 @@ CONFIGS = [
     },
     {
         'offset': 15,
-        'suffix': 'W.TOFS.s---2.c',
+        'suffix': 'W.TOFS.s--2.c',
         'fields': TOFS_FIELDS,
         'hybrid': True,
         'hybrid_partner': 'colbert',
@@ -408,8 +408,8 @@ DOCSBOX_VARIANTS = [
 
 
 def run_docsbox_config(variant, query_field):
-    """Execute one DOCSBOX_VARIANTS entry (W.TOFS.-.-) for one query field."""
-    run_folder_name = f"{variant['tag']}.{QUERY_FIELD_TAGS[query_field]}.W.TOFS.-.-"
+    """Execute one DOCSBOX_VARIANTS entry (W.TOFS.----.-) for one query field."""
+    run_folder_name = f"{variant['tag']}.{QUERY_FIELD_TAGS[query_field]}.W.TOFS.----.-"
 
     print(f"\n{Style.BOLD}{Style.CYAN}=== {run_folder_name} "
           f"(query_field={query_field}) ==={Style.RESET}")
@@ -456,7 +456,7 @@ def _build_registry():
     for query_field, base in DOCSBOX_ID_BASE.items():
         for offset, variant in enumerate(DOCSBOX_VARIANTS, start=1):
             exp_id = base + offset
-            name = f"{variant['tag']}.{QUERY_FIELD_TAGS[query_field]}.W.TOFS.-.-"
+            name = f"{variant['tag']}.{QUERY_FIELD_TAGS[query_field]}.W.TOFS.----.-"
             registry[exp_id] = (
                 name,
                 (lambda v=variant, qf=query_field: run_docsbox_config(v, qf)),

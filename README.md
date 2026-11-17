@@ -300,7 +300,7 @@ Experiment folders follow a **6-segment dotted notation**:
 - **All-Labels Ranker**: `b`/`c`/`e`/`l`/`w`/`x`/`y`/`z` (folder-level rankers/ensembles), `-` (unused)
 - Optional `.WRRF*` suffix for weighted RRF fusion between the document ranker and the All-Labels ranker.
 
-For example, `U5.TD-.W.TOFS.-.-` indicates Uniform 5 docs/box sampling, Title+Description query, Learned BM25F+ColBERT+Embeddings RRF ranker, all document fields, no score propagation, and no All-Labels ranker.
+For example, `U5.TD-.W.TOFS.----.-` indicates Uniform 5 docs/box sampling, Title+Description query, Learned BM25F+ColBERT+Embeddings RRF ranker, all document fields, no score propagation, and no All-Labels ranker.
 
 ### Collection Viewer in Detail
 
@@ -380,8 +380,8 @@ The visualizer is dynamic and discovers available experiment results from the fi
 ```text
 ProjectRoot/
 ├── all_runs/
-│   ├── U5.TD-.B.T---.-.-/
-│   └── U5.TD-.W.TOFS.m---2.-/
+│   ├── U5.TD-.B.T---.----.-/
+│   └── U5.TD-.W.TOFS.m--2.-/
 │       ├── model_overall_stats.json
 │       ├── topics_mean_margin.json
 │       ├── topics_relevant_count_stats.json
@@ -406,8 +406,8 @@ Use the 6-segment dotted pattern for experiment folder names:
 
 Examples:
 
-- `U5.TD-.B.T---.-.-`: Uniform 5 docs/box, Title+Description query, BM25F ranker, Title field only, no score propagation, no All-Labels ranker.
-- `U5.TD-.W.TOFS.m---2.-`: Uniform 5 docs/box, Title+Description query, Learned BM25F+ColBERT+Embeddings RRF ranker, all document fields, exact SNC score propagation with ceiling rank 2, no All-Labels ranker.
+- `U5.TD-.B.T---.----.-`: Uniform 5 docs/box, Title+Description query, BM25F ranker, Title field only, no score propagation, no All-Labels ranker.
+- `U5.TD-.W.TOFS.m--2.-`: Uniform 5 docs/box, Title+Description query, Learned BM25F+ColBERT+Embeddings RRF ranker, all document fields, exact SNC score propagation with ceiling rank 2, no All-Labels ranker.
 
 #### Optional color registration
 
