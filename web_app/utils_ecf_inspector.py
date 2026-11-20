@@ -358,7 +358,7 @@ def compute_relevance_coverage(ecf_data: dict) -> dict:
                     covered_g1 += 1
 
         match = re.search(r'\d+$', str(topic_id))
-        num = match.group() if match else topic_id
+        num = f"{int(match.group()):02d}" if match else topic_id
         title = topic_titles.get(topic_id, "")
         topic_label = f"T{num} — {title}" if title else f"T{num}"
 

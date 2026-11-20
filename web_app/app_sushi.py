@@ -732,6 +732,14 @@ def run_two_experiment_ui():
             def _fmt_sep(df_cat):
                 if df_cat.empty: return pd.DataFrame()
                 res = df_cat.copy()
+                # Match Training Set Viewer coverage naming (T01 — Title) so the column sorts correctly
+                def _pad_label(row):
+                    num = int(str(row['Topic']).lstrip('T'))
+                    label = str(row['Topic Label'])
+                    title = label.split(': ', 1)[1] if ': ' in label else ''
+                    return f"T{num:02d} — {title}" if title else f"T{num:02d}"
+                res['Topic Label'] = res.apply(_pad_label, axis=1)
+                res = res.sort_values('Topic Label')
                 res['Experiment A nDCG'] = res['nDCG_A'].apply(lambda x: f"{x:.4f}")
                 res['Experiment B nDCG'] = res['nDCG_B'].apply(lambda x: f"{x:.4f}")
                 res['Delta (A - B)'] = res['Diff'].apply(lambda x: f"{x:+.4f}")
