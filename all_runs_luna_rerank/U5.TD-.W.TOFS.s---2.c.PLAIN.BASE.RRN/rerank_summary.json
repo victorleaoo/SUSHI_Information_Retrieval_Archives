@@ -1,0 +1,12 @@
+{
+  "first_stage": "U5.TD-.W.TOFS.s---2.c.PLAIN.BASE",
+  "reranker": "RRN",
+  "rankings": 1350,
+  "invalid": 0,
+  "repaired": 0,
+  "input_tokens": 4265025,
+  "output_tokens": 70574,
+  "first_stage_recall20": 0.2749,
+  "first_stage_ndcg5": 0.2168,
+  "reranked_ndcg5": 0.2959
+}

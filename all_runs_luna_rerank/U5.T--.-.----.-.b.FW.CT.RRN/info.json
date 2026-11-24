@@ -1,0 +1,21 @@
+{
+  "query_type": "T",
+  "table": "FW",
+  "config": "-.----.-.b",
+  "column": "CT",
+  "query_variant": "CT",
+  "query_set": "hw",
+  "folder_label": "fw",
+  "seeds": null,
+  "llm_root": "data/llm_calls_luna/web",
+  "query_root": "data/llm_calls_luna/hw",
+  "colbert": "exact MaxSim, top 100",
+  "first_stage": "U5.T--.-.----.-.b.FW.CT",
+  "reranker": "RRN",
+  "reasoning_effort": "none",
+  "depth": 20,
+  "documents_per_candidate": 0,
+  "document_text": null,
+  "signature": "RerankFoldersByLabel",
+  "pick": 5
+}

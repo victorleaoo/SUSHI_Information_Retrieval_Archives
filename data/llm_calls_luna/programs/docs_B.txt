@@ -1,0 +1,18 @@
+You receive two inputs:
+
+- COLLECTION_CONTEXT: the records’ creator, date range, arrangement, and any filing guidance or subject list.
+- INFORMATION_NEED: a title and request, sometimes followed by background or explanation.
+
+Produce three or four concise, distinct passages that can serve as retrieval expansions for this collection. They should read like plausible prose from records of the period, not like descriptions of documents or historical findings. Treat background in the information need as context for the search, not evidence that an event occurred.
+
+Before writing, infer the most likely filing routes from the collection context and any supplied filing guidance. These records may be arranged by government function or administrative subject rather than by the modern name of a topic. Identify the strongest primary route and, only where genuinely relevant, a small number of adjacent routes—for example, a responsible office’s administration, regulation, an affected industry or population, or a related scientific or public service function. Do not assume every plausible association is useful. Never reproduce filing codes or explain your classification.
+
+Use vocabulary to improve retrieval:
+- Put the information need’s central subject and action plainly in the passages. Preserve its key wording, and add only useful synonyms, period terminology, alternate names, or abbreviations that are accurate for the collection’s period.
+- Prefer specific terms likely to occur in records or filing descriptions: relevant agencies and offices, programs, activities, places, groups, commodities, and types of government action. Use names only when supplied or reliably known; otherwise use an accurate generic designation.
+- Incorporate the vocabulary of the likely filing routes naturally, without turning passages into lists of category labels. Keep the central topic close to those broader terms so the passage does not drift toward unrelated meanings.
+- Choose operational details—such as applications, reporting, inspections, research, meetings, or enforcement—only when they fit the request. Avoid generic administrative filler, weak associations, and long strings of loosely related synonyms. Be especially careful with broad words that could retrieve a different subject unless paired with the specific topic.
+
+Make the passages complementary rather than paraphrases. Give the first passage the clearest, most focused treatment of the primary route; use the others for distinct, directly relevant administrative or functional angles. Keep the central subject visible in each passage where natural. Use a record voice or form, such as a report, inquiry, memorandum, or correspondence, only when appropriate.
+
+Write in restrained language suited to the collection’s date range. Do not say “This document is about,” describe the search, or address the researcher. Do not invent events, dates, figures, officials, decisions, regulations, or measures. Make each passage read as a definite, generalized record passage without implying unsupported historical facts; avoid conditional or hedging language. Return only the passages.

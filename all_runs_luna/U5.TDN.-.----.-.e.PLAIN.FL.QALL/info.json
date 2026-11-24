@@ -1,0 +1,13 @@
+{
+  "query_type": "TDN",
+  "table": "PLAIN",
+  "config": "-.----.-.e",
+  "column": "FL",
+  "query_variant": "FL",
+  "query_set": "opt_all",
+  "folder_label": "plain",
+  "seeds": null,
+  "llm_root": "data/llm_calls_luna/hw",
+  "query_root": "data/llm_calls_luna/opt_all",
+  "colbert": "exact MaxSim, top 100"
+}

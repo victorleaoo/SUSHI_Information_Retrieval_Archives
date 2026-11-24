@@ -1,0 +1,13 @@
+{
+  "query_type": "TDN",
+  "table": "PLAIN",
+  "config": "-.----.-.b",
+  "column": "CT",
+  "query_variant": "CT",
+  "query_set": "web",
+  "folder_label": "plain",
+  "seeds": null,
+  "llm_root": null,
+  "query_root": "data/llm_calls_luna/web",
+  "colbert": "exact MaxSim, top 100"
+}

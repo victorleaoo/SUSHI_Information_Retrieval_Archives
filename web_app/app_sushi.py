@@ -14,6 +14,10 @@ import utils_experiments_viz as u1
 import utils_topics_viz as u2
 import utils_retrieval as u3
 import utils_ecf_inspector as u4
+import utils_runs as ur
+import utils_llm as ul
+import llm_registry as reg
+import run_picker as rp
 try:
     from streamlit_scroll_to_top import scroll_to_here
 except ImportError:
@@ -42,7 +46,7 @@ st.markdown("""
         border-right: 1px solid #E2E8F0 !important;
     }
     section[data-testid="stSidebar"] * {
-        color: #334155 !important;
+        color: #000000 !important;
     }
     section[data-testid="stSidebar"] div[data-testid="stRadio"] div[role="radiogroup"] > label:last-child {
         border-top: 1px solid #E2E8F0 !important;
@@ -57,8 +61,14 @@ st.markdown("""
     [data-testid="stMarkdownContainer"] h3 {
         color: #0F172A !important;
     }
-    p, span, label, div[data-testid="stMarkdownContainer"] p, .stMarkdown {
-        color: #334155 !important;
+    p, span, label, li, div[data-testid="stMarkdownContainer"] p, .stMarkdown {
+        color: #000000 !important;
+    }
+    /* Captions, help text and blockquotes: black too, not Streamlit's light gray */
+    [data-testid="stCaptionContainer"], [data-testid="stCaptionContainer"] *,
+    [data-testid="stWidgetLabel"], [data-testid="stWidgetLabel"] *,
+    [data-testid="stMarkdownContainer"] blockquote, [data-testid="stMarkdownContainer"] blockquote * {
+        color: #000000 !important;
     }
 
     /* Metric Cards */
@@ -70,7 +80,7 @@ st.markdown("""
         box-shadow: 0 1px 3px rgba(0,0,0,0.05) !important;
     }
     div[data-testid="stMetric"] label {
-        color: #64748B !important;
+        color: #000000 !important;
         font-size: 0.85rem !important;
         white-space: normal !important;
         word-break: break-word !important;
@@ -92,7 +102,7 @@ st.markdown("""
         background-color: #F1F5F9 !important;
         border-radius: 8px !important;
         border: 1px solid #E2E8F0 !important;
-        color: #475569 !important;
+        color: #000000 !important;
         padding: 8px 20px !important;
     }
     .stTabs [aria-selected="true"] {
@@ -144,8 +154,8 @@ st.markdown("""
     .kpi-lg { font-size: 24px; font-weight: bold; }
     .kpi-md { font-size: 20px; font-weight: bold; }
     .kpi-sm { font-size: 14px; font-weight: bold; }
-    .kpi-label { color: #64748B !important; font-size: 13px; margin-top: 4px; }
-    .kpi-xs { font-size: 11px; color: #64748B !important; }
+    .kpi-label { color: #000000 !important; font-size: 13px; margin-top: 4px; }
+    .kpi-xs { font-size: 11px; color: #000000 !important; }
     .kpi-good { color: #16A34A !important; }
     .kpi-bad { color: #DC2626 !important; }
     .kpi-mid { color: #D97706 !important; }
@@ -156,7 +166,7 @@ st.markdown("""
 
     .tag { display: inline-block; padding: 2px 8px; border-radius: 12px; font-size: 12px; margin: 2px; }
     .tag-top5 { background-color: #DBEAFE !important; color: #1E40AF !important; }
-    .tag-top15 { background-color: #F1F5F9 !important; color: #475569 !important; }
+    .tag-top15 { background-color: #F1F5F9 !important; color: #000000 !important; }
     .tag-movable { background-color: #DCFCE7 !important; color: #15803D !important; }
 </style>
 """, unsafe_allow_html=True)
@@ -536,20 +546,8 @@ def run_single_experiment_ui():
     st.title("🔬 Single Experiment Viewer")
     st.caption("Select an experiment folder to see per-model nDCG@5 results, seed variance, and detailed retrieval rankings.")
 
-    all_runs_df = u1.get_all_runs_statistics()
-    if all_runs_df.empty:
-        st.error("No valid run folders found.")
-        return
-
-    grouped_runs = u1.get_grouped_run_configurations()
-    all_run_names = sorted(all_runs_df['Run Name'].tolist())
-
-    selected_run = st.selectbox(
-        "Select Experiment:",
-        options=all_run_names,
-        index=0 if all_run_names else None,
-        help="Select an experiment run folder from all_runs/."
-    )
+    selected_run = rp.run_picker("single", default="U5.TD-.W.TOFS.s---2.c.PLAIN.BASE")
+    rp.render_run_card(selected_run)
 
     if selected_run:
         df_chart, _, all_topics, model_results = u1.process_experiment_data([selected_run], {selected_run: [selected_run]})
@@ -569,6 +567,9 @@ def run_single_experiment_ui():
                     st.info("No multi-seed metric data available for this model run.")
                 elif var_df["N_Seeds"].max() <= 1:
                     st.caption(f"Only 1 seed available for `{selected_run}` — no cross-seed variance to display.")
+                elif (ur.run_info(selected_run) and ur.run_info(selected_run).seed_independent):
+                    st.caption(f"Seed-independent run: all {int(var_df['N_Seeds'].max())} seed files of "
+                               f"`{selected_run}` are identical, so there is no cross-seed variance.")
                 else:
                     n_seeds = int(var_df["N_Seeds"].max())
                     st.caption(f"Distribution of nDCG@5 across **{n_seeds} seeds** for `{selected_run}`.")
@@ -602,31 +603,16 @@ def run_two_experiment_ui():
     st.title("⚔️ Two-Experiment Viewer")
     st.caption("Directly compare two experiments side-by-side with statistical significance tests and topic separation analysis.")
 
-    all_runs_df = u1.get_all_runs_statistics()
-    if all_runs_df.empty:
-        st.warning("No runs found for comparison.")
-        return
-
-    all_run_names = sorted(all_runs_df['Run Name'].tolist())
-
     col_sel_a, col_sel_b = st.columns(2)
     with col_sel_a:
         st.subheader("🟦 Experiment A Selection")
-        sel_run_a = st.selectbox(
-            "Select Experiment A (Blue):",
-            options=all_run_names,
-            index=0 if all_run_names else 0,
-            key="side_by_side_run_a"
-        )
+        sel_run_a = rp.run_picker("cmp_a", default="U5.TD-.W.TOFS.s---2.c.FLAUG.BASE")
+        rp.render_run_card(sel_run_a)
 
     with col_sel_b:
         st.subheader("🟧 Experiment B Selection")
-        sel_run_b = st.selectbox(
-            "Select Experiment B (Orange):",
-            options=all_run_names,
-            index=1 if len(all_run_names) > 1 else 0,
-            key="side_by_side_run_b"
-        )
+        sel_run_b = rp.run_picker("cmp_b", default="U5.TD-.W.TOFS.s---2.c.PLAIN.BASE")
+        rp.render_run_card(sel_run_b)
 
     if sel_run_a and sel_run_b:
         folder_a = u1.resolve_run_folder_path(sel_run_a) or ""
@@ -662,28 +648,36 @@ def run_two_experiment_ui():
             else:
                 winner_disp = raw_winner
 
+            n, unit = wilcoxon_result["n"], wilcoxon_result["unit"]
+            wins_line = f"A wins {wilcoxon_result['wins_a']} {unit} | B wins {wilcoxon_result['wins_b']} {unit}"
             w_col1, w_col2, w_col3 = st.columns(3)
             with w_col1:
                 st.metric(
                     label="Wilcoxon p-value",
                     value=f"{p_val:.5f}",
                     delta=f"{sig_icon} {sig_text} (α=0.05)",
-                    delta_color="off"
+                    delta_color="off",
+                    help=ur.SEED_INDEPENDENCE_RULE,
                 )
             with w_col2:
                 st.metric(
                     label="Winner",
                     value=winner_disp,
-                    delta=f"Experiment A: {wilcoxon_result['wins_a']} wins | Experiment B: {wilcoxon_result['wins_b']} wins",
+                    delta=wins_line,
                     delta_color="off"
                 )
             with w_col3:
                 st.metric(
-                    label="Seeds Compared",
-                    value=f"{wilcoxon_result['n_seeds']} seeds",
-                    delta=f"A wins: {wilcoxon_result['wins_a']} | B wins: {wilcoxon_result['wins_b']}",
-                    delta_color="off"
+                    label=f"Paired by {wilcoxon_result['pairing']}, n={n} {unit}",
+                    value=f"{n} {unit}",
+                    delta=wins_line,
+                    delta_color="off",
+                    help=ur.SEED_INDEPENDENCE_RULE,
                 )
+            pairing_text = ("paired by seed" if wilcoxon_result["pairing"] == "seed"
+                            else "paired by topic (seed-independent run)")
+            st.caption(f"Wilcoxon signed-rank test, {pairing_text}, n={n}: {wilcoxon_result['reason']}. "
+                       f"Wins/losses are counted over the same {unit}.")
         elif wilcoxon_result.get("error"):
             st.caption(f"⚠️ Wilcoxon test: {wilcoxon_result['error']}")
 
@@ -733,6 +727,455 @@ def run_two_experiment_ui():
             with tab_worse:
                 if not df_worse.empty: st.dataframe(_fmt_sep(df_worse), width="stretch", hide_index=True)
                 else: st.info("No topics where Run A is at least 10% worse than Run B.")
+
+
+# ============================================================
+# LLM EXPERIMENTS PAGE (reports/web_app_llm_plan.md, Phase 4)
+# ============================================================
+
+@st.cache_data(show_spinner="Indexing documents…")
+def _items_lookup():
+    """{doc id: (title, summary, folder id)} from the app's items loader."""
+    df = _load_items_df()
+    return {r.doc_id: (r.title, r.summary, r.folder_id) for r in df[["doc_id", "title", "summary", "folder_id"]].itertuples()}
+
+
+def _doc_text(doc_id):
+    """'title - summary', the evidence / rerank document text."""
+    title, summary, _ = _items_lookup().get(doc_id, ("", "", ""))
+    parts = [p.strip() for p in (title, summary) if isinstance(p, str) and p.strip() and p.strip().lower() != "nan"]
+    return " - ".join(parts)
+
+
+def _blockquote(text):
+    return "\n".join("> " + line if line.strip() else ">" for line in text.splitlines())
+
+
+def _render_signature(sig, name):
+    st.markdown(_blockquote(sig["instructions"]))
+    rows = [{"Field": f, "Role": "input", "Description": d or "—"} for f, d in sig["inputs"]]
+    rows += [{"Field": f, "Role": "output", "Description": d or "—"} for f, d in sig["outputs"]]
+    st.dataframe(pd.DataFrame(rows), hide_index=True, width="stretch")
+    if name == "PredictFiling":
+        codes = ul.code_list()
+        with st.expander(f"code_list input: {len(codes)} codes"):
+            st.code("\n".join(codes), language=None)
+
+
+def _render_prompt_spec(spec):
+    kind, _, arg = spec.partition(":")
+    if kind == "sig":
+        _render_signature(ul.load_signature(arg), arg)
+    elif kind == "d2q" or spec == "d2q":
+        n = ul.load_luna_json("d2q/folder_label_augmentation/2_folder_context/folders.json").get("n_topics")
+        st.caption(f"`search_topics` asks for exactly N = {n} topics (`d2q/…/folders.json` → `n_topics`).")
+        _render_signature(ul.load_signature("Doc2QueryFolder", n), "Doc2QueryFolder")
+    elif kind == "program":
+        arm, _, split = arg.rpartition("_")
+        st.markdown(_blockquote(ul.load_program_instruction(arm, split)))
+        sig = ul.PROGRAM_SIGNATURE.get(arm, "")
+        if split == "hw":
+            st.caption(f"`programs/{arg}.txt`: the hand-written instruction (the docstring of `{sig}`).")
+        else:
+            st.caption(f"`programs/{arg}.txt`. Input and output fields are those of `{sig}`.")
+    elif kind == "web":
+        st.code(ul.web_prompt(arg), language=None, wrap_lines=True)
+        st.caption(f"`generation/web_notes.py` → `{arg}`; `{{ctx}}` is the collection context.")
+
+
+def _render_prompt_groups(groups):
+    if not groups:
+        st.info("No LLM call.")
+        return
+    for title, items in groups:
+        st.markdown(f"**{title}**")
+        if len(items) == 1:
+            st.caption(items[0][0])
+            _render_prompt_spec(items[0][1])
+        else:
+            cols = st.columns(len(items))
+            for col, (col_title, spec) in zip(cols, items):
+                with col:
+                    st.markdown(f"*{col_title}*")
+                    _render_prompt_spec(spec)
+
+
+def _render_parsed_folder(parsed):
+    if not parsed:
+        st.write("—")
+        return
+    if parsed.get("core_themes"):
+        st.markdown(f"**core_themes:** {parsed['core_themes']}")
+    if parsed.get("related_concepts"):
+        st.markdown(f"**related_concepts:** {', '.join(parsed['related_concepts'])}")
+
+
+def _invalid_warning(entry, what="label"):
+    if entry is not None and not entry.get("valid"):
+        st.warning(f"Invalid generation: the runner used the plain {what} for this item.")
+
+
+def _render_folder_fields(fields):
+    if not fields:
+        return
+    rows = [{"Field": k, "Value": "None" if v is None else str(v)} for k, v in fields.items()]
+    st.dataframe(pd.DataFrame(rows), hide_index=True, width="stretch")
+
+
+def _folder_options():
+    meta = ul.load_folders_meta()
+    return sorted(meta), meta
+
+
+@st.cache_data
+def _relevant_folders():
+    return {f for grades in u3.load_folder_qrels().values() for f, g in grades.items() if g >= 1}
+
+
+def _default_folders(seed_file):
+    """(own-evidence folder, borrowed-evidence folder), both with a qrel ≥ 1, from a FLEV seed file."""
+    folders = ul.load_luna_json(seed_file).get("folders", {})
+    rel = _relevant_folders()
+    own = [f for f, e in sorted(folders.items()) if f in rel and e.get("evidence_source") == "own"]
+    borrowed = [f for f, e in sorted(folders.items()) if f in rel and e.get("evidence_source") not in (None, "own")]
+    return (own[0] if own else None), (borrowed[0] if borrowed else None)
+
+
+def _folder_picker(key):
+    ids, meta = _folder_options()
+    k = f"llm_folder_{key}"
+    if k not in st.session_state:
+        own, _ = _default_folders("hw/folder_label_augmentation_with_evidence/2_folder_context/seed_42.json")
+        st.session_state[k] = own or ids[0]
+    return st.selectbox("Folder", ids, key=k, format_func=lambda f: f"{f} — {meta.get(f, {}).get('label', '')}")
+
+
+def _topic_picker(key, qt_default="TD-"):
+    topics = ul.load_topics()
+    ids = list(topics)
+    c1, c2 = st.columns([4, 2])
+    with c1:
+        tid = st.selectbox("Topic", ids, key=f"llm_topic_{key}",
+                           format_func=lambda t: f"T{int(t[-5:])}: {topics[t].get('TITLE', '')}")
+    with c2:
+        qf = st.radio("QF", list(ul.QT_FILE), index=list(ul.QT_FILE).index(qt_default), horizontal=True,
+                      key=f"llm_qf_{key}")
+    return tid, ul.QT_FILE[qf]
+
+
+def _seed_picker(key, data):
+    """(seed, sampling, file) for a per-seed strategy. Only seeds whose description file is present are offered
+    (a copy of the repo may ship some seeds only). seed is None when no file is present."""
+    c1, c2 = st.columns([2, 2])
+    sampling = "uniform"
+    if "template_uneven" in data:
+        with c2:
+            sampling = st.radio("Sampling", ["uniform", "uneven"], horizontal=True, key=f"llm_sampling_{key}",
+                                help="uneven = evidence drawn from the uneven sample (2_folder_context_uneven/)")
+    tmpl = data["template_uneven"] if sampling == "uneven" else data["template"]
+    seeds = [s for s in ul.SEEDS if ul.luna_exists(tmpl.format(seed=s))]
+    if not seeds:
+        st.info(f"No {sampling}-sample description files in this copy (`data/llm_calls_luna/{tmpl.format(seed='<s>')}`). "
+                "See README_DATA.md to download them.")
+        return None, sampling, None
+    with c1:
+        seed = st.selectbox(f"Seed ({len(seeds)} of {len(ul.SEEDS)} available)", seeds,
+                            index=seeds.index(42) if 42 in seeds else 0, key=f"llm_seed_{key}_{sampling}")
+    return seed, sampling, tmpl.format(seed=seed)
+
+
+def _render_web_notes(notes_file, key):
+    notes = ul.load_luna_json(notes_file).get(key) if key else None
+    with st.expander("Web notes given to the model", expanded=False):
+        if not notes:
+            st.write("No notes for this item.")
+            return
+        st.write(notes.get("notes") or "—")
+        st.caption(f"status: {notes.get('status')}" + (f", dropped: {notes.get('drop_reason')}" if notes.get("drop_reason") else ""))
+        if notes.get("sources"):
+            st.caption("Sources: " + " · ".join(notes["sources"][:8]))
+
+
+def _render_folder_example(strat, key):
+    if strat.example == "none":
+        st.info("No LLM call: the folder-label field keeps the catalogue text.")
+        return
+    fid = _folder_picker(key)
+    data = strat.data
+
+    if strat.example == "folder":
+        entry = ul.load_luna_json(data["path"]).get("folders", {}).get(fid)
+        _folder_io(entry, fid)
+        if data.get("notes") and entry:
+            _render_web_notes(data["notes"], entry.get("web_label") or (entry.get("fields") or {}).get("folder_label"))
+    elif strat.example == "folder_seed":
+        seed, sampling, path = _seed_picker(key, data)
+        if seed is None:
+            return
+        entry = ul.load_luna_json(path).get("folders", {}).get(fid)
+        if entry and entry.get("evidence_source"):
+            src = entry["evidence_source"]
+            st.markdown(f"**Evidence:** `{src}`" + ("" if src == "own" else " — borrowed: these documents are NOT in this folder"))
+            docs = entry.get("evidence_docnos") or []
+            if docs:
+                with st.expander(f"Evidence documents ({len(docs)})", expanded=True):
+                    for d in docs:
+                        st.markdown(f"- `{d}` {_doc_text(d)}")
+        if entry and entry.get("own_only_source"):
+            st.markdown(f"**Text taken from:** `{entry['own_only_source']}`")
+        _folder_io(entry, fid)
+        if data.get("notes") and entry:
+            _render_web_notes(data["notes"], entry.get("web_label") or (entry.get("fields") or {}).get("folder_label"))
+        st.caption(f"File: `data/llm_calls_luna/{path}`")
+    elif strat.example == "folder_cv":
+        cols = st.columns(2)
+        splits = ul.folds().get("splits", {})
+        for col, (split, path) in zip(cols, data["templates"].items()):
+            with col:
+                apply_to = splits.get(split, {}).get("apply_to", [])
+                st.markdown(f"**Program {split}** — searched by {len(apply_to)} topics: "
+                            + ", ".join(f"T{int(t[-5:])}" for t in apply_to))
+                entry = ul.load_luna_json(path).get("folders", {}).get(fid)
+                _folder_io(entry, fid, show_input=(split == "A"))
+    elif strat.example == "d2q":
+        raw = ul.load_luna_json(data["raw"]).get("folders", {}).get(fid)
+        if raw is None:
+            st.info("No Doc2Query answer for this folder.")
+            return
+        _invalid_warning(raw)
+        st.markdown("**Input**")
+        _render_folder_fields(raw.get("fields"))
+        st.markdown("**LLM output**")
+        d2q = raw.get("d2q") or {}
+        facets, topics, tf = d2q.get("facets", []), d2q.get("search_topics", []), d2q.get("topic_facets", [])
+        for i, facet in enumerate(facets, 1):
+            under = [t for t, f in zip(topics, tf) if f == i]
+            st.markdown(f"**{i}. {facet}** — " + "; ".join(under))
+        st.markdown(f"**keywords:** {', '.join(d2q.get('keywords', []))}")
+
+
+def _folder_io(entry, fid, show_input=True):
+    if entry is None:
+        st.info("No description for this folder.")
+        return
+    _invalid_warning(entry)
+    if show_input:
+        st.markdown("**Input**")
+        _render_folder_fields(entry.get("fields"))
+    st.markdown("**LLM output**")
+    _render_parsed_folder(entry.get("parsed"))
+
+
+def _render_query_arm_output(entry, column):
+    hip_docs = (entry.get("documents") or {}) if entry else {}
+    hip_fl = (entry.get("folder_label") or {}) if entry else {}
+    ct = (entry.get("core_themes") or {}) if entry else {}
+    if column in ("DOC", "DOCFL"):
+        st.markdown("**HypotheticalDocuments →** " + (f"`{hip_docs.get('program')}`" if hip_docs.get("program") else ""))
+        _invalid_warning(hip_docs, "query")
+        p = hip_docs.get("parsed") or {}
+        for i in (1, 2, 3):
+            if p.get(f"doc_{i}"):
+                st.markdown(f"{i}. {p[f'doc_{i}']}")
+    if column in ("FL", "DOCFL"):
+        st.markdown("**PredictFiling →** " + (f"`{hip_fl.get('program')}`" if hip_fl.get("program") else ""))
+        _invalid_warning(hip_fl, "query")
+        p = hip_fl.get("parsed") or {}
+        for code, label in zip(p.get("snc_codes", []), p.get("label_text", [])):
+            st.markdown(f"- `{code}` → {label}")
+        st.markdown(f"**subject_terms:** {', '.join(p.get('subject_terms', []))}")
+    if column == "CT":
+        st.markdown("**CoreThemes →** " + (f"`{ct.get('program')}`" if ct.get("program") else ""))
+        _invalid_warning(ct, "query")
+        _render_parsed_folder(ct.get("parsed"))
+
+
+def _program_note(program):
+    if not program or "_" not in program:
+        return ""
+    split = program.rsplit("_", 1)[1]
+    if split in ("A", "B"):
+        return f"written by `{program}`, trained on fold {split} topics (this topic is in the other fold)"
+    if split == "ALL":
+        return f"written by `{program}`, trained on all 45 topics"
+    return f"written by `{program}`"
+
+
+def _render_query_example(strat, key):
+    tid, qt = _topic_picker(key)
+    topic = ul.load_topics()[tid]
+    data = strat.data
+    if strat.slot == "column":
+        column, qset = strat.code, "hw"
+    else:
+        qset = data["set"]
+        cols = ["CT"] if qset == "web" else ["DOC", "FL", "DOCFL", "CT"]
+        column = st.radio("Query-side column", cols, horizontal=True, key=f"llm_col_{key}",
+                          index=len(cols) - 1, format_func=lambda c: f"{reg.COLUMN[c]} ({c})")
+    hip_file, ct_file = ul.query_files(qset, qt)
+    hip = ul.load_luna_json(hip_file).get("topics", {}).get(tid) if column in ("DOC", "FL", "DOCFL") else None
+    ct = ul.load_luna_json(ct_file).get("topics", {}).get(tid) if column == "CT" else None
+
+    st.markdown("**Input** (information_need, one topic field per line)")
+    st.code("\n".join(topic.get(f, "") for f in ul.QUERY_TYPE_FIELDS[qt] if topic.get(f)), language=None, wrap_lines=True)
+    if column != "BASE":
+        st.markdown("**LLM output**")
+        entry = hip if column in ("DOC", "FL", "DOCFL") else ct
+        if entry is None:
+            st.info(f"No `{qset}` entry for this topic.")
+        else:
+            if strat.example == "query_cv":
+                arm = entry.get("core_themes") if column == "CT" else entry.get("documents") or entry.get("folder_label")
+                note = _program_note((arm or {}).get("program"))
+                if note:
+                    st.caption(note + f"; folds.json applies program {ul.fold_of_topic(tid)} to this topic.")
+            _render_query_arm_output(entry, column)
+        if data.get("notes"):
+            _render_web_notes(data["notes"], f"{tid}|{qt}")
+
+
+def _render_rerank_example(key):
+    runs = ur.scan_runs()
+    rrn = sorted((n for n, i in runs.items() if i.slots.get("reranker") == "RRN"), key=lambda n: (
+        ur.load_info_json(n).get("pick", 99), n))
+    c1, c2 = st.columns([4, 1])
+    with c1:
+        name = st.selectbox("Reranked run", rrn, key=f"llm_rrn_{key}",
+                            format_func=lambda n: f"pick {ur.load_info_json(n).get('pick')} — {n}")
+    info = ur.load_info_json(name)
+    first = info.get("first_stage")
+    first_path = ur.run_path(first) if first else None
+    st.caption(f"First stage: `{first}` · prompt: `{info.get('signature')}` · documents per candidate: "
+               f"{info.get('documents_per_candidate')} · reasoning: {info.get('reasoning_effort')}")
+    if not first_path:
+        st.warning("First-stage run not found.")
+        return
+    # Per-seed rankings present for both stages (a copy of the repo may ship some seeds only). A seed-independent
+    # run (ALLFL first stage) has a single AllFolderLabel ranking instead.
+    rr_runs = os.path.join(ur.run_path(name), "runs")
+    if os.path.isfile(os.path.join(rr_runs, "AllFolderLabel.tsv")):
+        stems = ["AllFolderLabel"]
+    else:
+        stems = [f"Random{s}" for s in ul.SEEDS
+                 if os.path.isfile(os.path.join(first_path, "runs", f"Random{s}.tsv"))
+                 and os.path.isfile(os.path.join(rr_runs, f"Random{s}.tsv"))]
+    if not stems:
+        st.info("No per-seed rankings (`runs/Random<s>.tsv`) for this run in this copy. See README_DATA.md to "
+                "download them.")
+        return
+    with c2:
+        stem = st.selectbox(f"Seed ({len(stems)}/{len(ul.SEEDS)})" if stems[0] != "AllFolderLabel" else "Seed",
+                            stems, index=stems.index("Random42") if "Random42" in stems else 0,
+                            key=f"llm_rrn_seed_{key}",
+                            format_func=lambda x: "seed-independent (ALLFL)" if x == "AllFolderLabel" else x[6:])
+    seed = int(stem[6:]) if stem.startswith("Random") else None
+    topics = ul.load_topics()
+    tid = st.selectbox("Topic", list(topics), key=f"llm_rrn_topic_{key}",
+                       format_func=lambda t: f"T{int(t[-5:])}: {topics[t].get('TITLE', '')}")
+    first_file = os.path.join(first_path, "runs", f"{stem}.tsv")
+    if not os.path.isfile(first_file):                       # seed-independent first stage
+        first_file = os.path.join(first_path, "runs", "AllFolderLabel.tsv")
+    before = ul.read_ranking_tsv(first_file, tid)
+    after = ul.read_ranking_tsv(os.path.join(rr_runs, f"{stem}.tsv"), tid)
+    raw = ul.load_luna_json(f"rerank/{name}/{stem}.json").get(tid, {})
+    qrels = u3.load_folder_qrels().get(tid, {})
+    meta = ul.load_folders_meta()
+    first_rank = {f: r for r, f, _ in before}
+
+    def table(rows, with_change):
+        out = []
+        for r, f, _ in rows:
+            row = {"Rank": r, "Folder": f, "Label": meta.get(f, {}).get("label", ""),
+                   "Grade": u3.grade_badge(qrels.get(f, 0))}
+            if with_change:
+                old = first_rank.get(f)
+                row["Change"] = "new" if old is None else ("=" if old == r else (f"↑{old - r}" if old > r else f"↓{r - old}"))
+            out.append(row)
+        return pd.DataFrame(out)
+
+    ca, cb = st.columns(2)
+    with ca:
+        st.markdown("**First stage (top 20)**")
+        st.dataframe(table(before, False), hide_index=True, width="stretch")
+    with cb:
+        st.markdown("**After LLM rerank**")
+        st.dataframe(table(after, True), hide_index=True, width="stretch")
+    if raw:
+        st.caption(f"Model answer (candidate numbers, best first): {raw.get('order')} · valid: {raw.get('valid')} · "
+                   f"repaired: {raw.get('repaired')}")
+        if raw.get("repaired"):
+            st.warning("The model's order was not a permutation; it was repaired (repeats dropped, missing "
+                       "candidates appended in first-stage order).")
+
+    docs_by_folder = None
+    if info.get("documents_per_candidate") and seed is not None:
+        docs_by_folder = {}
+        lookup = _items_lookup()
+        for d in ul.sampled_doc_ids(seed):
+            text = _doc_text(d)
+            fid = lookup.get(d, ("", "", ""))[2]
+            if text and fid:
+                docs_by_folder.setdefault(fid, []).append(text)
+    lines = [ul.rerank_candidate_line(n, f, None if docs_by_folder is None else docs_by_folder.get(f, []),
+                                      docs_per_candidate=info.get("documents_per_candidate") or 3)
+             for n, (_, f, _) in enumerate(before, 1)]
+    st.markdown("**What the model saw**")
+    st.code("information_need:\n" + "\n".join(topics[tid].get(f, "") for f in
+            ul.QUERY_TYPE_FIELDS[ul.QT_FILE[first.split('.')[1]]] if topics[tid].get(f)), language=None, wrap_lines=True)
+    if lines:
+        shown = [f"{f}  {line}" for (_, f, _), line in zip(before, lines)]
+        st.code(shown[0], language=None, wrap_lines=True)
+        with st.expander(f"All {len(shown)} candidates"):
+            st.code("\n".join(shown), language=None, wrap_lines=True)
+        st.caption("The folder id on the left matches the tables above; the model saw only the text after it.")
+
+
+@st.fragment
+def _render_strategy(strat, expanded):
+    with st.expander(f"**{strat.code}** — {strat.name}", expanded=expanded):
+        st.markdown("**How it works:**\n" + "\n".join(f"- {h}" for h in strat.how))
+        for note in strat.notes:
+            st.caption(note)
+        st.markdown("#### Prompt")
+        _render_prompt_groups(strat.prompt)
+        st.markdown("#### Real example")
+        key = f"{strat.slot}_{strat.code}"
+        try:
+            if strat.example in ("folder", "folder_seed", "folder_cv", "d2q") or (strat.example == "none" and strat.slot == "table"):
+                _render_folder_example(strat, key)
+            elif strat.example in ("query", "query_cv"):
+                _render_query_example(strat, key)
+            elif strat.example == "rerank":
+                _render_rerank_example(key)
+            else:
+                st.info("No example: see the notes above.")
+        except Exception as exc:                                  # an example must never break the page
+            st.error(f"Could not render the example: {exc}")
+
+
+def run_llm_experiments_ui():
+    st.title("🤖 LLM Experiments")
+    st.markdown(
+        "Every LLM experiment changes one of three texts. On the **folder side**, the text indexed in the "
+        "folder-label field (of the sampled documents and of the ALLFL index) gets an LLM description of the "
+        "folder. On the **query side**, the query sent to the rankers gets LLM-written expansion text. With "
+        "**reranking**, the LLM reorders the first stage's top 20 folders.\n\n"
+        "All text was written by GPT-6-luna through DSPy and is stored in `data/llm_calls_luna/`. The prompts "
+        "and examples below are read from the code and those files when the page loads. A run name encodes "
+        "which texts it used:")
+    st.code(reg.RUN_NAME_DIAGRAM, language=None)
+    with st.expander("Collection context (an input of every prompt)"):
+        st.code(ul.collection_context(), language=None, wrap_lines=True)
+
+    missing = reg.check_registry(ur.scan_runs())
+    if missing:
+        st.error(f"Slot values with no registry entry (llm_registry.py): {', '.join(missing)}")
+
+    tabs = st.tabs(["📁 Folder side", "🔎 Query side", "🧬 Query sets (who wrote the text)", "🔁 Reranking"])
+    for tab, slot in zip(tabs, ["table", "column", "query_set", "reranker"]):
+        with tab:
+            for i, strat in enumerate(reg.strategies_for(slot)):
+                _render_strategy(strat, expanded=(i == 0))
 
 
 # ============================================================
@@ -995,7 +1438,7 @@ def run_data_overview_ui():
             expanded_txt = snc_flds["label_parent_expanded"].iloc[0] if len(snc_flds) > 0 else "N/A"
             st.markdown(
                 f'<div style="background-color: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 12px; padding: 12px 16px; min-height: 82px;">'
-                f'<div style="color: #64748B; font-size: 0.85rem;">Expanded Label</div>'
+                f'<div style="color:#000000; font-size: 0.85rem;">Expanded Label</div>'
                 f'<div style="color: #0F172A; font-size: 0.88rem; font-weight: 600; margin-top: 4px; line-height: 1.3;">{expanded_txt}</div>'
                 f'</div>',
                 unsafe_allow_html=True
@@ -1313,7 +1756,7 @@ Analyze what the Training Set includes:
 - **Compare Training Sets**: Overlay two Training Sets to compare their coverage distributions.
 
 ### 🔬 Single Experiment Viewer
-Select an experiment configuration to compare models (e.g., BM25 vs ColBERT) within it:
+Pick a run with the slot filters (see *Run Names* below); a card under the filters decodes its name:
 - **Global Performance**: KPI metrics showing mean nDCG@5 ± 95% margin per model.
 - **Model Comparison Chart**: Interactive dumbbell chart showing per-topic mean nDCG@5 and confidence intervals.
 - **Seed Variance**: Horizontal box plot displaying nDCG@5 distribution across seeds per topic.
@@ -1321,9 +1764,12 @@ Select an experiment configuration to compare models (e.g., BM25 vs ColBERT) wit
 ### ⚔️ Two-Experiment Viewer
 Direct side-by-side comparison of any two experiment runs across any sets of experiments:
 - **Side-by-Side KPIs & Delta**: Global mean nDCG@5 metrics and exact performance delta (A - B).
-- **Wilcoxon Signed-Rank Test**: Statistical significance test results (p-value, winner, win counts).
+- **Wilcoxon Signed-Rank Test**: p-value, winner and win counts, paired by seed or by topic (see *Significance Test* below).
 - **Overlay Comparison Chart**: Side-by-side topic overlay dumbbell chart comparing Run A (Blue) vs Run B (Orange).
 - **Topic Separation Analysis**: Categorized breakdown of topics into Better (≥ +10%), About Equal (within ±10%), and Worse (≤ -10%).
+
+### 🤖 LLM Experiments
+One section per LLM strategy (folder side, query side, query sets, reranking): how it works, the exact prompt (read from the code, with the GEPA-optimized instructions side by side), and a real example (the model's input and its output).
 
 ---
 
@@ -1353,44 +1799,77 @@ Direct side-by-side comparison of any two experiment runs across any sets of exp
 
 ---
 
-### 🧪 Experiment Naming Conventions (5-Element Dotted Notation)
+### 🧪 Run Names
 
-Run folders in `all_runs/` follow the structured 5-element dotted pattern:
-`{Sample}.{Ranker}.{Fields}.{LabelSearch}.{ScorePropagation}`
+Every run directory is named by its slots, separated by dots. The base is six slots:
 
-#### 1. Sample (`Sample`)
-- **`U`**: Uniform random sampling (~630 digitized docs, 5 per box)
-- **`K`**: Skewed non-uniform sampling (~630 digitized docs)
-- **`A`**: All 31,681 documents indexed (upper bound ceiling)
+```
+<Sample>.<QF>.<Scoring>.<Fields>.<Expansion>.<Partner>[.OfficialECF]
+  U5    . TD- .   W     .  TOFS  .   s---2   .    c
+```
 
-#### 2. Ranker / Model (`Ranker`)
-- **`B`**: BM25F
-- **`C`**: ColBERT late-interaction
-- **`E`**: Dense Embedding Similarity (`all-mpnet-base-v2`)
-- **`W`**: Reciprocal Rank Fusion (RRF) of Weighted BM25 + ColBERT + Embeddings
-- **`X`**: RRF of BM25 + ColBERT
-- **`Y`**: RRF of BM25 + Embeddings
-- **`Z`**: RRF of BM25 + ColBERT + Embeddings
+| Slot | Values | Meaning |
+|---|---|---|
+| **Sample** | `U5` | Uniform sample, 5 docs per box, 30 random seeds (the default) |
+| | `U1`–`U4` | Uniform sample, 1–4 docs per box (legacy sweep) |
+| | `K5` | Uneven sample (630 docs, from 44 in one box down to 1 in many) |
+| | `A-` | Every document indexed (an oracle with no sampling) |
+| **QF** | `T--`, `TD-`, `TDN` | Topic title / + description / + narrative |
+| **Scoring** | `B` / `L` | BM25(F), untuned / hand-tuned field weights |
+| | `C` / `E` | ColBERT / dense embeddings (`all-mpnet-base-v2`) |
+| | `W` / `Z` | Doc-level RRF of BM25F + Embeddings + ColBERT, tuned / untuned BM25F |
+| | `V` / `X` / `Y` | RRF of tuned BM25F + ColBERT / untuned BM25F + ColBERT / untuned BM25F + Embeddings |
+| | `-` | No document ranker (pure all-folder-label run) |
+| **Fields** | 4-char mask over **T**itle / **O**CR / **F**older label / **S**ummary | `TOFS` = all four, `--F-` = folder label only, `----` = none (ALLFL run) |
+| **Expansion** | `-` | None: a folder scores as the max of its docs' scores |
+| | letters + `k` | Label propagation to neighbouring folders, capped at `k`: `m` same SNC, `s` similar SNC, `x` same box, `d` close date (e.g. `s---2`) |
+| **Partner** | `-` | No fusion with a folder-level ranker |
+| | `b` / `c` / `e` | Fused with an **ALLFL** ranker (every folder's label indexed once, no sampled document): BM25 / ColBERT / Embeddings. In `-.----.-.<x>` runs the ALLFL ranker *is* the run. |
+| | `x` / `y` / `z` | ALLFL with a fused ranker (legacy only) |
 
-#### 3. Fields (`Fields`, 4-character string: `T`, `O`, `F`, `S`)
-- **`T`**: Title, **`O`**: OCR, **`F`**: Folder Label, **`S`**: Summary
-- Unused fields are represented with dashes (`-`).
-- Examples: `T---` (Title only), `-O--` (OCR only), `--F-` (Folder Label only), `---S` (Summary only), `T-FS` (Title+Folder+Summary), `TOF-` (Title+OCR+Folder), `TOFS` (All document fields), `----` (No doc fields, label search only).
+The **LLM (luna)** runs add two to four slots after these six:
 
-#### 4. Label Search (`LabelSearch`)
-- **`L`**: Weighted RRF with full-collection folder Label search
-- **`x`**: No label search
+```
+U5.<QF>.<config>.<TABLE>.<COLUMN>[.<QUERY SET>][.<RERANKER>]
+U5.TD-.W.TOFS.s---2.c.FLEV.CT.QCV
+```
 
-#### 5. Score Propagation (`ScorePropagation`)
-- **`1`**: Same SNC code score propagation depth 1
-- **`2`**: Same SNC code score propagation depth 2
-- **`x`**: No score propagation
+`TABLE` is the folder-side strategy (`PLAIN`, `FLAUG`, `FLEV`, …), `COLUMN` the query-side strategy (`BASE`, `DOC`,
+`FL`, `DOCFL`, `CT`), `QUERY SET` which prompts wrote the query text (none = hand-written, `.QCV`, `.QALL`, `.QWEB`),
+and `RERANKER` is `.RRN` (LLM listwise rerank of the top 20). The **🤖 LLM Experiments** page explains each value
+and shows its prompt and a real example.
 
-#### Folder Naming Examples
-- **`U.B.T---.x.x`**: Uniform sample, BM25 ranker, Title field only, no label search, no score propagation.
-- **`U.W.TOFS.L.2`**: Uniform sample, Weighted RRF ranker, all document fields, Label search enabled, propagation depth 2.
-- **`K.Z.TOFS.x.x`**: Skewed sample, RRF(B+C+E) ranker, all document fields, no label search, no score propagation.
-- **`A.Y.T-FS.x.x`**: All documents sample, RRF(B+E) ranker, Title+Folder+Summary fields, no label search, no score propagation.
+### 🗂️ Run Families and Folders
+
+| Family | Folder | What it holds |
+|---|---|---|
+| Baselines (no LLM) | `all_runs/` | The NTCIR-18 replication runs: 6-slot names, plus `*.OfficialECF` (the official 3-set protocol) |
+| LLM experiments | `all_runs_luna/` | The DSPy / GPT-6-luna study: 8-9 slot names |
+| LLM experiments | `all_runs_luna_rerank/` | The 21 reranked runs (`….RRN`) |
+
+**Picking a run:** both viewers use the same row of filters, in slot order: **Family → QF → Retrieval config →
+Folder-side → Query-side → Query set → Reranker** (baselines show **Protocol** instead of the last four). Each filter
+only offers values that exist given the filters before it, so the last one always leaves exactly one run; its full
+name is shown under the filters. The **🔄 Reload runs** button in the sidebar rescans the folders.
+
+Legacy and luna runs with ColBERT or Embeddings differ in implementation: legacy ColBERT used the PLAID index and
+luna uses exact MaxSim, so the same configuration does not give the same numbers. When the question is the LLM's
+effect, compare luna runs with luna runs (e.g. `….FLAUG.BASE` vs `….PLAIN.BASE`).
+
+### 📐 Significance Test (Two-Experiment Viewer)
+
+The Wilcoxon signed-rank test pairs the two runs in one of two ways, and the panel always says which, with n:
+
+- **Paired by seed** (n = common seeds, usually 30): when both runs vary by seed. For each seed, the run's mean
+  nDCG@5 over the 45 topics.
+- **Paired by topic** (n = 45): when **either** run is seed-independent. For each topic, the run's nDCG@5 averaged
+  over its seeds.
+
+A run is **seed-independent** when it has fewer than 2 `Random*.json` seed files, or when all its seed files give
+identical per-topic nDCG@5 (decided from the files, not the name). Runs whose results do not depend on the training
+sample (no per-seed files, or identical per-seed files: ALLFL with fixed folder text, OfficialECF) cannot be paired
+by seed. The test then pairs the 45 topics, each run's seed-averaged nDCG@5 per topic. Wins and losses are counted
+over the same units; when every difference is zero the result is "Identical" (p = 1).
 """)
 
 
@@ -1442,36 +1921,36 @@ def run_ecf_inspector_ui():
     with mc1:
         st.markdown(
             f'<div style="background:#F8FAFC; border:1px solid #E2E8F0; border-radius:12px; padding:14px 16px; margin-bottom:20px;">'
-            f'<div style="color:#64748B; font-size:0.85rem; font-weight:600;">📄 Documents Included</div>'
+            f'<div style="color:#000000; font-size:0.85rem; font-weight:600;">📄 Documents Included</div>'
             f'<div style="color:#0F172A; font-weight:700; font-size:1.25rem; margin-top:2px;">{metrics_a["docs_included"]:,} / {metrics_a["docs_total"]:,}</div>'
-            f'<div style="color:#64748B; font-size:0.85rem; margin-top:2px;">{metrics_a["docs_pct"]}% of total</div>'
+            f'<div style="color:#000000; font-size:0.85rem; margin-top:2px;">{metrics_a["docs_pct"]}% of total</div>'
             f'</div>',
             unsafe_allow_html=True
         )
     with mc2:
         st.markdown(
             f'<div style="background:#F8FAFC; border:1px solid #E2E8F0; border-radius:12px; padding:14px 16px; margin-bottom:20px;">'
-            f'<div style="color:#64748B; font-size:0.85rem; font-weight:600;">📂 Folders with ≥1 Doc</div>'
+            f'<div style="color:#000000; font-size:0.85rem; font-weight:600;">📂 Folders with ≥1 Doc</div>'
             f'<div style="color:#0F172A; font-weight:700; font-size:1.25rem; margin-top:2px;">{metrics_a["folders_covered"]:,} / {metrics_a["folders_total"]:,}</div>'
-            f'<div style="color:#64748B; font-size:0.85rem; margin-top:2px;">{metrics_a["folders_pct"]}% covered</div>'
+            f'<div style="color:#000000; font-size:0.85rem; margin-top:2px;">{metrics_a["folders_pct"]}% covered</div>'
             f'</div>',
             unsafe_allow_html=True
         )
     with mc3:
         st.markdown(
             f'<div style="background:#F8FAFC; border:1px solid #E2E8F0; border-radius:12px; padding:14px 16px; margin-bottom:20px;">'
-            f'<div style="color:#64748B; font-size:0.85rem; font-weight:600;">📦 Boxes Represented</div>'
+            f'<div style="color:#000000; font-size:0.85rem; font-weight:600;">📦 Boxes Represented</div>'
             f'<div style="color:#0F172A; font-weight:700; font-size:1.25rem; margin-top:2px;">{metrics_a["boxes_covered"]:,} / {metrics_a["boxes_total"]:,}</div>'
-            f'<div style="color:#64748B; font-size:0.85rem; margin-top:2px;">{metrics_a["boxes_pct"]}% covered</div>'
+            f'<div style="color:#000000; font-size:0.85rem; margin-top:2px;">{metrics_a["boxes_pct"]}% covered</div>'
             f'</div>',
             unsafe_allow_html=True
         )
     with mc4:
         st.markdown(
             f'<div style="background:#F8FAFC; border:1px solid #E2E8F0; border-radius:12px; padding:14px 16px; margin-bottom:20px;">'
-            f'<div style="color:#64748B; font-size:0.85rem; font-weight:600;">📊 Avg Docs/Covered Folder</div>'
+            f'<div style="color:#000000; font-size:0.85rem; font-weight:600;">📊 Avg Docs/Covered Folder</div>'
             f'<div style="color:#0F172A; font-weight:700; font-size:1.25rem; margin-top:2px;">{metrics_a["avg_docs_per_folder"]:.2f}</div>'
-            f'<div style="color:#64748B; font-size:0.85rem; margin-top:2px;">&nbsp;</div>'
+            f'<div style="color:#000000; font-size:0.85rem; margin-top:2px;">&nbsp;</div>'
             f'</div>',
             unsafe_allow_html=True
         )
@@ -1720,9 +2199,13 @@ def main():
             "🧪 Training Set Viewer",
             "🔬 Single Experiment Viewer",
             "⚔️ Two-Experiment Viewer",
+            "🤖 LLM Experiments",
             "📖 How-To Guide"
         ]
     )
+    if st.sidebar.button("🔄 Reload runs", help="Rescan all_runs/, all_runs_luna/ and all_runs_luna_rerank/."):
+        st.cache_data.clear()
+        st.rerun()
 
     if st.session_state.get("_last_app_mode") != app_mode:
         st.session_state["_last_app_mode"] = app_mode
@@ -1741,6 +2224,8 @@ def main():
         run_single_experiment_ui()
     elif app_mode == "⚔️ Two-Experiment Viewer":
         run_two_experiment_ui()
+    elif app_mode == "🤖 LLM Experiments":
+        run_llm_experiments_ui()
     elif app_mode == "📖 How-To Guide":
         run_howto_ui()
 

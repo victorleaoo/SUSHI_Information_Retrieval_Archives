@@ -1,0 +1,1566 @@
+{
+  "query_type": "TD",
+  "model": "gpt-6-luna",
+  "set": "opt_cv",
+  "checks": "structural",
+  "generated_at": "2026-10-09T08:33:21.010159",
+  "topics": {
+    "T18Eval-00001": {
+      "topic_id": "T18Eval-00001",
+      "original_query": {
+        "TITLE": "Future space missions",
+        "DESCRIPTION": "Find documents that describe plans for one or more specific future space missions by any nation, organization, or individual."
+      },
+      "query_text": "Future space missions\nFind documents that describe plans for one or more specific future space missions by any nation, organization, or individual.",
+      "core_themes": {
+        "raw_response": "{\"core_themes\": \"Seek State Department and Brazil post records from 1963–1973 describing proposed or planned future space missions by any country, organization, or individual. Include mission objectives, schedules, spacecraft or launch plans, international cooperation, and official or public statements about forthcoming flights, while distinguishing planned missions from completed space activities. Search likely under Political Affairs & Relations and any directly relevant scientific, technical, aviation, or international-organization subject headings supported by the files’ filing guide; retain the period’s terminology for space exploration, satellites, and manned or unmanned flight, including Brazilian-language usage where it appears.\", \"related_concepts\": [\"Political Affairs & Relations\", \"space exploration\", \"space program\", \"space mission\", \"planned space flight\", \"future space flight\", \"spacecraft\", \"satellite\", \"artificial satellite\", \"manned space flight\", \"unmanned space flight\", \"astronaut\", \"cosmonaut\", \"rocket launch\", \"launch vehicle\", \"NASA\", \"National Aeronautics and Space Administration\", \"United States space program\", \"Soviet space program\", \"programa espacial\", \"missão espacial\"]}",
+        "parsed": {
+          "core_themes": "Seek State Department and Brazil post records from 1963–1973 describing proposed or planned future space missions by any country, organization, or individual. Include mission objectives, schedules, spacecraft or launch plans, international cooperation, and official or public statements about forthcoming flights, while distinguishing planned missions from completed space activities. Search likely under Political Affairs & Relations and any directly relevant scientific, technical, aviation, or international-organization subject headings supported by the files’ filing guide; retain the period’s terminology for space exploration, satellites, and manned or unmanned flight, including Brazilian-language usage where it appears.",
+          "related_concepts": [
+            "Political Affairs & Relations",
+            "space exploration",
+            "space program",
+            "space mission",
+            "planned space flight",
+            "future space flight",
+            "spacecraft",
+            "satellite",
+            "artificial satellite",
+            "manned space flight",
+            "unmanned space flight",
+            "astronaut",
+            "cosmonaut",
+            "rocket launch",
+            "launch vehicle",
+            "NASA",
+            "National Aeronautics and Space Administration",
+            "United States space program",
+            "Soviet space program",
+            "programa espacial",
+            "missão espacial"
+          ]
+        },
+        "valid": true,
+        "program": "core_themes_B",
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "created_at": "2026-10-09T08:34:09.811818"
+      }
+    },
+    "T18Eval-00002": {
+      "topic_id": "T18Eval-00002",
+      "original_query": {
+        "TITLE": "Brazilian submarines",
+        "DESCRIPTION": "Find documents that mention the operation of submarines by the Brazilian Navy."
+      },
+      "query_text": "Brazilian submarines\nFind documents that mention the operation of submarines by the Brazilian Navy.",
+      "core_themes": {
+        "raw_response": "{\"core_themes\": \"Records mentioning the operation of submarines by the Brazilian Navy, including reports or correspondence about submarine operations in Brazil during 1963–1973. These materials may be filed under naval or military affairs rather than only under political relations.\", \"related_concepts\": [\"Brazilian Navy\", \"Brazilian submarines\", \"submarine operations\", \"submarine service\", \"naval affairs\", \"Brazilian military\", \"naval forces\"]}",
+        "parsed": {
+          "core_themes": "Records mentioning the operation of submarines by the Brazilian Navy, including reports or correspondence about submarine operations in Brazil during 1963–1973. These materials may be filed under naval or military affairs rather than only under political relations.",
+          "related_concepts": [
+            "Brazilian Navy",
+            "Brazilian submarines",
+            "submarine operations",
+            "submarine service",
+            "naval affairs",
+            "Brazilian military",
+            "naval forces"
+          ]
+        },
+        "valid": true,
+        "program": "core_themes_A",
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "created_at": "2026-10-09T08:33:57.960895"
+      }
+    },
+    "T18Eval-00003": {
+      "topic_id": "T18Eval-00003",
+      "original_query": {
+        "TITLE": "Alagoas flood",
+        "DESCRIPTION": "I'm interested in learning about damage from flooding in Alagoas in 1969 and in American help with the recovery effort."
+      },
+      "query_text": "Alagoas flood\nI'm interested in learning about damage from flooding in Alagoas in 1969 and in American help with the recovery effort.",
+      "core_themes": {
+        "raw_response": "{\"core_themes\": \"U.S. Department of State records concerning flood damage in Alagoas, Brazil, in 1969, and American assistance with recovery. The records may document assessments of damage and U.S. aid or other support for relief and reconstruction.\", \"related_concepts\": [\"Alagoas flood, 1969\", \"flood damage\", \"flood relief\", \"disaster relief\", \"recovery assistance\", \"U.S. assistance\", \"Brazil—natural disasters\"]}",
+        "parsed": {
+          "core_themes": "U.S. Department of State records concerning flood damage in Alagoas, Brazil, in 1969, and American assistance with recovery. The records may document assessments of damage and U.S. aid or other support for relief and reconstruction.",
+          "related_concepts": [
+            "Alagoas flood, 1969",
+            "flood damage",
+            "flood relief",
+            "disaster relief",
+            "recovery assistance",
+            "U.S. assistance",
+            "Brazil—natural disasters"
+          ]
+        },
+        "valid": true,
+        "program": "core_themes_A",
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "created_at": "2026-10-09T08:33:57.960915"
+      }
+    },
+    "T18Eval-00004": {
+      "topic_id": "T18Eval-00004",
+      "original_query": {
+        "TITLE": "Grain sorghum",
+        "DESCRIPTION": "Tell me about grain sorghum operations in Northeast Brazil."
+      },
+      "query_text": "Grain sorghum\nTell me about grain sorghum operations in Northeast Brazil.",
+      "core_themes": {
+        "raw_response": "{\"core_themes\": \"Records concerning grain sorghum operations in Northeast Brazil, including activities or operations explicitly related to the crop in that region. The request does not specify particular organizations, dates, or operational aspects, so retrieval should remain focused on grain sorghum and its regional production or cultivation.\", \"related_concepts\": [\"grain sorghum\", \"sorghum production\", \"sorghum cultivation\", \"grain crops\", \"agriculture\", \"Northeast Brazil\"]}",
+        "parsed": {
+          "core_themes": "Records concerning grain sorghum operations in Northeast Brazil, including activities or operations explicitly related to the crop in that region. The request does not specify particular organizations, dates, or operational aspects, so retrieval should remain focused on grain sorghum and its regional production or cultivation.",
+          "related_concepts": [
+            "grain sorghum",
+            "sorghum production",
+            "sorghum cultivation",
+            "grain crops",
+            "agriculture",
+            "Northeast Brazil"
+          ]
+        },
+        "valid": true,
+        "program": "core_themes_A",
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "created_at": "2026-10-09T08:33:57.960928"
+      }
+    },
+    "T18Eval-00005": {
+      "topic_id": "T18Eval-00005",
+      "original_query": {
+        "TITLE": "Beef cattle industry",
+        "DESCRIPTION": "Locate documents containing information on Brazil's beef cattle industry and the distribution of its products."
+      },
+      "query_text": "Beef cattle industry\nLocate documents containing information on Brazil's beef cattle industry and the distribution of its products.",
+      "core_themes": {
+        "raw_response": "{\"core_themes\": \"Documents concerning Brazil’s beef cattle industry and the distribution of its products, including records on cattle production, meat processing, and domestic or export channels where these relate to the stated industry and product distribution.\", \"related_concepts\": [\"Beef cattle industry\", \"Cattle raising\", \"Beef production\", \"Meatpacking industry\", \"Beef distribution\", \"Meat trade\", \"Livestock industry\", \"Agricultural trade\"]}",
+        "parsed": {
+          "core_themes": "Documents concerning Brazil’s beef cattle industry and the distribution of its products, including records on cattle production, meat processing, and domestic or export channels where these relate to the stated industry and product distribution.",
+          "related_concepts": [
+            "Beef cattle industry",
+            "Cattle raising",
+            "Beef production",
+            "Meatpacking industry",
+            "Beef distribution",
+            "Meat trade",
+            "Livestock industry",
+            "Agricultural trade"
+          ]
+        },
+        "valid": true,
+        "program": "core_themes_A",
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "created_at": "2026-10-09T08:33:57.960940"
+      }
+    },
+    "T18Eval-00006": {
+      "topic_id": "T18Eval-00006",
+      "original_query": {
+        "TITLE": "Cocoa exports",
+        "DESCRIPTION": "I want to see documents about the exportation of cocoa out of Brazil."
+      },
+      "query_text": "Cocoa exports\nI want to see documents about the exportation of cocoa out of Brazil.",
+      "core_themes": {
+        "raw_response": "{\"core_themes\": \"Seek Department of State and U.S. diplomatic or consular records from 1963–1973 concerning Brazil’s exportation of cocoa and cocoa products. Likely documentation includes export volumes and destinations, trade policy and controls, prices and market conditions, port or shipping arrangements, and correspondence with Brazilian government agencies, exporters, and trade organizations. Because the files use administrative subject headings, relevant records may be filed under Economic Affairs and Trade as well as agricultural commodities or Brazil’s foreign trade. Retain the focus on exports originating in Brazil during the stated period; include cocoa beans and processed cocoa only where records connect them to export activity.\", \"related_concepts\": [\"Economic Affairs\", \"Trade\", \"Foreign Trade\", \"Exports\", \"Brazilian exports\", \"Cocoa\", \"Cocoa beans\", \"Cacau\", \"Exportação de cacau\", \"Comércio exterior\", \"Agricultural commodities\", \"Agriculture\", \"Commodity prices\", \"Export controls\", \"Brazilian Ministry of Agriculture\", \"Brazilian Ministry of Industry and Commerce\", \"Brazilian Institute of Cocoa (Instituto Brasileiro do Cacau)\", \"Cocoa exporters\", \"Cocoa-producing regions\", \"Port shipments\"]}",
+        "parsed": {
+          "core_themes": "Seek Department of State and U.S. diplomatic or consular records from 1963–1973 concerning Brazil’s exportation of cocoa and cocoa products. Likely documentation includes export volumes and destinations, trade policy and controls, prices and market conditions, port or shipping arrangements, and correspondence with Brazilian government agencies, exporters, and trade organizations. Because the files use administrative subject headings, relevant records may be filed under Economic Affairs and Trade as well as agricultural commodities or Brazil’s foreign trade. Retain the focus on exports originating in Brazil during the stated period; include cocoa beans and processed cocoa only where records connect them to export activity.",
+          "related_concepts": [
+            "Economic Affairs",
+            "Trade",
+            "Foreign Trade",
+            "Exports",
+            "Brazilian exports",
+            "Cocoa",
+            "Cocoa beans",
+            "Cacau",
+            "Exportação de cacau",
+            "Comércio exterior",
+            "Agricultural commodities",
+            "Agriculture",
+            "Commodity prices",
+            "Export controls",
+            "Brazilian Ministry of Agriculture",
+            "Brazilian Ministry of Industry and Commerce",
+            "Brazilian Institute of Cocoa (Instituto Brasileiro do Cacau)",
+            "Cocoa exporters",
+            "Cocoa-producing regions",
+            "Port shipments"
+          ]
+        },
+        "valid": true,
+        "program": "core_themes_B",
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "created_at": "2026-10-09T08:34:09.811845"
+      }
+    },
+    "T18Eval-00007": {
+      "topic_id": "T18Eval-00007",
+      "original_query": {
+        "TITLE": "Manioc cultivation",
+        "DESCRIPTION": "Tell me about manioc cultivation in Brazil."
+      },
+      "query_text": "Manioc cultivation\nTell me about manioc cultivation in Brazil.",
+      "core_themes": {
+        "raw_response": "{\"core_themes\": \"Seek Department of State and U.S. diplomatic-post records from 1963–1973 concerning the cultivation of manioc in Brazil, using the period’s common term mandioca as well as cassava. Relevant records may describe production, planting and harvesting, agricultural conditions, yields, and the crop’s economic or food-supply role, particularly where these matters appear in reporting on Brazilian agriculture or rural development. Search under the collection’s supported Agricultural Matters heading, with Economic Matters as a closely related filing route when cultivation is discussed in terms of production, trade, or the national economy. Keep the focus on manioc cultivation in Brazil during this period.\", \"related_concepts\": [\"Agricultural Matters\", \"Economic Matters\", \"manioc\", \"mandioca\", \"cassava\", \"cultivation\", \"agriculture\", \"agricultural production\", \"crop production\", \"planting\", \"harvesting\", \"yields\", \"Brazilian agriculture\", \"rural development\", \"food crops\", \"food supply\", \"agricultural economy\"]}",
+        "parsed": {
+          "core_themes": "Seek Department of State and U.S. diplomatic-post records from 1963–1973 concerning the cultivation of manioc in Brazil, using the period’s common term mandioca as well as cassava. Relevant records may describe production, planting and harvesting, agricultural conditions, yields, and the crop’s economic or food-supply role, particularly where these matters appear in reporting on Brazilian agriculture or rural development. Search under the collection’s supported Agricultural Matters heading, with Economic Matters as a closely related filing route when cultivation is discussed in terms of production, trade, or the national economy. Keep the focus on manioc cultivation in Brazil during this period.",
+          "related_concepts": [
+            "Agricultural Matters",
+            "Economic Matters",
+            "manioc",
+            "mandioca",
+            "cassava",
+            "cultivation",
+            "agriculture",
+            "agricultural production",
+            "crop production",
+            "planting",
+            "harvesting",
+            "yields",
+            "Brazilian agriculture",
+            "rural development",
+            "food crops",
+            "food supply",
+            "agricultural economy"
+          ]
+        },
+        "valid": true,
+        "program": "core_themes_B",
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "created_at": "2026-10-09T08:34:09.811863"
+      }
+    },
+    "T18Eval-00008": {
+      "topic_id": "T18Eval-00008",
+      "original_query": {
+        "TITLE": "Peace Corps birth control ",
+        "DESCRIPTION": "Find documents that mention the Peace Corps distributing birth control to women in Brazil."
+      },
+      "query_text": "Peace Corps birth control \nFind documents that mention the Peace Corps distributing birth control to women in Brazil.",
+      "core_themes": {
+        "raw_response": "{\"core_themes\": \"Seek Department of State and U.S. diplomatic-post records from 1963–1973 concerning Peace Corps activities in Brazil and reports or correspondence about distributing birth-control materials or contraceptives to Brazilian women. Relevant records may describe the program’s administration, authorization, public reaction, or contact with Brazilian officials and health institutions. Search under Peace Corps and population or family-planning subjects, as well as closely related public-health and political-affairs filing headings when the distribution was discussed as a government, diplomatic, or policy issue. Preserve the focus on Peace Corps distribution to women in Brazil; do not broaden to contraception in general unless records directly connect it to the Corps.\", \"related_concepts\": [\"Peace Corps\", \"Peace Corps in Brazil\", \"birth control\", \"birth-control distribution\", \"contraceptives\", \"contraceptive distribution\", \"family planning\", \"population control\", \"women's health\", \"public health\", \"Brazilian Ministry of Health\", \"Brazilian health authorities\", \"Corpo da Paz\", \"planejamento familiar\", \"controle da natalidade\", \"anticoncepcionais\", \"distribuição de anticoncepcionais\", \"saúde da mulher\", \"POL — Political Affairs & Relations\", \"Brazil—Peace Corps correspondence\"]}",
+        "parsed": {
+          "core_themes": "Seek Department of State and U.S. diplomatic-post records from 1963–1973 concerning Peace Corps activities in Brazil and reports or correspondence about distributing birth-control materials or contraceptives to Brazilian women. Relevant records may describe the program’s administration, authorization, public reaction, or contact with Brazilian officials and health institutions. Search under Peace Corps and population or family-planning subjects, as well as closely related public-health and political-affairs filing headings when the distribution was discussed as a government, diplomatic, or policy issue. Preserve the focus on Peace Corps distribution to women in Brazil; do not broaden to contraception in general unless records directly connect it to the Corps.",
+          "related_concepts": [
+            "Peace Corps",
+            "Peace Corps in Brazil",
+            "birth control",
+            "birth-control distribution",
+            "contraceptives",
+            "contraceptive distribution",
+            "family planning",
+            "population control",
+            "women's health",
+            "public health",
+            "Brazilian Ministry of Health",
+            "Brazilian health authorities",
+            "Corpo da Paz",
+            "planejamento familiar",
+            "controle da natalidade",
+            "anticoncepcionais",
+            "distribuição de anticoncepcionais",
+            "saúde da mulher",
+            "POL — Political Affairs & Relations",
+            "Brazil—Peace Corps correspondence"
+          ]
+        },
+        "valid": true,
+        "program": "core_themes_B",
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "created_at": "2026-10-09T08:34:09.811882"
+      }
+    },
+    "T18Eval-00009": {
+      "topic_id": "T18Eval-00009",
+      "original_query": {
+        "TITLE": "Marijuana consumption",
+        "DESCRIPTION": "I want to find documents about marijuana consumption in Brazil."
+      },
+      "query_text": "Marijuana consumption\nI want to find documents about marijuana consumption in Brazil.",
+      "core_themes": {
+        "raw_response": "{\"core_themes\": \"Documents concerning marijuana consumption in Brazil during 1963–1973, as recorded by the U.S. Department of State and its diplomatic and consular posts. The focus is consumption rather than broader drug policy or trafficking.\", \"related_concepts\": [\"Marijuana\", \"Marihuana\", \"Cannabis\", \"Drug use\", \"Narcotics\", \"Drug addiction\", \"Social conditions\"]}",
+        "parsed": {
+          "core_themes": "Documents concerning marijuana consumption in Brazil during 1963–1973, as recorded by the U.S. Department of State and its diplomatic and consular posts. The focus is consumption rather than broader drug policy or trafficking.",
+          "related_concepts": [
+            "Marijuana",
+            "Marihuana",
+            "Cannabis",
+            "Drug use",
+            "Narcotics",
+            "Drug addiction",
+            "Social conditions"
+          ]
+        },
+        "valid": true,
+        "program": "core_themes_A",
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "created_at": "2026-10-09T08:33:57.960951"
+      }
+    },
+    "T18Eval-00010": {
+      "topic_id": "T18Eval-00010",
+      "original_query": {
+        "TITLE": "Wine industry",
+        "DESCRIPTION": "I want to find documents on Brazil's wine industry."
+      },
+      "query_text": "Wine industry\nI want to find documents on Brazil's wine industry.",
+      "core_themes": {
+        "raw_response": "{\"core_themes\": \"Records concerning Brazil’s wine industry, including its production, business, and development during the Department of State’s 1963–1973 reporting period. The relevant files may be organized under economic or commercial subjects rather than a dedicated wine-industry heading.\", \"related_concepts\": [\"Wine industry\", \"Wine production\", \"Brazilian wine\", \"Winemaking\", \"Wine trade\", \"Agriculture\", \"Commercial affairs\", \"Economic affairs\"]}",
+        "parsed": {
+          "core_themes": "Records concerning Brazil’s wine industry, including its production, business, and development during the Department of State’s 1963–1973 reporting period. The relevant files may be organized under economic or commercial subjects rather than a dedicated wine-industry heading.",
+          "related_concepts": [
+            "Wine industry",
+            "Wine production",
+            "Brazilian wine",
+            "Winemaking",
+            "Wine trade",
+            "Agriculture",
+            "Commercial affairs",
+            "Economic affairs"
+          ]
+        },
+        "valid": true,
+        "program": "core_themes_A",
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "created_at": "2026-10-09T08:33:57.960962"
+      }
+    },
+    "T18Eval-00011": {
+      "topic_id": "T18Eval-00011",
+      "original_query": {
+        "TITLE": "International reactions to coup",
+        "DESCRIPTION": "I need information on international reactions to the 1964 Brazilian coup d'etat."
+      },
+      "query_text": "International reactions to coup\nI need information on international reactions to the 1964 Brazilian coup d'etat.",
+      "core_themes": {
+        "raw_response": "{\"core_themes\": \"Records documenting international reactions to Brazil’s March 1964 coup d’état, including responses by foreign governments and other international actors. The focus is on diplomatic and political reactions to the coup itself.\", \"related_concepts\": [\"Brazilian coup d’état, 1964\", \"March 1964 coup\", \"international reactions\", \"foreign government responses\", \"diplomatic reaction\", \"Political Affairs & Relations\", \"Brazil-U.S. relations\"]}",
+        "parsed": {
+          "core_themes": "Records documenting international reactions to Brazil’s March 1964 coup d’état, including responses by foreign governments and other international actors. The focus is on diplomatic and political reactions to the coup itself.",
+          "related_concepts": [
+            "Brazilian coup d’état, 1964",
+            "March 1964 coup",
+            "international reactions",
+            "foreign government responses",
+            "diplomatic reaction",
+            "Political Affairs & Relations",
+            "Brazil-U.S. relations"
+          ]
+        },
+        "valid": true,
+        "program": "core_themes_A",
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "created_at": "2026-10-09T08:33:57.960974"
+      }
+    },
+    "T18Eval-00012": {
+      "topic_id": "T18Eval-00012",
+      "original_query": {
+        "TITLE": "Japanese fishing boat seizure",
+        "DESCRIPTION": "I'm looking for information on the seizure of Japanese fishing boats in Brazilian waters."
+      },
+      "query_text": "Japanese fishing boat seizure\nI'm looking for information on the seizure of Japanese fishing boats in Brazilian waters.",
+      "core_themes": {
+        "raw_response": "{\"core_themes\": \"Seek Department of State and U.S. diplomatic-post records from 1963–1973 concerning Brazilian authorities’ seizure, detention, or impoundment of Japanese fishing vessels operating in Brazilian waters. Records may document incidents, vessel and crew identification, alleged fishing or territorial-water violations, enforcement actions, diplomatic representations by Japan, and Brazilian responses. Relevant material could be filed under political relations or other directly pertinent subjects for diplomatic and consular reporting, maritime jurisdiction, fisheries regulation, or bilateral disputes. Focus on Japanese vessels and incidents in Brazil during the stated period; include records describing release, penalties, or negotiations where these relate to the seizures.\", \"related_concepts\": [\"Political Affairs & Relations\", \"Consular Affairs\", \"Brazil-Japan relations\", \"Japanese fishing vessels\", \"Japanese fishing boats\", \"seizure of vessels\", \"detention of fishing boats\", \"impoundment of vessels\", \"Brazilian territorial waters\", \"territorial sea\", \"maritime jurisdiction\", \"fisheries regulation\", \"fishing rights\", \"illegal fishing\", \"Brazilian Navy\", \"Brazilian maritime authorities\", \"Japanese nationals\", \"diplomatic representations\", \"vessel release\", \"Brazil-Japan dispute\"]}",
+        "parsed": {
+          "core_themes": "Seek Department of State and U.S. diplomatic-post records from 1963–1973 concerning Brazilian authorities’ seizure, detention, or impoundment of Japanese fishing vessels operating in Brazilian waters. Records may document incidents, vessel and crew identification, alleged fishing or territorial-water violations, enforcement actions, diplomatic representations by Japan, and Brazilian responses. Relevant material could be filed under political relations or other directly pertinent subjects for diplomatic and consular reporting, maritime jurisdiction, fisheries regulation, or bilateral disputes. Focus on Japanese vessels and incidents in Brazil during the stated period; include records describing release, penalties, or negotiations where these relate to the seizures.",
+          "related_concepts": [
+            "Political Affairs & Relations",
+            "Consular Affairs",
+            "Brazil-Japan relations",
+            "Japanese fishing vessels",
+            "Japanese fishing boats",
+            "seizure of vessels",
+            "detention of fishing boats",
+            "impoundment of vessels",
+            "Brazilian territorial waters",
+            "territorial sea",
+            "maritime jurisdiction",
+            "fisheries regulation",
+            "fishing rights",
+            "illegal fishing",
+            "Brazilian Navy",
+            "Brazilian maritime authorities",
+            "Japanese nationals",
+            "diplomatic representations",
+            "vessel release",
+            "Brazil-Japan dispute"
+          ]
+        },
+        "valid": true,
+        "program": "core_themes_B",
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "created_at": "2026-10-09T08:34:09.811898"
+      }
+    },
+    "T18Eval-00013": {
+      "topic_id": "T18Eval-00013",
+      "original_query": {
+        "TITLE": "Brazilian immigration to America",
+        "DESCRIPTION": "I need to find documents that describe immigration process of Brazilian citizens to America."
+      },
+      "query_text": "Brazilian immigration to America\nI need to find documents that describe immigration process of Brazilian citizens to America.",
+      "core_themes": {
+        "raw_response": "{\"core_themes\": \"Records describing Brazilian citizens’ immigration to the United States, particularly the process of applying to enter or immigrate, as documented by the Department of State and its diplomatic and consular posts in Brazil between 1963 and 1973. Relevant records may be filed under immigration, visas, or consular affairs.\", \"related_concepts\": [\"Brazilian immigration to the United States\", \"Brazilian citizens immigrating to the United States\", \"U.S. immigration procedures\", \"immigrant visas\", \"visa applications\", \"Consular Affairs\", \"immigration and naturalization\"]}",
+        "parsed": {
+          "core_themes": "Records describing Brazilian citizens’ immigration to the United States, particularly the process of applying to enter or immigrate, as documented by the Department of State and its diplomatic and consular posts in Brazil between 1963 and 1973. Relevant records may be filed under immigration, visas, or consular affairs.",
+          "related_concepts": [
+            "Brazilian immigration to the United States",
+            "Brazilian citizens immigrating to the United States",
+            "U.S. immigration procedures",
+            "immigrant visas",
+            "visa applications",
+            "Consular Affairs",
+            "immigration and naturalization"
+          ]
+        },
+        "valid": true,
+        "program": "core_themes_A",
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "created_at": "2026-10-09T08:33:57.960986"
+      }
+    },
+    "T18Eval-00014": {
+      "topic_id": "T18Eval-00014",
+      "original_query": {
+        "TITLE": "El Chocon Dam",
+        "DESCRIPTION": "I'm looking for documents mentioning the El Chocon Dam."
+      },
+      "query_text": "El Chocon Dam\nI'm looking for documents mentioning the El Chocon Dam.",
+      "core_themes": {
+        "raw_response": "{\"core_themes\": \"Seek Department of State and U.S. diplomatic-post records from 1963–1973 that mention Argentina’s El Chocón Dam project, including reporting on its planning, construction, financing, technical development, and significance to Argentine power generation and regional development. Because the project was located in Argentina, references in Brazil files may arise in comparative reporting, Brazilian diplomatic or economic interest, regional energy and infrastructure discussions, or U.S. assessments of Argentine policy and development. Search records using period spellings and names for El Chocón and its associated hydroelectric project; include only documents that connect the dam to Brazil, U.S. relations, or broader South American affairs.\", \"related_concepts\": [\"El Chocón Dam\", \"El Chocón hydroelectric complex\", \"El Chocón-Cerros Colorados\", \"El Chocon\", \"Represa de El Chocón\", \"Complejo hidroeléctrico El Chocón-Cerros Colorados\", \"Argentina—economic affairs\", \"Argentina—electric power\", \"hydroelectric power\", \"hydroelectric development\", \"power generation\", \"energy resources\", \"public works\", \"dam construction\", \"infrastructure development\", \"regional development\", \"Argentine economic development\", \"South American energy cooperation\", \"Brazil-Argentina relations\", \"Argentine government development plans\"]}",
+        "parsed": {
+          "core_themes": "Seek Department of State and U.S. diplomatic-post records from 1963–1973 that mention Argentina’s El Chocón Dam project, including reporting on its planning, construction, financing, technical development, and significance to Argentine power generation and regional development. Because the project was located in Argentina, references in Brazil files may arise in comparative reporting, Brazilian diplomatic or economic interest, regional energy and infrastructure discussions, or U.S. assessments of Argentine policy and development. Search records using period spellings and names for El Chocón and its associated hydroelectric project; include only documents that connect the dam to Brazil, U.S. relations, or broader South American affairs.",
+          "related_concepts": [
+            "El Chocón Dam",
+            "El Chocón hydroelectric complex",
+            "El Chocón-Cerros Colorados",
+            "El Chocon",
+            "Represa de El Chocón",
+            "Complejo hidroeléctrico El Chocón-Cerros Colorados",
+            "Argentina—economic affairs",
+            "Argentina—electric power",
+            "hydroelectric power",
+            "hydroelectric development",
+            "power generation",
+            "energy resources",
+            "public works",
+            "dam construction",
+            "infrastructure development",
+            "regional development",
+            "Argentine economic development",
+            "South American energy cooperation",
+            "Brazil-Argentina relations",
+            "Argentine government development plans"
+          ]
+        },
+        "valid": true,
+        "program": "core_themes_B",
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "created_at": "2026-10-09T08:34:09.811917"
+      }
+    },
+    "T18Eval-00015": {
+      "topic_id": "T18Eval-00015",
+      "original_query": {
+        "TITLE": "Coffee policies",
+        "DESCRIPTION": "Find documents that mention Brazilian policies on the production or distribution of coffee."
+      },
+      "query_text": "Coffee policies\nFind documents that mention Brazilian policies on the production or distribution of coffee.",
+      "core_themes": {
+        "raw_response": "{\"core_themes\": \"Seek Department of State and U.S. diplomatic-post records from 1963–1973 concerning Brazilian government policies on coffee production and distribution. Relevant documents may describe agricultural policy, production controls, marketing and domestic or export distribution, and the Brazilian agencies or officials responsible, including changes under the Goulart government and subsequent military governments. Since these records may be filed by administrative subject rather than by “coffee,” search agriculture and trade or economic-affairs headings where supported, alongside records using Brazilian Portuguese terminology such as café, produção cafeeira, and política cafeeira. Include policy documents, reports, correspondence, and assessments focused on Brazil during the specified period.\", \"related_concepts\": [\"Agriculture\", \"Economic Affairs\", \"Trade\", \"Coffee\", \"Café\", \"Coffee production\", \"Produção cafeeira\", \"Coffee policy\", \"Política cafeeira\", \"Coffee marketing\", \"Comercialização do café\", \"Coffee distribution\", \"Exportação de café\", \"Brazilian coffee industry\", \"Instituto Brasileiro do Café (IBC)\", \"Brazilian Ministry of Agriculture\", \"Ministério da Agricultura\", \"Brazilian coffee exports\", \"Coffee price policy\"]}",
+        "parsed": {
+          "core_themes": "Seek Department of State and U.S. diplomatic-post records from 1963–1973 concerning Brazilian government policies on coffee production and distribution. Relevant documents may describe agricultural policy, production controls, marketing and domestic or export distribution, and the Brazilian agencies or officials responsible, including changes under the Goulart government and subsequent military governments. Since these records may be filed by administrative subject rather than by “coffee,” search agriculture and trade or economic-affairs headings where supported, alongside records using Brazilian Portuguese terminology such as café, produção cafeeira, and política cafeeira. Include policy documents, reports, correspondence, and assessments focused on Brazil during the specified period.",
+          "related_concepts": [
+            "Agriculture",
+            "Economic Affairs",
+            "Trade",
+            "Coffee",
+            "Café",
+            "Coffee production",
+            "Produção cafeeira",
+            "Coffee policy",
+            "Política cafeeira",
+            "Coffee marketing",
+            "Comercialização do café",
+            "Coffee distribution",
+            "Exportação de café",
+            "Brazilian coffee industry",
+            "Instituto Brasileiro do Café (IBC)",
+            "Brazilian Ministry of Agriculture",
+            "Ministério da Agricultura",
+            "Brazilian coffee exports",
+            "Coffee price policy"
+          ]
+        },
+        "valid": true,
+        "program": "core_themes_B",
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "created_at": "2026-10-09T08:34:09.811934"
+      }
+    },
+    "T18Eval-00016": {
+      "topic_id": "T18Eval-00016",
+      "original_query": {
+        "TITLE": "Amateur radio",
+        "DESCRIPTION": "I am looking for information about amateur radio operations in Brazil."
+      },
+      "query_text": "Amateur radio\nI am looking for information about amateur radio operations in Brazil.",
+      "core_themes": {
+        "raw_response": "{\"core_themes\": \"Records concerning amateur radio operations in Brazil during 1963–1973, including the operation and regulation of amateur radio where documented. The search should focus on State Department and U.S. diplomatic or consular records filed under relevant communications or telecommunications subjects.\", \"related_concepts\": [\"Amateur radio\", \"Ham radio\", \"Radio amateurs\", \"Amateur radio operators\", \"Radio communications\", \"Telecommunications\", \"Brazilian radio regulations\"]}",
+        "parsed": {
+          "core_themes": "Records concerning amateur radio operations in Brazil during 1963–1973, including the operation and regulation of amateur radio where documented. The search should focus on State Department and U.S. diplomatic or consular records filed under relevant communications or telecommunications subjects.",
+          "related_concepts": [
+            "Amateur radio",
+            "Ham radio",
+            "Radio amateurs",
+            "Amateur radio operators",
+            "Radio communications",
+            "Telecommunications",
+            "Brazilian radio regulations"
+          ]
+        },
+        "valid": true,
+        "program": "core_themes_A",
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "created_at": "2026-10-09T08:33:57.960997"
+      }
+    },
+    "T18Eval-00017": {
+      "topic_id": "T18Eval-00017",
+      "original_query": {
+        "TITLE": "German war criminals",
+        "DESCRIPTION": "Find documents that mention people who were, or are suspected of having been, involved with war crimes or other serious offense where the Nazi party was in power."
+      },
+      "query_text": "German war criminals\nFind documents that mention people who were, or are suspected of having been, involved with war crimes or other serious offense where the Nazi party was in power.",
+      "core_themes": {
+        "raw_response": "{\"core_themes\": \"Records mentioning individuals alleged or suspected to have committed war crimes or other serious offenses under Nazi rule in Germany, including references to their identities or activities where documented in the Brazil-related diplomatic and consular files. The request does not specify particular individuals, cases, or actions.\", \"related_concepts\": [\"German war criminals\", \"Nazi war crimes\", \"Nazi-era offenses\", \"suspected war criminals\", \"war-crimes allegations\", \"Nazi Party\", \"Germany\", \"POL—Political Affairs & Relations\"]}",
+        "parsed": {
+          "core_themes": "Records mentioning individuals alleged or suspected to have committed war crimes or other serious offenses under Nazi rule in Germany, including references to their identities or activities where documented in the Brazil-related diplomatic and consular files. The request does not specify particular individuals, cases, or actions.",
+          "related_concepts": [
+            "German war criminals",
+            "Nazi war crimes",
+            "Nazi-era offenses",
+            "suspected war criminals",
+            "war-crimes allegations",
+            "Nazi Party",
+            "Germany",
+            "POL—Political Affairs & Relations"
+          ]
+        },
+        "valid": true,
+        "program": "core_themes_A",
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "created_at": "2026-10-09T08:33:57.961009"
+      }
+    },
+    "T18Eval-00018": {
+      "topic_id": "T18Eval-00018",
+      "original_query": {
+        "TITLE": "Lumber industry ",
+        "DESCRIPTION": "Find documents that provide information on the lumber industry in Brazil."
+      },
+      "query_text": "Lumber industry \nFind documents that provide information on the lumber industry in Brazil.",
+      "core_themes": {
+        "raw_response": "{\"core_themes\": \"Records concerning Brazil’s lumber industry during 1963–1973, including information on the industry’s activities and development. The search is for State Department and diplomatic-post files in which lumber or the forest-products trade may be filed under economic or commercial subjects.\", \"related_concepts\": [\"Lumber industry\", \"Timber industry\", \"Forest products\", \"Wood products\", \"Logging\", \"Lumber trade\", \"Brazilian timber exports\", \"Economic affairs\", \"Commercial affairs\"]}",
+        "parsed": {
+          "core_themes": "Records concerning Brazil’s lumber industry during 1963–1973, including information on the industry’s activities and development. The search is for State Department and diplomatic-post files in which lumber or the forest-products trade may be filed under economic or commercial subjects.",
+          "related_concepts": [
+            "Lumber industry",
+            "Timber industry",
+            "Forest products",
+            "Wood products",
+            "Logging",
+            "Lumber trade",
+            "Brazilian timber exports",
+            "Economic affairs",
+            "Commercial affairs"
+          ]
+        },
+        "valid": true,
+        "program": "core_themes_A",
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "created_at": "2026-10-09T08:33:57.961019"
+      }
+    },
+    "T18Eval-00019": {
+      "topic_id": "T18Eval-00019",
+      "original_query": {
+        "TITLE": "Guaíra Falls border dispute",
+        "DESCRIPTION": "Find documents that mention the dispute between Brazil and Paraguay over the Guaíra Falls."
+      },
+      "query_text": "Guaíra Falls border dispute\nFind documents that mention the dispute between Brazil and Paraguay over the Guaíra Falls.",
+      "core_themes": {
+        "raw_response": "{\"core_themes\": \"U.S. Department of State records from 1963–1973 concerning the dispute between Brazil and Paraguay over Guaíra Falls, including documents that mention the dispute or the two countries’ claims and relations related to it.\", \"related_concepts\": [\"Guaíra Falls dispute\", \"Brazil–Paraguay relations\", \"Brazil–Paraguay boundary dispute\", \"Guaíra Falls\", \"Sete Quedas Falls\", \"Paraguay–Brazil relations\", \"territorial claims\", \"border negotiations\"]}",
+        "parsed": {
+          "core_themes": "U.S. Department of State records from 1963–1973 concerning the dispute between Brazil and Paraguay over Guaíra Falls, including documents that mention the dispute or the two countries’ claims and relations related to it.",
+          "related_concepts": [
+            "Guaíra Falls dispute",
+            "Brazil–Paraguay relations",
+            "Brazil–Paraguay boundary dispute",
+            "Guaíra Falls",
+            "Sete Quedas Falls",
+            "Paraguay–Brazil relations",
+            "territorial claims",
+            "border negotiations"
+          ]
+        },
+        "valid": true,
+        "program": "core_themes_A",
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "created_at": "2026-10-09T08:33:57.961030"
+      }
+    },
+    "T18Eval-00020": {
+      "topic_id": "T18Eval-00020",
+      "original_query": {
+        "TITLE": "Rice cultivation",
+        "DESCRIPTION": "Tell me about rice cultivation in Brazil."
+      },
+      "query_text": "Rice cultivation\nTell me about rice cultivation in Brazil.",
+      "core_themes": {
+        "raw_response": "{\"core_themes\": \"Seek U.S. Department of State and diplomatic-post records on rice cultivation in Brazil during 1963–1973, including agricultural production, planting and harvesting, acreage, yields, regional conditions, and the role of rice in domestic food supply and commerce. Relevant material may appear in reporting on Brazilian agriculture, agricultural policy, rural development, food production, and trade, using period terminology such as “rice,” “paddy,” and “arroz.” Include correspondence and reports from Brazilian government ministries, agricultural agencies, research institutions, and U.S. officials where they address cultivation practices, production trends, or constraints. Keep the focus on rice growing in Brazil rather than rice cultivation generally or unrelated agricultural commodities.\", \"related_concepts\": [\"Agriculture\", \"Agricultural production\", \"Rice\", \"Paddy rice\", \"Arroz\", \"Cultivo de arroz\", \"Produção de arroz\", \"Agricultural policy\", \"Rural development\", \"Food production\", \"Food supply\", \"Agricultural statistics\", \"Rice acreage\", \"Rice yields\", \"Planting and harvesting\", \"Brazilian Ministry of Agriculture\", \"Brazilian agricultural agencies\", \"Agricultural research\", \"Brazil–U.S. agricultural relations\", \"Agricultural trade\"]}",
+        "parsed": {
+          "core_themes": "Seek U.S. Department of State and diplomatic-post records on rice cultivation in Brazil during 1963–1973, including agricultural production, planting and harvesting, acreage, yields, regional conditions, and the role of rice in domestic food supply and commerce. Relevant material may appear in reporting on Brazilian agriculture, agricultural policy, rural development, food production, and trade, using period terminology such as “rice,” “paddy,” and “arroz.” Include correspondence and reports from Brazilian government ministries, agricultural agencies, research institutions, and U.S. officials where they address cultivation practices, production trends, or constraints. Keep the focus on rice growing in Brazil rather than rice cultivation generally or unrelated agricultural commodities.",
+          "related_concepts": [
+            "Agriculture",
+            "Agricultural production",
+            "Rice",
+            "Paddy rice",
+            "Arroz",
+            "Cultivo de arroz",
+            "Produção de arroz",
+            "Agricultural policy",
+            "Rural development",
+            "Food production",
+            "Food supply",
+            "Agricultural statistics",
+            "Rice acreage",
+            "Rice yields",
+            "Planting and harvesting",
+            "Brazilian Ministry of Agriculture",
+            "Brazilian agricultural agencies",
+            "Agricultural research",
+            "Brazil–U.S. agricultural relations",
+            "Agricultural trade"
+          ]
+        },
+        "valid": true,
+        "program": "core_themes_B",
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "created_at": "2026-10-09T08:34:09.811951"
+      }
+    },
+    "T18Eval-00021": {
+      "topic_id": "T18Eval-00021",
+      "original_query": {
+        "TITLE": "Nuts",
+        "DESCRIPTION": "Find documents that contain information about the production of nuts in Brazil and how these nuts are distributed."
+      },
+      "query_text": "Nuts\nFind documents that contain information about the production of nuts in Brazil and how these nuts are distributed.",
+      "core_themes": {
+        "raw_response": "{\"core_themes\": \"Seek U.S. Department of State and Brazil-post records from 1963–1973 concerning the production, harvest, processing, marketing, and distribution of nuts in Brazil, including domestic trade, transport, exports, and principal producing regions or commercial actors where documented. Search for period terminology identifying Brazil nuts—often called castanha-do-pará in Brazilian usage—as well as other tree nuts or edible nuts when records distinguish them. Relevant material may appear in economic or commercial reporting and closely related agricultural reporting, including statistics, market surveys, trade reports, and correspondence on supply chains. Keep the search focused on nut production and distribution rather than Brazil’s agricultural economy generally.\", \"related_concepts\": [\"Agriculture\", \"Economic Affairs\", \"Trade\", \"Brazil nuts\", \"Castanha-do-pará\", \"Castanha-do-Brasil\", \"Nuts\", \"Edible nuts\", \"Nut production\", \"Nut harvest\", \"Nut processing\", \"Nut marketing\", \"Nut distribution\", \"Domestic trade\", \"Exports\", \"Agricultural products\", \"Agricultural statistics\", \"Market surveys\", \"Transportation of agricultural products\"]}",
+        "parsed": {
+          "core_themes": "Seek U.S. Department of State and Brazil-post records from 1963–1973 concerning the production, harvest, processing, marketing, and distribution of nuts in Brazil, including domestic trade, transport, exports, and principal producing regions or commercial actors where documented. Search for period terminology identifying Brazil nuts—often called castanha-do-pará in Brazilian usage—as well as other tree nuts or edible nuts when records distinguish them. Relevant material may appear in economic or commercial reporting and closely related agricultural reporting, including statistics, market surveys, trade reports, and correspondence on supply chains. Keep the search focused on nut production and distribution rather than Brazil’s agricultural economy generally.",
+          "related_concepts": [
+            "Agriculture",
+            "Economic Affairs",
+            "Trade",
+            "Brazil nuts",
+            "Castanha-do-pará",
+            "Castanha-do-Brasil",
+            "Nuts",
+            "Edible nuts",
+            "Nut production",
+            "Nut harvest",
+            "Nut processing",
+            "Nut marketing",
+            "Nut distribution",
+            "Domestic trade",
+            "Exports",
+            "Agricultural products",
+            "Agricultural statistics",
+            "Market surveys",
+            "Transportation of agricultural products"
+          ]
+        },
+        "valid": true,
+        "program": "core_themes_B",
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "created_at": "2026-10-09T08:34:09.811973"
+      }
+    },
+    "T18Eval-00022": {
+      "topic_id": "T18Eval-00022",
+      "original_query": {
+        "TITLE": "Freight shipping policies",
+        "DESCRIPTION": "I want to know about freight shipping policies in Brazil."
+      },
+      "query_text": "Freight shipping policies\nI want to know about freight shipping policies in Brazil.",
+      "core_themes": {
+        "raw_response": "{\"core_themes\": \"Records concerning freight shipping policies in Brazil during 1963–1973, including government rules and decisions affecting the movement of freight by ship. The request does not specify particular agencies, routes, or policy measures.\", \"related_concepts\": [\"freight shipping\", \"freight transport\", \"shipping policy\", \"maritime transport\", \"merchant shipping\", \"port regulations\", \"transportation policy\", \"Brazilian shipping\"]}",
+        "parsed": {
+          "core_themes": "Records concerning freight shipping policies in Brazil during 1963–1973, including government rules and decisions affecting the movement of freight by ship. The request does not specify particular agencies, routes, or policy measures.",
+          "related_concepts": [
+            "freight shipping",
+            "freight transport",
+            "shipping policy",
+            "maritime transport",
+            "merchant shipping",
+            "port regulations",
+            "transportation policy",
+            "Brazilian shipping"
+          ]
+        },
+        "valid": true,
+        "program": "core_themes_A",
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "created_at": "2026-10-09T08:33:57.961041"
+      }
+    },
+    "T18Eval-00023": {
+      "topic_id": "T18Eval-00023",
+      "original_query": {
+        "TITLE": "Smallpox vaccination",
+        "DESCRIPTION": "I want to find documents on smallpox vaccination in Brazil."
+      },
+      "query_text": "Smallpox vaccination\nI want to find documents on smallpox vaccination in Brazil.",
+      "core_themes": {
+        "raw_response": "{\"core_themes\": \"Records concerning smallpox vaccination in Brazil during 1963–1973, including documents about vaccination activities and the administration of smallpox vaccines. The search is focused on smallpox immunization rather than broader public-health topics.\", \"related_concepts\": [\"smallpox vaccination\", \"smallpox immunization\", \"smallpox vaccine\", \"variola vaccination\", \"vaccination campaigns\", \"public health\", \"health programs\"]}",
+        "parsed": {
+          "core_themes": "Records concerning smallpox vaccination in Brazil during 1963–1973, including documents about vaccination activities and the administration of smallpox vaccines. The search is focused on smallpox immunization rather than broader public-health topics.",
+          "related_concepts": [
+            "smallpox vaccination",
+            "smallpox immunization",
+            "smallpox vaccine",
+            "variola vaccination",
+            "vaccination campaigns",
+            "public health",
+            "health programs"
+          ]
+        },
+        "valid": true,
+        "program": "core_themes_A",
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "created_at": "2026-10-09T08:33:57.961051"
+      }
+    },
+    "T18Eval-00024": {
+      "topic_id": "T18Eval-00024",
+      "original_query": {
+        "TITLE": "Brazilian anti-semitism",
+        "DESCRIPTION": "I want to find documents on Brazilian anti-semitism."
+      },
+      "query_text": "Brazilian anti-semitism\nI want to find documents on Brazilian anti-semitism.",
+      "core_themes": {
+        "raw_response": "{\"core_themes\": \"Seek Department of State and U.S. diplomatic and consular post records from Brazil, 1963–1973, documenting antisemitism and discrimination against Jewish people in Brazil. Relevant materials may describe antisemitic incidents, propaganda, organizations or public figures, government responses, and the situation of Jewish communities, using period language in political reporting and bilateral relations files. Because the supplied context provides no filing guide or subject list beyond the POL heading, prioritize Political Affairs & Relations and closely related reporting on Brazilian domestic politics and civil rights where supported; do not assume a dedicated antisemitism category.\", \"related_concepts\": [\"Political Affairs & Relations\", \"Brazil—Political Affairs\", \"anti-Semitism\", \"antisemitism\", \"Jewish people\", \"Jews in Brazil\", \"Brazilian Jewish community\", \"Jewish organizations\", \"discrimination against Jews\", \"anti-Jewish propaganda\", \"anti-Jewish activity\", \"religious discrimination\", \"minority rights\", \"civil rights\", \"freedom of religion\", \"Brazilian government response\", \"political extremism\", \"Goulart government\", \"1964 military coup\"]}",
+        "parsed": {
+          "core_themes": "Seek Department of State and U.S. diplomatic and consular post records from Brazil, 1963–1973, documenting antisemitism and discrimination against Jewish people in Brazil. Relevant materials may describe antisemitic incidents, propaganda, organizations or public figures, government responses, and the situation of Jewish communities, using period language in political reporting and bilateral relations files. Because the supplied context provides no filing guide or subject list beyond the POL heading, prioritize Political Affairs & Relations and closely related reporting on Brazilian domestic politics and civil rights where supported; do not assume a dedicated antisemitism category.",
+          "related_concepts": [
+            "Political Affairs & Relations",
+            "Brazil—Political Affairs",
+            "anti-Semitism",
+            "antisemitism",
+            "Jewish people",
+            "Jews in Brazil",
+            "Brazilian Jewish community",
+            "Jewish organizations",
+            "discrimination against Jews",
+            "anti-Jewish propaganda",
+            "anti-Jewish activity",
+            "religious discrimination",
+            "minority rights",
+            "civil rights",
+            "freedom of religion",
+            "Brazilian government response",
+            "political extremism",
+            "Goulart government",
+            "1964 military coup"
+          ]
+        },
+        "valid": true,
+        "program": "core_themes_B",
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "created_at": "2026-10-09T08:34:09.811989"
+      }
+    },
+    "T18Eval-00025": {
+      "topic_id": "T18Eval-00025",
+      "original_query": {
+        "TITLE": "Montevideo airport strikes",
+        "DESCRIPTION": "I'm looking for documents on airport strikes in the Uruguayan capital of Montevideo."
+      },
+      "query_text": "Montevideo airport strikes\nI'm looking for documents on airport strikes in the Uruguayan capital of Montevideo.",
+      "core_themes": {
+        "raw_response": "{\"core_themes\": \"Records concerning strikes at the airport in Montevideo, Uruguay, including labor action or work stoppages at the airport. The collection consists of U.S. Department of State records created from 1963 to 1973 and maintained by diplomatic and consular posts in Brazil; the request does not specify a date or identify the workers involved.\", \"related_concepts\": [\"Montevideo airport strikes\", \"Montevideo airport\", \"airport labor strikes\", \"airport work stoppages\", \"Uruguay labor disputes\", \"Uruguay political affairs\"]}",
+        "parsed": {
+          "core_themes": "Records concerning strikes at the airport in Montevideo, Uruguay, including labor action or work stoppages at the airport. The collection consists of U.S. Department of State records created from 1963 to 1973 and maintained by diplomatic and consular posts in Brazil; the request does not specify a date or identify the workers involved.",
+          "related_concepts": [
+            "Montevideo airport strikes",
+            "Montevideo airport",
+            "airport labor strikes",
+            "airport work stoppages",
+            "Uruguay labor disputes",
+            "Uruguay political affairs"
+          ]
+        },
+        "valid": true,
+        "program": "core_themes_A",
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "created_at": "2026-10-09T08:33:57.961063"
+      }
+    },
+    "T18Eval-00026": {
+      "topic_id": "T18Eval-00026",
+      "original_query": {
+        "TITLE": "Sesame seed trade",
+        "DESCRIPTION": "I want to find information on the commercial viability of sesame seeds in Brazil."
+      },
+      "query_text": "Sesame seed trade\nI want to find information on the commercial viability of sesame seeds in Brazil.",
+      "core_themes": {
+        "raw_response": "{\"core_themes\": \"Seek Department of State and U.S. diplomatic-post records on the commercial prospects for sesame seed production and trade in Brazil during 1963–1973. Relevant materials may describe cultivation, yields, processing, domestic markets, export potential, prices, demand, and barriers to profitable commerce, including assessments of Brazilian producers and agricultural or trade officials. Look for reports, correspondence, market studies, and discussions of investment or U.S.–Brazil commercial opportunities. The records may be filed under agricultural matters and, where directly tied to sale or export, commerce or trade; preserve the focus on sesame rather than general Brazilian agriculture.\", \"related_concepts\": [\"Agriculture\", \"Agricultural products\", \"Trade\", \"Commerce\", \"Sesame\", \"Sesame seed\", \"Sesame cultivation\", \"Sesame production\", \"Sesame oil\", \"Gergelim\", \"Semente de gergelim\", \"Produção de gergelim\", \"Cultivo de gergelim\", \"Brazilian agricultural exports\", \"Export markets\", \"Commercial feasibility\", \"Market potential\", \"Commodity prices\", \"Agricultural processing\"]}",
+        "parsed": {
+          "core_themes": "Seek Department of State and U.S. diplomatic-post records on the commercial prospects for sesame seed production and trade in Brazil during 1963–1973. Relevant materials may describe cultivation, yields, processing, domestic markets, export potential, prices, demand, and barriers to profitable commerce, including assessments of Brazilian producers and agricultural or trade officials. Look for reports, correspondence, market studies, and discussions of investment or U.S.–Brazil commercial opportunities. The records may be filed under agricultural matters and, where directly tied to sale or export, commerce or trade; preserve the focus on sesame rather than general Brazilian agriculture.",
+          "related_concepts": [
+            "Agriculture",
+            "Agricultural products",
+            "Trade",
+            "Commerce",
+            "Sesame",
+            "Sesame seed",
+            "Sesame cultivation",
+            "Sesame production",
+            "Sesame oil",
+            "Gergelim",
+            "Semente de gergelim",
+            "Produção de gergelim",
+            "Cultivo de gergelim",
+            "Brazilian agricultural exports",
+            "Export markets",
+            "Commercial feasibility",
+            "Market potential",
+            "Commodity prices",
+            "Agricultural processing"
+          ]
+        },
+        "valid": true,
+        "program": "core_themes_B",
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "created_at": "2026-10-09T08:34:09.812005"
+      }
+    },
+    "T18Eval-00027": {
+      "topic_id": "T18Eval-00027",
+      "original_query": {
+        "TITLE": "Disaster relief powdered milk",
+        "DESCRIPTION": "I'm looking for information on the distribution of powdered milk in disaster relief."
+      },
+      "query_text": "Disaster relief powdered milk\nI'm looking for information on the distribution of powdered milk in disaster relief.",
+      "core_themes": {
+        "raw_response": "{\"core_themes\": \"Seek U.S. Embassy and consular correspondence, reports, and program records from 1963–1973 concerning the provision and distribution of powdered milk as disaster relief in Brazil. Records may describe requests and needs assessments, procurement or shipment, allocation to affected communities, coordination with Brazilian authorities and relief organizations, and reporting on delivery or use. Search under humanitarian and emergency assistance, disaster relief, food aid, and agricultural or public-health administration where those are supported filing routes. Include contemporary terminology such as “nonfat dry milk” and “dried milk,” while retaining the specific focus on powdered-milk distribution for disaster relief rather than general nutrition or food policy.\", \"related_concepts\": [\"Disaster relief\", \"Emergency relief\", \"Humanitarian assistance\", \"Food aid\", \"Powdered milk\", \"Nonfat dry milk\", \"Dried milk\", \"Milk distribution\", \"Relief supplies\", \"Food commodities\", \"U.S. foreign assistance\", \"Brazilian relief agencies\", \"Civil defense\", \"Flood relief\", \"Drought relief\", \"Earthquake relief\", \"Public health\", \"Nutrition assistance\", \"Brazil\", \"U.S. Embassy Brasilia\"]}",
+        "parsed": {
+          "core_themes": "Seek U.S. Embassy and consular correspondence, reports, and program records from 1963–1973 concerning the provision and distribution of powdered milk as disaster relief in Brazil. Records may describe requests and needs assessments, procurement or shipment, allocation to affected communities, coordination with Brazilian authorities and relief organizations, and reporting on delivery or use. Search under humanitarian and emergency assistance, disaster relief, food aid, and agricultural or public-health administration where those are supported filing routes. Include contemporary terminology such as “nonfat dry milk” and “dried milk,” while retaining the specific focus on powdered-milk distribution for disaster relief rather than general nutrition or food policy.",
+          "related_concepts": [
+            "Disaster relief",
+            "Emergency relief",
+            "Humanitarian assistance",
+            "Food aid",
+            "Powdered milk",
+            "Nonfat dry milk",
+            "Dried milk",
+            "Milk distribution",
+            "Relief supplies",
+            "Food commodities",
+            "U.S. foreign assistance",
+            "Brazilian relief agencies",
+            "Civil defense",
+            "Flood relief",
+            "Drought relief",
+            "Earthquake relief",
+            "Public health",
+            "Nutrition assistance",
+            "Brazil",
+            "U.S. Embassy Brasilia"
+          ]
+        },
+        "valid": true,
+        "program": "core_themes_B",
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "created_at": "2026-10-09T08:34:09.812020"
+      }
+    },
+    "T18Eval-00028": {
+      "topic_id": "T18Eval-00028",
+      "original_query": {
+        "TITLE": "Spread of equine influenza",
+        "DESCRIPTION": "I want to find documents on the spread of equine influenza in Brazil."
+      },
+      "query_text": "Spread of equine influenza\nI want to find documents on the spread of equine influenza in Brazil.",
+      "core_themes": {
+        "raw_response": "{\"core_themes\": \"Records concerning the spread of equine influenza in Brazil during 1963–1973, including reports or communications documenting its occurrence and geographic transmission. The search is for the disease’s spread, without assuming particular outbreaks, institutions, or responses.\", \"related_concepts\": [\"equine influenza\", \"horse influenza\", \"equine disease\", \"animal disease\", \"veterinary health\", \"epizootic disease\", \"disease outbreaks\", \"Brazil\"]}",
+        "parsed": {
+          "core_themes": "Records concerning the spread of equine influenza in Brazil during 1963–1973, including reports or communications documenting its occurrence and geographic transmission. The search is for the disease’s spread, without assuming particular outbreaks, institutions, or responses.",
+          "related_concepts": [
+            "equine influenza",
+            "horse influenza",
+            "equine disease",
+            "animal disease",
+            "veterinary health",
+            "epizootic disease",
+            "disease outbreaks",
+            "Brazil"
+          ]
+        },
+        "valid": true,
+        "program": "core_themes_A",
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "created_at": "2026-10-09T08:33:57.961074"
+      }
+    },
+    "T18Eval-00029": {
+      "topic_id": "T18Eval-00029",
+      "original_query": {
+        "TITLE": "Formation of labor unions",
+        "DESCRIPTION": "Find documents that describe the inception of labor unions in Brazil, specifically focusing on the initial motivations, key figures, and early challenges faced in the establishment of unions."
+      },
+      "query_text": "Formation of labor unions\nFind documents that describe the inception of labor unions in Brazil, specifically focusing on the initial motivations, key figures, and early challenges faced in the establishment of unions.",
+      "core_themes": {
+        "raw_response": "{\"core_themes\": \"Seek Department of State and U.S. diplomatic-post records from 1963–1973 documenting the formation and early development of labor unions in Brazil. Focus on accounts of workers’ reasons for organizing, union founders and leaders, recruitment and membership, and obstacles such as employer resistance, state regulation, political pressures, and repression, including developments around the 1964 coup and subsequent military governments. Records may appear under labor and social-affairs headings or, where union activity was treated as a political matter, political-affairs and relations headings. Look for contemporary Brazilian terminology alongside U.S. reporting language, including references to sindicatos, sindicalismo, and organização sindical.\", \"related_concepts\": [\"Labor\", \"Labor unions\", \"Trade unions\", \"Union organization\", \"Union formation\", \"Organização sindical\", \"Formação de sindicatos\", \"Sindicato\", \"Sindicalismo\", \"Trabalhadores\", \"Workers’ organizations\", \"Labor leaders\", \"Union founders\", \"Membership and recruitment\", \"Collective organization\", \"Labor relations\", \"Labor legislation\", \"Ministry of Labor (Ministério do Trabalho)\", \"Political Affairs & Relations\", \"Brazilian military coup of 1964\"]}",
+        "parsed": {
+          "core_themes": "Seek Department of State and U.S. diplomatic-post records from 1963–1973 documenting the formation and early development of labor unions in Brazil. Focus on accounts of workers’ reasons for organizing, union founders and leaders, recruitment and membership, and obstacles such as employer resistance, state regulation, political pressures, and repression, including developments around the 1964 coup and subsequent military governments. Records may appear under labor and social-affairs headings or, where union activity was treated as a political matter, political-affairs and relations headings. Look for contemporary Brazilian terminology alongside U.S. reporting language, including references to sindicatos, sindicalismo, and organização sindical.",
+          "related_concepts": [
+            "Labor",
+            "Labor unions",
+            "Trade unions",
+            "Union organization",
+            "Union formation",
+            "Organização sindical",
+            "Formação de sindicatos",
+            "Sindicato",
+            "Sindicalismo",
+            "Trabalhadores",
+            "Workers’ organizations",
+            "Labor leaders",
+            "Union founders",
+            "Membership and recruitment",
+            "Collective organization",
+            "Labor relations",
+            "Labor legislation",
+            "Ministry of Labor (Ministério do Trabalho)",
+            "Political Affairs & Relations",
+            "Brazilian military coup of 1964"
+          ]
+        },
+        "valid": true,
+        "program": "core_themes_B",
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "created_at": "2026-10-09T08:34:09.812037"
+      }
+    },
+    "T18Eval-00030": {
+      "topic_id": "T18Eval-00030",
+      "original_query": {
+        "TITLE": "International soccer",
+        "DESCRIPTION": "Find documents that mention international aspects of soccer, such as games with teams from other countries."
+      },
+      "query_text": "International soccer\nFind documents that mention international aspects of soccer, such as games with teams from other countries.",
+      "core_themes": {
+        "raw_response": "{\"core_themes\": \"Seek Department of State and U.S. diplomatic-post records from 1963–1973 concerning international soccer in Brazil, especially matches involving Brazilian teams and teams or national sides from other countries. Relevant files may describe scheduled or completed games, visiting teams, tours, tournaments, and related arrangements or reporting when these appear in the context of international relations or public events. Search for records using period terminology such as “football” as well as “soccer,” and Portuguese terms including “futebol,” “jogo internacional,” and “partida internacional.” The collection context supports Political Affairs & Relations as a plausible filing route; do not extend the search to domestic soccer generally.\", \"related_concepts\": [\"Political Affairs & Relations\", \"International soccer\", \"International football\", \"Futebol internacional\", \"Partida internacional\", \"Jogo internacional\", \"Brazilian national football team\", \"Seleção Brasileira\", \"Brazil national team\", \"Visiting soccer teams\", \"Foreign football teams\", \"International matches\", \"Soccer tours\", \"Football tours\", \"International tournaments\", \"Brazil–foreign sporting relations\", \"U.S.–Brazil sporting exchanges\"]}",
+        "parsed": {
+          "core_themes": "Seek Department of State and U.S. diplomatic-post records from 1963–1973 concerning international soccer in Brazil, especially matches involving Brazilian teams and teams or national sides from other countries. Relevant files may describe scheduled or completed games, visiting teams, tours, tournaments, and related arrangements or reporting when these appear in the context of international relations or public events. Search for records using period terminology such as “football” as well as “soccer,” and Portuguese terms including “futebol,” “jogo internacional,” and “partida internacional.” The collection context supports Political Affairs & Relations as a plausible filing route; do not extend the search to domestic soccer generally.",
+          "related_concepts": [
+            "Political Affairs & Relations",
+            "International soccer",
+            "International football",
+            "Futebol internacional",
+            "Partida internacional",
+            "Jogo internacional",
+            "Brazilian national football team",
+            "Seleção Brasileira",
+            "Brazil national team",
+            "Visiting soccer teams",
+            "Foreign football teams",
+            "International matches",
+            "Soccer tours",
+            "Football tours",
+            "International tournaments",
+            "Brazil–foreign sporting relations",
+            "U.S.–Brazil sporting exchanges"
+          ]
+        },
+        "valid": true,
+        "program": "core_themes_B",
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "created_at": "2026-10-09T08:34:09.812053"
+      }
+    },
+    "T18Eval-00031": {
+      "topic_id": "T18Eval-00031",
+      "original_query": {
+        "TITLE": "Aircraft accidents in Brazil",
+        "DESCRIPTION": "Please find documents about plane crashes on Brazilian territory."
+      },
+      "query_text": "Aircraft accidents in Brazil\nPlease find documents about plane crashes on Brazilian territory.",
+      "core_themes": {
+        "raw_response": "{\"core_themes\": \"Seek Department of State and U.S. diplomatic or consular post records from 1963–1973 concerning aircraft accidents and plane crashes occurring within Brazil. Relevant files may document crash circumstances, casualties, investigations, official Brazilian responses, and U.S. inquiries or assistance when these are addressed in the records. Search under Political Affairs & Relations and closely related transportation, aviation, or consular-administrative subject headings only where supported by the filing guide; use the period’s language for aircraft mishaps as well as Portuguese terms likely used by Brazilian authorities and local sources. Keep the geographic scope to Brazilian territory and the stated period.\", \"related_concepts\": [\"Political Affairs & Relations\", \"aviation\", \"aircraft accidents\", \"airplane crashes\", \"aircraft mishaps\", \"aviation safety\", \"air crash investigations\", \"Brazilian civil aviation\", \"acidentes aéreos\", \"acidentes aeronáuticos\", \"queda de avião\", \"desastre aéreo\", \"sinistro aéreo\", \"aviação civil\", \"investigação de acidentes aeronáuticos\", \"Brazil\", \"Brazilian authorities\", \"aircraft casualties\"]}",
+        "parsed": {
+          "core_themes": "Seek Department of State and U.S. diplomatic or consular post records from 1963–1973 concerning aircraft accidents and plane crashes occurring within Brazil. Relevant files may document crash circumstances, casualties, investigations, official Brazilian responses, and U.S. inquiries or assistance when these are addressed in the records. Search under Political Affairs & Relations and closely related transportation, aviation, or consular-administrative subject headings only where supported by the filing guide; use the period’s language for aircraft mishaps as well as Portuguese terms likely used by Brazilian authorities and local sources. Keep the geographic scope to Brazilian territory and the stated period.",
+          "related_concepts": [
+            "Political Affairs & Relations",
+            "aviation",
+            "aircraft accidents",
+            "airplane crashes",
+            "aircraft mishaps",
+            "aviation safety",
+            "air crash investigations",
+            "Brazilian civil aviation",
+            "acidentes aéreos",
+            "acidentes aeronáuticos",
+            "queda de avião",
+            "desastre aéreo",
+            "sinistro aéreo",
+            "aviação civil",
+            "investigação de acidentes aeronáuticos",
+            "Brazil",
+            "Brazilian authorities",
+            "aircraft casualties"
+          ]
+        },
+        "valid": true,
+        "program": "core_themes_B",
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "created_at": "2026-10-09T08:34:09.812069"
+      }
+    },
+    "T18Eval-00032": {
+      "topic_id": "T18Eval-00032",
+      "original_query": {
+        "TITLE": "Solar eclipse",
+        "DESCRIPTION": "I am looking for information about eclipses of the sun that could be seen from Brazil."
+      },
+      "query_text": "Solar eclipse\nI am looking for information about eclipses of the sun that could be seen from Brazil.",
+      "core_themes": {
+        "raw_response": "{\"core_themes\": \"Records concerning solar eclipses visible from Brazil, including references to observations or circumstances of the eclipses. The request does not specify a particular eclipse, date, or observer.\", \"related_concepts\": [\"Solar eclipse\", \"Eclipse of the sun\", \"Solar astronomy\", \"Astronomical observations\", \"Brazil—solar eclipses\"]}",
+        "parsed": {
+          "core_themes": "Records concerning solar eclipses visible from Brazil, including references to observations or circumstances of the eclipses. The request does not specify a particular eclipse, date, or observer.",
+          "related_concepts": [
+            "Solar eclipse",
+            "Eclipse of the sun",
+            "Solar astronomy",
+            "Astronomical observations",
+            "Brazil—solar eclipses"
+          ]
+        },
+        "valid": true,
+        "program": "core_themes_A",
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "created_at": "2026-10-09T08:33:57.961083"
+      }
+    },
+    "T18Eval-00033": {
+      "topic_id": "T18Eval-00033",
+      "original_query": {
+        "TITLE": "Coffee rust eradication",
+        "DESCRIPTION": "I am looking for documents that mention eradication practices for coffee rust in Brazil."
+      },
+      "query_text": "Coffee rust eradication\nI am looking for documents that mention eradication practices for coffee rust in Brazil.",
+      "core_themes": {
+        "raw_response": "{\"core_themes\": \"Records concerning coffee rust in Brazil, especially measures and practices intended to eradicate the disease. The search is for material that discusses eradication rather than coffee production generally.\", \"related_concepts\": [\"coffee rust\", \"coffee disease\", \"coffee rust eradication\", \"coffee rust control\", \"coffee plant disease\", \"coffee agriculture\", \"Brazilian coffee\"]}",
+        "parsed": {
+          "core_themes": "Records concerning coffee rust in Brazil, especially measures and practices intended to eradicate the disease. The search is for material that discusses eradication rather than coffee production generally.",
+          "related_concepts": [
+            "coffee rust",
+            "coffee disease",
+            "coffee rust eradication",
+            "coffee rust control",
+            "coffee plant disease",
+            "coffee agriculture",
+            "Brazilian coffee"
+          ]
+        },
+        "valid": true,
+        "program": "core_themes_A",
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "created_at": "2026-10-09T08:33:57.961093"
+      }
+    },
+    "T18Eval-00034": {
+      "topic_id": "T18Eval-00034",
+      "original_query": {
+        "TITLE": "Dairy cattle industry",
+        "DESCRIPTION": "Locate documents containing information on Brazil's dairy cattle industry and the distribution of its products."
+      },
+      "query_text": "Dairy cattle industry\nLocate documents containing information on Brazil's dairy cattle industry and the distribution of its products.",
+      "core_themes": {
+        "raw_response": "{\"core_themes\": \"Records concerning Brazil’s dairy cattle industry and the distribution of dairy products. The search should identify material on dairy cattle production and the channels through which dairy products were distributed.\", \"related_concepts\": [\"dairy cattle\", \"dairy industry\", \"milk production\", \"dairy products\", \"milk distribution\", \"dairy marketing\", \"livestock industry\", \"agriculture\"]}",
+        "parsed": {
+          "core_themes": "Records concerning Brazil’s dairy cattle industry and the distribution of dairy products. The search should identify material on dairy cattle production and the channels through which dairy products were distributed.",
+          "related_concepts": [
+            "dairy cattle",
+            "dairy industry",
+            "milk production",
+            "dairy products",
+            "milk distribution",
+            "dairy marketing",
+            "livestock industry",
+            "agriculture"
+          ]
+        },
+        "valid": true,
+        "program": "core_themes_A",
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "created_at": "2026-10-09T08:33:57.961103"
+      }
+    },
+    "T18Eval-00035": {
+      "topic_id": "T18Eval-00035",
+      "original_query": {
+        "TITLE": "International Cocoa Agreement",
+        "DESCRIPTION": "I want to know about the International Cocoa Agreement."
+      },
+      "query_text": "International Cocoa Agreement\nI want to know about the International Cocoa Agreement.",
+      "core_themes": {
+        "raw_response": "{\"core_themes\": \"Seek Department of State and U.S. diplomatic-post records from 1963–1973 concerning the International Cocoa Agreement, especially Brazil’s participation, position, and interests in international negotiations and cocoa trade arrangements. Relevant files may discuss treaty negotiations, signature or ratification, implementation, commodity policy, and diplomatic exchanges involving Brazil, the United States, and international bodies. Because the agreement was negotiated and concluded in 1972, prioritize records from that period while including earlier discussions of an international cocoa regime. Search under economic and commercial affairs, international organizations, and treaty-related filing concepts where supported by the records’ administrative context.\", \"related_concepts\": [\"International Cocoa Agreement\", \"cocoa agreement\", \"international cocoa regime\", \"cocoa negotiations\", \"cocoa trade\", \"cocoa exports\", \"cocoa production\", \"commodity agreement\", \"commodity policy\", \"international commodity trade\", \"Brazilian cocoa\", \"Brazilian cocoa industry\", \"Brazilian participation\", \"treaty negotiations\", \"treaty signature and ratification\", \"United Nations Conference on Trade and Development\", \"UNCTAD\", \"International Cocoa Organization\", \"ICO\"]}",
+        "parsed": {
+          "core_themes": "Seek Department of State and U.S. diplomatic-post records from 1963–1973 concerning the International Cocoa Agreement, especially Brazil’s participation, position, and interests in international negotiations and cocoa trade arrangements. Relevant files may discuss treaty negotiations, signature or ratification, implementation, commodity policy, and diplomatic exchanges involving Brazil, the United States, and international bodies. Because the agreement was negotiated and concluded in 1972, prioritize records from that period while including earlier discussions of an international cocoa regime. Search under economic and commercial affairs, international organizations, and treaty-related filing concepts where supported by the records’ administrative context.",
+          "related_concepts": [
+            "International Cocoa Agreement",
+            "cocoa agreement",
+            "international cocoa regime",
+            "cocoa negotiations",
+            "cocoa trade",
+            "cocoa exports",
+            "cocoa production",
+            "commodity agreement",
+            "commodity policy",
+            "international commodity trade",
+            "Brazilian cocoa",
+            "Brazilian cocoa industry",
+            "Brazilian participation",
+            "treaty negotiations",
+            "treaty signature and ratification",
+            "United Nations Conference on Trade and Development",
+            "UNCTAD",
+            "International Cocoa Organization",
+            "ICO"
+          ]
+        },
+        "valid": true,
+        "program": "core_themes_B",
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "created_at": "2026-10-09T08:34:09.812084"
+      }
+    },
+    "T18Eval-00036": {
+      "topic_id": "T18Eval-00036",
+      "original_query": {
+        "TITLE": "Shrimp fishing policies",
+        "DESCRIPTION": "Find documents that mention Brazilian shrimp fishing policies."
+      },
+      "query_text": "Shrimp fishing policies\nFind documents that mention Brazilian shrimp fishing policies.",
+      "core_themes": {
+        "raw_response": "{\"core_themes\": \"Records concerning Brazilian policies governing shrimp fishing, including documents that discuss regulations or other official measures affecting the shrimp fishery. The search is focused on shrimp fishing policy in Brazil during the Department of State’s 1963–1973 record period.\", \"related_concepts\": [\"shrimp fishing\", \"shrimp fishery\", \"Brazilian fisheries policy\", \"fishing regulations\", \"fisheries legislation\", \"commercial fishing\", \"Brazil fisheries\"]}",
+        "parsed": {
+          "core_themes": "Records concerning Brazilian policies governing shrimp fishing, including documents that discuss regulations or other official measures affecting the shrimp fishery. The search is focused on shrimp fishing policy in Brazil during the Department of State’s 1963–1973 record period.",
+          "related_concepts": [
+            "shrimp fishing",
+            "shrimp fishery",
+            "Brazilian fisheries policy",
+            "fishing regulations",
+            "fisheries legislation",
+            "commercial fishing",
+            "Brazil fisheries"
+          ]
+        },
+        "valid": true,
+        "program": "core_themes_A",
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "created_at": "2026-10-09T08:33:57.961113"
+      }
+    },
+    "T18Eval-00037": {
+      "topic_id": "T18Eval-00037",
+      "original_query": {
+        "TITLE": "Catholic birth control",
+        "DESCRIPTION": "Find documents documenting Catholic perspectives on female birth control in Brazil."
+      },
+      "query_text": "Catholic birth control\nFind documents documenting Catholic perspectives on female birth control in Brazil.",
+      "core_themes": {
+        "raw_response": "{\"core_themes\": \"Seek U.S. Department of State and Embassy or consular reporting from Brazil, 1963–1973, on Catholic views and institutional activity concerning contraception and women’s birth control. Records may describe the positions of Brazilian Catholic bishops, clergy, lay organizations, and the Catholic hierarchy, including debate over artificial contraception, family planning, and the Catholic Church’s response to changing reproductive practices. Search for material filed under political affairs and relations, as well as closely related reporting on religion, public health, and population matters where supported by the records. Include period terminology such as “birth control,” “contraception,” “family planning,” and “planejamento familiar,” while keeping the focus on Catholic perspectives in Brazil.\", \"related_concepts\": [\"Political Affairs and Relations\", \"Religion\", \"Public Health\", \"Population\", \"Catholic Church in Brazil\", \"Roman Catholic Church\", \"Brazilian Catholic bishops\", \"Brazilian Catholic clergy\", \"Catholic hierarchy\", \"birth control\", \"female contraception\", \"contraception\", \"artificial contraception\", \"family planning\", \"planejamento familiar\", \"controle da natalidade\", \"contracepção\", \"métodos anticoncepcionais\", \"Pope Paul VI\", \"Humanae Vitae\"]}",
+        "parsed": {
+          "core_themes": "Seek U.S. Department of State and Embassy or consular reporting from Brazil, 1963–1973, on Catholic views and institutional activity concerning contraception and women’s birth control. Records may describe the positions of Brazilian Catholic bishops, clergy, lay organizations, and the Catholic hierarchy, including debate over artificial contraception, family planning, and the Catholic Church’s response to changing reproductive practices. Search for material filed under political affairs and relations, as well as closely related reporting on religion, public health, and population matters where supported by the records. Include period terminology such as “birth control,” “contraception,” “family planning,” and “planejamento familiar,” while keeping the focus on Catholic perspectives in Brazil.",
+          "related_concepts": [
+            "Political Affairs and Relations",
+            "Religion",
+            "Public Health",
+            "Population",
+            "Catholic Church in Brazil",
+            "Roman Catholic Church",
+            "Brazilian Catholic bishops",
+            "Brazilian Catholic clergy",
+            "Catholic hierarchy",
+            "birth control",
+            "female contraception",
+            "contraception",
+            "artificial contraception",
+            "family planning",
+            "planejamento familiar",
+            "controle da natalidade",
+            "contracepção",
+            "métodos anticoncepcionais",
+            "Pope Paul VI",
+            "Humanae Vitae"
+          ]
+        },
+        "valid": true,
+        "program": "core_themes_B",
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "created_at": "2026-10-09T08:34:09.812101"
+      }
+    },
+    "T18Eval-00038": {
+      "topic_id": "T18Eval-00038",
+      "original_query": {
+        "TITLE": "Herbicide circulation",
+        "DESCRIPTION": "I'm looking for documents describing the circulation (development, shipment, use, etc.) of herbicides in Brazil."
+      },
+      "query_text": "Herbicide circulation\nI'm looking for documents describing the circulation (development, shipment, use, etc.) of herbicides in Brazil.",
+      "core_themes": {
+        "raw_response": "{\"core_themes\": \"Seek U.S. Department of State and post records documenting herbicides in Brazil during 1963–1973, including their development, production, import or export, shipment, distribution, sale, and use. Relevant material may describe government regulation, agricultural or commercial applications, and the activities of Brazilian agencies, U.S. officials, and companies where directly connected to herbicide circulation. Because the supplied context gives no filing guide or subject headings, likely search language should remain grounded in the records’ period vocabulary and Brazil-related administrative subjects rather than assume a specific filing category. Include both English and Portuguese terms, distinguishing herbicides and weedkillers from broader pesticides where records use those terms.\", \"related_concepts\": [\"Herbicides\", \"Herbicidas\", \"Weedkillers\", \"Desfolhantes\", \"Pesticides\", \"Pesticidas\", \"Agrochemicals\", \"Agroquímicos\", \"Chemical weed control\", \"Controle químico de ervas daninhas\", \"Herbicide development\", \"Desenvolvimento de herbicidas\", \"Herbicide imports\", \"Importação de herbicidas\", \"Herbicide exports\", \"Exportação de herbicidas\", \"Shipment and distribution\", \"Remessa e distribuição\", \"Agricultural chemicals\", \"Produtos químicos agrícolas\"]}",
+        "parsed": {
+          "core_themes": "Seek U.S. Department of State and post records documenting herbicides in Brazil during 1963–1973, including their development, production, import or export, shipment, distribution, sale, and use. Relevant material may describe government regulation, agricultural or commercial applications, and the activities of Brazilian agencies, U.S. officials, and companies where directly connected to herbicide circulation. Because the supplied context gives no filing guide or subject headings, likely search language should remain grounded in the records’ period vocabulary and Brazil-related administrative subjects rather than assume a specific filing category. Include both English and Portuguese terms, distinguishing herbicides and weedkillers from broader pesticides where records use those terms.",
+          "related_concepts": [
+            "Herbicides",
+            "Herbicidas",
+            "Weedkillers",
+            "Desfolhantes",
+            "Pesticides",
+            "Pesticidas",
+            "Agrochemicals",
+            "Agroquímicos",
+            "Chemical weed control",
+            "Controle químico de ervas daninhas",
+            "Herbicide development",
+            "Desenvolvimento de herbicidas",
+            "Herbicide imports",
+            "Importação de herbicidas",
+            "Herbicide exports",
+            "Exportação de herbicidas",
+            "Shipment and distribution",
+            "Remessa e distribuição",
+            "Agricultural chemicals",
+            "Produtos químicos agrícolas"
+          ]
+        },
+        "valid": true,
+        "program": "core_themes_B",
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "created_at": "2026-10-09T08:34:09.812117"
+      }
+    },
+    "T18Eval-00039": {
+      "topic_id": "T18Eval-00039",
+      "original_query": {
+        "TITLE": "Anti-cancer efforts",
+        "DESCRIPTION": "I'm looking for documents on anti-cancer efforts in Brazil."
+      },
+      "query_text": "Anti-cancer efforts\nI'm looking for documents on anti-cancer efforts in Brazil.",
+      "core_themes": {
+        "raw_response": "{\"core_themes\": \"Records concerning efforts to prevent, detect, or treat cancer in Brazil during 1963–1973. The collection context provides no specific institutions, programs, or activities, so retrieval should focus on cancer-related subject language and plausible terms for anti-cancer work.\", \"related_concepts\": [\"Cancer\", \"Cancer prevention\", \"Cancer treatment\", \"Cancer research\", \"Cancer control\", \"Oncology\", \"Public health\", \"Medical care\"]}",
+        "parsed": {
+          "core_themes": "Records concerning efforts to prevent, detect, or treat cancer in Brazil during 1963–1973. The collection context provides no specific institutions, programs, or activities, so retrieval should focus on cancer-related subject language and plausible terms for anti-cancer work.",
+          "related_concepts": [
+            "Cancer",
+            "Cancer prevention",
+            "Cancer treatment",
+            "Cancer research",
+            "Cancer control",
+            "Oncology",
+            "Public health",
+            "Medical care"
+          ]
+        },
+        "valid": true,
+        "program": "core_themes_A",
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "created_at": "2026-10-09T08:33:57.961124"
+      }
+    },
+    "T18Eval-00040": {
+      "topic_id": "T18Eval-00040",
+      "original_query": {
+        "TITLE": "Gemini 10 spaceflight",
+        "DESCRIPTION": "I want to find documents on the Gemini 10 spaceflight."
+      },
+      "query_text": "Gemini 10 spaceflight\nI want to find documents on the Gemini 10 spaceflight.",
+      "core_themes": {
+        "raw_response": "{\"core_themes\": \"Seek U.S. Department of State and U.S. diplomatic or consular post records from 1963–1973 concerning the Gemini 10 spaceflight, launched in July 1966, and its place in the U.S. manned space program. Relevant records may discuss the mission’s flight, objectives, crew, tracking or communications, public information, and Brazilian observation or reaction. Because these are foreign-relations files, search for the mission under space and scientific affairs, U.S. relations with Brazil, and press or public-affairs reporting where those headings plausibly captured coverage; retain the focus on Gemini 10 rather than spaceflight generally.\", \"related_concepts\": [\"Gemini 10\", \"Gemini X\", \"Project Gemini\", \"manned space flight\", \"U.S. space program\", \"NASA\", \"National Aeronautics and Space Administration\", \"John W. Young\", \"Michael Collins\", \"July 1966\", \"space exploration\", \"space research\", \"scientific cooperation\", \"U.S.-Brazil relations\", \"Brazilian reaction\", \"press coverage\", \"public information\", \"voo espacial Gemini 10\", \"Projeto Gemini\", \"NASA (Agência Espacial Norte-Americana)\"]}",
+        "parsed": {
+          "core_themes": "Seek U.S. Department of State and U.S. diplomatic or consular post records from 1963–1973 concerning the Gemini 10 spaceflight, launched in July 1966, and its place in the U.S. manned space program. Relevant records may discuss the mission’s flight, objectives, crew, tracking or communications, public information, and Brazilian observation or reaction. Because these are foreign-relations files, search for the mission under space and scientific affairs, U.S. relations with Brazil, and press or public-affairs reporting where those headings plausibly captured coverage; retain the focus on Gemini 10 rather than spaceflight generally.",
+          "related_concepts": [
+            "Gemini 10",
+            "Gemini X",
+            "Project Gemini",
+            "manned space flight",
+            "U.S. space program",
+            "NASA",
+            "National Aeronautics and Space Administration",
+            "John W. Young",
+            "Michael Collins",
+            "July 1966",
+            "space exploration",
+            "space research",
+            "scientific cooperation",
+            "U.S.-Brazil relations",
+            "Brazilian reaction",
+            "press coverage",
+            "public information",
+            "voo espacial Gemini 10",
+            "Projeto Gemini",
+            "NASA (Agência Espacial Norte-Americana)"
+          ]
+        },
+        "valid": true,
+        "program": "core_themes_B",
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "created_at": "2026-10-09T08:34:09.812133"
+      }
+    },
+    "T18Eval-00041": {
+      "topic_id": "T18Eval-00041",
+      "original_query": {
+        "TITLE": "Rare earth chloride sales",
+        "DESCRIPTION": "I want information on the sale of rare earth chlorides by the Brazilian government."
+      },
+      "query_text": "Rare earth chloride sales\nI want information on the sale of rare earth chlorides by the Brazilian government.",
+      "core_themes": {
+        "raw_response": "{\"core_themes\": \"Seek Department of State and U.S. diplomatic-post records from 1963–1973 concerning Brazilian government sales, marketing, export, or proposed disposition of rare earth chlorides. Relevant files may describe government agencies or state-linked entities handling these materials, sales terms, buyers, negotiations, pricing, production, and export controls, using period terminology for rare earths and their chemical compounds. Records may be filed under Brazilian economic or commercial affairs, trade, mineral resources, mining, or industrial development, with scientific and technical reporting as a closely related route where it directly concerns production or sale. Include Portuguese-language references to terras raras and cloretos de terras raras; keep the focus on sales by the Brazilian government, not rare-earth commerce generally.\", \"related_concepts\": [\"Economic Affairs\", \"Commercial Affairs\", \"Trade\", \"Exports\", \"Mineral Resources\", \"Mining\", \"Industrial Development\", \"Science and Technology\", \"rare earths\", \"rare-earth chlorides\", \"rare earth chloride\", \"rare-earth compounds\", \"terras raras\", \"cloretos de terras raras\", \"cloreto de terras raras\", \"Brazilian government sales\", \"government exports\", \"mineral sales\", \"export licensing\", \"foreign buyers\"]}",
+        "parsed": {
+          "core_themes": "Seek Department of State and U.S. diplomatic-post records from 1963–1973 concerning Brazilian government sales, marketing, export, or proposed disposition of rare earth chlorides. Relevant files may describe government agencies or state-linked entities handling these materials, sales terms, buyers, negotiations, pricing, production, and export controls, using period terminology for rare earths and their chemical compounds. Records may be filed under Brazilian economic or commercial affairs, trade, mineral resources, mining, or industrial development, with scientific and technical reporting as a closely related route where it directly concerns production or sale. Include Portuguese-language references to terras raras and cloretos de terras raras; keep the focus on sales by the Brazilian government, not rare-earth commerce generally.",
+          "related_concepts": [
+            "Economic Affairs",
+            "Commercial Affairs",
+            "Trade",
+            "Exports",
+            "Mineral Resources",
+            "Mining",
+            "Industrial Development",
+            "Science and Technology",
+            "rare earths",
+            "rare-earth chlorides",
+            "rare earth chloride",
+            "rare-earth compounds",
+            "terras raras",
+            "cloretos de terras raras",
+            "cloreto de terras raras",
+            "Brazilian government sales",
+            "government exports",
+            "mineral sales",
+            "export licensing",
+            "foreign buyers"
+          ]
+        },
+        "valid": true,
+        "program": "core_themes_B",
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "created_at": "2026-10-09T08:34:09.812148"
+      }
+    },
+    "T18Eval-00042": {
+      "topic_id": "T18Eval-00042",
+      "original_query": {
+        "TITLE": "Import of color television",
+        "DESCRIPTION": "I'm looking for information on the import of color television into Brazil."
+      },
+      "query_text": "Import of color television\nI'm looking for information on the import of color television into Brazil.",
+      "core_themes": {
+        "raw_response": "{\"core_themes\": \"Seek State Department and U.S. diplomatic-post records from 1963–1973 concerning Brazil’s importation of color television equipment and technology. Relevant files may describe Brazilian government policy, licensing and customs treatment, import restrictions, commercial negotiations, and U.S. manufacturers or exporters supplying television sets, components, and broadcasting equipment. Search both trade and economic-affairs language and the period’s technical terminology for color television, including the adoption of the PAL-M standard and related broadcasting systems. Include Brazilian Portuguese terms likely to appear in local correspondence, while keeping the focus on imports into Brazil rather than domestic television programming generally.\", \"related_concepts\": [\"Foreign Trade\", \"Economic Affairs\", \"Imports\", \"Import licenses\", \"Import restrictions\", \"Customs duties\", \"Color television\", \"televisão em cores\", \"televisão a cores\", \"TV em cores\", \"televisão colorida\", \"PAL-M\", \"PAL-M system\", \"NTSC\", \"color television receivers\", \"television sets\", \"television components\", \"broadcasting equipment\", \"equipamentos de televisão\", \"importação de televisores\", \"Brazilian television industry\"]}",
+        "parsed": {
+          "core_themes": "Seek State Department and U.S. diplomatic-post records from 1963–1973 concerning Brazil’s importation of color television equipment and technology. Relevant files may describe Brazilian government policy, licensing and customs treatment, import restrictions, commercial negotiations, and U.S. manufacturers or exporters supplying television sets, components, and broadcasting equipment. Search both trade and economic-affairs language and the period’s technical terminology for color television, including the adoption of the PAL-M standard and related broadcasting systems. Include Brazilian Portuguese terms likely to appear in local correspondence, while keeping the focus on imports into Brazil rather than domestic television programming generally.",
+          "related_concepts": [
+            "Foreign Trade",
+            "Economic Affairs",
+            "Imports",
+            "Import licenses",
+            "Import restrictions",
+            "Customs duties",
+            "Color television",
+            "televisão em cores",
+            "televisão a cores",
+            "TV em cores",
+            "televisão colorida",
+            "PAL-M",
+            "PAL-M system",
+            "NTSC",
+            "color television receivers",
+            "television sets",
+            "television components",
+            "broadcasting equipment",
+            "equipamentos de televisão",
+            "importação de televisores",
+            "Brazilian television industry"
+          ]
+        },
+        "valid": true,
+        "program": "core_themes_B",
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "created_at": "2026-10-09T08:34:09.812163"
+      }
+    },
+    "T18Eval-00043": {
+      "topic_id": "T18Eval-00043",
+      "original_query": {
+        "TITLE": "Vampire bat control",
+        "DESCRIPTION": "I'm looking for documents on controlling Brazil's vampire bat population."
+      },
+      "query_text": "Vampire bat control\nI'm looking for documents on controlling Brazil's vampire bat population.",
+      "core_themes": {
+        "raw_response": "{\"core_themes\": \"Records concerning efforts to control vampire bats in Brazil, including measures directed at reducing or managing the population. The request does not specify a program, institution, location, or period within the collection dates.\", \"related_concepts\": [\"vampire bats\", \"bat control\", \"vampire bat population\", \"bat eradication\", \"rabies control\", \"animal disease control\", \"livestock protection\"]}",
+        "parsed": {
+          "core_themes": "Records concerning efforts to control vampire bats in Brazil, including measures directed at reducing or managing the population. The request does not specify a program, institution, location, or period within the collection dates.",
+          "related_concepts": [
+            "vampire bats",
+            "bat control",
+            "vampire bat population",
+            "bat eradication",
+            "rabies control",
+            "animal disease control",
+            "livestock protection"
+          ]
+        },
+        "valid": true,
+        "program": "core_themes_A",
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "created_at": "2026-10-09T08:33:57.961133"
+      }
+    },
+    "T18Eval-00044": {
+      "topic_id": "T18Eval-00044",
+      "original_query": {
+        "TITLE": "Rural agriculture",
+        "DESCRIPTION": "Find documents that discuss the development and impact of rural agriculture in Brazil, including practices, benefits, challenges, and examples."
+      },
+      "query_text": "Rural agriculture\nFind documents that discuss the development and impact of rural agriculture in Brazil, including practices, benefits, challenges, and examples.",
+      "core_themes": {
+        "raw_response": "{\"core_themes\": \"Seek Department of State and U.S. diplomatic-post records on rural agriculture in Brazil during 1963–1973, including agricultural development, farming practices, production, benefits, and problems affecting rural communities and the national economy. Likely materials include reports, correspondence, field assessments, and policy papers describing crops and livestock, land use, agricultural technology, rural credit and extension, infrastructure, labor, and government programs. Records may address conditions under the Goulart government and subsequent military governments, with attention to changes over time and concrete regional or project examples. Search agricultural and economic reporting, and closely related rural-development, land-reform, and food-production topics where these directly document farming and its effects.\", \"related_concepts\": [\"Agriculture\", \"Rural development\", \"Agricultural production\", \"Farming practices\", \"Agricultural technology\", \"Crop production\", \"Livestock\", \"Land use\", \"Agricultural policy\", \"Agricultural extension\", \"Rural credit\", \"Farm labor\", \"Land reform\", \"Agrarian reform\", \"Food production\", \"Agricultural exports\", \"Agricultural infrastructure\", \"Brazilian Ministry of Agriculture\", \"Agricultura\", \"Agricultura rural\", \"Desenvolvimento rural\", \"Produção agrícola\", \"Reforma agrária\"]}",
+        "parsed": {
+          "core_themes": "Seek Department of State and U.S. diplomatic-post records on rural agriculture in Brazil during 1963–1973, including agricultural development, farming practices, production, benefits, and problems affecting rural communities and the national economy. Likely materials include reports, correspondence, field assessments, and policy papers describing crops and livestock, land use, agricultural technology, rural credit and extension, infrastructure, labor, and government programs. Records may address conditions under the Goulart government and subsequent military governments, with attention to changes over time and concrete regional or project examples. Search agricultural and economic reporting, and closely related rural-development, land-reform, and food-production topics where these directly document farming and its effects.",
+          "related_concepts": [
+            "Agriculture",
+            "Rural development",
+            "Agricultural production",
+            "Farming practices",
+            "Agricultural technology",
+            "Crop production",
+            "Livestock",
+            "Land use",
+            "Agricultural policy",
+            "Agricultural extension",
+            "Rural credit",
+            "Farm labor",
+            "Land reform",
+            "Agrarian reform",
+            "Food production",
+            "Agricultural exports",
+            "Agricultural infrastructure",
+            "Brazilian Ministry of Agriculture",
+            "Agricultura",
+            "Agricultura rural",
+            "Desenvolvimento rural",
+            "Produção agrícola",
+            "Reforma agrária"
+          ]
+        },
+        "valid": true,
+        "program": "core_themes_B",
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "created_at": "2026-10-09T08:34:09.812179"
+      }
+    },
+    "T18Eval-00045": {
+      "topic_id": "T18Eval-00045",
+      "original_query": {
+        "TITLE": "Oil price changes",
+        "DESCRIPTION": "I want to find any documents from which I can learn both influence and effect oil prices on Brazilian society."
+      },
+      "query_text": "Oil price changes\nI want to find any documents from which I can learn both influence and effect oil prices on Brazilian society.",
+      "core_themes": {
+        "raw_response": "{\"core_themes\": \"Seek Department of State and U.S. diplomatic-post records from 1963–1973 on changes in oil prices and their influence on Brazil, including effects on Brazilian society, the economy, and government policy. Records may discuss petroleum prices, import costs, fuel prices, supply conditions, and the consequences of price changes for transportation, industry, consumers, and the cost of living. Look for reporting and analysis under economic and commercial affairs, energy or petroleum matters, and political affairs where oil-price developments shaped public conditions or official decisions. Include Brazilian terminology such as petróleo, preços do petróleo, combustíveis, and custo de vida, while retaining the period’s institutional and diplomatic framing.\", \"related_concepts\": [\"Economic affairs\", \"Commercial affairs\", \"Political affairs and relations\", \"Petroleum\", \"Oil prices\", \"Petroleum prices\", \"Fuel prices\", \"Petroleum imports\", \"Oil supply\", \"Energy policy\", \"Brazilian economy\", \"Cost of living\", \"Consumer prices\", \"Inflation\", \"Transportation costs\", \"Industrial costs\", \"petróleo\", \"preços do petróleo\", \"preços dos combustíveis\", \"custo de vida\"]}",
+        "parsed": {
+          "core_themes": "Seek Department of State and U.S. diplomatic-post records from 1963–1973 on changes in oil prices and their influence on Brazil, including effects on Brazilian society, the economy, and government policy. Records may discuss petroleum prices, import costs, fuel prices, supply conditions, and the consequences of price changes for transportation, industry, consumers, and the cost of living. Look for reporting and analysis under economic and commercial affairs, energy or petroleum matters, and political affairs where oil-price developments shaped public conditions or official decisions. Include Brazilian terminology such as petróleo, preços do petróleo, combustíveis, and custo de vida, while retaining the period’s institutional and diplomatic framing.",
+          "related_concepts": [
+            "Economic affairs",
+            "Commercial affairs",
+            "Political affairs and relations",
+            "Petroleum",
+            "Oil prices",
+            "Petroleum prices",
+            "Fuel prices",
+            "Petroleum imports",
+            "Oil supply",
+            "Energy policy",
+            "Brazilian economy",
+            "Cost of living",
+            "Consumer prices",
+            "Inflation",
+            "Transportation costs",
+            "Industrial costs",
+            "petróleo",
+            "preços do petróleo",
+            "preços dos combustíveis",
+            "custo de vida"
+          ]
+        },
+        "valid": true,
+        "program": "core_themes_B",
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "created_at": "2026-10-09T08:34:09.812197"
+      }
+    }
+  }
+}

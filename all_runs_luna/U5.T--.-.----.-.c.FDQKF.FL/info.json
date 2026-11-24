@@ -1,0 +1,13 @@
+{
+  "query_type": "T",
+  "table": "FDQKF",
+  "config": "-.----.-.c",
+  "column": "FL",
+  "query_variant": "FL",
+  "query_set": "hw",
+  "folder_label": "fdqkf",
+  "seeds": null,
+  "llm_root": "data/llm_calls_luna/d2q_kf",
+  "query_root": "data/llm_calls_luna/hw",
+  "colbert": "exact MaxSim, top 100"
+}

@@ -1,0 +1,1953 @@
+{
+  "query_type": "TD",
+  "model": "gpt-6-luna",
+  "set": "web",
+  "generated_at": "2026-10-16T23:22:05.651861",
+  "topics": {
+    "T18Eval-00001": {
+      "topic_id": "T18Eval-00001",
+      "original_query": {
+        "TITLE": "Future space missions",
+        "DESCRIPTION": "Find documents that describe plans for one or more specific future space missions by any nation, organization, or individual."
+      },
+      "query_text": "Future space missions\nFind documents that describe plans for one or more specific future space missions by any nation, organization, or individual.",
+      "core_themes": {
+        "raw_response": "{\"core_themes\": \"Records describing planned Brazilian and U.S. space and upper-atmosphere missions, including CNAE–NASA scientific sounding-rocket launches from the Centro de Lançamento de Foguetes da Barreira do Inferno and Brazil’s participation in EXAMETNET. Documents may specify launch schedules, rocket payloads, meteorological observations, radar support, training, and exchange of data with NASA’s Wallops Station. Mission plans also concern Black Brant IV flights carrying electron-energy spectrometers and radiation detectors to investigate the South Atlantic Anomaly and inner radiation belts, with implications for astronaut safety. Related planning records describe Projeto SACI’s proposed use of a NASA telecommunications satellite for educational broadcasts and teacher training in remote Brazil.\", \"related_concepts\": [\"Comissão Nacional de Atividades Espaciais (CNAE)\", \"National Aeronautics and Space Administration (NASA)\", \"Centro de Lançamento de Foguetes da Barreira do Inferno\", \"Natal\", \"Rio Grande do Norte\", \"São José dos Campos\", \"Inter-American Experimental Meteorological Sounding Rocket Network (EXAMETNET)\", \"Black Brant IV\", \"sounding rockets\", \"meteorological sounding rockets\", \"Wallops Station\", \"radar equipment\", \"meteorological data\", \"electron-energy spectrometer\", \"radiation detectors\", \"South Atlantic Anomaly\", \"inner radiation belts\", \"low-altitude, low-inclination Earth orbit\", \"Projeto Satélite Avançado de Comunicações Interdisciplinares (SACI)\", \"NASA telecommunications satellite\"]}",
+        "parsed": {
+          "core_themes": "Records describing planned Brazilian and U.S. space and upper-atmosphere missions, including CNAE–NASA scientific sounding-rocket launches from the Centro de Lançamento de Foguetes da Barreira do Inferno and Brazil’s participation in EXAMETNET. Documents may specify launch schedules, rocket payloads, meteorological observations, radar support, training, and exchange of data with NASA’s Wallops Station. Mission plans also concern Black Brant IV flights carrying electron-energy spectrometers and radiation detectors to investigate the South Atlantic Anomaly and inner radiation belts, with implications for astronaut safety. Related planning records describe Projeto SACI’s proposed use of a NASA telecommunications satellite for educational broadcasts and teacher training in remote Brazil.",
+          "related_concepts": [
+            "Comissão Nacional de Atividades Espaciais (CNAE)",
+            "National Aeronautics and Space Administration (NASA)",
+            "Centro de Lançamento de Foguetes da Barreira do Inferno",
+            "Natal",
+            "Rio Grande do Norte",
+            "São José dos Campos",
+            "Inter-American Experimental Meteorological Sounding Rocket Network (EXAMETNET)",
+            "Black Brant IV",
+            "sounding rockets",
+            "meteorological sounding rockets",
+            "Wallops Station",
+            "radar equipment",
+            "meteorological data",
+            "electron-energy spectrometer",
+            "radiation detectors",
+            "South Atlantic Anomaly",
+            "inner radiation belts",
+            "low-altitude, low-inclination Earth orbit",
+            "Projeto Satélite Avançado de Comunicações Interdisciplinares (SACI)",
+            "NASA telecommunications satellite"
+          ]
+        },
+        "valid": true,
+        "program": "web_hw",
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "created_at": "2026-10-16T23:22:23.492914",
+        "web_fallback": false,
+        "notes_created_at": "2026-10-16T22:50:28"
+      }
+    },
+    "T18Eval-00002": {
+      "topic_id": "T18Eval-00002",
+      "original_query": {
+        "TITLE": "Brazilian submarines",
+        "DESCRIPTION": "Find documents that mention the operation of submarines by the Brazilian Navy."
+      },
+      "query_text": "Brazilian submarines\nFind documents that mention the operation of submarines by the Brazilian Navy.",
+      "core_themes": {
+        "raw_response": "{\"core_themes\": \"U.S. diplomatic and consular reports, correspondence, and assessments concerning the operation, readiness, deployments, training, maintenance, and modernization of submarines of the Marinha do Brasil during 1963–1973. Records may identify the Força de Submarinos and Escola de Submarinos, individual vessels and their service histories, and changes in submarine capabilities associated with Fleet Type boats and GUPPY II, GUPPY III, and Oberon-class designs. Relevant files may also discuss commissioning, transfer, or decommissioning of submarines and the Brazilian Navy’s submarine activities during the Goulart and subsequent military governments.\", \"related_concepts\": [\"Marinha do Brasil\", \"Força de Submarinos\", \"Flotilha de Submarinos\", \"Escola de Submarinos\", \"Bahia (S-12)\", \"Rio Grande do Sul (S-11)\", \"Humaitá (S-14)\", \"Riachuelo (S-15)\", \"Guanabara (S-10)\", \"Rio de Janeiro (S-13)\", \"Ceará (S-14)\", \"Goiás (S-15)\", \"Amazonas (S-16)\", \"Humaitá (S-20)\", \"Fleet Type I\", \"Fleet Type II\", \"GUPPY II\", \"GUPPY III\", \"Oberon-class submarines\"]}",
+        "parsed": {
+          "core_themes": "U.S. diplomatic and consular reports, correspondence, and assessments concerning the operation, readiness, deployments, training, maintenance, and modernization of submarines of the Marinha do Brasil during 1963–1973. Records may identify the Força de Submarinos and Escola de Submarinos, individual vessels and their service histories, and changes in submarine capabilities associated with Fleet Type boats and GUPPY II, GUPPY III, and Oberon-class designs. Relevant files may also discuss commissioning, transfer, or decommissioning of submarines and the Brazilian Navy’s submarine activities during the Goulart and subsequent military governments.",
+          "related_concepts": [
+            "Marinha do Brasil",
+            "Força de Submarinos",
+            "Flotilha de Submarinos",
+            "Escola de Submarinos",
+            "Bahia (S-12)",
+            "Rio Grande do Sul (S-11)",
+            "Humaitá (S-14)",
+            "Riachuelo (S-15)",
+            "Guanabara (S-10)",
+            "Rio de Janeiro (S-13)",
+            "Ceará (S-14)",
+            "Goiás (S-15)",
+            "Amazonas (S-16)",
+            "Humaitá (S-20)",
+            "Fleet Type I",
+            "Fleet Type II",
+            "GUPPY II",
+            "GUPPY III",
+            "Oberon-class submarines"
+          ]
+        },
+        "valid": true,
+        "program": "web_hw",
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "created_at": "2026-10-16T23:22:23.492952",
+        "web_fallback": false,
+        "notes_created_at": "2026-10-16T22:50:27"
+      }
+    },
+    "T18Eval-00003": {
+      "topic_id": "T18Eval-00003",
+      "original_query": {
+        "TITLE": "Alagoas flood",
+        "DESCRIPTION": "I'm interested in learning about damage from flooding in Alagoas in 1969 and in American help with the recovery effort."
+      },
+      "query_text": "Alagoas flood\nI'm interested in learning about damage from flooding in Alagoas in 1969 and in American help with the recovery effort.",
+      "core_themes": {
+        "raw_response": "{\"core_themes\": \"State Department and consular dispatches, situation reports, and relief correspondence concerning the March 14, 1969, Mundaú River Valley flood in Alagoas, documenting deaths and damage in São José da Laje, União dos Palmares, Murici, and Branquinha; Brazilian emergency operations and air transport; and U.S. Government participation in food relief and recovery. Records may describe requests and coordination by the U.S. Mission’s Emergency Relief Officer and the Consul General in Recife, Food for Peace commodities, an AID contingency-fund grant to SUDENE for cooking equipment, nongovernmental relief contributions, and Brazilian plans for cleanup and reconstruction.\", \"related_concepts\": [\"Enchente de Alagoas (1969)\", \"Rio Mundaú\", \"Rio Canhoto\", \"São José da Laje\", \"União dos Palmares\", \"Murici\", \"Branquinha\", \"Maceió\", \"Recife\", \"Operação Emergência\", \"Adauto Barbosa\", \"Donor Lion\", \"Robert R. Standley\", \"Emergency Relief Officer\", \"Food for Peace\", \"Public Law 480 (P.L. 480)\", \"SUDENE (Superintendência do Desenvolvimento do Nordeste)\", \"Força Aérea Brasileira (FAB)\", \"Church World Service\", \"Catholic Relief Services\", \"AID contingency fund\"]}",
+        "parsed": {
+          "core_themes": "State Department and consular dispatches, situation reports, and relief correspondence concerning the March 14, 1969, Mundaú River Valley flood in Alagoas, documenting deaths and damage in São José da Laje, União dos Palmares, Murici, and Branquinha; Brazilian emergency operations and air transport; and U.S. Government participation in food relief and recovery. Records may describe requests and coordination by the U.S. Mission’s Emergency Relief Officer and the Consul General in Recife, Food for Peace commodities, an AID contingency-fund grant to SUDENE for cooking equipment, nongovernmental relief contributions, and Brazilian plans for cleanup and reconstruction.",
+          "related_concepts": [
+            "Enchente de Alagoas (1969)",
+            "Rio Mundaú",
+            "Rio Canhoto",
+            "São José da Laje",
+            "União dos Palmares",
+            "Murici",
+            "Branquinha",
+            "Maceió",
+            "Recife",
+            "Operação Emergência",
+            "Adauto Barbosa",
+            "Donor Lion",
+            "Robert R. Standley",
+            "Emergency Relief Officer",
+            "Food for Peace",
+            "Public Law 480 (P.L. 480)",
+            "SUDENE (Superintendência do Desenvolvimento do Nordeste)",
+            "Força Aérea Brasileira (FAB)",
+            "Church World Service",
+            "Catholic Relief Services",
+            "AID contingency fund"
+          ]
+        },
+        "valid": true,
+        "program": "web_hw",
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "created_at": "2026-10-16T23:22:23.492973",
+        "web_fallback": false,
+        "notes_created_at": "2026-10-16T22:54:38"
+      }
+    },
+    "T18Eval-00004": {
+      "topic_id": "T18Eval-00004",
+      "original_query": {
+        "TITLE": "Grain sorghum",
+        "DESCRIPTION": "Tell me about grain sorghum operations in Northeast Brazil."
+      },
+      "query_text": "Grain sorghum\nTell me about grain sorghum operations in Northeast Brazil.",
+      "core_themes": {
+        "raw_response": "{\"core_themes\": \"Department of State and U.S. diplomatic and consular correspondence concerning grain sorghum cultivation and agricultural operations in Brazil’s Northeast during 1963–1973. Records may describe sorghum trials and extension work, drought tolerance relative to maize, feed-grain shortages, acreage and production, seed varieties and hybrids, and regional agricultural research institutions in Pernambuco, Paraíba, Ceará, and Rio Grande do Norte. Relevant files may address cooperation or technical assistance among Brazilian research agencies and U.S. officials, crop development under the changing governments of Goulart, Castelo Branco, Costa e Silva, and Médici, and agricultural conditions affecting rural production. Later reports and statistics cited in the web notes fall outside this collection’s date range.\", \"related_concepts\": [\"sorgo granífero\", \"cultura do sorgo\", \"Nordeste brasileiro\", \"Instituto de Pesquisas Agronômicas (IPA)\", \"Programa de Sorgo e Milheto\", \"EMBRAPA\", \"Centro Nacional de Pesquisa de Milho e Sorgo (CNPMS)\", \"milho\", \"Centralmex\", \"Caruaru\", \"Arcoverde\", \"Serra Talhada\", \"Araripina\", \"Itabaiana\", \"Soledade\", \"Itaporanga\", \"Pernambuco\", \"Paraíba\", \"Ceará\", \"Rio Grande do Norte\"]}",
+        "parsed": {
+          "core_themes": "Department of State and U.S. diplomatic and consular correspondence concerning grain sorghum cultivation and agricultural operations in Brazil’s Northeast during 1963–1973. Records may describe sorghum trials and extension work, drought tolerance relative to maize, feed-grain shortages, acreage and production, seed varieties and hybrids, and regional agricultural research institutions in Pernambuco, Paraíba, Ceará, and Rio Grande do Norte. Relevant files may address cooperation or technical assistance among Brazilian research agencies and U.S. officials, crop development under the changing governments of Goulart, Castelo Branco, Costa e Silva, and Médici, and agricultural conditions affecting rural production. Later reports and statistics cited in the web notes fall outside this collection’s date range.",
+          "related_concepts": [
+            "sorgo granífero",
+            "cultura do sorgo",
+            "Nordeste brasileiro",
+            "Instituto de Pesquisas Agronômicas (IPA)",
+            "Programa de Sorgo e Milheto",
+            "EMBRAPA",
+            "Centro Nacional de Pesquisa de Milho e Sorgo (CNPMS)",
+            "milho",
+            "Centralmex",
+            "Caruaru",
+            "Arcoverde",
+            "Serra Talhada",
+            "Araripina",
+            "Itabaiana",
+            "Soledade",
+            "Itaporanga",
+            "Pernambuco",
+            "Paraíba",
+            "Ceará",
+            "Rio Grande do Norte"
+          ]
+        },
+        "valid": true,
+        "program": "web_hw",
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "created_at": "2026-10-16T23:22:23.492991",
+        "web_fallback": false,
+        "notes_created_at": "2026-10-16T22:54:38"
+      }
+    },
+    "T18Eval-00005": {
+      "topic_id": "T18Eval-00005",
+      "original_query": {
+        "TITLE": "Beef cattle industry",
+        "DESCRIPTION": "Locate documents containing information on Brazil's beef cattle industry and the distribution of its products."
+      },
+      "query_text": "Beef cattle industry\nLocate documents containing information on Brazil's beef cattle industry and the distribution of its products.",
+      "core_themes": {
+        "raw_response": "{\"core_themes\": \"Subject-Numeric Files concerning Brazil’s pecuária bovina, including cattle raising, production and movement of gado bovino and boi em pé, slaughter, frigoríficos, and the processing, marketing, and domestic distribution of carne bovina and its by-products. Records may address prices, stocks, supply, inspection, and government measures affecting the meat trade, as well as export policy, quotas, and restrictions on shipments. Relevant files may also document Amazon-region cattle development and associated federal agencies and incentives, and the distribution of fresh, chilled, frozen, canned, or processed beef and miúdos.\", \"related_concepts\": [\"pecuária bovina\", \"gado bovino\", \"boi em pé\", \"carne bovina\", \"frigoríficos\", \"carne verde\", \"carne frigorificada\", \"carne resfriada\", \"carne congelada\", \"conservas de carne bovina\", \"miúdos\", \"Superintendência Nacional do Abastecimento (SUNAB)\", \"Carteira de Comércio Exterior (CACEX)\", \"Comitê Brasileiro de Exportadores de Carne (CBEC)\", \"Superintendência do Desenvolvimento da Amazônia (SUDAM)\", \"Superintendência do Plano de Valorização Econômica da Amazônia (SPVEA)\", \"Lei nº 5.173 (1966)\", \"Lei nº 5.174 (1966)\", \"Lei nº 5.760 (1971)\", \"quota de contribuição\"]}",
+        "parsed": {
+          "core_themes": "Subject-Numeric Files concerning Brazil’s pecuária bovina, including cattle raising, production and movement of gado bovino and boi em pé, slaughter, frigoríficos, and the processing, marketing, and domestic distribution of carne bovina and its by-products. Records may address prices, stocks, supply, inspection, and government measures affecting the meat trade, as well as export policy, quotas, and restrictions on shipments. Relevant files may also document Amazon-region cattle development and associated federal agencies and incentives, and the distribution of fresh, chilled, frozen, canned, or processed beef and miúdos.",
+          "related_concepts": [
+            "pecuária bovina",
+            "gado bovino",
+            "boi em pé",
+            "carne bovina",
+            "frigoríficos",
+            "carne verde",
+            "carne frigorificada",
+            "carne resfriada",
+            "carne congelada",
+            "conservas de carne bovina",
+            "miúdos",
+            "Superintendência Nacional do Abastecimento (SUNAB)",
+            "Carteira de Comércio Exterior (CACEX)",
+            "Comitê Brasileiro de Exportadores de Carne (CBEC)",
+            "Superintendência do Desenvolvimento da Amazônia (SUDAM)",
+            "Superintendência do Plano de Valorização Econômica da Amazônia (SPVEA)",
+            "Lei nº 5.173 (1966)",
+            "Lei nº 5.174 (1966)",
+            "Lei nº 5.760 (1971)",
+            "quota de contribuição"
+          ]
+        },
+        "valid": true,
+        "program": "web_hw",
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "created_at": "2026-10-16T23:22:23.493010",
+        "web_fallback": false,
+        "notes_created_at": "2026-10-16T22:54:39"
+      }
+    },
+    "T18Eval-00006": {
+      "topic_id": "T18Eval-00006",
+      "original_query": {
+        "TITLE": "Cocoa exports",
+        "DESCRIPTION": "I want to see documents about the exportation of cocoa out of Brazil."
+      },
+      "query_text": "Cocoa exports\nI want to see documents about the exportation of cocoa out of Brazil.",
+      "core_themes": {
+        "raw_response": "{\"core_themes\": \"U.S. diplomatic and consular correspondence, reports, and trade records concerning the exportation of Brazilian cocoa during 1963–1973, including production and shipment of cacau em amêndoas and cacau e derivados; export routes, port facilities, loading practices, and transport from Bahia’s região cacaueira; and government and industry measures affecting cocoa trade. Records may discuss CEPLAC’s support for Ilhéus port development, the opening of Porto do Malhado, use of Salvador as an export outlet, and Brazil’s participation in producer agreements and quota arrangements.\", \"related_concepts\": [\"cacau em amêndoas\", \"cacau e derivados\", \"exportação de cacau\", \"CEPLAC\", \"Comissão Executiva do Plano da Lavoura Cacaueira\", \"Porto do Malhado\", \"Ilhéus\", \"Porto de Salvador\", \"Salvador\", \"Itabuna\", \"região cacaueira da Bahia\", \"Enseada das Trincheiras\", \"chatas\", \"alvarengas\", \"manteiga de cacau\", \"líquor de cacau\", \"torta de cacau\", \"cacau em pó\", \"Aliança dos Produtores de Cacau\", \"Estatutos de Abidjan\", \"Acordo de Lomé\"]}",
+        "parsed": {
+          "core_themes": "U.S. diplomatic and consular correspondence, reports, and trade records concerning the exportation of Brazilian cocoa during 1963–1973, including production and shipment of cacau em amêndoas and cacau e derivados; export routes, port facilities, loading practices, and transport from Bahia’s região cacaueira; and government and industry measures affecting cocoa trade. Records may discuss CEPLAC’s support for Ilhéus port development, the opening of Porto do Malhado, use of Salvador as an export outlet, and Brazil’s participation in producer agreements and quota arrangements.",
+          "related_concepts": [
+            "cacau em amêndoas",
+            "cacau e derivados",
+            "exportação de cacau",
+            "CEPLAC",
+            "Comissão Executiva do Plano da Lavoura Cacaueira",
+            "Porto do Malhado",
+            "Ilhéus",
+            "Porto de Salvador",
+            "Salvador",
+            "Itabuna",
+            "região cacaueira da Bahia",
+            "Enseada das Trincheiras",
+            "chatas",
+            "alvarengas",
+            "manteiga de cacau",
+            "líquor de cacau",
+            "torta de cacau",
+            "cacau em pó",
+            "Aliança dos Produtores de Cacau",
+            "Estatutos de Abidjan",
+            "Acordo de Lomé"
+          ]
+        },
+        "valid": true,
+        "program": "web_hw",
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "created_at": "2026-10-16T23:22:23.493027",
+        "web_fallback": false,
+        "notes_created_at": "2026-10-16T22:54:46"
+      }
+    },
+    "T18Eval-00007": {
+      "topic_id": "T18Eval-00007",
+      "original_query": {
+        "TITLE": "Manioc cultivation",
+        "DESCRIPTION": "Tell me about manioc cultivation in Brazil."
+      },
+      "query_text": "Manioc cultivation\nTell me about manioc cultivation in Brazil.",
+      "core_themes": {
+        "raw_response": "{\"core_themes\": \"Department of State and U.S. diplomatic-post reports concerning Brazilian manioc (mandioca) cultivation, production, and processing during 1963–1973, including crop acreage, output, yields, regional and municipal production, and agricultural planning or technical studies. Records may distinguish mandioca mansa for household consumption from mandioca brava grown for processing, and discuss products such as farinha de mandioca, fécula, and farinha de raspa. Relevant reporting may cover production trends and projections, state-level statistics, cultivation practices and variety trials, and the economic importance of manioc in Pernambuco, Ceará, Piauí, and the Baixada Fluminense.\", \"related_concepts\": [\"mandioca\", \"mandioca mansa\", \"mandioca brava\", \"cultivo da mandioca\", \"produção agrícola\", \"área colhida\", \"rendimento agrícola\", \"farinha de mandioca\", \"fécula\", \"farinha de raspa\", \"Mandioca: estudo técnico e econômico\", \"Anuário Estatístico do Brasil\", \"Pernambuco\", \"Ceará\", \"Piauí\", \"Caucaia\", \"São Benedito\", \"Campos Sales\", \"Parambu\", \"Baixada Fluminense\"]}",
+        "parsed": {
+          "core_themes": "Department of State and U.S. diplomatic-post reports concerning Brazilian manioc (mandioca) cultivation, production, and processing during 1963–1973, including crop acreage, output, yields, regional and municipal production, and agricultural planning or technical studies. Records may distinguish mandioca mansa for household consumption from mandioca brava grown for processing, and discuss products such as farinha de mandioca, fécula, and farinha de raspa. Relevant reporting may cover production trends and projections, state-level statistics, cultivation practices and variety trials, and the economic importance of manioc in Pernambuco, Ceará, Piauí, and the Baixada Fluminense.",
+          "related_concepts": [
+            "mandioca",
+            "mandioca mansa",
+            "mandioca brava",
+            "cultivo da mandioca",
+            "produção agrícola",
+            "área colhida",
+            "rendimento agrícola",
+            "farinha de mandioca",
+            "fécula",
+            "farinha de raspa",
+            "Mandioca: estudo técnico e econômico",
+            "Anuário Estatístico do Brasil",
+            "Pernambuco",
+            "Ceará",
+            "Piauí",
+            "Caucaia",
+            "São Benedito",
+            "Campos Sales",
+            "Parambu",
+            "Baixada Fluminense"
+          ]
+        },
+        "valid": true,
+        "program": "web_hw",
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "created_at": "2026-10-16T23:22:23.493045",
+        "web_fallback": false,
+        "notes_created_at": "2026-10-16T22:54:48"
+      }
+    },
+    "T18Eval-00008": {
+      "topic_id": "T18Eval-00008",
+      "original_query": {
+        "TITLE": "Peace Corps birth control ",
+        "DESCRIPTION": "Find documents that mention the Peace Corps distributing birth control to women in Brazil."
+      },
+      "query_text": "Peace Corps birth control \nFind documents that mention the Peace Corps distributing birth control to women in Brazil.",
+      "core_themes": {
+        "raw_response": "{\"core_themes\": \"State Department and U.S. diplomatic-post correspondence, reports, and memoranda concerning allegations or accounts of Peace Corps personnel distributing birth-control materials or contraceptives to women in Brazil during 1963–1973. Relevant records may use “Peace Corps” or “Corpo da Paz” alongside period terms for contraception and family planning, and may discuss Brazilian organizations involved in birth-control advocacy, including Sociedade Civil Bem-Estar Familiar no Brasil (BEMFAM) and the International Planned Parenthood Federation (IPPF). The available background does not substantiate Peace Corps contraceptive distribution to Brazilian women; records about contraceptives provided to volunteers should be distinguished from Brazilian public services or distribution programs.\", \"related_concepts\": [\"Peace Corps\", \"Corpo da Paz\", \"birth control\", \"contraceptives\", \"family planning\", \"population control\", \"pílula anticoncepcional\", \"anticoncepcionais\", \"planejamento familiar\", \"Sociedade Civil Bem-Estar Familiar no Brasil\", \"BEMFAM\", \"International Planned Parenthood Federation\", \"IPPF\", \"U.S. Embassy Brasília\", \"Brazil\", \"women’s health\", \"contraceptive distribution\", \"Peace Corps volunteers\"]}",
+        "parsed": {
+          "core_themes": "State Department and U.S. diplomatic-post correspondence, reports, and memoranda concerning allegations or accounts of Peace Corps personnel distributing birth-control materials or contraceptives to women in Brazil during 1963–1973. Relevant records may use “Peace Corps” or “Corpo da Paz” alongside period terms for contraception and family planning, and may discuss Brazilian organizations involved in birth-control advocacy, including Sociedade Civil Bem-Estar Familiar no Brasil (BEMFAM) and the International Planned Parenthood Federation (IPPF). The available background does not substantiate Peace Corps contraceptive distribution to Brazilian women; records about contraceptives provided to volunteers should be distinguished from Brazilian public services or distribution programs.",
+          "related_concepts": [
+            "Peace Corps",
+            "Corpo da Paz",
+            "birth control",
+            "contraceptives",
+            "family planning",
+            "population control",
+            "pílula anticoncepcional",
+            "anticoncepcionais",
+            "planejamento familiar",
+            "Sociedade Civil Bem-Estar Familiar no Brasil",
+            "BEMFAM",
+            "International Planned Parenthood Federation",
+            "IPPF",
+            "U.S. Embassy Brasília",
+            "Brazil",
+            "women’s health",
+            "contraceptive distribution",
+            "Peace Corps volunteers"
+          ]
+        },
+        "valid": true,
+        "program": "web_hw",
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "created_at": "2026-10-16T23:22:23.493073",
+        "web_fallback": false,
+        "notes_created_at": "2026-10-16T22:54:54"
+      }
+    },
+    "T18Eval-00009": {
+      "topic_id": "T18Eval-00009",
+      "original_query": {
+        "TITLE": "Marijuana consumption",
+        "DESCRIPTION": "I want to find documents about marijuana consumption in Brazil."
+      },
+      "query_text": "Marijuana consumption\nI want to find documents about marijuana consumption in Brazil.",
+      "core_themes": {
+        "raw_response": "{\"core_themes\": \"U.S. diplomatic and consular reports, Brazilian government and police correspondence, and legislative records concerning the consumption and use of maconha in Brazil, including distinctions among use, possession, carrying, cultivation, and trafficking in narcotics. Documents may describe public attitudes, consumption patterns and markets, enforcement actions, and cooperation between federal and state authorities, as well as the effects of amendments to Penal Code Article 281 and Brazil’s implementation of the 1961 Single Convention on Narcotic Drugs. Relevant reports may focus on Recife, São Paulo, and Rio de Janeiro during the Goulart and subsequent military governments.\", \"related_concepts\": [\"maconha\", \"cannabis\", \"cânhamo\", \"Cannabis sativa\", \"entorpecentes\", \"uso de entorpecentes\", \"consumo de maconha\", \"posse de entorpecentes\", \"porte de entorpecentes\", \"tráfico de entorpecentes\", \"cultivo de cânhamo\", \"Convenção Única sôbre Entorpecentes\", \"Decreto nº 54.216, de 1964\", \"Código Penal, artigo 281\", \"Lei nº 4.451, de 1964\", \"Decreto-Lei nº 385, de 1968\", \"Lei nº 5.726, de 1971\", \"Divisão de Repressão a Entorpecentes\", \"Polícia Federal\", \"Recife\", \"São Paulo\", \"Rio de Janeiro\"]}",
+        "parsed": {
+          "core_themes": "U.S. diplomatic and consular reports, Brazilian government and police correspondence, and legislative records concerning the consumption and use of maconha in Brazil, including distinctions among use, possession, carrying, cultivation, and trafficking in narcotics. Documents may describe public attitudes, consumption patterns and markets, enforcement actions, and cooperation between federal and state authorities, as well as the effects of amendments to Penal Code Article 281 and Brazil’s implementation of the 1961 Single Convention on Narcotic Drugs. Relevant reports may focus on Recife, São Paulo, and Rio de Janeiro during the Goulart and subsequent military governments.",
+          "related_concepts": [
+            "maconha",
+            "cannabis",
+            "cânhamo",
+            "Cannabis sativa",
+            "entorpecentes",
+            "uso de entorpecentes",
+            "consumo de maconha",
+            "posse de entorpecentes",
+            "porte de entorpecentes",
+            "tráfico de entorpecentes",
+            "cultivo de cânhamo",
+            "Convenção Única sôbre Entorpecentes",
+            "Decreto nº 54.216, de 1964",
+            "Código Penal, artigo 281",
+            "Lei nº 4.451, de 1964",
+            "Decreto-Lei nº 385, de 1968",
+            "Lei nº 5.726, de 1971",
+            "Divisão de Repressão a Entorpecentes",
+            "Polícia Federal",
+            "Recife",
+            "São Paulo",
+            "Rio de Janeiro"
+          ]
+        },
+        "valid": true,
+        "program": "web_hw",
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "created_at": "2026-10-16T23:22:23.493095",
+        "web_fallback": false,
+        "notes_created_at": "2026-10-16T22:54:53"
+      }
+    },
+    "T18Eval-00010": {
+      "topic_id": "T18Eval-00010",
+      "original_query": {
+        "TITLE": "Wine industry",
+        "DESCRIPTION": "I want to find documents on Brazil's wine industry."
+      },
+      "query_text": "Wine industry\nI want to find documents on Brazil's wine industry.",
+      "core_themes": {
+        "raw_response": "{\"core_themes\": \"Records concerning Brazil’s wine and grape industry, including the regulation of viticulture, wine production, circulation, importation, and sale under Decreto-Lei nº 476 (1969); Ministry of Agriculture oversight of wineries, processors, importers, and product registration; and research by the Instituto de Fermentação. Documents may address the Programa Plante Viníferas, planting of European wine grapes, vineyard systems and grape varieties, and investment or expansion by Brazilian and foreign wine companies in Rio Grande do Sul, including activity in Flores da Cunha, the Serra do Sudeste, Santana do Livramento, and Garibaldi.\", \"related_concepts\": [\"Decreto-Lei nº 476\", \"Decreto nº 52.339\", \"Ministério da Agricultura\", \"Instituto de Fermentação (IF)\", \"Secretaria de Agricultura do Rio Grande do Sul\", \"Programa Plante Viníferas\", \"Guia de Livre Trânsito\", \"vinho\", \"viticultura\", \"cultivares viníferas\", \"cepas viníferas e híbridas\", \"sistema em espaldeira\", \"cantinas\", \"Sociedade Vinícola Rio-Grandense\", \"Companhia Vinícola Rio-Grandense S.A.\", \"National Distillers\", \"Almadén\", \"Moët Chandon\", \"Flores da Cunha\", \"Serra do Sudeste\", \"Santana do Livramento\", \"Garibaldi\"]}",
+        "parsed": {
+          "core_themes": "Records concerning Brazil’s wine and grape industry, including the regulation of viticulture, wine production, circulation, importation, and sale under Decreto-Lei nº 476 (1969); Ministry of Agriculture oversight of wineries, processors, importers, and product registration; and research by the Instituto de Fermentação. Documents may address the Programa Plante Viníferas, planting of European wine grapes, vineyard systems and grape varieties, and investment or expansion by Brazilian and foreign wine companies in Rio Grande do Sul, including activity in Flores da Cunha, the Serra do Sudeste, Santana do Livramento, and Garibaldi.",
+          "related_concepts": [
+            "Decreto-Lei nº 476",
+            "Decreto nº 52.339",
+            "Ministério da Agricultura",
+            "Instituto de Fermentação (IF)",
+            "Secretaria de Agricultura do Rio Grande do Sul",
+            "Programa Plante Viníferas",
+            "Guia de Livre Trânsito",
+            "vinho",
+            "viticultura",
+            "cultivares viníferas",
+            "cepas viníferas e híbridas",
+            "sistema em espaldeira",
+            "cantinas",
+            "Sociedade Vinícola Rio-Grandense",
+            "Companhia Vinícola Rio-Grandense S.A.",
+            "National Distillers",
+            "Almadén",
+            "Moët Chandon",
+            "Flores da Cunha",
+            "Serra do Sudeste",
+            "Santana do Livramento",
+            "Garibaldi"
+          ]
+        },
+        "valid": true,
+        "program": "web_hw",
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "created_at": "2026-10-16T23:22:23.493115",
+        "web_fallback": false,
+        "notes_created_at": "2026-10-16T22:54:57"
+      }
+    },
+    "T18Eval-00011": {
+      "topic_id": "T18Eval-00011",
+      "original_query": {
+        "TITLE": "International reactions to coup",
+        "DESCRIPTION": "I need information on international reactions to the 1964 Brazilian coup d'etat."
+      },
+      "query_text": "International reactions to coup\nI need information on international reactions to the 1964 Brazilian coup d'etat.",
+      "core_themes": {
+        "raw_response": "{\"core_themes\": \"Department of State and Embassy Rio de Janeiro telegrams, memoranda, and reports concerning foreign governments’ responses to the overthrow of President João Goulart and the assumption of power by Brazil’s military authorities in March–April 1964. Records discuss U.S. recognition of the new government, statements and recognition decisions by other American republics, and consultations through the Organization of American States. They may address President Lyndon B. Johnson’s administration, Secretary of State Dean Rusk, Ambassador Lincoln Gordon, and proposed emergency economic and military assistance, including Operation Brother Sam. Relevant reporting also treats Brazil’s diplomatic break with Cuba and regional developments that shaped inter-American debate, while distinguishing reactions to the coup from the separate Dominican Republic crisis and the Inter-American Peace Force.\", \"related_concepts\": [\"Golpe de 1964\", \"João Goulart\", \"Castelo Branco government\", \"Lyndon B. Johnson\", \"Dean Rusk\", \"Lincoln Gordon\", \"U.S. recognition of Brazil’s military government\", \"Embassy Rio de Janeiro\", \"U.S. Department of State\", \"Organization of American States (OAS)\", \"American republics\", \"Costa Rica recognition of Brazil\", \"Operation Brother Sam\", \"emergency economic assistance\", \"petroleum, arms, and ammunition\", \"Brazil–Cuba diplomatic relations\", \"Cuban-Brazilian diplomatic break\", \"Inter-American Peace Force (Força Interamericana de Paz)\", \"Dominican Republic crisis\"]}",
+        "parsed": {
+          "core_themes": "Department of State and Embassy Rio de Janeiro telegrams, memoranda, and reports concerning foreign governments’ responses to the overthrow of President João Goulart and the assumption of power by Brazil’s military authorities in March–April 1964. Records discuss U.S. recognition of the new government, statements and recognition decisions by other American republics, and consultations through the Organization of American States. They may address President Lyndon B. Johnson’s administration, Secretary of State Dean Rusk, Ambassador Lincoln Gordon, and proposed emergency economic and military assistance, including Operation Brother Sam. Relevant reporting also treats Brazil’s diplomatic break with Cuba and regional developments that shaped inter-American debate, while distinguishing reactions to the coup from the separate Dominican Republic crisis and the Inter-American Peace Force.",
+          "related_concepts": [
+            "Golpe de 1964",
+            "João Goulart",
+            "Castelo Branco government",
+            "Lyndon B. Johnson",
+            "Dean Rusk",
+            "Lincoln Gordon",
+            "U.S. recognition of Brazil’s military government",
+            "Embassy Rio de Janeiro",
+            "U.S. Department of State",
+            "Organization of American States (OAS)",
+            "American republics",
+            "Costa Rica recognition of Brazil",
+            "Operation Brother Sam",
+            "emergency economic assistance",
+            "petroleum, arms, and ammunition",
+            "Brazil–Cuba diplomatic relations",
+            "Cuban-Brazilian diplomatic break",
+            "Inter-American Peace Force (Força Interamericana de Paz)",
+            "Dominican Republic crisis"
+          ]
+        },
+        "valid": true,
+        "program": "web_hw",
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "created_at": "2026-10-16T23:22:23.493135",
+        "web_fallback": false,
+        "notes_created_at": "2026-10-16T22:55:06"
+      }
+    },
+    "T18Eval-00012": {
+      "topic_id": "T18Eval-00012",
+      "original_query": {
+        "TITLE": "Japanese fishing boat seizure",
+        "DESCRIPTION": "I'm looking for information on the seizure of Japanese fishing boats in Brazilian waters."
+      },
+      "query_text": "Japanese fishing boat seizure\nI'm looking for information on the seizure of Japanese fishing boats in Brazilian waters.",
+      "core_themes": {
+        "raw_response": "{\"core_themes\": \"Department of State and Embassy Brasilia or consular reports concerning the detention, seizure, or impounding of Japanese fishing vessels operating in Brazilian waters, including the circumstances, vessel identities, crew treatment, enforcement actions, and diplomatic representations by Japan. Records may describe disputes over Brazil’s claimed 200-nautical-mile territorial sea, fishing access and licensing, authorization by the Ministry of Agriculture following consultation with the Ministry of the Navy, and landing permits administered by SUDEPE under Decreto-Lei nº 221. Include reporting on negotiations for a Brazil–Japan fisheries agreement and the status of Japanese longline fishing off Recife and Brazil’s northeastern coast through 1973; the available background does not confirm that a seizure occurred.\", \"related_concepts\": [\"Japanese fishing vessels\", \"Japanese longline fishery\", \"seizure of fishing boats\", \"detention of foreign vessels\", \"Brazilian territorial sea\", \"200-mile limit\", \"Brazil–Japan fisheries agreement\", \"fishing access\", \"foreign fishing-vessel licensing\", \"Decreto-Lei nº 221, de 28 de fevereiro de 1967\", \"Superintendência do Desenvolvimento da Pesca (SUDEPE)\", \"Ministério da Agricultura\", \"Ministério da Marinha\", \"Brazilian maritime authorities\", \"fishing-vessel authorization\", \"landing of catches\", \"Recife, Pernambuco\", \"northeastern Brazil fishing grounds\", \"tuna longline fishing\", \"Japanese diplomatic representations\"]}",
+        "parsed": {
+          "core_themes": "Department of State and Embassy Brasilia or consular reports concerning the detention, seizure, or impounding of Japanese fishing vessels operating in Brazilian waters, including the circumstances, vessel identities, crew treatment, enforcement actions, and diplomatic representations by Japan. Records may describe disputes over Brazil’s claimed 200-nautical-mile territorial sea, fishing access and licensing, authorization by the Ministry of Agriculture following consultation with the Ministry of the Navy, and landing permits administered by SUDEPE under Decreto-Lei nº 221. Include reporting on negotiations for a Brazil–Japan fisheries agreement and the status of Japanese longline fishing off Recife and Brazil’s northeastern coast through 1973; the available background does not confirm that a seizure occurred.",
+          "related_concepts": [
+            "Japanese fishing vessels",
+            "Japanese longline fishery",
+            "seizure of fishing boats",
+            "detention of foreign vessels",
+            "Brazilian territorial sea",
+            "200-mile limit",
+            "Brazil–Japan fisheries agreement",
+            "fishing access",
+            "foreign fishing-vessel licensing",
+            "Decreto-Lei nº 221, de 28 de fevereiro de 1967",
+            "Superintendência do Desenvolvimento da Pesca (SUDEPE)",
+            "Ministério da Agricultura",
+            "Ministério da Marinha",
+            "Brazilian maritime authorities",
+            "fishing-vessel authorization",
+            "landing of catches",
+            "Recife, Pernambuco",
+            "northeastern Brazil fishing grounds",
+            "tuna longline fishing",
+            "Japanese diplomatic representations"
+          ]
+        },
+        "valid": true,
+        "program": "web_hw",
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "created_at": "2026-10-16T23:22:23.493154",
+        "web_fallback": false,
+        "notes_created_at": "2026-10-16T22:55:06"
+      }
+    },
+    "T18Eval-00013": {
+      "topic_id": "T18Eval-00013",
+      "original_query": {
+        "TITLE": "Brazilian immigration to America",
+        "DESCRIPTION": "I need to find documents that describe immigration process of Brazilian citizens to America."
+      },
+      "query_text": "Brazilian immigration to America\nI need to find documents that describe immigration process of Brazilian citizens to America.",
+      "core_themes": {
+        "raw_response": "{\"core_themes\": \"U.S. Embassy and consular-post correspondence concerning Brazilian nationals’ applications for immigrant visas, required passports or travel documents, visa issuance, and admission at U.S. ports of entry. Records may describe administration of the Immigration and Nationality Act of 1952 as amended by the Immigration and Nationality Act of 1965, immigrant preference categories based on family relationships and occupational qualifications, and the application of the Western Hemisphere annual ceiling beginning July 1, 1968. Include visa-number availability, waiting periods, consular procedures, and inquiries about permanent residence. Distinguish ordinary immigrant applications from the 1965 U.S.–Brazil exchange of notes on fees for specified official nonimmigrant visas.\", \"related_concepts\": [\"Brazilian nationals\", \"United States immigrant visas\", \"U.S. Embassy in Brazil\", \"U.S. consulates in Brazil\", \"Immigration and Nationality Act of 1952\", \"Immigration and Nationality Act Amendments of 1965\", \"Public Law 89-236\", \"79 Stat. 911\", \"immigrant visa preference categories\", \"family-sponsored immigration\", \"occupational preference\", \"Western Hemisphere immigration ceiling\", \"July 1, 1968 annual limit\", \"120,000-person annual ceiling\", \"visa number availability\", \"visa waiting periods\", \"passport and travel documents\", \"U.S. ports of entry\", \"Bureau of Security and Consular Affairs\", \"Barbara Watson\", \"U.S.–Brazil exchange of notes on nonimmigrant visa fees\"]}",
+        "parsed": {
+          "core_themes": "U.S. Embassy and consular-post correspondence concerning Brazilian nationals’ applications for immigrant visas, required passports or travel documents, visa issuance, and admission at U.S. ports of entry. Records may describe administration of the Immigration and Nationality Act of 1952 as amended by the Immigration and Nationality Act of 1965, immigrant preference categories based on family relationships and occupational qualifications, and the application of the Western Hemisphere annual ceiling beginning July 1, 1968. Include visa-number availability, waiting periods, consular procedures, and inquiries about permanent residence. Distinguish ordinary immigrant applications from the 1965 U.S.–Brazil exchange of notes on fees for specified official nonimmigrant visas.",
+          "related_concepts": [
+            "Brazilian nationals",
+            "United States immigrant visas",
+            "U.S. Embassy in Brazil",
+            "U.S. consulates in Brazil",
+            "Immigration and Nationality Act of 1952",
+            "Immigration and Nationality Act Amendments of 1965",
+            "Public Law 89-236",
+            "79 Stat. 911",
+            "immigrant visa preference categories",
+            "family-sponsored immigration",
+            "occupational preference",
+            "Western Hemisphere immigration ceiling",
+            "July 1, 1968 annual limit",
+            "120,000-person annual ceiling",
+            "visa number availability",
+            "visa waiting periods",
+            "passport and travel documents",
+            "U.S. ports of entry",
+            "Bureau of Security and Consular Affairs",
+            "Barbara Watson",
+            "U.S.–Brazil exchange of notes on nonimmigrant visa fees"
+          ]
+        },
+        "valid": true,
+        "program": "web_hw",
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "created_at": "2026-10-16T23:22:23.493174",
+        "web_fallback": false,
+        "notes_created_at": "2026-10-16T22:55:08"
+      }
+    },
+    "T18Eval-00014": {
+      "topic_id": "T18Eval-00014",
+      "original_query": {
+        "TITLE": "El Chocon Dam",
+        "DESCRIPTION": "I'm looking for documents mentioning the El Chocon Dam."
+      },
+      "query_text": "El Chocon Dam\nI'm looking for documents mentioning the El Chocon Dam.",
+      "core_themes": {
+        "raw_response": "{\"core_themes\": \"U.S. Embassy and consular reporting, correspondence, and memoranda concerning Argentina’s Complejo El Chocón-Cerros Colorados hydroelectric development, including the El Chocón dam and powerhouse on the río Limay, construction, financing, generation capacity, flood-control works, and transmission links to the Gran Buenos Aires-Litoral electrical system. Records may discuss the concession to Hidronor S.A., Argentine legislation and energy administration, the World Bank loan, project stages and schedules, and the dam’s expected contribution to electricity supply in Gran Buenos Aires, especially the 1973 target.\", \"related_concepts\": [\"Complejo El Chocón-Cerros Colorados\", \"Represa de El Chocón\", \"Hidronor S.A.\", \"Hidroeléctrica Norpatagónica, Sociedad Anónima\", \"Ley N.º 16.882\", \"Ley N.º 17.574\", \"Fondo El Chocón-Cerros Colorados\", \"Secretaría de Estado de Energía y Minería\", \"río Limay\", \"río Neuquén\", \"Neuquén\", \"Río Negro\", \"sistema eléctrico Gran Buenos Aires-Litoral\", \"Banco Mundial\", \"préstamo de US$82 millones\", \"Portezuelo Grande\", \"Planicie Banderita\", \"central hidroeléctrica\", \"líneas de transmisión\", \"tres unidades generadoras de 200 MW\"]}",
+        "parsed": {
+          "core_themes": "U.S. Embassy and consular reporting, correspondence, and memoranda concerning Argentina’s Complejo El Chocón-Cerros Colorados hydroelectric development, including the El Chocón dam and powerhouse on the río Limay, construction, financing, generation capacity, flood-control works, and transmission links to the Gran Buenos Aires-Litoral electrical system. Records may discuss the concession to Hidronor S.A., Argentine legislation and energy administration, the World Bank loan, project stages and schedules, and the dam’s expected contribution to electricity supply in Gran Buenos Aires, especially the 1973 target.",
+          "related_concepts": [
+            "Complejo El Chocón-Cerros Colorados",
+            "Represa de El Chocón",
+            "Hidronor S.A.",
+            "Hidroeléctrica Norpatagónica, Sociedad Anónima",
+            "Ley N.º 16.882",
+            "Ley N.º 17.574",
+            "Fondo El Chocón-Cerros Colorados",
+            "Secretaría de Estado de Energía y Minería",
+            "río Limay",
+            "río Neuquén",
+            "Neuquén",
+            "Río Negro",
+            "sistema eléctrico Gran Buenos Aires-Litoral",
+            "Banco Mundial",
+            "préstamo de US$82 millones",
+            "Portezuelo Grande",
+            "Planicie Banderita",
+            "central hidroeléctrica",
+            "líneas de transmisión",
+            "tres unidades generadoras de 200 MW"
+          ]
+        },
+        "valid": true,
+        "program": "web_hw",
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "created_at": "2026-10-16T23:22:23.493202",
+        "web_fallback": false,
+        "notes_created_at": "2026-10-16T22:55:11"
+      }
+    },
+    "T18Eval-00015": {
+      "topic_id": "T18Eval-00015",
+      "original_query": {
+        "TITLE": "Coffee policies",
+        "DESCRIPTION": "Find documents that mention Brazilian policies on the production or distribution of coffee."
+      },
+      "query_text": "Coffee policies\nFind documents that mention Brazilian policies on the production or distribution of coffee.",
+      "core_themes": {
+        "raw_response": "{\"core_themes\": \"Department of State correspondence and reports concerning Brazilian government regulation of coffee production, domestic distribution, transportation, stockholding, classification, official purchases, and exports. Records may discuss the Instituto Brasileiro do Café (IBC) and its enforcement of supply controls and export quotas; the removal of uneconomic coffee trees, diversification of coffee-growing regions, and later coffee-field renewal; and Brazil’s participation in international coffee agreements and stock-retention arrangements. Relevant materials may describe policy implementation and effects in coffee-producing states, particularly Paraná, under the governments of Goulart, Castelo Branco, Costa e Silva, and Médici.\", \"related_concepts\": [\"Instituto Brasileiro do Café (IBC)\", \"Ministério da Indústria e do Comércio\", \"Divisão de Controle de Café (DCC)\", \"Decreto nº 56.458, de 12 de junho de 1965\", \"Quota de Equilíbrio Comum\", \"armazéns designados pelo IBC\", \"Decreto-Lei nº 47, de 1966\", \"abastecimento interno de café\", \"transporte interno de café\", \"comércio interno de café\", \"exportação de café\", \"Grupo Executivo de Erradicação e Racionalização da Cafeicultura (GERCA)\", \"cafeeiros antieconômicos\", \"diversificação agrícola\", \"Paraná\", \"Plano de Renovação e Revigoramento de Cafezais (PRRC)\", \"Convênio Internacional do Café de 1962\", \"Acordo Internacional do Café de 1968\", \"retenção de estoques de café\", \"Café Mundial de 1973\"]}",
+        "parsed": {
+          "core_themes": "Department of State correspondence and reports concerning Brazilian government regulation of coffee production, domestic distribution, transportation, stockholding, classification, official purchases, and exports. Records may discuss the Instituto Brasileiro do Café (IBC) and its enforcement of supply controls and export quotas; the removal of uneconomic coffee trees, diversification of coffee-growing regions, and later coffee-field renewal; and Brazil’s participation in international coffee agreements and stock-retention arrangements. Relevant materials may describe policy implementation and effects in coffee-producing states, particularly Paraná, under the governments of Goulart, Castelo Branco, Costa e Silva, and Médici.",
+          "related_concepts": [
+            "Instituto Brasileiro do Café (IBC)",
+            "Ministério da Indústria e do Comércio",
+            "Divisão de Controle de Café (DCC)",
+            "Decreto nº 56.458, de 12 de junho de 1965",
+            "Quota de Equilíbrio Comum",
+            "armazéns designados pelo IBC",
+            "Decreto-Lei nº 47, de 1966",
+            "abastecimento interno de café",
+            "transporte interno de café",
+            "comércio interno de café",
+            "exportação de café",
+            "Grupo Executivo de Erradicação e Racionalização da Cafeicultura (GERCA)",
+            "cafeeiros antieconômicos",
+            "diversificação agrícola",
+            "Paraná",
+            "Plano de Renovação e Revigoramento de Cafezais (PRRC)",
+            "Convênio Internacional do Café de 1962",
+            "Acordo Internacional do Café de 1968",
+            "retenção de estoques de café",
+            "Café Mundial de 1973"
+          ]
+        },
+        "valid": true,
+        "program": "web_hw",
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "created_at": "2026-10-16T23:22:23.493226",
+        "web_fallback": false,
+        "notes_created_at": "2026-10-16T22:55:13"
+      }
+    },
+    "T18Eval-00016": {
+      "topic_id": "T18Eval-00016",
+      "original_query": {
+        "TITLE": "Amateur radio",
+        "DESCRIPTION": "I am looking for information about amateur radio operations in Brazil."
+      },
+      "query_text": "Amateur radio\nI am looking for information about amateur radio operations in Brazil.",
+      "core_themes": {
+        "raw_response": "{\"core_themes\": \"Records concerning amateur radio in Brazil, including the regulation and licensing of radioamateur stations and operators under the Código Brasileiro de Telecomunicações and the Regulamento dos Serviços de Radioamador; CONTEL’s operating rules and oversight; operator classes, permissible noncommercial activities, and coordination with LABRE. Documents may describe routine intercommunication and technical investigation, emergency communications during calamities or failures of ordinary telecommunications, the Rede Nacional de Radioamadores’ reserve role, and monitoring or guidance on QTCs during the 1964 political crisis. Also relevant are notable operations such as PY0DX at Penedos de São Pedro e São Paulo and the 1970 Copa do Mundo de Radioamadorismo.\", \"related_concepts\": [\"radioamadorismo\", \"Código Brasileiro de Telecomunicações\", \"Lei nº 4.117\", \"Decreto nº 52.026\", \"Regulamento dos Serviços de Radioamador\", \"Decreto nº 58.555\", \"Conselho Nacional de Telecomunicações (CONTEL)\", \"Liga de Amadores Brasileiros de Rádio Emissão (LABRE)\", \"Rede Nacional de Radioamadores (RNR)\", \"Classes A, B e C\", \"Serviço Normal\", \"Serviço De Emergência\", \"QTC\", \"PY0DX\", \"Penedos de São Pedro e São Paulo\", \"Recife\", \"Copa do Mundo de Radioamadorismo\", \"Higino Corsetti\", \"licença de estação radioamadora\", \"comunicações de emergência\"]}",
+        "parsed": {
+          "core_themes": "Records concerning amateur radio in Brazil, including the regulation and licensing of radioamateur stations and operators under the Código Brasileiro de Telecomunicações and the Regulamento dos Serviços de Radioamador; CONTEL’s operating rules and oversight; operator classes, permissible noncommercial activities, and coordination with LABRE. Documents may describe routine intercommunication and technical investigation, emergency communications during calamities or failures of ordinary telecommunications, the Rede Nacional de Radioamadores’ reserve role, and monitoring or guidance on QTCs during the 1964 political crisis. Also relevant are notable operations such as PY0DX at Penedos de São Pedro e São Paulo and the 1970 Copa do Mundo de Radioamadorismo.",
+          "related_concepts": [
+            "radioamadorismo",
+            "Código Brasileiro de Telecomunicações",
+            "Lei nº 4.117",
+            "Decreto nº 52.026",
+            "Regulamento dos Serviços de Radioamador",
+            "Decreto nº 58.555",
+            "Conselho Nacional de Telecomunicações (CONTEL)",
+            "Liga de Amadores Brasileiros de Rádio Emissão (LABRE)",
+            "Rede Nacional de Radioamadores (RNR)",
+            "Classes A, B e C",
+            "Serviço Normal",
+            "Serviço De Emergência",
+            "QTC",
+            "PY0DX",
+            "Penedos de São Pedro e São Paulo",
+            "Recife",
+            "Copa do Mundo de Radioamadorismo",
+            "Higino Corsetti",
+            "licença de estação radioamadora",
+            "comunicações de emergência"
+          ]
+        },
+        "valid": true,
+        "program": "web_hw",
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "created_at": "2026-10-16T23:22:23.493245",
+        "web_fallback": false,
+        "notes_created_at": "2026-10-16T22:55:19"
+      }
+    },
+    "T18Eval-00017": {
+      "topic_id": "T18Eval-00017",
+      "original_query": {
+        "TITLE": "German war criminals",
+        "DESCRIPTION": "Find documents that mention people who were, or are suspected of having been, involved with war crimes or other serious offense where the Nazi party was in power."
+      },
+      "query_text": "German war criminals\nFind documents that mention people who were, or are suspected of having been, involved with war crimes or other serious offense where the Nazi party was in power.",
+      "core_themes": {
+        "raw_response": "{\"core_themes\": \"Department of State and U.S. Embassy and consular dispatches concerning the presence in Brazil of persons accused or suspected of Nazi-era war crimes and other offenses under the Nazi regime; efforts by the Federal Republic of Germany, Austria, or Poland to locate, arrest, and extradite them; Brazilian extradition proceedings and Supremo Tribunal Federal decisions; and reporting on allegations, wartime roles, residence, employment, and information supplied by investigators and documentation organizations. Records may discuss the 1967 arrest and extradition of former SS officer Franz Stangl, competing national requests, and reports concerning Josef Mengele, Martin Bormann, and Heinrich Müller.\", \"related_concepts\": [\"Franz Stangl\", \"Josef Mengele\", \"Martin Bormann\", \"Heinrich Müller\", \"Simon Wiesenthal\", \"Jewish Documentation Center, Vienna\", \"Supremo Tribunal Federal (STF)\", \"Extradição nº 272 (1967)\", \"extradição\", \"Federal Republic of Germany (FRG)\", \"Austria\", \"Poland\", \"Treblinka\", \"Sobibor\", \"Auschwitz\", \"Gestapo\", \"Schutzstaffel (SS)\", \"genocide\", \"war crimes\", \"Volkswagen do Brasil\", \"São Paulo\"]}",
+        "parsed": {
+          "core_themes": "Department of State and U.S. Embassy and consular dispatches concerning the presence in Brazil of persons accused or suspected of Nazi-era war crimes and other offenses under the Nazi regime; efforts by the Federal Republic of Germany, Austria, or Poland to locate, arrest, and extradite them; Brazilian extradition proceedings and Supremo Tribunal Federal decisions; and reporting on allegations, wartime roles, residence, employment, and information supplied by investigators and documentation organizations. Records may discuss the 1967 arrest and extradition of former SS officer Franz Stangl, competing national requests, and reports concerning Josef Mengele, Martin Bormann, and Heinrich Müller.",
+          "related_concepts": [
+            "Franz Stangl",
+            "Josef Mengele",
+            "Martin Bormann",
+            "Heinrich Müller",
+            "Simon Wiesenthal",
+            "Jewish Documentation Center, Vienna",
+            "Supremo Tribunal Federal (STF)",
+            "Extradição nº 272 (1967)",
+            "extradição",
+            "Federal Republic of Germany (FRG)",
+            "Austria",
+            "Poland",
+            "Treblinka",
+            "Sobibor",
+            "Auschwitz",
+            "Gestapo",
+            "Schutzstaffel (SS)",
+            "genocide",
+            "war crimes",
+            "Volkswagen do Brasil",
+            "São Paulo"
+          ]
+        },
+        "valid": true,
+        "program": "web_hw",
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "created_at": "2026-10-16T23:22:23.493261",
+        "web_fallback": false,
+        "notes_created_at": "2026-10-16T22:55:25"
+      }
+    },
+    "T18Eval-00018": {
+      "topic_id": "T18Eval-00018",
+      "original_query": {
+        "TITLE": "Lumber industry ",
+        "DESCRIPTION": "Find documents that provide information on the lumber industry in Brazil."
+      },
+      "query_text": "Lumber industry \nFind documents that provide information on the lumber industry in Brazil.",
+      "core_themes": {
+        "raw_response": "{\"core_themes\": \"Department of State and consular-post reports, studies, and correspondence concerning Brazil’s lumber and forest-products industry, including sawmills, timber supply, production, transport, trade, and industrial processing. Records may describe northern expansion of forest industries and facilities in Pará, Amazonas, and other Amazonian locations, alongside Paraná’s sawn-timber industry and depletion of commercial timber stocks, particularly *Pinho-do-Paraná*. Relevant documents may address federal development and forest-policy institutions, reforestation incentives, requirements for treated wood, and regulation or enforcement affecting timber extraction and commerce during the 1960s and early 1970s.\", \"related_concepts\": [\"indústria madeireira\", \"serrarias\", \"madeira serrada\", \"produtos florestais\", \"extração florestal\", \"transporte de madeira\", \"comércio de madeira\", \"Pará\", \"Belém\", \"Santarém\", \"Rio Tapajós\", \"Ilha de Marajó\", \"Breves\", \"Amazonas\", \"Manaus\", \"Paraná\", \"Pinho-do-Paraná\", \"Araucaria angustifolia\", \"Superintendência do Desenvolvimento da Amazônia (SUDAM)\", \"Instituto Brasileiro de Desenvolvimento Florestal (IBDF)\", \"Lei nº 5.173, de 27 de outubro de 1966\", \"Lei nº 5.106, de 2 de setembro de 1966\", \"Decreto-Lei nº 289, de 28 de fevereiro de 1967\", \"Lei nº 4.797, de 20 de outubro de 1965\"]}",
+        "parsed": {
+          "core_themes": "Department of State and consular-post reports, studies, and correspondence concerning Brazil’s lumber and forest-products industry, including sawmills, timber supply, production, transport, trade, and industrial processing. Records may describe northern expansion of forest industries and facilities in Pará, Amazonas, and other Amazonian locations, alongside Paraná’s sawn-timber industry and depletion of commercial timber stocks, particularly *Pinho-do-Paraná*. Relevant documents may address federal development and forest-policy institutions, reforestation incentives, requirements for treated wood, and regulation or enforcement affecting timber extraction and commerce during the 1960s and early 1970s.",
+          "related_concepts": [
+            "indústria madeireira",
+            "serrarias",
+            "madeira serrada",
+            "produtos florestais",
+            "extração florestal",
+            "transporte de madeira",
+            "comércio de madeira",
+            "Pará",
+            "Belém",
+            "Santarém",
+            "Rio Tapajós",
+            "Ilha de Marajó",
+            "Breves",
+            "Amazonas",
+            "Manaus",
+            "Paraná",
+            "Pinho-do-Paraná",
+            "Araucaria angustifolia",
+            "Superintendência do Desenvolvimento da Amazônia (SUDAM)",
+            "Instituto Brasileiro de Desenvolvimento Florestal (IBDF)",
+            "Lei nº 5.173, de 27 de outubro de 1966",
+            "Lei nº 5.106, de 2 de setembro de 1966",
+            "Decreto-Lei nº 289, de 28 de fevereiro de 1967",
+            "Lei nº 4.797, de 20 de outubro de 1965"
+          ]
+        },
+        "valid": true,
+        "program": "web_hw",
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "created_at": "2026-10-16T23:22:23.493280",
+        "web_fallback": false,
+        "notes_created_at": "2026-10-16T22:55:29"
+      }
+    },
+    "T18Eval-00019": {
+      "topic_id": "T18Eval-00019",
+      "original_query": {
+        "TITLE": "Guaíra Falls border dispute",
+        "DESCRIPTION": "Find documents that mention the dispute between Brazil and Paraguay over the Guaíra Falls."
+      },
+      "query_text": "Guaíra Falls border dispute\nFind documents that mention the dispute between Brazil and Paraguay over the Guaíra Falls.",
+      "core_themes": {
+        "raw_response": "{\"core_themes\": \"U.S. Embassy and consular dispatches, memoranda, and diplomatic correspondence concerning the Brazil–Paraguay boundary dispute over sovereignty at Sete Quedas and the adjacent Paraná River territory. Records may describe competing claims and the 1962 exchange of diplomatic notes, negotiations between Itamarati and the Chancelaria Paraguaia, and the work of the Comissão Mista de Limites. Relevant files may also trace the proposed Projeto Sete Quedas, the 1966 Ata Final de Foz do Iguaçu and its technical commission, and the 1973 Tratado de Itaipu, including arrangements for joint hydroelectric development and division of generated electricity.\", \"related_concepts\": [\"Sete Quedas\", \"Guaíra Falls\", \"Salto de Guairá\", \"Salto Grande de Sete Quedas\", \"Salto Grande de las Siete Caídas\", \"questões fronteiriças\", \"Brazil–Paraguay boundary dispute\", \"Paraná River\", \"exchange of diplomatic notes (1962)\", \"Comissão Mista de Limites\", \"Itamarati\", \"Chancelaria Paraguaia\", \"Projeto Sete Quedas\", \"Ata Final de Foz do Iguaçu (1966)\", \"Ata das Cataratas\", \"Comissão Mista Técnica Brasileiro-Paraguaia\", \"Tratado de Itaipu (1973)\", \"hydroelectric development\", \"division of electricity\"]}",
+        "parsed": {
+          "core_themes": "U.S. Embassy and consular dispatches, memoranda, and diplomatic correspondence concerning the Brazil–Paraguay boundary dispute over sovereignty at Sete Quedas and the adjacent Paraná River territory. Records may describe competing claims and the 1962 exchange of diplomatic notes, negotiations between Itamarati and the Chancelaria Paraguaia, and the work of the Comissão Mista de Limites. Relevant files may also trace the proposed Projeto Sete Quedas, the 1966 Ata Final de Foz do Iguaçu and its technical commission, and the 1973 Tratado de Itaipu, including arrangements for joint hydroelectric development and division of generated electricity.",
+          "related_concepts": [
+            "Sete Quedas",
+            "Guaíra Falls",
+            "Salto de Guairá",
+            "Salto Grande de Sete Quedas",
+            "Salto Grande de las Siete Caídas",
+            "questões fronteiriças",
+            "Brazil–Paraguay boundary dispute",
+            "Paraná River",
+            "exchange of diplomatic notes (1962)",
+            "Comissão Mista de Limites",
+            "Itamarati",
+            "Chancelaria Paraguaia",
+            "Projeto Sete Quedas",
+            "Ata Final de Foz do Iguaçu (1966)",
+            "Ata das Cataratas",
+            "Comissão Mista Técnica Brasileiro-Paraguaia",
+            "Tratado de Itaipu (1973)",
+            "hydroelectric development",
+            "division of electricity"
+          ]
+        },
+        "valid": true,
+        "program": "web_hw",
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "created_at": "2026-10-16T23:22:23.493298",
+        "web_fallback": false,
+        "notes_created_at": "2026-10-16T22:55:29"
+      }
+    },
+    "T18Eval-00020": {
+      "topic_id": "T18Eval-00020",
+      "original_query": {
+        "TITLE": "Rice cultivation",
+        "DESCRIPTION": "Tell me about rice cultivation in Brazil."
+      },
+      "query_text": "Rice cultivation\nTell me about rice cultivation in Brazil.",
+      "core_themes": {
+        "raw_response": "{\"core_themes\": \"State Department dispatches, consular reports, and agricultural correspondence concerning rice cultivation (orizicultura) in Brazil, especially production, research, breeding, and technical exchange in Rio Grande do Sul. Records may discuss traditional rice cultivars and the shift toward long, fine-grain varieties; irrigated rice, direct planting, and weed control; the work of the Instituto Rio Grandense do Arroz (IRGA) and its experimental station; and the CDO levy that financed rice-sector cooperation and defense. Relevant reporting may identify regional trials, cultivar introductions, agricultural policy, and the effects of institutional or market changes on Brazilian rice production during 1963–1973.\", \"related_concepts\": [\"orizicultura\", \"arroz irrigado\", \"plantio direto\", \"cultivares tradicionais\", \"grão longo e fino\", \"Instituto Rio Grandense do Arroz (IRGA)\", \"Estação Experimental do Arroz (EEA)\", \"IRGA–IPEAS\", \"EEA 404\", \"EEA 406\", \"Bluebelle\", \"Propanil\", \"inços\", \"Lei nº 5.645 (1968)\", \"Taxa de Cooperação e Defesa da Orizicultura (CDO)\", \"3ª Reunião Geral da Cultura do Arroz\", \"Cachoeirinha\", \"Santa Vitória do Palmar\", \"Pedro Osório\", \"Rio Grande do Sul\"]}",
+        "parsed": {
+          "core_themes": "State Department dispatches, consular reports, and agricultural correspondence concerning rice cultivation (orizicultura) in Brazil, especially production, research, breeding, and technical exchange in Rio Grande do Sul. Records may discuss traditional rice cultivars and the shift toward long, fine-grain varieties; irrigated rice, direct planting, and weed control; the work of the Instituto Rio Grandense do Arroz (IRGA) and its experimental station; and the CDO levy that financed rice-sector cooperation and defense. Relevant reporting may identify regional trials, cultivar introductions, agricultural policy, and the effects of institutional or market changes on Brazilian rice production during 1963–1973.",
+          "related_concepts": [
+            "orizicultura",
+            "arroz irrigado",
+            "plantio direto",
+            "cultivares tradicionais",
+            "grão longo e fino",
+            "Instituto Rio Grandense do Arroz (IRGA)",
+            "Estação Experimental do Arroz (EEA)",
+            "IRGA–IPEAS",
+            "EEA 404",
+            "EEA 406",
+            "Bluebelle",
+            "Propanil",
+            "inços",
+            "Lei nº 5.645 (1968)",
+            "Taxa de Cooperação e Defesa da Orizicultura (CDO)",
+            "3ª Reunião Geral da Cultura do Arroz",
+            "Cachoeirinha",
+            "Santa Vitória do Palmar",
+            "Pedro Osório",
+            "Rio Grande do Sul"
+          ]
+        },
+        "valid": true,
+        "program": "web_hw",
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "created_at": "2026-10-16T23:22:23.493328",
+        "web_fallback": false,
+        "notes_created_at": "2026-10-16T22:55:31"
+      }
+    },
+    "T18Eval-00021": {
+      "topic_id": "T18Eval-00021",
+      "original_query": {
+        "TITLE": "Nuts",
+        "DESCRIPTION": "Find documents that contain information about the production of nuts in Brazil and how these nuts are distributed."
+      },
+      "query_text": "Nuts\nFind documents that contain information about the production of nuts in Brazil and how these nuts are distributed.",
+      "core_themes": {
+        "raw_response": "{\"core_themes\": \"Records concerning Brazil’s production, extraction, processing, classification, transport, and domestic and overseas distribution of nuts, especially castanha do Pará (castanha do Brasil) and castanha de caju. Relevant documents may describe castanhais and castanheiros in Pará, harvests and beneficiation, land tenure and arrangements for extraction, processing industries, river and port shipments, export inspection and grading, and trade routes and markets. For cashew nuts, records may address expanding production and harvests after 1967, cultivation and SUDENE-approved projects in the Northeast, particularly Ceará, and the development of exports to Europe alongside established Latin American and United States markets.\", \"related_concepts\": [\"castanha do Pará\", \"castanha do Brasil\", \"castanha de caju\", \"castanhais\", \"castanheiros\", \"beneficiamento da castanha\", \"produção\", \"extração\", \"safra\", \"industrialização\", \"classificação\", \"inspeção de exportação\", \"transporte\", \"exportação\", \"canais de distribuição\", \"arrendamento\", \"aforamento\", \"Rio Tocantins\", \"Marabá\", \"Belém\", \"Ministério da Agricultura\", \"Serviço de Informação Agrícola (SIA)\", \"Decreto nº 51.209, de 18 de agosto de 1961\", \"SUDENE\", \"Ceará\"]}",
+        "parsed": {
+          "core_themes": "Records concerning Brazil’s production, extraction, processing, classification, transport, and domestic and overseas distribution of nuts, especially castanha do Pará (castanha do Brasil) and castanha de caju. Relevant documents may describe castanhais and castanheiros in Pará, harvests and beneficiation, land tenure and arrangements for extraction, processing industries, river and port shipments, export inspection and grading, and trade routes and markets. For cashew nuts, records may address expanding production and harvests after 1967, cultivation and SUDENE-approved projects in the Northeast, particularly Ceará, and the development of exports to Europe alongside established Latin American and United States markets.",
+          "related_concepts": [
+            "castanha do Pará",
+            "castanha do Brasil",
+            "castanha de caju",
+            "castanhais",
+            "castanheiros",
+            "beneficiamento da castanha",
+            "produção",
+            "extração",
+            "safra",
+            "industrialização",
+            "classificação",
+            "inspeção de exportação",
+            "transporte",
+            "exportação",
+            "canais de distribuição",
+            "arrendamento",
+            "aforamento",
+            "Rio Tocantins",
+            "Marabá",
+            "Belém",
+            "Ministério da Agricultura",
+            "Serviço de Informação Agrícola (SIA)",
+            "Decreto nº 51.209, de 18 de agosto de 1961",
+            "SUDENE",
+            "Ceará"
+          ]
+        },
+        "valid": true,
+        "program": "web_hw",
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "created_at": "2026-10-16T23:22:23.493348",
+        "web_fallback": false,
+        "notes_created_at": "2026-10-16T22:55:39"
+      }
+    },
+    "T18Eval-00022": {
+      "topic_id": "T18Eval-00022",
+      "original_query": {
+        "TITLE": "Freight shipping policies",
+        "DESCRIPTION": "I want to know about freight shipping policies in Brazil."
+      },
+      "query_text": "Freight shipping policies\nI want to know about freight shipping policies in Brazil.",
+      "core_themes": {
+        "raw_response": "{\"core_themes\": \"Department of State and U.S. diplomatic and consular post records concerning Brazilian regulation of freight carriage and maritime shipping, including rules for cargo handling, manifests, freight charges, carrier participation, and the use of Brazilian-flag vessels for imports and exports. Documents may discuss the Decreto nº 50.876 (1961) on cargo conferences, packaging, inspection, loss, and damage; the Decreto nº 59.316 (1966) on cofres de carga and freight tariffs; and the Decreto-Lei nº 666 (1969) and SUNAMAM’s administration of cargo allocation and foreign-flag exemptions. Records may also address the Lloyd Brasileiro, freight conferences and cargo-sharing arrangements, and the 1973 Brazil–Peru maritime transport agreement.\", \"related_concepts\": [\"Decreto nº 50.876, de 29 de junho de 1961\", \"Decreto nº 59.316, de 28 de setembro de 1966\", \"Decreto-Lei nº 666, de 2 de julho de 1969\", \"Convênio sobre Transportes Marítimos Brasil–Peru (1973)\", \"Superintendência Nacional da Marinha Mercante (SUNAMAM)\", \"Ministério da Viação e Obras Públicas\", \"Lloyd Brasileiro\", \"navio de bandeira brasileira\", \"transporte marítimo\", \"carga de importação e exportação\", \"cofre de carga\", \"manifesto de carga\", \"conhecimento de frete\", \"tarifa privilegiada de frete\", \"Conferência de Fretes\", \"rateio de fretes\", \"rateio de cargas\", \"armador\", \"embarcardor\", \"avaria e extravio\"]}",
+        "parsed": {
+          "core_themes": "Department of State and U.S. diplomatic and consular post records concerning Brazilian regulation of freight carriage and maritime shipping, including rules for cargo handling, manifests, freight charges, carrier participation, and the use of Brazilian-flag vessels for imports and exports. Documents may discuss the Decreto nº 50.876 (1961) on cargo conferences, packaging, inspection, loss, and damage; the Decreto nº 59.316 (1966) on cofres de carga and freight tariffs; and the Decreto-Lei nº 666 (1969) and SUNAMAM’s administration of cargo allocation and foreign-flag exemptions. Records may also address the Lloyd Brasileiro, freight conferences and cargo-sharing arrangements, and the 1973 Brazil–Peru maritime transport agreement.",
+          "related_concepts": [
+            "Decreto nº 50.876, de 29 de junho de 1961",
+            "Decreto nº 59.316, de 28 de setembro de 1966",
+            "Decreto-Lei nº 666, de 2 de julho de 1969",
+            "Convênio sobre Transportes Marítimos Brasil–Peru (1973)",
+            "Superintendência Nacional da Marinha Mercante (SUNAMAM)",
+            "Ministério da Viação e Obras Públicas",
+            "Lloyd Brasileiro",
+            "navio de bandeira brasileira",
+            "transporte marítimo",
+            "carga de importação e exportação",
+            "cofre de carga",
+            "manifesto de carga",
+            "conhecimento de frete",
+            "tarifa privilegiada de frete",
+            "Conferência de Fretes",
+            "rateio de fretes",
+            "rateio de cargas",
+            "armador",
+            "embarcardor",
+            "avaria e extravio"
+          ]
+        },
+        "valid": true,
+        "program": "web_hw",
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "created_at": "2026-10-16T23:22:23.493387",
+        "web_fallback": false,
+        "notes_created_at": "2026-10-16T22:55:39"
+      }
+    },
+    "T18Eval-00023": {
+      "topic_id": "T18Eval-00023",
+      "original_query": {
+        "TITLE": "Smallpox vaccination",
+        "DESCRIPTION": "I want to find documents on smallpox vaccination in Brazil."
+      },
+      "query_text": "Smallpox vaccination\nI want to find documents on smallpox vaccination in Brazil.",
+      "core_themes": {
+        "raw_response": "{\"core_themes\": \"U.S. Embassy and consular reporting, correspondence, and health-policy material concerning smallpox vaccination in Brazil, including the Campanha Nacional contra a Varíola and the Campanha de Erradicação da Varíola (CEV) under the Ministério da Saúde and Departamento Nacional de Saúde. Records may document the 1966 legal establishment of CEV, agreements with public and private Brazilian or foreign organizations, campaign administration and regional coordination, mass vaccination operations and coverage, vaccine production and supply, and techniques used in the field. Relevant reporting may also address CEV’s incorporation into SUCAM in 1970 and smallpox surveillance, including the final reported case in Rio de Janeiro in 1971.\", \"related_concepts\": [\"Campanha Nacional contra a Varíola\", \"Campanha de Erradicação da Varíola (CEV)\", \"Ministério da Saúde\", \"Departamento Nacional de Saúde\", \"Superintendência de Campanhas de Saúde Pública (SUCAM)\", \"Lei nº 5.026, de 14 de junho de 1966\", \"Decreto nº 59.153, de 31 de agosto de 1966\", \"Decreto nº 66.623, de 1970\", \"vacinação antivariólica\", \"erradicação da varíola\", \"liofilizada\", \"multipuntura\", \"pistola de pressão\", \"convênios\", \"Instituto Oswaldo Cruz\", \"Recife\", \"Instituto de Pesquisas Biológicas do Rio Grande do Sul\", \"Porto Alegre\", \"Rio de Janeiro\", \"Superintendente da CEV\"]}",
+        "parsed": {
+          "core_themes": "U.S. Embassy and consular reporting, correspondence, and health-policy material concerning smallpox vaccination in Brazil, including the Campanha Nacional contra a Varíola and the Campanha de Erradicação da Varíola (CEV) under the Ministério da Saúde and Departamento Nacional de Saúde. Records may document the 1966 legal establishment of CEV, agreements with public and private Brazilian or foreign organizations, campaign administration and regional coordination, mass vaccination operations and coverage, vaccine production and supply, and techniques used in the field. Relevant reporting may also address CEV’s incorporation into SUCAM in 1970 and smallpox surveillance, including the final reported case in Rio de Janeiro in 1971.",
+          "related_concepts": [
+            "Campanha Nacional contra a Varíola",
+            "Campanha de Erradicação da Varíola (CEV)",
+            "Ministério da Saúde",
+            "Departamento Nacional de Saúde",
+            "Superintendência de Campanhas de Saúde Pública (SUCAM)",
+            "Lei nº 5.026, de 14 de junho de 1966",
+            "Decreto nº 59.153, de 31 de agosto de 1966",
+            "Decreto nº 66.623, de 1970",
+            "vacinação antivariólica",
+            "erradicação da varíola",
+            "liofilizada",
+            "multipuntura",
+            "pistola de pressão",
+            "convênios",
+            "Instituto Oswaldo Cruz",
+            "Recife",
+            "Instituto de Pesquisas Biológicas do Rio Grande do Sul",
+            "Porto Alegre",
+            "Rio de Janeiro",
+            "Superintendente da CEV"
+          ]
+        },
+        "valid": true,
+        "program": "web_hw",
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "created_at": "2026-10-16T23:22:23.493407",
+        "web_fallback": false,
+        "notes_created_at": "2026-10-16T22:55:41"
+      }
+    },
+    "T18Eval-00024": {
+      "topic_id": "T18Eval-00024",
+      "original_query": {
+        "TITLE": "Brazilian anti-semitism",
+        "DESCRIPTION": "I want to find documents on Brazilian anti-semitism."
+      },
+      "query_text": "Brazilian anti-semitism\nI want to find documents on Brazilian anti-semitism.",
+      "core_themes": {
+        "raw_response": "{\"core_themes\": \"Department of State and U.S. diplomatic and consular reports on anti-Jewish prejudice and incidents in Brazil, including efforts to remove offensive racial, national, and religious definitions from public-school dictionaries; complaints by Jewish attorney and author Fernando Levisky; desecration of Jewish cemeteries in Curitiba and Porto Alegre; attacks on Jewish-owned businesses and a community center in Salvador; and swastikas and anti-Jewish slogans in Rio de Janeiro. Records may describe suspected former Integralists, responses by the Partido de Representação Popular, and the Brazilian government’s handling of antisemitic activity during the Goulart administration and the 1964 coup period.\", \"related_concepts\": [\"anti-semitismo\", \"preconceito contra judeus\", \"Jânio Quadros\", \"Fernando Levisky\", \"Ministério da Educação\", \"dicionários escolares\", \"Curitiba\", \"Porto Alegre\", \"Salvador, Bahia\", \"Rio de Janeiro\", \"cemitérios judaicos\", \"sinagoga ortodoxa de Copacabana\", \"União Nacional dos Estudantes (UNE)\", \"Tribunal Federal de Recursos\", \"suásticas\", \"Ação Integralista Brasileira (AIB)\", \"Partido de Representação Popular (PRP)\", \"comunidade judaica\", \"Goulart\", \"golpe militar de 1964\"]}",
+        "parsed": {
+          "core_themes": "Department of State and U.S. diplomatic and consular reports on anti-Jewish prejudice and incidents in Brazil, including efforts to remove offensive racial, national, and religious definitions from public-school dictionaries; complaints by Jewish attorney and author Fernando Levisky; desecration of Jewish cemeteries in Curitiba and Porto Alegre; attacks on Jewish-owned businesses and a community center in Salvador; and swastikas and anti-Jewish slogans in Rio de Janeiro. Records may describe suspected former Integralists, responses by the Partido de Representação Popular, and the Brazilian government’s handling of antisemitic activity during the Goulart administration and the 1964 coup period.",
+          "related_concepts": [
+            "anti-semitismo",
+            "preconceito contra judeus",
+            "Jânio Quadros",
+            "Fernando Levisky",
+            "Ministério da Educação",
+            "dicionários escolares",
+            "Curitiba",
+            "Porto Alegre",
+            "Salvador, Bahia",
+            "Rio de Janeiro",
+            "cemitérios judaicos",
+            "sinagoga ortodoxa de Copacabana",
+            "União Nacional dos Estudantes (UNE)",
+            "Tribunal Federal de Recursos",
+            "suásticas",
+            "Ação Integralista Brasileira (AIB)",
+            "Partido de Representação Popular (PRP)",
+            "comunidade judaica",
+            "Goulart",
+            "golpe militar de 1964"
+          ]
+        },
+        "valid": true,
+        "program": "web_hw",
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "created_at": "2026-10-16T23:22:23.493424",
+        "web_fallback": false,
+        "notes_created_at": "2026-10-16T22:55:48"
+      }
+    },
+    "T18Eval-00025": {
+      "topic_id": "T18Eval-00025",
+      "original_query": {
+        "TITLE": "Montevideo airport strikes",
+        "DESCRIPTION": "I'm looking for documents on airport strikes in the Uruguayan capital of Montevideo."
+      },
+      "query_text": "Montevideo airport strikes\nI'm looking for documents on airport strikes in the Uruguayan capital of Montevideo.",
+      "core_themes": {
+        "raw_response": "{\"core_themes\": \"U.S. Embassy and consular reporting, memoranda, and press summaries concerning labor stoppages in Montevideo in 1965, particularly the June 17 strike by central-administration employees that halted airport and government communications services, and the November 19–20 civil-aviation workers’ strike that closed airports. Records may describe wage arrears, salary increases and benefits amid inflation, government sanctions, and the Consejo Nacional de Gobierno’s position that public-employee strikes were illegal. Related accounts may cover the CNT-organized November 25 general strike, airport and port closures, union activity among central-administration and autonomous-agency workers, and congressional action on salary increases and associated taxes.\", \"related_concepts\": [\"Montevideo\", \"Uruguay\", \"aeropuerto de Montevideo\", \"huelga de empleados de la administración central\", \"huelga de trabajadores de la aviación civil\", \"huelga general del 25 de noviembre de 1965\", \"Convención Nacional de Trabajadores (CNT)\", \"Confederación de Trabajadores del Uruguay (CTU)\", \"Consejo Nacional de Gobierno (CNG)\", \"empleados públicos\", \"sindicatos de la administración central\", \"entes autónomos\", \"servicios descentralizados\", \"salarios impagos\", \"aumento de salarios\", \"beneficios sociales\", \"sanciones a funcionarios públicos\", \"ilegalidad de las huelgas de funcionarios\", \"Puerto de Montevideo\", \"impuestos a actividades agropecuarias y ganaderas\", \"exportadores de lana\", \"sistema bancario\"]}",
+        "parsed": {
+          "core_themes": "U.S. Embassy and consular reporting, memoranda, and press summaries concerning labor stoppages in Montevideo in 1965, particularly the June 17 strike by central-administration employees that halted airport and government communications services, and the November 19–20 civil-aviation workers’ strike that closed airports. Records may describe wage arrears, salary increases and benefits amid inflation, government sanctions, and the Consejo Nacional de Gobierno’s position that public-employee strikes were illegal. Related accounts may cover the CNT-organized November 25 general strike, airport and port closures, union activity among central-administration and autonomous-agency workers, and congressional action on salary increases and associated taxes.",
+          "related_concepts": [
+            "Montevideo",
+            "Uruguay",
+            "aeropuerto de Montevideo",
+            "huelga de empleados de la administración central",
+            "huelga de trabajadores de la aviación civil",
+            "huelga general del 25 de noviembre de 1965",
+            "Convención Nacional de Trabajadores (CNT)",
+            "Confederación de Trabajadores del Uruguay (CTU)",
+            "Consejo Nacional de Gobierno (CNG)",
+            "empleados públicos",
+            "sindicatos de la administración central",
+            "entes autónomos",
+            "servicios descentralizados",
+            "salarios impagos",
+            "aumento de salarios",
+            "beneficios sociales",
+            "sanciones a funcionarios públicos",
+            "ilegalidad de las huelgas de funcionarios",
+            "Puerto de Montevideo",
+            "impuestos a actividades agropecuarias y ganaderas",
+            "exportadores de lana",
+            "sistema bancario"
+          ]
+        },
+        "valid": true,
+        "program": "web_hw",
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "created_at": "2026-10-16T23:22:23.493460",
+        "web_fallback": false,
+        "notes_created_at": "2026-10-16T22:55:47"
+      }
+    },
+    "T18Eval-00026": {
+      "topic_id": "T18Eval-00026",
+      "original_query": {
+        "TITLE": "Sesame seed trade",
+        "DESCRIPTION": "I want to find information on the commercial viability of sesame seeds in Brazil."
+      },
+      "query_text": "Sesame seed trade\nI want to find information on the commercial viability of sesame seeds in Brazil.",
+      "core_themes": {
+        "raw_response": "{\"core_themes\": \"U.S. Embassy and consular reporting, Brazilian government and agricultural agency correspondence, and commercial assessments concerning the production, domestic marketing, export, and commercial viability of sesame (gergelim) in Brazil during 1963–1973. Records may discuss cultivation in São Paulo and Paraná, seed demand and prices, export destinations and trade prospects, processing for oil, and cultivar performance. They may also describe research by the Instituto Agronômico de Campinas, the Banco do Nordeste do Brasil and Cetrede’s promotion studies, and competition from expanding soybean, orange, and sugarcane cultivation, including effects on acreage, supply, and oil-mill utilization.\", \"related_concepts\": [\"gergelim\", \"sesame seed\", \"Brazilian domestic market\", \"sesame exports\", \"São Paulo\", \"Paraná\", \"Instituto Agronômico de Campinas (IAC)\", \"Morada\", \"Venezuela 51\", \"Venezuela 52\", \"São Manuel\", \"agricultural year 1970–71\", \"Banco do Nordeste do Brasil\", \"Centro de Treinamento em Desenvolvimento Econômico (Cetrede)\", \"oil mills\", \"sesame oil\", \"soybean expansion\", \"orange cultivation\", \"sugarcane cultivation\", \"Lebanon\"]}",
+        "parsed": {
+          "core_themes": "U.S. Embassy and consular reporting, Brazilian government and agricultural agency correspondence, and commercial assessments concerning the production, domestic marketing, export, and commercial viability of sesame (gergelim) in Brazil during 1963–1973. Records may discuss cultivation in São Paulo and Paraná, seed demand and prices, export destinations and trade prospects, processing for oil, and cultivar performance. They may also describe research by the Instituto Agronômico de Campinas, the Banco do Nordeste do Brasil and Cetrede’s promotion studies, and competition from expanding soybean, orange, and sugarcane cultivation, including effects on acreage, supply, and oil-mill utilization.",
+          "related_concepts": [
+            "gergelim",
+            "sesame seed",
+            "Brazilian domestic market",
+            "sesame exports",
+            "São Paulo",
+            "Paraná",
+            "Instituto Agronômico de Campinas (IAC)",
+            "Morada",
+            "Venezuela 51",
+            "Venezuela 52",
+            "São Manuel",
+            "agricultural year 1970–71",
+            "Banco do Nordeste do Brasil",
+            "Centro de Treinamento em Desenvolvimento Econômico (Cetrede)",
+            "oil mills",
+            "sesame oil",
+            "soybean expansion",
+            "orange cultivation",
+            "sugarcane cultivation",
+            "Lebanon"
+          ]
+        },
+        "valid": true,
+        "program": "web_hw",
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "created_at": "2026-10-16T23:22:23.493481",
+        "web_fallback": false,
+        "notes_created_at": "2026-10-16T22:55:53"
+      }
+    },
+    "T18Eval-00027": {
+      "topic_id": "T18Eval-00027",
+      "original_query": {
+        "TITLE": "Disaster relief powdered milk",
+        "DESCRIPTION": "I'm looking for information on the distribution of powdered milk in disaster relief."
+      },
+      "query_text": "Disaster relief powdered milk\nI'm looking for information on the distribution of powdered milk in disaster relief.",
+      "core_themes": {
+        "raw_response": "{\"core_themes\": \"Department of State and consular correspondence, telegrams, and reports concerning U.S. emergency food assistance to Brazil after the Bahia floods of 1964 and the Alagoas floods of 1969. Records may describe the shipment, diversion, allocation, and local distribution of donated powdered or nonfat dry milk; requests for relief; coordination with Brazilian authorities and voluntary agencies; and the roles of the Alliance for Progress, Food for Peace, and Public Law 480. Relevant documentation may identify shipments through Rio de Janeiro and Salvador, relief operations in Alagoas, participating organizations, other food commodities, and distribution arrangements for flood-affected communities.\", \"related_concepts\": [\"Bahia floods, 1964\", \"Alagoas floods, 1969\", \"Aliança para o Progresso\", \"Alliance for Progress\", \"Food for Peace\", \"Alimentos para a Paz\", \"Public Law 480\", \"PL 480\", \"nonfat dry milk\", \"powdered milk\", \"Aeroporto Santos Dumont\", \"Rio de Janeiro\", \"Salvador\", \"Recife\", \"Caritas\", \"Catholic Relief Services\", \"Church World Service\", \"Alagoas Project and Work Fronts\", \"Operation Emergency\", \"Operação Emergência\", \"bulgur\"]}",
+        "parsed": {
+          "core_themes": "Department of State and consular correspondence, telegrams, and reports concerning U.S. emergency food assistance to Brazil after the Bahia floods of 1964 and the Alagoas floods of 1969. Records may describe the shipment, diversion, allocation, and local distribution of donated powdered or nonfat dry milk; requests for relief; coordination with Brazilian authorities and voluntary agencies; and the roles of the Alliance for Progress, Food for Peace, and Public Law 480. Relevant documentation may identify shipments through Rio de Janeiro and Salvador, relief operations in Alagoas, participating organizations, other food commodities, and distribution arrangements for flood-affected communities.",
+          "related_concepts": [
+            "Bahia floods, 1964",
+            "Alagoas floods, 1969",
+            "Aliança para o Progresso",
+            "Alliance for Progress",
+            "Food for Peace",
+            "Alimentos para a Paz",
+            "Public Law 480",
+            "PL 480",
+            "nonfat dry milk",
+            "powdered milk",
+            "Aeroporto Santos Dumont",
+            "Rio de Janeiro",
+            "Salvador",
+            "Recife",
+            "Caritas",
+            "Catholic Relief Services",
+            "Church World Service",
+            "Alagoas Project and Work Fronts",
+            "Operation Emergency",
+            "Operação Emergência",
+            "bulgur"
+          ]
+        },
+        "valid": true,
+        "program": "web_hw",
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "created_at": "2026-10-16T23:22:23.493500",
+        "web_fallback": false,
+        "notes_created_at": "2026-10-16T22:55:54"
+      }
+    },
+    "T18Eval-00028": {
+      "topic_id": "T18Eval-00028",
+      "original_query": {
+        "TITLE": "Spread of equine influenza",
+        "DESCRIPTION": "I want to find documents on the spread of equine influenza in Brazil."
+      },
+      "query_text": "Spread of equine influenza\nI want to find documents on the spread of equine influenza in Brazil.",
+      "core_themes": {
+        "raw_response": "{\"core_themes\": \"U.S. diplomatic and consular reports, correspondence, and attached scientific or veterinary material concerning the occurrence and geographic spread of equine influenza in Brazil, especially the outbreaks reported in São Paulo State in 1963 and in Guanabara and São Paulo during July–October 1969. Records may describe affected horses, epizootic conditions, virus isolation and identification, and laboratory comparisons of Brazilian isolates with reference strains. Relevant technical language includes A-equi 2, Heq2Neq2, A/Eq1 and A/Eq2, hemagglutination-inhibition tests, and postinfection horse sera; documents may also identify the 1963 isolate as A/Equi/SP/63 and compare later strains with A/Eq/Miami/1/63.\", \"related_concepts\": [\"influenza eqüina\", \"A-equi 2\", \"A/Eq1\", \"A/Eq2\", \"Heq2Neq2\", \"A/Equi/SP/63\", \"A/Eq/Miami/1/63\", \"São Paulo\", \"Estado de São Paulo\", \"Guanabara\", \"Rio de Janeiro\", \"epizootia\", \"isolamento do vírus\", \"vírus da influenza eqüina\", \"teste de inibição da hemaglutinação\", \"soros de cavalos pós-infecção\", \"1963 surto\", \"epizootia de julho–outubro de 1969\"]}",
+        "parsed": {
+          "core_themes": "U.S. diplomatic and consular reports, correspondence, and attached scientific or veterinary material concerning the occurrence and geographic spread of equine influenza in Brazil, especially the outbreaks reported in São Paulo State in 1963 and in Guanabara and São Paulo during July–October 1969. Records may describe affected horses, epizootic conditions, virus isolation and identification, and laboratory comparisons of Brazilian isolates with reference strains. Relevant technical language includes A-equi 2, Heq2Neq2, A/Eq1 and A/Eq2, hemagglutination-inhibition tests, and postinfection horse sera; documents may also identify the 1963 isolate as A/Equi/SP/63 and compare later strains with A/Eq/Miami/1/63.",
+          "related_concepts": [
+            "influenza eqüina",
+            "A-equi 2",
+            "A/Eq1",
+            "A/Eq2",
+            "Heq2Neq2",
+            "A/Equi/SP/63",
+            "A/Eq/Miami/1/63",
+            "São Paulo",
+            "Estado de São Paulo",
+            "Guanabara",
+            "Rio de Janeiro",
+            "epizootia",
+            "isolamento do vírus",
+            "vírus da influenza eqüina",
+            "teste de inibição da hemaglutinação",
+            "soros de cavalos pós-infecção",
+            "1963 surto",
+            "epizootia de julho–outubro de 1969"
+          ]
+        },
+        "valid": true,
+        "program": "web_hw",
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "created_at": "2026-10-16T23:22:23.493516",
+        "web_fallback": false,
+        "notes_created_at": "2026-10-16T22:55:53"
+      }
+    },
+    "T18Eval-00029": {
+      "topic_id": "T18Eval-00029",
+      "original_query": {
+        "TITLE": "Formation of labor unions",
+        "DESCRIPTION": "Find documents that describe the inception of labor unions in Brazil, specifically focusing on the initial motivations, key figures, and early challenges faced in the establishment of unions."
+      },
+      "query_text": "Formation of labor unions\nFind documents that describe the inception of labor unions in Brazil, specifically focusing on the initial motivations, key figures, and early challenges faced in the establishment of unions.",
+      "core_themes": {
+        "raw_response": "{\"core_themes\": \"Records concerning the formation and early organization of Brazilian labor unions, including workers’ associations, occupational unions, federations, confederations, and efforts to coordinate nationally. Documents describe the motives for organizing—wages, working conditions, social rights, and the jornada de oito horas—as well as leaders, delegates, labor press, congresses, and strikes used to build collective action. For the early 1960s, relevant files address disputes over labor representation and the creation of the Comando Geral dos Trabalhadores alongside the established confederation structure. They may also document obstacles to union formation and activity, including resistance to centralized organization, state intervention, arrests, exile, and repression after the March 1964 coup.\", \"related_concepts\": [\"I Congresso Operário Brasileiro\", \"Confederação Operária Brasileira (COB)\", \"Comando Geral dos Trabalhadores (CGT)\", \"Confederação Nacional dos Trabalhadores na Indústria (CNTI)\", \"3º Congresso Nacional Sindical\", \"Centro Gallego\", \"Rio de Janeiro\", \"São Paulo\", \"João Goulart\", \"Partido Trabalhista Brasileiro (PTB)\", \"Partido Comunista Brasileiro (PCB)\", \"Companhia Paulista de Estradas de Ferro\", \"jornada de oito horas\", \"greve geral\", \"associações de trabalhadores\", \"sindicatos por categoria profissional\", \"federações sindicais\", \"confederações sindicais\", \"intervenção sindical\", \"lideranças sindicais\"]}",
+        "parsed": {
+          "core_themes": "Records concerning the formation and early organization of Brazilian labor unions, including workers’ associations, occupational unions, federations, confederations, and efforts to coordinate nationally. Documents describe the motives for organizing—wages, working conditions, social rights, and the jornada de oito horas—as well as leaders, delegates, labor press, congresses, and strikes used to build collective action. For the early 1960s, relevant files address disputes over labor representation and the creation of the Comando Geral dos Trabalhadores alongside the established confederation structure. They may also document obstacles to union formation and activity, including resistance to centralized organization, state intervention, arrests, exile, and repression after the March 1964 coup.",
+          "related_concepts": [
+            "I Congresso Operário Brasileiro",
+            "Confederação Operária Brasileira (COB)",
+            "Comando Geral dos Trabalhadores (CGT)",
+            "Confederação Nacional dos Trabalhadores na Indústria (CNTI)",
+            "3º Congresso Nacional Sindical",
+            "Centro Gallego",
+            "Rio de Janeiro",
+            "São Paulo",
+            "João Goulart",
+            "Partido Trabalhista Brasileiro (PTB)",
+            "Partido Comunista Brasileiro (PCB)",
+            "Companhia Paulista de Estradas de Ferro",
+            "jornada de oito horas",
+            "greve geral",
+            "associações de trabalhadores",
+            "sindicatos por categoria profissional",
+            "federações sindicais",
+            "confederações sindicais",
+            "intervenção sindical",
+            "lideranças sindicais"
+          ]
+        },
+        "valid": true,
+        "program": "web_hw",
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "created_at": "2026-10-16T23:22:23.493535",
+        "web_fallback": false,
+        "notes_created_at": "2026-10-16T22:56:02"
+      }
+    },
+    "T18Eval-00030": {
+      "topic_id": "T18Eval-00030",
+      "original_query": {
+        "TITLE": "International soccer",
+        "DESCRIPTION": "Find documents that mention international aspects of soccer, such as games with teams from other countries."
+      },
+      "query_text": "International soccer\nFind documents that mention international aspects of soccer, such as games with teams from other countries.",
+      "core_themes": {
+        "raw_response": "{\"core_themes\": \"U.S. diplomatic and consular correspondence concerning international association football (futebol), including visits by foreign clubs, Brazilian club matches abroad, and games in Brazil involving overseas teams. Records may describe Santos Futebol Clube’s Copa Intercontinental contests with Sport Lisboa e Benfica and Milan, Brazil national-team amistosos with Argentina and Austria, and Brazil’s participation in the 1970 Copa do Mundo FIFA in Mexico. Relevant documents may address match arrangements, results, venues, visiting delegations, public and press interest, and the role of the Confederação Brasileira de Desportos and national-team coach Zagallo.\", \"related_concepts\": [\"futebol\", \"Santos Futebol Clube\", \"Copa Intercontinental\", \"Sport Lisboa e Benfica\", \"Milan\", \"Argentina\", \"Áustria\", \"amistosos\", \"seleção brasileira\", \"Confederação Brasileira de Desportos (CBD)\", \"Zagallo\", \"Copa do Mundo FIFA de 1970\", \"Maracanã\", \"Estádio da Luz\", \"San Siro\", \"Estádio do Morumbi\", \"Rio de Janeiro\", \"Lisboa\", \"Milão\", \"Guadalajara\", \"Cidade do México\"]}",
+        "parsed": {
+          "core_themes": "U.S. diplomatic and consular correspondence concerning international association football (futebol), including visits by foreign clubs, Brazilian club matches abroad, and games in Brazil involving overseas teams. Records may describe Santos Futebol Clube’s Copa Intercontinental contests with Sport Lisboa e Benfica and Milan, Brazil national-team amistosos with Argentina and Austria, and Brazil’s participation in the 1970 Copa do Mundo FIFA in Mexico. Relevant documents may address match arrangements, results, venues, visiting delegations, public and press interest, and the role of the Confederação Brasileira de Desportos and national-team coach Zagallo.",
+          "related_concepts": [
+            "futebol",
+            "Santos Futebol Clube",
+            "Copa Intercontinental",
+            "Sport Lisboa e Benfica",
+            "Milan",
+            "Argentina",
+            "Áustria",
+            "amistosos",
+            "seleção brasileira",
+            "Confederação Brasileira de Desportos (CBD)",
+            "Zagallo",
+            "Copa do Mundo FIFA de 1970",
+            "Maracanã",
+            "Estádio da Luz",
+            "San Siro",
+            "Estádio do Morumbi",
+            "Rio de Janeiro",
+            "Lisboa",
+            "Milão",
+            "Guadalajara",
+            "Cidade do México"
+          ]
+        },
+        "valid": true,
+        "program": "web_hw",
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "created_at": "2026-10-16T23:22:23.493554",
+        "web_fallback": false,
+        "notes_created_at": "2026-10-16T22:56:08"
+      }
+    },
+    "T18Eval-00031": {
+      "topic_id": "T18Eval-00031",
+      "original_query": {
+        "TITLE": "Aircraft accidents in Brazil",
+        "DESCRIPTION": "Please find documents about plane crashes on Brazilian territory."
+      },
+      "query_text": "Aircraft accidents in Brazil\nPlease find documents about plane crashes on Brazilian territory.",
+      "core_themes": {
+        "raw_response": "{\"core_themes\": \"U.S. Embassy and consular correspondence, Brazilian government notices, press reporting, and investigative records concerning aircraft accidents and plane crashes on Brazilian territory, including the loss of commercial and military aircraft, fatalities, crash locations, routes, operators, aircraft types and registrations, and official findings. Records may describe *acidentes aeronáuticos* and *Investigações de Acidente Aeronáutico* (IAA) conducted under the *Sistema de Investigação e Prevenção de Acidentes Aeronáuticos* (SIPAER), established in 1965, as well as related *Inquérito Policial-Militar* (IPM), *Sindicância*, or administrative inquiries. Particular incidents include the 1963 Varig and Cruzeiro do Sul crashes and the 1967 aircraft accident near Fortaleza that killed former president Marechal Humberto de Alencar Castelo Branco.\", \"related_concepts\": [\"acidentes aeronáuticos\", \"Sistema de Investigação e Prevenção de Acidentes Aeronáuticos (SIPAER)\", \"Investigação de Acidente Aeronáutico (IAA)\", \"Inquérito Policial-Militar (IPM)\", \"Sindicância\", \"Ministério da Aeronáutica\", \"Inspetor Geral da Aeronáutica\", \"Força Aérea Brasileira (FAB)\", \"Varig Flight 280\", \"Douglas DC-3\", \"PP-VBV\", \"Passo Fundo\", \"Rio Grande do Sul\", \"Cruzeiro do Sul\", \"Convair\", \"Avenida Piaçanguaba\", \"Planalto Paulista\", \"São Paulo\", \"Humberto de Alencar Castelo Branco\", \"Fortaleza\", \"Ceará\"]}",
+        "parsed": {
+          "core_themes": "U.S. Embassy and consular correspondence, Brazilian government notices, press reporting, and investigative records concerning aircraft accidents and plane crashes on Brazilian territory, including the loss of commercial and military aircraft, fatalities, crash locations, routes, operators, aircraft types and registrations, and official findings. Records may describe *acidentes aeronáuticos* and *Investigações de Acidente Aeronáutico* (IAA) conducted under the *Sistema de Investigação e Prevenção de Acidentes Aeronáuticos* (SIPAER), established in 1965, as well as related *Inquérito Policial-Militar* (IPM), *Sindicância*, or administrative inquiries. Particular incidents include the 1963 Varig and Cruzeiro do Sul crashes and the 1967 aircraft accident near Fortaleza that killed former president Marechal Humberto de Alencar Castelo Branco.",
+          "related_concepts": [
+            "acidentes aeronáuticos",
+            "Sistema de Investigação e Prevenção de Acidentes Aeronáuticos (SIPAER)",
+            "Investigação de Acidente Aeronáutico (IAA)",
+            "Inquérito Policial-Militar (IPM)",
+            "Sindicância",
+            "Ministério da Aeronáutica",
+            "Inspetor Geral da Aeronáutica",
+            "Força Aérea Brasileira (FAB)",
+            "Varig Flight 280",
+            "Douglas DC-3",
+            "PP-VBV",
+            "Passo Fundo",
+            "Rio Grande do Sul",
+            "Cruzeiro do Sul",
+            "Convair",
+            "Avenida Piaçanguaba",
+            "Planalto Paulista",
+            "São Paulo",
+            "Humberto de Alencar Castelo Branco",
+            "Fortaleza",
+            "Ceará"
+          ]
+        },
+        "valid": true,
+        "program": "web_hw",
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "created_at": "2026-10-16T23:22:23.493579",
+        "web_fallback": false,
+        "notes_created_at": "2026-10-16T22:56:12"
+      }
+    },
+    "T18Eval-00032": {
+      "topic_id": "T18Eval-00032",
+      "original_query": {
+        "TITLE": "Solar eclipse",
+        "DESCRIPTION": "I am looking for information about eclipses of the sun that could be seen from Brazil."
+      },
+      "query_text": "Solar eclipse\nI am looking for information about eclipses of the sun that could be seen from Brazil.",
+      "core_themes": {
+        "raw_response": "{\"core_themes\": \"Department of State and U.S. Embassy and consular correspondence concerning solar eclipses observable in Brazil, including forecasts, paths of totality or annularity, scientific observation, travel and logistical arrangements, and Brazilian or international reporting. Relevant records may discuss the total eclipse of November 12, 1966, and the annular eclipse of September 11, 1969, whose paths crossed Brazilian territory, as well as the June 30 and December 24, 1973 eclipses visible in Brazil. Search for references to observing sites, especially in Roraima and northern Brazil, and to communications with Brazilian authorities, astronomers, and scientific institutions. The January 4, 1973 annular eclipse was offshore in the South Atlantic, not at a Brazilian observing site.\", \"related_concepts\": [\"Eclipse solar\", \"12 de novembro de 1966\", \"11 de setembro de 1969\", \"30 de junho de 1973\", \"24 de dezembro de 1973\", \"eclipse total do Sol\", \"eclipse anular do Sol\", \"faixa de totalidade\", \"faixa de anularidade\", \"observação astronômica\", \"Brasil\", \"Roraima\", \"fronteira Brasil-Guiana\", \"Embaixada dos Estados Unidos no Brasil\", \"postos consulares dos Estados Unidos no Brasil\", \"Departamento de Estado dos Estados Unidos\", \"autoridades brasileiras\", \"astronomia brasileira\", \"observatórios brasileiros\", \"cooperação científica internacional\"]}",
+        "parsed": {
+          "core_themes": "Department of State and U.S. Embassy and consular correspondence concerning solar eclipses observable in Brazil, including forecasts, paths of totality or annularity, scientific observation, travel and logistical arrangements, and Brazilian or international reporting. Relevant records may discuss the total eclipse of November 12, 1966, and the annular eclipse of September 11, 1969, whose paths crossed Brazilian territory, as well as the June 30 and December 24, 1973 eclipses visible in Brazil. Search for references to observing sites, especially in Roraima and northern Brazil, and to communications with Brazilian authorities, astronomers, and scientific institutions. The January 4, 1973 annular eclipse was offshore in the South Atlantic, not at a Brazilian observing site.",
+          "related_concepts": [
+            "Eclipse solar",
+            "12 de novembro de 1966",
+            "11 de setembro de 1969",
+            "30 de junho de 1973",
+            "24 de dezembro de 1973",
+            "eclipse total do Sol",
+            "eclipse anular do Sol",
+            "faixa de totalidade",
+            "faixa de anularidade",
+            "observação astronômica",
+            "Brasil",
+            "Roraima",
+            "fronteira Brasil-Guiana",
+            "Embaixada dos Estados Unidos no Brasil",
+            "postos consulares dos Estados Unidos no Brasil",
+            "Departamento de Estado dos Estados Unidos",
+            "autoridades brasileiras",
+            "astronomia brasileira",
+            "observatórios brasileiros",
+            "cooperação científica internacional"
+          ]
+        },
+        "valid": true,
+        "program": "web_hw",
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "created_at": "2026-10-16T23:22:23.493602",
+        "web_fallback": false,
+        "notes_created_at": "2026-10-16T22:56:12"
+      }
+    },
+    "T18Eval-00033": {
+      "topic_id": "T18Eval-00033",
+      "original_query": {
+        "TITLE": "Coffee rust eradication",
+        "DESCRIPTION": "I am looking for documents that mention eradication practices for coffee rust in Brazil."
+      },
+      "query_text": "Coffee rust eradication\nI am looking for documents that mention eradication practices for coffee rust in Brazil.",
+      "core_themes": {
+        "raw_response": "{\"core_themes\": \"U.S. Embassy and consular reporting on the federal campaign to investigate and eradicate coffee rust (ferrugem do cafeeiro) in Brazil, including disease surveys, quarantine measures, compulsory destruction of infected coffee plants, compensation to growers, and restrictions on transporting seedlings, green plant parts, and processed or unprocessed coffee. Documents may describe the Comissão Executiva da Erradicação da Ferrugem do Cafeeiro, the Instituto Brasileiro do Café and Ministry of Agriculture’s campaign, recruitment and training of agricultural personnel, and the spread of the disease from Bahia to other coffee-producing states. Relevant records may also address São Paulo’s 1971 decree and interagency enforcement.\", \"related_concepts\": [\"ferrugem do cafeeiro\", \"Comissão Executiva da Erradicação da Ferrugem do Cafeeiro (CEFCA)\", \"Campanha de Erradicação da Ferrugem do Cafeeiro\", \"Instituto Brasileiro do Café (IBC)\", \"Ministério da Agricultura\", \"Instituto Biológico\", \"Secretaria da Agricultura do Estado de São Paulo\", \"Coordenadoria da Assistência Técnica Integral (CATI)\", \"Grupo Executivo de Combate à Ferrugem do Cafeeiro\", \"Decreto paulista de 29 de janeiro de 1971\", \"quarentena vegetal\", \"erradicação compulsória\", \"indenização a cafeicultores\", \"fiscalização fitossanitária\", \"mudas de café\", \"partes verdes de cafeeiro\", \"café beneficiado ou em côco\", \"Aurelino Leal\", \"Fazenda São Joaquim\", \"Pedregulho\"]}",
+        "parsed": {
+          "core_themes": "U.S. Embassy and consular reporting on the federal campaign to investigate and eradicate coffee rust (ferrugem do cafeeiro) in Brazil, including disease surveys, quarantine measures, compulsory destruction of infected coffee plants, compensation to growers, and restrictions on transporting seedlings, green plant parts, and processed or unprocessed coffee. Documents may describe the Comissão Executiva da Erradicação da Ferrugem do Cafeeiro, the Instituto Brasileiro do Café and Ministry of Agriculture’s campaign, recruitment and training of agricultural personnel, and the spread of the disease from Bahia to other coffee-producing states. Relevant records may also address São Paulo’s 1971 decree and interagency enforcement.",
+          "related_concepts": [
+            "ferrugem do cafeeiro",
+            "Comissão Executiva da Erradicação da Ferrugem do Cafeeiro (CEFCA)",
+            "Campanha de Erradicação da Ferrugem do Cafeeiro",
+            "Instituto Brasileiro do Café (IBC)",
+            "Ministério da Agricultura",
+            "Instituto Biológico",
+            "Secretaria da Agricultura do Estado de São Paulo",
+            "Coordenadoria da Assistência Técnica Integral (CATI)",
+            "Grupo Executivo de Combate à Ferrugem do Cafeeiro",
+            "Decreto paulista de 29 de janeiro de 1971",
+            "quarentena vegetal",
+            "erradicação compulsória",
+            "indenização a cafeicultores",
+            "fiscalização fitossanitária",
+            "mudas de café",
+            "partes verdes de cafeeiro",
+            "café beneficiado ou em côco",
+            "Aurelino Leal",
+            "Fazenda São Joaquim",
+            "Pedregulho"
+          ]
+        },
+        "valid": true,
+        "program": "web_hw",
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "created_at": "2026-10-16T23:22:23.493622",
+        "web_fallback": false,
+        "notes_created_at": "2026-10-16T22:56:17"
+      }
+    },
+    "T18Eval-00034": {
+      "topic_id": "T18Eval-00034",
+      "original_query": {
+        "TITLE": "Dairy cattle industry",
+        "DESCRIPTION": "Locate documents containing information on Brazil's dairy cattle industry and the distribution of its products."
+      },
+      "query_text": "Dairy cattle industry\nLocate documents containing information on Brazil's dairy cattle industry and the distribution of its products.",
+      "core_themes": {
+        "raw_response": "{\"core_themes\": \"State Department files documenting Brazil’s dairy cattle and milk industry, including cattle and milk production, dairy cooperatives, processing and sanitary conditions, and the distribution of fluid milk and other dairy products. Records may describe the cooperatives supplying Rio de Janeiro, São Paulo, and Belo Horizonte; Minas Gerais milk sheds and the movement of dairy products from Minas Gerais to those urban markets; and government measures concerning production, processing, pasteurization, packaging, refrigerated storage, and distribution. Relevant material also includes plans for regional dairy facilities and powdered-milk factories, cooperative organization, and changes in the classification of milk-producing regions during 1963–1973.\", \"related_concepts\": [\"Cooperativa Central dos Produtores de Leite (CCPL)\", \"Cooperativa Central de Laticínios do Estado de São Paulo (CCL)\", \"Cooperativa Central dos Produtores Rurais de Minas Gerais (CCPR)\", \"Laticínios de Minas Gerais S.A. (LACTIMISA)\", \"Financiadora de Estudos e Projetos (FINEP)\", \"United States Agency for International Development (USAID)\", \"bacias leiteiras\", \"Zona da Mata\", \"Metalúrgica\", \"Campos da Mantiqueira Mineira\", \"Sul de Minas\", \"Rio Doce\", \"Oeste de Minas\", \"Minas Gerais\", \"Rio de Janeiro\", \"São Paulo\", \"Belo Horizonte\", \"Lei estadual nº 3.035, de 19 de dezembro de 1963\", \"Decreto federal nº 66.183, de 5 de fevereiro de 1970\", \"Lei nº 5.764, de 16 de dezembro de 1971\", \"Política Nacional de Cooperativismo\"]}",
+        "parsed": {
+          "core_themes": "State Department files documenting Brazil’s dairy cattle and milk industry, including cattle and milk production, dairy cooperatives, processing and sanitary conditions, and the distribution of fluid milk and other dairy products. Records may describe the cooperatives supplying Rio de Janeiro, São Paulo, and Belo Horizonte; Minas Gerais milk sheds and the movement of dairy products from Minas Gerais to those urban markets; and government measures concerning production, processing, pasteurization, packaging, refrigerated storage, and distribution. Relevant material also includes plans for regional dairy facilities and powdered-milk factories, cooperative organization, and changes in the classification of milk-producing regions during 1963–1973.",
+          "related_concepts": [
+            "Cooperativa Central dos Produtores de Leite (CCPL)",
+            "Cooperativa Central de Laticínios do Estado de São Paulo (CCL)",
+            "Cooperativa Central dos Produtores Rurais de Minas Gerais (CCPR)",
+            "Laticínios de Minas Gerais S.A. (LACTIMISA)",
+            "Financiadora de Estudos e Projetos (FINEP)",
+            "United States Agency for International Development (USAID)",
+            "bacias leiteiras",
+            "Zona da Mata",
+            "Metalúrgica",
+            "Campos da Mantiqueira Mineira",
+            "Sul de Minas",
+            "Rio Doce",
+            "Oeste de Minas",
+            "Minas Gerais",
+            "Rio de Janeiro",
+            "São Paulo",
+            "Belo Horizonte",
+            "Lei estadual nº 3.035, de 19 de dezembro de 1963",
+            "Decreto federal nº 66.183, de 5 de fevereiro de 1970",
+            "Lei nº 5.764, de 16 de dezembro de 1971",
+            "Política Nacional de Cooperativismo"
+          ]
+        },
+        "valid": true,
+        "program": "web_hw",
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "created_at": "2026-10-16T23:22:23.493642",
+        "web_fallback": false,
+        "notes_created_at": "2026-10-16T22:56:19"
+      }
+    },
+    "T18Eval-00035": {
+      "topic_id": "T18Eval-00035",
+      "original_query": {
+        "TITLE": "International Cocoa Agreement",
+        "DESCRIPTION": "I want to know about the International Cocoa Agreement."
+      },
+      "query_text": "International Cocoa Agreement\nI want to know about the International Cocoa Agreement.",
+      "core_themes": {
+        "raw_response": "{\"core_themes\": \"Department of State and U.S. Embassy Brasília records concerning Brazil’s participation in negotiating, signing, approving, and ratifying the Acordo Internacional do Cacau (1972), concluded at Geneva under the United Nations Conference on Trade and Development. Documents may report Brazil’s signature in New York, Decree-Law No. 25 of 1973, ratification and provisional entry into force, and diplomatic exchanges with cocoa-producing and cocoa-consuming countries. Related records address Brazilian representation and interagency deliberations, the financing and administration of the acordo’s estoque regulador (buffer stock), Brazil’s contribution, CEPLAC’s administrative expenses, and proceedings of the provisional International Cocoa Council.\", \"related_concepts\": [\"Acordo Internacional do Cacau\", \"International Cocoa Agreement (1972)\", \"United Nations Conference on Trade and Development (UNCTAD)\", \"Ministério das Relações Exteriores\", \"Itamaraty\", \"Mário Gibson Barboza\", \"Emílio Garrastazu Médici\", \"Representante Permanente do Brasil junto às Nações Unidas\", \"Decree-Law No. 25 of 1973\", \"estoque regulador\", \"buffer stock\", \"Conselho Monetário Nacional\", \"Banco Central do Brasil\", \"Conselho de Comércio Exterior\", \"Comissão Executiva do Plano da Lavoura Cacaueira (CEPLAC)\", \"International Cocoa Council\", \"cocoa-producing countries\", \"cocoa-consuming countries\", \"Geneva\", \"United Nations headquarters, New York\"]}",
+        "parsed": {
+          "core_themes": "Department of State and U.S. Embassy Brasília records concerning Brazil’s participation in negotiating, signing, approving, and ratifying the Acordo Internacional do Cacau (1972), concluded at Geneva under the United Nations Conference on Trade and Development. Documents may report Brazil’s signature in New York, Decree-Law No. 25 of 1973, ratification and provisional entry into force, and diplomatic exchanges with cocoa-producing and cocoa-consuming countries. Related records address Brazilian representation and interagency deliberations, the financing and administration of the acordo’s estoque regulador (buffer stock), Brazil’s contribution, CEPLAC’s administrative expenses, and proceedings of the provisional International Cocoa Council.",
+          "related_concepts": [
+            "Acordo Internacional do Cacau",
+            "International Cocoa Agreement (1972)",
+            "United Nations Conference on Trade and Development (UNCTAD)",
+            "Ministério das Relações Exteriores",
+            "Itamaraty",
+            "Mário Gibson Barboza",
+            "Emílio Garrastazu Médici",
+            "Representante Permanente do Brasil junto às Nações Unidas",
+            "Decree-Law No. 25 of 1973",
+            "estoque regulador",
+            "buffer stock",
+            "Conselho Monetário Nacional",
+            "Banco Central do Brasil",
+            "Conselho de Comércio Exterior",
+            "Comissão Executiva do Plano da Lavoura Cacaueira (CEPLAC)",
+            "International Cocoa Council",
+            "cocoa-producing countries",
+            "cocoa-consuming countries",
+            "Geneva",
+            "United Nations headquarters, New York"
+          ]
+        },
+        "valid": true,
+        "program": "web_hw",
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "created_at": "2026-10-16T23:22:23.493661",
+        "web_fallback": false,
+        "notes_created_at": "2026-10-16T22:56:22"
+      }
+    },
+    "T18Eval-00036": {
+      "topic_id": "T18Eval-00036",
+      "original_query": {
+        "TITLE": "Shrimp fishing policies",
+        "DESCRIPTION": "Find documents that mention Brazilian shrimp fishing policies."
+      },
+      "query_text": "Shrimp fishing policies\nFind documents that mention Brazilian shrimp fishing policies.",
+      "core_themes": {
+        "raw_response": "{\"core_themes\": \"U.S. Embassy and consular-post files concerning Brazilian regulation and conservation of shrimp fisheries, including the 1972 Acordo entre o Governo da República Federativa do Brasil e o Governo dos Estados Unidos da América sobre Camarão and its implementation in 1973. Documents may describe fishing limits and seasons, protected breeding and nursery grounds, vessel registration and reporting, fleet size, and restrictions on fishing gear in waters off Brazil. Relevant records may identify the role of the Superintendência do Desenvolvimento da Pesca (SUDEPE), the Capitania dos Portos, and Brazilian decrees governing fisheries and the bilateral agreement during the Médici government.\", \"related_concepts\": [\"Acordo sobre Camarão (1972)\", \"Decreto nº 72.135, de 26 de abril de 1973\", \"Decreto do Conselho de Ministros nº 1.942, de 21 de dezembro de 1962\", \"Superintendência do Desenvolvimento da Pesca (SUDEPE)\", \"Capitania dos Portos\", \"Emílio G. Médici\", \"Mário Gibson Barboza\", \"pesca de camarão\", \"conservação dos recursos pesqueiros\", \"áreas de reprodução e criação\", \"registro de embarcações\", \"mapas de bordo\", \"restrições a aparelhos de pesca\", \"limite de embarcações da frota norte-americana\", \"temporada de pesca\", \"isóbata de 30 metros\", \"Penaeus duorarum notialis\", \"Penaeus brasiliensis\", \"Penaeus aztecus subtilis\"]}",
+        "parsed": {
+          "core_themes": "U.S. Embassy and consular-post files concerning Brazilian regulation and conservation of shrimp fisheries, including the 1972 Acordo entre o Governo da República Federativa do Brasil e o Governo dos Estados Unidos da América sobre Camarão and its implementation in 1973. Documents may describe fishing limits and seasons, protected breeding and nursery grounds, vessel registration and reporting, fleet size, and restrictions on fishing gear in waters off Brazil. Relevant records may identify the role of the Superintendência do Desenvolvimento da Pesca (SUDEPE), the Capitania dos Portos, and Brazilian decrees governing fisheries and the bilateral agreement during the Médici government.",
+          "related_concepts": [
+            "Acordo sobre Camarão (1972)",
+            "Decreto nº 72.135, de 26 de abril de 1973",
+            "Decreto do Conselho de Ministros nº 1.942, de 21 de dezembro de 1962",
+            "Superintendência do Desenvolvimento da Pesca (SUDEPE)",
+            "Capitania dos Portos",
+            "Emílio G. Médici",
+            "Mário Gibson Barboza",
+            "pesca de camarão",
+            "conservação dos recursos pesqueiros",
+            "áreas de reprodução e criação",
+            "registro de embarcações",
+            "mapas de bordo",
+            "restrições a aparelhos de pesca",
+            "limite de embarcações da frota norte-americana",
+            "temporada de pesca",
+            "isóbata de 30 metros",
+            "Penaeus duorarum notialis",
+            "Penaeus brasiliensis",
+            "Penaeus aztecus subtilis"
+          ]
+        },
+        "valid": true,
+        "program": "web_hw",
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "created_at": "2026-10-16T23:22:23.493678",
+        "web_fallback": false,
+        "notes_created_at": "2026-10-16T22:56:25"
+      }
+    },
+    "T18Eval-00037": {
+      "topic_id": "T18Eval-00037",
+      "original_query": {
+        "TITLE": "Catholic birth control",
+        "DESCRIPTION": "Find documents documenting Catholic perspectives on female birth control in Brazil."
+      },
+      "query_text": "Catholic birth control\nFind documents documenting Catholic perspectives on female birth control in Brazil.",
+      "core_themes": {
+        "raw_response": "{\"core_themes\": \"Records concerning Catholic clergy, lay organizations, and Church authorities in Brazil and their views on methods of regulating female fertility, including the contraceptive pill and other birth-control practices. Documents may address the reception and public debate surrounding Pope Paul VI’s 1968 encyclical *Humanae vitae* (“Sobre a regulação da natalidade”), its teaching on responsible parenthood and periodic continence, and Catholic objections to contraception and direct sterilization. Relevant material may also describe disputes involving the Brazilian government and the Organization of American States over the Church’s position, and the relationship between Catholic debate and family-planning activity in Brazil.\", \"related_concepts\": [\"Humanae vitae\", \"Sobre a regulação da natalidade\", \"Pope Paul VI\", \"paternidade responsável\", \"continência periódica\", \"regulação dos nascimentos\", \"contracepção\", \"pílula anticoncepcional\", \"controle da natalidade\", \"planejamento familiar\", \"esterilização direta\", \"Igreja Católica\", \"clero brasileiro\", \"Concílio Vaticano II\", \"Costa e Silva\", \"Organização dos Estados Americanos (OEA)\", \"International Planned Parenthood Federation (IPPF)\", \"Sociedade Civil do Bem-Estar Familiar no Brasil (BEMFAM)\"]}",
+        "parsed": {
+          "core_themes": "Records concerning Catholic clergy, lay organizations, and Church authorities in Brazil and their views on methods of regulating female fertility, including the contraceptive pill and other birth-control practices. Documents may address the reception and public debate surrounding Pope Paul VI’s 1968 encyclical *Humanae vitae* (“Sobre a regulação da natalidade”), its teaching on responsible parenthood and periodic continence, and Catholic objections to contraception and direct sterilization. Relevant material may also describe disputes involving the Brazilian government and the Organization of American States over the Church’s position, and the relationship between Catholic debate and family-planning activity in Brazil.",
+          "related_concepts": [
+            "Humanae vitae",
+            "Sobre a regulação da natalidade",
+            "Pope Paul VI",
+            "paternidade responsável",
+            "continência periódica",
+            "regulação dos nascimentos",
+            "contracepção",
+            "pílula anticoncepcional",
+            "controle da natalidade",
+            "planejamento familiar",
+            "esterilização direta",
+            "Igreja Católica",
+            "clero brasileiro",
+            "Concílio Vaticano II",
+            "Costa e Silva",
+            "Organização dos Estados Americanos (OEA)",
+            "International Planned Parenthood Federation (IPPF)",
+            "Sociedade Civil do Bem-Estar Familiar no Brasil (BEMFAM)"
+          ]
+        },
+        "valid": true,
+        "program": "web_hw",
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "created_at": "2026-10-16T23:22:23.493695",
+        "web_fallback": false,
+        "notes_created_at": "2026-10-16T22:56:28"
+      }
+    },
+    "T18Eval-00038": {
+      "topic_id": "T18Eval-00038",
+      "original_query": {
+        "TITLE": "Herbicide circulation",
+        "DESCRIPTION": "I'm looking for documents describing the circulation (development, shipment, use, etc.) of herbicides in Brazil."
+      },
+      "query_text": "Herbicide circulation\nI'm looking for documents describing the circulation (development, shipment, use, etc.) of herbicides in Brazil.",
+      "core_themes": {
+        "raw_response": "{\"core_themes\": \"Department of State and U.S. diplomatic and consular correspondence concerning the development, importation, manufacture, shipment, distribution, and agricultural use of herbicides in Brazil, including reliance on imported active ingredients and the beginnings of domestic production. Records may describe 2,4-D imports, Rohm & Haas’s 1973 manufacture of propanil, and the tax treatment of agrotóxicos under the Imposto de Circulação de Mercadorias (ICM). Documents on field trials and use may discuss paraquat and plantio direto experiments in Londrina, Paraná, and Passo Fundo, Rio Grande do Sul, during 1972–1973.\", \"related_concepts\": [\"herbicida\", \"agrotóxicos\", \"2,4-D\", \"ácido 2,4-diclorofenoxiacético\", \"paraquat\", \"propanil\", \"Rohm & Haas\", \"importação de herbicidas\", \"produção de herbicidas\", \"importação de princípios ativos\", \"circulação de mercadorias\", \"Imposto de Circulação de Mercadorias (ICM)\", \"isenção do ICM\", \"plantio direto\", \"ensaios de campo\", \"Londrina, Paraná\", \"Passo Fundo, Rio Grande do Sul\", \"abastecimento de produtos agrícolas\"]}",
+        "parsed": {
+          "core_themes": "Department of State and U.S. diplomatic and consular correspondence concerning the development, importation, manufacture, shipment, distribution, and agricultural use of herbicides in Brazil, including reliance on imported active ingredients and the beginnings of domestic production. Records may describe 2,4-D imports, Rohm & Haas’s 1973 manufacture of propanil, and the tax treatment of agrotóxicos under the Imposto de Circulação de Mercadorias (ICM). Documents on field trials and use may discuss paraquat and plantio direto experiments in Londrina, Paraná, and Passo Fundo, Rio Grande do Sul, during 1972–1973.",
+          "related_concepts": [
+            "herbicida",
+            "agrotóxicos",
+            "2,4-D",
+            "ácido 2,4-diclorofenoxiacético",
+            "paraquat",
+            "propanil",
+            "Rohm & Haas",
+            "importação de herbicidas",
+            "produção de herbicidas",
+            "importação de princípios ativos",
+            "circulação de mercadorias",
+            "Imposto de Circulação de Mercadorias (ICM)",
+            "isenção do ICM",
+            "plantio direto",
+            "ensaios de campo",
+            "Londrina, Paraná",
+            "Passo Fundo, Rio Grande do Sul",
+            "abastecimento de produtos agrícolas"
+          ]
+        },
+        "valid": true,
+        "program": "web_hw",
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "created_at": "2026-10-16T23:22:23.493711",
+        "web_fallback": false,
+        "notes_created_at": "2026-10-16T22:56:29"
+      }
+    },
+    "T18Eval-00039": {
+      "topic_id": "T18Eval-00039",
+      "original_query": {
+        "TITLE": "Anti-cancer efforts",
+        "DESCRIPTION": "I'm looking for documents on anti-cancer efforts in Brazil."
+      },
+      "query_text": "Anti-cancer efforts\nI'm looking for documents on anti-cancer efforts in Brazil.",
+      "core_themes": {
+        "raw_response": "{\"core_themes\": \"Records concerning Brazilian federal and local efforts to prevent, detect, and treat cancer, including the work of the Serviço Nacional de Câncer and Instituto Nacional de Câncer under the Ministério da Saúde; the Ofensiva Contra o Câncer and its supporting foundation; and the establishment and administration of the Campanha Nacional de Combate ao Câncer. Documents may address public education, early diagnosis, medical assistance and training, cancer research, specialist hospital facilities, cervical-cancer control, cancer registration, and national planning under the Programa Nacional de Controle do Câncer, including cooperation among health agencies, universities, and postal services.\", \"related_concepts\": [\"Serviço Nacional de Câncer (SNC)\", \"Departamento Nacional de Saúde\", \"Ministério da Saúde\", \"Instituto Nacional de Câncer (INCA)\", \"Decreto nº 50.251 (1961)\", \"Ofensiva Contra o Câncer\", \"Fundação Ofensiva Contra o Câncer\", \"João Goulart\", \"Lei nº 5.026 (1966)\", \"Campanha Nacional de Combate ao Câncer (CNCC)\", \"Decreto nº 61.968 (1967)\", \"Divisão Nacional do Câncer (DNC)\", \"Programa Nacional de Controle do Câncer (PNCC)\", \"Registro de Câncer de Base Populacional (RCBP)\", \"Recife\", \"Universidade Estadual de Campinas (Unicamp)\", \"controle do câncer do colo do útero\", \"Centro de Pesquisas Luiza Gomes de Lemos\", \"Empresa Brasileira de Correios e Telégrafos\", \"Prevenção do Câncer Ginecológico ao Alcance do Médico do Interior\"]}",
+        "parsed": {
+          "core_themes": "Records concerning Brazilian federal and local efforts to prevent, detect, and treat cancer, including the work of the Serviço Nacional de Câncer and Instituto Nacional de Câncer under the Ministério da Saúde; the Ofensiva Contra o Câncer and its supporting foundation; and the establishment and administration of the Campanha Nacional de Combate ao Câncer. Documents may address public education, early diagnosis, medical assistance and training, cancer research, specialist hospital facilities, cervical-cancer control, cancer registration, and national planning under the Programa Nacional de Controle do Câncer, including cooperation among health agencies, universities, and postal services.",
+          "related_concepts": [
+            "Serviço Nacional de Câncer (SNC)",
+            "Departamento Nacional de Saúde",
+            "Ministério da Saúde",
+            "Instituto Nacional de Câncer (INCA)",
+            "Decreto nº 50.251 (1961)",
+            "Ofensiva Contra o Câncer",
+            "Fundação Ofensiva Contra o Câncer",
+            "João Goulart",
+            "Lei nº 5.026 (1966)",
+            "Campanha Nacional de Combate ao Câncer (CNCC)",
+            "Decreto nº 61.968 (1967)",
+            "Divisão Nacional do Câncer (DNC)",
+            "Programa Nacional de Controle do Câncer (PNCC)",
+            "Registro de Câncer de Base Populacional (RCBP)",
+            "Recife",
+            "Universidade Estadual de Campinas (Unicamp)",
+            "controle do câncer do colo do útero",
+            "Centro de Pesquisas Luiza Gomes de Lemos",
+            "Empresa Brasileira de Correios e Telégrafos",
+            "Prevenção do Câncer Ginecológico ao Alcance do Médico do Interior"
+          ]
+        },
+        "valid": true,
+        "program": "web_hw",
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "created_at": "2026-10-16T23:22:23.493729",
+        "web_fallback": false,
+        "notes_created_at": "2026-10-16T22:56:33"
+      }
+    },
+    "T18Eval-00040": {
+      "topic_id": "T18Eval-00040",
+      "original_query": {
+        "TITLE": "Gemini 10 spaceflight",
+        "DESCRIPTION": "I want to find documents on the Gemini 10 spaceflight."
+      },
+      "query_text": "Gemini 10 spaceflight\nI want to find documents on the Gemini 10 spaceflight.",
+      "core_themes": {
+        "raw_response": "{\"core_themes\": \"U.S. Embassy and consular post correspondence, Department of State telegrams, reports, and press materials concerning NASA’s Gemini X (Gemini 10) crewed spaceflight of July 18–21, 1966. Records may discuss the mission’s launch, rendezvous and docking operations, extravehicular activity, recovery, and public or diplomatic interest in the flight, including the July 21 photograph of the Rio Negro near Barcelos in Amazonas, northwestern Brazil. Relevant descriptions may identify the Gemini Agena Target Vehicle, astronauts John W. Young and Michael Collins, and space photography over Brazilian territory; the available context does not indicate a Brazilian operational role in the mission.\", \"related_concepts\": [\"Gemini X\", \"Gemini 10\", \"NASA\", \"Gemini program\", \"Gemini X mission\", \"John W. Young\", \"Michael Collins\", \"Gemini Agena Target Vehicle-10\", \"GATV-10\", \"Gemini VIII Agena Target Vehicle\", \"Cape Kennedy\", \"Complex 19\", \"Titan II\", \"extravehicular activity\", \"rendezvous and docking\", \"space photography\", \"Rio Negro\", \"Barcelos\", \"Amazonas\", \"Amazon River\", \"Brazil\"]}",
+        "parsed": {
+          "core_themes": "U.S. Embassy and consular post correspondence, Department of State telegrams, reports, and press materials concerning NASA’s Gemini X (Gemini 10) crewed spaceflight of July 18–21, 1966. Records may discuss the mission’s launch, rendezvous and docking operations, extravehicular activity, recovery, and public or diplomatic interest in the flight, including the July 21 photograph of the Rio Negro near Barcelos in Amazonas, northwestern Brazil. Relevant descriptions may identify the Gemini Agena Target Vehicle, astronauts John W. Young and Michael Collins, and space photography over Brazilian territory; the available context does not indicate a Brazilian operational role in the mission.",
+          "related_concepts": [
+            "Gemini X",
+            "Gemini 10",
+            "NASA",
+            "Gemini program",
+            "Gemini X mission",
+            "John W. Young",
+            "Michael Collins",
+            "Gemini Agena Target Vehicle-10",
+            "GATV-10",
+            "Gemini VIII Agena Target Vehicle",
+            "Cape Kennedy",
+            "Complex 19",
+            "Titan II",
+            "extravehicular activity",
+            "rendezvous and docking",
+            "space photography",
+            "Rio Negro",
+            "Barcelos",
+            "Amazonas",
+            "Amazon River",
+            "Brazil"
+          ]
+        },
+        "valid": true,
+        "program": "web_hw",
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "created_at": "2026-10-16T23:22:23.493762",
+        "web_fallback": false,
+        "notes_created_at": "2026-10-16T22:56:36"
+      }
+    },
+    "T18Eval-00041": {
+      "topic_id": "T18Eval-00041",
+      "original_query": {
+        "TITLE": "Rare earth chloride sales",
+        "DESCRIPTION": "I want information on the sale of rare earth chlorides by the Brazilian government."
+      },
+      "query_text": "Rare earth chloride sales\nI want information on the sale of rare earth chlorides by the Brazilian government.",
+      "core_themes": {
+        "raw_response": "{\"core_themes\": \"State Department correspondence and reports concerning Brazilian government sales and exports of mixed rare-earth chloride concentrates (TRCl₃), a secondary product of monazite processing, including the disposition of output, export arrangements, and any discussions of buyers, contracts, prices, or destinations. Records may describe the Comissão Nacional de Energia Nuclear’s assumption of monazite-processing operations and acquisition of ORQUIMA S.A.’s facilities, completed in 1966, and the operation of Administração da Produção de Monazita at Usina Santo Amaro in São Paulo. They may also note the 1972 transfer of APM management to Companhia Brasileira de Tecnologia Nuclear and the relationship of chloride sales to Brazil’s nuclear-material production.\", \"related_concepts\": [\"terras-raras\", \"cloreto de terras-raras (TRCl₃)\", \"concentrado misto de cloretos de terras-raras\", \"monazita\", \"Comissão Nacional de Energia Nuclear (CNEN)\", \"Administração da Produção de Monazita (APM)\", \"ORQUIMA S.A.\", \"Usina Santo Amaro (USAM)\", \"São Paulo\", \"Companhia Brasileira de Tecnologia Nuclear (CBTN)\", \"exportação de produtos de monazita\", \"venda de concentrados de terras-raras\", \"óxidos de terras-raras de baixa pureza\", \"fosfatos de sódio\", \"processamento de monazita\", \"transferência de instalações (1966)\", \"produção de urânio\", \"produção de tório\", \"combustível nuclear\"]}",
+        "parsed": {
+          "core_themes": "State Department correspondence and reports concerning Brazilian government sales and exports of mixed rare-earth chloride concentrates (TRCl₃), a secondary product of monazite processing, including the disposition of output, export arrangements, and any discussions of buyers, contracts, prices, or destinations. Records may describe the Comissão Nacional de Energia Nuclear’s assumption of monazite-processing operations and acquisition of ORQUIMA S.A.’s facilities, completed in 1966, and the operation of Administração da Produção de Monazita at Usina Santo Amaro in São Paulo. They may also note the 1972 transfer of APM management to Companhia Brasileira de Tecnologia Nuclear and the relationship of chloride sales to Brazil’s nuclear-material production.",
+          "related_concepts": [
+            "terras-raras",
+            "cloreto de terras-raras (TRCl₃)",
+            "concentrado misto de cloretos de terras-raras",
+            "monazita",
+            "Comissão Nacional de Energia Nuclear (CNEN)",
+            "Administração da Produção de Monazita (APM)",
+            "ORQUIMA S.A.",
+            "Usina Santo Amaro (USAM)",
+            "São Paulo",
+            "Companhia Brasileira de Tecnologia Nuclear (CBTN)",
+            "exportação de produtos de monazita",
+            "venda de concentrados de terras-raras",
+            "óxidos de terras-raras de baixa pureza",
+            "fosfatos de sódio",
+            "processamento de monazita",
+            "transferência de instalações (1966)",
+            "produção de urânio",
+            "produção de tório",
+            "combustível nuclear"
+          ]
+        },
+        "valid": true,
+        "program": "web_hw",
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "created_at": "2026-10-16T23:22:23.493782",
+        "web_fallback": false,
+        "notes_created_at": "2026-10-16T22:56:39"
+      }
+    },
+    "T18Eval-00042": {
+      "topic_id": "T18Eval-00042",
+      "original_query": {
+        "TITLE": "Import of color television",
+        "DESCRIPTION": "I'm looking for information on the import of color television into Brazil."
+      },
+      "query_text": "Import of color television\nI'm looking for information on the import of color television into Brazil.",
+      "core_themes": {
+        "raw_response": "{\"core_themes\": \"Records concerning the importation of color television receivers and related equipment into Brazil, including applications for import licenses, foreign-exchange cover, customs duties, exemptions from the imposto de importação, supplier and country-of-origin information, and distinctions between imported and domestically manufactured goods. Relevant files may discuss federal approval, Banco do Brasil exchange controls, and whether comparable national products were available. Related material may address the expansion of color television broadcasting and demand for receivers, including 1972–73 sales, while distinguishing receiver imports from equipment imported to install or operate television stations.\", \"related_concepts\": [\"televisão em cores\", \"televisores em cores\", \"aparelhos receptores de televisão\", \"importação\", \"imposto de importação\", \"licença de importação\", \"cobertura cambial\", \"Carteira de Câmbio do Banco do Brasil S.A.\", \"similar nacional\", \"equipamento de televisão\", \"indústria nacional de televisores\", \"produção nacional\", \"mercado de televisores\", \"vendas de televisores\", \"transmissão em cores\", \"Embratel\", \"Lei nº 5.224, de 17 de janeiro de 1967\", \"Rádio Difusora do Maranhão Ltda.\", \"São Luís\", \"Festa Nacional da Uva\"]}",
+        "parsed": {
+          "core_themes": "Records concerning the importation of color television receivers and related equipment into Brazil, including applications for import licenses, foreign-exchange cover, customs duties, exemptions from the imposto de importação, supplier and country-of-origin information, and distinctions between imported and domestically manufactured goods. Relevant files may discuss federal approval, Banco do Brasil exchange controls, and whether comparable national products were available. Related material may address the expansion of color television broadcasting and demand for receivers, including 1972–73 sales, while distinguishing receiver imports from equipment imported to install or operate television stations.",
+          "related_concepts": [
+            "televisão em cores",
+            "televisores em cores",
+            "aparelhos receptores de televisão",
+            "importação",
+            "imposto de importação",
+            "licença de importação",
+            "cobertura cambial",
+            "Carteira de Câmbio do Banco do Brasil S.A.",
+            "similar nacional",
+            "equipamento de televisão",
+            "indústria nacional de televisores",
+            "produção nacional",
+            "mercado de televisores",
+            "vendas de televisores",
+            "transmissão em cores",
+            "Embratel",
+            "Lei nº 5.224, de 17 de janeiro de 1967",
+            "Rádio Difusora do Maranhão Ltda.",
+            "São Luís",
+            "Festa Nacional da Uva"
+          ]
+        },
+        "valid": true,
+        "program": "web_hw",
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "created_at": "2026-10-16T23:22:23.493799",
+        "web_fallback": false,
+        "notes_created_at": "2026-10-16T22:56:43"
+      }
+    },
+    "T18Eval-00043": {
+      "topic_id": "T18Eval-00043",
+      "original_query": {
+        "TITLE": "Vampire bat control",
+        "DESCRIPTION": "I'm looking for documents on controlling Brazil's vampire bat population."
+      },
+      "query_text": "Vampire bat control\nI'm looking for documents on controlling Brazil's vampire bat population.",
+      "core_themes": {
+        "raw_response": "{\"core_themes\": \"Reports, correspondence, and technical studies concerning measures to control vampire bats in Brazil, especially the hematophagous bat *Desmodus rotundus* and its role in transmitting rabies among livestock. Records may discuss the Ministério da Agricultura’s 1966 *Plano de Combate à Raiva dos Herbívoros*, work by its Divisão de Defesa Sanitária Animal, livestock vaccination, and field or experimental control methods. Relevant studies include systemic anticoagulant treatment of cattle to poison bats feeding on them, including the 1972 diphenadione trials, as well as use of chlorophacinone or warfarin and broader efforts at population control.\", \"related_concepts\": [\"Ministério da Agricultura\", \"Divisão de Defesa Sanitária Animal\", \"Plano de Combate à Raiva dos Herbívoros\", \"raiva dos herbívoros\", \"morcegos hematófagos\", \"Desmodus rotundus\", \"bovinos\", \"controle de morcegos\", \"controle populacional\", \"anticoagulantes\", \"diphenadione\", \"2-diphenylacetyl-1,3-indandione\", \"chlorophacinone\", \"warfarin\", \"tratamento sistêmico de bovinos\", \"vacinação de animais suscetíveis\", \"transmissão da raiva\", \"Thompson, R. D.\", \"Mitchell, G. C.\", \"Burns, R. J.\"]}",
+        "parsed": {
+          "core_themes": "Reports, correspondence, and technical studies concerning measures to control vampire bats in Brazil, especially the hematophagous bat *Desmodus rotundus* and its role in transmitting rabies among livestock. Records may discuss the Ministério da Agricultura’s 1966 *Plano de Combate à Raiva dos Herbívoros*, work by its Divisão de Defesa Sanitária Animal, livestock vaccination, and field or experimental control methods. Relevant studies include systemic anticoagulant treatment of cattle to poison bats feeding on them, including the 1972 diphenadione trials, as well as use of chlorophacinone or warfarin and broader efforts at population control.",
+          "related_concepts": [
+            "Ministério da Agricultura",
+            "Divisão de Defesa Sanitária Animal",
+            "Plano de Combate à Raiva dos Herbívoros",
+            "raiva dos herbívoros",
+            "morcegos hematófagos",
+            "Desmodus rotundus",
+            "bovinos",
+            "controle de morcegos",
+            "controle populacional",
+            "anticoagulantes",
+            "diphenadione",
+            "2-diphenylacetyl-1,3-indandione",
+            "chlorophacinone",
+            "warfarin",
+            "tratamento sistêmico de bovinos",
+            "vacinação de animais suscetíveis",
+            "transmissão da raiva",
+            "Thompson, R. D.",
+            "Mitchell, G. C.",
+            "Burns, R. J."
+          ]
+        },
+        "valid": true,
+        "program": "web_hw",
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "created_at": "2026-10-16T23:22:23.493816",
+        "web_fallback": false,
+        "notes_created_at": "2026-10-16T22:56:49"
+      }
+    },
+    "T18Eval-00044": {
+      "topic_id": "T18Eval-00044",
+      "original_query": {
+        "TITLE": "Rural agriculture",
+        "DESCRIPTION": "Find documents that discuss the development and impact of rural agriculture in Brazil, including practices, benefits, challenges, and examples."
+      },
+      "query_text": "Rural agriculture\nFind documents that discuss the development and impact of rural agriculture in Brazil, including practices, benefits, challenges, and examples.",
+      "core_themes": {
+        "raw_response": "{\"core_themes\": \"U.S. Embassy and consular reporting on Brazilian rural agriculture, including agricultural development programs, farming practices, productivity, and the economic and social effects of rural production. Records may describe rural credit and financing for production, marketing, storage, processing, and investment; small and medium rural producers and cooperatives; land access, agrarian reform, colonization, technical assistance, agricultural research, mechanization, and inputs. Documents may assess benefits and obstacles such as soil conservation, rural infrastructure, uneven access to credit and land, and regional differences, with attention to the Estatuto da Terra, PROTERRA, the Programa de Integração Nacional, and agricultural initiatives in the North and Northeast.\", \"related_concepts\": [\"Sistema Nacional de Crédito Rural (SNCR)\", \"Lei nº 4.829, de 5 de novembro de 1965\", \"Decreto nº 58.380, de 10 de maio de 1966\", \"Estatuto da Terra (Lei nº 4.504, de 1964)\", \"Instituto Brasileiro de Reforma Agrária (IBRA)\", \"Instituto Nacional de Desenvolvimento Agrário (INDA)\", \"Instituto Nacional de Colonização e Reforma Agrária (INCRA)\", \"PROTERRA\", \"Programa de Redistribuição de Terras e de Estímulo à Agro-Indústria do Norte e do Nordeste\", \"Programa de Integração Nacional (PIN)\", \"Transamazônica\", \"Empresa Brasileira de Pesquisa Agropecuária (EMBRAPA)\", \"Conselho Monetário Nacional\", \"Banco do Brasil\", \"Banco do Nordeste do Brasil (BNB)\", \"Banco de Crédito da Amazônia\", \"SUDAM\", \"SUDENE\", \"crédito rural\", \"conservação do solo\"]}",
+        "parsed": {
+          "core_themes": "U.S. Embassy and consular reporting on Brazilian rural agriculture, including agricultural development programs, farming practices, productivity, and the economic and social effects of rural production. Records may describe rural credit and financing for production, marketing, storage, processing, and investment; small and medium rural producers and cooperatives; land access, agrarian reform, colonization, technical assistance, agricultural research, mechanization, and inputs. Documents may assess benefits and obstacles such as soil conservation, rural infrastructure, uneven access to credit and land, and regional differences, with attention to the Estatuto da Terra, PROTERRA, the Programa de Integração Nacional, and agricultural initiatives in the North and Northeast.",
+          "related_concepts": [
+            "Sistema Nacional de Crédito Rural (SNCR)",
+            "Lei nº 4.829, de 5 de novembro de 1965",
+            "Decreto nº 58.380, de 10 de maio de 1966",
+            "Estatuto da Terra (Lei nº 4.504, de 1964)",
+            "Instituto Brasileiro de Reforma Agrária (IBRA)",
+            "Instituto Nacional de Desenvolvimento Agrário (INDA)",
+            "Instituto Nacional de Colonização e Reforma Agrária (INCRA)",
+            "PROTERRA",
+            "Programa de Redistribuição de Terras e de Estímulo à Agro-Indústria do Norte e do Nordeste",
+            "Programa de Integração Nacional (PIN)",
+            "Transamazônica",
+            "Empresa Brasileira de Pesquisa Agropecuária (EMBRAPA)",
+            "Conselho Monetário Nacional",
+            "Banco do Brasil",
+            "Banco do Nordeste do Brasil (BNB)",
+            "Banco de Crédito da Amazônia",
+            "SUDAM",
+            "SUDENE",
+            "crédito rural",
+            "conservação do solo"
+          ]
+        },
+        "valid": true,
+        "program": "web_hw",
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "created_at": "2026-10-16T23:22:23.493834",
+        "web_fallback": false,
+        "notes_created_at": "2026-10-16T22:56:50"
+      }
+    },
+    "T18Eval-00045": {
+      "topic_id": "T18Eval-00045",
+      "original_query": {
+        "TITLE": "Oil price changes",
+        "DESCRIPTION": "I want to find any documents from which I can learn both influence and effect oil prices on Brazilian society."
+      },
+      "query_text": "Oil price changes\nI want to find any documents from which I can learn both influence and effect oil prices on Brazilian society.",
+      "core_themes": {
+        "raw_response": "{\"core_themes\": \"State Department records concerning changes in petroleum prices and their effects on Brazil’s economy and society, including the state monopoly over crude petroleum and derivatives, regulation of imports, exchange-rate and domestic fuel-price changes, and the setting of ex-refinery prices. Documents may discuss Petróleo Brasileiro S.A. (PETROBRÁS), the Conselho Nacional do Petróleo (CNP), and measures linking petroleum imports to Brazilian exports, as well as the consequences of rising crude costs for Brazil’s import bill, consumer prices, and economic conditions. For 1973, seek reporting on the October oil-price shock, increased crude-import costs, and anticipated effects on Brazilian public finances, industry, transport, and consumers.\", \"related_concepts\": [\"Decreto nº 53.337, de 23 de dezembro de 1963\", \"Decreto nº 53.982, de 25 de junho de 1964\", \"Instrução nº 207 da SUMOC\", \"Lei nº 4.452, de 5 de novembro de 1964\", \"Petróleo Brasileiro S.A. (PETROBRÁS)\", \"Conselho Nacional do Petróleo (CNP)\", \"Superintendência da Moeda e do Crédito (SUMOC)\", \"Comissão de Comércio Exterior\", \"Carteira de Câmbio\", \"monopólio estatal do petróleo\", \"petróleo bruto\", \"derivados de petróleo\", \"preços ex-refinaria\", \"custo CIF\", \"importação de petróleo\", \"compromissos de exportação\", \"choque do petróleo de outubro de 1973\", \"conta de importação de petróleo\", \"preços ao consumidor\"]}",
+        "parsed": {
+          "core_themes": "State Department records concerning changes in petroleum prices and their effects on Brazil’s economy and society, including the state monopoly over crude petroleum and derivatives, regulation of imports, exchange-rate and domestic fuel-price changes, and the setting of ex-refinery prices. Documents may discuss Petróleo Brasileiro S.A. (PETROBRÁS), the Conselho Nacional do Petróleo (CNP), and measures linking petroleum imports to Brazilian exports, as well as the consequences of rising crude costs for Brazil’s import bill, consumer prices, and economic conditions. For 1973, seek reporting on the October oil-price shock, increased crude-import costs, and anticipated effects on Brazilian public finances, industry, transport, and consumers.",
+          "related_concepts": [
+            "Decreto nº 53.337, de 23 de dezembro de 1963",
+            "Decreto nº 53.982, de 25 de junho de 1964",
+            "Instrução nº 207 da SUMOC",
+            "Lei nº 4.452, de 5 de novembro de 1964",
+            "Petróleo Brasileiro S.A. (PETROBRÁS)",
+            "Conselho Nacional do Petróleo (CNP)",
+            "Superintendência da Moeda e do Crédito (SUMOC)",
+            "Comissão de Comércio Exterior",
+            "Carteira de Câmbio",
+            "monopólio estatal do petróleo",
+            "petróleo bruto",
+            "derivados de petróleo",
+            "preços ex-refinaria",
+            "custo CIF",
+            "importação de petróleo",
+            "compromissos de exportação",
+            "choque do petróleo de outubro de 1973",
+            "conta de importação de petróleo",
+            "preços ao consumidor"
+          ]
+        },
+        "valid": true,
+        "program": "web_hw",
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "created_at": "2026-10-16T23:22:23.493850",
+        "web_fallback": false,
+        "notes_created_at": "2026-10-16T22:56:51"
+      }
+    }
+  }
+}

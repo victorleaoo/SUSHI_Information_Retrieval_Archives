@@ -1,0 +1,13 @@
+{
+  "query_type": "TDN",
+  "table": "FLAUG",
+  "config": "-.----.-.e",
+  "column": "FL",
+  "query_variant": "FL",
+  "query_set": "opt_cv",
+  "folder_label": "flaug",
+  "seeds": null,
+  "llm_root": "data/llm_calls_luna/hw",
+  "query_root": "data/llm_calls_luna/opt_cv",
+  "colbert": "exact MaxSim, top 100"
+}

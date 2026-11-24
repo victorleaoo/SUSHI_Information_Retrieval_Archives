@@ -1,0 +1,11 @@
+{
+  "query_type": "T",
+  "table": "PLAIN",
+  "config": "-.----.-.b",
+  "column": "BASE",
+  "query_variant": null,
+  "folder_label": "plain",
+  "seeds": null,
+  "llm_root": "data/llm_calls_luna/hw",
+  "colbert": "exact MaxSim, top 100"
+}

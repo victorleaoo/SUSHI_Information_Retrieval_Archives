@@ -8,6 +8,8 @@ from collections import defaultdict
 from typing import List, Dict, Tuple, Any, Optional
 import streamlit as st
 
+import utils_runs as ur
+
 # ==========================================
 # CONSTANTES
 # ==========================================
@@ -196,119 +198,26 @@ def get_topic_title_map() -> Dict[str, str]:
 
     return title_map
 
-def is_subfolder_match(target_subfolder: Optional[str], current_subfolder: str) -> bool:
-    """
-    Checks if current_subfolder matches target_subfolder (exact match or parent phase prefix).
-    """
-    if not target_subfolder or target_subfolder in ("All Subfolders", "All Sets of Experiments"):
-        return True
-    if current_subfolder == target_subfolder:
-        return True
-    if current_subfolder.startswith(target_subfolder + "/"):
-        return True
-    return False
-
 def get_run_folder_info_map() -> Dict[str, Dict[str, str]]:
-    """
-    Recursively scans EXPERIMENTS_ROOT_DIR and returns a dictionary mapping
-    keys -> {'path': full_absolute_path, 'subfolder': relative_subfolder, 'name': folder_name}
-    for all run folders containing metric JSON files.
-    """
-    if not os.path.exists(EXPERIMENTS_ROOT_DIR):
-        return {}
-    
-    mapping = {}
-    valid_metric_files = [
-        'topics_mean_margin.json',
-        'model_overall_stats.json',
-        'all_documents_model_overall_stats.json',
-        'AllDocuments_TopicsFolderMetrics.json',
-        'topics_values.json',
-        'folder_overall_stats.json'
-    ]
-    for root, dirs, files in os.walk(EXPERIMENTS_ROOT_DIR):
-        dirs.sort(key=natural_keys)
-        if any(f in files for f in valid_metric_files):
-            fname = os.path.basename(root)
-            rel_p = os.path.relpath(root, EXPERIMENTS_ROOT_DIR)
-            parts = rel_p.split(os.sep)
-            subfolder = '/'.join(parts[:-1]) if len(parts) > 1 else 'Root'
-            info = {'path': root, 'subfolder': subfolder, 'name': fname}
-            mapping[rel_p] = info
-            if fname not in mapping or '_seed' in mapping[fname]['subfolder']:
-                mapping[fname] = info
-            
-    return mapping
+    """{run name: {'path', 'subfolder', 'name'}} over all roots (utils_runs.scan_runs). 'subfolder' is the root."""
+    return {name: {"path": info.path, "subfolder": ur.ROOTS[info.root], "name": name}
+            for name, info in ur.scan_runs().items()}
 
 def get_run_folder_map() -> Dict[str, str]:
     """Returns a dict mapping folder_name -> full_path."""
-    info_map = get_run_folder_info_map()
-    res = {}
-    for k, info in info_map.items():
-        res[k] = info['path']
-        fname = info['name']
-        if fname not in res or '_seed' in res[fname]:
-            res[fname] = info['path']
-    return res
+    return {name: info.path for name, info in ur.scan_runs().items()}
 
 def resolve_run_folder_path(run_name: str, subfolder: Optional[str] = None) -> Optional[str]:
-    """
-    Resolves the exact directory path for a run_name, optionally scoped by subfolder.
-    """
-    info_map = get_run_folder_info_map()
-    
-    # 1. If run_name is an exact key in info_map (e.g. relative path)
-    if run_name in info_map:
-        info = info_map[run_name]
-        if not subfolder or subfolder in ("All Subfolders", "All Sets of Experiments") or is_subfolder_match(subfolder, info['subfolder']):
-            return info['path']
-
-    # 2. Match both info['name'] == run_name and subfolder scope (preferring non-seed directories)
-    if subfolder and subfolder not in ("All Subfolders", "All Sets of Experiments"):
-        best_path = None
-        for info in info_map.values():
-            if info['name'] == run_name and is_subfolder_match(subfolder, info['subfolder']):
-                if best_path is None or '_seed' in best_path:
-                    best_path = info['path']
-        if best_path:
-            return best_path
-
-    # 3. Fallback to get_run_folder_map() short-name lookup
-    return get_run_folder_map().get(run_name)
-
-def get_available_subfolders() -> List[str]:
-    """Returns a sorted list of unique subfolder paths and top-level parent phases present inside EXPERIMENTS_ROOT_DIR."""
-    info_map = get_run_folder_info_map()
-    raw_subfolders = {info['subfolder'] for info in info_map.values()}
-    
-    parent_phases = set()
-    for sf in raw_subfolders:
-        if '/' in sf:
-            parent = sf.split('/')[0]
-            parent_phases.add(parent)
-            
-    all_scopes = sorted(list(raw_subfolders | parent_phases), key=natural_keys)
-    return all_scopes
+    """The run's directory. `subfolder` is kept for old call sites and ignored: run names are unique."""
+    return ur.run_path(run_name)
 
 def get_grouped_run_configurations(subfolder: Optional[str] = None) -> Dict[str, List[str]]:
     """
-    Scans all run folders in EXPERIMENTS_ROOT_DIR and groups them by configuration name.
-    If subfolder is provided and not 'All Subfolders', only runs matching that scope are included.
+    Groups every scanned run (utils_runs.scan_runs) by configuration name. `subfolder` is ignored.
     Returns a dict mapping config_name -> list of run_folder_names.
     """
-    info_map = get_run_folder_info_map()
     grouped: Dict[str, List[str]] = {}
-    seen_paths = set()
-    
-    for key, info in info_map.items():
-        folder_path = info['path']
-        if folder_path in seen_paths:
-            continue
-        if subfolder and not is_subfolder_match(subfolder, info['subfolder']):
-            continue
-        
-        seen_paths.add(folder_path)
-        fname = info['name']
+    for fname in ur.scan_runs():
         parsed = parse_run_folder(fname)
         cfg = parsed['config'] if parsed else fname
         grouped.setdefault(cfg, []).append(fname)
@@ -348,8 +257,8 @@ def process_experiment_data(selected_configs: List[str], grouped_runs: Dict[str,
             mean_val = g.get('mean', 0.0)
             margin_val = g.get('margin', 0.0)
 
-            # Count seeds (Random*.json files)
-            random_count = len([f for f in os.listdir(fpath) if f.startswith('Random') and f.endswith('.json')])
+            # Count seeds (Random*.json files, or seed_ndcg5.json)
+            random_count = ur.count_seeds(fpath)
             if random_count == 0:
                 random_count = 1
 
@@ -528,45 +437,33 @@ def get_configuration_ndcg_map(grouped_runs: Dict[str, List[str]]) -> Dict[str, 
         config_ndcg[cfg] = max_val
     return config_ndcg
 
+@st.cache_data(show_spinner="Loading run statistics…")
 def get_all_runs_statistics(subfolder: Optional[str] = None) -> pd.DataFrame:
     """
-    Scans EXPERIMENTS_ROOT_DIR recursively for all subfolders, looks for 
-    overall stats, and counts Random_ files.
+    One row per run over all roots (utils_runs.scan_runs): overall mean/margin, family, seed count,
+    in-sample and seed-independent flags. `subfolder` is kept for old call sites and ignored.
     """
-    info_map = get_run_folder_info_map()
     rows = []
-    seen_paths = set()
-    
-    for key, info in info_map.items():
-        folder_path = info['path']
-        if folder_path in seen_paths:
-            continue
-        if not is_subfolder_match(subfolder, info['subfolder']):
-            continue
-
-        seen_paths.add(folder_path)
-        global_metrics = load_overall_stats(folder_path)
-        
-        mean_val = global_metrics.get("mean", 0.0)
-        margin_val = global_metrics.get("margin", 0.0)
-        
-        random_count = len([
-            f for f in os.listdir(folder_path) 
-            if f.startswith("Random") and f.endswith(".json")
-        ])
-        
+    for name, info in ur.scan_runs().items():
+        global_metrics = load_overall_stats(info.path)
+        if info.n_seed_files == 0 and info.family == "luna" and info.seed_independent:
+            seeds = "1 (ALLFL)"
+        else:
+            seeds = str(info.n_seed_files)
         rows.append({
-            "Run Name": info['name'],
-            "Set of Experiments": info['subfolder'],
-            "Mean": mean_val,
-            "Margin": margin_val,
-            "Random Runs Count": random_count
+            "Run Name": name,
+            "Family": info.family,
+            "Set of Experiments": ur.ROOTS[info.root],
+            "Mean": global_metrics.get("mean", 0.0),
+            "Margin": global_metrics.get("margin", 0.0),
+            "Random Runs Count": seeds,
+            "In-sample": info.in_sample,
+            "Seed-independent": info.seed_independent,
         })
 
     df = pd.DataFrame(rows)
     if not df.empty:
         df = df.sort_values(by="Mean", ascending=False)
-        
     return df
 
 def load_relevance_stats(folder_path: str) -> Dict:
@@ -674,75 +571,96 @@ def categorize_topics_comparison(df_run_a: pd.DataFrame, df_run_b: pd.DataFrame)
     }
 
 
+def _topic_seed_means(folder_path: str) -> Optional[np.ndarray]:
+    """Seed-mean nDCG@5 per topic, T1..T45, from topics_values.json ({"T1": [v_seed1, ...], ...})."""
+    tv = load_json_safely(os.path.join(folder_path, "topics_values.json"))
+    if not tv:
+        return None
+    vals = []
+    for t in ur.TOPIC_KEYS:
+        v = tv.get(t)
+        if not isinstance(v, list) or not v:
+            return None
+        vals.append(float(np.mean(v)))
+    return np.array(vals)
+
+
+def _seed_means(folder_path: str) -> Dict[str, float]:
+    """{seed name: mean nDCG@5 over topics}, from the seed files or seed_ndcg5.json (utils_runs.seed_topic_values)."""
+    if not os.path.isdir(folder_path):
+        return {}
+    return {seed: float(np.nanmean(v)) for seed, v in ur.seed_topic_values(folder_path).items()
+            if not np.all(np.isnan(v))}
+
+
 def run_wilcoxon_test(run_name_a: str, run_name_b: str,
                       subfolder_a: Optional[str] = None,
                       subfolder_b: Optional[str] = None) -> Dict:
     """
-    Runs a Wilcoxon signed-rank test comparing two runs across their seed files.
-    For each common seed, computes the mean nDCG@5 across all topics, then
-    performs a paired test on those seed-level means.
+    Wilcoxon signed-rank test between two runs (D3-D5 of reports/web_app_llm_plan.md).
 
-    Returns dict with: statistic, p_value, n_seeds, significant, winner,
-    mean_a, mean_b, wins_a, wins_b.
+    - Both runs vary by seed: paired by seed. For each common Random*.json file, the mean nDCG@5 over
+      topics; n = common seeds.
+    - Either run is seed-independent (utils_runs.is_seed_independent): paired by topic. Each run's
+      seed-averaged nDCG@5 per topic (topics_values.json), n = 45 topics.
+
+    Returns dict with: statistic, p_value, n, unit ("seeds" | "topics"), pairing ("seed" | "topic"),
+    reason, significant, winner, mean_a, mean_b, wins_a, wins_b (counted over the same units).
     """
     from scipy import stats as sp_stats
 
-    folder_a = resolve_run_folder_path(run_name_a, subfolder_a) or ""
-    folder_b = resolve_run_folder_path(run_name_b, subfolder_b) or ""
-
+    folder_a = resolve_run_folder_path(run_name_a) or ""
+    folder_b = resolve_run_folder_path(run_name_b) or ""
     if not folder_a or not folder_b:
         return {"error": "Could not resolve run folder paths."}
 
-    def _load_seed_means(folder_path: str) -> Dict[str, float]:
-        """Load Random*.json files and return {seed_filename: mean_ndcg}."""
-        seed_means = {}
-        if not os.path.isdir(folder_path):
-            return seed_means
-        for fname in sorted(os.listdir(folder_path)):
-            if fname.startswith("Random") and fname.endswith(".json"):
-                fpath = os.path.join(folder_path, fname)
-                try:
-                    with open(fpath, 'r', encoding='utf-8') as f:
-                        content = json.load(f)
-                    scores = [
-                        m.get('ndcg_cut_5', 0.0)
-                        for m in content.values()
-                        if isinstance(m, dict) and 'ndcg_cut_5' in m
-                    ]
-                    if scores:
-                        seed_means[fname] = float(np.mean(scores))
-                except Exception:
-                    pass
-        return seed_means
+    indep_a = ur.is_seed_independent(folder_a)
+    indep_b = ur.is_seed_independent(folder_b)
 
-    seeds_a = _load_seed_means(folder_a)
-    seeds_b = _load_seed_means(folder_b)
+    if indep_a or indep_b:
+        pairing, unit = "topic", "topics"
+        reason = ("both runs are seed-independent" if indep_a and indep_b
+                  else "Run A is seed-independent" if indep_a else "Run B is seed-independent")
+        vals_a, vals_b = _topic_seed_means(folder_a), _topic_seed_means(folder_b)
+        if vals_a is None or vals_b is None:
+            return {"error": "topics_values.json is missing or incomplete, so the runs cannot be paired by topic."}
+        n = len(ur.TOPIC_KEYS)
+    else:
+        pairing, unit = "seed", "seeds"
+        reason = "both runs vary by seed"
+        seeds_a, seeds_b = _seed_means(folder_a), _seed_means(folder_b)
+        common = sorted(set(seeds_a) & set(seeds_b))
+        if len(common) < 2:
+            return {"error": f"Not enough common seeds ({len(common)}) for Wilcoxon test. Need ≥ 2."}
+        vals_a = np.array([seeds_a[s] for s in common])
+        vals_b = np.array([seeds_b[s] for s in common])
+        n = len(common)
 
-    common_seeds = sorted(set(seeds_a.keys()) & set(seeds_b.keys()))
-    if len(common_seeds) < 2:
-        return {"error": f"Not enough common seeds ({len(common_seeds)}) for Wilcoxon test. Need ≥ 2."}
+    d = vals_a - vals_b
+    mean_a, mean_b = float(np.mean(vals_a)), float(np.mean(vals_b))
+    wins_a, wins_b = int((d > 1e-9).sum()), int((d < -1e-9).sum())
 
-    vals_a = [seeds_a[s] for s in common_seeds]
-    vals_b = [seeds_b[s] for s in common_seeds]
-
-    mean_a = float(np.mean(vals_a))
-    mean_b = float(np.mean(vals_b))
-    wins_a = sum(1 for a, b in zip(vals_a, vals_b) if a > b)
-    wins_b = sum(1 for a, b in zip(vals_a, vals_b) if b > a)
-
-    try:
-        stat, p_val = sp_stats.wilcoxon(vals_a, vals_b)
-        significant = p_val < 0.05
-        winner = "Run A" if mean_a > mean_b else "Run B" if mean_b > mean_a else "Tie"
-    except ValueError:
+    if not np.any(np.abs(d) > 1e-9):
         stat, p_val, significant, winner = 0.0, 1.0, False, "Identical"
+    else:
+        try:
+            stat, p_val = sp_stats.wilcoxon(vals_a, vals_b)
+            significant = bool(p_val < 0.05)
+            winner = "Run A" if mean_a > mean_b else "Run B" if mean_b > mean_a else "Tie"
+            if not significant:
+                winner = "No significant difference"
+        except ValueError:
+            stat, p_val, significant, winner = 0.0, 1.0, False, "Identical"
 
     return {
         "statistic": float(stat),
         "p_value": float(p_val),
-        "n_seeds": len(common_seeds),
+        "n": n,
+        "unit": unit,
+        "pairing": pairing,
+        "reason": reason,
         "significant": significant,
-        "winner": winner if significant else "No significant difference",
+        "winner": winner,
         "mean_a": mean_a,
         "mean_b": mean_b,
         "wins_a": wins_a,
@@ -764,23 +682,14 @@ def compute_seed_variance_df(run_name: str, subfolder: Optional[str] = None) -> 
     title_map = get_topic_title_map()
     topic_scores = defaultdict(list)
 
-    # 1. Check for Random*.json files (Phase 1 or updated Phase 2 format)
-    random_files = sorted([f for f in os.listdir(folder_path) if f.startswith("Random") and f.endswith(".json")])
+    # 1. Per-seed results (Random*.json files, or seed_ndcg5.json)
+    per_seed = ur.seed_topic_values(folder_path)
 
-    if random_files:
-        for fname in random_files:
-            fpath = os.path.join(folder_path, fname)
-            try:
-                with open(fpath, "r", encoding="utf-8") as f:
-                    content = json.load(f)
-                for raw_key, metrics in content.items():
-                    if isinstance(metrics, dict) and "ndcg_cut_5" in metrics:
-                        match = re.search(r"\d+$", raw_key)
-                        if match:
-                            t_key = f"T{int(match.group())}"
-                            topic_scores[t_key].append(float(metrics["ndcg_cut_5"]))
-            except Exception:
-                pass
+    if per_seed:
+        for vec in per_seed.values():
+            for t_key, v in zip(ur.TOPIC_KEYS, vec):
+                if not np.isnan(v):
+                    topic_scores[t_key].append(float(v))
     else:
         # Fallback: check topics_values.json
         tv_path = os.path.join(folder_path, "topics_values.json")

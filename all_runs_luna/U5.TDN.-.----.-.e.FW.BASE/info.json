@@ -1,0 +1,13 @@
+{
+  "query_type": "TDN",
+  "table": "FW",
+  "config": "-.----.-.e",
+  "column": "BASE",
+  "query_variant": null,
+  "query_set": "hw",
+  "folder_label": "fw",
+  "seeds": null,
+  "llm_root": "data/llm_calls_luna/web",
+  "query_root": "data/llm_calls_luna/hw",
+  "colbert": "exact MaxSim, top 100"
+}

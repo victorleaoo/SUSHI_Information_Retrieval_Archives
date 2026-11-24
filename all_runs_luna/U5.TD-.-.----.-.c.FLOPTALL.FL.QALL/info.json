@@ -1,0 +1,13 @@
+{
+  "query_type": "TD",
+  "table": "FLOPTALL",
+  "config": "-.----.-.c",
+  "column": "FL",
+  "query_variant": "FL",
+  "query_set": "opt_all",
+  "folder_label": "floptall",
+  "seeds": null,
+  "llm_root": "data/llm_calls_luna/opt_all",
+  "query_root": "data/llm_calls_luna/opt_all",
+  "colbert": "exact MaxSim, top 100"
+}

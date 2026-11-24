@@ -1,0 +1,11 @@
+{
+  "query_type": "T",
+  "table": "FLAUG",
+  "config": "-.----.-.b",
+  "column": "DOCFL",
+  "query_variant": "AUG",
+  "folder_label": "flaug",
+  "seeds": null,
+  "llm_root": "data/llm_calls_luna/hw",
+  "colbert": "exact MaxSim, top 100"
+}

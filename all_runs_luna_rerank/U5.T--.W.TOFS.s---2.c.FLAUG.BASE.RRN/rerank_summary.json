@@ -1,0 +1,12 @@
+{
+  "first_stage": "U5.T--.W.TOFS.s---2.c.FLAUG.BASE",
+  "reranker": "RRN",
+  "rankings": 1350,
+  "invalid": 0,
+  "repaired": 0,
+  "input_tokens": 3384928,
+  "output_tokens": 70218,
+  "first_stage_recall20": 0.3491,
+  "first_stage_ndcg5": 0.2838,
+  "reranked_ndcg5": 0.3606
+}

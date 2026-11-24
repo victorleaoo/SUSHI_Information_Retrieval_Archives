@@ -1,0 +1,13 @@
+{
+  "query_type": "TDN",
+  "table": "PLAIN",
+  "config": "-.----.-.e",
+  "column": "DOC",
+  "query_variant": "DOC",
+  "query_set": "opt_cv",
+  "folder_label": "plain",
+  "seeds": null,
+  "llm_root": "data/llm_calls_luna/hw",
+  "query_root": "data/llm_calls_luna/opt_cv",
+  "colbert": "exact MaxSim, top 100"
+}

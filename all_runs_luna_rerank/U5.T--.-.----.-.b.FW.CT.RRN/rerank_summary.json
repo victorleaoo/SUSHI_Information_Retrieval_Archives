@@ -1,0 +1,12 @@
+{
+  "first_stage": "U5.T--.-.----.-.b.FW.CT",
+  "reranker": "RRN",
+  "rankings": 45,
+  "invalid": 0,
+  "repaired": 0,
+  "input_tokens": 56119,
+  "output_tokens": 2340,
+  "first_stage_recall20": 0.4045,
+  "first_stage_ndcg5": 0.3287,
+  "reranked_ndcg5": 0.3529
+}

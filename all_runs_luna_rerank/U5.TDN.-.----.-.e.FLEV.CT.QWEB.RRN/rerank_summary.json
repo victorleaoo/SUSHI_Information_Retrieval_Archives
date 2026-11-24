@@ -1,0 +1,12 @@
+{
+  "first_stage": "U5.TDN.-.----.-.e.FLEV.CT.QWEB",
+  "reranker": "RRN",
+  "rankings": 1350,
+  "invalid": 0,
+  "repaired": 0,
+  "input_tokens": 1851889,
+  "output_tokens": 70425,
+  "first_stage_recall20": 0.3859,
+  "first_stage_ndcg5": 0.3219,
+  "reranked_ndcg5": 0.3102
+}
